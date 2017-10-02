@@ -1,0 +1,7 @@
+C:\other projects\Keyify Class Library\KeyifyScaleFinderClassLibrary\KeyifyScaleFinderClassLibrary\bin\Debug\KeyifyScaleFinderClassLibrary.dll
+C:\other projects\Keyify Class Library\KeyifyScaleFinderClassLibrary\KeyifyScaleFinderClassLibrary\bin\Debug\KeyifyScaleFinderClassLibrary.pdb
+C:\other projects\Keyify Class Library\KeyifyScaleFinderClassLibrary\KeyifyScaleFinderClassLibrary\bin\Debug\nunit.framework.dll
+C:\other projects\Keyify Class Library\KeyifyScaleFinderClassLibrary\KeyifyScaleFinderClassLibrary\bin\Debug\nunit.framework.xml
+C:\other projects\Keyify Class Library\KeyifyScaleFinderClassLibrary\KeyifyScaleFinderClassLibrary\obj\Debug\KeyifyScaleFinderClassLibrary.dll
+C:\other projects\Keyify Class Library\KeyifyScaleFinderClassLibrary\KeyifyScaleFinderClassLibrary\obj\Debug\KeyifyScaleFinderClassLibrary.pdb
+C:\other projects\Keyify Class Library\KeyifyScaleFinderClassLibrary\KeyifyScaleFinderClassLibrary\obj\Debug\KeyifyScaleFinderClassLibrary.csprojResolveAssemblyReference.cache
