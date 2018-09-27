@@ -44,14 +44,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Instrument\GuitarComponents.cs" />
-    <Compile Include="Instrument\IComponent.cs" />
-    <Compile Include="Theory\MusicTheoryBusinessLogic.cs" />
-    <Compile Include="Theory\OldScaleMatcher.cs" />
+    <Compile Include="MusicTheory\CustomTuning.cs" />
+    <Compile Include="MusicTheory\HeptatonicModes.cs" />
+    <Compile Include="MusicTheory\IChord.cs" />
+    <Compile Include="MusicTheory\IScale.cs" />
+    <Compile Include="MusicTheory\MusicTheoryBusinessLogic.cs" />
+    <Compile Include="MusicTheory\Note.cs" />
+    <Compile Include="MusicTheory\PentatonicModes.cs" />
+    <Compile Include="MusicTheory\Scale.cs" />
+    <Compile Include="MusicTheory\ScaleStep.cs" />
+    <Compile Include="MusicTheory\StandardTuning.cs" />
+    <Compile Include="MusicTheory\Triad.cs" />
+    <Compile Include="MusicTheory\TriadType.cs" />
     <Compile Include="Unit Tests\GuitarComponentUnitTest.cs" />
     <Compile Include="Unit Tests\MusicTheoryUnitTests.cs" />
-    <Compile Include="Theory\MusicTheoryModels.cs" />
+    <Compile Include="MusicTheory\MusicTheoryModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Theory\Tuning.cs" />
+    <Compile Include="MusicTheory\ITuning.cs" />
     <Compile Include="Unit Tests\TuningUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>

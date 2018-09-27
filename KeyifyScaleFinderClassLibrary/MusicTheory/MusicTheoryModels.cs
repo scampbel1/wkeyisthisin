@@ -2,56 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace KeyifyScaleFinderClassLibrary.Theory
+namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {
-    public interface IScale
-    {
-        void AddNote(Note note);
-    }
-
-    public interface IChord
-    {
-
-    }
-
-    public enum Note
-    {
-        A,
-        Bb, //A#
-        B,
-        C,
-        Db, //C#
-        D,
-        Eb, //D#
-        E,
-        F,
-        Gb, //F#
-        G,
-        Ab, //G#
-    }
-
-    public enum ScaleStep
-    {
-        R = 0,
-        h = 1,
-        W = 2,
-        Wh = 3
-    }
-
-    public enum HeptatonicModes
-    {
-        Ionian, //Major
-        Dorian,
-        Phrygian,
-        Lydian,
-        Mixolydian,
-        Aeolian, //Natural Minor
-        Locrian,
-        Harmonic_Minor,
-        Melodic_Minor,
-        Augmented
-    }
-
     //"A mode is what math calls a set, a scale is what math calls a sequence."
 
     //"A mode is a collection of pitches/pitch classes - that are NOT in a prescribed order"
@@ -61,21 +13,6 @@ namespace KeyifyScaleFinderClassLibrary.Theory
      "The major scale, harmonic minor scale, and melodic minor scale each have seven different modes.
      The ones for the major scale are commonly used enough to have special names - ionian, dorian, and so on."
     */
-
-
-    public enum PentatonicModes
-    {
-        Minor,
-        Major
-    }
-
-    public enum TriadType
-    {
-        m,
-        M,
-        o,
-        aug
-    }
 
     public abstract class TriadFactory
     {

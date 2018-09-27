@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using GuitarKeyFinder;
-using KeyifyScaleFinderClassLibrary.Theory;
+using KeyifyScaleFinderClassLibrary.MusicTheory;
 using NUnit.Framework;
 
 namespace KeyifyScaleFinderClassLibrary.Unit_Tests
@@ -68,7 +67,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
             var scaleSample = ScaleNoteGenerator.GenerateNotes(Note.Bb,
                 HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicModes.Aeolian).Item2).Notes;
 
-            var expectedScale = new System.Collections.Generic.List<Note>()
+            var expectedScale = new List<Note>()
             {
                 Note.Bb,
                 Note.C,
@@ -228,7 +227,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         }
 
         [Test]
-        public void ADGBbFMatchesMoreThanTenScales()
+        public void AdgbbFMatchesMoreThanTenScales()
         {
             var results = ScaleMatcher.GetMatchedScales(
                 new Note[] { Note.A, Note.D, Note.G, Note.Bb, Note.F },

@@ -1,8 +1,8 @@
 ﻿using System;
-using KeyifyScaleFinderClassLibrary.Theory;
+using KeyifyScaleFinderClassLibrary.MusicTheory;
 using NUnit.Framework;
 
-namespace GuitarKeyFinder.Unit_Tests
+namespace KeyifyScaleFinderClassLibrary.Unit_Tests
 {
     [TestFixture]
     public class TuningUnitTests

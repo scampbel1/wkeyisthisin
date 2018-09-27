@@ -1,39 +1,8 @@
 ﻿using System;
 
-namespace KeyifyScaleFinderClassLibrary.Theory
+namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {
-    public interface ITuning
-    {
-        Note[] ReturnNotes();
-    }
-
-    public abstract class BaseTuning : ITuning
-    {
-        private readonly Note[] _notes = new Note[6]
-        {
-            Note.E,
-            Note.A,
-            Note.D,
-            Note.G,
-            Note.B,
-            Note.E
-        };
-
-        public virtual Note[] ReturnNotes()
-        {
-            return _notes;
-        }
-    }
-
-    public class StandardTuning : BaseTuning
-    {
-        public override Note[] ReturnNotes()
-        {
-            return base.ReturnNotes();
-        }
-    }
-
-    public class CustomTuning : BaseTuning
+    public class CustomTuning : StandardTuning
     {
         private readonly Note[] _notes;
 

@@ -1,5 +1,5 @@
-﻿using GuitarKeyFinder;
-using KeyifyScaleFinderClassLibrary.Theory;
+﻿using KeyifyScaleFinderClassLibrary.Instrument;
+using KeyifyScaleFinderClassLibrary.MusicTheory;
 using NUnit.Framework;
 
 namespace KeyifyScaleFinderClassLibrary.Unit_Tests

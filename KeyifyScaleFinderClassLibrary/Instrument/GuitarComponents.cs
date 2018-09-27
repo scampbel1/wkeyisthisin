@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using KeyifyScaleFinderClassLibrary.Theory;
+using KeyifyScaleFinderClassLibrary.MusicTheory;
 
-namespace GuitarKeyFinder
+namespace KeyifyScaleFinderClassLibrary.Instrument
 {
     public delegate void GuitarComponentDebugWriter(string input);
 
