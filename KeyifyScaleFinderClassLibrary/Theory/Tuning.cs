@@ -1,16 +1,15 @@
 ﻿using System;
-using KeyifyScaleFinderClassLibrary.Theory;
 
-namespace GuitarKeyFinder
+namespace KeyifyScaleFinderClassLibrary.Theory
 {
-    public interface Tuning
+    public interface ITuning
     {
         Note[] ReturnNotes();
     }
 
-    public abstract class BaseTuning : Tuning
+    public abstract class BaseTuning : ITuning
     {
-        private Note[] _notes = new Note[6]
+        private readonly Note[] _notes = new Note[6]
         {
             Note.E,
             Note.A,
@@ -36,7 +35,7 @@ namespace GuitarKeyFinder
 
     public class CustomTuning : BaseTuning
     {
-        private Note[] _notes;
+        private readonly Note[] _notes;
 
         public CustomTuning(string inputNotes)
         {
@@ -54,7 +53,7 @@ namespace GuitarKeyFinder
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
-                    throw e;
+                    throw;
                 }
             }
         }

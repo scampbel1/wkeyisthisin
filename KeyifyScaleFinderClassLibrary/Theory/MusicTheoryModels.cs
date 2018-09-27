@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GuitarKeyFinder
+namespace KeyifyScaleFinderClassLibrary.Theory
 {
     public interface IScale
     {

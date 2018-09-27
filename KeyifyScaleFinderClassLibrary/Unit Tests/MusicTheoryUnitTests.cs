@@ -1,13 +1,12 @@
-﻿using System;
-using NUnit.Framework;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GuitarKeyFinder;
 using KeyifyScaleFinderClassLibrary.Theory;
+using NUnit.Framework;
 
-namespace GuitarKeyFinder.Unit_Tests
+namespace KeyifyScaleFinderClassLibrary.Unit_Tests
 {
     [TestFixture]
-    class MusicTheoryUnitTests
+    public class MusicTheoryUnitTests
     {
         [Test]
         //[ExpectedException(typeof(Exception))] //http://stackoverflow.com/questions/33895457/expectedexception-in-nunit-gave-me-an-error

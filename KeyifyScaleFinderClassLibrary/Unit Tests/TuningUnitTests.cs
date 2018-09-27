@@ -1,24 +1,25 @@
 ﻿using System;
+using KeyifyScaleFinderClassLibrary.Theory;
 using NUnit.Framework;
 
 namespace GuitarKeyFinder.Unit_Tests
 {
     [TestFixture]
-    class TuningUnitTests
+    public class TuningUnitTests
     {
-        Tuning tuning;
+        ITuning _tuning;
 
         [SetUp]
         public void Init()
         {
-            tuning = new StandardTuning();
+            _tuning = new StandardTuning();
         }
 
         [Test]
         public void StandardTuningIsCorrect()
         {
             Assert.AreEqual(
-                tuning.ReturnNotes(),
+                _tuning.ReturnNotes(),
                 new Note[]
                 {
                     Note.E,

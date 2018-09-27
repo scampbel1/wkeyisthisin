@@ -10,7 +10,7 @@ namespace KeyifyScaleFinderClassLibrary.Theory
         public static Scale GenerateNotes(Note key, ScaleStep[] scaleSteps)
         {
             var scale = new Scale(key);
-            int noteNumber = (int)key;
+            var noteNumber = (int)key;
 
             foreach (var scaleStep in scaleSteps)
             {

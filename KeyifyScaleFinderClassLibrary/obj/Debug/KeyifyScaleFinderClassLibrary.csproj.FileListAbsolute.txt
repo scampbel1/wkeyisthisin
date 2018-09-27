@@ -5,3 +5,10 @@ C:\other projects\Keyify Class Library\KeyifyScaleFinderClassLibrary\KeyifyScale
 C:\other projects\Keyify Class Library\KeyifyScaleFinderClassLibrary\KeyifyScaleFinderClassLibrary\obj\Debug\KeyifyScaleFinderClassLibrary.dll
 C:\other projects\Keyify Class Library\KeyifyScaleFinderClassLibrary\KeyifyScaleFinderClassLibrary\obj\Debug\KeyifyScaleFinderClassLibrary.pdb
 C:\other projects\Keyify Class Library\KeyifyScaleFinderClassLibrary\KeyifyScaleFinderClassLibrary\obj\Debug\KeyifyScaleFinderClassLibrary.csprojResolveAssemblyReference.cache
+C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary\bin\Debug\KeyifyScaleFinderClassLibrary.dll
+C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary\bin\Debug\KeyifyScaleFinderClassLibrary.pdb
+C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary\bin\Debug\nunit.framework.dll
+C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary\bin\Debug\nunit.framework.xml
+C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary\obj\Debug\KeyifyScaleFinderClassLibrary.csprojResolveAssemblyReference.cache
+C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary\obj\Debug\KeyifyScaleFinderClassLibrary.dll
+C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary\obj\Debug\KeyifyScaleFinderClassLibrary.pdb

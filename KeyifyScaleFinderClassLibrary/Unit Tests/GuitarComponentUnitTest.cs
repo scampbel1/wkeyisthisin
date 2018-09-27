@@ -1,27 +1,24 @@
-﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GuitarKeyFinder;
+using KeyifyScaleFinderClassLibrary.Theory;
+using NUnit.Framework;
 
-namespace GuitarKeyFinder.Unit_Tests
+namespace KeyifyScaleFinderClassLibrary.Unit_Tests
 {
-    class GuitarComponentUnitTest
+    public class GuitarComponentUnitTest
     {
-        Tuning tuning;
+        ITuning _tuning;
 
         [SetUp]
         public void Init()
         {
-            tuning = new CustomTuning("EADGBE");
+            _tuning = new CustomTuning("EADGBE");
         }
         
         [Test]
         public void CorrectNotesPopulatedOnFretboard()
         {
             Assert.AreEqual(
-                Fretboard.PopulateFretboard(tuning),
+                Fretboard.PopulateFretboard(_tuning),
                 Fretboard.PopulateFretboard(new StandardTuning())
                 );
         }

@@ -47,7 +47,7 @@ namespace GuitarKeyFinder
 
     public static class Fretboard
     {
-        public static List<Note[]> PopulateFretboard(Tuning tuning, int fretCount = 24)
+        public static List<Note[]> PopulateFretboard(ITuning tuning, int fretCount = 24)
         {
             var fretboard = new List<Note[]>();
 
