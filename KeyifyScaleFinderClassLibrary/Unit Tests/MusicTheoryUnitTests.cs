@@ -184,7 +184,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
 
             Assert.AreEqual(ScaleNoteGenerator.GenerateNotes(Note.A,
                 HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicModes.Aeolian).Item2).Notes, expectedAeolian);
-            
+
             Assert.AreEqual(ScaleNoteGenerator.GenerateNotes(Note.B,
                 HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicModes.Locrian).Item2).Notes, expectedLocrian);
 

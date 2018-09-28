@@ -7,7 +7,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
 {
     public class GuitarComponentUnitTest
     {
-        ITuning _tuning;
+        private ITuning _tuning;
 
         [SetUp]
         public void Init()
@@ -28,8 +28,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         {
             Assert.AreEqual(
                 Fretboard.PopulateFretboard(_tuning),
-                Fretboard.PopulateFretboard(new StandardTuning())
-                );
+                Fretboard.PopulateFretboard(new StandardTuning()));
         }
     }
 }

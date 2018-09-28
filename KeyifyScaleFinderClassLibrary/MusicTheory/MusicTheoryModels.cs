@@ -181,6 +181,11 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
     }
 }
 
+/*
+ * Total possible scales within an octave - using the chromatic scale (12 notes)
+ * http://mathcentral.uregina.ca/QQ/database/QQ.09.01/terence1.html
+ */
+
 // Music of the common practice periods(1600–1900) uses three types of scale:
 // The diatonic scale(seven notes)—this includes the major scale
 // and the natural minor

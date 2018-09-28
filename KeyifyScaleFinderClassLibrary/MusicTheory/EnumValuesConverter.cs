@@ -4,10 +4,6 @@ using System.Linq;
 
 namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {
-    /*https://www.guitarmasterclass.net/guitar_forum/index.php?showtopic=6023
-     *https://www.guitarmasterclass.net/guitar_forum/index.php?showtopic=3630
-    */
-
     public static class EnumValuesConverter
     {
         public static List<string> GetNotes()
