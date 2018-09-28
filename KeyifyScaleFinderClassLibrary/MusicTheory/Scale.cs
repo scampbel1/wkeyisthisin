@@ -4,13 +4,18 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {
     public class Scale : IScale
     {
-        public readonly Note Key;
-        public List<Note> Notes { get; private set; }
+        private readonly Note _key;
+        public List<Note> Notes { get; set; }
+
+        public Note GetKey()
+        {
+            return _key;
+        }
 
         public Scale(Note key)
         {
+            _key = key;
             Notes = new List<Note>();
-            this.Key = key;
         }
 
         public void AddNote(Note note)

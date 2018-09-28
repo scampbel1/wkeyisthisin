@@ -14,12 +14,6 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
      The ones for the major scale are commonly used enough to have special names - ionian, dorian, and so on."
     */
 
-    public abstract class TriadFactory
-    {
-        public abstract TriadType[] ReturnTriadSteps(HeptatonicModes mode);
-        //public abstract TriadType[] ReturnTriadSteps(PentatonicModes mode);
-    }
-
     //Rename "Heptatonic"
     public static class HeptatonicScaleModeDictionary
     {

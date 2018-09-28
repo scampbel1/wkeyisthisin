@@ -1,5 +1,6 @@
 ﻿using KeyifyScaleFinderClassLibrary.Instrument;
 using KeyifyScaleFinderClassLibrary.MusicTheory;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning;
 using NUnit.Framework;
 
 namespace KeyifyScaleFinderClassLibrary.Unit_Tests

@@ -8,15 +8,6 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
     public class MusicTheoryUnitTests
     {
         [Test]
-        //[ExpectedException(typeof(Exception))] //http://stackoverflow.com/questions/33895457/expectedexception-in-nunit-gave-me-an-error
-        // --> Use Throws clause (see link)
-        [Ignore("Decide how to implement note management")]
-        public void TestExceptionForNoteCount()
-        {
-
-        }
-
-        [Test]
         public void CorrectScaleEntryReturned()
         {
             var scale = HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicModes.Ionian).Item2;
@@ -31,13 +22,6 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
                     ScaleStep.h};
 
             Assert.AreEqual(scale, expected);
-        }
-
-        [Test]
-        [Ignore("Irrelivant")]
-        public void CorrectScaleCountReturned()
-        {
-            Assert.AreEqual(HeptatonicScaleModeDictionary.ReturnCount(), 7);
         }
 
         [Test]
@@ -209,13 +193,6 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         }
 
         [Test]
-        [Ignore("Irrelivant")]
-        public void ScaleDictionaryCountIsCorrect()
-        {
-            Assert.AreEqual(ScaleDictionary.GenerateDictionary().Count, 84);
-        }
-
-        [Test]
         public void AbCandFMatchesMoreThanTenScales()
         {
             var results = ScaleMatcher.GetMatchedScales(
@@ -238,21 +215,9 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         }
 
         [Test]
-        [Ignore("Irrelivant")]
-        public void HandlesArrayWithRepeatingNote()
-        {
-            var results = ScaleMatcher.GetMatchedScales(
-                new Note[] { Note.A, Note.A, Note.A, Note.D, Note.D, Note.G, Note.Bb, Note.F },
-                0
-                );
-
-            Assert.AreEqual(results.Count, 14);
-        }
-
-        [Test]
         public void ReturnsCorrectUnconvertedChords()
         {
-            var testTriad = new Triad();
+            var testTriad = new TriadFactory();
 
             Assert.AreEqual(testTriad.GenerateChords(HeptatonicModes.Ionian, Note.C), new List<string>() { "C", "Dm", "Em", "F", "G", "Am", "Bo" });
             Assert.AreEqual(testTriad.GenerateChords(HeptatonicModes.Lydian, Note.Bb), new List<string>() { "Bb", "C", "Dm", "Eo", "F", "Gm", "Am" });

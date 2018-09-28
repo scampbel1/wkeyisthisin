@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {
-    public class Triad : TriadFactory //To-Do: Merge with Mode Class
+    public class TriadFactory : AbstractTriadFactory //TODO: Merge with Mode Class
     {
         public override TriadType[] ReturnTriadSteps(HeptatonicModes mode)
         {
@@ -134,16 +134,16 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
                 //https://music.stackexchange.com/questions/45752/diminished-and-augmented-scales
 
                 #endregion
-                default: throw new ArgumentException(string.Format("Mode \"{0}\" Triad Steps not defined", mode));
+                default: throw new ArgumentException($"Mode \"{mode}\" Triad Steps not defined");
             }
         }
 
-        public List<string> GenerateChords(HeptatonicModes mode, Note key) //To-Do: Create chord class type
+        public List<string> GenerateChords(HeptatonicModes mode, Note key) //TODO: Create chord class type
         {
             var notes = ScaleNoteGenerator.GenerateNotes(key,
                 HeptatonicScaleModeDictionary.GetScaleDirectory(mode).Item2).Notes;
 
-            int scaleCount = 0; //To-Do: Create roman numeral equivalent
+            int scaleCount = 0; //TODO: Create roman numeral equivalent
             var chords = new List<string>();
 
             foreach (TriadType tt in ReturnTriadSteps(mode))

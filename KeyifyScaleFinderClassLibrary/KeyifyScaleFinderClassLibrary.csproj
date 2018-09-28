@@ -43,18 +43,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Instrument\GuitarComponents.cs" />
-    <Compile Include="MusicTheory\CustomTuning.cs" />
+    <Compile Include="Instrument\Fretboard.cs" />
+    <Compile Include="Instrument\StringNotePopulater.cs" />
+    <Compile Include="MusicTheory\AbstractTriadFactory.cs" />
+    <Compile Include="MusicTheory\Tuning\CustomTuning.cs" />
+    <Compile Include="MusicTheory\EnumValuesConverter.cs" />
     <Compile Include="MusicTheory\HeptatonicModes.cs" />
-    <Compile Include="MusicTheory\IChord.cs" />
     <Compile Include="MusicTheory\IScale.cs" />
-    <Compile Include="MusicTheory\MusicTheoryBusinessLogic.cs" />
+    <Compile Include="MusicTheory\KeyifyElementStringConverter.cs" />
     <Compile Include="MusicTheory\Note.cs" />
     <Compile Include="MusicTheory\PentatonicModes.cs" />
     <Compile Include="MusicTheory\Scale.cs" />
+    <Compile Include="MusicTheory\ScaleDictionary.cs" />
+    <Compile Include="MusicTheory\ScaleMatcher.cs" />
+    <Compile Include="MusicTheory\ScaleNoteGenerator.cs" />
     <Compile Include="MusicTheory\ScaleStep.cs" />
-    <Compile Include="MusicTheory\StandardTuning.cs" />
-    <Compile Include="MusicTheory\Triad.cs" />
+    <Compile Include="MusicTheory\Tuning\StandardTuning.cs" />
+    <Compile Include="MusicTheory\TriadFactory.cs" />
     <Compile Include="MusicTheory\TriadType.cs" />
     <Compile Include="Unit Tests\GuitarComponentUnitTest.cs" />
     <Compile Include="Unit Tests\MusicTheoryUnitTests.cs" />
