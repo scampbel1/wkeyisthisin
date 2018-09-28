@@ -1,4 +1,4 @@
-﻿namespace KeyifyScaleFinderClassLibrary.MusicTheory
+﻿namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning
 {
     public class StandardTuning : ITuning
     {

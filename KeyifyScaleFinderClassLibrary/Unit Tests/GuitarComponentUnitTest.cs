@@ -12,7 +12,15 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         [SetUp]
         public void Init()
         {
-            _tuning = new CustomTuning("EADGBE");
+            _tuning = new CustomTuning(new[]
+            {
+                Note.E,
+                Note.A,
+                Note.D,
+                Note.G,
+                Note.B,
+                Note.E
+            });
         }
         
         [Test]

@@ -7,29 +7,9 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning
     {
         private readonly Note[] _notes;
 
-        public CustomTuning(string inputNotes)
+        public CustomTuning(Note[] inputNotes)
         {
-            if(!ValidateMusicalNotes(inputNotes))
-                throw new ArgumentException("Input string contains invalid characters");
-
             _notes = new Note[inputNotes.Length];
-
-            var count = 0;
-
-            foreach (var note in inputNotes)
-            {
-                try
-                {
-                    _notes[count] = KeyifyElementStringConverter
-                        .ConvertStringNoteToNoteType(note);
-
-                    count++;
-                }
-                catch (Exception e)
-                {
-                    throw new Exception("Problem converting input to Note", e);
-                }
-            }
         }
 
         public override Note[] ReturnNotes()
@@ -41,6 +21,33 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning
         {
             var validCharacters = new Regex("^[ABCDEFGb]*$");
             return validCharacters.IsMatch(input);
+        }
+
+        public static Note[] ConvertStringInputToNotes(string input)
+        {
+            var notes = new Note[input.Length];
+
+            if(!ValidateMusicalNotes(input))
+                throw new ArgumentException("Invalid string input. Unable to convert to note.");
+
+            var count = 0;
+
+            foreach (var note in input)
+            {
+                try
+                {
+                    notes[count] = KeyifyElementStringConverter
+                        .ConvertStringNoteToNoteType(note);
+
+                    count++;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Problem converting input to Note", e);
+                }
+            }
+
+            return notes;
         }
     }
 }
