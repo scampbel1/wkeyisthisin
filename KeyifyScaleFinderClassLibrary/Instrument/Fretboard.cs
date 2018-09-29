@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using KeyifyScaleFinderClassLibrary.MusicTheory;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning;
 
 namespace KeyifyScaleFinderClassLibrary.Instrument

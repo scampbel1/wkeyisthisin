@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning;
 
 namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
 
 namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning
 {

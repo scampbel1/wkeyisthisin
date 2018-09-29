@@ -48,24 +48,24 @@
     <Compile Include="MusicTheory\AbstractTriadFactory.cs" />
     <Compile Include="MusicTheory\Tuning\CustomTuning.cs" />
     <Compile Include="MusicTheory\EnumValuesConverter.cs" />
-    <Compile Include="MusicTheory\HeptatonicModes.cs" />
-    <Compile Include="MusicTheory\IScale.cs" />
+    <Compile Include="MusicTheory\Enums\HeptatonicModes.cs" />
+    <Compile Include="MusicTheory\Tuning\IScale.cs" />
     <Compile Include="MusicTheory\KeyifyElementStringConverter.cs" />
-    <Compile Include="MusicTheory\Note.cs" />
-    <Compile Include="MusicTheory\PentatonicModes.cs" />
+    <Compile Include="MusicTheory\Enums\Note.cs" />
+    <Compile Include="MusicTheory\Enums\PentatonicModes.cs" />
     <Compile Include="MusicTheory\Scale.cs" />
     <Compile Include="MusicTheory\ScaleDictionary.cs" />
     <Compile Include="MusicTheory\ScaleMatcher.cs" />
     <Compile Include="MusicTheory\ScaleNoteGenerator.cs" />
-    <Compile Include="MusicTheory\ScaleStep.cs" />
+    <Compile Include="MusicTheory\Enums\ScaleStep.cs" />
     <Compile Include="MusicTheory\Tuning\StandardTuning.cs" />
-    <Compile Include="MusicTheory\TriadFactory.cs" />
-    <Compile Include="MusicTheory\TriadType.cs" />
+    <Compile Include="MusicTheory\ScaleFactory.cs" />
+    <Compile Include="MusicTheory\Enums\TriadType.cs" />
     <Compile Include="Unit Tests\GuitarComponentUnitTest.cs" />
     <Compile Include="Unit Tests\MusicTheoryUnitTests.cs" />
-    <Compile Include="MusicTheory\MusicTheoryModels.cs" />
+    <Compile Include="MusicTheory\HeptatonicScaleModeDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MusicTheory\ITuning.cs" />
+    <Compile Include="MusicTheory\Tuning\ITuning.cs" />
     <Compile Include="Unit Tests\TuningUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>

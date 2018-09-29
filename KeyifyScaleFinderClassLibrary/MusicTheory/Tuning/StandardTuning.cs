@@ -1,4 +1,6 @@
-﻿namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning
+﻿using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
+
+namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning
 {
     public class StandardTuning : ITuning
     {

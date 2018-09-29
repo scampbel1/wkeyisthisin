@@ -3,11 +3,11 @@
 namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public enum TriadType
+    public enum ScaleStep
     {
-        m,
-        M,
-        o,
-        aug
+        R = 0,
+        h = 1,
+        W = 2,
+        Wh = 3
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace KeyifyScaleFinderClassLibrary.MusicTheory
+﻿namespace KeyifyScaleFinderClassLibrary.MusicTheory.Enums
 {
-    public enum HeptatonicModes
+    public enum HeptatonicMode
     {
         Ionian, //Major
         Dorian,
@@ -9,8 +9,8 @@
         Mixolydian,
         Aeolian, //Natural Minor
         Locrian,
-        Harmonic_Minor,
-        Melodic_Minor,
+        HarmonicMinor,
+        MelodicMinor,
         Augmented
     }
 }

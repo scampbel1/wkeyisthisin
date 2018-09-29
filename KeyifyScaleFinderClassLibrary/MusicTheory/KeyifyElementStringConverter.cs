@@ -1,4 +1,5 @@
 ﻿using System;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
 
 namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {
@@ -14,9 +15,9 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
             return (Note)Enum.Parse(typeof(Note), note.ToString(), true);
         }
 
-        public static HeptatonicModes ConvertStringModeNameToModeType(string mode)
+        public static HeptatonicMode ConvertStringModeNameToModeType(string mode)
         {
-            return (HeptatonicModes)Enum.Parse(typeof(HeptatonicModes), mode, true);
+            return (HeptatonicMode)Enum.Parse(typeof(HeptatonicMode), mode, true);
         }
     }
 }

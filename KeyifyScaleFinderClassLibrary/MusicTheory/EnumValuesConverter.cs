@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
 
 namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {
@@ -13,7 +14,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
 
         public static List<string> GetModes()
         {
-            return Enum.GetNames(typeof(HeptatonicModes)).ToList();
+            return Enum.GetNames(typeof(HeptatonicMode)).ToList();
         }
     }
 }

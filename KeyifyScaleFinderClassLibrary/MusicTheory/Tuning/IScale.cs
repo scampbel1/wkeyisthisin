@@ -2,8 +2,8 @@
 
 namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning
 {
-    public interface ITuning
+    public interface IScale
     {
-        Note[] ReturnNotes();
+        void AddNote(Note note);
     }
 }

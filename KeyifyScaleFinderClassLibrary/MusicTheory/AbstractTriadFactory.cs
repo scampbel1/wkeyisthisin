@@ -1,8 +1,10 @@
-﻿namespace KeyifyScaleFinderClassLibrary.MusicTheory
+﻿using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
+
+namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {
-    public abstract class AbstractTriadFactory
+    public abstract class AbstractChordGroupingFactory
     {
-        public abstract TriadType[] ReturnTriadSteps(HeptatonicModes mode);
-        //public abstract TriadType[] ReturnTriadSteps(PentatonicModes mode);
+        public abstract TriadType[] ReturnTriadTemplate(HeptatonicMode mode);
+        public abstract TriadType[] ReturnTriadTemplate(PentatonicModes mode);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace KeyifyScaleFinderClassLibrary.MusicTheory
+﻿namespace KeyifyScaleFinderClassLibrary.MusicTheory.Enums
 {
     public enum PentatonicModes
     {

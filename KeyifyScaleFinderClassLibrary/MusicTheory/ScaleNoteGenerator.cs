@@ -1,4 +1,6 @@
-﻿namespace KeyifyScaleFinderClassLibrary.MusicTheory
+﻿using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
+
+namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {
     public static class ScaleNoteGenerator
     {
