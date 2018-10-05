@@ -46,6 +46,7 @@
     <Compile Include="Instrument\Fretboard.cs" />
     <Compile Include="Instrument\StringNotePopulater.cs" />
     <Compile Include="MusicTheory\AbstractTriadFactory.cs" />
+    <Compile Include="MusicTheory\ScaleMatch.cs" />
     <Compile Include="MusicTheory\Tuning\CustomTuning.cs" />
     <Compile Include="MusicTheory\Helper\EnumValuesConverter.cs" />
     <Compile Include="MusicTheory\Enums\HeptatonicModes.cs" />
