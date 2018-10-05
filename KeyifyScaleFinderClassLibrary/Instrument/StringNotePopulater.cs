@@ -1,5 +1,6 @@
 ﻿using KeyifyScaleFinderClassLibrary.MusicTheory;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Helper;
 
 namespace KeyifyScaleFinderClassLibrary.Instrument
 {

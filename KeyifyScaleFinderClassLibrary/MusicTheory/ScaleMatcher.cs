@@ -9,12 +9,12 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
     {
         public static List<Tuple<string, List<Note>>> GetMatchedScales(Note[] selectedNotes, int maximumMissing = 0)
         {
-            var Scales = ScaleDictionary.GenerateDictionary();
+            var scales = ScaleDictionary.GenerateDictionary();
             var matches = new List<Tuple<string, List<Note>>>();
 
             foreach (Note note in selectedNotes)
             {
-                foreach (var scale in Scales)
+                foreach (var scale in scales)
                 {
                     if (scale.Item2.Notes.Contains(note))
                     {

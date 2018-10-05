@@ -174,11 +174,6 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
         {
             return GenerateDictionary().FirstOrDefault(s => s.Item1 == mode);
         }
-
-        public static int ReturnCount()
-        {
-            return GenerateDictionary().Count;
-        }
     }
 }
 

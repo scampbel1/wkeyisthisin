@@ -47,10 +47,10 @@
     <Compile Include="Instrument\StringNotePopulater.cs" />
     <Compile Include="MusicTheory\AbstractTriadFactory.cs" />
     <Compile Include="MusicTheory\Tuning\CustomTuning.cs" />
-    <Compile Include="MusicTheory\EnumValuesConverter.cs" />
+    <Compile Include="MusicTheory\Helper\EnumValuesConverter.cs" />
     <Compile Include="MusicTheory\Enums\HeptatonicModes.cs" />
-    <Compile Include="MusicTheory\Tuning\IScale.cs" />
-    <Compile Include="MusicTheory\KeyifyElementStringConverter.cs" />
+    <Compile Include="MusicTheory\IScale.cs" />
+    <Compile Include="MusicTheory\Helper\KeyifyElementStringConverter.cs" />
     <Compile Include="MusicTheory\Enums\Note.cs" />
     <Compile Include="MusicTheory\Enums\PentatonicModes.cs" />
     <Compile Include="MusicTheory\Scale.cs" />

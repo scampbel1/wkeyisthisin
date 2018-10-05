@@ -1,7 +1,7 @@
 ﻿using System;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
 
-namespace KeyifyScaleFinderClassLibrary.MusicTheory
+namespace KeyifyScaleFinderClassLibrary.MusicTheory.Helper
 {
     public static class KeyifyElementStringConverter
     {

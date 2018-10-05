@@ -1,6 +1,6 @@
 ﻿using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
 
-namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning
+namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {
     public interface IScale
     {
