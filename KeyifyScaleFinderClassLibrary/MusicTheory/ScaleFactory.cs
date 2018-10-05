@@ -147,7 +147,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
         public List<string> GenerateChords(HeptatonicMode mode, Note key) //TODO: Create chord class type
         {
             var notes = ScaleNoteGenerator.GenerateNotes(key,
-                HeptatonicScaleModeDictionary.GetScaleDirectory(mode).Item2).Notes;
+                HeptatonicScaleModeDictionary.GetScaleDirectory(mode).ScaleSteps).Notes;
 
             int scaleCount = 0; //TODO: Create roman numeral equivalent
             var chords = new List<string>();

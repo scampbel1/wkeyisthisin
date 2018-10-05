@@ -11,7 +11,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         [Test]
         public void CorrectScaleEntryReturned()
         {
-            var scale = HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Ionian).Item2;
+            var scale = HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Ionian).ScaleSteps;
             var expected = new ScaleStep[]{
                     ScaleStep.R,
                     ScaleStep.W,
@@ -29,7 +29,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         public void MajorScaleGeneratedCorrectlyForEachNoteAndScaleType()
         {
             var scaleSample = ScaleNoteGenerator.GenerateNotes(Note.Db,
-                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Ionian).Item2).Notes;
+                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Ionian).ScaleSteps).Notes;
 
             var expectedScale = new System.Collections.Generic.List<Note>()
             {
@@ -50,7 +50,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         public void MinorScaleGeneratedCorrectlyForEachNoteAndScaleType()
         {
             var scaleSample = ScaleNoteGenerator.GenerateNotes(Note.Bb,
-                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Aeolian).Item2).Notes;
+                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Aeolian).ScaleSteps).Notes;
 
             var expectedScale = new List<Note>()
             {
@@ -169,28 +169,28 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
             #endregion
 
             Assert.AreEqual(ScaleNoteGenerator.GenerateNotes(Note.C,
-                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Ionian).Item2).Notes, expectedIonian);
+                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Ionian).ScaleSteps).Notes, expectedIonian);
 
             Assert.AreEqual(ScaleNoteGenerator.GenerateNotes(Note.D,
-                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Dorian).Item2).Notes, expectedDorian);
+                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Dorian).ScaleSteps).Notes, expectedDorian);
 
             Assert.AreEqual(ScaleNoteGenerator.GenerateNotes(Note.E,
-                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Phrygian).Item2).Notes, expectedPhrygian);
+                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Phrygian).ScaleSteps).Notes, expectedPhrygian);
 
             Assert.AreEqual(ScaleNoteGenerator.GenerateNotes(Note.F,
-                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Lydian).Item2).Notes, expectedLydian);
+                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Lydian).ScaleSteps).Notes, expectedLydian);
 
             Assert.AreEqual(ScaleNoteGenerator.GenerateNotes(Note.G,
-                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Mixolydian).Item2).Notes, expectedMixolydian);
+                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Mixolydian).ScaleSteps).Notes, expectedMixolydian);
 
             Assert.AreEqual(ScaleNoteGenerator.GenerateNotes(Note.A,
-                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Aeolian).Item2).Notes, expectedAeolian);
+                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Aeolian).ScaleSteps).Notes, expectedAeolian);
 
             Assert.AreEqual(ScaleNoteGenerator.GenerateNotes(Note.B,
-                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Locrian).Item2).Notes, expectedLocrian);
+                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Locrian).ScaleSteps).Notes, expectedLocrian);
 
             Assert.AreEqual(ScaleNoteGenerator.GenerateNotes(Note.F,
-                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Locrian).Item2).Notes, expectedLocrianF);
+                HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Locrian).ScaleSteps).Notes, expectedLocrianF);
         }
 
         [Test]
@@ -233,7 +233,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         [Test]
         public void ModeDescriptionReturnsCorrectScale()
         {
-            var expectedMixolydian = new System.Collections.Generic.List<Note>()
+            var expectedMixolydian = new List<Note>()
             {
                 Note.G,
                 Note.A,
@@ -246,7 +246,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
             };
 
             Assert.AreEqual(
-                ScaleDictionary.GenerateEntryFromString("G Mixolydian").Item2.Notes,
+                ScaleDictionary.GenerateEntryFromString("G Mixolydian").Scale.Notes,
                 expectedMixolydian);
         }
     }

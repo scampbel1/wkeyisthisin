@@ -16,17 +16,17 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
     */
 
     //Rename "Heptatonic"
-    public static class HeptatonicScaleModeDictionary
+    public static partial class HeptatonicScaleModeDictionary
     {
-        private static List<Tuple<HeptatonicMode, ScaleStep[]>> GenerateDictionary()
+        private static List<ScaleDirectoryEntry> GenerateDictionary()
         {
-            var scaleDictionary = new List<Tuple<HeptatonicMode, ScaleStep[]>>();
+            var scaleDictionary = new List<ScaleDirectoryEntry>();
 
             #region Scales
 
             //Major Scale
 
-            scaleDictionary.Add(new Tuple<HeptatonicMode, ScaleStep[]>(
+            scaleDictionary.Add(new ScaleDirectoryEntry(
                 HeptatonicMode.Ionian,
                 new ScaleStep[] {
                     ScaleStep.R,
@@ -41,7 +41,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
 
             //Minor Scale
 
-            scaleDictionary.Add(new Tuple<HeptatonicMode, ScaleStep[]>(
+            scaleDictionary.Add(new ScaleDirectoryEntry(
                 HeptatonicMode.Aeolian,
                 new ScaleStep[] {
                     ScaleStep.R,
@@ -54,7 +54,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
                     ScaleStep.W
                 }));
 
-            scaleDictionary.Add(new Tuple<HeptatonicMode, ScaleStep[]>(
+            scaleDictionary.Add(new ScaleDirectoryEntry(
                 HeptatonicMode.Phrygian,
                 new ScaleStep[]
                 {
@@ -68,7 +68,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
                     ScaleStep.W
                 }));
 
-            scaleDictionary.Add(new Tuple<HeptatonicMode, ScaleStep[]>(
+            scaleDictionary.Add(new ScaleDirectoryEntry(
                 HeptatonicMode.Lydian,
                 new ScaleStep[]
                 {
@@ -82,7 +82,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
                     ScaleStep.h
                 }));
 
-            scaleDictionary.Add(new Tuple<HeptatonicMode, ScaleStep[]>(
+            scaleDictionary.Add(new ScaleDirectoryEntry(
                 HeptatonicMode.Mixolydian,
                 new ScaleStep[]
                 {
@@ -96,7 +96,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
                     ScaleStep.W
                 }));
 
-            scaleDictionary.Add(new Tuple<HeptatonicMode, ScaleStep[]>(
+            scaleDictionary.Add(new ScaleDirectoryEntry(
                 HeptatonicMode.Locrian,
                 new ScaleStep[]
                 {
@@ -110,7 +110,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
                     ScaleStep.W
                 }));
 
-            scaleDictionary.Add(new Tuple<HeptatonicMode, ScaleStep[]>(
+            scaleDictionary.Add(new ScaleDirectoryEntry(
                 HeptatonicMode.Dorian,
                 new ScaleStep[]
                 {
@@ -124,7 +124,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
                     ScaleStep.W
                 }));
 
-            scaleDictionary.Add(new Tuple<HeptatonicMode, ScaleStep[]>(
+            scaleDictionary.Add(new ScaleDirectoryEntry(
                 HeptatonicMode.HarmonicMinor,
                 new ScaleStep[]
                 {
@@ -138,7 +138,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
                     ScaleStep.h
                 }));
 
-            scaleDictionary.Add(new Tuple<HeptatonicMode, ScaleStep[]>(
+            scaleDictionary.Add(new ScaleDirectoryEntry(
                 HeptatonicMode.MelodicMinor,
                 new ScaleStep[]
                 {
@@ -152,7 +152,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
                     ScaleStep.h
                 }));
 
-            scaleDictionary.Add(new Tuple<HeptatonicMode, ScaleStep[]>(
+            scaleDictionary.Add(new ScaleDirectoryEntry(
                 HeptatonicMode.Augmented, //(W+h) h (W+h) h (W+h) h 
                 new ScaleStep[]
                 {
@@ -170,9 +170,9 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
             return scaleDictionary;
         }
 
-        public static Tuple<HeptatonicMode, ScaleStep[]> GetScaleDirectory(HeptatonicMode mode)
+        public static ScaleDirectoryEntry GetScaleDirectory(HeptatonicMode mode)
         {
-            return GenerateDictionary().FirstOrDefault(s => s.Item1 == mode);
+            return GenerateDictionary().FirstOrDefault(s => s.Mode == mode);
         }
     }
 }

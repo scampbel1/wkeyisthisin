@@ -6,15 +6,15 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {
     public static class ScaleDictionary
     {
-        public static List<Tuple<string, Scale>> GenerateDictionary()
+        public static List<ScaleDictionyEntry> GenerateDictionary()
         {
-            var dictionary = new List<Tuple<string, Scale>>();
+            var dictionary = new List<ScaleDictionyEntry>();
 
             foreach (var mode in EnumValuesConverter.GetModes())
             {
                 foreach (var note in EnumValuesConverter.GetNotes())
                 {
-                    dictionary.Add(new Tuple<string, Scale>(
+                    dictionary.Add(new ScaleDictionyEntry(
                         note + " " + mode,
 
                         ScaleNoteGenerator.GenerateNotes(
@@ -24,7 +24,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
                             HeptatonicScaleModeDictionary
                                 .GetScaleDirectory(KeyifyElementStringConverter
                                     .ConvertStringModeNameToModeType(mode))
-                                .Item2)
+                                .ScaleSteps)
                     ));
                 }
             }
@@ -32,9 +32,9 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
             return dictionary;
         }
 
-        public static Tuple<string, Scale> GenerateEntryFromString(string scale)
+        public static ScaleDictionyEntry GenerateEntryFromString(string scale)
         {
-            return new Tuple<string, Scale>(scale,
+            return new ScaleDictionyEntry(scale,
 
                 ScaleNoteGenerator
                     .GenerateNotes(
@@ -45,10 +45,20 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
                             .GetScaleDirectory(
                                 KeyifyElementStringConverter
                                     .ConvertStringModeNameToModeType(scale
-                                        .Substring(2).ToString()))
-                            .Item2
+                                        .Substring(2)))
+                            .ScaleSteps));
+        }
+    }
 
-                    ));
+    public class ScaleDictionyEntry
+    {
+        public string ScaleName { get; set; }
+        public Scale Scale { get; set; }
+
+        public ScaleDictionyEntry(string name, Scale scale)
+        {
+            ScaleName = name;
+            Scale = scale;
         }
     }
 }

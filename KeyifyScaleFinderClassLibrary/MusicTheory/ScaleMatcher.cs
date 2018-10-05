@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
 
@@ -16,16 +15,16 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
             {
                 foreach (var scale in scales)
                 {
-                    if (scale.Item2.Notes.Contains(note))
+                    if (scale.Scale.Notes.Contains(note))
                     {
-                        if (matches.Any(a => a.ScaleName == scale.Item1))
+                        if (matches.Any(a => a.ScaleName == scale.ScaleName))
                         {
-                            matches.Single(a => a.ScaleName == scale.Item1)
+                            matches.Single(a => a.ScaleName == scale.ScaleName)
                                 .Scale.Add(note);
                         }
                         else
                         {
-                            matches.Add(new ScaleMatch(scale.Item1, note));
+                            matches.Add(new ScaleMatch(scale.ScaleName, note));
                         }
                     }
                 }
