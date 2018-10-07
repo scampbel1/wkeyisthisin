@@ -24,8 +24,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
                             HeptatonicScaleModeDictionary
                                 .GetScaleDirectory(KeyifyElementStringConverter
                                     .ConvertStringModeNameToModeType(mode))
-                                .ScaleSteps)
-                    ));
+                                .ScaleSteps)));
                 }
             }
 

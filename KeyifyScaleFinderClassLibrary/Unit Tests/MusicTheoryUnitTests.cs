@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using KeyifyScaleFinderClassLibrary.MusicTheory;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
 using NUnit.Framework;
@@ -31,7 +32,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
             var scaleSample = ScaleNoteGenerator.GenerateNotes(Note.Db,
                 HeptatonicScaleModeDictionary.GetScaleDirectory(HeptatonicMode.Ionian).ScaleSteps).Notes;
 
-            var expectedScale = new System.Collections.Generic.List<Note>()
+            var expectedScale = new List<Note>()
             {
                 Note.Db,
                 Note.Eb,
@@ -197,8 +198,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         public void AbCandFMatchesMoreThanTenScales()
         {
             var results = ScaleMatcher.GetMatchedScales(
-                new Note[] { Note.Ab, Note.C, Note.F },
-                0
+                new Note[] { Note.Ab, Note.C, Note.F }
                 );
 
             Assert.True(results.Count > 10);
@@ -208,11 +208,40 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         public void AdgbbFMatchesMoreThanTenScales()
         {
             var results = ScaleMatcher.GetMatchedScales(
-                new Note[] { Note.A, Note.D, Note.G, Note.Bb, Note.F },
-                0
+                new Note[] { Note.A, Note.D, Note.G, Note.Bb, Note.F }
                 );
 
             Assert.True(results.Count > 10);
+        }
+
+        [Test]
+        public void DbEbFgbAbBbCMatchesAnyScale()
+        {
+            var results = ScaleMatcher.GetMatchedScales(
+                new Note[] { Note.Db,
+                    Note.Eb,
+                    Note.F,
+                    Note.Gb,
+                    Note.Ab,
+                    Note.Bb,
+                    Note.C }
+            );
+
+            Assert.True(results.Any());
+        }
+
+        [Test]
+        public void DbEbGbMatchesAnyScale()
+        {
+            var results = ScaleMatcher.GetMatchedScales(
+                new Note[] {
+                    Note.Db,
+                    Note.Eb,
+                    Note.Gb
+                    }
+            );
+
+            Assert.True(results.Any());
         }
 
         [Test]

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
-using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning;
 
 namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {
@@ -8,6 +7,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
     {
         private readonly Note _key;
         public List<Note> Notes { get; set; }
+        public HashSet<Note> NotesSet { get; set; }
 
         public Note GetKey()
         {
@@ -18,11 +18,13 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
         {
             _key = key;
             Notes = new List<Note>();
+            NotesSet = new HashSet<Note>();
         }
 
         public void AddNote(Note note)
         {
             Notes.Add(note);
+            NotesSet.Add(note);
         }
     }
 }

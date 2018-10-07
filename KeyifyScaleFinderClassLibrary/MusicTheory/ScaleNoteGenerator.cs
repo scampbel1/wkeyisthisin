@@ -12,7 +12,16 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
             foreach (var scaleStep in scaleSteps)
             {
                 noteNumber += (int)scaleStep;
-                if (noteNumber > 11) noteNumber -= 12; //move back to 0, number of notes will never be larger than 12
+
+                /*
+                 * move back to 0, number of notes will never be larger than 12
+                 */
+
+                if (noteNumber > 11)
+                {
+                    noteNumber -= 12;
+                }
+
                 scale.AddNote((Note)noteNumber);
             }
 

@@ -2,14 +2,6 @@
 
 namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {
-
-
-
-
-
-
-
-
     public static partial class HeptatonicScaleModeDictionary
     {
         public class ScaleDirectoryEntry

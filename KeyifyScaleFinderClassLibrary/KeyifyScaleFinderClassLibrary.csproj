@@ -48,6 +48,7 @@
     <Compile Include="MusicTheory\AbstractTriadFactory.cs" />
     <Compile Include="MusicTheory\ScaleDirectoryEntry.cs" />
     <Compile Include="MusicTheory\ScaleMatch.cs" />
+    <Compile Include="MusicTheory\ScaleMatcher.cs" />
     <Compile Include="MusicTheory\Tuning\CustomTuning.cs" />
     <Compile Include="MusicTheory\Helper\EnumValuesConverter.cs" />
     <Compile Include="MusicTheory\Enums\HeptatonicModes.cs" />
@@ -57,7 +58,6 @@
     <Compile Include="MusicTheory\Enums\PentatonicModes.cs" />
     <Compile Include="MusicTheory\Scale.cs" />
     <Compile Include="MusicTheory\ScaleDictionary.cs" />
-    <Compile Include="MusicTheory\ScaleMatcher.cs" />
     <Compile Include="MusicTheory\ScaleNoteGenerator.cs" />
     <Compile Include="MusicTheory\Enums\ScaleStep.cs" />
     <Compile Include="MusicTheory\Tuning\StandardTuning.cs" />
