@@ -61,7 +61,7 @@
     <Compile Include="MusicTheory\ScaleNoteGenerator.cs" />
     <Compile Include="MusicTheory\Enums\ScaleStep.cs" />
     <Compile Include="MusicTheory\Tuning\StandardTuning.cs" />
-    <Compile Include="MusicTheory\ScaleFactory.cs" />
+    <Compile Include="MusicTheory\ChordGroupingFactory.cs" />
     <Compile Include="MusicTheory\Enums\TriadType.cs" />
     <Compile Include="Unit Tests\GuitarComponentUnitTest.cs" />
     <Compile Include="Unit Tests\MusicTheoryUnitTests.cs" />

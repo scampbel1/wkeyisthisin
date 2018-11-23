@@ -247,7 +247,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         [Test]
         public void ReturnsCorrectUnconvertedChords()
         {
-            var testTriad = new ScaleFactory();
+            var testTriad = new ChordGroupingFactory();
 
             Assert.AreEqual(testTriad.GenerateChords(HeptatonicMode.Ionian, Note.C), new List<string>() { "C", "Dm", "Em", "F", "G", "Am", "Bo" });
             Assert.AreEqual(testTriad.GenerateChords(HeptatonicMode.Lydian, Note.Bb), new List<string>() { "Bb", "C", "Dm", "Eo", "F", "Gm", "Am" });
