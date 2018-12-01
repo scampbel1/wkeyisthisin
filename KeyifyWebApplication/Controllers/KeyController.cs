@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Web.Http;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning;
 
 namespace KeyifyWebApplication.Controllers
 {
@@ -14,8 +15,13 @@ namespace KeyifyWebApplication.Controllers
             _initialMessage = currentTime.ToString(CultureInfo.CurrentCulture);
         }
 
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(ITuning tuning)
         {
+//            if (notes are invalid)
+//            {
+//                return BadRequest("Tuning note(s) contain invalid characters.");
+//            }
+
             try
             {
                 var myObject = new { NumberIndex = new[] { 0, 1 }, Name = "Anonymous Object made by Sean Campbell" };

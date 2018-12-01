@@ -73,3 +73,8 @@ C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\Microsoft.AI.Window
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\Microsoft.AI.Web.xml
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\obj\Debug\KeyifyWebApplication.dll
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\obj\Debug\KeyifyWebApplication.pdb
+C:\Users\cambo\keyify_class_library\KeyifyWebApplication\obj\Debug\KeyifyWebApplication.csprojResolveAssemblyReference.cache
+C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\KeyifyScaleFinderClassLibrary.dll
+C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\nunit.framework.dll
+C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\KeyifyScaleFinderClassLibrary.pdb
+C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\nunit.framework.xml

@@ -11,3 +11,4 @@ C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary\bin\Debug\nuni
 C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary\bin\Debug\nunit.framework.xml
 C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary\obj\Debug\KeyifyScaleFinderClassLibrary.dll
 C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary\obj\Debug\KeyifyScaleFinderClassLibrary.pdb
+C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary\obj\Debug\KeyifyScaleFinderClassLibrary.csprojResolveAssemblyReference.cache
