@@ -31,21 +31,14 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
             return dictionary;
         }
 
-        public static ScaleDictionyEntry GenerateEntryFromString(string scale)
+        public static ScaleDictionyEntry GenerateEntryFromString(string inputScale)
         {
-            return new ScaleDictionyEntry(scale,
+            Scale generatedScale = ScaleNoteGenerator.GenerateNotes(
+                KeyifyElementStringConverter.ConvertStringNoteToNoteType(inputScale[0]),
+                HeptatonicScaleModeDictionary.GetScaleDirectory(KeyifyElementStringConverter.ConvertStringModeNameToModeType(inputScale.Substring(2)))
+                .ScaleSteps);
 
-                ScaleNoteGenerator
-                    .GenerateNotes(
-                        KeyifyElementStringConverter
-                            .ConvertStringNoteToNoteType(scale[0]),
-
-                        HeptatonicScaleModeDictionary
-                            .GetScaleDirectory(
-                                KeyifyElementStringConverter
-                                    .ConvertStringModeNameToModeType(scale
-                                        .Substring(2)))
-                            .ScaleSteps));
+            return new ScaleDictionyEntry(inputScale, generatedScale);
         }
     }
 

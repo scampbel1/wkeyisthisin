@@ -11,7 +11,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning
 
         public CustomTuning(Note[] inputNotes)
         {
-            _notes = inputNotes;
+            _notes = inputNotes; 
         }
 
         public override Note[] ReturnNotes()
@@ -21,7 +21,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning
 
         public static bool ValidateMusicalNotes(string input)
         {
-            var validCharacters = new Regex("^[ABCDEFGb]*$");
+            var validCharacters = new Regex("^[ABCDEFGb#]*$");
             return validCharacters.IsMatch(input);
         }
 
