@@ -39,7 +39,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning
                 try
                 {
                     notes[count] = KeyifyElementStringConverter
-                        .ConvertStringNoteToNoteType(note);
+                        .ConvertCharNoteToNoteType(note);
 
                     count++;
                 }

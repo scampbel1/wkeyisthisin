@@ -36,12 +36,13 @@ namespace KeyifyWebApplication.Controllers
         [HttpGet]
         public IHttpActionResult ScaleName(string scaleName)
         {
-            if (!string.IsNullOrEmpty(scaleName))
-            {
-                ScaleDictionyEntry scaleEntry = ScaleDictionary.GenerateEntryFromString(scaleName);
+            if (string.IsNullOrEmpty(scaleName))
+                return BadRequest();
 
-                if (scaleEntry != null) return Ok(scaleEntry);
-            }
+            ScaleDictionyEntry scaleEntry = ScaleDictionary.GenerateEntryFromString(scaleName);
+
+            if (scaleEntry != null)
+                return Ok(scaleEntry);
 
             return NotFound();
         }
