@@ -22,6 +22,7 @@ namespace KeyifyWebApplication
             config.Formatters.JsonFormatter.SupportedMediaTypes.Clear();
 
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
 
             config.Formatters.JsonFormatter.SerializerSettings.Formatting
                 = Newtonsoft.Json.Formatting.Indented;

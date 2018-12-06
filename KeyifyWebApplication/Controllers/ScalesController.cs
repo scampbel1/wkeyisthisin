@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using KeyifyScaleFinderClassLibrary.MusicTheory;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Helper;
 
 namespace KeyifyWebApplication.Controllers
 {
@@ -20,11 +21,13 @@ namespace KeyifyWebApplication.Controllers
                     if (scales != null) return Ok(scales);
                 }
 
-                //var notes = KeyifyScaleFinderClassLibrary.MusicTheory.Helper.EnumValuesConverter.GetNotes();
+                var results =
+                    ScaleMatcher.GetMatchedScales(KeyifyElementStringConverter.ConvertStringArrayIntoNotes(notes));
 
-                //var matchedScales = ScaleMatcher.GetMatchedScales(notes);
+                if (results.Any())
+                    return Ok(results);
 
-                return NotFound();
+                    return Ok($"No elements found in according to search: {string.Join("", notes)}");
             }
             catch (Exception e)
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
 
@@ -19,6 +20,27 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory.Helper
         public static HeptatonicMode ConvertStringModeNameToModeType(string mode)
         {
             return (HeptatonicMode) Enum.Parse(typeof(HeptatonicMode), mode, true);
+        }
+
+        public static List<Note> ConvertStringArrayIntoNotes(string[] notes)
+        {
+            List<Note> convertedNotes = new List<Note>(notes.Length);
+
+            foreach (string note in notes)
+            {
+                try
+                {
+                    convertedNotes.Add(note.Contains("#")
+                        ? ConvertSharpNoteToFlat(note)
+                        : ConvertCharNoteToNoteType(note));
+                }
+                catch
+                {
+                    throw new Exception("There was a problem converting string note into Note");
+                }
+            }
+
+            return convertedNotes;
         }
 
         public static Note ConvertSharpNoteToFlat(string note)
@@ -67,7 +89,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory.Helper
             }
         }
 
-        public static bool IsNoteSharpOrFlat(Note note)
+        private static bool IsNoteSharpOrFlat(Note note)
         {
             switch (note)
             {

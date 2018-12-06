@@ -5,7 +5,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
 {
     public static class ScaleMatcher
     {
-        public static List<ScaleMatch> GetMatchedScales(Note[] selectedNotes)
+        public static List<ScaleMatch> GetMatchedScales(IEnumerable<Note> selectedNotes)
         {
             var matches = new List<ScaleMatch>();
 
