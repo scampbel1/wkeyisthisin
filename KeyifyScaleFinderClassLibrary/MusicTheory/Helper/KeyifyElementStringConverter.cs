@@ -103,7 +103,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory.Helper
                     return true;
                 case Note.Gb:
                     return true;
-                default:
+                default:    
                     return false;
             }
         }

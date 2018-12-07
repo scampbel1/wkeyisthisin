@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
+using KeyifyWebApplication.Models;
 
 namespace KeyifyWebApplication.Controllers
 {
     public class HomeController : ApiController
     {
-        public class Person
-        {
-            public string Name { get; set; }
-            public int Age { get; set; }
-            public string Message { get; set; }
-        }
-
         [HttpGet]
         public IHttpActionResult TestPersonModel([FromBody] Person person)
         {
