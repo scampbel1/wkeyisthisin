@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Web.Http;
-using KeyifyScaleFinderClassLibrary;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning;
 
 namespace KeyifyWebApplication.Controllers
 {
     public class TuningsController : ApiController
     {
-        [Route("api/Tunings/{tuningText}")]
         [HttpGet]
-        public IHttpActionResult Get(string tuningText)
+        public IHttpActionResult Get([FromBody] string tuningText)
         {
             try
             {
                 if (tuningText.ToLower().Equals("standard"))
-                {
-                    var tuning = new StandardTuning();
-                    return Ok(tuning.ReturnNotes());
-                }
+                    return Ok(new StandardTuning().ReturnNotes());
 
-                return BadRequest();
+                try
+                {
+                    return Ok(new CustomTuning(tuningText).ReturnNotes());
+                }
+                catch
+                {
+                    return BadRequest();
+                }
             }
             catch
             {

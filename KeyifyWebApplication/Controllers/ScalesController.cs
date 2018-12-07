@@ -10,11 +10,11 @@ namespace KeyifyWebApplication.Controllers
     public class ScalesController : ApiController
     {
         [HttpGet]
-        public IHttpActionResult Get([FromUri] string[] notes)
+        public IHttpActionResult Get([FromBody] string[] notes)
         {
             try
             {
-                if (!notes.Any())
+                if (notes == null || !notes.Any())
                 {
                     List<ScaleDictionyEntry> scales = ScaleDictionary.GenerateDictionary();
 
@@ -27,27 +27,12 @@ namespace KeyifyWebApplication.Controllers
                 if (results.Any())
                     return Ok(results);
 
-                    return Ok($"No elements found in according to search: {string.Join("", notes)}");
+                return Ok($"No elements found in according to search: {string.Join("", notes)}");
             }
             catch (Exception e)
             {
                 return InternalServerError(e);
             }
-        }
-
-        [Route("api/Scales/ScaleName/{scaleName}")]
-        [HttpGet]
-        public IHttpActionResult ScaleName(string scaleName)
-        {
-            if (string.IsNullOrEmpty(scaleName))
-                return BadRequest();
-
-            ScaleDictionyEntry scaleEntry = ScaleDictionary.GenerateEntryFromString(scaleName);
-
-            if (scaleEntry != null)
-                return Ok(scaleEntry);
-
-            return NotFound();
         }
     }
 }

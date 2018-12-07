@@ -14,6 +14,11 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning
             _notes = inputNotes; 
         }
 
+        public CustomTuning(string inputNotes)
+        {
+            _notes = ConvertStringInputToNotes(inputNotes);
+        }
+
         public override Note[] ReturnNotes()
         {
             return _notes;
