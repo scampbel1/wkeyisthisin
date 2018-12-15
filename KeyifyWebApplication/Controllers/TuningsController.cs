@@ -1,6 +1,4 @@
-﻿using System;
-using System.Web.Http;
-using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
+﻿using System.Web.Http;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning;
 
 namespace KeyifyWebApplication.Controllers

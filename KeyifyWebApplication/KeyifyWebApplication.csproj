@@ -154,9 +154,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\FretboardController.cs" />
+    <Compile Include="Models\FretboardRequest.cs" />
     <Compile Include="Controllers\ScaleController.cs" />
-    <Compile Include="Models\Person.cs" />
     <Compile Include="Controllers\ScalesController.cs" />
     <Compile Include="Controllers\TuningsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -191,6 +191,9 @@
       <Project>{09d095ea-b20d-4d5c-a943-216879a34525}</Project>
       <Name>KeyifyScaleFinderClassLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
