@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using KeyifyScaleFinderClassLibrary.Instrument;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning;
+using KeyifyWebClient.Models;
 
-namespace WebApplication1.Controllers
+namespace KeyifyWebClient.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            return View();
+            var model = new FretboardWebModel(Fretboard.PopulateFretboard(new StandardTuning()));
+            return View(model);
         }
 
         public ActionResult About()

@@ -70,3 +70,7 @@ C:\Users\cambo\keyify_class_library\WebApplication1\bin\System.Net.Http.Primitiv
 C:\Users\cambo\keyify_class_library\WebApplication1\bin\System.Net.Http.Extensions.xml
 C:\Users\cambo\keyify_class_library\WebApplication1\bin\System.Net.Http.Primitives.xml
 C:\Users\cambo\keyify_class_library\WebApplication1\obj\Debug\KeyifyWebClient.csproj.App.config
+C:\Users\cambo\keyify_class_library\WebApplication1\bin\KeyifyScaleFinderClassLibrary.dll
+C:\Users\cambo\keyify_class_library\WebApplication1\bin\nunit.framework.dll
+C:\Users\cambo\keyify_class_library\WebApplication1\bin\KeyifyScaleFinderClassLibrary.pdb
+C:\Users\cambo\keyify_class_library\WebApplication1\bin\nunit.framework.xml
