@@ -25,9 +25,6 @@ C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\roslyn\vbc.exe.conf
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\roslyn\vbc.rsp
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\roslyn\VBCSCompiler.exe
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\KeyifyWebApplication.dll.config
-C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\KeyifyWebApplication.dll
-C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\KeyifyWebApplication.pdb
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\Antlr3.Runtime.dll
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\Microsoft.AI.Agent.Intercept.dll
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\Microsoft.AI.DependencyCollector.dll
@@ -71,10 +68,13 @@ C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\Microsoft.AI.Depend
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\Microsoft.AI.Web.xml
-C:\Users\cambo\keyify_class_library\KeyifyWebApplication\obj\Debug\KeyifyWebApplication.dll
-C:\Users\cambo\keyify_class_library\KeyifyWebApplication\obj\Debug\KeyifyWebApplication.pdb
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\obj\Debug\KeyifyWebApplication.csprojResolveAssemblyReference.cache
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\KeyifyScaleFinderClassLibrary.dll
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\nunit.framework.dll
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\KeyifyScaleFinderClassLibrary.pdb
 C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\nunit.framework.xml
+C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\KeyifyRestApi.dll.config
+C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\KeyifyRestApi.dll
+C:\Users\cambo\keyify_class_library\KeyifyWebApplication\bin\KeyifyRestApi.pdb
+C:\Users\cambo\keyify_class_library\KeyifyWebApplication\obj\Debug\KeyifyRestApi.dll
+C:\Users\cambo\keyify_class_library\KeyifyWebApplication\obj\Debug\KeyifyRestApi.pdb

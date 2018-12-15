@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyifyScaleFinderClassLibrary", "KeyifyScaleFinderClassLibrary\KeyifyScaleFinderClassLibrary.csproj", "{09D095EA-B20D-4D5C-A943-216879A34525}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyifyWebApplication", "KeyifyWebApplication\KeyifyWebApplication.csproj", "{E819535F-B050-45C9-8DAD-9FD625842D91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyifyRestApi", "KeyifyWebApplication\KeyifyRestApi.csproj", "{E819535F-B050-45C9-8DAD-9FD625842D91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyifyWebClient", "WebApplication1\KeyifyWebClient.csproj", "{7E23FBAC-3779-4496-B14E-364D4FFA5DC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E819535F-B050-45C9-8DAD-9FD625842D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E819535F-B050-45C9-8DAD-9FD625842D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E819535F-B050-45C9-8DAD-9FD625842D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E23FBAC-3779-4496-B14E-364D4FFA5DC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E23FBAC-3779-4496-B14E-364D4FFA5DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E23FBAC-3779-4496-B14E-364D4FFA5DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E23FBAC-3779-4496-B14E-364D4FFA5DC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
