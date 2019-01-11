@@ -1,5 +1,6 @@
 ﻿using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning.Guitar;
 using NUnit.Framework;
 
 namespace KeyifyScaleFinderClassLibrary.Unit_Tests
@@ -13,7 +14,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         [SetUp]
         public void Init()
         {
-            _tuning = new StandardTuning();
+            _tuning = new StandardGuitarTuning();
             _standardTuning = new Note[]
             {
                 Note.E,

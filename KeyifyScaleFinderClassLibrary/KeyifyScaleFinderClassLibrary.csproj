@@ -46,10 +46,11 @@
     <Compile Include="Instrument\Fretboard.cs" />
     <Compile Include="Instrument\StringNotePopulater.cs" />
     <Compile Include="MusicTheory\AbstractTriadFactory.cs" />
+    <Compile Include="MusicTheory\ScaleDictionyEntry.cs" />
     <Compile Include="MusicTheory\ScaleDirectoryEntry.cs" />
     <Compile Include="MusicTheory\ScaleMatch.cs" />
     <Compile Include="MusicTheory\ScaleMatcher.cs" />
-    <Compile Include="MusicTheory\Tuning\CustomTuning.cs" />
+    <Compile Include="MusicTheory\Tuning\Guitar\CustomGuitarTuning.cs" />
     <Compile Include="MusicTheory\Helper\EnumValuesConverter.cs" />
     <Compile Include="MusicTheory\Enums\HeptatonicModes.cs" />
     <Compile Include="MusicTheory\IScale.cs" />
@@ -60,9 +61,9 @@
     <Compile Include="MusicTheory\ScaleDictionary.cs" />
     <Compile Include="MusicTheory\ScaleNoteGenerator.cs" />
     <Compile Include="MusicTheory\Enums\ScaleStep.cs" />
-    <Compile Include="MusicTheory\Tuning\StandardTuning.cs" />
     <Compile Include="MusicTheory\ChordGroupingFactory.cs" />
     <Compile Include="MusicTheory\Enums\TriadType.cs" />
+    <Compile Include="MusicTheory\Tuning\Guitar\StandardGuitarTuning.cs" />
     <Compile Include="Unit Tests\GuitarComponentUnitTest.cs" />
     <Compile Include="Unit Tests\MusicTheoryUnitTests.cs" />
     <Compile Include="MusicTheory\HeptatonicScaleModeDictionary.cs" />

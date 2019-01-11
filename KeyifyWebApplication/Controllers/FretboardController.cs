@@ -1,9 +1,9 @@
 ﻿using System.Web.Http;
 using KeyifyScaleFinderClassLibrary.Instrument;
-using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning;
-using KeyifyWebApplication.Models;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning.Guitar;
+using KeyifyRestApi.Models;
 
-namespace KeyifyWebApplication.Controllers
+namespace KeyifyRestApi.Controllers
 {
     public class FretboardController : ApiController
     {
@@ -12,7 +12,7 @@ namespace KeyifyWebApplication.Controllers
         {
             try
             {
-                CustomTuning tuning = new CustomTuning(request.Tuning);
+                CustomGuitarTuning tuning = new CustomGuitarTuning(request.Tuning);
 
                 return Ok(Fretboard.PopulateFretboard(tuning, request.FretCount));
             }

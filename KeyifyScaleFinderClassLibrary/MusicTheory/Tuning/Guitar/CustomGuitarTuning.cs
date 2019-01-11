@@ -3,18 +3,18 @@ using System.Text.RegularExpressions;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Helper;
 
-namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning
+namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning.Guitar
 {
-    public class CustomTuning : StandardTuning
+    public class CustomGuitarTuning : StandardGuitarTuning
     {
         private readonly Note[] _notes;
 
-        public CustomTuning(Note[] inputNotes)
+        public CustomGuitarTuning(Note[] inputNotes)
         {
             _notes = inputNotes; 
         }
 
-        public CustomTuning(string inputNotes)
+        public CustomGuitarTuning(string inputNotes)
         {
             _notes = ConvertStringInputToNotes(inputNotes);
         }

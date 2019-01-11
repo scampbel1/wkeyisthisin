@@ -5,9 +5,9 @@ using System.Web;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(KeyifyWebApplication.Startup))]
+[assembly: OwinStartup(typeof(KeyifyRestApi.Startup))]
 
-namespace KeyifyWebApplication
+namespace KeyifyRestApi
 {
     public class Startup
     {

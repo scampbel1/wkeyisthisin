@@ -37,16 +37,4 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
             return new ScaleDictionyEntry(inputScale, generatedScale);
         }
     }
-
-    public class ScaleDictionyEntry
-    {
-        public string ScaleName { get; set; }
-        public Scale Scale { get; set; }
-
-        public ScaleDictionyEntry(string name, Scale scale)
-        {
-            ScaleName = name;
-            Scale = scale;
-        }
-    }
 }

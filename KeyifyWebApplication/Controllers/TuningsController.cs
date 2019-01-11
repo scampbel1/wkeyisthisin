@@ -1,7 +1,8 @@
 ﻿using System.Web.Http;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning.Guitar;
 
-namespace KeyifyWebApplication.Controllers
+namespace KeyifyRestApi.Controllers
 {
     public class TuningsController : ApiController
     {
@@ -11,11 +12,11 @@ namespace KeyifyWebApplication.Controllers
             try
             {
                 if (tuningText.ToLower().Equals("standard"))
-                    return Ok(new StandardTuning().ReturnNotes());
+                    return Ok(new StandardGuitarTuning().ReturnNotes());
 
                 try
                 {
-                    return Ok(new CustomTuning(tuningText).ReturnNotes());
+                    return Ok(new CustomGuitarTuning(tuningText).ReturnNotes());
                 }
                 catch
                 {

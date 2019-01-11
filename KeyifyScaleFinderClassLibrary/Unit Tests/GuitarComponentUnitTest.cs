@@ -1,6 +1,7 @@
 ﻿using KeyifyScaleFinderClassLibrary.Instrument;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning;
+using KeyifyScaleFinderClassLibrary.MusicTheory.Tuning.Guitar;
 using NUnit.Framework;
 
 namespace KeyifyScaleFinderClassLibrary.Unit_Tests
@@ -12,7 +13,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         [SetUp]
         public void Init()
         {
-            _tuning = new CustomTuning(new[]
+            _tuning = new CustomGuitarTuning(new[]
             {
                 Note.E,
                 Note.A,
@@ -28,7 +29,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         {
             Assert.AreEqual(
                 Fretboard.PopulateFretboard(_tuning),
-                Fretboard.PopulateFretboard(new StandardTuning()));
+                Fretboard.PopulateFretboard(new StandardGuitarTuning()));
         }
     }
 }

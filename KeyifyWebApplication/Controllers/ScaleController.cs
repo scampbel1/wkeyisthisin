@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using KeyifyScaleFinderClassLibrary.MusicTheory;
 
-namespace KeyifyWebApplication.Controllers
+namespace KeyifyRestApi.Controllers
 {
     public class ScaleController : ApiController
     {

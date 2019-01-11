@@ -5,7 +5,7 @@ using System.Web.Http;
 using KeyifyScaleFinderClassLibrary.MusicTheory;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Helper;
 
-namespace KeyifyWebApplication.Controllers
+namespace KeyifyRestApi.Controllers
 {
     public class ScalesController : ApiController
     {

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace KeyifyWebApplication.Models
+namespace KeyifyRestApi.Models
 {
     public class FretboardRequest
     {

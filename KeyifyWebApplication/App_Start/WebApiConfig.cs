@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using Newtonsoft.Json.Serialization;
 
-namespace KeyifyWebApplication
+namespace KeyifyRestApi
 {
     public static class WebApiConfig
     {

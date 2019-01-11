@@ -1,8 +1,8 @@
 ﻿using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
 
-namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning
+namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning.Guitar
 {
-    public class StandardTuning : ITuning
+    public class StandardGuitarTuning : ITuning
     {
         private readonly Note[] _notes = new Note[6]
         {
