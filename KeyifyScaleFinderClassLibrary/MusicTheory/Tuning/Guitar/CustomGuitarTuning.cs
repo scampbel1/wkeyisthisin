@@ -44,7 +44,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory.Tuning.Guitar
                 try
                 {
                     notes[count] = KeyifyElementStringConverter
-                        .ConvertCharNoteToNoteType(note);
+                        .ConvertStringNoteToNoteType(note);
 
                     count++;
                 }

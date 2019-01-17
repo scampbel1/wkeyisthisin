@@ -308,7 +308,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         public void CsharpIsConvertedCorrectlyToDflat()
         {
             const string note = "C#";
-            Note conversion = KeyifyElementStringConverter.ConvertSharpNoteToFlat(note);
+            Note conversion = KeyifyElementStringConverter.ConvertSharpNoteStringToFlat(note);
 
             Assert.AreEqual(Note.Db, conversion);
         }
@@ -317,7 +317,7 @@ namespace KeyifyScaleFinderClassLibrary.Unit_Tests
         public void GsharpIsConvertedCorrectlyToAflat()
         {
             const string note = "G#";
-            Note conversion = KeyifyElementStringConverter.ConvertSharpNoteToFlat(note);
+            Note conversion = KeyifyElementStringConverter.ConvertSharpNoteStringToFlat(note);
 
             Assert.AreEqual(Note.Ab, conversion);
         }

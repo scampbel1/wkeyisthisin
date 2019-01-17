@@ -1,6 +1,4 @@
-﻿@using KeyifyScaleFinderClassLibrary.MusicTheory.Enums
-@using KeyifyScaleFinderClassLibrary.MusicTheory.Helper
-@model KeyifyWebClient.Models.FretboardWebModel
+﻿@model KeyifyWebClient.Models.FretboardWebModel
 
 @{
     ViewBag.Title = "Home Page";
@@ -14,11 +12,11 @@
 
 <table class="fretboard">
     <tr>
-        @foreach (var note in EnumValuesConverter.GetNotes())
+        @foreach (var note in Model.Notes)
         {
             <td>
-                @Html.Label(note)
-                @Html.CheckBox(note)
+                @Html.Label(note.Item1)
+                @Html.CheckBox(note.Item2)
             </td>
         }
     </tr>

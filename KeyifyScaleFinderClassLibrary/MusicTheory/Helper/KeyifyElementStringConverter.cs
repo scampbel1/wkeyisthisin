@@ -6,12 +6,12 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory.Helper
 {
     public static class KeyifyElementStringConverter
     {
-        public static Note ConvertCharNoteToNoteType(string note)
+        public static Note ConvertStringNoteToNoteType(string note)
         {
             return (Note) Enum.Parse(typeof(Note), note, true);
         }
 
-        public static Note ConvertCharNoteToNoteType(char note)
+        public static Note ConvertStringNoteToNoteType(char note)
         {
             return (Note) Enum.Parse(typeof(Note), note.ToString(), true);
         }
@@ -30,8 +30,8 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory.Helper
                 try
                 {
                     convertedNotes.Add(note.Contains("#")
-                        ? ConvertSharpNoteToFlat(note)
-                        : ConvertCharNoteToNoteType(note));
+                        ? ConvertSharpNoteStringToFlat(note)
+                        : ConvertStringNoteToNoteType(note));
                 }
                 catch
                 {
@@ -42,14 +42,16 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory.Helper
             return convertedNotes;
         }
 
-        public static Note ConvertSharpNoteToFlat(string note)
+        public static Note ConvertSharpNoteStringToFlat(string note)
         {
-            if (note.Length != 2 && note[1] != '#')
+            if (note.Length != 2) return ConvertStringNoteToNoteType(note);
+
+            if (note[1] != '#')
                 throw new InvalidOperationException("Note must be sharp");
 
             try
             {
-                Note convertedNote = ConvertCharNoteToNoteType(note[0]);
+                Note convertedNote = ConvertStringNoteToNoteType(note[0]);
 
                 if ((int) convertedNote >= EnumValuesConverter.GetNotes().Count)
                 {
@@ -61,6 +63,58 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory.Helper
                 }
 
                 return convertedNote;
+            }
+            catch
+            {
+                throw new Exception("Conversion went wrong");
+            }
+        }
+
+        public static Note ConvertFlatNoteStringToSharp(string note)
+        {
+            if (note.Length != 2) return ConvertStringNoteToNoteType(note);
+
+            if (note[1] != 'b')
+                throw new InvalidOperationException("Note must be sharp");
+
+            try
+            {
+                Note convertedNote = ConvertStringNoteToNoteType(note[0]);
+
+                if ((int) convertedNote >= EnumValuesConverter.GetNotes().Count)
+                {
+                    convertedNote = (Note) 0;
+                }
+                else
+                {
+                    convertedNote = convertedNote + 1;
+                }
+
+                return convertedNote;
+            }
+            catch
+            {
+                throw new Exception("Conversion went wrong");
+            }
+        }
+        public static string ConvertFlatNoteStringToSharpString(string note)
+        {
+            if (note.Length < 2 || note[1] != 'b') return note;
+
+            try
+            {
+                Note convertedNote = ConvertStringNoteToNoteType(note[0]);
+
+                if ((int) convertedNote >= EnumValuesConverter.GetNotes().Count)
+                {
+                    convertedNote = (Note) 0;
+                }
+                else
+                {
+                    convertedNote = convertedNote + 1;
+                }
+
+                return ConvertNoteToStringEquivalent(convertedNote);
             }
             catch
             {

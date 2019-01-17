@@ -18,7 +18,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
                         note + " " + mode,
 
                         ScaleNoteGenerator.GenerateNotes(
-                            KeyifyElementStringConverter.ConvertCharNoteToNoteType(note),
+                            KeyifyElementStringConverter.ConvertStringNoteToNoteType(note),
                             HeptatonicScaleModeDictionary.GetScaleDirectory(KeyifyElementStringConverter.ConvertStringModeNameToModeType(mode))
                                 .ScaleSteps)));
                 }
@@ -30,7 +30,7 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory
         public static ScaleDictionyEntry GenerateEntryFromString(string inputScale)
         {
             Scale generatedScale = ScaleNoteGenerator.GenerateNotes(
-                KeyifyElementStringConverter.ConvertCharNoteToNoteType(inputScale[0]),
+                KeyifyElementStringConverter.ConvertStringNoteToNoteType(inputScale[0]),
                 HeptatonicScaleModeDictionary.GetScaleDirectory(KeyifyElementStringConverter.ConvertStringModeNameToModeType(inputScale.Substring(2)))
                 .ScaleSteps);
 
