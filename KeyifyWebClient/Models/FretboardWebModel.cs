@@ -7,13 +7,13 @@ namespace KeyifyWebClient.Models
 {
     public class FretboardWebModel
     {
-        public readonly List<Note[]> Strings;
+        public readonly List<string[]> Strings;
         public readonly int Fretcount;
         public List<Tuple<string, Note>> Notes;
 
-        public FretboardWebModel(IEnumerable<Note[]> strings, int fretcount)
+        public FretboardWebModel(IEnumerable<string[]> strings, int fretcount)
         {
-            Strings = strings as List<Note[]>;
+            Strings = strings as List<string[]>;
             Fretcount = fretcount;
             Notes = new List<Tuple<string, Note>>(12);
             PopulateNotes();

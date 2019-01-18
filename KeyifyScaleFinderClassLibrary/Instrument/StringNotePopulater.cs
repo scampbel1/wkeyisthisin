@@ -1,4 +1,5 @@
-﻿using KeyifyScaleFinderClassLibrary.MusicTheory;
+﻿using System;
+using KeyifyScaleFinderClassLibrary.MusicTheory;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Enums;
 using KeyifyScaleFinderClassLibrary.MusicTheory.Helper;
 
