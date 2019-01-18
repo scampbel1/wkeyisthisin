@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyifyScaleFinderClassLibra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyifyRestApi", "KeyifyWebApplication\KeyifyRestApi.csproj", "{E819535F-B050-45C9-8DAD-9FD625842D91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyifyWebClient", "WebApplication1\KeyifyWebClient.csproj", "{7E23FBAC-3779-4496-B14E-364D4FFA5DC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyifyWebClient", "KeyifyWebClient\KeyifyWebClient.csproj", "{7E23FBAC-3779-4496-B14E-364D4FFA5DC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

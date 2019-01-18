@@ -70,12 +70,12 @@ namespace KeyifyScaleFinderClassLibrary.MusicTheory.Helper
             }
         }
 
-        public static Note ConvertFlatNoteStringToSharp(string note)
+        public static Note ConvertFlatNoteStringToFlat(string note)
         {
             if (note.Length != 2) return ConvertStringNoteToNoteType(note);
 
             if (note[1] != 'b')
-                throw new InvalidOperationException("Note must be sharp");
+                throw new InvalidOperationException("Note must be flat");
 
             try
             {
