@@ -9,15 +9,19 @@
 @Html.Partial("Fretboard")
 
 <h1>Select Notes</h1>
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <table class="fretboard">
+        <tr>
+            @foreach (var note in Model.AvailableNotes)
+            {
+                <td>
+                    @Html.Label(note.Item1)
+                    @Html.CheckBox(note.Item2.ToString())
+                </td>
+            }
+        </tr>
+    </table>
 
-<table class="fretboard">
-    <tr>
-        @foreach (var note in Model.Notes)
-        {
-            <td>
-                @Html.Label(note.Item1)
-                @Html.CheckBox(note.Item2.ToString())
-            </td>
-        }
-    </tr>
-</table>
+    <input type="submit" value="Add Notes"/>
+}

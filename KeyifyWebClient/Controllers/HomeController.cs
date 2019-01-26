@@ -8,9 +8,17 @@ namespace KeyifyWebClient.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
             var model = new FretboardWebModel(Fretboard.PopulateFretboard(new StandardGuitarTuning()), 24);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Index(FretboardWebModel model)
+        {
+            model.SelectedNotes = model.SelectedNotes;
             return View(model);
         }
     }

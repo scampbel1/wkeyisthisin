@@ -7,15 +7,19 @@ namespace KeyifyWebClient.Models
 {
     public class FretboardWebModel
     {
-        public readonly List<string[]> Strings;
+        public readonly List<string[]> Tuning;
         public readonly int Fretcount;
-        public List<Tuple<string, Note>> Notes;
+
+        public List<Tuple<string, Note>> AvailableNotes;
+        public HashSet<Note> SelectedNotes;
 
         public FretboardWebModel(IEnumerable<string[]> strings, int fretcount)
         {
-            Strings = strings as List<string[]>;
+            AvailableNotes = new List<Tuple<string, Note>>(12);
+            SelectedNotes = new HashSet<Note>();
+            Tuning = strings as List<string[]>;
             Fretcount = fretcount;
-            Notes = new List<Tuple<string, Note>>(12);
+            
             PopulateNotes();
         }
 
@@ -23,7 +27,7 @@ namespace KeyifyWebClient.Models
         {
             foreach (var note in (Note[])Enum.GetValues(typeof(Note)))
             {
-                Notes.Add(new Tuple<string, Note>
+                AvailableNotes.Add(new Tuple<string, Note>
                     (KeyifyElementStringConverter.ConvertNoteToStringEquivalent(note, true), note));
             }
         }
