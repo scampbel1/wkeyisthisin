@@ -18,7 +18,6 @@ namespace KeyifyWebClient.Controllers
         [HttpPost]
         public ActionResult Index(FretboardWebModel model)
         {
-            model.SelectedNotes = model.SelectedNotes;
             return View(model);
         }
     }

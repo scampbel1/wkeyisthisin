@@ -1,0 +1,11 @@
+﻿.fretboard {
+    table-layout: fixed;
+    width: 750px;
+    text-align: center;
+}
+
+
+.fretboardHeading {
+    text-align: center;
+    color: darkgrey;
+}

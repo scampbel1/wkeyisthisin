@@ -187,12 +187,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KeyifyScaleFinderClassLibrary\KeyifyScaleFinderClassLibrary.csproj">
-      <Project>{09d095ea-b20d-4d5c-a943-216879a34525}</Project>
-      <Name>KeyifyScaleFinderClassLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
   </ItemGroup>
   <PropertyGroup>
