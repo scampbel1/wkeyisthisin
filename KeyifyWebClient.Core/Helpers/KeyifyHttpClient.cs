@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace KeyifyWebClient.Helpers
+namespace KeyifyWebClient.Core.Helpers
 {
     public static class KeyifyHttpClient
     {

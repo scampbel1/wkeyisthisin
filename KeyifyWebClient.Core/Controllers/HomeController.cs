@@ -1,6 +1,6 @@
 ﻿using KeyifyScaleFinderClassLibrary.Core.Instrument;
 using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Tuning.Guitar;
-using KeyifyWebClient.Models;
+using KeyifyWebClient.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KeyifyWebClient.Core.Controllers

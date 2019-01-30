@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Enums;
 using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Helper;
 
-namespace KeyifyWebClient.Models
+namespace KeyifyWebClient.Core.Models
 {
     public class FretboardWebModel
     {
