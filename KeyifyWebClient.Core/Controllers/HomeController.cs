@@ -1,6 +1,5 @@
-﻿using KeyifyScaleFinderClassLibrary.Core.Instrument;
-using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Tuning.Guitar;
-using KeyifyWebClient.Core.Models;
+﻿using KeyifyWebClient.Core.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KeyifyWebClient.Core.Controllers
@@ -10,7 +9,7 @@ namespace KeyifyWebClient.Core.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var model = new FretboardWebModel(Fretboard.PopulateFretboard(new StandardGuitarTuning()), 24);
+            var model = new FretboardWebModel();
             return View(model);
         }
 

@@ -13,15 +13,18 @@
 {
     <table class="fretboard">
         <tr>
-            @foreach (var note in Model.AvailableNotes)
+            @foreach(var i in Model.Notes)
             {
                 <td>
-                    @Html.Label(note.Item1)
-                    @Html.CheckBox(note.Item2.ToString())
+                    @Html.Label(i.Item1)
+                    @Html.CheckBox(i.Item2)
                 </td>
             }
         </tr>
     </table>
 
-    <input type="submit" value="Add Notes"/>
+    @Html.HiddenFor(m => m.Fretcount)
+    @Html.HiddenFor(m => m.Tuning)
+
+    <button type="submit">Add Notes</button>
 }

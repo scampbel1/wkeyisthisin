@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using KeyifyScaleFinderClassLibrary.Core.Instrument;
 using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Enums;
-using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Helper;
+using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Tuning.Guitar;
 
 namespace KeyifyWebClient.Core.Models
 {
@@ -10,16 +11,13 @@ namespace KeyifyWebClient.Core.Models
         public readonly List<string[]> Tuning;
         public readonly int Fretcount;
 
-        public List<Tuple<string, Note>> AvailableNotes;
-        public HashSet<Note> SelectedNotes;
+        public List<Tuple<string, bool>> Notes;
 
-        public FretboardWebModel(IEnumerable<string[]> strings, int fretcount)
+        public FretboardWebModel()
         {
-            AvailableNotes = new List<Tuple<string, Note>>(12);
-            SelectedNotes = new HashSet<Note>();
-            Tuning = strings as List<string[]>;
-            Fretcount = fretcount;
-            
+            Notes = new List<Tuple<string, bool>>();
+            Tuning = Fretboard.PopulateFretboard(new StandardGuitarTuning());
+            Fretcount = 24;
             PopulateNotes();
         }
 
@@ -27,8 +25,7 @@ namespace KeyifyWebClient.Core.Models
         {
             foreach (var note in (Note[])Enum.GetValues(typeof(Note)))
             {
-                AvailableNotes.Add(new Tuple<string, Note>
-                    (KeyifyElementStringConverter.ConvertNoteToStringEquivalent(note, true), note));
+                Notes.Add(new Tuple<string, bool>(note.ToString(), false));
             }
         }
     }
