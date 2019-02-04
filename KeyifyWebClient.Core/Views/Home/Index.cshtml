@@ -1,4 +1,5 @@
-﻿@model KeyifyWebClient.Core.Models.FretboardWebModel
+﻿@using System.Text
+@model KeyifyWebClient.Core.Models.FretboardWebModel
 
 @{
     ViewBag.Title = "Home Page";
@@ -13,11 +14,11 @@
 {
     <table class="fretboard">
         <tr>
-            @foreach(var i in Model.Notes)
+            @foreach (var n in Model.Notes)
             {
                 <td>
-                    @Html.Label(i.Item1)
-                    @Html.CheckBox(i.Item2)
+                    @Html.Label(n.Text)
+                    @Html.CheckBoxFor(model => model.Notes.Single(list => list.Equals(n)).Selected, n.Selected)
                 </td>
             }
         </tr>
@@ -25,6 +26,7 @@
 
     @Html.HiddenFor(m => m.Fretcount)
     @Html.HiddenFor(m => m.Tuning)
+    @Html.HiddenFor(m => m.Notes)
 
     <button type="submit">Add Notes</button>
 }

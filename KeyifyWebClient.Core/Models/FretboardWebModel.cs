@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using KeyifyScaleFinderClassLibrary.Core.Instrument;
 using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Enums;
 using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Tuning.Guitar;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace KeyifyWebClient.Core.Models
 {
@@ -11,11 +12,11 @@ namespace KeyifyWebClient.Core.Models
         public readonly List<string[]> Tuning;
         public readonly int Fretcount;
 
-        public List<Tuple<string, bool>> Notes;
+        public List<SelectListItem> Notes;
 
         public FretboardWebModel()
         {
-            Notes = new List<Tuple<string, bool>>();
+            Notes = new List<SelectListItem>();
             Tuning = Fretboard.PopulateFretboard(new StandardGuitarTuning());
             Fretcount = 24;
             PopulateNotes();
@@ -25,8 +26,14 @@ namespace KeyifyWebClient.Core.Models
         {
             foreach (var note in (Note[])Enum.GetValues(typeof(Note)))
             {
-                Notes.Add(new Tuple<string, bool>(note.ToString(), false));
+                Notes.Add(new SelectListItem { Selected = false, Text = note.ToString(), Value = note.ToString() });
             }
         }
+    }
+
+    public class SelectedNoteItem
+    {
+        public Note Note { get; set; }
+        public bool Selected { get; set; }
     }
 }
