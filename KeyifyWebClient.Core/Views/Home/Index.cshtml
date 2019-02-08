@@ -1,4 +1,12 @@
-﻿@using System.Text
+﻿<script language="javascript" type="text/javascript">
+
+    function AddNote(note) {
+        alert(note.toString());
+    }
+
+</script>
+
+
 @model KeyifyWebClient.Core.Models.FretboardWebModel
 
 @{
@@ -10,23 +18,14 @@
 @Html.Partial("Fretboard")
 
 <h1>Select Notes</h1>
-@using (Html.BeginForm("Index", "Home", FormMethod.Post))
-{
-    <table class="fretboard">
-        <tr>
-            @foreach (var n in Model.Notes)
+
+<table class="fretboard">
+    <tr>
+        @foreach (var n in Model.Notes)
             {
-                <td>
-                    @Html.Label(n.Text)
-                    @Html.CheckBoxFor(model => model.Notes.Single(list => list.Equals(n)).Selected, n.Selected)
-                </td>
-            }
-        </tr>
-    </table>
-
-    @Html.HiddenFor(m => m.Fretcount)
-    @Html.HiddenFor(m => m.Tuning)
-    @Html.HiddenFor(m => m.Notes)
-
-    <button type="submit">Add Notes</button>
-}
+            <td>
+                <input type="button" value="@n.Note" onclick="AddNote('@n.Note')" />
+            </td>
+        }
+    </tr>
+</table>
