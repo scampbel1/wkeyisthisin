@@ -13,9 +13,11 @@ namespace KeyifyWebClient.Core.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(FretboardWebModel model)
+        public ActionResult UpdateSelectedNotes()
         {
-            return View(model);
+            var model = new FretboardWebModel();
+
+            return View("Index", model);
         }
     }
 }

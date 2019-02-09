@@ -1,11 +1,24 @@
 ﻿<script language="javascript" type="text/javascript">
 
-    function AddNote(note) {
-        alert(note.toString());
-    }
+//    function AddNote(note) {
+//
+//
+//        $.ajax({
+//            type: 'POST',
+//            url: endpoint,
+//            datatype: text,
+//            data: note
+//        });
+//    }
 
+    $(function() {
+        $('.NoteButton').on('click',
+            function() {
+                var endpoint = '@Url.Action("UpdateSelectedNotes", "Home")';
+                alert(this);
+            });
+    })
 </script>
-
 
 @model KeyifyWebClient.Core.Models.FretboardWebModel
 
@@ -19,13 +32,19 @@
 
 <h1>Select Notes</h1>
 
-<table class="fretboard">
-    <tr>
-        @foreach (var n in Model.Notes)
+@using (Html.BeginForm("UpdateSelectedNotes", "Home", FormMethod.Post, new { id = "SelectNote" }))
+{
+
+    <table class="fretboard">
+        <tr>
+            @foreach (var n in Model.Notes)
             {
-            <td>
-                <input type="button" value="@n.Note" onclick="AddNote('@n.Note')" />
-            </td>
-        }
-    </tr>
-</table>
+                <td>
+                    <input type="button" value="@n.Note" class="NoteButton"/> 
+                </td>
+            }
+        </tr>
+    </table>
+}
+
+@*onclick="AddNote('@n.Note')"*@
