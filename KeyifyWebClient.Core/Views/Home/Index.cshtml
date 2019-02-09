@@ -12,10 +12,9 @@
 //    }
 
     $(function() {
-        $('.NoteButton').on('click',
+        $('#SelectedNote').on('submit',
             function() {
-                var endpoint = '@Url.Action("UpdateSelectedNotes", "Home")';
-                alert(this);
+                var endpoint = '@Url.Action("Index", "Home")';
             });
     })
 </script>
@@ -32,7 +31,7 @@
 
 <h1>Select Notes</h1>
 
-@using (Html.BeginForm("UpdateSelectedNotes", "Home", FormMethod.Post, new { id = "SelectNote" }))
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "SelectNote" }))
 {
 
     <table class="fretboard">
@@ -40,7 +39,7 @@
             @foreach (var n in Model.Notes)
             {
                 <td>
-                    <input type="button" value="@n.Note" class="NoteButton"/> 
+                    <input type="button" value="@n.Note" selectedNote="@n.Note" id="SelectedNote"/> 
                 </td>
             }
         </tr>
