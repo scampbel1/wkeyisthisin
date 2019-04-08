@@ -4,6 +4,19 @@
     ViewBag.Title = "Home Page";
 }
 
+<script language="javascript" type="text/javascript">
+    function SelectNote(note) {
+        var self = this;
+
+        $.ajax({
+            url: "@Html.ActionLink("Home","Index")",
+            datatype: 'json',
+            contentType: "application/json",
+            type: "POST",
+        })
+    }
+</script>
+
 <h1>Fretboard</h1>
 
 @Html.Partial("Fretboard")
@@ -12,13 +25,12 @@
 
 @using (Html.BeginForm("Index", "Home", FormMethod.Post))
 {
-
     <table class="fretboard">
         <tr>
             @foreach (var n in Model.Notes)
             {
                 <td>
-                    <input type="button" value="@n.Note" selectedNote="@n.Note" id="SelectedNote"/> 
+                    <input type="button" value="@n.Note" onclick=""/>
                 </td>
             }
         </tr>
