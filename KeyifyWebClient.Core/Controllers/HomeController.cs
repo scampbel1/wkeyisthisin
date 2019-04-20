@@ -21,7 +21,7 @@ namespace KeyifyWebClient.Core.Controllers
         }
 
         [HttpPost]
-        public JsonResult UpdateFretboardModel([FromBody] string data)
+        public JsonResult UpdateFretboardModel(string data)
         {
             //Update: 20/04/2019 - Poc created, demonstrating Json functionality
             //TODO: Complete method
