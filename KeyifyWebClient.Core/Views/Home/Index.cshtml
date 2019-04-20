@@ -4,16 +4,20 @@
     ViewBag.Title = "Home Page";
 }
 
-<script language="javascript" type="text/javascript">
+<script lang="en" language="javascript" type="text/javascript">
+
     function SelectNote(note) {
-        var self = this;
+
+        alert(note);
 
         $.ajax({
-            url: "@Html.ActionLink("Home","Index")",
+            url: "@Html.ActionLink("Home","UpdateFretboardModel")",
             datatype: 'json',
+            async: 'false',
             contentType: "application/json",
             type: "POST",
-        })
+            data: note
+        });
     }
 </script>
 
@@ -23,16 +27,13 @@
 
 <h1>Select Notes</h1>
 
-@using (Html.BeginForm("Index", "Home", FormMethod.Post))
-{
-    <table class="fretboard">
-        <tr>
-            @foreach (var n in Model.Notes)
+<table class="fretboard">
+    <tr>
+        @foreach (var n in Model.Notes)
             {
-                <td>
-                    <input type="button" value="@n.Note" onclick=""/>
-                </td>
-            }
-        </tr>
-    </table>
-}
+            <td>
+                <button value="@n.Note" onclick="SelectNote(@n.Note)"></button>
+            </td>
+        }
+    </tr>
+</table>
