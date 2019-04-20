@@ -23,10 +23,8 @@ namespace KeyifyWebClient.Core.Controllers
         [HttpPost]
         public JsonResult UpdateFretboardModel([FromBody] string data)
         {
-            //TODO: Read this - https://www.c-sharpcorner.com/UploadFile/2ed7ae/jsonresult-type-in-mvc/
-            
-            //      Complete method based on this information... this should point you in the right direction
-
+            //Update: 20/04/2019 - Poc created, demonstrating Json functionality
+            //TODO: Complete method
             return null;
         }
     }

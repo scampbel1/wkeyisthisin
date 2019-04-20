@@ -4,36 +4,19 @@
     ViewBag.Title = "Home Page";
 }
 
-<script lang="en" language="javascript" type="text/javascript">
-
-    function SelectNote(note) {
-
-        alert(note);
-
-        $.ajax({
-            url: "@Html.ActionLink("Home","UpdateFretboardModel")",
-            datatype: 'json',
-            async: 'false',
-            contentType: "application/json",
-            type: "POST",
-            data: note
-        });
-    }
-</script>
-
 <h1>Fretboard</h1>
 
 @Html.Partial("Fretboard")
 
-<h1>Select Notes</h1>
+@*<h1>Select Notes</h1>*@
 
-<table class="fretboard">
+@*<table class="fretboard">
     <tr>
         @foreach (var n in Model.Notes)
-            {
+        {
             <td>
-                <button value="@n.Note" onclick="SelectNote(@n.Note)"></button>
+                <input type="button" value="@n.Note" onclick="SelectNote()">
             </td>
         }
     </tr>
-</table>
+</table>*@

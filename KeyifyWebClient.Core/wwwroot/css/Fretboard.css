@@ -1,11 +1,16 @@
 ﻿.fretboard {
     table-layout: fixed;
-    width: 750px;
+    width: 75%;
     text-align: center;
 }
-
 
 .fretboardHeading {
     text-align: center;
     color: darkgrey;
+    font-size: 12px;
+}
+
+.defaultNote {
+    cursor: pointer;
+    font-size: 18px;
 }
