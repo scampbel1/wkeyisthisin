@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create Sample JSON Data and send it to controller</title>
+</head>
+<body>
+    <div>
+        <label>Create Sample User JSON Data and send it to controller</label><br /><br />
+        <input type="button" id="btnUpdateUserDetail" value="Update User Detail" onclick="UpdateUserDetail();" />
+    </div>
+</body>
+</html>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script lang="en" type="text/javascript">
+
+    function UpdateUserDetail() {
+        var usersJson = GetSampleUsersList();
+        var getReportColumnsParams = {
+            "usersJson": usersJson
+        };
+        $.ajax({
+            type: "POST",
+            traditional: true,
+            async: false,
+            cache: false,
+            url: '/JsonDemo/UpdateUsersDetail',
+            context: document.body,
+            data: getReportColumnsParams,
+            success: function (result) {
+                alert(result);
+            },
+            error: function (xhr) {
+                //debugger;
+                console.log(xhr.responseText);
+                alert("Error has occurred..");
+            }
+        });
+    }
+    function GetSampleUsersList() {
+        var userDetails = {};
+        var usersList = [];
+        for (var i = 1; i <= 3; i++) {
+            userDetails["UserId"] = i;
+            userDetails["UserName"] = "User- " + i;
+            userDetails["Company"] = "Company- " + i;
+            usersList.push(userDetails);
+        }
+        return JSON.stringify(usersList);
+    }
+</script>
