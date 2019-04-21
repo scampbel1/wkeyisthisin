@@ -26,6 +26,11 @@ namespace KeyifyWebClient.Core.Controllers
             //Update: 20/04/2019 - Poc created, demonstrating Json functionality
             //Update: 21/04/2019 - Value being passed - JSON format was incorrect
             //TODO: Complete method
+
+                // Change to action result
+                // Accept list of actively selected notes as parameter
+                // Create new FretboardWebModel
+                // Return View with model as paramter
             return null;
         }
     }
