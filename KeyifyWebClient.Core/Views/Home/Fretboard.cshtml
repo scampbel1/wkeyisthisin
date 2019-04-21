@@ -6,9 +6,7 @@
 
     function SelectNote(note) {
 
-        //TODO: Find out how to generate url properly for the method below...
-
-        var methodUrl = '@Url.Link("Home","UpdateFretboardModel")';
+        var methodUrl = '@Url.Action("UpdateFretboardModel")';
 
         alert(methodUrl);
 
@@ -18,7 +16,7 @@
                     async: 'false',
                     contentType: "application/json",
                     type: "POST",
-                    data: note.toString(),
+                    data: note,
                     success: function (result) {
                         alert(result);
                     },
