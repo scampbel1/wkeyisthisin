@@ -8,7 +8,9 @@
 
         var methodUrl = '@Url.Action("UpdateFretboardModel")';
 
-        alert(methodUrl);
+        var data = GenerateControllerMethodParams(note);
+
+        alert(data);
 
                 $.ajax({
                     url: methodUrl,
@@ -16,7 +18,7 @@
                     async: 'false',
                     contentType: "application/json",
                     type: "POST",
-                    data: note,
+                    data: data,
                     success: function (result) {
                         alert(result);
                     },
@@ -26,7 +28,10 @@
                         alert("Error has occurred..");
                     }
                 });
+    }
 
+    function GenerateControllerMethodParams(note) {
+        return JSON.stringify(note);
     }
 </script>
 
