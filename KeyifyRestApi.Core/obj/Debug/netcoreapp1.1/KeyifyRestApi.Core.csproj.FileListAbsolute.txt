@@ -1,0 +1,11 @@
+C:\Users\cambo\keyify_class_library\KeyifyRestApi.Core\bin\Debug\netcoreapp1.1\KeyifyRestApi.Core.deps.json
+C:\Users\cambo\keyify_class_library\KeyifyRestApi.Core\bin\Debug\netcoreapp1.1\KeyifyScaleFinderClassLibrary.Core.dll
+C:\Users\cambo\keyify_class_library\KeyifyRestApi.Core\bin\Debug\netcoreapp1.1\System.Web.Http.dll
+C:\Users\cambo\keyify_class_library\KeyifyRestApi.Core\bin\Debug\netcoreapp1.1\System.Web.Http.xml
+C:\Users\cambo\keyify_class_library\KeyifyRestApi.Core\obj\Debug\netcoreapp1.1\KeyifyRestApi.Core.csprojResolveAssemblyReference.cache
+C:\Users\cambo\keyify_class_library\KeyifyRestApi.Core\obj\Debug\netcoreapp1.1\KeyifyRestApi.Core.AssemblyInfo.cs
+C:\Users\cambo\keyify_class_library\KeyifyRestApi.Core\bin\Debug\netcoreapp1.1\KeyifyRestApi.Core.dll
+C:\Users\cambo\keyify_class_library\KeyifyRestApi.Core\bin\Debug\netcoreapp1.1\KeyifyRestApi.Core.pdb
+C:\Users\cambo\keyify_class_library\KeyifyRestApi.Core\bin\Debug\netcoreapp1.1\KeyifyScaleFinderClassLibrary.Core.pdb
+C:\Users\cambo\keyify_class_library\KeyifyRestApi.Core\obj\Debug\netcoreapp1.1\KeyifyRestApi.Core.dll
+C:\Users\cambo\keyify_class_library\KeyifyRestApi.Core\obj\Debug\netcoreapp1.1\KeyifyRestApi.Core.pdb
