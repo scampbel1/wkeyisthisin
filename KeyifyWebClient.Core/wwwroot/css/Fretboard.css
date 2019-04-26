@@ -14,3 +14,8 @@
     cursor: pointer;
     font-size: 18px;
 }
+
+.selectedNote {
+    color: red;
+    text-decoration: underline;
+}

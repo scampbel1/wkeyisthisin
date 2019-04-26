@@ -4,6 +4,4 @@
     ViewBag.Title = "Home Page";
 }
 
-<h1>Fretboard</h1>
-
-@Html.Partial("Fretboard")
+@{ Html.RenderPartial("Fretboard", Model); }
