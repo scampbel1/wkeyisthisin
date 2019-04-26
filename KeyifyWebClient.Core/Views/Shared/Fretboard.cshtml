@@ -1,0 +1,49 @@
+﻿@model KeyifyWebClient.Core.Models.FretboardWebModel
+
+<link href="css/Fretboard.css" rel="stylesheet" />
+
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script lang="en" type="text/javascript">
+
+    function SelectNote(note) {
+
+        alert(note.toString());
+
+                $.ajax({
+                    url: "@Html.ActionLink("Home","UpdateFretboardModel")",
+                    datatype: 'json',
+                    async: 'false',
+                    contentType: "application/json",
+                    type: "POST",
+                    data: null
+                });
+    }
+</script>
+
+<table class="fretboard">
+    <tr>
+        @for (int count = 0; count < Model.Fretcount; count++)
+        {
+            if (count == 0)
+            {
+                <th class="fretboardHeading"></th>
+                continue;
+            }
+
+            <th class="fretboardHeading">
+                @count
+            </th>
+        }
+    </tr>
+
+    @foreach (var instString in Model.Tuning)
+    {
+        <tr>
+            @foreach (var note in instString)
+            {
+                <td onclick="SelectNote('@note');" class="defaultNote">@note</td>
+            }
+        </tr>
+    }
+
+</table>
