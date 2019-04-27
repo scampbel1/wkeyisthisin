@@ -11,10 +11,12 @@
 }
 
 .defaultNote {
-    cursor: pointer;
     font-size: 18px;
+    cursor: pointer;
 }
 
 .selectedNote {
+    font-size: 18px;
+    cursor: pointer;
     color: red;
 }

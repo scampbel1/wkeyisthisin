@@ -11,14 +11,29 @@
                 async: 'false',
                 contentType: "application/json",
                 type: "POST",
-                data: GenerateControllerMethodParams(note),
+                data: GenerateControllerMethodParams(note, true),
                 success: function (data) {
                     $("#Fretboard").html(data);
                 }
             });
         }
 
-        function GenerateControllerMethodParams(note) {
+        function DeselectNote(note) {
+
+            $.ajax({
+                url: '@Url.Action("UpdateFretboardModel")',
+                datatype: 'json',
+                async: 'false',
+                contentType: "application/json",
+                type: "POST",
+                data: GenerateControllerMethodParams(note, false),
+                success: function (data) {
+                    $("#Fretboard").html(data);
+                }
+            });
+        }
+
+        function GenerateControllerMethodParams(note, remove) {
             var noteArray = new Array();
 
             @foreach (var note in Model.Notes.Where(n => n.Value))
@@ -26,7 +41,11 @@
                 @:noteArray.push("@note.Key");
             }
 
-            noteArray.push(note);
+            if (remove === true) {
+                noteArray.push(note);
+            } else {
+                noteArray.pop(note);
+            }
 
             return JSON.stringify(noteArray);
         }
@@ -59,7 +78,7 @@
             {
                 if (Model.Notes.Single(a => a.Key == note).Equals(new KeyValuePair<string, bool>(note, true)))
                 {
-                    <td class="selectedNote"><b>@note</b></td>
+                    <td class="selectedNote" onclick="DeselectNote('@note')"><b>@note</b></td>
                     continue;
                 }
 
