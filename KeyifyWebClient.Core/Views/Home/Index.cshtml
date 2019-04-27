@@ -22,9 +22,12 @@
                 async: 'false',
                 contentType: "application/json",
                 type: "POST",
-                data: data
-            });
-        }
+                data: data,
+                success: function (data) {
+                    $("body").html(data);
+                    }
+                });
+            }
 
         function GenerateControllerMethodParams(note) {
             return JSON.stringify(note);
@@ -32,40 +35,40 @@
     </script>
 </head>
 
-<h1>Fretboard</h1>
+<body>
+    <h1>Fretboard</h1>
 
-<table class="fretboard">
-    <tr>
-        @for (int count = 0; count < Model.Fretcount; count++)
-        {
-            if (count == 0)
-            {
-                <th class="fretboardHeading"></th>
-                continue;
-            }
-
-            <th class="fretboardHeading">
-                @count
-            </th>
-        }
-    </tr>
-
-    @foreach (var instString in Model.Tuning)
-    {
+    <table class="fretboard">
         <tr>
-            @foreach (var note in instString)
+            @for (int count = 0; count < Model.Fretcount; count++)
             {
-                //TODO: remove this - it doesn't work
-                if (Model.Notes.Contains(new SelectedNoteItem() { Note = note, Selected = true }))
+                if (count == 0)
                 {
-                    <td class="selectedNote"><b>@note</b></td>
+                    <th class="fretboardHeading"></th>
+                    continue;
                 }
 
-                else
-                {
-                    <td class="defaultNote" onclick="SelectNote('@note');">@note</td>
-                }
+                <th class="fretboardHeading">
+                    @count
+                </th>
             }
         </tr>
-    }
-</table>
+
+        @foreach (var instString in Model.Tuning)
+        {
+            <tr>
+                @foreach (var note in instString)
+                {
+                    //TODO: remove this - it doesn't work
+                    if (Model.Notes.ContainsKey(note) && Model.Notes.ContainsValue(true))
+                    {
+                        <td class="selectedNote"><b>@note</b></td>
+                        continue;
+                    }
+
+                    <td class="defaultNote" onclick="SelectNote('@note');">@note</td>
+                }
+            </tr>
+        }
+    </table>
+</body>

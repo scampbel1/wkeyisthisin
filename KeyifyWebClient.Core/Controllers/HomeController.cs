@@ -26,9 +26,10 @@ namespace KeyifyWebClient.Core.Controllers
 
             var model = new FretboardWebModel();
 
-            model.Notes.Single(n => n.Note == note).Selected = true;
+            model.Notes.Remove(note);
+            model.Notes.Add(note, true);
 
-            return PartialView("Fretboard", model);
+            return View("Index", model);
         }
     }
 }

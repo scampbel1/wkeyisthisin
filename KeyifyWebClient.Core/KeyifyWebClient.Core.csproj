@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Home\Fretboard.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\css\Fretboard.css" />
     <Content Include="wwwroot\Style\Fretboard.css" />
   </ItemGroup>

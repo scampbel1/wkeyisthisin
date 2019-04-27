@@ -12,11 +12,11 @@ namespace KeyifyWebClient.Core.Models
         public readonly List<string[]> Tuning;
         public readonly int Fretcount;
 
-        public List<SelectedNoteItem> Notes;
+        public Dictionary<string, bool> Notes;
 
         public FretboardWebModel()
         {
-            Notes = new List<SelectedNoteItem>();
+            Notes = new Dictionary<string, bool>();
             Tuning = Fretboard.PopulateFretboard(new StandardGuitarTuning());
             Fretcount = 24;
             PopulateNotes();
@@ -26,7 +26,7 @@ namespace KeyifyWebClient.Core.Models
         {
             foreach (var note in (Note[])Enum.GetValues(typeof(Note)))
             {
-                Notes.Add(new SelectedNoteItem {Note = KeyifyElementStringConverter.ConvertNoteToStringEquivalent(note, true), Selected = false});
+                Notes.Add(KeyifyElementStringConverter.ConvertNoteToStringEquivalent(note, true), false);
             }
         }
     }
