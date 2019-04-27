@@ -3,29 +3,14 @@
 <head>
     <script lang="en" type="text/javascript">
 
-        function SelectNote(note) {
+        function UpdateModel(note, add) {
             $.ajax({
                 url: '@Url.Action("UpdateFretboardModel")',
                 datatype: 'json',
                 async: 'false',
                 contentType: "application/json",
                 type: "POST",
-                data: GenerateControllerMethodParams(note, true),
-                success: function (data) {
-                    $("#Fretboard").html(data);
-                }
-            });
-        }
-
-        function DeselectNote(note) {
-            //TODO: fix random deselection problem
-            $.ajax({
-                url: '@Url.Action("UpdateFretboardModel")',
-                datatype: 'json',
-                async: 'false',
-                contentType: "application/json",
-                type: "POST",
-                data: GenerateControllerMethodParams(note, false),
+                data: GenerateControllerMethodParams(note, add),
                 success: function (data) {
                     $("#Fretboard").html(data);
                 }
@@ -43,7 +28,11 @@
             if (remove === true) {
                 noteArray.push(note);
             } else {
-                noteArray.pop(note);
+                for( var i = 0; i < noteArray.length; i++){ 
+                    if (noteArray[i] === note) {
+                        noteArray.splice(i, 1); 
+                    }
+                }
             }
 
             return JSON.stringify(noteArray);
@@ -75,13 +64,14 @@
         <tr>
             @foreach (var note in instString)
             {
+                //TODO: Remove this, replace on controller
                 if (Model.Notes.Single(a => a.Key == note).Equals(new KeyValuePair<string, bool>(note, true)))
                 {
-                    <td class="selectedNote" onclick="DeselectNote('@note')"><b>@note</b></td>
+                    <td class="selectedNote" onclick="UpdateModel('@note', false)"><b>@note</b></td>
                     continue;
                 }
 
-                <td class="defaultNote" onclick="SelectNote('@note');">@note</td>
+                <td class="defaultNote" onclick="UpdateModel('@note', true);">@note</td>
             }
         </tr>
     }
