@@ -1,0 +1,38 @@
+﻿@model KeyifyWebClient.Core.Models.FretboardWebModel
+
+<body>
+<h1>Fretboard</h1>
+
+<table class="fretboard">
+    <tr>
+        @for (int count = 0; count < Model.Fretcount; count++)
+        {
+            if (count == 0)
+            {
+                <th class="fretboardHeading"></th>
+                continue;
+            }
+
+            <th class="fretboardHeading">
+                @count
+            </th>
+        }
+    </tr>
+
+    @foreach (var instString in Model.Tuning)
+    {
+        <tr>
+            @foreach (var note in instString)
+            {
+                if (Model.Notes.Single(a => a.Key == note).Equals(new KeyValuePair<string, bool>(note, true)))
+                {
+                    <td class="selectedNote"><b>@note</b></td>
+                    continue;
+                }
+
+                <td class="defaultNote" onclick="SelectNote('@note');">@note</td>
+            }
+        </tr>
+    }
+</table>
+</body>

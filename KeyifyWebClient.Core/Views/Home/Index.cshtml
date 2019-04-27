@@ -1,5 +1,4 @@
-﻿@using System.Collections
-@model KeyifyWebClient.Core.Models.FretboardWebModel
+﻿@model KeyifyWebClient.Core.Models.FretboardWebModel
 
 @{
     ViewBag.Title = "Home Page";
@@ -8,66 +7,31 @@
 <head>
     <link href="css/Fretboard.css" rel="stylesheet" />
     <script src="~/js/jquery-3.3.1.min.js"></script>
+
     <script lang="en" type="text/javascript">
 
         function SelectNote(note) {
 
-            var methodUrl = '@Url.Action("UpdateFretboardModel")';
-
-            var data = GenerateControllerMethodParams(note);
-
             $.ajax({
-                url: methodUrl,
+                url: '@Url.Action("UpdateFretboardModel")',
                 datatype: 'json',
                 async: 'false',
                 contentType: "application/json",
                 type: "POST",
-                data: data,
+                data: GenerateControllerMethodParams(note),
                 success: function (data) {
-                    $("body").html(data);
-                    }
-                });
-            }
+                    $("#Fretboard").html(data);
+                }
+            });
+        }
 
         function GenerateControllerMethodParams(note) {
             return JSON.stringify(note);
         }
     </script>
+
 </head>
 
 <body>
-    <h1>Fretboard</h1>
-
-    <table class="fretboard">
-        <tr>
-            @for (int count = 0; count < Model.Fretcount; count++)
-            {
-                if (count == 0)
-                {
-                    <th class="fretboardHeading"></th>
-                    continue;
-                }
-
-                <th class="fretboardHeading">
-                    @count
-                </th>
-            }
-        </tr>
-
-        @foreach (var instString in Model.Tuning)
-        {
-            <tr>
-                @foreach (var note in instString)
-                {
-                    if (Model.Notes.Single(a => a.Key == note).Equals(new KeyValuePair<string, bool>(note, true)))
-                    {
-                        <td class="selectedNote"><b>@note</b></td>
-                        continue;
-                    }
-
-                    <td class="defaultNote" onclick="SelectNote('@note');">@note</td>
-                }
-            </tr>
-        }
-    </table>
+<div id="Fretboard">@Html.Partial("FretboardMain", Model)</div>
 </body>

@@ -29,7 +29,7 @@ namespace KeyifyWebClient.Core.Controllers
             model.Notes.Remove(note);
             model.Notes.Add(note, true);
 
-            return View("Index", model);
+            return PartialView("FretboardMain", model);
         }
     }
 }
