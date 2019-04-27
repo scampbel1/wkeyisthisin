@@ -4,7 +4,6 @@
     <script lang="en" type="text/javascript">
 
         function SelectNote(note) {
-
             $.ajax({
                 url: '@Url.Action("UpdateFretboardModel")',
                 datatype: 'json',
@@ -19,7 +18,7 @@
         }
 
         function DeselectNote(note) {
-
+            //TODO: fix random deselection problem
             $.ajax({
                 url: '@Url.Action("UpdateFretboardModel")',
                 datatype: 'json',
