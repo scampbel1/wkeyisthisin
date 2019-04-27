@@ -4,3 +4,4 @@ C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary.Core\bin\Debug
 C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary.Core\obj\Debug\netcoreapp1.1\KeyifyScaleFinderClassLibrary.Core.AssemblyInfo.cs
 C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary.Core\obj\Debug\netcoreapp1.1\KeyifyScaleFinderClassLibrary.Core.dll
 C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary.Core\obj\Debug\netcoreapp1.1\KeyifyScaleFinderClassLibrary.Core.pdb
+C:\Users\cambo\keyify_class_library\KeyifyScaleFinderClassLibrary.Core\obj\Debug\netcoreapp1.1\KeyifyScaleFinderClassLibrary.Core.csprojResolveAssemblyReference.cache

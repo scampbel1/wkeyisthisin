@@ -1,4 +1,4 @@
-﻿@using KeyifyWebClient.Core.Models
+﻿@using System.Collections
 @model KeyifyWebClient.Core.Models.FretboardWebModel
 
 @{
@@ -59,8 +59,7 @@
             <tr>
                 @foreach (var note in instString)
                 {
-                    //TODO: remove this - it doesn't work
-                    if (Model.Notes.ContainsKey(note) && Model.Notes.ContainsValue(true))
+                    if (Model.Notes.Single(a => a.Key == note).Equals(new KeyValuePair<string, bool>(note, true)))
                     {
                         <td class="selectedNote"><b>@note</b></td>
                         continue;
