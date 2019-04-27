@@ -14,14 +14,6 @@ namespace KeyifyWebClient.Core.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index([FromBody] string data)
-        {
-            var model = new FretboardWebModel();
-
-            return View(model);
-        }
-
-        [HttpPost]
         public ActionResult UpdateFretboardModel([FromBody] string note)
         {
             //Update: 20/04/2019 - Poc created, demonstrating Json functionality
