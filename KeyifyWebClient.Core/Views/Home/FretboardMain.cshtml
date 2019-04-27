@@ -1,5 +1,38 @@
 ﻿@model KeyifyWebClient.Core.Models.FretboardWebModel
 
+<head>
+    <script lang="en" type="text/javascript">
+
+        function SelectNote(note) {
+
+            $.ajax({
+                url: '@Url.Action("UpdateFretboardModel")',
+                datatype: 'json',
+                async: 'false',
+                contentType: "application/json",
+                type: "POST",
+                data: GenerateControllerMethodParams(note),
+                success: function (data) {
+                    $("#Fretboard").html(data);
+                }
+            });
+        }
+
+        function GenerateControllerMethodParams(note) {
+            var noteArray = new Array();
+
+            @foreach (var note in Model.Notes.Where(n => n.Value))
+            {
+                @:noteArray.push("@note.Key");
+            }
+
+            noteArray.push(note);
+
+            return JSON.stringify(noteArray);
+        }
+    </script>
+</head>
+
 <body>
 <h1>Fretboard</h1>
 

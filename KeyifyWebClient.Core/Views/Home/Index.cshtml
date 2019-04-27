@@ -7,39 +7,6 @@
 <head>
     <link href="css/Fretboard.css" rel="stylesheet" />
     <script src="~/js/jquery-3.3.1.min.js"></script>
-
-    <script lang="en" type="text/javascript">
-
-        function SelectNote(note) {
-
-            $.ajax({
-                url: '@Url.Action("UpdateFretboardModel")',
-                datatype: 'json',
-                async: 'false',
-                contentType: "application/json",
-                type: "POST",
-                data: GenerateControllerMethodParams(note),
-                success: function (data) {
-                    $("#Fretboard").html(data);
-                }
-            });
-        }
-
-        function GenerateControllerMethodParams(note) {
-            var noteArray = [];
-            noteArray.push(note);
-
-            alert('@Model.Notes.Count(n => n.Value)');
-
-            @foreach (var note in Model.Notes.Where(n => n.Value))
-            {
-                @:noteArray.push('@note.Key');
-            }
-
-            return JSON.stringify(noteArray);
-        }
-    </script>
-
 </head>
 
 <body>
