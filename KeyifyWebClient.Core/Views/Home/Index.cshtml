@@ -26,7 +26,17 @@
         }
 
         function GenerateControllerMethodParams(note) {
-            return JSON.stringify(note);
+            var noteArray = [];
+            noteArray.push(note);
+
+            alert('@Model.Notes.Count(n => n.Value)');
+
+            @foreach (var note in Model.Notes.Where(n => n.Value))
+            {
+                @:noteArray.push('@note.Key');
+            }
+
+            return JSON.stringify(noteArray);
         }
     </script>
 
