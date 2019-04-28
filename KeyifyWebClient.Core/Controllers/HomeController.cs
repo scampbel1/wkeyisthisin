@@ -5,22 +5,18 @@ namespace KeyifyWebClient.Core.Controllers
 {
     public class HomeController : Controller
     {
-        FretboardWebModel model;
-
-        public HomeController()
-        {
-            model = new FretboardWebModel();
-        }
-
         [HttpGet]
         public ActionResult Index()
         {
+            var model = new FretboardWebModel();
             return View(model);
         }
 
         [HttpPost]
         public ActionResult UpdateFretboardModel([FromBody] string[] notes)
         {
+            var model = new FretboardWebModel();
+
             foreach (var note in notes)
             {
                 model.Notes.Remove(note);
