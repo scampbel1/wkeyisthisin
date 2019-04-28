@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using KeyifyWebClient.Core.Models;
+﻿using KeyifyWebClient.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KeyifyWebClient.Core.Controllers

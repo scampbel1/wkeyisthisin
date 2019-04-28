@@ -1,4 +1,5 @@
-﻿@model KeyifyWebClient.Core.Models.FretboardWebModel
+﻿@using KeyifyWebClient.Core.Models
+@model KeyifyWebClient.Core.Models.FretboardWebModel
 
 <head>
     <script lang="en" type="text/javascript">
@@ -64,8 +65,7 @@
         <tr>
             @foreach (var note in instString)
             {
-                //TODO: Remove this, replace on controller
-                if (Model.Notes.Single(a => a.Key == note).Equals(new KeyValuePair<string, bool>(note, true)))
+                if (Model.NoteIsSelected(note))
                 {
                     <td class="selectedNote" onclick="UpdateModel('@note', false)"><b>@note</b></td>
                     continue;

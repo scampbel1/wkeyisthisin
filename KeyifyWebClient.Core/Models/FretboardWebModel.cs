@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using KeyifyScaleFinderClassLibrary.Core.Instrument;
 using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Enums;
 using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Helper;
@@ -28,6 +30,13 @@ namespace KeyifyWebClient.Core.Models
             {
                 Notes.Add(KeyifyElementStringConverter.ConvertNoteToStringEquivalent(note, true), false);
             }
+        }
+
+        public bool NoteIsSelected(string note)
+        {
+            var selectedNotes = Notes.ToImmutableHashSet().Where(a => a.Value);
+
+            return selectedNotes.Contains(new KeyValuePair<string, bool>(note, true));
         }
     }
 }
