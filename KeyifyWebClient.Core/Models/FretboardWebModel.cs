@@ -19,8 +19,8 @@ namespace KeyifyWebClient.Core.Models
         public FretboardWebModel()
         {
             Notes = new Dictionary<string, bool>();
-            Tuning = Fretboard.PopulateFretboard(new StandardGuitarTuning());
             Fretcount = 24;
+            Tuning = Fretboard.PopulateFretboard(new StandardGuitarTuning(), Fretcount);
             PopulateNotes();
         }
 
