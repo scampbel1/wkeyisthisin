@@ -25,5 +25,13 @@ namespace KeyifyWebClient.Core.Controllers
 
             return PartialView("FretboardMain", model);
         }
+
+        [HttpPost]
+        public ActionResult ResetModel()
+        {
+            var model = new FretboardWebModel();
+
+            return PartialView("FretboardMain", model);
+        }
     }
 }

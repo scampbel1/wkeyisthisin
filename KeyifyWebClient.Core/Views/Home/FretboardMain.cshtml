@@ -4,6 +4,19 @@
 <head>
     <script lang="en" type="text/javascript">
 
+        function ResetModel() {
+            $.ajax({
+                url: '@Url.Action("ResetModel")',
+                datatype: 'json',
+                async: 'false',
+                contentType: "application/json",
+                type: "POST",
+                success: function (data) {
+                    $("#Fretboard").html(data);
+                }
+            });
+        }
+
         function UpdateModel(note, add) {
             $.ajax({
                 url: '@Url.Action("UpdateFretboardModel")',
@@ -29,9 +42,9 @@
             if (remove === true) {
                 noteArray.push(note);
             } else {
-                for( var i = 0; i < noteArray.length; i++){ 
+                for( var i = 0; i < noteArray.length; i++){
                     if (noteArray[i] === note) {
-                        noteArray.splice(i, 1); 
+                        noteArray.splice(i, 1);
                     }
                 }
             }
@@ -42,38 +55,42 @@
 </head>
 
 <body>
-<h1>Fretboard</h1>
+    <h1>Fretboard</h1>
 
-<table class="fretboard">
-    <tr>
-        @for (int count = 0; count < Model.Fretcount; count++)
-        {
-            if (count == 0)
-            {
-                <th class="fretboardHeading"></th>
-                continue;
-            }
-
-            <th class="fretboardHeading">
-                @count
-            </th>
-        }
-    </tr>
-
-    @foreach (var instString in Model.Tuning)
-    {
+    <table class="fretboard">
         <tr>
-            @foreach (var note in instString)
+            @for (int count = 0; count < Model.Fretcount; count++)
             {
-                if (Model.NoteIsSelected(note))
+                if (count == 0)
                 {
-                    <td class="selectedNote" onclick="UpdateModel('@note', false)"><b>@note</b></td>
+                    <th class="fretboardHeading"></th>
                     continue;
                 }
 
-                <td class="defaultNote" onclick="UpdateModel('@note', true);">@note</td>
+                <th class="fretboardHeading">
+                    @count
+                </th>
             }
         </tr>
-    }
-</table>
+
+        @foreach (var instString in Model.Tuning)
+        {
+            <tr>
+                @foreach (var note in instString)
+                {
+                    if (Model.NoteIsSelected(note))
+                    {
+                        <td class="selectedNote" onclick="UpdateModel('@note', false)"><b>@note</b></td>
+                        continue;
+                    }
+
+                    <td class="defaultNote" onclick="UpdateModel('@note', true);">@note</td>
+                }
+            </tr>
+        }
+    </table>
+    <br />
+    <div style="padding-left: 15px">
+        <button onclick="ResetModel()">Reset</button>
+    </div>
 </body>
