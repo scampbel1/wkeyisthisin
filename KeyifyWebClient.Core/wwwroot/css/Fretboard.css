@@ -21,3 +21,10 @@
     color: red;
     background-color: lightcoral;
 }
+
+.scaleResults {
+    table-layout: fixed;
+    width: 75%;
+    cursor: pointer;
+    padding-left: 15px;
+}

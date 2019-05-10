@@ -1,4 +1,7 @@
-﻿using KeyifyWebClient.Core.Models;
+﻿using System.Collections.Generic;
+using KeyifyScaleFinderClassLibrary.Core.MusicTheory;
+using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Helper;
+using KeyifyWebClient.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KeyifyWebClient.Core.Controllers
@@ -23,6 +26,9 @@ namespace KeyifyWebClient.Core.Controllers
                 model.Notes.Add(note, true);
             }
 
+            //TODO: Remove direct reference and reference a hosted instance of the REST Service
+            model.Scales = GenerateScales(notes);
+
             return PartialView("FretboardMain", model);
         }
 
@@ -32,6 +38,11 @@ namespace KeyifyWebClient.Core.Controllers
             var model = new FretboardWebModel();
 
             return PartialView("FretboardMain", model);
+        }
+
+        private List<ScaleMatch> GenerateScales(string[] notes)
+        {
+            return ScaleMatcher.GetMatchedScales(KeyifyElementStringConverter.ConvertStringArrayIntoNotes(notes));
         }
     }
 }

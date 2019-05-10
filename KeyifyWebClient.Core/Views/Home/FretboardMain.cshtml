@@ -31,6 +31,10 @@
             });
         }
 
+        function SelectScale(scale) {
+            alert(scale);
+        }
+
         function GenerateControllerMethodParams(note, remove) {
             var noteArray = new Array();
 
@@ -89,6 +93,21 @@
             </tr>
         }
     </table>
+
+    <div class="scaleResults">
+        @foreach (var key in Model.Scales)
+        {
+            if (Model.Scales.Last().Equals(key))
+            {
+                <span><span onclick="SelectScale('@key.ScaleName')"><b>@key.ScaleName</b></span>. </span>
+
+            }
+            else
+            {
+                <span><span onclick="SelectScale('@key.ScaleName')"><b>@key.ScaleName</b></span>, </span>
+            }
+        }
+    </div>
     <br />
     <div style="padding-left: 15px">
         <button onclick="ResetModel()">Reset</button>

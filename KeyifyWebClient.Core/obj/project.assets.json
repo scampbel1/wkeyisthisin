@@ -3677,6 +3677,16 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "KeyifyRestApi.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v1.1",
+        "dependencies": {
+          "KeyifyScaleFinderClassLibrary.Core": "1.0.0",
+          "Microsoft.AspNetCore.JsonPatch": "1.1.0",
+          "Microsoft.AspNetCore.Mvc.Core": "1.1.0",
+          "Microsoft.NETCore.App": "1.1.1"
+        }
+      },
       "KeyifyScaleFinderClassLibrary.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v1.1",
@@ -9802,6 +9812,11 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
+    "KeyifyRestApi.Core/1.0.0": {
+      "type": "project",
+      "path": "../KeyifyRestApi.Core/KeyifyRestApi.Core.csproj",
+      "msbuildProject": "../KeyifyRestApi.Core/KeyifyRestApi.Core.csproj"
+    },
     "KeyifyScaleFinderClassLibrary.Core/1.0.0": {
       "type": "project",
       "path": "../KeyifyScaleFinderClassLibrary.Core/KeyifyScaleFinderClassLibrary.Core.csproj",
@@ -9810,6 +9825,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v1.1": [
+      "KeyifyRestApi.Core >= 1.0.0",
       "KeyifyScaleFinderClassLibrary.Core >= 1.0.0",
       "Microsoft.ApplicationInsights.AspNetCore >= 2.0.0",
       "Microsoft.AspNetCore >= 1.1.1",
@@ -9839,6 +9855,9 @@
           "projectReferences": {
             "C:\\Users\\cambo\\keyify_class_library\\KeyifyScaleFinderClassLibrary.Core\\KeyifyScaleFinderClassLibrary.Core.csproj": {
               "projectPath": "C:\\Users\\cambo\\keyify_class_library\\KeyifyScaleFinderClassLibrary.Core\\KeyifyScaleFinderClassLibrary.Core.csproj"
+            },
+            "C:\\Users\\cambo\\keyify_class_library\\KeyifyRestApi.Core\\KeyifyRestApi.Core.csproj": {
+              "projectPath": "C:\\Users\\cambo\\keyify_class_library\\KeyifyRestApi.Core\\KeyifyRestApi.Core.csproj"
             }
           }
         }

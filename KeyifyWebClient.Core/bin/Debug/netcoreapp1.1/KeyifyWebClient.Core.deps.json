@@ -23,6 +23,7 @@
     ".NETCoreApp,Version=v1.1": {
       "keyifywebclient.core/1.0.0": {
         "dependencies": {
+          "KeyifyRestApi.Core": "1.0.0",
           "KeyifyScaleFinderClassLibrary.Core": "1.0.0",
           "Microsoft.ApplicationInsights.AspNetCore": "2.0.0",
           "Microsoft.AspNetCore": "1.1.1",
@@ -1329,6 +1330,20 @@
         },
         "compile": {
           "lib/netstandard1.0/System.Text.Encodings.Web.dll": {}
+        }
+      },
+      "keyifyrestapi.core/1.0.0": {
+        "dependencies": {
+          "KeyifyScaleFinderClassLibrary.Core": "1.0.0",
+          "Microsoft.AspNetCore.JsonPatch": "1.1.1",
+          "Microsoft.AspNetCore.Mvc.Core": "1.1.2",
+          "Microsoft.NETCore.App": "1.1.1"
+        },
+        "runtime": {
+          "KeyifyRestApi.Core.dll": {}
+        },
+        "compile": {
+          "KeyifyRestApi.Core.dll": {}
         }
       },
       "keyifyscalefinderclasslibrary.core/1.0.0": {
@@ -3619,6 +3634,11 @@
       "sha512": "sha512-SfgFKYIFJySlctNBVU0fL3iLB0IMphOg1weyUsV4p1DdKod8Ccjg4JE5I3F0b9zJwf8yW9IxuXEhpdFQoEKpkQ==",
       "path": "system.text.encodings.web/4.3.0",
       "hashPath": "system.text.encodings.web.4.3.0.nupkg.sha512"
+    },
+    "keyifyrestapi.core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "keyifyscalefinderclasslibrary.core/1.0.0": {
       "type": "project",

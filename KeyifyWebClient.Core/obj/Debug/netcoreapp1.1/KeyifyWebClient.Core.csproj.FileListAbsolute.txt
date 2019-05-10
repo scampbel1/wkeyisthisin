@@ -9,3 +9,5 @@ C:\Users\cambo\keyify_class_library\KeyifyWebClient.Core\bin\Debug\netcoreapp1.1
 C:\Users\cambo\keyify_class_library\KeyifyWebClient.Core\bin\Debug\netcoreapp1.1\KeyifyScaleFinderClassLibrary.Core.pdb
 C:\Users\cambo\keyify_class_library\KeyifyWebClient.Core\obj\Debug\netcoreapp1.1\KeyifyWebClient.Core.dll
 C:\Users\cambo\keyify_class_library\KeyifyWebClient.Core\obj\Debug\netcoreapp1.1\KeyifyWebClient.Core.pdb
+C:\Users\cambo\keyify_class_library\KeyifyWebClient.Core\bin\Debug\netcoreapp1.1\KeyifyRestApi.Core.dll
+C:\Users\cambo\keyify_class_library\KeyifyWebClient.Core\bin\Debug\netcoreapp1.1\KeyifyRestApi.Core.pdb
