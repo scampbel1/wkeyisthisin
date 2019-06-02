@@ -2,6 +2,7 @@
     table-layout: fixed;
     width: 75%;
     text-align: center;
+    padding-left: 15px;
 }
 
 .fretboardHeading {
@@ -24,7 +25,14 @@
 
 .scaleResults {
     table-layout: fixed;
-    width: 75%;
-    cursor: pointer;
+    width: 50%;
     padding-left: 15px;
+}
+
+.scaleResult {
+    cursor: pointer;
+}
+
+h1 {
+    padding: 15px;
 }

@@ -1,5 +1,5 @@
 ﻿@using KeyifyWebClient.Core.Models
-@model KeyifyWebClient.Core.Models.FretboardWebModel
+@model FretboardWebModel
 
 <head>
     <script lang="en" type="text/javascript">
@@ -45,7 +45,9 @@
 
             if (remove === true) {
                 noteArray.push(note);
-            } else {
+            }
+
+            if (remove === false) {
                 for( var i = 0; i < noteArray.length; i++){
                     if (noteArray[i] === note) {
                         noteArray.splice(i, 1);
@@ -60,7 +62,6 @@
 
 <body>
     <h1>Fretboard</h1>
-
     <table class="fretboard">
         <tr>
             @for (int count = 0; count < Model.Fretcount; count++)
@@ -93,23 +94,30 @@
             </tr>
         }
     </table>
-
+    <div style="padding-left: 15px">
+        <br />
+        <button onclick="ResetModel()">Reset</button>
+    </div>
     <div class="scaleResults">
         @foreach (var key in Model.Scales)
         {
+            if (Model.Scales.Count < 2)
+            {
+                continue;
+            }
             if (Model.Scales.Last().Equals(key))
             {
-                <span><span onclick="SelectScale('@key.ScaleName')"><b>@key.ScaleName</b></span>. </span>
-
+                <span onclick="SelectScale('@key.ScaleName')"><b class="scaleResult">@key.ScaleName</b>.</span>
+            }
+            else if (Model.Scales.First().Equals(key))
+            {
+                <h2>Matching Keys</h2>
+                <span onclick="SelectScale('@key.ScaleName')"><b class="scaleResult">@key.ScaleName</b>, </span>
             }
             else
             {
-                <span><span onclick="SelectScale('@key.ScaleName')"><b>@key.ScaleName</b></span>, </span>
+                <span onclick="SelectScale('@key.ScaleName')"><b class="scaleResult">@key.ScaleName</b>, </span>
             }
         }
-    </div>
-    <br />
-    <div style="padding-left: 15px">
-        <button onclick="ResetModel()">Reset</button>
     </div>
 </body>
