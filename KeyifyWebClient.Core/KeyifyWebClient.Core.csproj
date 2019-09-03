@@ -31,6 +31,7 @@
     <None Include="wwwroot\Style\Fretboard.css" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KeyifyRestApi.Core\KeyifyRestApi.Core.csproj" />
     <ProjectReference Include="..\KeyifyScaleFinderClassLibrary.Core\KeyifyScaleFinderClassLibrary.Core.csproj" />
   </ItemGroup>
 

@@ -8,7 +8,7 @@ namespace KeyifyScaleFinderClassLibrary.Core.Instrument
 {
     public static class Fretboard
     {
-        public static List<string[]> PopulateFretboard(ITuning tuning, int fretCount = 24)
+        public static List<string[]> PopulateFretboard(ITuning tuning, int fretCount)
         {
             var fretboard = new List<string[]>();
 

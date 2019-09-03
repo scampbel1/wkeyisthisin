@@ -29,5 +29,11 @@ namespace KeyifyScaleFinderClassLibrary.Core.MusicTheory
         {
             Scale.Add(note);
         }
+
+        //TODO: Create method to tidy up scale where they're defined as enum constants
+//        private string GenerateScaleLabel(string scaleName)
+//        {
+//            if(scaleName.Contains())
+//        }
     }
 }
