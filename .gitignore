@@ -1,3 +1,4 @@
-bin/
-packages/
-obj/
+bin
+packages
+obj
+*.suo
