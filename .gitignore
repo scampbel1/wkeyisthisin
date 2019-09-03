@@ -1,10 +1,6 @@
 bin
 packages
 obj
-<<<<<<< HEAD
-*.suo
-=======
 .vs
 *.suo
 *.user
->>>>>>> development
