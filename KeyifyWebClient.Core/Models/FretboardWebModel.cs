@@ -48,5 +48,10 @@ namespace KeyifyWebClient.Core.Models
             Tuning = Fretboard.PopulateFretboard(new StandardGuitarTuning(), _fretcount);
             PopulateNotes();
         }
+
+        public int GetFretboardCount()
+        {
+            return _fretcount;
+        }
     }
 }

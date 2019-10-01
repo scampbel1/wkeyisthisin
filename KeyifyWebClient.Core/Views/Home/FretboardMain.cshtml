@@ -64,7 +64,7 @@
     <h1>Fretboard</h1>
     <table class="fretboard">
         <tr>
-            @for (int count = 0; count < Model.Fretcount; count++)
+            @for (int count = 0; count < Model.GetFretboardCount(); count++)
             {
                 if (count == 0)
                 {
