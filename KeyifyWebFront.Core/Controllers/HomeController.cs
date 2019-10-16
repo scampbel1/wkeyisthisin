@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using KeyifyScaleFinderClassLibrary.Core.MusicTheory;
-using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Helper;
+using KeyifyClassLibrary.Core.MusicTheory;
+using KeyifyClassLibrary.Core.MusicTheory.Helper;
 using KeyifyWebClient.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 

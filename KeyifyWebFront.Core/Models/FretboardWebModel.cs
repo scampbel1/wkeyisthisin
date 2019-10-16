@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using KeyifyScaleFinderClassLibrary.Core.Instrument;
-using KeyifyScaleFinderClassLibrary.Core.MusicTheory;
-using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Enums;
-using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Helper;
-using KeyifyScaleFinderClassLibrary.Core.MusicTheory.Tuning.Guitar;
+using KeyifyClassLibrary.Core.Instrument;
+using KeyifyClassLibrary.Core.MusicTheory;
+using KeyifyClassLibrary.Core.MusicTheory.Enums;
+using KeyifyClassLibrary.Core.MusicTheory.Helper;
+using KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar;
 
 namespace KeyifyWebClient.Core.Models
 {
