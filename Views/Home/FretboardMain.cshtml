@@ -1,0 +1,123 @@
+﻿@using KeyifyWebClient.Core.Models
+@model FretboardWebModel
+
+<head>
+    <script lang="en" type="text/javascript">
+
+        function ResetModel() {
+            $.ajax({
+                url: '@Url.Action("ResetModel")',
+                datatype: 'json',
+                async: 'false',
+                contentType: "application/json",
+                type: "POST",
+                success: function (data) {
+                    $("#Fretboard").html(data);
+                }
+            });
+        }
+
+        function UpdateModel(note, add) {
+            $.ajax({
+                url: '@Url.Action("UpdateFretboardModel")',
+                datatype: 'json',
+                async: 'false',
+                contentType: "application/json",
+                type: "POST",
+                data: GenerateControllerMethodParams(note, add),
+                success: function (data) {
+                    $("#Fretboard").html(data);
+                }
+            });
+        }
+
+        function SelectScale(scale) {
+            alert(scale);
+        }
+
+        function GenerateControllerMethodParams(note, remove) {
+            var noteArray = new Array();
+
+            @foreach (var note in Model.Notes.Where(n => n.Value))
+            {
+                @:noteArray.push("@note.Key");
+            }
+
+            if (remove === true) {
+                noteArray.push(note);
+            }
+
+            if (remove === false) {
+                for( var i = 0; i < noteArray.length; i++){
+                    if (noteArray[i] === note) {
+                        noteArray.splice(i, 1);
+                    }
+                }
+            }
+
+            return JSON.stringify(noteArray);
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Fretboard</h1>
+    <table class="fretboard">
+        <tr>
+            @for (int count = 0; count < Model.GetFretboardCount(); count++)
+            {
+                if (count == 0)
+                {
+                    <th class="fretboardHeading"></th>
+                    continue;
+                }
+
+                <th class="fretboardHeading">
+                    @count
+                </th>
+            }
+        </tr>
+
+        @foreach (var instString in Model.Tuning)
+        {
+            <tr>
+                @foreach (var note in instString)
+                {
+                    if (Model.NoteIsSelected(note))
+                    {
+                        <td class="selectedNote" onclick="UpdateModel('@note', false)"><b>@note</b></td>
+                        continue;
+                    }
+
+                    <td class="defaultNote" onclick="UpdateModel('@note', true);">@note</td>
+                }
+            </tr>
+        }
+    </table>
+    <div style="padding-left: 15px">
+        <br />
+        <button onclick="ResetModel()">Reset</button>
+    </div>
+    <div class="scaleResults">
+        @foreach (var key in Model.Scales)
+        {
+            if (Model.Scales.Count < 2)
+            {
+                continue;
+            }
+            if (Model.Scales.Last().Equals(key))
+            {
+                <span onclick="SelectScale('@key.ScaleName')"><b class="scaleResult">@key.ScaleName</b>.</span>
+            }
+            else if (Model.Scales.First().Equals(key))
+            {
+                <h2>Matching Keys</h2>
+                <span onclick="SelectScale('@key.ScaleName')"><b class="scaleResult">@key.ScaleName</b>, </span>
+            }
+            else
+            {
+                <span onclick="SelectScale('@key.ScaleName')"><b class="scaleResult">@key.ScaleName</b>, </span>
+            }
+        }
+    </div>
+</body>

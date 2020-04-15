@@ -1,37 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using KeyifyClassLibrary.Core.MusicTheory;
+using KeyifyClassLibrary.Core.MusicTheory.Helper;
+using KeyifyWebClient.Core.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Keyify.Models;
 
-namespace Keyify.Controllers
+namespace KeyifyWebClient.Core.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        [HttpGet]
+        public ActionResult Index()
         {
-            _logger = logger;
+            var model = new FretboardWebModel();
+            return View(model);
         }
 
-        public IActionResult Index()
+        [HttpPost]
+        public ActionResult UpdateFretboardModel([FromBody] string[] notes, string scale)
         {
-            return View();
+            FretboardWebModel model = new FretboardWebModel();
+
+            if (notes.Length > 0)
+            {
+                foreach (var note in notes)
+                {
+                    model.Notes.Remove(note);
+                    model.Notes.Add(note, true);
+                }
+
+                //TODO: Remove direct reference and reference a hosted instance of the REST Service
+                model.Scales = GenerateScales(notes);
+            }
+
+            return PartialView("FretboardMain", model);
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public ActionResult ResetModel()
         {
-            return View();
+            var model = new FretboardWebModel();
+
+            return PartialView("FretboardMain", model);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        private List<ScaleMatch> GenerateScales(string[] notes)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return ScaleMatcher.GetMatchedScales(KeyifyElementStringConverter.ConvertStringArrayIntoNotes(notes));
         }
     }
 }

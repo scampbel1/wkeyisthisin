@@ -1,8 +1,13 @@
-﻿@{
+﻿@model KeyifyWebClient.Core.Models.FretboardWebModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<head>
+    <link href="css/Fretboard.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="Fretboard">@Html.Partial("FretboardMain", Model)</div>
+</body>
