@@ -49,7 +49,7 @@ namespace KeyifyWebClient.Core.Models
             PopulateNotes();
         }
 
-        public int GetFretboardCount()
+        public int GetFretCount()
         {
             return _fretcount;
         }
