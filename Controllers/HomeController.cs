@@ -20,7 +20,7 @@ namespace KeyifyWebClient.Core.Controllers
         {
             FretboardWebModel model = new FretboardWebModel();
 
-            if (notes.Length > 0)
+            if (notes != null && notes.Length > 0)
             {
                 foreach (var note in notes)
                 {

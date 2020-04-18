@@ -32,7 +32,7 @@
         }
 
         function SelectScale(scale) {
-            
+
         }
 
         function GenerateControllerMethodParams(note, remove) {
@@ -101,24 +101,29 @@
     </div>
 
     <div class="scaleResults">
-        @foreach (var scale in Model.Scales)
+        @if (Model.Scales.Any())
         {
-            if (Model.Scales.Count < 2)
+            foreach (var scale in Model.Scales)
             {
-                continue;
-            }
-            if (Model.Scales.Last().Equals(scale))
-            {
-                <span onclick="SelectScale('@scale.ScaleName')"><b class="scaleResult">@scale.ScaleName</b>.</span>
-            }
-            else if (Model.Scales.First().Equals(scale))
-            {
-                <h2>Matching Keys</h2>
-                <span onclick="SelectScale('@scale.ScaleName')"><b class="scaleResult">@scale.ScaleName</b>, </span>
-            }
-            else
-            {
-                <span onclick="SelectScale('@scale.ScaleName')"><b class="scaleResult">@scale.ScaleName</b>, </span>
+                if (Model.Scales.Count == 1)
+                {
+                    <h2>Matching Keys</h2>
+                    <span onclick="SelectScale('@scale.ScaleName')"><b class="scaleResult">@scale.ScaleName</b></span>
+                    break;
+                }
+                if (Model.Scales.Last().Equals(scale))
+                {
+                    <span onclick="SelectScale('@scale.ScaleName')"><b class="scaleResult">@scale.ScaleName</b>.</span>
+                }
+                else if (Model.Scales.First().Equals(scale))
+                {
+                    <h2>Matching Keys</h2>
+                    <span onclick="SelectScale('@scale.ScaleName')"><b class="scaleResult">@scale.ScaleName</b>, </span>
+                }
+                else
+                {
+                    <span onclick="SelectScale('@scale.ScaleName')"><b class="scaleResult">@scale.ScaleName</b>, </span>
+                }
             }
         }
     </div>
