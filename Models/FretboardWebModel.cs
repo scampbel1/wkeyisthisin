@@ -12,11 +12,12 @@ namespace KeyifyWebClient.Core.Models
 {
     public class FretboardWebModel
     {
-        public List<string[]> Tuning { get; private set; }
-        private int _fretcount = 24;
+        private int _fretcount = 24;       
 
+        public List<string[]> Tuning { get; private set; }
         public Dictionary<string, bool> Notes;
         public List<ScaleMatch> Scales;
+        public string SelectedString { get; set; }
 
         public FretboardWebModel()
         {

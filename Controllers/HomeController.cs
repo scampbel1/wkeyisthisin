@@ -20,6 +20,9 @@ namespace KeyifyWebClient.Core.Controllers
         {
             FretboardWebModel model = new FretboardWebModel();
 
+            if (!string.IsNullOrEmpty(scale))
+                model.SelectedString = scale;
+
             if (notes != null && notes.Length > 0)
             {
                 foreach (var note in notes)
