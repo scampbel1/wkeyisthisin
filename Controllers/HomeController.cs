@@ -21,7 +21,10 @@ namespace KeyifyWebClient.Core.Controllers
             FretboardWebModel model = new FretboardWebModel();
 
             if (!string.IsNullOrEmpty(scale))
-                model.SelectedString = scale;
+            {
+                var selectedScale = ScaleDictionary.GenerateEntryFromString(scale);
+                model.SelectedScale = new ScaleMatch(selectedScale.ScaleName, selectedScale.Scale.Notes);
+            }
 
             if (notes != null && notes.Length > 0)
             {

@@ -18,7 +18,6 @@ namespace KeyifyWebClient.Core.Models
         public List<string[]> Tuning { get; private set; }
         public Dictionary<string, bool> Notes;
         public List<ScaleMatch> Scales;
-        public string SelectedString { get; set; }
         public ScaleMatch SelectedScale { get; set; }
 
         public FretboardWebModel()
