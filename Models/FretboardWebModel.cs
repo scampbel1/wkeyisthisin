@@ -12,12 +12,14 @@ namespace KeyifyWebClient.Core.Models
 {
     public class FretboardWebModel
     {
-        private int _fretcount = 24;       
+        private int _fretcount = 24;
+        private readonly int _minFretCount = 8;
 
         public List<string[]> Tuning { get; private set; }
         public Dictionary<string, bool> Notes;
         public List<ScaleMatch> Scales;
         public string SelectedString { get; set; }
+        public ScaleMatch SelectedScale { get; set; }
 
         public FretboardWebModel()
         {
@@ -31,7 +33,7 @@ namespace KeyifyWebClient.Core.Models
         {
             foreach (var note in (Note[])Enum.GetValues(typeof(Note)))
             {
-                Notes.Add(KeyifyElementStringConverter.ConvertNoteToStringEquivalent(note, true), false);
+                Notes.Add(ElementStringConverter.ConvertNoteToStringEquivalent(note, true), false);
             }
         }
 
@@ -42,10 +44,23 @@ namespace KeyifyWebClient.Core.Models
             return selectedNotes.Contains(new KeyValuePair<string, bool>(note, true));
         }
 
+        //TODO: Create a hashset that is the cross-section between selected note and selected note in selected scale
+        public bool NoteIsPartOfSelectedScale(string note)
+        {
+            if (SelectedScale == null)
+                return false;
+
+            var scaleNotes = SelectedScale.Scale.ToImmutableHashSet();
+            return scaleNotes.Contains(ElementStringConverter.ConvertStringNoteToNoteType(note));
+        }
+
         //TODO: Create unit tests and test using UI
         public void UpdateFretCount(int count)
         {
-            _fretcount = count > 8 ? _fretcount = count : _fretcount;
+            _fretcount = count > _minFretCount
+                ? _fretcount = count
+                : _fretcount;
+
             Tuning = Fretboard.PopulateFretboard(new StandardGuitarTuning(), _fretcount);
             PopulateNotes();
         }

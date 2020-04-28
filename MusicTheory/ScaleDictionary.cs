@@ -17,8 +17,8 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                         note + " " + mode,
 
                         ScaleNoteGenerator.GenerateNotes(
-                            KeyifyElementStringConverter.ConvertStringNoteToNoteType(note),
-                            HeptatonicScaleModeDictionary.GetScaleDirectory(KeyifyElementStringConverter.ConvertStringModeNameToModeType(mode))
+                            ElementStringConverter.ConvertStringNoteToNoteType(note),
+                            HeptatonicScaleModeDictionary.GetScaleDirectory(ElementStringConverter.ConvertStringModeNameToModeType(mode))
                                 .ScaleSteps)));
                 }
             }
@@ -29,8 +29,8 @@ namespace KeyifyClassLibrary.Core.MusicTheory
         public static ScaleDictionyEntry GenerateEntryFromString(string inputScale)
         {
             Scale generatedScale = ScaleNoteGenerator.GenerateNotes(
-                KeyifyElementStringConverter.ConvertStringNoteToNoteType(inputScale[0]),
-                HeptatonicScaleModeDictionary.GetScaleDirectory(KeyifyElementStringConverter.ConvertStringModeNameToModeType(inputScale.Substring(2)))
+                ElementStringConverter.ConvertStringNoteToNoteType(inputScale[0]),
+                HeptatonicScaleModeDictionary.GetScaleDirectory(ElementStringConverter.ConvertStringModeNameToModeType(inputScale.Substring(2)))
                 .ScaleSteps);
 
             return new ScaleDictionyEntry(inputScale, generatedScale);

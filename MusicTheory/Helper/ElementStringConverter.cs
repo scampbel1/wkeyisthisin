@@ -4,7 +4,7 @@ using KeyifyClassLibrary.Core.MusicTheory.Enums;
 
 namespace KeyifyClassLibrary.Core.MusicTheory.Helper
 {
-    public static class KeyifyElementStringConverter
+    public static class ElementStringConverter
     {
         public static Note ConvertStringNoteToNoteType(string note)
         {

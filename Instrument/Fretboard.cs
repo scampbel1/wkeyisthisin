@@ -26,7 +26,7 @@ namespace KeyifyClassLibrary.Core.Instrument
 
             foreach (var note in notes)
             {
-                convertedNotes.Add(KeyifyElementStringConverter.ConvertNoteToStringEquivalent(note, true));
+                convertedNotes.Add(ElementStringConverter.ConvertNoteToStringEquivalent(note, true));
             }
 
             return convertedNotes.ToArray();

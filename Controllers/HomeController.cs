@@ -48,7 +48,7 @@ namespace KeyifyWebClient.Core.Controllers
 
         private List<ScaleMatch> GenerateScales(string[] notes)
         {
-            return ScaleMatcher.GetMatchedScales(KeyifyElementStringConverter.ConvertStringArrayIntoNotes(notes));
+            return ScaleMatcher.GetMatchedScales(ElementStringConverter.ConvertStringArrayIntoNotes(notes));
         }
     }
 }

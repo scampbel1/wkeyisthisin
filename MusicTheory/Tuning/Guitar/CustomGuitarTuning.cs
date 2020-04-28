@@ -43,7 +43,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar
             {
                 try
                 {
-                    notes[count] = KeyifyElementStringConverter
+                    notes[count] = ElementStringConverter
                         .ConvertStringNoteToNoteType(note);
 
                     count++;
