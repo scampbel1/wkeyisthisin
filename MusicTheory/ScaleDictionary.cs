@@ -5,15 +5,15 @@ namespace KeyifyClassLibrary.Core.MusicTheory
 {
     public static class ScaleDictionary
     {
-        public static List<ScaleDictionyEntry> GenerateDictionary()
+        public static List<ScaleDictionaryEntry> GenerateDictionary()
         {
-            var dictionary = new List<ScaleDictionyEntry>();
+            var dictionary = new List<ScaleDictionaryEntry>();
 
             foreach (var mode in EnumValuesConverter.GetModes())
             {
                 foreach (var note in EnumValuesConverter.GetNotes())
                 {
-                    dictionary.Add(new ScaleDictionyEntry(
+                    dictionary.Add(new ScaleDictionaryEntry(
                         note + " " + mode,
 
                         ScaleNoteGenerator.GenerateNotes(
@@ -26,14 +26,14 @@ namespace KeyifyClassLibrary.Core.MusicTheory
             return dictionary;
         }
 
-        public static ScaleDictionyEntry GenerateEntryFromString(string inputScale)
+        public static ScaleDictionaryEntry GenerateEntryFromString(string inputScale)
         {
             Scale generatedScale = ScaleNoteGenerator.GenerateNotes(
                 ElementStringConverter.ConvertStringNoteToNoteType(inputScale[0]),
                 HeptatonicScaleModeDictionary.GetScaleDirectory(ElementStringConverter.ConvertStringModeNameToModeType(inputScale.Substring(2)))
                 .ScaleSteps);
 
-            return new ScaleDictionyEntry(inputScale, generatedScale);
+            return new ScaleDictionaryEntry(inputScale, generatedScale);
         }
     }
 }

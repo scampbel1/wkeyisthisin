@@ -18,7 +18,7 @@ namespace KeyifyWebClient.Core.Models
         public List<string[]> Tuning { get; private set; }
         public Dictionary<string, bool> Notes;
         public List<ScaleMatch> Scales;
-        public ScaleMatch SelectedScale { get; set; }
+        public ScaleDictionaryEntry SelectedScale { get; set; }
 
         public FretboardWebModel()
         {
@@ -49,8 +49,7 @@ namespace KeyifyWebClient.Core.Models
             if (SelectedScale == null)
                 return false;
 
-            var scaleNotes = SelectedScale.Scale.ToImmutableHashSet();
-            return scaleNotes.Contains(ElementStringConverter.ConvertStringNoteToNoteType(note));
+            return SelectedScale.Scale.NotesSet.Contains(ElementStringConverter.ConvertStringNoteToNoteType(note));
         }
 
         //TODO: Create unit tests and test using UI

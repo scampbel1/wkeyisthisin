@@ -21,9 +21,8 @@ namespace KeyifyWebClient.Core.Controllers
             FretboardWebModel model = new FretboardWebModel();
 
             if (!string.IsNullOrEmpty(scale))
-            {
-                var selectedScale = ScaleDictionary.GenerateEntryFromString(scale);
-                model.SelectedScale = new ScaleMatch(selectedScale.ScaleName, selectedScale.Scale.Notes);
+            {                
+                model.SelectedScale = ScaleDictionary.GenerateEntryFromString(scale);
             }
 
             if (notes != null && notes.Length > 0)
@@ -34,7 +33,6 @@ namespace KeyifyWebClient.Core.Controllers
                     model.Notes.Add(note, true);
                 }
 
-                //TODO: Remove direct reference and reference a hosted instance of the REST Service
                 model.Scales = GenerateScales(notes);
             }
 
