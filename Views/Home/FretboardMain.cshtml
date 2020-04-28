@@ -19,26 +19,24 @@
 
         function UpdateModel(note, add, scale) {
 
-            alert(note, add, scale);
+            var dataPost = { notes: GenerateControllerMethodParams(note, add), scale: scale };
 
-            var myData = GenerateControllerMethodParams(note, add, scale);
 
-            alert(myData);
-
+            //Note: Ensure that the ajax parameters are entirely neccessary
+            //      https://stackoverflow.com/questions/2558870/asp-net-mvc-jquery-ajax-input-parameters-are-null
             $.ajax({
                 url: '@Url.Action("UpdateFretboardModel")',
-                datatype: 'json',
                 async: 'false',
-                contentType: "application/json",
                 type: "POST",
-                data: JSON.stringify(myData),
+                data: dataPost,
+                datatype: "json",
                 success: function (data) {
                     $("#Fretboard").html(data);
                 }
             });
         }
 
-        function GenerateControllerMethodParams(note, add, scale) {
+        function GenerateControllerMethodParams(note, add) {
             var noteArray = new Array();
             @foreach (var note in Model.Notes.Where(n => n.Value))
             {

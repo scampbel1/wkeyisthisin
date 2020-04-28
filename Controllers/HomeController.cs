@@ -16,7 +16,7 @@ namespace KeyifyWebClient.Core.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateFretboardModel([FromBody] string[] notes, string scale)
+        public ActionResult UpdateFretboardModel(string[] notes, string scale)
         {
             FretboardWebModel model = new FretboardWebModel();
 
