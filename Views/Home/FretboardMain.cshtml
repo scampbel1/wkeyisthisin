@@ -89,23 +89,31 @@
                     {
                         if (Model.SelectedNoteIsPartOfSelectedScale(note))
                         {
-                            <td class="selectedNoteSelectedScale" onclick="UpdateModel('@note', false, '@Model.SelectedScale?.ScaleName')"><b>@note</b></td>
+                            <td class="selectedNoteSelectedScale" onclick="UpdateModel('@note', false, '@Model.SelectedScale?.ScaleName')">
+                                <b>@note</b>
+                            </td>
                             continue;
                         }
                         else if (Model.NoteIsPartOfSelectedScale(note))
                         {
-                            <td class="noteSelectedScale" onclick="UpdateModel('@note', false, '@Model.SelectedScale?.ScaleName')"><b>@note</b></td>
+                            <td class="noteSelectedScale" onclick="UpdateModel('@note', false, '@Model.SelectedScale?.ScaleName')">
+                                <b>@note</b>
+                            </td>
                             continue;
                         }
                     }
 
                     if (Model.NoteIsSelected(note))
                     {
-                        <td class="selectedNote" onclick="UpdateModel('@note', false, '@Model.SelectedScale?.ScaleName')">@note</td>
+                        <td class="selectedNote" onclick="UpdateModel('@note', false, '@Model.SelectedScale?.ScaleName')">
+                            <b>@note</b>
+                        </td>
                         continue;
                     }
 
-                    <td class="defaultNote" onclick="UpdateModel('@note', true, '@Model.SelectedScale?.ScaleName')">@note</td>
+                    <td class="defaultNote" onclick="UpdateModel('@note', true, '@Model.SelectedScale?.ScaleName')">
+                        @note
+                    </td>
                 }
             </tr>
         }

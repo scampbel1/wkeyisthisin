@@ -19,22 +19,22 @@
 .selectedNote {
     font-size: 18px;
     cursor: pointer;
-    color: red;
+    color: forestgreen;
     background-color: lightcoral;
 }
 
 .selectedNoteSelectedScale {
     font-size: 18px;
-    cursor: pointer;
+    cursor: help;
     color: orange;
     background-color: darkgreen;
 }
 
 .noteSelectedScale {
     font-size: 18px;
-    cursor: pointer;
-    color: black;
-    background-color: ghostwhite;
+    cursor: crosshair;
+    color: ghostwhite;
+    background-color: black;
 }
 
 .scaleResults {
