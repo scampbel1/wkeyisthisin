@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using KeyifyClassLibrary.Core.MusicTheory;
+using KeyifyClassLibrary.Core.MusicTheory.Enums;
 using KeyifyClassLibrary.Core.MusicTheory.Helper;
 using KeyifyWebClient.Core.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -20,17 +21,20 @@ namespace KeyifyWebClient.Core.Controllers
         {
             FretboardWebModel model = new FretboardWebModel();
 
-            if (!string.IsNullOrEmpty(scale))
-            {                
-                model.SelectedScale = ScaleDictionary.GenerateEntryFromString(scale);
-            }
-
             if (notes != null && notes.Length > 0)
             {
                 foreach (var note in notes)
                 {
                     model.Notes.Remove(note);
                     model.Notes.Add(note, true);
+                }
+
+                if (!string.IsNullOrEmpty(scale))
+                {
+                    model.SelectedScale = ScaleDictionary.GenerateEntryFromString(scale);
+                    //Incorrect!!
+                    model.SelectedNoteSelectedScaleMatch = new HashSet<KeyifyClassLibrary.Core.MusicTheory.Enums.Note>(model.SelectedScale.Scale.Notes);
+                    model.SelectedNoteSelectedScaleMatch.SymmetricExceptWith(ElementStringConverter.ConvertStringArrayIntoNotes(notes));
                 }
 
                 model.Scales = GenerateScales(notes);

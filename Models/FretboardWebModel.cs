@@ -19,6 +19,7 @@ namespace KeyifyWebClient.Core.Models
         public Dictionary<string, bool> Notes;
         public List<ScaleMatch> Scales;
         public ScaleDictionaryEntry SelectedScale { get; set; }
+        public HashSet<Note> SelectedNoteSelectedScaleMatch { get; set; }
 
         public FretboardWebModel()
         {
@@ -38,12 +39,19 @@ namespace KeyifyWebClient.Core.Models
 
         public bool NoteIsSelected(string note)
         {
-            var selectedNotes = Notes.ToImmutableHashSet().Where(a => a.Value);
-
-            return selectedNotes.Contains(new KeyValuePair<string, bool>(note, true));
+            return Notes.Contains(new KeyValuePair<string, bool>(note, true));
         }
 
-        //TODO: Create a hashset that is the cross-section between selected note and selected note in selected scale
+        //Improve model - wasteful use of resources
+        public bool SelectedNoteIsPartOfSelectedScale(string note)
+        {
+            if (SelectedScale == null)
+                return false;
+
+            return SelectedNoteSelectedScaleMatch.Contains(ElementStringConverter.ConvertStringNoteToNoteType(note));
+        }
+        
+        //Improve model - wasteful use of resources
         public bool NoteIsPartOfSelectedScale(string note)
         {
             if (SelectedScale == null)
