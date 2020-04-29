@@ -20,7 +20,6 @@ namespace KeyifyWebClient.Core.Controllers
         public ActionResult UpdateFretboardModel(string[] notes, string scale)
         {
             FretboardWebModel model = new FretboardWebModel();
-            HashSet<Note> unmatched;
 
             if (notes != null && notes.Length > 0)
             {
@@ -38,11 +37,11 @@ namespace KeyifyWebClient.Core.Controllers
 
                     var selectedNotes = ElementStringConverter.ConvertStringArrayIntoNotes(notes);
                     scaleSet.IntersectWith(selectedNotes);
-
+                    //Include scaleSet and selectedNotes match boolean to be shown on page using "widget"
                     model.SelectedNoteSelectedScaleMatch = scaleSet;
                 }
 
-                model.Scales = GenerateScales(notes);
+                model.Scales = ScaleMatcher.GetMatchedScales(ElementStringConverter.ConvertStringArrayIntoNotes(notes));
             }
 
             return PartialView("FretboardMain", model);
@@ -54,11 +53,6 @@ namespace KeyifyWebClient.Core.Controllers
             var model = new FretboardWebModel();
 
             return PartialView("FretboardMain", model);
-        }
-
-        private List<ScaleMatch> GenerateScales(string[] notes)
-        {
-            return ScaleMatcher.GetMatchedScales(ElementStringConverter.ConvertStringArrayIntoNotes(notes));
         }
     }
 }

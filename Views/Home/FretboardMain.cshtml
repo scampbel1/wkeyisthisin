@@ -85,24 +85,20 @@
             <tr>
                 @foreach (var note in instrumentString)
                 {
-                    if (Model.SelectedScale != null)
+                    if (Model.SelectedScale != null && Model.SelectedNoteIsPartOfSelectedScale(note))
                     {
-                        if (Model.SelectedNoteIsPartOfSelectedScale(note))
-                        {
-                            <td class="selectedNoteSelectedScale" onclick="UpdateModel('@note', false, '@Model.SelectedScale?.ScaleName')">
-                                @note
-                            </td>
-                            continue;
-                        }
-                        else if (Model.NoteIsPartOfSelectedScale(note))
-                        {
-                            <td class="noteSelectedScale" onclick="UpdateModel('@note', false, '@Model.SelectedScale?.ScaleName')">
-                                @note
-                            </td>
-                            continue;
-                        }
+                        <td class="selectedNoteSelectedScale" onclick="UpdateModel('@note', false, '@Model.SelectedScale?.ScaleName')">
+                            @note
+                        </td>
+                        continue;
                     }
-
+                    else if (Model.SelectedScale != null && Model.NoteIsPartOfSelectedScale(note))
+                    {
+                        <td class="noteSelectedScale" onclick="UpdateModel('@note', false, '@Model.SelectedScale?.ScaleName')">
+                            @note
+                        </td>
+                        continue;
+                    }
                     if (Model.NoteIsSelected(note))
                     {
                         <td class="selectedNote" onclick="UpdateModel('@note', false, '@Model.SelectedScale?.ScaleName')">
