@@ -20,6 +20,7 @@ namespace KeyifyWebClient.Core.Controllers
         public ActionResult UpdateFretboardModel(string[] notes, string scale)
         {
             FretboardWebModel model = new FretboardWebModel();
+            HashSet<Note> unmatched;
 
             if (notes != null && notes.Length > 0)
             {
@@ -29,12 +30,16 @@ namespace KeyifyWebClient.Core.Controllers
                     model.Notes.Add(note, true);
                 }
 
+                //Do not simplify this until you have unit tests in place for it
                 if (!string.IsNullOrEmpty(scale))
                 {
-                    model.SelectedScale = ScaleDictionary.GenerateEntryFromString(scale);
-                    //Incorrect!!
-                    model.SelectedNoteSelectedScaleMatch = new HashSet<KeyifyClassLibrary.Core.MusicTheory.Enums.Note>(model.SelectedScale.Scale.Notes);
-                    model.SelectedNoteSelectedScaleMatch.SymmetricExceptWith(ElementStringConverter.ConvertStringArrayIntoNotes(notes));
+                    model.SelectedScale = ScaleDictionary.GenerateEntryFromString(scale);                    
+                    var scaleSet = new HashSet<Note>(model.SelectedScale.Scale.NotesSet);
+
+                    var selectedNotes = ElementStringConverter.ConvertStringArrayIntoNotes(notes);
+                    scaleSet.IntersectWith(selectedNotes);
+
+                    model.SelectedNoteSelectedScaleMatch = scaleSet;
                 }
 
                 model.Scales = GenerateScales(notes);

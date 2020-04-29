@@ -90,14 +90,14 @@
                         if (Model.SelectedNoteIsPartOfSelectedScale(note))
                         {
                             <td class="selectedNoteSelectedScale" onclick="UpdateModel('@note', false, '@Model.SelectedScale?.ScaleName')">
-                                <b>@note</b>
+                                @note
                             </td>
                             continue;
                         }
                         else if (Model.NoteIsPartOfSelectedScale(note))
                         {
                             <td class="noteSelectedScale" onclick="UpdateModel('@note', false, '@Model.SelectedScale?.ScaleName')">
-                                <b>@note</b>
+                                @note
                             </td>
                             continue;
                         }
@@ -106,7 +106,7 @@
                     if (Model.NoteIsSelected(note))
                     {
                         <td class="selectedNote" onclick="UpdateModel('@note', false, '@Model.SelectedScale?.ScaleName')">
-                            <b>@note</b>
+                            @note
                         </td>
                         continue;
                     }
