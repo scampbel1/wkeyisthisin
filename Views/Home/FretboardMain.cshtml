@@ -37,13 +37,15 @@
         }
 
         function GenerateControllerMethodParams(note, add) {
+
             var noteArray = new Array();
+
             @foreach (var note in Model.Notes.Where(n => n.Value))
             {
                 @:noteArray.push("@note.Key");
             }
 
-            if (note != null) {
+            if (note != null && note != '') {
                 if (add === true) {
                     noteArray.push(note);
                 }
@@ -128,21 +130,21 @@
                 if (Model.Scales.Count == 1)
                 {
                     <h2>Matching Keys</h2>
-                    <span><b class="scaleResult" onclick="UpdateModel('', false, '@scale.ScaleName')">@scale.ScaleName</b></span>
+                    <span><b class="scaleResult" onclick="UpdateModel(null, false, '@scale.ScaleName')">@scale.ScaleName</b></span>
                     break;
                 }
                 if (Model.Scales.Last().Equals(scale))
                 {
-                    <span><b class="scaleResult" onclick="UpdateModel('', false, '@scale.ScaleName')">@scale.ScaleName</b>.</span>
+                    <span><b class="scaleResult" onclick="UpdateModel(null, false, '@scale.ScaleName')">@scale.ScaleName</b>.</span>
                 }
                 else if (Model.Scales.First().Equals(scale))
                 {
                     <h2>Matching Keys</h2>
-                    <span><b class="scaleResult" onclick="UpdateModel('', false, '@scale.ScaleName')">@scale.ScaleName</b>, </span>
+                    <span><b class="scaleResult" onclick="UpdateModel(null, false, '@scale.ScaleName')">@scale.ScaleName</b>, </span>
                 }
                 else
                 {
-                    <span><b class="scaleResult" onclick="UpdateModel('', false, '@scale.ScaleName')">@scale.ScaleName</b>, </span>
+                    <span><b class="scaleResult" onclick="UpdateModel(null, false, '@scale.ScaleName')">@scale.ScaleName</b>, </span>
                 }
             }
         }
