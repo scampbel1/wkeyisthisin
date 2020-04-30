@@ -87,30 +87,34 @@
             <tr>
                 @foreach (var note in instrumentString.Notes)
                 {
-                    if (note.InSelectedScale && note.Selected)
+                    if (Model.SelectedScale != null)
                     {
-                        <td class="selectedNoteSelectedScale" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleName')">
-                            @note.Note
-                        </td>
+                        if (note.InSelectedScale && note.Selected)
+                        {
+                            <td class="selectedNoteSelectedScale" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleName')">
+                                @note.Note
+                            </td>
+                            continue;
+                        }
+                        else if (note.InSelectedScale && !note.Selected)
+                        {
+                            <td class="noteSelectedScale" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleName')">
+                                @note.Note
+                            </td>
+                            continue;
+                        }
                     }
-                    else if (note.InSelectedScale && !note.Selected)
-                    {
-                        <td class="noteSelectedScale" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleName')">
-                            @note.Note
-                        </td>
-                    }
-                    else if (note.Selected)
+                    if (note.Selected)
                     {
                         <td class="selectedNote" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleName')">
                             @note.Note
                         </td>
+                        continue;
                     }
-                    else if (!note.Selected)
-                    {
-                        <td class="defaultNote" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleName')">
-                            @note.Note
-                        </td>
-                    }
+
+                    <td class="defaultNote" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleName')">
+                        @note.Note
+                    </td>
                 }
             </tr>
         }
