@@ -12,10 +12,10 @@ namespace KeyifyWebClient.Core.Models
 {
     public class FretboardWebModel
     {
-        private int _fretcount = 24;
+        private int _fretCount = 24;
         private readonly int _minFretCount = 8;
 
-        public List<string[]> Tuning { get; private set; }
+        public Fretboard Tuning { get; private set; }
         public Dictionary<string, bool> Notes;
         public List<ScaleMatch> Scales;
         public ScaleDictionaryEntry SelectedScale { get; set; }
@@ -25,7 +25,7 @@ namespace KeyifyWebClient.Core.Models
         {
             Notes = new Dictionary<string, bool>();
             Scales = new List<ScaleMatch>();
-            Tuning = Fretboard.PopulateFretboard(new StandardGuitarTuning(), _fretcount);
+            Tuning = new Fretboard() { new GuitarString(new StandardGuitarTuning(), _fretCount) };
             PopulateNotes();
         }
 
@@ -63,17 +63,17 @@ namespace KeyifyWebClient.Core.Models
         //TODO: Create unit tests and test using UI
         public void UpdateFretCount(int count)
         {
-            _fretcount = count > _minFretCount
-                ? _fretcount = count
-                : _fretcount;
+            _fretCount = count > _minFretCount
+                ? _fretCount = count
+                : _fretCount;
 
-            Tuning = Fretboard.PopulateFretboard(new StandardGuitarTuning(), _fretcount);
+            //Tuning = Fretboard.PopulateFretboard(new StandardGuitarTuning(), _fretCount);
             PopulateNotes();
         }
 
         public int GetFretCount()
         {
-            return _fretcount;
+            return _fretCount;
         }
     }
 }

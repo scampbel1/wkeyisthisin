@@ -6,7 +6,7 @@ using KeyifyClassLibrary.Core.MusicTheory.Tuning;
 
 namespace KeyifyClassLibrary.Core.Instrument
 {
-    public static class Fretboard
+    public static class Old_Fretboard
     {
         public static List<string[]> PopulateFretboard(ITuning tuning, int fretCount)
         {
