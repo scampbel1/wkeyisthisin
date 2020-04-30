@@ -1,15 +1,15 @@
 ﻿.selectedNoteSelectedScale {
     font-size: 18px;
     cursor: pointer;
-    color: yellow;
-    background-color: blue;
+    color: yellow !important;
+    background-color: blue !important;
 }
 
 .noteSelectedScale {
     font-size: 18px;
     cursor: pointer;
-    color: orange;
-    background-color: green;
+    color: orange !important;
+    background-color: green !important;
 }
 
 .fretboard {
@@ -33,8 +33,8 @@
 .selectedNote {
     font-size: 18px;
     cursor: pointer;
-    color: forestgreen;
-    background-color: lightcoral;
+    color: forestgreen !important;
+    background-color: lightcoral !important;
 }
 
 .scaleResults {

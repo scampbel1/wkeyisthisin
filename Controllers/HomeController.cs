@@ -23,25 +23,16 @@ namespace KeyifyWebClient.Core.Controllers
 
             if (notes != null && notes.Length > 0)
             {
-                foreach (var note in notes)
-                {
-                    model.Notes.Remove(note);
-                    model.Notes.Add(note, true);
-                }
+                model.ApplySelectedNotesToFretboard(notes);
 
-                //Do not simplify this until you have unit tests in place for it
                 if (!string.IsNullOrEmpty(scale))
                 {
-                    model.SelectedScale = ScaleDictionary.GenerateEntryFromString(scale);                    
-                    var scaleSet = new HashSet<Note>(model.SelectedScale.Scale.NotesSet);
-
-                    var selectedNotes = ElementStringConverter.ConvertStringArrayIntoNotes(notes);
-                    scaleSet.IntersectWith(selectedNotes);
-                    //Include scaleSet and selectedNotes match boolean to be shown on page using "widget"
-                    model.SelectedNoteSelectedScaleMatch = scaleSet;
+                    model.SelectedScale = ScaleDictionary.GenerateEntryFromString(scale);
+                    model.ApplySelectedScaleNotesToFretboard(model.SelectedScale.Scale.NotesSet);
                 }
 
-                model.Scales = ScaleMatcher.GetMatchedScales(ElementStringConverter.ConvertStringArrayIntoNotes(notes));
+                model.Scales = ScaleMatcher.GetMatchedScales(ElementStringConverter.ConvertStringArrayIntoNotes(notes));                
+                model.SelectedNotes = new List<string>(notes);
             }
 
             return PartialView("FretboardMain", model);

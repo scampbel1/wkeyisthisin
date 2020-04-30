@@ -6,7 +6,7 @@ namespace KeyifyWebClient.Core.Models
 {
     public class Fretboard
     {
-        public List<InstrumentString> GuitarStrings { get; set; }
+        public List<InstrumentString> InstrumentStrings { get; set; }
         public ITuning Tuning { get; set; }
         public int FretCount { get; set; }
 
@@ -14,7 +14,7 @@ namespace KeyifyWebClient.Core.Models
         {
             FretCount = fretCount;
             Tuning = tuning;
-            GuitarStrings = new List<InstrumentString>(tuning.ReturnStringCount());
+            InstrumentStrings = new List<InstrumentString>(tuning.ReturnStringCount());
             PopulateFretboard();
         }
 
@@ -22,8 +22,11 @@ namespace KeyifyWebClient.Core.Models
         {
             foreach(Note note in Tuning.ReturnNotes())
             {
-                GuitarStrings.Add(new InstrumentString(note, FretCount));
+                InstrumentStrings.Add(new InstrumentString(note, FretCount));
             }
+            
+            //Fretboard must be viewed "upside-down" to adhere to view from player's perspective
+            InstrumentStrings.Reverse();
         }
     }
 }
