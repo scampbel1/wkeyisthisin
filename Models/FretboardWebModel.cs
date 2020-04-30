@@ -25,7 +25,7 @@ namespace KeyifyWebClient.Core.Models
         {
             Notes = new Dictionary<string, bool>();
             Scales = new List<ScaleMatch>();
-            Tuning = new Fretboard() { new GuitarString(new StandardGuitarTuning(), _fretCount) };
+            Tuning = new Fretboard(new StandardGuitarTuning(), _fretCount);
             PopulateNotes();
         }
 
@@ -50,7 +50,7 @@ namespace KeyifyWebClient.Core.Models
 
             return SelectedNoteSelectedScaleMatch.Contains(ElementStringConverter.ConvertStringNoteToNoteType(note));
         }
-        
+
         //Improve model - wasteful use of resources
         public bool NoteIsPartOfSelectedScale(string note)
         {

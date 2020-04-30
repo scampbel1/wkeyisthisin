@@ -2,3 +2,6 @@
 
 # MVC1000: Use of IHtmlHelper.{0} should be avoided.
 dotnet_diagnostic.MVC1000.severity = warning
+
+# IDE0060: Remove unused parameter
+dotnet_code_quality_unused_parameters = non_public:suggestion

@@ -18,5 +18,10 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar
         {
             return _notes;
         }
+
+        public int ReturnStringCount()
+        {
+            return _notes.Length;
+        }
     }
 }

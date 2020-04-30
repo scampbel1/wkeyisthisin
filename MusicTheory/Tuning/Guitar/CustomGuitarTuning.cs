@@ -5,16 +5,16 @@ using KeyifyClassLibrary.Core.MusicTheory.Helper;
 
 namespace KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar
 {
-    public class CustomGuitarTuning : StandardGuitarTuning
+    public class CustomStandardGuitarTuning : StandardGuitarTuning
     {
         private readonly Note[] _notes;
 
-        public CustomGuitarTuning(Note[] inputNotes)
+        public CustomStandardGuitarTuning(Note[] inputNotes)
         {
             _notes = inputNotes; 
         }
 
-        public CustomGuitarTuning(string inputNotes)
+        public CustomStandardGuitarTuning(string inputNotes)
         {
             _notes = ConvertStringInputToNotes(inputNotes);
         }

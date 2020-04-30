@@ -82,12 +82,12 @@
             }
         </tr>
 
-        @*@foreach (var instrumentString in Model.Tuning)
+        @foreach (var instrumentString in Model.Tuning.GuitarStrings)
         {
             <tr>
-                @foreach (var note in instrumentString)
+                @foreach (var note in instrumentString.Notes)
                 {
-                    if (Model.SelectedScale != null && Model.SelectedNoteIsPartOfSelectedScale(note))
+                    @*if (Model.SelectedScale != null && Model.SelectedNoteIsPartOfSelectedScale(note))
                     {
                         <td class="selectedNoteSelectedScale" onclick="UpdateModel('@note', false, '@Model.SelectedScale?.ScaleName')">
                             @note
@@ -107,14 +107,14 @@
                             @note
                         </td>
                         continue;
-                    }
+                    }*@
 
                     <td class="defaultNote" onclick="UpdateModel('@note', true, '@Model.SelectedScale?.ScaleName')">
-                        @note
+                        @note.Note
                     </td>
                 }
             </tr>
-        }*@
+        }
     </table>
 
     <div style="padding-left: 15px">
