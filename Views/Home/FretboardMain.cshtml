@@ -17,11 +17,10 @@
             });
         }
 
-        function UpdateModel(note, add, scale) {
+        function UpdateModel(note, addNote, scale) {
 
-            var dataPost = { notes: GenerateControllerMethodParams(note, add), scale: scale };
-
-
+            var dataPost = { notes: GenerateControllerMethodParams(note, addNote), scale: scale };
+            
             //Note: Ensure that the ajax parameters are entirely neccessary
             //      https://stackoverflow.com/questions/2558870/asp-net-mvc-jquery-ajax-input-parameters-are-null
             $.ajax({
@@ -36,7 +35,7 @@
             });
         }
 
-        function GenerateControllerMethodParams(note, add) {
+        function GenerateControllerMethodParams(note, addNote) {
 
             var noteArray = new Array();
 
@@ -46,11 +45,11 @@
             }
 
             if (note != null && note != '') {
-                if (add === true) {
+                if (addNote === true) {
                     noteArray.push(note);
                 }
 
-                if (add === false) {
+                if (addNote === false) {
                     for (var i = 0; i < noteArray.length; i++) {
                         if (noteArray[i] === note) {
                             noteArray.splice(i, 1);

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using KeyifyClassLibrary.Core.MusicTheory;
 using KeyifyClassLibrary.Core.MusicTheory.Helper;
 using KeyifyWebClient.Core.Models;
@@ -30,6 +31,12 @@ namespace KeyifyWebClient.Core.Controllers
             if (!string.IsNullOrEmpty(scale))
             {
                 model.SelectedScale = ScaleDictionary.GenerateEntryFromString(scale);
+
+                var selected = new ScaleMatch(model.SelectedScale.ScaleName, model.SelectedScale.Scale.Notes);
+
+                if (!model.Scales.Any(a => a.ScaleName == scale))
+                    model.Scales.Add(selected);
+
                 model.ApplySelectedScaleNotesToFretboard(model.SelectedScale.Scale.NotesSet);
             }
 
