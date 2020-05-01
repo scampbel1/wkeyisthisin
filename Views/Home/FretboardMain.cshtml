@@ -20,7 +20,7 @@
         function UpdateModel(note, addNote, scale) {
 
             var dataPost = { notes: GenerateControllerMethodParams(note, addNote), scale: scale };
-            
+
             //Note: Ensure that the ajax parameters are entirely neccessary
             //      https://stackoverflow.com/questions/2558870/asp-net-mvc-jquery-ajax-input-parameters-are-null
             $.ajax({
@@ -127,27 +127,11 @@
     <div class="scaleResults">
         @if (Model.Scales.Any())
         {
+            <h2>Matching Keys</h2>
+
             foreach (var scale in Model.Scales)
             {
-                if (Model.Scales.Count == 1)
-                {
-                    <h2>Matching Keys</h2>
-                    <span><b class="scaleResult" onclick="UpdateModel(null, false, '@scale.ScaleName')">@scale.ScaleName</b></span>
-                    break;
-                }
-                if (Model.Scales.Last().Equals(scale))
-                {
-                    <span><b class="scaleResult" onclick="UpdateModel(null, false, '@scale.ScaleName')">@scale.ScaleName</b>.</span>
-                }
-                else if (Model.Scales.First().Equals(scale))
-                {
-                    <h2>Matching Keys</h2>
-                    <span><b class="scaleResult" onclick="UpdateModel(null, false, '@scale.ScaleName')">@scale.ScaleName</b>, </span>
-                }
-                else
-                {
-                    <span><b class="scaleResult" onclick="UpdateModel(null, false, '@scale.ScaleName')">@scale.ScaleName</b>, </span>
-                }
+                <span><a class="scaleResult" onclick="UpdateModel(null, false, '@scale.ScaleName')">@scale.ScaleName&nbsp;</a></span>
             }
         }
     </div>
