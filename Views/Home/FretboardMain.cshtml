@@ -133,7 +133,8 @@
             {
                 if (scale.Selected)
                 {
-                    <span><b><a class="scaleResult" onclick="UpdateModel(null, false, '')">@scale.ScaleName&nbsp;</a></b></span>
+                    <span><b><u><a class="scaleResult" onclick="UpdateModel(null, false, '')">@scale.ScaleName&nbsp;</a></u></b></span>
+                    continue;
                 }
 
                 <span><a class="scaleResult" onclick="UpdateModel(null, false, '@scale.ScaleName')">@scale.ScaleName&nbsp;</a></span>

@@ -35,16 +35,21 @@ namespace KeyifyWebClient.Core.Controllers
                 var selected = new ScaleMatch(model.SelectedScale.ScaleName, model.SelectedScale.Scale.Notes);
                 selected.Selected = true;
 
-                if (!model.Scales.Any(a => a.ScaleName == scale))
+                if (!model.Scales.Any(a => a.ScaleName == selected.ScaleName))
                     model.Scales.Add(selected);
                 else
                 {
                     var update = model.Scales.Single(a => a.ScaleName == selected.ScaleName);
-                    update.Selected = true;
+                    model.Scales.Remove(update);
+                    model.Scales.Add(selected);
                 }
 
                 model.ApplySelectedScaleNotesToFretboard(model.SelectedScale.Scale.NotesSet);
             }
+            else
+                model.SelectedScale = null;
+
+            model.Scales = model.Scales.OrderBy(a => a.ScaleName).ToList();
 
             return PartialView("FretboardMain", model);
         }
