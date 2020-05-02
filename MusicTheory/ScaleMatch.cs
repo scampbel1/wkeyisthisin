@@ -7,6 +7,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
     {
         public string ScaleName { get; set; }
         public List<Note> Scale { get; private set; }
+        public bool Selected { get; set; }
 
         public ScaleMatch()
         {

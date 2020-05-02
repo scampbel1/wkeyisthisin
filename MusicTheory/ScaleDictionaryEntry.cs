@@ -4,6 +4,7 @@
     {
         public string ScaleName { get; set; }
         public Scale Scale { get; set; }
+        public bool Selected { get; set; }
 
         public ScaleDictionaryEntry(string name, Scale scale)
         {

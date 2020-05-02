@@ -33,9 +33,15 @@ namespace KeyifyWebClient.Core.Controllers
                 model.SelectedScale = ScaleDictionary.GenerateEntryFromString(scale);
 
                 var selected = new ScaleMatch(model.SelectedScale.ScaleName, model.SelectedScale.Scale.Notes);
+                selected.Selected = true;
 
                 if (!model.Scales.Any(a => a.ScaleName == scale))
                     model.Scales.Add(selected);
+                else
+                {
+                    var update = model.Scales.Single(a => a.ScaleName == selected.ScaleName);
+                    update.Selected = true;
+                }
 
                 model.ApplySelectedScaleNotesToFretboard(model.SelectedScale.Scale.NotesSet);
             }
