@@ -2,14 +2,14 @@
 
 namespace KeyifyClassLibrary.Core.MusicTheory
 {
-    public static partial class HeptatonicScaleModeDictionary
+    public static partial class ScaleModeDictionary
     {
         public class ScaleDirectoryEntry
         {
-            public HeptatonicMode Mode { get; set; }
+            public Mode Mode { get; set; }
             public ScaleStep[] ScaleSteps { get; set; }
 
-            public ScaleDirectoryEntry(HeptatonicMode mode, ScaleStep[] scaleSteps)
+            public ScaleDirectoryEntry(Mode mode, ScaleStep[] scaleSteps)
             {
                 Mode = mode;
                 ScaleSteps = scaleSteps;

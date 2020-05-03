@@ -1,6 +1,6 @@
 ﻿namespace KeyifyClassLibrary.Core.MusicTheory.Enums
 {
-    public enum HeptatonicMode
+    public enum Mode
     {
         Ionian, //Major
         Dorian,
@@ -11,6 +11,8 @@
         Locrian,
         HarmonicMinor,
         MelodicMinor,
-        Augmented
+        Augmented,
+        PentatonicMajor,
+        PentatonicMinor
     }
 }

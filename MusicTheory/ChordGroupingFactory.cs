@@ -8,12 +8,12 @@ namespace KeyifyClassLibrary.MusicTheory
 {
     public class ChordGroupingFactory : AbstractChordGroupingFactory //TODO: Merge with Mode Class
     {
-        public override TriadType[] ReturnTriadTemplate(HeptatonicMode mode)
+        public override TriadType[] ReturnTriadTemplate(Mode mode)
         {
             switch (mode)
             {
                 #region Modes
-                case HeptatonicMode.Mixolydian:
+                case Mode.Mixolydian:
                     return new TriadType[]
                     {
                         TriadType.M,
@@ -25,7 +25,7 @@ namespace KeyifyClassLibrary.MusicTheory
                         TriadType.M
                     };
 
-                case HeptatonicMode.Dorian:
+                case Mode.Dorian:
                     return new TriadType[]
                     {
                         TriadType.m,
@@ -37,7 +37,7 @@ namespace KeyifyClassLibrary.MusicTheory
                         TriadType.M
                     };
 
-                case HeptatonicMode.Aeolian:
+                case Mode.Aeolian:
                     return new TriadType[]
                     {
                         TriadType.m,
@@ -49,7 +49,7 @@ namespace KeyifyClassLibrary.MusicTheory
                         TriadType.M
                     };
 
-                case HeptatonicMode.Locrian:
+                case Mode.Locrian:
                     return new TriadType[]
                     {
                         TriadType.o,
@@ -61,7 +61,7 @@ namespace KeyifyClassLibrary.MusicTheory
                         TriadType.m
                     };
 
-                case HeptatonicMode.Lydian:
+                case Mode.Lydian:
                     return new TriadType[]
                     {
                         TriadType.M,
@@ -73,7 +73,7 @@ namespace KeyifyClassLibrary.MusicTheory
                         TriadType.m
                     };
 
-                case HeptatonicMode.Phrygian:
+                case Mode.Phrygian:
                     return new TriadType[]
                     {
                         TriadType.m,
@@ -85,7 +85,7 @@ namespace KeyifyClassLibrary.MusicTheory
                         TriadType.m
                     };
 
-                case HeptatonicMode.Ionian:
+                case Mode.Ionian:
                     return new TriadType[]
                     {
                         TriadType.M,
@@ -97,7 +97,7 @@ namespace KeyifyClassLibrary.MusicTheory
                         TriadType.o
                     };
 
-                case HeptatonicMode.HarmonicMinor:
+                case Mode.HarmonicMinor:
                     return new TriadType[]
                     {
                         TriadType.m,
@@ -109,7 +109,7 @@ namespace KeyifyClassLibrary.MusicTheory
                         TriadType.o
                     };
 
-                case HeptatonicMode.MelodicMinor:
+                case Mode.MelodicMinor:
                     return new TriadType[]
                     {
                         TriadType.m,
@@ -121,7 +121,7 @@ namespace KeyifyClassLibrary.MusicTheory
                         TriadType.o
                     };
 
-                case HeptatonicMode.Augmented:
+                case Mode.Augmented:
                     return new TriadType[]
                     {
                         //TriadType.m,
@@ -145,10 +145,10 @@ namespace KeyifyClassLibrary.MusicTheory
             throw new NotImplementedException();
         }
 
-        public List<string> GenerateChords(HeptatonicMode mode, Note key) //TODO: Create chord class type
+        public List<string> GenerateChords(Mode mode, Note key) //TODO: Create chord class type
         {
             var notes = ScaleNoteGenerator.GenerateNotes(key,
-                HeptatonicScaleModeDictionary.GetScaleDirectory(mode).ScaleSteps).Notes;
+                ScaleModeDictionary.GetScaleDirectory(mode).ScaleSteps).Notes;
 
             int scaleCount = 0; //TODO: Create roman numeral equivalent
             var chords = new List<string>();

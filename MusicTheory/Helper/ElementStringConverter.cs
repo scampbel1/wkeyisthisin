@@ -16,9 +16,9 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Helper
             return (Note) Enum.Parse(typeof(Note), note.ToString(), true);
         }
 
-        public static HeptatonicMode ConvertStringModeNameToModeType(string mode)
+        public static Mode ConvertStringModeNameToModeType(string mode)
         {
-            return (HeptatonicMode) Enum.Parse(typeof(HeptatonicMode), mode, true);
+            return (Mode) Enum.Parse(typeof(Mode), mode, true);
         }
 
         public static List<Note> ConvertStringArrayIntoNotes(string[] notes)

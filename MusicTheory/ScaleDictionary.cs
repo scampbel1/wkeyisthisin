@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using KeyifyClassLibrary.Core.MusicTheory.Enums;
 using KeyifyClassLibrary.Core.MusicTheory.Helper;
-using static KeyifyClassLibrary.Core.MusicTheory.HeptatonicScaleModeDictionary;
+using static KeyifyClassLibrary.Core.MusicTheory.ScaleModeDictionary;
 
 namespace KeyifyClassLibrary.Core.MusicTheory
 {
     public static class ScaleDictionary
     {
-        public static List<ScaleDictionaryEntry> GenerateHeptatonicDictionary()
+        public static List<ScaleDictionaryEntry> GenerateDictionary()
         {
             var dictionary = new List<ScaleDictionaryEntry>();
 
@@ -18,7 +18,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                 {
                     string scaleLabel = note + " " + mode;
                     Note realNote = ElementStringConverter.ConvertStringNoteToNoteType(note);
-                    HeptatonicMode realMode = ElementStringConverter.ConvertStringModeNameToModeType(mode);
+                    Mode realMode = ElementStringConverter.ConvertStringModeNameToModeType(mode);
                     ScaleDirectoryEntry scaleDirectory = GetScaleDirectory(realMode);
                     ScaleStep[] scaleSteps = scaleDirectory.ScaleSteps;
 

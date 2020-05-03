@@ -14,8 +14,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
      The ones for the major scale are commonly used enough to have special names - ionian, dorian, and so on."
     */
 
-    //Rename "Heptatonic"
-    public static partial class HeptatonicScaleModeDictionary
+    public static partial class ScaleModeDictionary
     {
         private static List<ScaleDirectoryEntry> GenerateDictionary()
         {
@@ -26,7 +25,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
             //Major Scale
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                HeptatonicMode.Ionian,
+                Mode.Ionian,
                 new ScaleStep[] {
                     ScaleStep.R,
                     ScaleStep.W,
@@ -41,7 +40,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
             //Minor Scale
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                HeptatonicMode.Aeolian,
+                Mode.Aeolian,
                 new ScaleStep[] {
                     ScaleStep.R,
                     ScaleStep.W,
@@ -54,7 +53,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                 }));
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                HeptatonicMode.Phrygian,
+                Mode.Phrygian,
                 new ScaleStep[]
                 {
                     ScaleStep.R,
@@ -68,7 +67,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                 }));
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                HeptatonicMode.Lydian,
+                Mode.Lydian,
                 new ScaleStep[]
                 {
                     ScaleStep.R,
@@ -82,7 +81,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                 }));
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                HeptatonicMode.Mixolydian,
+                Mode.Mixolydian,
                 new ScaleStep[]
                 {
                     ScaleStep.R,
@@ -96,7 +95,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                 }));
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                HeptatonicMode.Locrian,
+                Mode.Locrian,
                 new ScaleStep[]
                 {
                     ScaleStep.R,
@@ -110,7 +109,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                 }));
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                HeptatonicMode.Dorian,
+                Mode.Dorian,
                 new ScaleStep[]
                 {
                     ScaleStep.R,
@@ -124,7 +123,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                 }));
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                HeptatonicMode.HarmonicMinor,
+                Mode.HarmonicMinor,
                 new ScaleStep[]
                 {
                     ScaleStep.R,
@@ -138,7 +137,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                 }));
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                HeptatonicMode.MelodicMinor,
+                Mode.MelodicMinor,
                 new ScaleStep[]
                 {
                     ScaleStep.R,
@@ -152,7 +151,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                 }));
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                HeptatonicMode.Augmented, //(W+h) h (W+h) h (W+h) h 
+                Mode.Augmented, //(W+h) h (W+h) h (W+h) h 
                 new ScaleStep[]
                 {
                     ScaleStep.R,
@@ -162,6 +161,30 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                     ScaleStep.h,
                     ScaleStep.Wh,
                     ScaleStep.h
+                }));
+
+            scaleDictionary.Add(new ScaleDirectoryEntry(
+                Mode.PentatonicMinor, //(W+h) + W + W (W+h) + W
+                new ScaleStep[]
+                {
+                    ScaleStep.R,
+                    ScaleStep.Wh,
+                    ScaleStep.W,
+                    ScaleStep.W,
+                    ScaleStep.Wh,
+                    ScaleStep.W
+                }));
+
+            scaleDictionary.Add(new ScaleDirectoryEntry(
+                Mode.PentatonicMajor, //W-W-(Wh)-W-(Wh)
+                new ScaleStep[]
+                {
+                    ScaleStep.R,
+                    ScaleStep.W,
+                    ScaleStep.W,
+                    ScaleStep.Wh,
+                    ScaleStep.W,
+                    ScaleStep.Wh
                 }));
 
             #endregion
@@ -169,7 +192,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
             return scaleDictionary;
         }
 
-        public static ScaleDirectoryEntry GetScaleDirectory(HeptatonicMode mode)
+        public static ScaleDirectoryEntry GetScaleDirectory(Mode mode)
         {
             return GenerateDictionary().FirstOrDefault(s => s.Mode == mode);
         }

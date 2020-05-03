@@ -14,7 +14,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Helper
 
         public static List<string> GetModes()
         {
-            return Enum.GetNames(typeof(HeptatonicMode)).ToList();
+            return Enum.GetNames(typeof(Mode)).ToList();
         }
     }
 }
