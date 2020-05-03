@@ -2,37 +2,49 @@
 using KeyifyClassLibrary.Core.MusicTheory;
 using KeyifyClassLibrary.Core.MusicTheory.Enums;
 using KeyifyClassLibrary.Core.MusicTheory.Helper;
+using KeyifyClassLibrary.Core.MusicTheory.Tuning;
 using KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar;
 
 namespace KeyifyWebClient.Core.Models
 {
     public class FretboardWebModel
     {
-        private static int _fretCount = 24;
-        private readonly int _minFretCount = 8;
-
         public Fretboard Fretboard { get; private set; }
         public ScaleDictionaryEntry SelectedScale { get; set; }
         public List<string> SelectedNotes { get; set; }
         public List<ScaleMatch> Scales;
+        public string InstrumentName { get; set; } = "Unnamed Instrument";
 
         public FretboardWebModel()
         {
             Scales = new List<ScaleMatch>();
-            Fretboard = new Fretboard(new StandardGuitarTuning(), _fretCount);
+            Fretboard = new Fretboard(new StandardGuitarTuning(), 24);
             SelectedNotes = new List<string>(12);
         }
 
-        public void UpdateFretCount(int count)
+        public FretboardWebModel(int fretCount)
         {
-            _fretCount = count > _minFretCount
-                ? _fretCount = count
-                : _fretCount;
+            new FretboardWebModel();
+            this.Fretboard.FretCount = fretCount;
+        }
+
+        public FretboardWebModel(ITuning tuning)
+        {
+            Scales = new List<ScaleMatch>();
+            Fretboard = new Fretboard(tuning, 24);
+            SelectedNotes = new List<string>(12);
+        }
+
+        public FretboardWebModel(int fretCount, ITuning tuning)
+        {
+            Scales = new List<ScaleMatch>();
+            Fretboard = new Fretboard(tuning, fretCount);
+            SelectedNotes = new List<string>(12);
         }
 
         public int GetFretCount()
         {
-            return _fretCount;
+            return Fretboard.FretCount;
         }
 
         public void ApplySelectedNotesToFretboard(string[] selectedNotes)

@@ -6,11 +6,24 @@
 
         function ResetModel() {
             $.ajax({
-                url: '@Url.Action("ResetModel")',
+                url: '@Url.Action("Index")',
                 datatype: 'json',
                 async: 'false',
                 contentType: "application/json",
-                type: "POST",
+                type: "Get",
+                success: function (data) {
+                    $("#Fretboard").html(data);
+                }
+            });
+        }
+
+        function GoHome() {
+            $.ajax({
+                url: '@Url.Action("Index", "Home")',
+                datatype: 'json',
+                async: 'false',
+                contentType: "application/json",
+                type: "Get",
                 success: function (data) {
                     $("#Fretboard").html(data);
                 }
@@ -64,7 +77,7 @@
 </head>
 
 <body>
-    <h1>Fretboard</h1>
+    <h1>@Model.InstrumentName Fretboard</h1>
     <table class="fretboard">
         <tr>
             @for (int count = 0; count < Model.GetFretCount(); count++)
@@ -122,6 +135,7 @@
     <div style="padding-left: 15px">
         <br />
         <button onclick="ResetModel()">Reset</button>
+        <button onclick="GoHome()">Back</button>
     </div>
 
     <div class="scaleResults">

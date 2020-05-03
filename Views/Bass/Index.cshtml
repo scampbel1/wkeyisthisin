@@ -1,4 +1,6 @@
-﻿@{
+﻿@model KeyifyWebClient.Core.Models.FretboardWebModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -8,7 +10,5 @@
 </head>
 
 <body>
-    <h1>Instruments</h1>
-    <h2>@Html.ActionLink("Guitar", "Index", "Guitar")</h2>
-    <h2>@Html.ActionLink("Bass", "Index", "Bass")</h2>
+    <div id="Fretboard">@Html.Partial("Fretboard", Model)</div>
 </body>
