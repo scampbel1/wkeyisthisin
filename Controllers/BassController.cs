@@ -1,6 +1,7 @@
 ﻿using KeyifyClassLibrary.Core.MusicTheory;
 using KeyifyClassLibrary.Core.MusicTheory.Enums;
 using KeyifyClassLibrary.Core.MusicTheory.Helper;
+using KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar;
 using KeyifyWebClient.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -8,19 +9,20 @@ using System.Linq;
 
 namespace Keyify.Controllers
 {
-    public class GuitarController : Controller
+    public class BassController : Controller
     {
         [HttpGet]
-        public IActionResult Index()
+        public ActionResult Index()
         {
-            var model = new FretboardWebModel();
+            var model = new FretboardWebModel(16, new CustomStandardGuitarTuning(new Note[] { Note.E, Note.A, Note.D, Note.G }));
+            
             return View(model);
         }
 
         [HttpPost]
         public ActionResult UpdateFretboardModel(string[] notes, string scale)
         {
-            FretboardWebModel model = new FretboardWebModel();
+            var model = new FretboardWebModel(16, new CustomStandardGuitarTuning(new Note[] { Note.E, Note.A, Note.D, Note.G }));
 
             if (notes != null && notes.Length > 0)
             {
@@ -55,6 +57,6 @@ namespace Keyify.Controllers
             model.Scales = model.Scales.OrderBy(a => a.ScaleName).ToList();
 
             return PartialView("Fretboard", model);
-        }        
+        }
     }
 }

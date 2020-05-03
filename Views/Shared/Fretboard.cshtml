@@ -6,11 +6,24 @@
 
         function ResetModel() {
             $.ajax({
-                url: '@Url.Action("ResetModel")',
+                url: '@Url.Action("Index")',
                 datatype: 'json',
                 async: 'false',
                 contentType: "application/json",
-                type: "POST",
+                type: "Get",
+                success: function (data) {
+                    $("#Fretboard").html(data);
+                }
+            });
+        }
+
+        function GoHome() {
+            $.ajax({
+                url: '@Url.Action("Index", "Home")',
+                datatype: 'json',
+                async: 'false',
+                contentType: "application/json",
+                type: "Get",
                 success: function (data) {
                     $("#Fretboard").html(data);
                 }
@@ -122,6 +135,7 @@
     <div style="padding-left: 15px">
         <br />
         <button onclick="ResetModel()">Reset</button>
+        <button onclick="GoHome()">Back</button>
     </div>
 
     <div class="scaleResults">
