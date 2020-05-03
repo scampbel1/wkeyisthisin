@@ -39,7 +39,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                     note = ElementStringConverter.ConvertSharpNoteStringToFlat(note).ToString();
 
             Note realNote = ElementStringConverter.ConvertStringNoteToNoteType(note);
-            ScaleDirectoryEntry realScale = HeptatonicScaleModeDictionary.GetScaleDirectory(ElementStringConverter.ConvertStringModeNameToModeType(mode));
+            ScaleDirectoryEntry realScale = GetScaleDirectory(ElementStringConverter.ConvertStringModeNameToModeType(mode));
             Scale generatedScale = ScaleNoteGenerator.GenerateNotes(realNote, realScale.ScaleSteps);
 
             return new ScaleDictionaryEntry(inputScale, generatedScale);
