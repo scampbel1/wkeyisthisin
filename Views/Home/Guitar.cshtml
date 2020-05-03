@@ -2,7 +2,65 @@
 @model FretboardWebModel
 
 <head>
-    <div id="Fretboard">@Html.Partial("Guitar", Model)</div>
+    <script lang="en" type="text/javascript">
+
+        function ResetModel() {
+            $.ajax({
+                url: '@Url.Action("ResetModel")',
+                datatype: 'json',
+                async: 'false',
+                contentType: "application/json",
+                type: "POST",
+                success: function (data) {
+                    $("#Fretboard").html(data);
+                }
+            });
+        }
+
+        function UpdateModel(note, addNote, scale) {
+
+            var dataPost = { notes: GenerateControllerMethodParams(note, addNote), scale: scale };
+
+            //Note: Ensure that the ajax parameters are entirely neccessary
+            //      https://stackoverflow.com/questions/2558870/asp-net-mvc-jquery-ajax-input-parameters-are-null
+            $.ajax({
+                url: '@Url.Action("UpdateFretboardModel")',
+                async: 'false',
+                type: "POST",
+                data: dataPost,
+                datatype: "json",
+                success: function (data) {
+                    $("#Fretboard").html(data);
+                }
+            });
+        }
+
+        function GenerateControllerMethodParams(note, addNote) {
+
+            var noteArray = new Array();
+
+            @foreach (var note in Model.SelectedNotes)
+            {
+                @:noteArray.push("@note");
+            }
+
+            if (note != null && note != '') {
+                if (addNote === true) {
+                    noteArray.push(note);
+                }
+
+                if (addNote === false) {
+                    for (var i = 0; i < noteArray.length; i++) {
+                        if (noteArray[i] === note) {
+                            noteArray.splice(i, 1);
+                        }
+                    }
+                }
+            }
+
+            return noteArray;
+        }
+    </script>
 </head>
 
 <body>

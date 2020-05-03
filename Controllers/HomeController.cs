@@ -54,7 +54,7 @@ namespace KeyifyWebClient.Core.Controllers
 
             model.Scales = model.Scales.OrderBy(a => a.ScaleName).ToList();
 
-            return PartialView("FretboardMain", model);
+            return PartialView("Guitar", model);
         }
 
         [HttpPost]
@@ -62,7 +62,7 @@ namespace KeyifyWebClient.Core.Controllers
         {
             var model = new FretboardWebModel();
 
-            return PartialView("FretboardMain", model);
+            return PartialView("Guitar", model);
         }
     }
 }
