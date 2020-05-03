@@ -9,13 +9,11 @@ namespace KeyifyWebClient.Core.Models
 {
     public class FretboardWebModel
     {
-        
-        private readonly int _minFretCount = 8;
-
         public Fretboard Fretboard { get; private set; }
         public ScaleDictionaryEntry SelectedScale { get; set; }
         public List<string> SelectedNotes { get; set; }
         public List<ScaleMatch> Scales;
+        public string InstrumentName { get; set; } = "Unnamed Instrument";
 
         public FretboardWebModel()
         {

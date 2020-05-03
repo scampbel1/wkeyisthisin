@@ -15,6 +15,7 @@ namespace Keyify.Controllers
         public ActionResult Index()
         {
             var model = new FretboardWebModel(16, new CustomStandardGuitarTuning(new Note[] { Note.E, Note.A, Note.D, Note.G }));
+            model.InstrumentName = "Bass";
             
             return View(model);
         }
@@ -23,6 +24,7 @@ namespace Keyify.Controllers
         public ActionResult UpdateFretboardModel(string[] notes, string scale)
         {
             var model = new FretboardWebModel(16, new CustomStandardGuitarTuning(new Note[] { Note.E, Note.A, Note.D, Note.G }));
+            model.InstrumentName = "Bass";
 
             if (notes != null && notes.Length > 0)
             {
