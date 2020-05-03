@@ -35,7 +35,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Helper
                 }
                 catch
                 {
-                    throw new Exception("There was a problem converting string note into Note");
+                    throw new Exception($"There was a problem converting string note into Note: {note}");
                 }
             }
 

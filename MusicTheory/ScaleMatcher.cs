@@ -9,7 +9,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
         {
             var matches = new List<ScaleMatch>();
 
-            foreach (var scaleEntry in ScaleDictionary.GenerateDictionary())
+            foreach (var scaleEntry in ScaleDictionary.GenerateHeptatonicDictionary())
             {
                 if (scaleEntry.Scale.NotesSet.IsSupersetOf(selectedNotes))
                 {

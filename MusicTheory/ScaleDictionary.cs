@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using KeyifyClassLibrary.Core.MusicTheory.Enums;
 using KeyifyClassLibrary.Core.MusicTheory.Helper;
+using static KeyifyClassLibrary.Core.MusicTheory.HeptatonicScaleModeDictionary;
 
 namespace KeyifyClassLibrary.Core.MusicTheory
 {
     public static class ScaleDictionary
     {
-        public static List<ScaleDictionaryEntry> GenerateDictionary()
+        public static List<ScaleDictionaryEntry> GenerateHeptatonicDictionary()
         {
             var dictionary = new List<ScaleDictionaryEntry>();
 
@@ -14,13 +16,13 @@ namespace KeyifyClassLibrary.Core.MusicTheory
             {
                 foreach (var note in EnumValuesConverter.GetNotes())
                 {
-                    dictionary.Add(new ScaleDictionaryEntry(
-                        note + " " + mode,
+                    string scaleLabel = note + " " + mode;
+                    Note realNote = ElementStringConverter.ConvertStringNoteToNoteType(note);
+                    HeptatonicMode realMode = ElementStringConverter.ConvertStringModeNameToModeType(mode);
+                    ScaleDirectoryEntry scaleDirectory = GetScaleDirectory(realMode);
+                    ScaleStep[] scaleSteps = scaleDirectory.ScaleSteps;
 
-                        ScaleNoteGenerator.GenerateNotes(
-                            ElementStringConverter.ConvertStringNoteToNoteType(note),
-                            HeptatonicScaleModeDictionary.GetScaleDirectory(ElementStringConverter.ConvertStringModeNameToModeType(mode))
-                                .ScaleSteps)));
+                    dictionary.Add(new ScaleDictionaryEntry(scaleLabel, ScaleNoteGenerator.GenerateNotes(realNote, scaleSteps)));
                 }
             }
 
@@ -37,9 +39,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                     note = ElementStringConverter.ConvertSharpNoteStringToFlat(note).ToString();
 
             Note realNote = ElementStringConverter.ConvertStringNoteToNoteType(note);
-
-            var realScale = HeptatonicScaleModeDictionary.GetScaleDirectory(ElementStringConverter.ConvertStringModeNameToModeType(mode));
-
+            ScaleDirectoryEntry realScale = HeptatonicScaleModeDictionary.GetScaleDirectory(ElementStringConverter.ConvertStringModeNameToModeType(mode));
             Scale generatedScale = ScaleNoteGenerator.GenerateNotes(realNote, realScale.ScaleSteps);
 
             return new ScaleDictionaryEntry(inputScale, generatedScale);

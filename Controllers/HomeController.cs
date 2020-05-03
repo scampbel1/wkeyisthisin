@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using KeyifyClassLibrary.Core.MusicTheory;
+using KeyifyClassLibrary.Core.MusicTheory.Enums;
 using KeyifyClassLibrary.Core.MusicTheory.Helper;
 using KeyifyWebClient.Core.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -23,8 +24,10 @@ namespace KeyifyWebClient.Core.Controllers
 
             if (notes != null && notes.Length > 0)
             {
+                List<Note> realNotes = ElementStringConverter.ConvertStringArrayIntoNotes(notes);
+
                 model.ApplySelectedNotesToFretboard(notes);
-                model.Scales = ScaleMatcher.GetMatchedScales(ElementStringConverter.ConvertStringArrayIntoNotes(notes));
+                model.Scales = ScaleMatcher.GetMatchedScales(realNotes);
                 model.SelectedNotes = new List<string>(notes);
             }
 
