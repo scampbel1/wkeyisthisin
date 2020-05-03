@@ -1,0 +1,86 @@
+﻿@using KeyifyWebClient.Core.Models
+@model FretboardWebModel
+
+<head>
+    <div id="Fretboard">@Html.Partial("Guitar", Model)</div>
+</head>
+
+<body>
+    <h1>Fretboard</h1>
+    <table class="fretboard">
+        <tr>
+            @for (int count = 0; count < Model.GetFretCount(); count++)
+            {
+                if (count == 0)
+                {
+                    <th class="fretboardHeading"></th>
+                    continue;
+                }
+
+                <th class="fretboardHeading">
+                    @count
+                </th>
+            }
+        </tr>
+
+        @foreach (var instrumentString in Model.Fretboard.InstrumentStrings)
+        {
+            <tr>
+                @foreach (var note in instrumentString.Notes)
+                {
+                    if (Model.SelectedScale != null)
+                    {
+                        if (note.InSelectedScale && note.Selected)
+                        {
+                            <td class="selectedNoteSelectedScale" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleName')">
+                                @note.Note
+                            </td>
+                            continue;
+                        }
+                        else if (note.InSelectedScale && !note.Selected)
+                        {
+                            <td class="noteSelectedScale" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleName')">
+                                @note.Note
+                            </td>
+                            continue;
+                        }
+                    }
+                    if (note.Selected)
+                    {
+                        <td class="selectedNote" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleName')">
+                            @note.Note
+                        </td>
+                        continue;
+                    }
+
+                    <td class="defaultNote" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleName')">
+                        @note.Note
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+
+    <div style="padding-left: 15px">
+        <br />
+        <button onclick="ResetModel()">Reset</button>
+    </div>
+
+    <div class="scaleResults">
+        @if (Model.Scales.Any())
+        {
+            <h2>Matching Keys</h2>
+
+            foreach (var scale in Model.Scales)
+            {
+                if (scale.Selected)
+                {
+                    <span><b><u><a class="scaleResult" onclick="UpdateModel(null, false, '')">@scale.ScaleName&nbsp;</a></u></b></span>
+                    continue;
+                }
+
+                <span><a class="scaleResult" onclick="UpdateModel(null, false, '@scale.ScaleName')">@scale.ScaleName&nbsp;</a></span>
+            }
+        }
+    </div>
+</body>
