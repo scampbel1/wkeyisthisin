@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using KeyifyClassLibrary.Core.MusicTheory.Enums;
 using KeyifyClassLibrary.Core.MusicTheory.Helper;
 
 namespace KeyifyClassLibrary.Core.MusicTheory
@@ -28,10 +29,18 @@ namespace KeyifyClassLibrary.Core.MusicTheory
 
         public static ScaleDictionaryEntry GenerateEntryFromString(string inputScale)
         {
-            Scale generatedScale = ScaleNoteGenerator.GenerateNotes(
-                ElementStringConverter.ConvertStringNoteToNoteType(inputScale[0]),
-                HeptatonicScaleModeDictionary.GetScaleDirectory(ElementStringConverter.ConvertStringModeNameToModeType(inputScale.Substring(2)))
-                .ScaleSteps);
+            string note = inputScale.Substring(0, inputScale.IndexOf(' '));
+            string mode = inputScale.Substring(inputScale.IndexOf(' '), inputScale.Length - (note.Length));
+
+            if (note.Length > 1)
+                if (note[1] == '#')
+                    note = ElementStringConverter.ConvertSharpNoteStringToFlat(note).ToString();
+
+            Note realNote = ElementStringConverter.ConvertStringNoteToNoteType(note);
+
+            var realScale = HeptatonicScaleModeDictionary.GetScaleDirectory(ElementStringConverter.ConvertStringModeNameToModeType(mode));
+
+            Scale generatedScale = ScaleNoteGenerator.GenerateNotes(realNote, realScale.ScaleSteps);
 
             return new ScaleDictionaryEntry(inputScale, generatedScale);
         }
