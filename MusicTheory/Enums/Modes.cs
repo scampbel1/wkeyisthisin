@@ -13,10 +13,6 @@
         MelodicMinor,
         Augmented,
         PentatonicMajor,
-        PentatonicMinor,
-        Blues,
-        WholeTone,
-        WholeHalfDiminished,
-        HalfWholeDiminished
+        PentatonicMinor
     }
 }
