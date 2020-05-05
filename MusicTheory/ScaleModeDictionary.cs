@@ -186,6 +186,62 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                     ScaleStep.W,
                     ScaleStep.Wh
                 }));
+            
+            scaleDictionary.Add(new ScaleDirectoryEntry(
+                Mode.Blues, // WH-W-H-H-WH-W
+                new ScaleStep[]
+                {
+                    ScaleStep.R,
+                    ScaleStep.Wh,
+                    ScaleStep.W,
+                    ScaleStep.h,
+                    ScaleStep.h,
+                    ScaleStep.Wh,
+                    ScaleStep.W
+                }));
+            
+            scaleDictionary.Add(new ScaleDirectoryEntry(
+                Mode.WholeTone, // W-W-W-W-W-W
+                new ScaleStep[]
+                {
+                    ScaleStep.R,
+                    ScaleStep.W,
+                    ScaleStep.W,
+                    ScaleStep.W,
+                    ScaleStep.W,
+                    ScaleStep.W,
+                    ScaleStep.W
+                }));
+            
+            scaleDictionary.Add(new ScaleDirectoryEntry(
+                Mode.WholeHalfDiminished, //  W-H-W-H-W-H-W-H
+                new ScaleStep[]
+                {
+                    ScaleStep.R,
+                    ScaleStep.W,
+                    ScaleStep.h,
+                    ScaleStep.W,
+                    ScaleStep.h,
+                    ScaleStep.W,
+                    ScaleStep.h,
+                    ScaleStep.W,
+                    ScaleStep.h
+                }));
+            
+            scaleDictionary.Add(new ScaleDirectoryEntry(
+                Mode.HalfWholeDiminished, // H-W-H-W-H-W-H-W
+                new ScaleStep[]
+                {
+                    ScaleStep.R,
+                    ScaleStep.h,
+                    ScaleStep.W,
+                    ScaleStep.h,
+                    ScaleStep.W,
+                    ScaleStep.h,
+                    ScaleStep.W,
+                    ScaleStep.h,
+                    ScaleStep.W
+                }));
 
             #endregion
 
