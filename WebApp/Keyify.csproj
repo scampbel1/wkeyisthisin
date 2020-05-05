@@ -5,11 +5,18 @@
     <UserSecretsId>a50ac624-865b-41b6-b124-40c9089050d7</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
+    <StartupObject></StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MusicTheory">
+      <HintPath>..\MusicTheory\obj\Debug\netcoreapp3.1\MusicTheory.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 
