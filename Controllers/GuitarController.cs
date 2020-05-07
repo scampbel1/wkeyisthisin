@@ -10,11 +10,13 @@ namespace Keyify.Controllers
 {
     public class GuitarController : Controller
     {
+        private readonly string _instrument = "Guitar";
+
         [HttpGet]
         public IActionResult Index()
         {
             var model = new FretboardWebModel();
-            model.InstrumentName = "Guitar";
+            model.InstrumentName = _instrument;
 
             return View(model);
         }
@@ -23,7 +25,7 @@ namespace Keyify.Controllers
         public ActionResult UpdateFretboardModel(string[] notes, string scale)
         {
             FretboardWebModel model = new FretboardWebModel();
-            model.InstrumentName = "Guitar";
+            model.InstrumentName = _instrument;
 
             if (notes != null && notes.Length > 0)
             {
