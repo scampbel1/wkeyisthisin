@@ -27,14 +27,15 @@ namespace Keyify.Controllers
             FretboardWebModel model = new FretboardWebModel();
             model.InstrumentName = _instrument;
 
-            if (notes != null && notes.Length > 0)
-            {
-                List<Note> realNotes = ElementStringConverter.ConvertStringArrayIntoNotes(notes);
+            if (notes == null || notes.Length < 1)
+                return PartialView("Fretboard", model);
 
-                model.ApplySelectedNotesToFretboard(notes);
-                model.Scales = ScaleMatcher.GetMatchedScales(realNotes);
-                model.SelectedNotes = new List<string>(notes);
-            }
+            List<Note> realNotes = ElementStringConverter.ConvertStringArrayIntoNotes(notes);
+
+            model.ApplySelectedNotesToFretboard(notes);
+            model.Scales = ScaleMatcher.GetMatchedScales(realNotes);
+            model.SelectedNotes = new List<string>(notes);
+
 
             if (!string.IsNullOrEmpty(scale))
             {
@@ -60,6 +61,6 @@ namespace Keyify.Controllers
             model.Scales = model.Scales.OrderBy(a => a.ScaleName).ToList();
 
             return PartialView("Fretboard", model);
-        }        
+        }
     }
 }
