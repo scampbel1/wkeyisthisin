@@ -13,11 +13,8 @@ namespace Keyify.Business_Logic
         public static void FindScales(FretboardWebModel model, string scale, string[] notes, IScaleDictionaryService dictionaryService)
         {
             List<Note> realNotes = ElementStringConverter.ConvertStringArrayIntoNotes(notes);
-
-            //TODO: Part A - Merge into Part B
-            model.ApplySelectedNotesToFretboard(notes);
             model.Scales = ScaleMatcher.GetMatchedScales(realNotes, dictionaryService);
-            model.SelectedNotes = new List<string>(notes);            
+            model.SelectedNotes = new List<string>(notes);
 
             if (!string.IsNullOrEmpty(scale))
             {
@@ -34,12 +31,11 @@ namespace Keyify.Business_Logic
                     model.Scales.Remove(update);
                     model.Scales.Add(selected);
                 }
-
-                //TODO: Part B - Merge into Part A
-                model.ApplySelectedScaleNotesToFretboard(model.SelectedScale.Scale.NotesSet);
             }
             else
                 model.SelectedScale = null;
+
+            model.ApplySelectedNotesToFretboard(realNotes, model.SelectedScale?.Scale.NotesSet);
 
             model.Scales = model.Scales.OrderBy(a => a.ScaleName).ToList();
         }

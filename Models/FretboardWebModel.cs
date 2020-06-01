@@ -47,32 +47,24 @@ namespace KeyifyWebClient.Core.Models
             return Fretboard.FretCount;
         }
 
-        public void ApplySelectedNotesToFretboard(string[] selectedNotes)
+        public void ApplySelectedNotesToFretboard(List<Note> selectedNotes, HashSet<Note> scaleNotes)
         {
-            HashSet<Note> SelectedNotes = new HashSet<Note>(ElementStringConverter.ConvertStringArrayIntoNotes(selectedNotes));
-
             foreach(InstrumentString guitarString in Fretboard.InstrumentStrings)
             {
                 foreach(FretboardNote fretboardNote in guitarString.Notes)
                 {
-                    if (SelectedNotes.Contains(fretboardNote.Note))
+                    if (selectedNotes.Contains(fretboardNote.Note))
                         fretboardNote.Selected = true;
                     else
                         fretboardNote.Selected = false;
-                }
-            }
-        }
-
-        public void ApplySelectedScaleNotesToFretboard(HashSet<Note> scaleNotes)
-        {
-            foreach (InstrumentString guitarString in Fretboard.InstrumentStrings)
-            {
-                foreach (FretboardNote fretboardNote in guitarString.Notes)
-                {
-                    if (scaleNotes.Contains(fretboardNote.Note))
-                        fretboardNote.InSelectedScale = true;
-                    else
-                        fretboardNote.InSelectedScale = false;
+                    
+                    if (scaleNotes != null)
+                    {
+                        if (scaleNotes.Contains(fretboardNote.Note))
+                            fretboardNote.InSelectedScale = true;
+                        else
+                            fretboardNote.InSelectedScale = false;
+                    }
                 }
             }
         }
