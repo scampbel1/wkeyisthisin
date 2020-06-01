@@ -5,10 +5,11 @@ namespace KeyifyClassLibrary.Core.MusicTheory
 {
     public static class ScaleMatcher
     {
+        //TODO: This should be created as a service rather than created each time
         public static List<ScaleMatch> GetMatchedScales(IEnumerable<Note> selectedNotes)
         {
             var matches = new List<ScaleMatch>();
-
+            
             foreach (var scaleEntry in ScaleDictionary.GenerateDictionary())
             {
                 if (scaleEntry.Scale.NotesSet.IsSupersetOf(selectedNotes))

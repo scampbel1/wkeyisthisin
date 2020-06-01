@@ -22,7 +22,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                     ScaleDirectoryEntry scaleDirectory = GetScaleDirectory(realMode);
                     ScaleStep[] scaleSteps = scaleDirectory.ScaleSteps;
 
-                    dictionary.Add(new ScaleDictionaryEntry(scaleLabel, ScaleNoteGenerator.GenerateNotes(realNote, scaleSteps)));
+                    dictionary.Add(new ScaleDictionaryEntry(scaleLabel, ScaleNoteGenerator.GenerateScaleFromKey(realNote, scaleSteps)));
                 }
             }
 
@@ -40,7 +40,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
 
             Note realNote = ElementStringConverter.ConvertStringNoteToNoteType(note);
             ScaleDirectoryEntry realScale = GetScaleDirectory(ElementStringConverter.ConvertStringModeNameToModeType(mode));
-            Scale generatedScale = ScaleNoteGenerator.GenerateNotes(realNote, realScale.ScaleSteps);
+            Scale generatedScale = ScaleNoteGenerator.GenerateScaleFromKey(realNote, realScale.ScaleSteps);
 
             return new ScaleDictionaryEntry(inputScale, generatedScale);
         }

@@ -4,7 +4,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
 {
     public static class ScaleNoteGenerator
     {
-        public static Scale GenerateNotes(Note key, ScaleStep[] scaleSteps)
+        public static Scale GenerateScaleFromKey(Note key, ScaleStep[] scaleSteps)
         {
             var scale = new Scale(key);
             var noteNumber = (int)key;

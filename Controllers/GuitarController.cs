@@ -1,10 +1,6 @@
-﻿using KeyifyClassLibrary.Core.MusicTheory;
-using KeyifyClassLibrary.Core.MusicTheory.Enums;
-using KeyifyClassLibrary.Core.MusicTheory.Helper;
+﻿using Keyify.Business_Logic;
 using KeyifyWebClient.Core.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Keyify.Controllers
 {
@@ -18,6 +14,8 @@ namespace Keyify.Controllers
             var model = new FretboardWebModel();
             model.InstrumentName = _instrument;
 
+            var test = HttpContext;
+
             return View(model);
         }
 
@@ -30,38 +28,7 @@ namespace Keyify.Controllers
             if (notes == null || notes.Length < 1)
                 return PartialView("Fretboard", model);
 
-            //TODO: move all of this boilerplate code out into its own class
-            //      too much going on in the controller method
-
-            List<Note> realNotes = ElementStringConverter.ConvertStringArrayIntoNotes(notes);
-
-            model.ApplySelectedNotesToFretboard(notes);
-            model.Scales = ScaleMatcher.GetMatchedScales(realNotes);
-            model.SelectedNotes = new List<string>(notes);
-
-
-            if (!string.IsNullOrEmpty(scale))
-            {
-                model.SelectedScale = ScaleDictionary.GenerateEntryFromString(scale);
-
-                var selected = new ScaleMatch(model.SelectedScale.ScaleName, model.SelectedScale.Scale.Notes);
-                selected.Selected = true;
-
-                if (!model.Scales.Any(a => a.ScaleName == selected.ScaleName))
-                    model.Scales.Add(selected);
-                else
-                {
-                    var update = model.Scales.Single(a => a.ScaleName == selected.ScaleName);
-                    model.Scales.Remove(update);
-                    model.Scales.Add(selected);
-                }
-
-                model.ApplySelectedScaleNotesToFretboard(model.SelectedScale.Scale.NotesSet);
-            }
-            else
-                model.SelectedScale = null;
-
-            model.Scales = model.Scales.OrderBy(a => a.ScaleName).ToList();
+            FretboardFunctions.FindScales(model, scale, notes);
 
             return PartialView("Fretboard", model);
         }
