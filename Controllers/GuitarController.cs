@@ -30,6 +30,9 @@ namespace Keyify.Controllers
             if (notes == null || notes.Length < 1)
                 return PartialView("Fretboard", model);
 
+            //TODO: move all of this boilerplate code out into its own class
+            //      too much going on in the controller method
+
             List<Note> realNotes = ElementStringConverter.ConvertStringArrayIntoNotes(notes);
 
             model.ApplySelectedNotesToFretboard(notes);
