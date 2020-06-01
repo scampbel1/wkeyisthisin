@@ -1,4 +1,5 @@
-﻿using KeyifyClassLibrary.Core.MusicTheory;
+﻿using Keyify.Models;
+using KeyifyClassLibrary.Core.MusicTheory;
 using KeyifyClassLibrary.Core.MusicTheory.Enums;
 using KeyifyClassLibrary.Core.MusicTheory.Helper;
 using KeyifyWebClient.Core.Models;
@@ -9,14 +10,13 @@ namespace Keyify.Business_Logic
 {
     public static class FretboardFunctions
     {
-        public static void FindScales(FretboardWebModel model, string scale, string[] notes)
+        public static void FindScales(FretboardWebModel model, string scale, string[] notes, IScaleDictionaryService dictionaryService)
         {
             List<Note> realNotes = ElementStringConverter.ConvertStringArrayIntoNotes(notes);
 
             model.ApplySelectedNotesToFretboard(notes);
             model.Scales = ScaleMatcher.GetMatchedScales(realNotes);
-            model.SelectedNotes = new List<string>(notes);
-
+            model.SelectedNotes = new List<string>(notes);            
 
             if (!string.IsNullOrEmpty(scale))
             {

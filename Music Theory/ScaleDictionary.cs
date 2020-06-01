@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using KeyifyClassLibrary.Core.MusicTheory.Enums;
 using KeyifyClassLibrary.Core.MusicTheory.Helper;
 using static KeyifyClassLibrary.Core.MusicTheory.ScaleModeDictionary;

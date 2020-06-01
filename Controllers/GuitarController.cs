@@ -1,4 +1,5 @@
 ﻿using Keyify.Business_Logic;
+using Keyify.Models;
 using KeyifyWebClient.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,13 +9,18 @@ namespace Keyify.Controllers
     {
         private readonly string _instrument = "Guitar";
 
+        private IScaleDictionaryService _dictionaryService;
+
+        public GuitarController(IScaleDictionaryService dictionary)
+        {
+            _dictionaryService = dictionary;
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
             var model = new FretboardWebModel();
             model.InstrumentName = _instrument;
-
-            var test = HttpContext;
 
             return View(model);
         }
@@ -28,7 +34,7 @@ namespace Keyify.Controllers
             if (notes == null || notes.Length < 1)
                 return PartialView("Fretboard", model);
 
-            FretboardFunctions.FindScales(model, scale, notes);
+            FretboardFunctions.FindScales(model, scale, notes, _dictionaryService);
 
             return PartialView("Fretboard", model);
         }

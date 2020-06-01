@@ -30,7 +30,7 @@ namespace Keyify.Controllers
             if (notes == null || notes.Length < 1)
                 return PartialView("Fretboard", model);
 
-            FretboardFunctions.FindScales(model, scale, notes);
+            FretboardFunctions.FindScales(model, scale, notes, null);
 
             return PartialView("Fretboard", model);
         }
