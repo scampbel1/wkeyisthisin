@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Keyify.Business_Logic;
+﻿using Keyify.Business_Logic;
 using Keyify.Models;
-using KeyifyClassLibrary.Core.MusicTheory;
 using KeyifyClassLibrary.Core.MusicTheory.Enums;
-using KeyifyClassLibrary.Core.MusicTheory.Helper;
 using KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar;
 using KeyifyWebClient.Core.Models;
 using Microsoft.AspNetCore.Mvc;
