@@ -1,4 +1,5 @@
 ﻿using Keyify.Business_Logic;
+using Keyify.Models;
 using KeyifyClassLibrary.Core.MusicTheory.Enums;
 using KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar;
 using KeyifyWebClient.Core.Models;
@@ -11,6 +12,13 @@ namespace Keyify.Controllers
         private readonly int _fretCount = 21;
         private readonly Note[] _tuning = new Note[] { Note.E, Note.A, Note.D, Note.G };
         private readonly string _instrument = "Bass";
+
+        private IScaleDictionaryService _dictionaryService;
+
+        public BassController(IScaleDictionaryService dictionary)
+        {
+            _dictionaryService = dictionary;
+        }
 
         [HttpGet]
         public ActionResult Index()
@@ -30,7 +38,7 @@ namespace Keyify.Controllers
             if (notes == null || notes.Length < 1)
                 return PartialView("Fretboard", model);
 
-            FretboardFunctions.FindScales(model, scale, notes, null);
+            FretboardFunctions.FindScales(model, scale, notes, _dictionaryService);
 
             return PartialView("Fretboard", model);
         }

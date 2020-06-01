@@ -20,7 +20,7 @@ namespace Keyify
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddTransient(typeof(IScaleDictionaryService), typeof(ScaleDictionaryService));
+            services.AddSingleton(typeof(IScaleDictionaryService), typeof(ScaleDictionaryService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
