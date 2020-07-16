@@ -1,27 +1,41 @@
-﻿using System;
+﻿using KeyifyClassLibrary.Core.MusicTheory.Enums;
+using System;
 using System.Collections.Generic;
-using KeyifyClassLibrary.Core.MusicTheory.Enums;
 
 namespace KeyifyClassLibrary.Core.MusicTheory.Helper
 {
-    public static class ElementStringConverter
+    public static class NoteHelper
     {
+        private static bool IsSharpOrFlat(Note note)
+        {
+            switch (note)
+            {
+                case Note.Ab:
+                    return true;
+                case Note.Bb:
+                    return true;
+                case Note.Eb:
+                    return true;
+                case Note.Db:
+                    return true;
+                case Note.Gb:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
         public static Note ConvertStringNoteToNoteType(string note)
         {
-            return (Note) Enum.Parse(typeof(Note), note, true);
+            return (Note)Enum.Parse(typeof(Note), note, true);
         }
 
         public static Note ConvertStringNoteToNoteType(char note)
         {
-            return (Note) Enum.Parse(typeof(Note), note.ToString(), true);
+            return (Note)Enum.Parse(typeof(Note), note.ToString(), true);
         }
 
-        public static Mode ConvertStringModeNameToModeType(string mode)
-        {
-            return (Mode) Enum.Parse(typeof(Mode), mode, true);
-        }
-
-        public static List<Note> ConvertStringArrayIntoNotes(string[] notes)
+        public static List<Note> ConvertNoteStringArrayIntoNotes(string[] notes)
         {
             List<Note> convertedNotes = new List<Note>(notes.Length);
 
@@ -30,7 +44,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Helper
                 try
                 {
                     convertedNotes.Add(note.Contains("#")
-                        ? ConvertSharpNoteStringToFlat(note)
+                        ? ConvertSharpNoteStringToFlatNote(note)
                         : ConvertStringNoteToNoteType(note));
                 }
                 catch
@@ -42,7 +56,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Helper
             return convertedNotes;
         }
 
-        public static Note ConvertSharpNoteStringToFlat(string note)
+        public static Note ConvertSharpNoteStringToFlatNote(string note)
         {
             if (note.Length != 2) return ConvertStringNoteToNoteType(note);
 
@@ -53,9 +67,9 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Helper
             {
                 Note convertedNote = ConvertStringNoteToNoteType(note[0]);
 
-                if ((int) convertedNote >= EnumValuesConverter.GetNotes().Count)
+                if ((int)convertedNote >= EnumHelper.GetAllNoteNames().Count)
                 {
-                    convertedNote = (Note) 0;
+                    convertedNote = (Note)0;
                 }
                 else
                 {
@@ -70,7 +84,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Helper
             }
         }
 
-        public static Note ConvertFlatNoteStringToFlat(string note)
+        public static Note ConvertFlatNoteStringToFlatNote(string note)
         {
             if (note.Length != 2) return ConvertStringNoteToNoteType(note);
 
@@ -81,9 +95,9 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Helper
             {
                 Note convertedNote = ConvertStringNoteToNoteType(note[0]);
 
-                if ((int) convertedNote >= EnumValuesConverter.GetNotes().Count)
+                if ((int)convertedNote >= EnumHelper.GetAllNoteNames().Count)
                 {
-                    convertedNote = (Note) 0;
+                    convertedNote = (Note)0;
                 }
                 else
                 {
@@ -105,9 +119,9 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Helper
             {
                 Note convertedNote = ConvertStringNoteToNoteType(note[0]);
 
-                if ((int) convertedNote >= EnumValuesConverter.GetNotes().Count)
+                if ((int)convertedNote >= EnumHelper.GetAllNoteNames().Count)
                 {
-                    convertedNote = (Note) 0;
+                    convertedNote = (Note)0;
                 }
                 else
                 {
@@ -124,7 +138,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Helper
 
         public static string ConvertNoteToStringEquivalent(Note note, bool convertFlatNotes = false)
         {
-            if (!IsNoteSharpOrFlat(note))
+            if (!IsSharpOrFlat(note))
                 return note.ToString();
 
             try
@@ -139,25 +153,6 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Helper
             catch
             {
                 throw new Exception("Conversion went wrong");
-            }
-        }
-
-        private static bool IsNoteSharpOrFlat(Note note)
-        {
-            switch (note)
-            {
-                case Note.Ab:
-                    return true;
-                case Note.Bb:
-                    return true;
-                case Note.Eb:
-                    return true;
-                case Note.Db:
-                    return true;
-                case Note.Gb:
-                    return true;
-                default:    
-                    return false;
             }
         }
     }

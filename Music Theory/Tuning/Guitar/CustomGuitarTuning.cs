@@ -1,7 +1,7 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using KeyifyClassLibrary.Core.MusicTheory.Enums;
+﻿using KeyifyClassLibrary.Core.MusicTheory.Enums;
 using KeyifyClassLibrary.Core.MusicTheory.Helper;
+using System;
+using System.Text.RegularExpressions;
 
 namespace KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar
 {
@@ -11,7 +11,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar
 
         public CustomStandardGuitarTuning(Note[] inputNotes)
         {
-            _notes = inputNotes; 
+            _notes = inputNotes;
         }
 
         public CustomStandardGuitarTuning(string inputNotes)
@@ -34,7 +34,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar
         {
             var notes = new Note[input.Length];
 
-            if(!ValidateMusicalNotes(input))
+            if (!ValidateMusicalNotes(input))
                 throw new ArgumentException("Invalid string input. Unable to convert to note.");
 
             var count = 0;
@@ -43,7 +43,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar
             {
                 try
                 {
-                    notes[count] = ElementStringConverter
+                    notes[count] = NoteHelper
                         .ConvertStringNoteToNoteType(note);
 
                     count++;

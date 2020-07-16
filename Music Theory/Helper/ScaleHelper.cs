@@ -1,8 +1,8 @@
 ﻿using KeyifyClassLibrary.Core.MusicTheory.Enums;
 
-namespace KeyifyClassLibrary.Core.MusicTheory
+namespace KeyifyClassLibrary.Core.MusicTheory.Helper
 {
-    public static class ScaleNoteGenerator
+    public static class ScaleHelper
     {
         public static Scale GenerateScaleFromKey(Note key, ScaleStep[] scaleSteps)
         {

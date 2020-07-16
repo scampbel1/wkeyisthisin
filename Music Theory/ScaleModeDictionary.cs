@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using KeyifyClassLibrary.Core.MusicTheory.Enums;
+using System.Collections.Generic;
 using System.Linq;
-using KeyifyClassLibrary.Core.MusicTheory.Enums;
 
 namespace KeyifyClassLibrary.Core.MusicTheory
 {
@@ -186,7 +186,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                     ScaleStep.W,
                     ScaleStep.Wh
                 }));
-            
+
             scaleDictionary.Add(new ScaleDirectoryEntry(
                 Mode.Blues, // WH-W-H-H-WH-W
                 new ScaleStep[]
@@ -199,7 +199,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                     ScaleStep.Wh,
                     ScaleStep.W
                 }));
-            
+
             scaleDictionary.Add(new ScaleDirectoryEntry(
                 Mode.WholeTone, // W-W-W-W-W-W
                 new ScaleStep[]
@@ -212,7 +212,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                     ScaleStep.W,
                     ScaleStep.W
                 }));
-            
+
             scaleDictionary.Add(new ScaleDirectoryEntry(
                 Mode.WholeHalfDiminished, //  W-H-W-H-W-H-W-H
                 new ScaleStep[]
@@ -227,7 +227,7 @@ namespace KeyifyClassLibrary.Core.MusicTheory
                     ScaleStep.W,
                     ScaleStep.h
                 }));
-            
+
             scaleDictionary.Add(new ScaleDirectoryEntry(
                 Mode.HalfWholeDiminished, // H-W-H-W-H-W-H-W
                 new ScaleStep[]

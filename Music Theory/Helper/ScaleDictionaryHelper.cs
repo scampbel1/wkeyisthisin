@@ -1,27 +1,30 @@
 ﻿using System.Collections.Generic;
+using Keyify.Music_Theory.Helper;
 using KeyifyClassLibrary.Core.MusicTheory.Enums;
-using KeyifyClassLibrary.Core.MusicTheory.Helper;
 using static KeyifyClassLibrary.Core.MusicTheory.ScaleModeDictionary;
 
-namespace KeyifyClassLibrary.Core.MusicTheory
+namespace KeyifyClassLibrary.Core.MusicTheory.Helper
 {
-    public static class ScaleDictionary
+    public static class ScaleDictionaryHelper
     {
         public static List<ScaleDictionaryEntry> GenerateDictionary()
         {
             var dictionary = new List<ScaleDictionaryEntry>();
 
-            foreach (var mode in EnumValuesConverter.GetModes())
+            foreach (var mode in EnumHelper.GetAllModeNames())
             {
-                foreach (var note in EnumValuesConverter.GetNotes())
+                foreach (var note in EnumHelper.GetAllNoteNames())
                 {
                     string scaleLabel = note + " " + mode;
-                    Note realNote = ElementStringConverter.ConvertStringNoteToNoteType(note);
-                    Mode realMode = ElementStringConverter.ConvertStringModeNameToModeType(mode);
+
+                    Note realNote = NoteHelper.ConvertStringNoteToNoteType(note);
+                    Mode realMode = ModeHelper.ConvertStringModeNameToModeType(mode);
+
                     ScaleDirectoryEntry scaleDirectory = GetScaleDirectory(realMode);
+
                     ScaleStep[] scaleSteps = scaleDirectory.ScaleSteps;
 
-                    dictionary.Add(new ScaleDictionaryEntry(scaleLabel, ScaleNoteGenerator.GenerateScaleFromKey(realNote, scaleSteps)));
+                    dictionary.Add(new ScaleDictionaryEntry(scaleLabel, ScaleHelper.GenerateScaleFromKey(realNote, scaleSteps)));
                 }
             }
 
@@ -35,11 +38,11 @@ namespace KeyifyClassLibrary.Core.MusicTheory
 
             if (note.Length > 1)
                 if (note[1] == '#')
-                    note = ElementStringConverter.ConvertSharpNoteStringToFlat(note).ToString();
+                    note = NoteHelper.ConvertSharpNoteStringToFlatNote(note).ToString();
 
-            Note realNote = ElementStringConverter.ConvertStringNoteToNoteType(note);
-            ScaleDirectoryEntry realScale = GetScaleDirectory(ElementStringConverter.ConvertStringModeNameToModeType(mode));
-            Scale generatedScale = ScaleNoteGenerator.GenerateScaleFromKey(realNote, realScale.ScaleSteps);
+            Note realNote = NoteHelper.ConvertStringNoteToNoteType(note);
+            ScaleDirectoryEntry realScale = GetScaleDirectory(ModeHelper.ConvertStringModeNameToModeType(mode));
+            Scale generatedScale = ScaleHelper.GenerateScaleFromKey(realNote, realScale.ScaleSteps);
 
             return new ScaleDictionaryEntry(inputScale, generatedScale);
         }

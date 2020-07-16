@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using KeyifyClassLibrary.Core.MusicTheory.Enums;
+﻿using KeyifyClassLibrary.Core.MusicTheory.Enums;
+using System.Collections.Generic;
 
 namespace KeyifyClassLibrary.Core.MusicTheory
 {

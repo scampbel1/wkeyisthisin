@@ -1,5 +1,5 @@
 ﻿using KeyifyClassLibrary.Core.MusicTheory;
-using System;
+using KeyifyClassLibrary.Core.MusicTheory.Helper;
 using System.Collections.Generic;
 
 namespace Keyify.Models
@@ -10,7 +10,7 @@ namespace Keyify.Models
 
         public ScaleDictionaryService()
         {
-            _scaleDictionary = ScaleDictionary.GenerateDictionary();
+            _scaleDictionary = ScaleDictionaryHelper.GenerateDictionary();
         }
 
         public List<ScaleDictionaryEntry> GetDictionary()

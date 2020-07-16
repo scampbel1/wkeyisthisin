@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using KeyifyClassLibrary.Core.MusicTheory;
+﻿using KeyifyClassLibrary.Core.MusicTheory;
 using KeyifyClassLibrary.Core.MusicTheory.Enums;
 using KeyifyClassLibrary.Core.MusicTheory.Tuning;
 using KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar;
+using System.Collections.Generic;
 
 namespace KeyifyWebClient.Core.Models
 {
@@ -35,15 +35,15 @@ namespace KeyifyWebClient.Core.Models
 
         public void ApplySelectedNotesToFretboard(List<Note> selectedNotes, HashSet<Note> scaleNotes)
         {
-            foreach(InstrumentString guitarString in Fretboard.InstrumentStrings)
+            foreach (InstrumentString guitarString in Fretboard.InstrumentStrings)
             {
-                foreach(FretboardNote fretboardNote in guitarString.Notes)
+                foreach (FretboardNote fretboardNote in guitarString.Notes)
                 {
                     if (selectedNotes.Contains(fretboardNote.Note))
                         fretboardNote.Selected = true;
                     else
                         fretboardNote.Selected = false;
-                    
+
                     if (scaleNotes != null)
                     {
                         if (scaleNotes.Contains(fretboardNote.Note))

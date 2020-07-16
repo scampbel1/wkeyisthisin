@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Keyify.Models;
+﻿using Keyify.Models;
 using KeyifyClassLibrary.Core.MusicTheory.Enums;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace KeyifyClassLibrary.Core.MusicTheory
+namespace KeyifyClassLibrary.Core.MusicTheory.Helper
 {
-    public static class ScaleMatcher
+    public static class ScaleMatchHelper
     {
         public static List<ScaleMatch> GetMatchedScales(IEnumerable<Note> selectedNotes, IScaleDictionaryService dictionary)
         {

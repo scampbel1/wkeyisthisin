@@ -26,7 +26,7 @@ namespace KeyifyWebClient.Core.Models
                 stringNoteIndex++;
                 count++;
 
-                if (stringNoteIndex >= EnumValuesConverter.GetNotes().Count)
+                if (stringNoteIndex >= EnumHelper.GetAllNoteNames().Count)
                 {
                     stringNoteIndex = 0;
                 }
