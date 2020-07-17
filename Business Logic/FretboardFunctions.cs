@@ -13,9 +13,10 @@ namespace Keyify.Business_Logic
         public static void FindScales(FretboardWebModel model, string scale, string[] notes, IScaleDictionaryService dictionaryService)
         {
             List<Note> realNotes = NoteHelper.ConvertNoteStringArrayIntoNotes(notes);
-            
-            model.Scales = ScaleMatchHelper.GetMatchedScales(realNotes, dictionaryService);
             model.SelectedNotes = new List<string>(notes);
+
+            if (model.SelectedNotes.Count > 1)
+                model.Scales = ScaleMatchHelper.GetMatchedScales(realNotes, dictionaryService);
 
             if (!string.IsNullOrEmpty(scale))
             {
