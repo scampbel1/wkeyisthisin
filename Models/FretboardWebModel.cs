@@ -1,8 +1,8 @@
-﻿using KeyifyClassLibrary.Core.Domain;
+﻿using System.Collections.Generic;
+using KeyifyClassLibrary.Core.Domain;
 using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Tuning;
 using KeyifyClassLibrary.Core.Domain.Tuning.Guitar;
-using System.Collections.Generic;
 
 namespace KeyifyWebClient.Core.Models
 {

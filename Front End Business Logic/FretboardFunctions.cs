@@ -6,7 +6,7 @@ using KeyifyClassLibrary.Core.Domain;
 using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Helper;
 
-namespace Keyify.Business_Logic
+namespace Keyify.Frontend_BuisnessLogic
 {
     public static class FretboardFunctions
     {
