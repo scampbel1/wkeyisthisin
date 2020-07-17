@@ -24,11 +24,11 @@ namespace Keyify.Business_Logic
                 ScaleMatch selected = new ScaleMatch(model.SelectedScale.ScaleName, model.SelectedScale.Scale.Notes);
                 selected.Selected = true;
 
-                if (!model.Scales.Any(a => a.ScaleName == selected.ScaleName))
+                if (!model.Scales.Any(a => a.ScaleLabel == selected.ScaleLabel))
                     model.Scales.Add(selected);
                 else
                 {
-                    ScaleMatch update = model.Scales.Single(a => a.ScaleName == selected.ScaleName);
+                    ScaleMatch update = model.Scales.Single(a => a.ScaleLabel == selected.ScaleLabel);
 
                     model.Scales.Remove(update);
                     model.Scales.Add(selected);
@@ -39,7 +39,7 @@ namespace Keyify.Business_Logic
 
             model.ApplySelectedNotesToFretboard(realNotes, model.SelectedScale?.Scale.NotesSet);
 
-            model.Scales = model.Scales.OrderBy(a => a.ScaleName).ToList();
+            model.Scales = model.Scales.OrderBy(a => a.ScaleLabel).ToList();
         }
     }
 }

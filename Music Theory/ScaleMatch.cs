@@ -1,34 +1,23 @@
-﻿using KeyifyClassLibrary.Core.MusicTheory.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using KeyifyClassLibrary.Core.MusicTheory.Enums;
+using KeyifyClassLibrary.Core.MusicTheory.Helper;
 
 namespace KeyifyClassLibrary.Core.MusicTheory
 {
     public class ScaleMatch
     {
-        public string ScaleName { get; set; }
-        public List<Note> Scale { get; private set; }
+        public readonly string ScaleLabel;
+        public readonly string UserReadableLabel;
+
+        public readonly List<Note> Scale;
+
         public bool Selected { get; set; }
 
-        public ScaleMatch()
+        public ScaleMatch(string scaleName, List<Note> notes)
         {
-            Scale = new List<Note>();
-        }
-
-        public ScaleMatch(string scaleName, List<Note> notes) : this()
-        {
-            ScaleName = scaleName;
+            ScaleLabel = scaleName;
+            UserReadableLabel = ScaleMatchHelper.GetUserFriendlyLabel(ScaleLabel);
             Scale = notes;
-        }
-
-        public ScaleMatch(string scaleName, Note note) : this()
-        {
-            ScaleName = scaleName;
-            Scale.Add(note);
-        }
-
-        public void AddNote(Note note)
-        {
-            Scale.Add(note);
         }
     }
 }

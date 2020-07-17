@@ -33,6 +33,8 @@ namespace KeyifyClassLibrary.Core.MusicTheory.Helper
 
         public static ScaleDictionaryEntry GenerateEntryFromString(string inputScale)
         {
+            inputScale = ScaleMatchHelper.ConvertUserFriendlyLabelIntoLabel(inputScale);
+
             string note = inputScale.Substring(0, inputScale.IndexOf(' '));
             string mode = inputScale.Substring(inputScale.IndexOf(' '), inputScale.Length - (note.Length));
 
