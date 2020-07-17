@@ -1,10 +1,10 @@
-﻿using KeyifyClassLibrary.Core.MusicTheory.Enums;
+﻿using KeyifyClassLibrary.Core.Domain.Enums;
 
-namespace KeyifyClassLibrary.Core.MusicTheory.Helper
+namespace KeyifyClassLibrary.Core.Domain.Helper
 {
     public static class ScaleHelper
     {
-        public static Scale GenerateScaleFromKey(Note key, ScaleStep[] scaleSteps)
+        public static Scale GenerateScaleFromKey(Note key, Step[] scaleSteps)
         {
             var scale = new Scale(key);
             var noteNumber = (int)key;

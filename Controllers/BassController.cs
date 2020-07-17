@@ -1,7 +1,7 @@
 ﻿using Keyify.Business_Logic;
 using Keyify.Models;
-using KeyifyClassLibrary.Core.MusicTheory.Enums;
-using KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar;
+using KeyifyClassLibrary.Core.Domain.Enums;
+using KeyifyClassLibrary.Core.Domain.Tuning.Guitar;
 using KeyifyWebClient.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 

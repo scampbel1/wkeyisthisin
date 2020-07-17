@@ -1,6 +1,6 @@
-﻿using KeyifyClassLibrary.Core.MusicTheory.Enums;
+﻿using KeyifyClassLibrary.Core.Domain.Enums;
 
-namespace KeyifyClassLibrary.Core.MusicTheory.Tuning
+namespace KeyifyClassLibrary.Core.Domain.Tuning
 {
     public interface ITuning
     {

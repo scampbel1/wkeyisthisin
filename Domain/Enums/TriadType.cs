@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace KeyifyClassLibrary.Core.MusicTheory.Enums
+namespace KeyifyClassLibrary.Core.Domain.Enums
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public enum TriadType

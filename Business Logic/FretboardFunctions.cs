@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Keyify.Models;
 using KeyifyWebClient.Core.Models;
-using KeyifyClassLibrary.Core.MusicTheory;
-using KeyifyClassLibrary.Core.MusicTheory.Enums;
-using KeyifyClassLibrary.Core.MusicTheory.Helper;
+using KeyifyClassLibrary.Core.Domain;
+using KeyifyClassLibrary.Core.Domain.Enums;
+using KeyifyClassLibrary.Core.Domain.Helper;
 
 namespace Keyify.Business_Logic
 {
@@ -16,23 +16,21 @@ namespace Keyify.Business_Logic
             model.SelectedNotes = new List<string>(notes);
 
             if (model.SelectedNotes.Count > 1)
-                model.Scales = ScaleMatchHelper.GetMatchedScales(realNotes, dictionaryService);
+                model.Scales = ScaleDictionaryHelper.GetMatchedScales(realNotes, dictionaryService);
 
             if (!string.IsNullOrEmpty(scale))
             {
                 model.SelectedScale = ScaleDictionaryHelper.GenerateEntryFromString(scale);
+                model.SelectedScale.Selected = true;
 
-                ScaleMatch selected = new ScaleMatch(model.SelectedScale.ScaleName, model.SelectedScale.Scale.Notes);
-                selected.Selected = true;
-
-                if (!model.Scales.Any(a => a.ScaleLabel == selected.ScaleLabel))
-                    model.Scales.Add(selected);
+                if (!model.Scales.Any(a => a.ScaleLabel == model.SelectedScale.ScaleLabel))
+                    model.Scales.Add(model.SelectedScale);
                 else
                 {
-                    ScaleMatch update = model.Scales.Single(a => a.ScaleLabel == selected.ScaleLabel);
+                    ScaleDictionaryEntry update = model.Scales.Single(a => a.ScaleLabel == model.SelectedScale.ScaleLabel);
 
                     model.Scales.Remove(update);
-                    model.Scales.Add(selected);
+                    model.Scales.Add(model.SelectedScale);
                 }
             }
             else

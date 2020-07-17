@@ -1,9 +1,9 @@
-﻿using KeyifyClassLibrary.Core.MusicTheory.Enums;
+﻿using KeyifyClassLibrary.Core.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace KeyifyClassLibrary.Core.MusicTheory.Helper
+namespace KeyifyClassLibrary.Core.Domain.Helper
 {
     public static class EnumHelper
     {

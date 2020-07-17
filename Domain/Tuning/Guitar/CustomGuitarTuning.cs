@@ -1,9 +1,9 @@
-﻿using KeyifyClassLibrary.Core.MusicTheory.Enums;
-using KeyifyClassLibrary.Core.MusicTheory.Helper;
-using System;
+﻿using System;
 using System.Text.RegularExpressions;
+using KeyifyClassLibrary.Core.Domain.Enums;
+using KeyifyClassLibrary.Core.Domain.Helper;
 
-namespace KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar
+namespace KeyifyClassLibrary.Core.Domain.Tuning.Guitar
 {
     public class CustomStandardGuitarTuning : StandardGuitarTuning
     {

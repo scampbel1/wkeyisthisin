@@ -1,4 +1,4 @@
-﻿using KeyifyClassLibrary.Core.MusicTheory.Enums;
+﻿using KeyifyClassLibrary.Core.Domain.Enums;
 using System;
 
 namespace Keyify.Music_Theory.Helper

@@ -103,14 +103,14 @@
                     {
                         if (note.InSelectedScale && note.Selected)
                         {
-                            <td class="selectedNoteSelectedScale" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleName')">
+                            <td class="selectedNoteSelectedScale" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleLabel')">
                                 @note.Note
                             </td>
                             continue;
                         }
                         else if (note.InSelectedScale && !note.Selected)
                         {
-                            <td class="noteSelectedScale" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleName')">
+                            <td class="noteSelectedScale" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleLabel')">
                                 @note.Note
                             </td>
                             continue;
@@ -118,13 +118,13 @@
                     }
                     if (note.Selected)
                     {
-                        <td class="selectedNote" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleName')">
+                        <td class="selectedNote" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleLabel')">
                             @note.Note
                         </td>
                         continue;
                     }
 
-                    <td class="defaultNote" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleName')">
+                    <td class="defaultNote" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleLabel')">
                         @note.Note
                     </td>
                 }

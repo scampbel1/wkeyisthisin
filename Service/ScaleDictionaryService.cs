@@ -1,5 +1,5 @@
-﻿using KeyifyClassLibrary.Core.MusicTheory;
-using KeyifyClassLibrary.Core.MusicTheory.Helper;
+﻿using KeyifyClassLibrary.Core.Domain;
+using KeyifyClassLibrary.Core.Domain.Helper;
 using System.Collections.Generic;
 
 namespace Keyify.Models

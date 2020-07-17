@@ -1,6 +1,6 @@
-﻿using KeyifyClassLibrary.Core.MusicTheory.Enums;
+﻿using KeyifyClassLibrary.Core.Domain.Enums;
 
-namespace KeyifyClassLibrary.Core.MusicTheory.Tuning.Guitar
+namespace KeyifyClassLibrary.Core.Domain.Tuning.Guitar
 {
     public class StandardGuitarTuning : ITuning
     {

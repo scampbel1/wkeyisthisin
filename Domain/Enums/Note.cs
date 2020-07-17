@@ -1,4 +1,4 @@
-﻿namespace KeyifyClassLibrary.Core.MusicTheory.Enums
+﻿namespace KeyifyClassLibrary.Core.Domain.Enums
 {
     public enum Note
     {

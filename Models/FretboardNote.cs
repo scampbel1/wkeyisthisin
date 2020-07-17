@@ -1,4 +1,4 @@
-﻿using KeyifyClassLibrary.Core.MusicTheory.Enums;
+﻿using KeyifyClassLibrary.Core.Domain.Enums;
 
 namespace KeyifyWebClient.Core.Models
 {

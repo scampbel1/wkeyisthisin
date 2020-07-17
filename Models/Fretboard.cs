@@ -1,5 +1,5 @@
-﻿using KeyifyClassLibrary.Core.MusicTheory.Enums;
-using KeyifyClassLibrary.Core.MusicTheory.Tuning;
+﻿using KeyifyClassLibrary.Core.Domain.Enums;
+using KeyifyClassLibrary.Core.Domain.Tuning;
 using System.Collections.Generic;
 
 namespace KeyifyWebClient.Core.Models

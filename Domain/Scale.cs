@@ -1,9 +1,9 @@
-﻿using KeyifyClassLibrary.Core.MusicTheory.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using KeyifyClassLibrary.Core.Domain.Enums;
 
-namespace KeyifyClassLibrary.Core.MusicTheory
+namespace KeyifyClassLibrary.Core.Domain
 {
-    public class Scale : IScale
+    public class Scale
     {
         private readonly Note _key;
         public List<Note> Notes { get; set; }
