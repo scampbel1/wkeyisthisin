@@ -52,6 +52,7 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
 
             Note realNote = NoteHelper.ConvertStringNoteToNoteType(note);
             ScaleDirectoryEntry realScale = GetScaleDirectory(ModeHelper.ConvertStringModeNameToModeType(mode));
+            
             Scale generatedScale = ScaleHelper.GenerateScaleFromKey(realNote, realScale.ScaleSteps);
 
             return new ScaleDictionaryEntry(inputScale, generatedScale);

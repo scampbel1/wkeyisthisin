@@ -146,7 +146,7 @@ namespace KeyifyClassLibrary.Core.Domain
                 }));
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                Mode.Augmented, //(W+h) h (W+h) h (W+h) h 
+                Mode.Augmented,
                 new Step[]
                 {
                     Step.R,
@@ -159,7 +159,7 @@ namespace KeyifyClassLibrary.Core.Domain
                 }));
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                Mode.PentatonicMinor, //(W+h) + W + W (W+h) + W
+                Mode.PentatonicMinor,
                 new Step[]
                 {
                     Step.R,
@@ -171,7 +171,7 @@ namespace KeyifyClassLibrary.Core.Domain
                 }));
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                Mode.PentatonicMajor, //W-W-(Wh)-W-(Wh)
+                Mode.PentatonicMajor,
                 new Step[]
                 {
                     Step.R,
@@ -183,7 +183,7 @@ namespace KeyifyClassLibrary.Core.Domain
                 }));
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                Mode.Blues, // WH-W-H-H-WH-W
+                Mode.Blues,
                 new Step[]
                 {
                     Step.R,
@@ -196,7 +196,7 @@ namespace KeyifyClassLibrary.Core.Domain
                 }));
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                Mode.WholeTone, // W-W-W-W-W-W
+                Mode.WholeTone,
                 new Step[]
                 {
                     Step.R,
@@ -209,7 +209,7 @@ namespace KeyifyClassLibrary.Core.Domain
                 }));
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                Mode.WholeHalfDiminished, //  W-H-W-H-W-H-W-H
+                Mode.WholeHalfDiminished,
                 new Step[]
                 {
                     Step.R,
@@ -224,7 +224,7 @@ namespace KeyifyClassLibrary.Core.Domain
                 }));
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
-                Mode.HalfWholeDiminished, // H-W-H-W-H-W-H-W
+                Mode.HalfWholeDiminished,
                 new Step[]
                 {
                     Step.R,
