@@ -23,7 +23,7 @@ namespace Keyify.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var model = new FretboardWebModel(_fretCount, new CustomStandardGuitarTuning(_tuning));
+            FretboardWebModel model = new FretboardWebModel(_fretCount, new CustomStandardGuitarTuning(_tuning));
             model.InstrumentName = _instrument;
 
             return View(model);

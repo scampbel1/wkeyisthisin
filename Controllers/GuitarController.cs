@@ -19,7 +19,7 @@ namespace Keyify.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var model = new FretboardWebModel();
+            FretboardWebModel model = new FretboardWebModel();
             model.InstrumentName = _instrument;
 
             return View(model);

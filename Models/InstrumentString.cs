@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using Keyify.Frontend_BuisnessLogic;
 using KeyifyClassLibrary.Core.Domain.Enums;
-using KeyifyClassLibrary.Core.Domain.Helper;
 
 namespace KeyifyWebClient.Core.Models
 {
@@ -10,29 +10,7 @@ namespace KeyifyWebClient.Core.Models
 
         public InstrumentString(Note openNote, int fretCount)
         {
-            Notes = Populate(openNote, fretCount);
-        }
-
-        private static List<FretboardNote> Populate(Note openNote, int fretCount)
-        {
-            var stringNoteIndex = (int)openNote;
-            var count = 0;
-
-            List<FretboardNote> notes = new List<FretboardNote>(fretCount);
-
-            while (count < fretCount)
-            {
-                notes.Add(new FretboardNote((Note)stringNoteIndex));
-                stringNoteIndex++;
-                count++;
-
-                if (stringNoteIndex >= EnumHelper.GetAllNoteNames().Count)
-                {
-                    stringNoteIndex = 0;
-                }
-            }
-
-            return notes;
-        }
+            Notes = FretboardFunctions.Populate(openNote, fretCount);
+        }        
     }
 }

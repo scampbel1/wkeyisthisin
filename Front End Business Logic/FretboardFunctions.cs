@@ -40,5 +40,27 @@ namespace Keyify.Frontend_BuisnessLogic
 
             model.Scales = model.Scales.OrderBy(a => a.ScaleLabel).ToList();
         }
+
+        public static List<FretboardNote> Populate(Note openNote, int fretCount)
+        {
+            var stringNoteIndex = (int)openNote;
+            var count = 0;
+
+            List<FretboardNote> notes = new List<FretboardNote>(fretCount);
+
+            while (count < fretCount)
+            {
+                notes.Add(new FretboardNote((Note)stringNoteIndex));
+                stringNoteIndex++;
+                count++;
+
+                if (stringNoteIndex >= EnumHelper.GetAllNoteNames().Count)
+                {
+                    stringNoteIndex = 0;
+                }
+            }
+
+            return notes;
+        }
     }
 }

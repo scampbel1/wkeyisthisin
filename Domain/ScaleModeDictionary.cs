@@ -13,7 +13,7 @@ namespace KeyifyClassLibrary.Core.Domain
 
         private static List<ScaleDirectoryEntry> GenerateDictionary()
         {
-            var scaleDictionary = new List<ScaleDirectoryEntry>();
+            List<ScaleDirectoryEntry> scaleDictionary = new List<ScaleDirectoryEntry>();
 
             #region Scales
 
