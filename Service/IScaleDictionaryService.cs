@@ -6,5 +6,6 @@ namespace Keyify.Models
     public interface IScaleDictionaryService
     {
         Dictionary<string, ScaleDictionaryEntry> GetScaleDictionary();
+        ScaleDictionaryEntry GetScale(string ScaleLabel);
     }
 }

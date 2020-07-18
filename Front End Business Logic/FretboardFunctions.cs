@@ -20,7 +20,7 @@ namespace Keyify.FrontendBuisnessLogic
 
             if (!string.IsNullOrEmpty(scale))
             {
-                model.SelectedScale = ScaleDictionaryHelper.GenerateEntryFromString(scale, scaleDirectoryService);
+                model.SelectedScale = dictionaryService.GetScale(scale);
                 model.SelectedScale.Selected = true;
 
                 if (!model.Scales.Any(a => a.Value.ScaleLabel == model.SelectedScale.ScaleLabel))
