@@ -17,11 +17,11 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
 
         public static List<ScaleDictionaryEntry> GenerateDictionary()
         {
-            var dictionary = new List<ScaleDictionaryEntry>();
+            List<ScaleDictionaryEntry> dictionary = new List<ScaleDictionaryEntry>();
 
-            foreach (var mode in EnumHelper.GetAllModeNames())
+            foreach (string mode in EnumHelper.GetAllModeNames())
             {
-                foreach (var note in EnumHelper.GetAllNoteNames())
+                foreach (string note in EnumHelper.GetAllNoteNames())
                 {
                     string scaleLabel = note + " " + mode;
 

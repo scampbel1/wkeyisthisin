@@ -2,11 +2,14 @@
 using Keyify.Models;
 using Keyify.Frontend_BuisnessLogic;
 using KeyifyWebClient.Core.Models;
+using KeyifyClassLibrary.Core.Domain.Tuning;
+using KeyifyClassLibrary.Core.Domain.Tuning.Guitar;
 
 namespace Keyify.Controllers
 {
     public class GuitarController : Controller
     {
+        private readonly ITuning _tuning;
         private readonly string _instrument = "Guitar";
 
         private IScaleDictionaryService _dictionaryService;
@@ -14,6 +17,7 @@ namespace Keyify.Controllers
         public GuitarController(IScaleDictionaryService dictionary)
         {
             _dictionaryService = dictionary;
+            _tuning = new StandardGuitarTuning();
         }
 
         [HttpGet]

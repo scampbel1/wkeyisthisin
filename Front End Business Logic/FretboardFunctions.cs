@@ -43,8 +43,8 @@ namespace Keyify.Frontend_BuisnessLogic
 
         public static List<FretboardNote> Populate(Note openNote, int fretCount)
         {
-            var stringNoteIndex = (int)openNote;
-            var count = 0;
+            int stringNoteIndex = (int)openNote;
+            int count = 0;
 
             List<FretboardNote> notes = new List<FretboardNote>(fretCount);
 

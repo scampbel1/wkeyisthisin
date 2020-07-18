@@ -1,8 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace KeyifyClassLibrary.Core.Domain.Enums
+﻿namespace KeyifyClassLibrary.Core.Domain.Enums
 {
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public enum TriadType
     {
         m,

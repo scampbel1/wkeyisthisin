@@ -1,5 +1,5 @@
-﻿using KeyifyClassLibrary.Core.Domain.Enums;
-using System;
+﻿using System;
+using KeyifyClassLibrary.Core.Domain.Enums;
 
 namespace Keyify.Music_Theory.Helper
 {

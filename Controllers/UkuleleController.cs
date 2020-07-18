@@ -2,15 +2,15 @@
 using Keyify.Models;
 using KeyifyWebClient.Core.Models;
 using Keyify.Frontend_BuisnessLogic;
-using KeyifyClassLibrary.Core.Domain.Enums;
-using KeyifyClassLibrary.Core.Domain.Tuning.Guitar;
+using Keyify.Domain.Tuning.Ukulele;
+using KeyifyClassLibrary.Core.Domain.Tuning;
 
 namespace Keyify.Controllers
 {
     public class UkuleleController : Controller
     {
+        private readonly ITuning _tuning;
         private readonly int _fretCount = 13;
-        private readonly Note[] _tuning = new Note[] { Note.G, Note.C, Note.E, Note.A };
         private readonly string _instrument = "Ukulele";
 
         private IScaleDictionaryService _dictionaryService;
@@ -18,12 +18,19 @@ namespace Keyify.Controllers
         public UkuleleController(IScaleDictionaryService dictionary)
         {
             _dictionaryService = dictionary;
+            _tuning = new StandardUkuleleTuning();
+        }
+
+        public UkuleleController(IScaleDictionaryService dictionary, ITuning tuning)
+        {
+            _dictionaryService = dictionary;
+            _tuning = tuning;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            FretboardWebModel model = new FretboardWebModel(_fretCount, new CustomStandardGuitarTuning(_tuning));
+            FretboardWebModel model = new FretboardWebModel(_fretCount, _tuning);
             model.InstrumentName = _instrument;
 
             return View(model);
@@ -32,7 +39,7 @@ namespace Keyify.Controllers
         [HttpPost]
         public ActionResult UpdateFretboardModel(string[] notes, string scale)
         {
-            FretboardWebModel model = new FretboardWebModel(_fretCount, new CustomStandardGuitarTuning(_tuning));
+            FretboardWebModel model = new FretboardWebModel(_fretCount, _tuning);
             model.InstrumentName = _instrument;
 
             if (notes == null || notes.Length < 1)

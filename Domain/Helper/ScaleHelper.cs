@@ -6,10 +6,10 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
     {
         public static Scale GenerateScaleFromKey(Note key, Step[] scaleSteps)
         {
-            var scale = new Scale(key);
-            var noteNumber = (int)key;
+            Scale scale = new Scale(key);
+            int noteNumber = (int)key;
 
-            foreach (var scaleStep in scaleSteps)
+            foreach (Step scaleStep in scaleSteps)
             {
                 noteNumber += (int)scaleStep;
 
