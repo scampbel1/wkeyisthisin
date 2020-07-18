@@ -144,6 +144,7 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
                 throw new Exception("Conversion went wrong");
             }
         }
+
         public static string ConvertFlatNoteStringToSharpString(string note)
         {
             if (note.Length < 2 || note[1] != 'b') return note;

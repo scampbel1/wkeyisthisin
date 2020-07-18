@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Keyify.Models;
-using KeyifyWebClient.Core.Models;
-using Keyify.Frontend_BuisnessLogic;
-using KeyifyClassLibrary.Core.Domain.Tuning;
+using Keyify.Service;
 using Keyify.Domain.Tuning.Bass;
+using KeyifyWebClient.Core.Models;
+using Keyify.FrontendBuisnessLogic;
+using KeyifyClassLibrary.Core.Domain.Tuning;
 
 namespace Keyify.Controllers
 {
@@ -14,18 +15,21 @@ namespace Keyify.Controllers
         private readonly string _instrument = "Bass";
 
         private IScaleDictionaryService _dictionaryService;
+        private IScaleDirectoryService _scaleDirectoryService;
 
-        public BassController(IScaleDictionaryService dictionary)
+        public BassController(IScaleDictionaryService dictionary, IScaleDirectoryService scaleDirectoryService)
         {
             _dictionaryService = dictionary;
+            _scaleDirectoryService = scaleDirectoryService;
             _tuning = new StandardBassTuning();
         }
 
-        public BassController(IScaleDictionaryService dictionary, ITuning tuning)
-        {
-            _dictionaryService = dictionary;
-            _tuning = tuning;
-        }
+        //public BassController(IScaleDictionaryService dictionary, IScaleDirectoryService scaleDirectoryService, ITuning tuning)
+        //{
+        //    _dictionaryService = dictionary;
+        //    _scaleDirectoryService = scaleDirectoryService;
+        //    _tuning = tuning;
+        //}
 
         [HttpGet]
         public ActionResult Index()
@@ -45,7 +49,7 @@ namespace Keyify.Controllers
             if (notes == null || notes.Length < 1)
                 return PartialView("Fretboard", model);
 
-            FretboardFunctions.FindScales(model, scale, notes, _dictionaryService);
+            FretboardFunctions.FindScales(model, scale, notes, _dictionaryService, _scaleDirectoryService);
 
             return PartialView("Fretboard", model);
         }

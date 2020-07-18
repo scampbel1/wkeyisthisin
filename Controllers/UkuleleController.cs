@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Keyify.Models;
+using Keyify.Service;
 using KeyifyWebClient.Core.Models;
-using Keyify.Frontend_BuisnessLogic;
 using Keyify.Domain.Tuning.Ukulele;
+using Keyify.FrontendBuisnessLogic;
 using KeyifyClassLibrary.Core.Domain.Tuning;
 
 namespace Keyify.Controllers
@@ -14,18 +15,21 @@ namespace Keyify.Controllers
         private readonly string _instrument = "Ukulele";
 
         private IScaleDictionaryService _dictionaryService;
+        private IScaleDirectoryService _scaleDirectoryService;
 
-        public UkuleleController(IScaleDictionaryService dictionary)
+        public UkuleleController(IScaleDictionaryService dictionary, IScaleDirectoryService scaleDirectoryService)
         {
             _dictionaryService = dictionary;
+            _scaleDirectoryService = scaleDirectoryService;
             _tuning = new StandardUkuleleTuning();
         }
 
-        public UkuleleController(IScaleDictionaryService dictionary, ITuning tuning)
-        {
-            _dictionaryService = dictionary;
-            _tuning = tuning;
-        }
+        //public UkuleleController(IScaleDictionaryService dictionary, IScaleDirectoryService scaleDirectoryService, ITuning tuning)
+        //{
+        //    _dictionaryService = dictionary;
+        //    _scaleDirectoryService = scaleDirectoryService;
+        //    _tuning = tuning;
+        //}
 
         [HttpGet]
         public IActionResult Index()
@@ -45,7 +49,7 @@ namespace Keyify.Controllers
             if (notes == null || notes.Length < 1)
                 return PartialView("Fretboard", model);
 
-            FretboardFunctions.FindScales(model, scale, notes, _dictionaryService);
+            FretboardFunctions.FindScales(model, scale, notes, _dictionaryService, _scaleDirectoryService);
 
             return PartialView("Fretboard", model);
         }

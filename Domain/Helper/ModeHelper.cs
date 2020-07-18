@@ -9,5 +9,10 @@ namespace Keyify.Music_Theory.Helper
         {
             return (Mode)Enum.Parse(typeof(Mode), mode, true);
         }
+
+        public static string ConvertModeToModeLabel(Mode mode)
+        {
+            return mode.ToString();
+        }
     }
 }

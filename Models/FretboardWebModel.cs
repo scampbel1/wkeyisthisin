@@ -2,7 +2,6 @@
 using KeyifyClassLibrary.Core.Domain;
 using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Tuning;
-using KeyifyClassLibrary.Core.Domain.Tuning.Guitar;
 
 namespace KeyifyWebClient.Core.Models
 {
@@ -12,18 +11,11 @@ namespace KeyifyWebClient.Core.Models
         public Fretboard Fretboard { get; private set; }
         public ScaleDictionaryEntry SelectedScale { get; set; }
         public List<string> SelectedNotes { get; set; }
-        public List<ScaleDictionaryEntry> Scales;
-
-        public FretboardWebModel()
-        {
-            Scales = new List<ScaleDictionaryEntry>();
-            Fretboard = new Fretboard(new StandardGuitarTuning(), 24);
-            SelectedNotes = new List<string>(12);
-        }
+        public Dictionary<string, ScaleDictionaryEntry> Scales;        
 
         public FretboardWebModel(int fretCount, ITuning tuning)
         {
-            Scales = new List<ScaleDictionaryEntry>();
+            Scales = new Dictionary<string, ScaleDictionaryEntry>();
             Fretboard = new Fretboard(tuning, fretCount);
             SelectedNotes = new List<string>(12);
         }

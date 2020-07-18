@@ -1,19 +1,20 @@
-﻿using KeyifyClassLibrary.Core.Domain;
+﻿using System.Collections.Generic;
+using Keyify.Service;
+using KeyifyClassLibrary.Core.Domain;
 using KeyifyClassLibrary.Core.Domain.Helper;
-using System.Collections.Generic;
 
 namespace Keyify.Models
 {
     public class ScaleDictionaryService : IScaleDictionaryService
     {
-        private readonly List<ScaleDictionaryEntry> _scaleDictionary;
+        private readonly Dictionary<string, ScaleDictionaryEntry> _scaleDictionary;
 
-        public ScaleDictionaryService()
+        public ScaleDictionaryService(IScaleDirectoryService scaleDirectoryService)
         {
-            _scaleDictionary = ScaleDictionaryHelper.GenerateDictionary();
+            _scaleDictionary = ScaleDictionaryHelper.GenerateDictionary(scaleDirectoryService);
         }
 
-        public List<ScaleDictionaryEntry> GetDictionary()
+        public Dictionary<string, ScaleDictionaryEntry> GetScaleDictionary()
         {
             return _scaleDictionary;
         }

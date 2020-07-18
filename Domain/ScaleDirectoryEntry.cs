@@ -1,4 +1,5 @@
-﻿using KeyifyClassLibrary.Core.Domain.Enums;
+﻿using Keyify.Music_Theory.Helper;
+using KeyifyClassLibrary.Core.Domain.Enums;
 
 namespace KeyifyClassLibrary.Core.Domain
 {
@@ -6,13 +7,15 @@ namespace KeyifyClassLibrary.Core.Domain
     {
         public class ScaleDirectoryEntry
         {
-            public Mode Mode { get; set; }
-            public Step[] ScaleSteps { get; set; }
+            public readonly Mode Mode;
+            public readonly string Label;
+            public readonly Step[] ScaleSteps;
 
             public ScaleDirectoryEntry(Mode mode, Step[] scaleSteps)
             {
                 Mode = mode;
                 ScaleSteps = scaleSteps;
+                Label = ModeHelper.ConvertModeToModeLabel(mode);
             }
         }
     }

@@ -1,9 +1,10 @@
-using Keyify.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Keyify.Models;
+using Keyify.Service;
 
 namespace Keyify
 {
@@ -20,6 +21,7 @@ namespace Keyify
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton(typeof(IScaleDirectoryService), typeof(ScaleDirectoryService));
             services.AddSingleton(typeof(IScaleDictionaryService), typeof(ScaleDictionaryService));
         }
 

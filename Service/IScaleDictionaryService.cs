@@ -1,10 +1,10 @@
-﻿using KeyifyClassLibrary.Core.Domain;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using KeyifyClassLibrary.Core.Domain;
 
 namespace Keyify.Models
 {
     public interface IScaleDictionaryService
     {
-        List<ScaleDictionaryEntry> GetDictionary();
+        Dictionary<string, ScaleDictionaryEntry> GetScaleDictionary();
     }
 }

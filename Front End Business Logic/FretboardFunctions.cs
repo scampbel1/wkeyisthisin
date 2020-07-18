@@ -1,16 +1,16 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using Keyify.Models;
+using Keyify.Service;
 using KeyifyWebClient.Core.Models;
-using KeyifyClassLibrary.Core.Domain;
 using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Helper;
 
-namespace Keyify.Frontend_BuisnessLogic
+namespace Keyify.FrontendBuisnessLogic
 {
     public static class FretboardFunctions
     {
-        public static void FindScales(FretboardWebModel model, string scale, string[] notes, IScaleDictionaryService dictionaryService)
+        public static void FindScales(FretboardWebModel model, string scale, string[] notes, IScaleDictionaryService dictionaryService, IScaleDirectoryService scaleDirectoryService)
         {
             List<Note> realNotes = NoteHelper.ConvertNoteStringArrayIntoNotes(notes);
             model.SelectedNotes = new List<string>(notes);
@@ -20,25 +20,21 @@ namespace Keyify.Frontend_BuisnessLogic
 
             if (!string.IsNullOrEmpty(scale))
             {
-                model.SelectedScale = ScaleDictionaryHelper.GenerateEntryFromString(scale);
+                model.SelectedScale = ScaleDictionaryHelper.GenerateEntryFromString(scale, scaleDirectoryService);
                 model.SelectedScale.Selected = true;
 
-                if (!model.Scales.Any(a => a.ScaleLabel == model.SelectedScale.ScaleLabel))
-                    model.Scales.Add(model.SelectedScale);
+                if (!model.Scales.Any(a => a.Value.ScaleLabel == model.SelectedScale.ScaleLabel))
+                    model.Scales.Add(model.SelectedScale.ScaleLabel, model.SelectedScale);
                 else
                 {
-                    ScaleDictionaryEntry update = model.Scales.Single(a => a.ScaleLabel == model.SelectedScale.ScaleLabel);
-
-                    model.Scales.Remove(update);
-                    model.Scales.Add(model.SelectedScale);
+                    model.Scales.Remove(model.SelectedScale.ScaleLabel);
+                    model.Scales.Add(model.SelectedScale.ScaleLabel, model.SelectedScale);
                 }
             }
             else
                 model.SelectedScale = null;
 
             model.ApplySelectedNotesToFretboard(realNotes, model.SelectedScale?.Scale.NotesSet);
-
-            model.Scales = model.Scales.OrderBy(a => a.ScaleLabel).ToList();
         }
 
         public static List<FretboardNote> Populate(Note openNote, int fretCount)

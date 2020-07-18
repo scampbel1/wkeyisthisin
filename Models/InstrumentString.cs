@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Keyify.Frontend_BuisnessLogic;
+using Keyify.FrontendBuisnessLogic;
 using KeyifyClassLibrary.Core.Domain.Enums;
 
 namespace KeyifyWebClient.Core.Models

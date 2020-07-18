@@ -1,17 +1,11 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using KeyifyClassLibrary.Core.Domain.Enums;
 
 namespace KeyifyClassLibrary.Core.Domain
 {
     public static partial class ScaleModeDictionary
     {
-        public static ScaleDirectoryEntry GetScaleDirectory(Mode mode)
-        {
-            return GenerateDictionary().FirstOrDefault(s => s.Mode == mode);
-        }
-
-        private static List<ScaleDirectoryEntry> GenerateDictionary()
+        public static List<ScaleDirectoryEntry> GenerateDirectory()
         {
             List<ScaleDirectoryEntry> scaleDictionary = new List<ScaleDirectoryEntry>();
 
