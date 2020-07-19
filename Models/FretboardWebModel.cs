@@ -8,10 +8,10 @@ namespace KeyifyWebClient.Core.Models
     public class FretboardWebModel
     {
         public string InstrumentName { get; set; } = "Unnamed Instrument";
+        public List<string> SelectedNotes { get; set; }
         public Fretboard Fretboard { get; private set; }
         public ScaleDictionaryEntry SelectedScale { get; set; }
-        public List<string> SelectedNotes { get; set; }
-        public Dictionary<string, ScaleDictionaryEntry> Scales;        
+        public Dictionary<string, ScaleDictionaryEntry> Scales { get; set; }
 
         public FretboardWebModel(int fretCount, ITuning tuning)
         {

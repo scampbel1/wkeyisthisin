@@ -31,6 +31,7 @@ namespace Keyify.FrontendBuisnessLogic
                     model.Scales.Add(model.SelectedScale.ScaleLabel, model.SelectedScale);
                 }
             }
+            
             else
                 model.SelectedScale = null;
 
