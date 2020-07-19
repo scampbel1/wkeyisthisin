@@ -18,9 +18,10 @@ namespace Keyify.FrontendBuisnessLogic
             if (model.SelectedNotes.Count > 1)
                 model.Scales = ScaleDictionaryHelper.GetMatchedScales(realNotes, dictionaryService);
 
+            model.SelectedScale = dictionaryService.GetScale(scale);
+
             if (!string.IsNullOrEmpty(scale))
             {
-                model.SelectedScale = dictionaryService.GetScale(scale);
                 model.SelectedScale.Selected = true;
 
                 if (!model.Scales.Any(a => a.Value.ScaleLabel == model.SelectedScale.ScaleLabel))
@@ -31,7 +32,7 @@ namespace Keyify.FrontendBuisnessLogic
                     model.Scales.Add(model.SelectedScale.ScaleLabel, model.SelectedScale);
                 }
             }
-            
+
             else
                 model.SelectedScale = null;
 

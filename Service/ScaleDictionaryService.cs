@@ -26,6 +26,12 @@ namespace Keyify.Models
             if (!string.IsNullOrEmpty(_currentlySelected))
                 _scaleDictionary[_currentlySelected].Selected = false;
 
+            if (string.IsNullOrEmpty(scaleLabel))
+            {
+                _currentlySelected = string.Empty;
+                return null;
+            }
+
             ScaleDictionaryEntry retVal = _scaleDictionary.GetValueOrDefault(scaleLabel);
 
             if (retVal == null)
