@@ -14,6 +14,7 @@ namespace Keyify.Controllers
         private readonly ITuning _tuning;
         private readonly string _instrumentName = "Bass";
 
+        FretboardWebModel _model;
 
         private IScaleDictionaryService _dictionaryService;
         private IScaleDirectoryService _scaleDirectoryService;
@@ -23,29 +24,25 @@ namespace Keyify.Controllers
             _dictionaryService = dictionary;
             _scaleDirectoryService = scaleDirectoryService;
             _tuning = new StandardBassTuning();
+            _model = new FretboardWebModel(_fretCount, _tuning, _instrumentName);
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            FretboardWebModel model = new FretboardWebModel(_fretCount, _tuning);
-            model.InstrumentName = _instrumentName;
 
-            return View(model);
+            return View(_model);
         }
 
         [HttpPost]
         public ActionResult UpdateFretboardModel(string[] selectedNotes, string selectedScale)
         {
-            FretboardWebModel model = new FretboardWebModel(_fretCount, _tuning);
-            model.InstrumentName = _instrumentName;
-
             if (selectedNotes == null || selectedNotes.Length < 1)
-                return PartialView("Fretboard", model);
+                return PartialView("Fretboard", _model);
 
-            FretboardFunctions.FindScales(model, selectedScale, selectedNotes, _dictionaryService, _scaleDirectoryService);
+            FretboardFunctions.FindScales(_model, selectedScale, selectedNotes, _dictionaryService, _scaleDirectoryService);
 
-            return PartialView("Fretboard", model);
+            return PartialView("Fretboard", _model);
         }
     }
 }
