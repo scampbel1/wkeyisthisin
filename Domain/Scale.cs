@@ -9,11 +9,6 @@ namespace KeyifyClassLibrary.Core.Domain
         public List<Note> Notes { get; set; }
         public HashSet<Note> NotesSet { get; set; }
 
-        public Note GetKey()
-        {
-            return _key;
-        }
-
         public Scale(Note key)
         {
             _key = key;

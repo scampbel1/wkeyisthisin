@@ -34,15 +34,11 @@ namespace KeyifyWebClient.Core.Models
                 {
                     if (selectedNotes.Contains(fretboardNote.Note))
                         fretboardNote.Selected = true;
-                    else
-                        fretboardNote.Selected = false;
 
                     if (scaleNotes != null)
                     {
                         if (scaleNotes.Contains(fretboardNote.Note))
                             fretboardNote.InSelectedScale = true;
-                        else
-                            fretboardNote.InSelectedScale = false;
                     }
                 }
             }

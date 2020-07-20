@@ -18,6 +18,10 @@ namespace KeyifyWebClient.Core.Models
             PopulateFretboard();
         }
 
+        /// <summary>
+        /// Build an Instrument String for each Note in a Tuning.
+        /// InstrumentStrings must be reversed because Fretboard must be viewed "upside-down" to adhere to view from player's perspective.
+        /// </summary>
         private void PopulateFretboard()
         {
             foreach (Note note in Tuning.ReturnNotes())
@@ -25,7 +29,6 @@ namespace KeyifyWebClient.Core.Models
                 InstrumentStrings.Add(new InstrumentString(note, FretCount));
             }
 
-            //Fretboard must be viewed "upside-down" to adhere to view from player's perspective
             InstrumentStrings.Reverse();
         }
     }
