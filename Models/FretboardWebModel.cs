@@ -13,11 +13,12 @@ namespace KeyifyWebClient.Core.Models
         public ScaleDictionaryEntry SelectedScale { get; set; }
         public Dictionary<string, ScaleDictionaryEntry> Scales { get; set; }
 
-        public FretboardWebModel(int fretCount, ITuning tuning)
+        public FretboardWebModel(int fretCount, ITuning tuning, string instrumentName)
         {
             Scales = new Dictionary<string, ScaleDictionaryEntry>();
             Fretboard = new Fretboard(tuning, fretCount);
             SelectedNotes = new List<string>(12);
+            InstrumentName = instrumentName;
         }
 
         public int GetFretCount()

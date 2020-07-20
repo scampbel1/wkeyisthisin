@@ -12,7 +12,9 @@ namespace Keyify.Controllers
     {
         private readonly int _fretCount = 21;
         private readonly ITuning _tuning;
-        private readonly string _instrument = "Bass";
+        private readonly string _instrumentName = "Bass";
+
+        FretboardWebModel _model;
 
         private IScaleDictionaryService _dictionaryService;
         private IScaleDirectoryService _scaleDirectoryService;
@@ -22,36 +24,24 @@ namespace Keyify.Controllers
             _dictionaryService = dictionary;
             _scaleDirectoryService = scaleDirectoryService;
             _tuning = new StandardBassTuning();
+            _model = new FretboardWebModel(_fretCount, _tuning, _instrumentName);
         }
-
-        //public BassController(IScaleDictionaryService dictionary, IScaleDirectoryService scaleDirectoryService, ITuning tuning)
-        //{
-        //    _dictionaryService = dictionary;
-        //    _scaleDirectoryService = scaleDirectoryService;
-        //    _tuning = tuning;
-        //}
 
         [HttpGet]
         public ActionResult Index()
         {
-            FretboardWebModel model = new FretboardWebModel(_fretCount, _tuning);
-            model.InstrumentName = _instrument;
-
-            return View(model);
+            return View(_model);
         }
 
         [HttpPost]
-        public ActionResult UpdateFretboardModel(string[] notes, string scale)
+        public ActionResult UpdateFretboardModel(string[] selectedNotes, string selectedScale)
         {
-            FretboardWebModel model = new FretboardWebModel(_fretCount, _tuning);
-            model.InstrumentName = _instrument;
+            if (selectedNotes == null || selectedNotes.Length < 1)
+                return PartialView("Fretboard", _model);
 
-            if (notes == null || notes.Length < 1)
-                return PartialView("Fretboard", model);
+            FretboardFunctions.FindScales(_model, selectedScale, selectedNotes, _dictionaryService, _scaleDirectoryService);
 
-            FretboardFunctions.FindScales(model, scale, notes, _dictionaryService, _scaleDirectoryService);
-
-            return PartialView("Fretboard", model);
+            return PartialView("Fretboard", _model);
         }
     }
 }
