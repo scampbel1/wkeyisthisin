@@ -14,8 +14,6 @@ namespace Keyify.Controllers
         private readonly ITuning _tuning;
         private readonly string _instrumentName = "Mandolin";
 
-        FretboardWebModel _model;
-
         private IScaleDictionaryService _dictionaryService;
         private IScaleDirectoryService _scaleDirectoryService;
 
@@ -24,31 +22,29 @@ namespace Keyify.Controllers
             _dictionaryService = dictionary;
             _scaleDirectoryService = scaleDirectoryService;
             _tuning = new StandardMandolinTuning();
-            _model = new FretboardWebModel(_fretCount, _tuning, _instrumentName);
         }
-
-        //public BassController(IScaleDictionaryService dictionary, IScaleDirectoryService scaleDirectoryService, ITuning tuning)
-        //{
-        //    _dictionaryService = dictionary;
-        //    _scaleDirectoryService = scaleDirectoryService;
-        //    _tuning = tuning;
-        //}
 
         [HttpGet]
         public ActionResult Index()
         {
-            return View(_model);
+            FretboardWebModel model = new FretboardWebModel(_fretCount, _tuning);
+            model.InstrumentName = _instrumentName;
+
+            return View(model);
         }
 
         [HttpPost]
         public ActionResult UpdateFretboardModel(string[] selectedNotes, string selectedScale)
         {
+            FretboardWebModel model = new FretboardWebModel(_fretCount, _tuning);
+            model.InstrumentName = _instrumentName;
+
             if (selectedNotes == null || selectedNotes.Length < 1)
-                return PartialView("Fretboard", _model);
+                return PartialView("Fretboard", model);
 
-            FretboardFunctions.FindScales(_model, selectedScale, selectedNotes, _dictionaryService, _scaleDirectoryService);
+            FretboardFunctions.FindScales(model, selectedScale, selectedNotes, _dictionaryService, _scaleDirectoryService);
 
-            return PartialView("Fretboard", _model);
+            return PartialView("Fretboard", model);
         }
     }
 }
