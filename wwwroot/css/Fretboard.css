@@ -48,7 +48,12 @@
 }
 
 .scaleResult {
-    color: chocolate;
+    color: darkcyan;
+}
+
+.scaleResultSelected {
+    color: darkblue;
+    cursor: crosshair;
 }
 
 h1 {
