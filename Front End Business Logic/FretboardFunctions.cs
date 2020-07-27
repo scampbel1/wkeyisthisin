@@ -10,7 +10,7 @@ namespace Keyify.FrontendBuisnessLogic
 {
     public static class FretboardFunctions
     {
-        public static void FindScales(FretboardWebModel model, string scale, string[] notes, IScaleDictionaryService dictionaryService, IScaleDirectoryService scaleDirectoryService)
+        public static void FindScales(FretboardWebModel model, string selectedScale, string[] notes, IScaleDictionaryService dictionaryService, IScaleDirectoryService scaleDirectoryService)
         {
             List<Note> realNotes = NoteHelper.ConvertNoteStringArrayIntoNotes(notes);
             model.SelectedNotes = new List<string>(notes);
@@ -18,9 +18,9 @@ namespace Keyify.FrontendBuisnessLogic
             if (model.SelectedNotes.Count > 1)
                 model.Scales = ScaleDictionaryHelper.GetMatchedScales(realNotes, dictionaryService);
 
-            if (!string.IsNullOrEmpty(scale))
+            if (!string.IsNullOrEmpty(selectedScale))
             {
-                model.SelectedScale = dictionaryService.GetScale(scale);
+                model.SelectedScale = dictionaryService.GetScale(selectedScale);
                 model.SelectedScale.Selected = true;
 
                 if (!model.Scales.Any(a => a.Value.ScaleLabel == model.SelectedScale.ScaleLabel))
@@ -31,9 +31,15 @@ namespace Keyify.FrontendBuisnessLogic
                     model.Scales.Add(model.SelectedScale.ScaleLabel, model.SelectedScale);
                 }
             }
-            
             else
+            {
                 model.SelectedScale = null;
+                
+                if(model.Scales.Any(a => a.Value.Selected))
+                {
+                    model.Scales.SingleOrDefault(a => a.Value.Selected).Value.Selected = false;
+                }
+            }
 
             model.ApplySelectedNotesToFretboard(realNotes, model.SelectedScale?.Scale.NotesSet);
         }

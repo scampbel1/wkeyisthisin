@@ -45,15 +45,12 @@
 
 .scaleResult {
     cursor: pointer;
-}
-
-.scaleResult {
     color: darkcyan;
 }
 
 .scaleResultSelected {
     color: darkblue;
-    cursor: crosshair;
+    cursor: pointer;
 }
 
 h1 {
