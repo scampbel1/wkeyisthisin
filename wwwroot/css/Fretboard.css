@@ -1,15 +1,15 @@
 ﻿.selectedNoteSelectedScale {
     font-size: 18px;
     cursor: pointer;
-    color: darkblue !important;
-    background-color: dodgerblue !important;
+    color: green !important;
+    background-color: darkseagreen !important;
 }
 
 .noteSelectedScale {
     font-size: 18px;
     cursor: pointer;
-    color: green !important;
-    background-color: darkseagreen !important;
+    color: darkblue !important;
+    background-color: dodgerblue !important;
 }
 
 .selectedNote {

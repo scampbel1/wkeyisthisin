@@ -77,7 +77,7 @@
 </head>
 
 <body>
-    <h1>@Model.InstrumentName Fretboard</h1>
+    <h1>@Model.InstrumentName Fretboard @Model.SelectedScale?.UserReadableLabel</h1>
     <table class="fretboard">
         <tr>
             @for (int count = 0; count < Model.GetFretCount(); count++)
