@@ -141,7 +141,7 @@
     <div class="scaleResults">
         @if (Model.Scales.Any())
         {
-            <h2>Matching Scales</h2>
+            <h2>Matching Scales @string.Join(' ', Model.SelectedNotes)</h2>
 
             foreach (var scale in Model.Scales)
             {
