@@ -77,7 +77,16 @@
 </head>
 
 <body>
-    <h1>@Model.InstrumentName Fretboard @Model.SelectedScale?.UserReadableLabel</h1>
+
+    @if (Model.SelectedScale != null)
+    {
+        <h1>@Model.InstrumentName Fretboard (@Model.SelectedScale?.UserReadableLabel)</h1>
+    }
+    else
+    {
+        <h1>@Model.InstrumentName Fretboard</h1>
+    }
+
     <table class="fretboard">
         <tr>
             @for (int count = 0; count < Model.GetFretCount(); count++)
@@ -141,7 +150,14 @@
     <div class="scaleResults">
         @if (Model.Scales.Any())
         {
-            <h2>Matching Scales @string.Join(' ', Model.SelectedNotes)</h2>
+            if (Model.SelectedNotes.Count > 0)
+            {
+                <h2>Matching Scales (@string.Join(' ', Model.SelectedNotes))</h2>
+            }
+            else
+            {
+                <h2>Matching Scales</h2>
+            }
 
             foreach (var scale in Model.Scales)
             {
