@@ -1,4 +1,10 @@
-﻿.selectedNoteSelectedScale {
+﻿body {
+    background-image: url(../images/bg-rip.jpg);
+    background-repeat: repeat;
+    margin: 0;
+}
+
+.selectedNoteSelectedScale {
     font-size: 18px;
     cursor: pointer;
     color: green !important;
