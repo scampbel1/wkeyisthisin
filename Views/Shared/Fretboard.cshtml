@@ -141,18 +141,21 @@
         }
     </table>
 
-    <div style="padding-left: 15px">
-        <br />
-        <button onclick="ResetModel()">Reset</button>
-        <button onclick="GoHome()">Back</button>
-    </div>
+    @if (!Model.Scales.Any())
+    {
+        <div style="padding-left: 15px">
+            <br />
+            <button onclick="ResetModel()">Reset</button>
+            <button onclick="GoHome()">Back</button>
+        </div>
+    }
 
     <div class="scaleResults">
         @if (Model.Scales.Any())
         {
             if (Model.SelectedNotes.Count > 0)
             {
-                <h2>Matching Scales (Selected Notes: @string.Join(' ', Model.SelectedNotes))</h2>
+                <h2>Matching Scales (Selected Notes: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>)</h2>
             }
             else
             {
@@ -169,6 +172,12 @@
 
                 <span><a class="scaleResult" onclick="UpdateModel(null, false, '@scale.Value.UserReadableLabel')">@scale.Value.UserReadableLabel&nbsp;</a></span>
             }
+
+            <br />
+            <br />
+            <button onclick="ResetModel()">Reset</button>
+            <button onclick="GoHome()">Back</button>
+
         }
     </div>
 </body>

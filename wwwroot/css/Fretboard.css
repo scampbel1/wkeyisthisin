@@ -1,28 +1,46 @@
 ﻿body {
-    background-image: url(../images/bg-rip.jpg);
+    background-image: url(../images/bg-tile-23092020.jpg);
     background-repeat: repeat;
     margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .selectedNoteSelectedScale {
+    min-width: 15px;
     font-size: 18px;
     cursor: pointer;
     color: green !important;
-    background-color: darkseagreen !important;
+    background-color: rgba(52, 255, 152, 0.4) !important;
 }
 
 .noteSelectedScale {
+    min-width: 50px;
     font-size: 18px;
     cursor: pointer;
     color: darkblue !important;
-    background-color: dodgerblue !important;
+    background-color: rgba(30, 144, 225, 0.4) !important;
 }
 
 .selectedNote {
+    min-width: 50px;
     font-size: 18px;
     cursor: pointer;
     color: orangered !important;
-    background-color: lightpink !important;
+    background-color: rgba(255,182,193, 0.4) !important;
+}
+
+.fretboardHeading {
+    min-width: 50px;
+    text-align: center;
+    color: darkgrey;
+    font-size: 12px;
+}
+
+.defaultNote {
+    min-width: 50px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.4) !important;
 }
 
 .fretboard {
@@ -30,17 +48,6 @@
     width: 75%;
     text-align: center;
     padding-left: 15px;
-}
-
-.fretboardHeading {
-    text-align: center;
-    color: darkgrey;
-    font-size: 12px;
-}
-
-.defaultNote {
-    font-size: 18px;
-    cursor: pointer;
 }
 
 .scaleResults {
