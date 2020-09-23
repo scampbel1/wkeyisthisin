@@ -87,6 +87,10 @@
         <h1>@Model.InstrumentName Fretboard</h1>
     }
 
+    <span style="padding-left:15px; background-color: rgba(255, 255, 255, 0.4) !important;">Select notes on the Fretboard below</span>
+    <br/>
+    <br/>
+
     <table class="fretboard">
         <tr>
             @for (int count = 0; count < Model.GetFretCount(); count++)
@@ -155,7 +159,7 @@
         {
             if (Model.SelectedNotes.Count > 0)
             {
-                <h2>Matching Scales (Selected Notes: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>)</h2>
+                <h2>Matching Scales (Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>)</h2>
             }
             else
             {

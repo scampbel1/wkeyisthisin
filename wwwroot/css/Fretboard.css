@@ -29,18 +29,18 @@
     background-color: rgba(255,182,193, 0.4) !important;
 }
 
+.defaultNote {
+    min-width: 50px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.6) !important;
+}
+
 .fretboardHeading {
     min-width: 50px;
     text-align: center;
     color: darkgrey;
     font-size: 12px;
-}
-
-.defaultNote {
-    min-width: 50px;
-    font-size: 18px;
-    cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.4) !important;
 }
 
 .fretboard {
@@ -59,6 +59,7 @@
 .scaleResult {
     cursor: pointer;
     color: darkcyan;
+    background-color: rgba(255, 255, 255, 0.5) !important;
 }
 
 .scaleResultSelected {
