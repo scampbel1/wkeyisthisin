@@ -10,7 +10,7 @@ namespace KeyifyWebClient.Core.Models
 
         public InstrumentString(Note openNote, int fretCount)
         {
-            Notes = FretboardFunctions.Populate(openNote, fretCount);
+            Notes = FretboardFunctions.PopulateFretboard(openNote, fretCount);
         }        
     }
 }

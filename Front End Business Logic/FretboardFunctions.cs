@@ -19,9 +19,11 @@ namespace Keyify.FrontendBuisnessLogic
                 model.SelectedNotes.Clear();
                 model.SelectedNotes.AddRange(selectedNotes);
                 realNotes = NoteHelper.ConvertNoteStringArrayIntoNotes(selectedNotes);
-                
+
                 if (selectedNotes.Length > 1)
                     model.Scales = ScaleDictionaryHelper.GetMatchedScales(realNotes, dictionaryService);
+                else
+                    selectedScale = null;
             }
             else
             {
@@ -56,7 +58,7 @@ namespace Keyify.FrontendBuisnessLogic
             model.ApplySelectedNotesToFretboard(realNotes, model.SelectedScale?.Scale.NotesSet);
         }
 
-        public static List<FretboardNote> Populate(Note openNote, int fretCount)
+        public static List<FretboardNote> PopulateFretboard(Note openNote, int fretCount)
         {
             int stringNoteIndex = (int)openNote;
             int count = 0;
