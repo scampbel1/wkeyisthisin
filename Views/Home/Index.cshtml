@@ -12,10 +12,16 @@
     <h1>Instruments</h1>
 
     <div style="padding-left: 15px">
-        <h2>@Html.ActionLink("Bass", "Index", "Bass")</h2>
-        <h2>@Html.ActionLink("Guitar", "Index", "Guitar")</h2>
-        <h2>@Html.ActionLink("Mandolin", "Index", "Mandolin")</h2>
-        <h2>@Html.ActionLink("Ukulele", "Index", "Ukulele")</h2>
+        <h2>
+            @Html.ActionLink("Bass", "Index", "Bass", null, new { style = "text-decoration:none;" })
+        </h2>
+        <h2>
+            @Html.ActionLink("Guitar", "Index", "Guitar", null, new { style = "text-decoration:none;" })
+        </h2>
+        <h2>
+            @Html.ActionLink("Mandolin", "Index", "Mandolin", null, new { style = "text-decoration:none;" })
+        </h2>
+        <h2>@Html.ActionLink("Ukulele", "Index", "Ukulele", null, new { style = "text-decoration:none;" })</h2>
     </div>
 
 </body>

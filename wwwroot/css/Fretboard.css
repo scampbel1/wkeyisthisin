@@ -2,7 +2,8 @@
     background-image: url(../images/bg-tile-23092020.jpg);
     background-repeat: repeat;
     margin: 0;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: darkslategrey !important;
 }
 
 .selectedNoteSelectedScale {
@@ -70,4 +71,24 @@
 
 h1 {
     padding: 15px;
+}
+
+a:link {
+    color: steelblue;
+}
+
+a:visited {
+    color: steelblue;
+}
+
+a:hover {
+    color: blue;
+}
+
+a:active {
+    color: cadetblue;
+}
+
+.hyperlinkRemoveUnderline {
+    text-decoration: none;
 }
