@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Keyify.FrontendBuisnessLogic;
+﻿using Keyify.FrontendBuisnessLogic;
 using KeyifyClassLibrary.Core.Domain.Enums;
+using System.Collections.Generic;
 
 namespace KeyifyWebClient.Core.Models
 {
@@ -11,6 +11,6 @@ namespace KeyifyWebClient.Core.Models
         public InstrumentString(Note openNote, int fretCount)
         {
             Notes = FretboardFunctions.PopulateFretboard(openNote, fretCount);
-        }        
+        }
     }
 }

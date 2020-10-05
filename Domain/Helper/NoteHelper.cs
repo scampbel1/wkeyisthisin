@@ -1,7 +1,7 @@
-﻿using System;
+﻿using KeyifyClassLibrary.Core.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using KeyifyClassLibrary.Core.Domain.Enums;
 
 namespace KeyifyClassLibrary.Core.Domain.Helper
 {

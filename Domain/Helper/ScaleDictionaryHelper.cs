@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Text;
-using System.Collections.Generic;
-using Keyify.Models;
-using Keyify.Service;
+﻿using Keyify.Models;
 using Keyify.Music_Theory.Helper;
+using Keyify.Service;
 using KeyifyClassLibrary.Core.Domain.Enums;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using static KeyifyClassLibrary.Core.Domain.ScaleModeDictionary;
 
 namespace KeyifyClassLibrary.Core.Domain.Helper
@@ -53,7 +53,7 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
             Note realNote = NoteHelper.ConvertStringNoteToNoteType(note);
 
             ScaleDirectoryEntry realScale = scaleDirectoryService.GetDirectoryEntry(ModeHelper.ConvertStringModeNameToModeType(mode));
-            
+
             Scale generatedScale = ScaleHelper.GenerateScaleFromKey(realNote, realScale.ScaleSteps);
 
             return new ScaleDictionaryEntry(inputScale, generatedScale);

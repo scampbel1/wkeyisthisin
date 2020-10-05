@@ -1,6 +1,6 @@
-﻿using System.Linq;
+﻿using KeyifyClassLibrary.Core.Domain.Enums;
 using System.Collections.Generic;
-using KeyifyClassLibrary.Core.Domain.Enums;
+using System.Linq;
 using static KeyifyClassLibrary.Core.Domain.ScaleModeDictionary;
 
 namespace Keyify.Service

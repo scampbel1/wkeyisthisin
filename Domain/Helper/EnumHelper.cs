@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using KeyifyClassLibrary.Core.Domain.Enums;
+using System;
 using System.Collections.Generic;
-using KeyifyClassLibrary.Core.Domain.Enums;
+using System.Linq;
 
 namespace KeyifyClassLibrary.Core.Domain.Helper
 {

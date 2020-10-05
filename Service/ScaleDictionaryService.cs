@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using Keyify.Service;
+﻿using Keyify.Service;
 using KeyifyClassLibrary.Core.Domain;
 using KeyifyClassLibrary.Core.Domain.Helper;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Keyify.Models
 {

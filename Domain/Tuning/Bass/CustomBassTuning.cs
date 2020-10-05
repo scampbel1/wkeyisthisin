@@ -1,7 +1,7 @@
-﻿using System;
-using KeyifyClassLibrary.Core.Domain.Enums;
+﻿using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Helper;
 using KeyifyClassLibrary.Core.Domain.Tuning;
+using System;
 
 namespace Keyify.Domain.Tuning.Bass
 {

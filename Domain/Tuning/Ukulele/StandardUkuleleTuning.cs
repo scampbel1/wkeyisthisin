@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using KeyifyClassLibrary.Core.Domain.Enums;
+﻿using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Tuning;
+using System.Linq;
 
 namespace Keyify.Domain.Tuning.Ukulele
 {

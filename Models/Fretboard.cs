@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using KeyifyClassLibrary.Core.Domain.Enums;
+﻿using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Tuning;
+using System.Collections.Generic;
 
 namespace KeyifyWebClient.Core.Models
 {
     public class Fretboard
     {
         public int FretCount { get; set; }
-        public ITuning Tuning { get; set; }        
+        public ITuning Tuning { get; set; }
         public List<InstrumentString> InstrumentStrings { get; set; }
 
         public Fretboard(ITuning tuning, int fretCount)

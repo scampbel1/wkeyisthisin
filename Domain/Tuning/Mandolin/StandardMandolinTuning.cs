@@ -1,9 +1,5 @@
 ﻿using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Tuning;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Keyify.Domain.Tuning.Mandolin
 {

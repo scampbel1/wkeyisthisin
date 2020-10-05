@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using KeyifyClassLibrary.Core.Domain.Enums;
+﻿using KeyifyClassLibrary.Core.Domain.Enums;
+using System.Collections.Generic;
 using static KeyifyClassLibrary.Core.Domain.ScaleModeDictionary;
 
 namespace Keyify.Service
