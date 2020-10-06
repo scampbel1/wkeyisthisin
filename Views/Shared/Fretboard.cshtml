@@ -160,15 +160,20 @@
         {
             if (Model.SelectedNotes.Count > 0)
             {
-                if (Model.Scales.Count > 1)
+                if (Model.Scales.Count > 1 && Model.SelectedScale == null)
                 {
                     <br />
                     <h2>@Model.Scales.Count Matching Scales (Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>)</h2>
                 }
+                if (Model.Scales.Count > 1 && Model.SelectedScale != null)
+                {
+                    <br />
+                    <h2>@(Model.Scales.Count - 1) Matching Scales (Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale?.UserReadableLabel</span>)</h2>
+                }
                 else if (Model.SelectedScale != null)
                 {
                     <br />
-                    <h2>1 Scale Selected (Notes Selected: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>)</h2>
+                    <h2>0 Scales Found (Notes Selected: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale?.UserReadableLabel</span>)</h2>
                 }
             }
 
