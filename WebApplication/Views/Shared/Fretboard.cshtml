@@ -6,29 +6,11 @@
     <script lang="en" type="text/javascript">
 
         function ResetModel() {
-            $.ajax({
-                url: '@Url.Action("Index")',
-                datatype: 'json',
-                async: 'false',
-                contentType: "application/json",
-                type: "Get",
-                success: function (data) {
-                    $("#Fretboard").html(data);
-                }
-            });
+            location.href = '@Url.Action("Index")';
         }
 
         function GoHome() {
-            $.ajax({
-                url: '@Url.Action("Index", "Home")',
-                datatype: 'json',
-                async: 'false',
-                contentType: "application/json",
-                type: "Get",
-                success: function (data) {
-                    $("#Fretboard").html(data);
-                }
-            });
+            location.href = '@Url.Action("Index","Home")';
         }
 
         function UpdateModel(note, addNote, scale) {

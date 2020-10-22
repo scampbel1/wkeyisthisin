@@ -6,6 +6,10 @@
     color: darkslategrey !important;
 }
 
+p.testing {
+    color: red;
+}
+
 .selectedNoteSelectedScale {
     min-width: 15px;
     font-size: 18px;
