@@ -17,8 +17,6 @@
 
             var dataPost = { selectedNotes: GenerateControllerMethodParams(note, addNote), selectedScale: scale };
 
-            //Note: Ensure that the ajax parameters are entirely neccessary
-            //      https://stackoverflow.com/questions/2558870/asp-net-mvc-jquery-ajax-input-parameters-are-null
             $.ajax({
                 url: '@Url.Action("UpdateFretboardModel")',
                 async: 'true',
