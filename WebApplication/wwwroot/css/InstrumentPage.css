@@ -6,8 +6,12 @@
     color: darkslategrey !important;
 }
 
-p.testing {
-    color: red;
+#instrumentHyperlinkHeaderList {
+    margin-left: 20px;
+}
+
+.instrumentHyperlink {
+    margin-right: 10px;
 }
 
 .selectedNoteSelectedScale {

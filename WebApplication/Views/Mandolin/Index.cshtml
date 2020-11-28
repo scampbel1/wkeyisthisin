@@ -1,12 +1,9 @@
 ﻿@model KeyifyWebClient.Core.Models.FretboardWebModel
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = Model.InstrumentName + " Page";
     Layout = "/Views/Shared/_Layout.cshtml";
 }
-
-<head>
-</head>
 
 <body>
     <div id="Fretboard">@await Html.PartialAsync("Fretboard", Model)</div>

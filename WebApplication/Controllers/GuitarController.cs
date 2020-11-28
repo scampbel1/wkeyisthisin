@@ -33,7 +33,7 @@ namespace Keyify.Controllers
             return View(_model);
         }
 
-        [HttpPost]
+        [HttpPost] //Remove when playing around with ActionLink helper method
         public ActionResult UpdateFretboardModel(string[] selectedNotes, string selectedScale)
         {
             if (selectedNotes == null || selectedNotes.Length < 1)

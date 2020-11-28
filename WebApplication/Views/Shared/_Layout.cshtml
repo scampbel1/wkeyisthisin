@@ -1,16 +1,20 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    @model KeyifyWebClient.Core.Models.FretboardWebModel
     <title>@ViewBag.Title</title>
     <meta name="viewport" content="width=device-width" />
     <link href="~/css/InstrumentPage.css" rel="stylesheet" />
 </head>
 <body>
     <header>
-        <span class="instrumentHyperlink">@Html.ActionLink("Bass", "Index", "Bass", null, new { style = "text-decoration:none;" })</span>
-        <span class="instrumentHyperlink">@Html.ActionLink("Guitar", "Index", "Guitar", null, new { style = "text-decoration:none;" })</span>
-        <span class="instrumentHyperlink">@Html.ActionLink("Mandolin", "Index", "Mandolin", null, new { style = "text-decoration:none;" })</span>
-        <span class="instrumentHyperlink">@Html.ActionLink("Ukulele", "Index", "Ukulele", null, new { style = "text-decoration:none;" })</span>
+        <div id="instrumentHyperlinkHeaderList">
+            <span class="instrumentHyperlink">@Html.ActionLink("Bass", "Index", "Bass", null, new { style = "text-decoration:none;" })</span>
+            <span class="instrumentHyperlink">@Html.ActionLink("Guitar", "Index", "Guitar", null, new { style = "text-decoration:none;" })</span>
+            <!--<span class="instrumentHyperlink">Html.ActionLink("Guitar", "UpdateFretboardModel", "Guitar", new { selectedNotes = Model.SelectedNotes, selectedScale = Model.SelectedScale?.ScaleLabel })</span>--> @*, new { style = "text-decoration:none;" }*@
+            <span class="instrumentHyperlink">@Html.ActionLink("Mandolin", "Index", "Mandolin", null, new { style = "text-decoration:none;" })</span>
+            <span class="instrumentHyperlink">@Html.ActionLink("Ukulele", "Index", "Ukulele", null, new { style = "text-decoration:none;" })</span>
+        </div>
     </header>
     <div>
         @RenderBody()

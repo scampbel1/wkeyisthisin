@@ -23,6 +23,7 @@ namespace Keyify.Controllers
         {
             _dictionaryService = dictionary;
             _scaleDirectoryService = scaleDirectoryService;
+            //Stop creating new models - this is part of what's growing the application memory
             _tuning = new StandardMandolinTuning();
             _model = new FretboardWebModel(_fretCount, _tuning, _instrumentName);
         }
