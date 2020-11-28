@@ -1,7 +1,6 @@
 ﻿@using KeyifyWebClient.Core.Models
 @model FretboardWebModel
 <body>
-
     @if (Model.SelectedScale != null)
     {
         <h1>@Model.InstrumentName Fretboard (@Model.SelectedScale?.UserReadableLabel)</h1>
@@ -10,7 +9,6 @@
     {
         <h1>@Model.InstrumentName Fretboard</h1>
     }
-
     <table class="fretboard">
         <tr>
             @for (int count = 0; count < Model.GetFretCount(); count++)
@@ -26,7 +24,6 @@
                 </th>
             }
         </tr>
-
         @foreach (var instrumentString in Model.Fretboard.InstrumentStrings)
         {
             <tr>
@@ -65,15 +62,6 @@
         }
     </table>
     <hr />
-
-    @if (!Model.Scales.Any())
-    {
-        <div style="padding-left: 15px">
-            <br />
-            <button onclick="ResetModel()">Reset</button>
-            <button onclick="GoHome()">Back</button>
-        </div>
-    }
     <div class="scaleResults">
         @if (Model.Scales.Any())
         {
@@ -106,24 +94,9 @@
 
                 <span><a class="scaleResult" onclick="UpdateModel(null, false, '@scale.Value.UserReadableLabel')">@scale.Value.UserReadableLabel&nbsp;</a></span>
             }
-
-            <br />
-            <br />
-            <button onclick="ResetModel()">Reset</button>
-            <button onclick="GoHome()">Back</button>
-
         }
     </div>
-    <script src="~/js/jquery-3.5.1.min.js"></script>
     <script lang="en" type="text/javascript">
-
-        function ResetModel() {
-            location.href = '@Url.Action("Index")';
-        }
-
-        function GoHome() {
-            location.href = '@Url.Action("Index","Home")';
-        }
 
         function UpdateModel(note, addNote, scale) {
 
