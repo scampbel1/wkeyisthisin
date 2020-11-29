@@ -7,15 +7,6 @@
     <link href="~/css/InstrumentPage.css" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <div id="instrumentHyperlinkHeaderList">
-            <span class="instrumentHyperlink">@Html.ActionLink("Bass", "Index", "Bass", null, null)</span>
-            <span class="instrumentHyperlink">@Html.ActionLink("Guitar", "Index", "Guitar", null, null)</span>
-            @*<span class="instrumentHyperlink"><a onclick="ChangeInstrument('@Model.SelectedNotes.FirstOrDefault()', '@Model.SelectedScale', 'Guitar', '@Url.ActionLink("Index", "Guitar")')">Test</a></span> @string.Join(',', Model.SelectedNotes)*@
-            <span class="instrumentHyperlink">@Html.ActionLink("Mandolin", "Index", "Mandolin", null, null)</span>
-            <span class="instrumentHyperlink">@Html.ActionLink("Ukulele", "Index", "Ukulele", null, null)</span>
-        </div>
-    </header>
     <div>
         @RenderBody()
     </div>

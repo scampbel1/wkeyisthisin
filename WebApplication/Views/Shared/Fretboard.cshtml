@@ -62,6 +62,15 @@
         }
     </table>
     <hr />
+
+    <div id="instrumentHyperlinkHeaderList">
+        <span class="instrumentHyperlink">@Html.ActionLink("Bass", "Index", "Bass", null, null)</span>
+        <span class="instrumentHyperlink">@Html.ActionLink("Guitar", "Index", "Guitar", null, null)</span>
+        @*<span class="instrumentHyperlink"><a onclick="ChangeInstrument('@string.Join(',', Model.SelectedNotes)', '@Model.SelectedScale?.ScaleLabel', 'Guitar', '@Url.ActionLink("Index", "Guitar")')">Test</a></span>*@
+        <span class="instrumentHyperlink">@Html.ActionLink("Mandolin", "Index", "Mandolin", null, null)</span>
+        <span class="instrumentHyperlink">@Html.ActionLink("Ukulele", "Index", "Ukulele", null, null)</span>
+    </div>
+
     <div class="scaleResults">
         @if (Model.Scales.Any())
         {
@@ -96,6 +105,7 @@
             }
         }
     </div>
+
     <script lang="en" type="text/javascript">
 
         function UpdateModel(note, addNote, scale) {
