@@ -12,6 +12,7 @@
 
 .instrumentHyperlink {
     margin-right: 10px;
+    text-decoration: none;
 }
 
 .selectedNoteSelectedScale {

@@ -140,12 +140,14 @@
             return noteArray;
         }
 
-        @*function ChangeInstrument(notes, scale, newInstrument) {
+        function ChangeInstrument(notes, scale, newInstrument, hyperlinkUrl) {
 
-            var instrumentUrl = @Url.Action()
+            var instrumentUrl = '';
+
+            alert(notes + scale + newInstrument + hyperlinkUrl);
 
             $.ajax({
-                url: '@Url.Action("UpdateFretboardModel")',
+                url: instrumentUrl,
                 async: 'true',
                 type: "POST",
                 data: dataPost,
@@ -154,7 +156,7 @@
                     $("#Fretboard").html(data);
                 }
             });
-        }*@
+        }
 
     </script>
 </body>
