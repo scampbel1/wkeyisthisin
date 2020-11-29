@@ -9,66 +9,67 @@
     {
         <h1>@Model.InstrumentName Fretboard</h1>
     }
-    <table class="fretboard">
-        <tr>
-            @for (int count = 0; count < Model.GetFretCount(); count++)
-            {
-                if (count == 0)
-                {
-                    <th class="fretboardHeading"></th>
-                    continue;
-                }
 
-                <th class="fretboardHeading">
-                    @count
-                </th>
-            }
-        </tr>
-        @foreach (var instrumentString in Model.Fretboard.InstrumentStrings)
-        {
+    <div id="instrumentHyperlinkHeaderList">
+        <span class="instrumentHyperlink"><a onclick="ChangeInstrument('@Model.SelectedScale?.ScaleLabel', 'Bass')">Bass</a></span>
+        <span class="instrumentHyperlink"><a onclick="ChangeInstrument('@Model.SelectedScale?.ScaleLabel', 'Guitar')">Guitar</a></span>
+        <span class="instrumentHyperlink"><a onclick="ChangeInstrument('@Model.SelectedScale?.ScaleLabel', 'Mandolin')">Mandolin</a></span>
+        <span class="instrumentHyperlink"><a onclick="ChangeInstrument('@Model.SelectedScale?.ScaleLabel', 'Ukulele')">Ukulele</a></span>
+    </div>
+
+    <div>
+        <table class="fretboard">
             <tr>
-                @foreach (var note in instrumentString.Notes)
+                @for (int count = 0; count < Model.GetFretCount(); count++)
                 {
-                    if (Model.SelectedScale != null)
+                    if (count == 0)
                     {
-                        if (note.InSelectedScale && note.Selected)
-                        {
-                            <td class="selectedNoteSelectedScale" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleLabel')">
-                                @note.Note
-                            </td>
-                            continue;
-                        }
-                        else if (note.InSelectedScale && !note.Selected)
-                        {
-                            <td class="noteSelectedScale" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleLabel')">
-                                @note.Note
-                            </td>
-                            continue;
-                        }
-                    }
-                    if (note.Selected)
-                    {
-                        <td class="selectedNote" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleLabel')">
-                            @note.Note
-                        </td>
+                        <th class="fretboardHeading"></th>
                         continue;
                     }
 
-                    <td class="defaultNote" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleLabel')">
-                        @note.Note
-                    </td>
+                    <th class="fretboardHeading">
+                        @count
+                    </th>
                 }
             </tr>
-        }
-    </table>
-    <hr />
+            @foreach (var instrumentString in Model.Fretboard.InstrumentStrings)
+            {
+                <tr>
+                    @foreach (var note in instrumentString.Notes)
+                    {
+                        if (Model.SelectedScale != null)
+                        {
+                            if (note.InSelectedScale && note.Selected)
+                            {
+                                <td class="selectedNoteSelectedScale" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleLabel')">
+                                    @note.Note
+                                </td>
+                                continue;
+                            }
+                            else if (note.InSelectedScale && !note.Selected)
+                            {
+                                <td class="noteSelectedScale" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleLabel')">
+                                    @note.Note
+                                </td>
+                                continue;
+                            }
+                        }
+                        if (note.Selected)
+                        {
+                            <td class="selectedNote" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleLabel')">
+                                @note.Note
+                            </td>
+                            continue;
+                        }
 
-    <div id="instrumentHyperlinkHeaderList">
-        <span class="instrumentHyperlink">@Html.ActionLink("Bass", "Index", "Bass", null, null)</span>
-        <span class="instrumentHyperlink">@Html.ActionLink("Guitar", "Index", "Guitar", null, null)</span>
-        @*<span class="instrumentHyperlink"><a onclick="ChangeInstrument('@string.Join(',', Model.SelectedNotes)', '@Model.SelectedScale?.ScaleLabel', 'Guitar', '@Url.ActionLink("Index", "Guitar")')">Test</a></span>*@
-        <span class="instrumentHyperlink">@Html.ActionLink("Mandolin", "Index", "Mandolin", null, null)</span>
-        <span class="instrumentHyperlink">@Html.ActionLink("Ukulele", "Index", "Ukulele", null, null)</span>
+                        <td class="defaultNote" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleLabel')">
+                            @note.Note
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
     </div>
 
     <div class="scaleResults">
@@ -110,7 +111,7 @@
 
         function UpdateModel(note, addNote, scale) {
 
-            var dataPost = { selectedNotes: GenerateControllerMethodParams(note, addNote), selectedScale: scale };
+            var dataPost = { selectedNotes: GenerateArrayWithNewNote(note, addNote), selectedScale: scale };
 
             $.ajax({
                 url: '@Url.Action("UpdateFretboardModel")',
@@ -124,7 +125,7 @@
             });
         }
 
-        function GenerateControllerMethodParams(note, addNote) {
+        function GenerateArrayWithNewNote(note, addNote) {
 
             var noteArray = new Array();
 
@@ -150,11 +151,23 @@
             return noteArray;
         }
 
-        function ChangeInstrument(notes, scale, newInstrument, hyperlinkUrl) {
+        function GenerateArray() {
 
-            var instrumentUrl = '';
+            var noteArray = new Array();
 
-            alert(notes + scale + newInstrument + hyperlinkUrl);
+            @foreach (var note in Model.SelectedNotes)
+            {
+                @:noteArray.push("@note");
+            }
+
+            return noteArray;
+        }
+
+        function ChangeInstrument(scale, newInstrument) {
+
+            var instrumentUrl = '/' + newInstrument + '/UpdateFretboardModel/';
+
+            var dataPost = { selectedNotes: GenerateArray(), selectedScale: scale };
 
             $.ajax({
                 url: instrumentUrl,

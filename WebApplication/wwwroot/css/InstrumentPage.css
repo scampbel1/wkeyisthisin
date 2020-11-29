@@ -8,11 +8,14 @@
 
 #instrumentHyperlinkHeaderList {
     margin-left: 20px;
+    margin-bottom: 25px;
 }
 
 .instrumentHyperlink {
     margin-right: 10px;
     text-decoration: none;
+    font-size: larger;
+    background-color: rgba(0, 148, 255, 0.05) !important;
 }
 
 .selectedNoteSelectedScale {
@@ -96,4 +99,8 @@ a:hover {
 
 a:active {
     color: cadetblue;
+}
+
+a {
+    cursor: pointer;
 }
