@@ -50,9 +50,7 @@ namespace Keyify.FrontendBuisnessLogic
                 model.SelectedScale = null;
 
                 if (model.Scales.Any(a => a.Value.Selected))
-                {
                     model.Scales.SingleOrDefault(a => a.Value.Selected).Value.Selected = false;
-                }
             }
 
             model.ApplySelectedNotesToFretboard(realNotes, model.SelectedScale?.Scale.NotesSet);
@@ -72,9 +70,7 @@ namespace Keyify.FrontendBuisnessLogic
                 count++;
 
                 if (stringNoteIndex >= EnumHelper.GetAllNoteNames().Count)
-                {
                     stringNoteIndex = 0;
-                }
             }
 
             return notes;
