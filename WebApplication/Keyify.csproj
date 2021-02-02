@@ -8,11 +8,11 @@
 	<Authors>Sean Campbell</Authors>
 	<Product>Keyify</Product>
 	<Description />
-	<Copyright>Copyright © 2020</Copyright>    
+	<Copyright>Copyright © 2021</Copyright>    
 	</PropertyGroup>
 	
 	<PropertyGroup>
-		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<TargetFramework>net5.0</TargetFramework>
 		<UserSecretsId>a50ac624-865b-41b6-b124-40c9089050d7</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	<DockerfileContext>.</DockerfileContext>
