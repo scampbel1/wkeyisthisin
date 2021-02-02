@@ -13,9 +13,9 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
     {
         public static Dictionary<string, ScaleDictionaryEntry> GetMatchedScales(IEnumerable<Note> selectedNotes, IScaleDictionaryService dictionary)
         {
-            Dictionary<string, ScaleDictionaryEntry> dictionaryPointer = dictionary.GetScaleDictionary();
+            Dictionary<string, ScaleDictionaryEntry> dictionaryReference = dictionary.GetScaleDictionary();
 
-            return dictionaryPointer.Values.Where(a => a.Scale.NotesSet.IsSupersetOf(selectedNotes)).ToDictionary(a => a.ScaleLabel, b => b);
+            return dictionaryReference.Values.Where(a => a.Scale.NotesSet.IsSupersetOf(selectedNotes)).ToDictionary(a => a.ScaleLabel, b => b);
         }
 
         public static Dictionary<string, ScaleDictionaryEntry> GenerateDictionary(IScaleDirectoryService scaleDirectoryService)
@@ -59,6 +59,11 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
             return new ScaleDictionaryEntry(inputScale, generatedScale);
         }
 
+        /// <summary>
+        /// Inserts spaces found where a capital letter is found
+        /// </summary>
+        /// <param name="label"></param>
+        /// <returns>Stringbuilder modified input as a string</returns>
         public static string GetUserFriendlyLabel(string label)
         {
             StringBuilder sb = new StringBuilder().Append(label);
@@ -75,9 +80,15 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
             return sb.ToString();
         }
 
-        public static string ConvertUserFriendlyLabelIntoLabel(string inputScale)
+        /// <summary>
+        /// Removes any spaces found after the inital space between the root note and the scale name.
+        /// It wouldn't remove the space in between "B" and "Aeolian" in "B Aeolian."
+        /// </summary>
+        /// <param name="inputScaleLabel"></param>
+        /// <returns>Stringbuilder modified input as a string</returns>
+        public static string ConvertUserFriendlyLabelIntoLabel(string inputScaleLabel)
         {
-            StringBuilder sb = new StringBuilder().Append(inputScale);
+            StringBuilder sb = new StringBuilder().Append(inputScaleLabel);
 
             for (int i = 4; i <= sb.Length - 1; i++)
             {

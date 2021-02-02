@@ -46,7 +46,7 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
         {
             Note[] notes = new Note[input.Length];
 
-            if (!NoteHelper.ValidateMusicalNotes(input))
+            if (!ValidateMusicalNotes(input))
                 throw new ArgumentException("Invalid string input. Unable to convert to note.");
 
             int count = 0;
@@ -55,7 +55,7 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
             {
                 try
                 {
-                    notes[count] = NoteHelper.ConvertStringNoteToNoteType(note);
+                    notes[count] = ConvertStringNoteToNoteType(note);
 
                     count++;
                 }

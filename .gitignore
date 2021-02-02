@@ -4,3 +4,4 @@ obj
 .vs
 *.suo
 *.user
+/WebApplication/aws-beanstalk-tools-defaults.json
