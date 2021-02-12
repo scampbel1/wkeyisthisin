@@ -13,6 +13,6 @@ namespace Keyify.Music_Theory.Helper
         public static string ConvertModeToModeLabel(Mode mode)
         {
             return mode.ToString();
-        }
+        }       
     }
 }

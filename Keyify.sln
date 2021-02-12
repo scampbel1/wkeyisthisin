@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify", "WebApplication\Keyify.csproj", "{341BF9AB-63E6-4F23-8D41-E11846B4A3B3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Unit.Test", "Test\Keyify.Unit.Test.csproj", "{03786211-80C7-4964-84EB-701FA6D3B938}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Unit.Test", "Keyify.Unit.Test\Keyify.Unit.Test.csproj", "{03786211-80C7-4964-84EB-701FA6D3B938}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

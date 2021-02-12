@@ -1,6 +1,6 @@
 ﻿namespace KeyifyClassLibrary.Core.Domain.Enums
 {
-    public enum PentatonicModes
+    public enum PentatonicMode
     {
         Minor,
         Major
