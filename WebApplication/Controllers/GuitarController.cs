@@ -14,7 +14,7 @@ namespace Keyify.Controllers
         private readonly string _instrumentName = "Guitar";
         private readonly int _fretCount = 24;
 
-        private FretboardWebModel _model;
+        private InstrumentViewModel _model;
 
         private IScaleDictionaryService _dictionaryService;
         private IScaleDirectoryService _scaleDirectoryService;
@@ -24,7 +24,7 @@ namespace Keyify.Controllers
             _dictionaryService = dictionary;
             _scaleDirectoryService = scaleDirectoryService;
             _tuning = new StandardGuitarTuning();
-            _model = new FretboardWebModel(_fretCount, _tuning, _instrumentName);
+            _model = new InstrumentViewModel(_fretCount, _tuning, _instrumentName);
         }
 
         [HttpGet]

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace KeyifyWebClient.Core.Models
 {
-    public class FretboardWebModel
+    public class InstrumentViewModel //Be careful renaming this class! (It may not rename the reference in the Views)
     {
         public string InstrumentName { get; set; }
         public List<string> SelectedNotes { get; set; }
@@ -13,7 +13,7 @@ namespace KeyifyWebClient.Core.Models
         public ScaleDictionaryEntry SelectedScale { get; set; }
         public Dictionary<string, ScaleDictionaryEntry> Scales { get; set; }
 
-        public FretboardWebModel(int fretCount, ITuning tuning, string instrumentName)
+        public InstrumentViewModel(int fretCount, ITuning tuning, string instrumentName)
         {
             Scales = new Dictionary<string, ScaleDictionaryEntry>();
             Fretboard = new Fretboard(tuning, fretCount);

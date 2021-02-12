@@ -22,5 +22,31 @@ namespace Keyify.Domain.Helper
         {
             return GetModeNameColloquialism(mode).ToString();
         }
+
+        public static Nullable<Mode> GetModeFromPentatonicMode(PentatonicMode pentatonicMode)
+        {
+            switch (pentatonicMode)
+            {
+                case PentatonicMode.Major:
+                    return Mode.Ionian;
+                case PentatonicMode.Minor:
+                    return Mode.Aeolian;
+                default:
+                    return null;
+            }
+        }
+
+        public static string GetModeStringFromPentatonicMode(PentatonicMode pentatonicMode)
+        {
+            return GetModeFromPentatonicMode(pentatonicMode).ToString();
+        }
+
+        //public static string GetModeStringFromPentatonicMode(string pentatonicMode)
+        //{
+        //    if (EnumHelper.GetAllEnumNames(typeof(PentatonicMode)).Contains(pentatonicMode))
+        //        return GetModeFromPentatonicMode((PentatonicMode)Enum.Parse(typeof(PentatonicMode), pentatonicMode)).ToString();
+        //    else
+        //        return string.Empty;
+        //}
     }
 }

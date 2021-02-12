@@ -14,7 +14,7 @@ namespace Keyify.Controllers
         private readonly ITuning _tuning;
         private readonly string _instrumentName = "Mandolin";
 
-        FretboardWebModel _model;
+        InstrumentViewModel _model;
 
         private IScaleDictionaryService _dictionaryService;
         private IScaleDirectoryService _scaleDirectoryService;
@@ -25,7 +25,7 @@ namespace Keyify.Controllers
             _scaleDirectoryService = scaleDirectoryService;
             //Stop creating new models - this is part of what's growing the application memory
             _tuning = new StandardMandolinTuning();
-            _model = new FretboardWebModel(_fretCount, _tuning, _instrumentName);
+            _model = new InstrumentViewModel(_fretCount, _tuning, _instrumentName);
         }
 
         [HttpGet]

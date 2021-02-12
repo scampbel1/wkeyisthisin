@@ -10,7 +10,7 @@ namespace Keyify.FrontendBuisnessLogic
 {
     public static class FretboardFunctions
     {
-        public static void FindScales(FretboardWebModel model, string selectedScale, string[] selectedNotes, IScaleDictionaryService dictionaryService, IScaleDirectoryService scaleDirectoryService)
+        public static void FindScales(InstrumentViewModel model, string selectedScale, string[] selectedNotes, IScaleDictionaryService dictionaryService, IScaleDirectoryService scaleDirectoryService)
         {
             List<Note> realNotes;
 
@@ -32,7 +32,7 @@ namespace Keyify.FrontendBuisnessLogic
                 return;
             }
 
-            if (!string.IsNullOrEmpty(selectedScale))
+            if (!string.IsNullOrWhiteSpace(selectedScale))
             {
                 model.SelectedScale = dictionaryService.GetScale(selectedScale);
                 model.SelectedScale.Selected = true;
@@ -69,7 +69,7 @@ namespace Keyify.FrontendBuisnessLogic
                 stringNoteIndex++;
                 count++;
 
-                if (stringNoteIndex >= EnumHelper.GetAllNoteNames().Count)
+                if (stringNoteIndex >= EnumHelper.GetEnumNameCount(typeof(Note)))
                     stringNoteIndex = 0;
             }
 

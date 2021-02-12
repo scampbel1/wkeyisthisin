@@ -100,7 +100,7 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
             {
                 Note convertedNote = ConvertStringNoteToNoteType(note[0]);
 
-                if ((int)convertedNote >= EnumHelper.GetAllNoteNames().Count)
+                if ((int)convertedNote >= EnumHelper.GetEnumNameCount(typeof(Note)))
                 {
                     convertedNote = (Note)0;
                 }
@@ -128,7 +128,7 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
             {
                 Note convertedNote = ConvertStringNoteToNoteType(note[0]);
 
-                if ((int)convertedNote >= EnumHelper.GetAllNoteNames().Count)
+                if ((int)convertedNote >= EnumHelper.GetEnumNameCount(typeof(Note)))
                 {
                     convertedNote = (Note)0;
                 }
@@ -153,7 +153,7 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
             {
                 Note convertedNote = ConvertStringNoteToNoteType(note[0]);
 
-                if ((int)convertedNote >= EnumHelper.GetAllNoteNames().Count)
+                if ((int)convertedNote >= EnumHelper.GetEnumNameCount(typeof(Note)))
                 {
                     convertedNote = (Note)0;
                 }

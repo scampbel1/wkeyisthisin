@@ -9,9 +9,7 @@ namespace KeyifyClassLibrary.Core.Domain
         {
             List<ScaleDirectoryEntry> scaleDictionary = new List<ScaleDirectoryEntry>();
 
-            #region Scales
-
-            //Major Scale
+            #region Scale Steps
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
                 Mode.Ionian,
@@ -25,8 +23,6 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.W,
                     Step.h
                 }));
-
-            //Minor Scale
 
             scaleDictionary.Add(new ScaleDirectoryEntry(
                 Mode.Aeolian,

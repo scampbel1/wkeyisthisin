@@ -1,5 +1,4 @@
-﻿using KeyifyClassLibrary.Core.Domain.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,14 +6,14 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
 {
     public static class EnumHelper
     {
-        public static List<string> GetAllNoteNames()
+        public static List<string> GetAllEnumNames(Type type)
         {
-            return Enum.GetNames(typeof(Note)).ToList();
+            return Enum.GetNames(type).ToList();
         }
 
-        public static List<string> GetAllModeNames()
+        public static int GetEnumNameCount(Type type)
         {
-            return Enum.GetNames(typeof(Mode)).ToList();
+            return GetAllEnumNames(type).Count;
         }
     }
 }
