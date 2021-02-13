@@ -23,8 +23,7 @@ namespace KeyifyClassLibrary.Core.Domain
         public ScaleDictionaryEntry(string name, Scale scale, Mode mode) : this(name, scale)
         {
             Mode = mode;
-            ColloquialNameLabel = PentatonicModeHelper.GetModeNameColloquialismLabel(mode);
+            ColloquialNameLabel = PentatonicModeHelper.GetScaleColloquialism(mode, scale);
         }
-        //ColloquialNameLabel = $"{Scale.Notes[0]} {PentatonicModeHelper.GetModeNameColloquialismLabel(mode)}";
     }
 }

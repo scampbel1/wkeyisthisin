@@ -5,13 +5,13 @@ namespace KeyifyClassLibrary.Core.Domain
 {
     public class Scale
     {
-        private readonly Note _key;
+        public readonly Note RootNote;
         public List<Note> Notes { get; set; }
         public HashSet<Note> NotesSet { get; set; }
 
         public Scale(Note key)
         {
-            _key = key;
+            RootNote = key;
             Notes = new List<Note>();
             NotesSet = new HashSet<Note>();
         }
