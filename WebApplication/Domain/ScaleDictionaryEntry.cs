@@ -12,6 +12,7 @@ namespace KeyifyClassLibrary.Core.Domain
         public string ScaleLabel { get; set; }
         public string UserReadableLabel { get; set; }
         public string ColloquialNameLabel { get; set; }
+        public string UserReadableLabelIncludingColloquialism => !string.IsNullOrWhiteSpace(ColloquialNameLabel) ? $"{UserReadableLabel} ({ColloquialNameLabel})" : $"{UserReadableLabel}";
 
         public ScaleDictionaryEntry(string name, Scale scale)
         {
