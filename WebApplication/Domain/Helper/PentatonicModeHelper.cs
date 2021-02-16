@@ -1,5 +1,6 @@
 ﻿using KeyifyClassLibrary.Core.Domain;
 using KeyifyClassLibrary.Core.Domain.Enums;
+using KeyifyClassLibrary.Core.Domain.Helper;
 
 namespace Keyify.Domain.Helper
 {
@@ -23,11 +24,11 @@ namespace Keyify.Domain.Helper
             return GetModeNameColloquialism(mode).ToString();
         }
 
-        public static string GetScaleColloquialism(Mode mode, Scale scale)
+        public static string GetScaleColloquialism(Scale scale, bool convertToSharp = false)
         {
-            var pentatonicModeEquivalent = GetModeNameColloquialismModeLabel(mode);
+            var pentatonicModeEquivalent = GetModeNameColloquialismModeLabel(scale.Mode);
 
-            return !string.IsNullOrWhiteSpace(pentatonicModeEquivalent) ? $"{scale.RootNote} {pentatonicModeEquivalent}" : pentatonicModeEquivalent;
-        }        
+            return !string.IsNullOrWhiteSpace(pentatonicModeEquivalent) ? $"{NoteHelper.ConvertNoteToStringEquivalent(scale.RootNote, convertToSharp)} {pentatonicModeEquivalent}" : pentatonicModeEquivalent;
+        }
     }
 }

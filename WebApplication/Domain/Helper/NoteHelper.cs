@@ -7,7 +7,7 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
 {
     public static class NoteHelper
     {
-        private static bool IsSharpOrFlat(Note note)
+        public static bool IsSharpOrFlat(Note note)
         {
             switch (note)
             {
@@ -117,77 +117,15 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
             }
         }
 
-        public static Note ConvertFlatNoteStringToFlatNote(string note)
-        {
-            if (note.Length != 2) return ConvertStringNoteToNoteType(note);
-
-            if (note[1] != 'b')
-                throw new InvalidOperationException("Note must be flat");
-
-            try
-            {
-                Note convertedNote = ConvertStringNoteToNoteType(note[0]);
-
-                if ((int)convertedNote >= EnumHelper.GetEnumNameCount(typeof(Note)))
-                {
-                    convertedNote = (Note)0;
-                }
-                else
-                {
-                    convertedNote = convertedNote + 1;
-                }
-
-                return convertedNote;
-            }
-            catch
-            {
-                throw new Exception("Conversion went wrong");
-            }
-        }
-
-        public static string ConvertFlatNoteStringToSharpString(string note)
-        {
-            if (note.Length < 2 || note[1] != 'b') return note;
-
-            try
-            {
-                Note convertedNote = ConvertStringNoteToNoteType(note[0]);
-
-                if ((int)convertedNote >= EnumHelper.GetEnumNameCount(typeof(Note)))
-                {
-                    convertedNote = (Note)0;
-                }
-                else
-                {
-                    convertedNote = convertedNote + 1;
-                }
-
-                return ConvertNoteToStringEquivalent(convertedNote);
-            }
-            catch
-            {
-                throw new Exception("Conversion went wrong");
-            }
-        }
-
         public static string ConvertNoteToStringEquivalent(Note note, bool convertFlatNotes = false)
         {
-            if (!IsSharpOrFlat(note))
+            if (!convertFlatNotes || !IsSharpOrFlat(note))
                 return note.ToString();
 
-            try
-            {
-                if (!convertFlatNotes) return note.ToString();
+            if (note == Note.Ab)
+                return "G#";
 
-                if (note == Note.Ab)
-                    return "G#";
-
-                return note - 1 + "#";
-            }
-            catch
-            {
-                throw new Exception("Conversion went wrong");
-            }
+            return note - 1 + "#";
         }
     }
 }

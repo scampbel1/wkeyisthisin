@@ -37,10 +37,10 @@ namespace ScaleDictionaryTests
         [Fact]
         public void AbIonianScaleIsConvertedToAbMajor()
         {
-            var scale = new Scale(Note.Ab);
+            var scale = new Scale(Note.Ab, Mode.Ionian);
 
             var expected = "Ab Major";
-            var actual = PentatonicModeHelper.GetScaleColloquialism(Mode.Ionian, scale);
+            var actual = PentatonicModeHelper.GetScaleColloquialism(scale);
 
             Assert.Equal(expected, actual);
         }
@@ -48,10 +48,10 @@ namespace ScaleDictionaryTests
         [Fact]
         public void DbAeolianScaleIsConvertedToDbMinor()
         {
-            var scale = new Scale(Note.Db);
+            var scale = new Scale(Note.Db, Mode.Aeolian);
 
             var expected = "Db Minor";
-            var actual = PentatonicModeHelper.GetScaleColloquialism(Mode.Aeolian, scale);
+            var actual = PentatonicModeHelper.GetScaleColloquialism(scale);
 
             Assert.Equal(expected, actual);
         }

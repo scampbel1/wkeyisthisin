@@ -1,4 +1,5 @@
 ﻿using KeyifyClassLibrary.Core.Domain.Enums;
+using static KeyifyClassLibrary.Core.Domain.ScaleModeDictionary;
 
 namespace KeyifyClassLibrary.Core.Domain.Helper
 {
@@ -10,16 +11,18 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
         /// </summary>
         /// <param name="key"></param>
         /// <param name="scaleSteps"></param>
+        /// <param name="scaleLabel"></param>
         /// <returns></returns>
-        public static Scale GenerateScaleFromKey(Note key, Step[] scaleSteps)
+        public static Scale GenerateScale(Note key, ScaleDirectoryEntry scaleDirectoryEntry)
         {
             int noteNumber = (int)key;
-            Scale scale = new Scale(key);
+            
+            Scale scale = new Scale(key, scaleDirectoryEntry.Mode);
 
-            foreach (Step scaleStep in scaleSteps)
+            foreach (Step scaleStep in scaleDirectoryEntry.ScaleSteps)
             {
                 noteNumber += (int)scaleStep;
-                
+
                 if (noteNumber > 11)
                     noteNumber -= 12;
 

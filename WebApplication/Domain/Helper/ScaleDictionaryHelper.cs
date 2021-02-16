@@ -1,11 +1,8 @@
 ﻿using Keyify.Models;
-using Keyify.Music_Theory.Helper;
-using Keyify.Service;
 using KeyifyClassLibrary.Core.Domain.Enums;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using static KeyifyClassLibrary.Core.Domain.ScaleModeDictionary;
 
 namespace KeyifyClassLibrary.Core.Domain.Helper
 {

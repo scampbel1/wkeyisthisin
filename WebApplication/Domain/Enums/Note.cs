@@ -1,18 +1,20 @@
-﻿namespace KeyifyClassLibrary.Core.Domain.Enums
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace KeyifyClassLibrary.Core.Domain.Enums
 {
     public enum Note
     {
-        A,
-        Bb, //A#
+        A,        
+        Bb,
         B,
-        C,
-        Db, //C#
+        C,        
+        Db,
         D,
-        Eb, //D#
+        Eb,
         E,
         F,
-        Gb, //F#
-        G,
-        Ab, //G#
+        Gb,
+        G,        
+        Ab,
     }
 }

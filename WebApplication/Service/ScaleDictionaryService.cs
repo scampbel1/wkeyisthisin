@@ -3,6 +3,7 @@ using Keyify.Service;
 using KeyifyClassLibrary.Core.Domain;
 using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static KeyifyClassLibrary.Core.Domain.ScaleModeDictionary;
@@ -32,7 +33,7 @@ namespace Keyify.Models
             ScaleDictionaryEntry retVal = _scaleDictionary.GetValueOrDefault(scaleLabel);
 
             if (retVal == null)
-                retVal = _scaleDictionary.SingleOrDefault(a => a.Value.UserReadableLabel == scaleLabel).Value;
+                retVal = _scaleDictionary.SingleOrDefault(a => a.Value.UserReadableLabel_Flat == scaleLabel).Value;
 
             _currentlySelected = retVal.ScaleLabel;
 
@@ -45,39 +46,17 @@ namespace Keyify.Models
 
             foreach (ScaleDirectoryEntry scaleDirectoryEntry in scaleDirectoryService.GetDirectory())
             {
-                foreach (string note in EnumHelper.GetAllEnumNames(typeof(Note)))
+                foreach (Note note in Enum.GetValues(typeof(Note)))
                 {
-                    string scaleLabel = $"{note} {scaleDirectoryEntry.Label}";
+                    Scale scale = ScaleHelper.GenerateScale(note, scaleDirectoryEntry);
 
-                    Note realNote = NoteHelper.ConvertStringNoteToNoteType(note);
+                    ScaleDictionaryEntry entry = new ScaleDictionaryEntry(scale);
 
-                    ScaleDictionaryEntry entry = new ScaleDictionaryEntry(scaleLabel, ScaleHelper.GenerateScaleFromKey(realNote, scaleDirectoryEntry.ScaleSteps), scaleDirectoryEntry.Mode);
-
-                    dictionary.Add(scaleLabel, entry);
+                    dictionary.Add(entry.ScaleLabel, entry);
                 }
             }
 
             return dictionary;
-        }
-
-        public static ScaleDictionaryEntry GenerateEntryFromString(string inputScale, IScaleDirectoryService scaleDirectoryService)
-        {
-            inputScale = ScaleDictionaryHelper.ConvertUserFriendlyLabelIntoLabel(inputScale);
-
-            string note = inputScale.Substring(0, inputScale.IndexOf(' '));
-            string mode = inputScale.Substring(inputScale.IndexOf(' '), inputScale.Length - (note.Length));
-
-            if (note.Length > 1)
-                if (note[1] == '#')
-                    note = NoteHelper.ConvertSharpNoteStringToFlatNote(note).ToString();
-
-            Note realNote = NoteHelper.ConvertStringNoteToNoteType(note);
-
-            ScaleDirectoryEntry realScale = scaleDirectoryService.GetDirectoryEntry(ModeHelper.ConvertStringModeNameToModeType(mode));
-
-            Scale generatedScale = ScaleHelper.GenerateScaleFromKey(realNote, realScale.ScaleSteps);
-
-            return new ScaleDictionaryEntry(inputScale, generatedScale);
-        }
+        }        
     }
 }

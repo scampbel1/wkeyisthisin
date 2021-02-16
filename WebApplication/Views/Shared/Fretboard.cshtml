@@ -3,7 +3,7 @@
 <body>
     @if (Model.SelectedScale != null)
     {
-        <h1>@Model.InstrumentName Fretboard (@Model.SelectedScale?.UserReadableLabelIncludingColloquialism)</h1>
+        <h1>@Model.InstrumentName Fretboard (@Model.SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp)</h1>
     }
     else
     {
@@ -43,14 +43,14 @@
                             if (note.InSelectedScale && note.Selected)
                             {
                                 <td class="selectedNoteSelectedScale" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleLabel')">
-                                    @note.Note
+                                    @note.Sharp
                                 </td>
                                 continue;
                             }
                             else if (note.InSelectedScale && !note.Selected)
                             {
                                 <td class="noteSelectedScale" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleLabel')">
-                                    @note.Note
+                                    @note.Sharp
                                 </td>
                                 continue;
                             }
@@ -58,13 +58,13 @@
                         if (note.Selected)
                         {
                             <td class="selectedNote" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleLabel')">
-                                @note.Note
+                                @note.Sharp
                             </td>
                             continue;
                         }
 
                         <td class="defaultNote" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleLabel')">
-                            @note.Note
+                            @note.Sharp
                         </td>
                     }
                 </tr>
@@ -86,13 +86,13 @@
                 {
                     <br />
                     <h2>
-                        @(Model.Scales.Count - 1) Matching Scales (Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale.UserReadableLabelIncludingColloquialism</span>)
+                        @(Model.Scales.Count - 1) Matching Scales (Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale.UserReadableLabelIncludingColloquialism_Sharp</span>)
                     </h2>
                 }
                 else if (Model.SelectedScale != null)
                 {
                     <br />
-                    <h2>0 Scales Found (Notes Selected: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale?.UserReadableLabelIncludingColloquialism</span>)</h2>
+                    <h2>0 Scales Found (Notes Selected: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp</span>)</h2>
                 }
             }
 
@@ -100,11 +100,11 @@
             {
                 if (scale.Value.Selected)
                 {
-                    <span><a class="scaleResultSelected" onclick="UpdateModel(null, false, '')">@scale.Value.UserReadableLabelIncludingColloquialism&nbsp;</a></span>
+                    <span><a class="scaleResultSelected" onclick="UpdateModel(null, false, '')">@scale.Value.UserReadableLabelIncludingColloquialism_Sharp&nbsp;</a></span>
                     continue;
                 }
 
-                <span><a class="scaleResult" onclick="UpdateModel(null, false, '@scale.Value.ScaleLabel')">@scale.Value.UserReadableLabelIncludingColloquialism&nbsp;</a></span>
+                <span><a class="scaleResult" onclick="UpdateModel(null, false, '@scale.Value.ScaleLabel')">@scale.Value.UserReadableLabelIncludingColloquialism_Sharp&nbsp;</a></span>
             }
         }
     </div>
