@@ -80,19 +80,21 @@
                 if (Model.Scales.Count > 1 && Model.SelectedScale == null)
                 {
                     <br />
-                    <h2>@Model.Scales.Count Matching Scales (Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>)</h2>
+                    <h2>@Model.Scales.Count Matching Scales</h2>
+                    <h4>(Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>)</h4>
+        
                 }
                 if (Model.Scales.Count > 1 && Model.SelectedScale != null)
                 {
                     <br />
-                    <h2>
-                        @(Model.Scales.Count - 1) Matching Scales (Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale.UserReadableLabelIncludingColloquialism_Sharp</span>)
-                    </h2>
+                    <h2>@(Model.Scales.Count - 1) Matching Scales</h2>
+                    <h4>(Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale.UserReadableLabelIncludingColloquialism_Sharp</span>)</h4>
                 }
                 else if (Model.SelectedScale != null)
                 {
                     <br />
-                    <h2>0 Scales Found (Notes Selected: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp</span>)</h2>
+                    <h2>0 Scales Found</h2>
+                    <h4>(Notes Selected: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp</span>)</h4>
                 }
             }
 
