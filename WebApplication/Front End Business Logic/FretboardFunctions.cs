@@ -10,38 +10,30 @@ namespace Keyify.FrontendBuisnessLogic
 {
     public static class FretboardFunctions
     {
-        public static void FindScales(InstrumentViewModel model,
-                                      string selectedScale,
-                                      string[] selectedNotes,
-                                      IScaleDictionaryService dictionaryService,
-                                      IScaleDirectoryService scaleDirectoryService)
+        public static void ProcessNotesAndScale(InstrumentViewModel model, string selectedScale, string[] selectedNotes, IScaleListService dictionaryService, IScaleDirectoryService scaleDirectoryService)
         {
             UpdateSelectedNotes(selectedNotes, model);
 
             if (model.SelectedNotes.Count > 1)
-                model.Scales = ScaleDictionaryHelper.GetMatchedScales(model.SelectedNotes.Select(a => a.Note), dictionaryService);
-            else
-                selectedScale = null;
-
-            if (!string.IsNullOrWhiteSpace(selectedScale))
             {
-                model.SelectedScale = dictionaryService.GetScale(selectedScale);
-                model.SelectedScale.Selected = true;
-
-                if (!model.Scales.Any(a => a.Value.ScaleLabel == model.SelectedScale.ScaleLabel))
-                    model.Scales.Add(model.SelectedScale.ScaleLabel, model.SelectedScale);
-                else
-                {
-                    model.Scales.Remove(model.SelectedScale.ScaleLabel);
-                    model.Scales.Add(model.SelectedScale.ScaleLabel, model.SelectedScale);
-                }
+                model.Scales = ScaleDictionaryHelper.GetMatchedScales(model.SelectedNotes.Select(a => a.Note), dictionaryService);
+                ApplySelectedScales(selectedScale, model);
             }
             else
             {
-                model.SelectedScale = null;
+                if (model.Scales != null && model.Scales.Any(a => a.Selected))
+                {
+                    model.Scales.SingleOrDefault(a => a.Selected).Selected = false;
+                }
 
-                if (model.Scales.Any(a => a.Value.Selected))
-                    model.Scales.SingleOrDefault(a => a.Value.Selected).Value.Selected = false;
+                model.SelectedScale = null;
+                model.Scales.Clear();
+                model.ResetNotesInScale();
+                
+                if (!selectedNotes.Any())
+                {
+                    model.ResetSelectedNotes();
+                }
             }
 
             model.ApplySelectedNotesToFretboard(model.SelectedNotes.Select(a => a.Note).ToList(), model.SelectedScale?.Scale.NotesSet);
@@ -78,6 +70,21 @@ namespace Keyify.FrontendBuisnessLogic
                 var selectedNote = noteStack.Pop();
 
                 model.UnselectedNotes.Where(n => n.Note.ToString() == selectedNote).Single().Selected = true;
+            }
+        }
+
+        private static void ApplySelectedScales(string selectedScale, InstrumentViewModel model)
+        {
+            model.ResetSelectedScales();
+
+            if (!string.IsNullOrWhiteSpace(selectedScale))
+            {
+                model.SelectedScale = model.Scales.Single(a => a.ScaleLabel == selectedScale);
+                model.SelectedScale.Selected = true;
+            }
+            else
+            {
+                model.SelectedScale = null;
             }
         }
     }

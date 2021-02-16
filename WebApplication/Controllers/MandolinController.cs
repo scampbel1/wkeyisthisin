@@ -16,10 +16,10 @@ namespace Keyify.Controllers
 
         InstrumentViewModel _model;
 
-        private IScaleDictionaryService _dictionaryService;
+        private IScaleListService _dictionaryService;
         private IScaleDirectoryService _scaleDirectoryService;
 
-        public MandolinController(IScaleDictionaryService dictionary, IScaleDirectoryService scaleDirectoryService, InstrumentViewModel instrumentViewModel)
+        public MandolinController(IScaleListService dictionary, IScaleDirectoryService scaleDirectoryService, InstrumentViewModel instrumentViewModel)
         {
             _dictionaryService = dictionary;
             _scaleDirectoryService = scaleDirectoryService;
@@ -42,7 +42,7 @@ namespace Keyify.Controllers
             if (selectedNotes == null || selectedNotes.Length < 1)
                 return PartialView("Fretboard", _model);
 
-            FretboardFunctions.FindScales(_model, selectedScale, selectedNotes, _dictionaryService, _scaleDirectoryService);
+            FretboardFunctions.ProcessNotesAndScale(_model, selectedScale, selectedNotes, _dictionaryService, _scaleDirectoryService);
 
             return PartialView("Fretboard", _model);
         }

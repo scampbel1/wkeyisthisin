@@ -15,9 +15,11 @@ namespace KeyifyWebClient.Core.Models
         public List<FretboardNote> Notes { get; set; } = new List<FretboardNote>();
         public List<FretboardNote> SelectedNotes => Notes.Where(n => n.Selected).ToList();
         public List<FretboardNote> UnselectedNotes => Notes.Where(n => !n.Selected).ToList();
+        public List<FretboardNote> NotesPartOfScale => Notes.Where(n => n.InSelectedScale).ToList();
         public Fretboard Fretboard { get; private set; }
-        public ScaleDictionaryEntry SelectedScale { get; set; }
-        public Dictionary<string, ScaleDictionaryEntry> Scales { get; set; } = new Dictionary<string, ScaleDictionaryEntry>();
+        public ScaleListEntry SelectedScale { get; set; }
+        public List<ScaleListEntry> Scales { get; set; } = new List<ScaleListEntry>();
+        public List<ScaleListEntry> SelectedScales => Scales.Where(s => s.Selected).ToList();
 
         public InstrumentViewModel()
         {
@@ -36,6 +38,22 @@ namespace KeyifyWebClient.Core.Models
             foreach (var selectedNote in SelectedNotes)
             {
                 selectedNote.Selected = false;
+            }
+        }
+
+        public void ResetNotesInScale()
+        {
+            foreach (var selectedNote in NotesPartOfScale)
+            {
+                selectedNote.InSelectedScale = false;
+            }
+        }
+
+        public void ResetSelectedScales()
+        {
+            foreach (var selectedScale in SelectedScales)
+            {
+                selectedScale.Selected = false;
             }
         }
 

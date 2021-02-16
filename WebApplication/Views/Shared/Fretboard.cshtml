@@ -94,19 +94,19 @@
                 {
                     <br />
                     <h2>0 Scales Found</h2>
-                    <h4>(Notes Selected: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp</span>)</h4>
+                    <h4>(Notes Selected: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp</span>)</h4>
                 }
             }
 
             foreach (var scale in Model.Scales)
             {
-                if (scale.Value.Selected)
+                if (scale.Selected)
                 {
-                    <span><a class="scaleResultSelected" onclick="UpdateModel(null, false, '')">@scale.Value.UserReadableLabelIncludingColloquialism_Sharp&nbsp;</a></span>
+                    <span><a class="scaleResultSelected" onclick="UpdateModel(null, false, '')">@scale.UserReadableLabelIncludingColloquialism_Sharp&nbsp;</a></span>
                     continue;
                 }
 
-                <span><a class="scaleResult" onclick="UpdateModel(null, false, '@scale.Value.ScaleLabel')">@scale.Value.UserReadableLabelIncludingColloquialism_Sharp&nbsp;</a></span>
+                <span><a class="scaleResult" onclick="UpdateModel(null, false, '@scale.ScaleLabel')">@scale.UserReadableLabelIncludingColloquialism_Sharp&nbsp;</a></span>
             }
         }
     </div>

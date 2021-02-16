@@ -8,11 +8,11 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
 {
     public static class ScaleDictionaryHelper
     {
-        public static Dictionary<string, ScaleDictionaryEntry> GetMatchedScales(IEnumerable<Note> selectedNotes, IScaleDictionaryService dictionary)
+        public static List<ScaleListEntry> GetMatchedScales(IEnumerable<Note> selectedNotes, IScaleListService listService)
         {
-            Dictionary<string, ScaleDictionaryEntry> dictionaryReference = dictionary.GetScaleDictionary();
+            var listReference = listService.GetScaleList();
 
-            return dictionaryReference.Values.Where(a => a.Scale.NotesSet.IsSupersetOf(selectedNotes)).ToDictionary(a => a.ScaleLabel, b => b);
+            return listReference.Where(a => a.Scale.NotesSet.IsSupersetOf(selectedNotes)).ToList();
         }
 
         /// <summary>

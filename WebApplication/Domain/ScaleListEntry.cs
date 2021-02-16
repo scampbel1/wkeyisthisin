@@ -3,7 +3,7 @@ using KeyifyClassLibrary.Core.Domain.Helper;
 
 namespace KeyifyClassLibrary.Core.Domain
 {
-    public class ScaleDictionaryEntry
+    public class ScaleListEntry
     {
         public Scale Scale { get; set; }
         public bool Selected { get; set; }
@@ -17,7 +17,7 @@ namespace KeyifyClassLibrary.Core.Domain
         public readonly string ColloquialNameLabel_Sharp;
         public readonly string UserReadableLabelIncludingColloquialism_Sharp;
 
-        public ScaleDictionaryEntry(Scale scale)
+        public ScaleListEntry(Scale scale)
         {
             ScaleLabel = $"{scale.RootNote}{scale.Mode}";
             Scale = scale;
