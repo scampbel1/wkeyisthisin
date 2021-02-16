@@ -19,13 +19,15 @@ namespace Keyify.Controllers
         private IScaleDictionaryService _dictionaryService;
         private IScaleDirectoryService _scaleDirectoryService;
 
-        public UkuleleController(IScaleDictionaryService dictionary, IScaleDirectoryService scaleDirectoryService)
+        public UkuleleController(IScaleDictionaryService dictionary, IScaleDirectoryService scaleDirectoryService, InstrumentViewModel instrumentViewModel)
         {
             _dictionaryService = dictionary;
             _scaleDirectoryService = scaleDirectoryService;
-            //Stop creating new models - this is part of what's growing the application memory
+
             _tuning = new StandardUkuleleTuning();
-            _model = new InstrumentViewModel(_fretCount, _tuning, _instrumentName);
+
+            _model = instrumentViewModel;
+            _model.UpdateViewModel(_instrumentName, _tuning, _fretCount);
         }
 
         [HttpGet]

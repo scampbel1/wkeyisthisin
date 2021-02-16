@@ -10,27 +10,18 @@ namespace Keyify.FrontendBuisnessLogic
 {
     public static class FretboardFunctions
     {
-        public static void FindScales(InstrumentViewModel model, string selectedScale, string[] selectedNotes, IScaleDictionaryService dictionaryService, IScaleDirectoryService scaleDirectoryService)
+        public static void FindScales(InstrumentViewModel model,
+                                      string selectedScale,
+                                      string[] selectedNotes,
+                                      IScaleDictionaryService dictionaryService,
+                                      IScaleDirectoryService scaleDirectoryService)
         {
-            List<Note> realNotes;
+            UpdateSelectedNotes(selectedNotes, model);
 
-            if (selectedNotes.Length > 0)
-            {
-                model.SelectedNotes.Clear();
-                model.SelectedNotes.AddRange(selectedNotes);
-                realNotes = NoteHelper.ConvertNoteStringArrayIntoNotes(selectedNotes);
-
-                if (selectedNotes.Length > 1)
-                    model.Scales = ScaleDictionaryHelper.GetMatchedScales(realNotes, dictionaryService);
-                else
-                    selectedScale = null;
-            }
+            if (model.SelectedNotes.Count > 1)
+                model.Scales = ScaleDictionaryHelper.GetMatchedScales(model.SelectedNotes.Select(a => a.Note), dictionaryService);
             else
-            {
-                model.SelectedNotes.Clear();
-                model.Scales.Clear();
-                return;
-            }
+                selectedScale = null;
 
             if (!string.IsNullOrWhiteSpace(selectedScale))
             {
@@ -53,7 +44,7 @@ namespace Keyify.FrontendBuisnessLogic
                     model.Scales.SingleOrDefault(a => a.Value.Selected).Value.Selected = false;
             }
 
-            model.ApplySelectedNotesToFretboard(realNotes, model.SelectedScale?.Scale.NotesSet);
+            model.ApplySelectedNotesToFretboard(model.SelectedNotes.Select(a => a.Note).ToList(), model.SelectedScale?.Scale.NotesSet);
         }
 
         public static List<FretboardNote> PopulateFretboard(Note openNote, int fretCount)
@@ -74,6 +65,20 @@ namespace Keyify.FrontendBuisnessLogic
             }
 
             return notes;
+        }
+
+        private static void UpdateSelectedNotes(IEnumerable<string> selectedNotes, InstrumentViewModel model)
+        {
+            var noteStack = new Stack<string>(selectedNotes);
+
+            model.ResetSelectedNotes();
+
+            while (noteStack.Any())
+            {
+                var selectedNote = noteStack.Pop();
+
+                model.UnselectedNotes.Where(n => n.Note.ToString() == selectedNote).Single().Selected = true;
+            }
         }
     }
 }

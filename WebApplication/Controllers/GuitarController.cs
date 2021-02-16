@@ -19,12 +19,15 @@ namespace Keyify.Controllers
         private IScaleDictionaryService _dictionaryService;
         private IScaleDirectoryService _scaleDirectoryService;
 
-        public GuitarController(IScaleDictionaryService dictionary, IScaleDirectoryService scaleDirectoryService)
+        public GuitarController(IScaleDictionaryService dictionary, IScaleDirectoryService scaleDirectoryService, InstrumentViewModel instrumentViewModel)
         {
             _dictionaryService = dictionary;
             _scaleDirectoryService = scaleDirectoryService;
+            
             _tuning = new StandardGuitarTuning();
-            _model = new InstrumentViewModel(_fretCount, _tuning, _instrumentName);
+            
+            _model = instrumentViewModel;
+            _model.UpdateViewModel(_instrumentName, _tuning, _fretCount);
         }
 
         [HttpGet]

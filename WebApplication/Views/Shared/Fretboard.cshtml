@@ -20,7 +20,7 @@
     <div>
         <table class="fretboard">
             <tr>
-                @for (int count = 0; count < Model.GetFretCount(); count++)
+                @for (int count = 0; count < Model.Fretboard.FretCount; count++)
                 {
                     if (count == 0)
                     {
@@ -80,13 +80,13 @@
                 if (Model.Scales.Count > 1 && Model.SelectedScale == null)
                 {
                     <br />
-                    <h2>@Model.Scales.Count Matching Scales (Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>)</h2>
+                    <h2>@Model.Scales.Count Matching Scales (Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>)</h2>
                 }
                 if (Model.Scales.Count > 1 && Model.SelectedScale != null)
                 {
                     <br />
                     <h2>
-                        @(Model.Scales.Count - 1) Matching Scales (Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes)</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale.UserReadableLabelIncludingColloquialism_Sharp</span>)
+                        @(Model.Scales.Count - 1) Matching Scales (Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale.UserReadableLabelIncludingColloquialism_Sharp</span>)
                     </h2>
                 }
                 else if (Model.SelectedScale != null)
@@ -133,7 +133,7 @@
 
             @foreach (var note in Model.SelectedNotes)
             {
-                @:noteArray.push("@note");
+                @:noteArray.push("@note.Note");
             }
 
             if (note != null && note != '') {
@@ -159,7 +159,7 @@
 
             @foreach (var note in Model.SelectedNotes)
             {
-                @:noteArray.push("@note");
+                @:noteArray.push("@note.Note");
             }
 
             return noteArray;
