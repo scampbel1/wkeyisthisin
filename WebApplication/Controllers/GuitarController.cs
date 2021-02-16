@@ -23,9 +23,9 @@ namespace Keyify.Controllers
         {
             _dictionaryService = dictionary;
             _scaleDirectoryService = scaleDirectoryService;
-            
+
             _tuning = new StandardGuitarTuning();
-            
+
             _model = instrumentViewModel;
             _model.UpdateViewModel(_instrumentName, _tuning, _fretCount);
         }
@@ -36,13 +36,11 @@ namespace Keyify.Controllers
             return View(_model);
         }
 
-        [HttpPost] //Remove when playing around with ActionLink helper method
+        [HttpPost]
         public ActionResult UpdateFretboardModel(string[] selectedNotes, string selectedScale)
         {
-            if (selectedNotes == null || selectedNotes.Length < 1)
-                return PartialView("Fretboard", _model);
-
-            FretboardFunctions.FindScales(_model, selectedScale, selectedNotes, _dictionaryService, _scaleDirectoryService);
+            if (selectedNotes != null && selectedNotes.Length > 0)
+                FretboardFunctions.FindScales(_model, selectedScale, selectedNotes, _dictionaryService, _scaleDirectoryService);
 
             return PartialView("Fretboard", _model);
         }
