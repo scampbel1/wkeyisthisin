@@ -39,10 +39,8 @@ namespace Keyify.Controllers
         [HttpPost]
         public ActionResult UpdateFretboardModel(string[] selectedNotes, string selectedScale)
         {
-            if (selectedNotes == null || selectedNotes.Length < 1)
-                return PartialView("Fretboard", _model);
-
-            FretboardFunctions.ProcessNotesAndScale(_model, selectedScale, selectedNotes, _dictionaryService, _scaleDirectoryService);
+            if (selectedNotes != null)
+                FretboardFunctions.ProcessNotesAndScale(_model, selectedScale, selectedNotes, _dictionaryService, _scaleDirectoryService);
 
             return PartialView("Fretboard", _model);
         }
