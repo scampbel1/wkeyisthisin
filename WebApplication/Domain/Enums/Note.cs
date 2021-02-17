@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace KeyifyClassLibrary.Core.Domain.Enums
+﻿namespace KeyifyClassLibrary.Core.Domain.Enums
 {
     public enum Note
     {

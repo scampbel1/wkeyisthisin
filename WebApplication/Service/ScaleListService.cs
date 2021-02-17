@@ -4,15 +4,13 @@ using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Helper;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using static KeyifyClassLibrary.Core.Domain.ScaleModeDictionary;
 
 namespace Keyify.Models
 {
     public class ScaleListService : IScaleListService
     {
-        private readonly List<ScaleListEntry> _scaleList;
-        private string _currentlySelected;
+        private readonly List<ScaleListEntry> _scaleList;        
 
         public ScaleListService(IScaleDirectoryService scaleDirectoryService)
         {
