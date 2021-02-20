@@ -17,9 +17,9 @@ namespace Keyify.Controllers
         InstrumentViewModel _model;
 
         private IScaleListService _dictionaryService;
-        private IScaleDirectoryService _scaleDirectoryService;
+        private IScaleService _scaleDirectoryService;
 
-        public UkuleleController(IScaleListService dictionary, IScaleDirectoryService scaleDirectoryService, InstrumentViewModel instrumentViewModel)
+        public UkuleleController(IScaleListService dictionary, IScaleService scaleDirectoryService, InstrumentViewModel instrumentViewModel)
         {
             _dictionaryService = dictionary;
             _scaleDirectoryService = scaleDirectoryService;
@@ -39,7 +39,7 @@ namespace Keyify.Controllers
         [HttpPost]
         public ActionResult UpdateFretboardModel(string[] selectedNotes, string selectedScale)
         {
-            if (selectedNotes == null)
+            if (selectedNotes != null)
                 FretboardFunctions.ProcessNotesAndScale(_model, selectedScale, selectedNotes, _dictionaryService, _scaleDirectoryService);
 
             return PartialView("Fretboard", _model);

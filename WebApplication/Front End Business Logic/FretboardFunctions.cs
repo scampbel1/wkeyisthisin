@@ -10,7 +10,7 @@ namespace Keyify.FrontendBuisnessLogic
 {
     public static class FretboardFunctions
     {
-        public static void ProcessNotesAndScale(InstrumentViewModel model, string selectedScale, string[] selectedNotes, IScaleListService dictionaryService, IScaleDirectoryService scaleDirectoryService)
+        public static void ProcessNotesAndScale(InstrumentViewModel model, string selectedScale, string[] selectedNotes, IScaleListService dictionaryService, IScaleService scaleDirectoryService)
         {
             UpdateSelectedNotes(selectedNotes, model);
 

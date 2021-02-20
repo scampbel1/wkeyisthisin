@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace KeyifyClassLibrary.Core.Domain
 {
-    public static partial class ScaleModeDictionary
+    public static partial class ModeDictionary
     {
-        public static List<ScaleDirectoryEntry> GenerateDirectory()
+        public static List<ModeDefinition> GenerateDirectory()
         {
-            List<ScaleDirectoryEntry> scaleDictionary = new List<ScaleDirectoryEntry>();
+            List<ModeDefinition> scaleDictionary = new List<ModeDefinition>();
 
             #region Scale Steps
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.Ionian,
                 new Step[] {
                     Step.R,
@@ -24,7 +24,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.h
                 }));
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.Aeolian,
                 new Step[] {
                     Step.R,
@@ -37,7 +37,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.W
                 }));
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.Phrygian,
                 new Step[]
                 {
@@ -51,7 +51,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.W
                 }));
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.Lydian,
                 new Step[]
                 {
@@ -65,7 +65,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.h
                 }));
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.Mixolydian,
                 new Step[]
                 {
@@ -79,7 +79,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.W
                 }));
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.Locrian,
                 new Step[]
                 {
@@ -93,7 +93,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.W
                 }));
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.Dorian,
                 new Step[]
                 {
@@ -107,7 +107,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.W
                 }));
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.HarmonicMinor,
                 new Step[]
                 {
@@ -121,7 +121,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.h
                 }));
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.MelodicMinor,
                 new Step[]
                 {
@@ -135,7 +135,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.h
                 }));
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.Augmented,
                 new Step[]
                 {
@@ -148,7 +148,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.h
                 }));
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.PentatonicMinor,
                 new Step[]
                 {
@@ -160,7 +160,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.W
                 }));
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.PentatonicMajor,
                 new Step[]
                 {
@@ -172,7 +172,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.Wh
                 }));
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.Blues,
                 new Step[]
                 {
@@ -185,7 +185,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.W
                 }));
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.WholeTone,
                 new Step[]
                 {
@@ -198,7 +198,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.W
                 }));
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.WholeHalfDiminished,
                 new Step[]
                 {
@@ -213,7 +213,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.h
                 }));
 
-            scaleDictionary.Add(new ScaleDirectoryEntry(
+            scaleDictionary.Add(new ModeDefinition(
                 Mode.HalfWholeDiminished,
                 new Step[]
                 {

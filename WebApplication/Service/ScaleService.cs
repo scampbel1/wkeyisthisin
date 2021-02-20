@@ -1,25 +1,25 @@
 ﻿using KeyifyClassLibrary.Core.Domain.Enums;
 using System.Collections.Generic;
 using System.Linq;
-using static KeyifyClassLibrary.Core.Domain.ScaleModeDictionary;
+using static KeyifyClassLibrary.Core.Domain.ModeDictionary;
 
 namespace Keyify.Service
 {
-    public class ScaleDirectoryService : IScaleDirectoryService
+    public class ScaleService : IScaleService
     {
-        private List<ScaleDirectoryEntry> _directory;
+        private List<ModeDefinition> _directory;
 
-        public ScaleDirectoryService()
+        public ScaleService()
         {
             _directory = GenerateDirectory();
         }
 
-        public List<ScaleDirectoryEntry> GetDirectory()
+        public List<ModeDefinition> GetDirectory()
         {
             return _directory;
         }
 
-        public ScaleDirectoryEntry GetDirectoryEntry(Mode mode)
+        public ModeDefinition GetDirectoryEntry(Mode mode)
         {
             return _directory.FirstOrDefault(s => s.Mode == mode);
         }

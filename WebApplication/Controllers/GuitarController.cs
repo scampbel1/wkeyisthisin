@@ -17,9 +17,9 @@ namespace Keyify.Controllers
         private InstrumentViewModel _model;
 
         private IScaleListService _dictionaryService;
-        private IScaleDirectoryService _scaleDirectoryService;
+        private IScaleService _scaleDirectoryService;
 
-        public GuitarController(IScaleListService dictionary, IScaleDirectoryService scaleDirectoryService, InstrumentViewModel instrumentViewModel)
+        public GuitarController(IScaleListService dictionary, IScaleService scaleDirectoryService, InstrumentViewModel instrumentViewModel)
         {
             _dictionaryService = dictionary;
             _scaleDirectoryService = scaleDirectoryService;

@@ -10,16 +10,16 @@ namespace Keyify.Controllers
 {
     public class MandolinController : Controller
     {
-        private readonly int _fretCount = 20;
         private readonly ITuning _tuning;
+        private readonly int _fretCount = 20;
         private readonly string _instrumentName = "Mandolin";
 
         InstrumentViewModel _model;
 
         private IScaleListService _dictionaryService;
-        private IScaleDirectoryService _scaleDirectoryService;
+        private IScaleService _scaleDirectoryService;
 
-        public MandolinController(IScaleListService dictionary, IScaleDirectoryService scaleDirectoryService, InstrumentViewModel instrumentViewModel)
+        public MandolinController(IScaleListService dictionary, IScaleService scaleDirectoryService, InstrumentViewModel instrumentViewModel)
         {
             _dictionaryService = dictionary;
             _scaleDirectoryService = scaleDirectoryService;

@@ -21,7 +21,7 @@ namespace Keyify
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton(typeof(IScaleDirectoryService), typeof(ScaleDirectoryService));
+            services.AddSingleton(typeof(IScaleService), typeof(ScaleService));
             services.AddSingleton(typeof(IScaleListService), typeof(ScaleListService));
             services.AddSingleton(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
         }

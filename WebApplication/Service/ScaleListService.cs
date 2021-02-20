@@ -4,7 +4,7 @@ using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Helper;
 using System;
 using System.Collections.Generic;
-using static KeyifyClassLibrary.Core.Domain.ScaleModeDictionary;
+using static KeyifyClassLibrary.Core.Domain.ModeDictionary;
 
 namespace Keyify.Models
 {
@@ -12,7 +12,7 @@ namespace Keyify.Models
     {
         private readonly List<ScaleListEntry> _scaleList;        
 
-        public ScaleListService(IScaleDirectoryService scaleDirectoryService)
+        public ScaleListService(IScaleService scaleDirectoryService)
         {
             _scaleList = GenerateScaleList(scaleDirectoryService);
         }
@@ -22,11 +22,11 @@ namespace Keyify.Models
             return _scaleList;
         }
 
-        public static List<ScaleListEntry> GenerateScaleList(IScaleDirectoryService scaleDirectoryService)
+        public static List<ScaleListEntry> GenerateScaleList(IScaleService scaleDirectoryService)
         {
             List<ScaleListEntry> dictionary = new List<ScaleListEntry>();
 
-            foreach (ScaleDirectoryEntry scaleDirectoryEntry in scaleDirectoryService.GetDirectory())
+            foreach (ModeDefinition scaleDirectoryEntry in scaleDirectoryService.GetDirectory())
             {
                 foreach (Note note in Enum.GetValues(typeof(Note)))
                 {
