@@ -28,5 +28,11 @@ namespace Keyify.Controllers
 
             return PartialView("Fretboard", _instrumentViewModel);
         }
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View(_instrumentViewModel);
+        }
     }
 }

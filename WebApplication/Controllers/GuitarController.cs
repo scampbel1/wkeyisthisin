@@ -3,7 +3,6 @@ using Keyify.Service;
 using KeyifyClassLibrary.Core.Domain.Tuning;
 using KeyifyClassLibrary.Core.Domain.Tuning.Guitar;
 using KeyifyWebClient.Core.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Keyify.Controllers
 {
@@ -18,12 +17,6 @@ namespace Keyify.Controllers
             _tuning = new StandardGuitarTuning();
 
             _instrumentViewModel.UpdateViewModel(_instrumentName, _tuning, _fretCount);
-        }
-
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return View(_instrumentViewModel);
         }
     }
 }
