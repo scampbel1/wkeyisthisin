@@ -3,6 +3,7 @@ using Keyify.Models;
 using Keyify.Service;
 using KeyifyWebClient.Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Keyify.Controllers
@@ -22,10 +23,24 @@ namespace Keyify.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateFretboardModel(string[] selectedNotes, string selectedScale)
+        public ActionResult UpdateFretboardModel(List<string> previouslySelectedNotes, string newlySelectedNote, string selectedScale)
         {
-            if (selectedNotes != null)
-                FretboardFunctions.ProcessNotesAndScale(_instrumentViewModel, selectedScale, selectedNotes, _dictionaryService, _scaleDirectoryService);
+            if (!string.IsNullOrWhiteSpace(newlySelectedNote) || previouslySelectedNotes != null)
+            {
+                if (!string.IsNullOrWhiteSpace(newlySelectedNote))
+                {
+                    if (!previouslySelectedNotes.Contains(newlySelectedNote))
+                    {
+                        previouslySelectedNotes.Add(newlySelectedNote);
+                    }
+                    else
+                    {
+                        previouslySelectedNotes.Remove(newlySelectedNote);
+                    }
+                }
+
+                FretboardFunctions.ProcessNotesAndScale(_instrumentViewModel, selectedScale, previouslySelectedNotes, _dictionaryService, _scaleDirectoryService);
+            }
 
             return PartialView("Fretboard", _instrumentViewModel);
         }

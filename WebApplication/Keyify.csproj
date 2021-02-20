@@ -26,13 +26,13 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+		<PackageReference Include="System.Text.Json" Version="5.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="wwwroot\js\" />
-	</ItemGroup>
-
-	<ItemGroup>
+		<Content Update="wwwroot\js\fretboardFunctions.js">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Update="wwwroot\js\jquery-3.5.1.min.js">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>

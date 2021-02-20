@@ -5,6 +5,7 @@ using KeyifyClassLibrary.Core.Domain.Tuning;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
 namespace KeyifyWebClient.Core.Models
 {
@@ -12,10 +13,14 @@ namespace KeyifyWebClient.Core.Models
     public class InstrumentViewModel
     {
         public string InstrumentName { get; set; } = "Instrument Not Named";
-        public List<FretboardNote> Notes { get; set; } = new List<FretboardNote>();
+        public List<FretboardNote> Notes { get; } = new List<FretboardNote>();
+
         public List<FretboardNote> SelectedNotes => Notes.Where(n => n.Selected).ToList();
+        public string SelectedNotesJson => JsonSerializer.Serialize(SelectedNotes.Select(n => n.Note.ToString()));
+
         public List<FretboardNote> UnselectedNotes => Notes.Where(n => !n.Selected).ToList();
         public List<FretboardNote> NotesPartOfScale => Notes.Where(n => n.InSelectedScale).ToList();
+
         public Fretboard Fretboard { get; private set; }
         public ScaleListEntry SelectedScale { get; set; }
         public List<ScaleListEntry> Scales { get; set; } = new List<ScaleListEntry>();

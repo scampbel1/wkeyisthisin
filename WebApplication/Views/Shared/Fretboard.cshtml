@@ -1,195 +1,129 @@
 ﻿@using KeyifyWebClient.Core.Models
 @model InstrumentViewModel
-    @if (Model.SelectedScale != null)
-    {
-        <h1>@Model.InstrumentName Fretboard (@Model.SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp)</h1>
-    }
-    else
-    {
-        <h1>@Model.InstrumentName Fretboard</h1>
-    }
 
-    <div id="instrumentHyperlinkHeaderList">
-        <span class="instrumentHyperlink"><a onclick="ChangeInstrument('@Model.SelectedScale?.ScaleLabel', 'Bass')">Bass</a></span>
-        <span class="instrumentHyperlink"><a onclick="ChangeInstrument('@Model.SelectedScale?.ScaleLabel', 'Guitar')">Guitar</a></span>
-        <span class="instrumentHyperlink"><a onclick="ChangeInstrument('@Model.SelectedScale?.ScaleLabel', 'Mandolin')">Mandolin</a></span>
-        <span class="instrumentHyperlink"><a onclick="ChangeInstrument('@Model.SelectedScale?.ScaleLabel', 'Ukulele')">Ukulele</a></span>
-    </div>
+@if (Model.SelectedScale != null)
+{
+    <h1>@Model.InstrumentName Fretboard (@Model.SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp)</h1>
+}
+else
+{
+    <h1>@Model.InstrumentName Fretboard</h1>
+}
 
-    <div>
-        <table class="fretboard">
-            <tr>
-                @for (int count = 0; count < Model.Fretboard.FretCount; count++)
-                {
-                    if (count == 0)
-                    {
-                        <th class="fretboardHeading"></th>
-                        continue;
-                    }
+<!-- Don't remove instrument links from here, the selected notes aren't updated on the layout page-->
 
-                    <th class="fretboardHeading">
-                        @count
-                    </th>
-                }
-            </tr>
-            @foreach (var instrumentString in Model.Fretboard.InstrumentStrings)
+<div id="instrumentHyperlinkHeaderList" style="padding-top:5px;">
+    <span class="instrumentHyperlink"><a onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Bass")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Bass</a></span>
+    <span class="instrumentHyperlink"><a onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Guitar")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Guitar</a></span>
+    <span class="instrumentHyperlink"><a onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Mandolin")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Mandolin</a></span>
+    <span class="instrumentHyperlink"><a onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Ukulele")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Ukulele</a></span>
+</div>
+<div>
+    <table class="fretboard">
+        <tr>
+            @for (int count = 0; count < Model.Fretboard.FretCount; count++)
             {
-                <tr>
-                    @foreach (var note in instrumentString.Notes)
+                if (count == 0)
+                {
+                    <th class="fretboardHeading"></th>
+                    continue;
+                }
+
+                <th class="fretboardHeading">
+                    @count
+                </th>
+            }
+        </tr>
+        @foreach (var instrumentString in Model.Fretboard.InstrumentStrings)
+        {
+            <tr>
+                @foreach (var note in instrumentString.Notes)
+                {
+                    if (Model.SelectedScale != null)
                     {
-                        if (Model.SelectedScale != null)
+                        if (note.InSelectedScale && note.Selected)
                         {
-                            if (note.InSelectedScale && note.Selected)
-                            {
-                                <td class="selectedNoteSelectedScale" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleLabel')">
-                                    @note.Sharp
-                                </td>
-                                continue;
-                            }
-                            else if (note.InSelectedScale && !note.Selected)
-                            {
-                                <td class="noteSelectedScale" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleLabel')">
-                                    @note.Sharp
-                                </td>
-                                continue;
-                            }
-                        }
-                        if (note.Selected)
-                        {
-                            <td class="selectedNote" onclick="UpdateModel('@note.Note', false, '@Model.SelectedScale?.ScaleLabel')">
+                            <td class="selectedNoteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
                                 @note.Sharp
                             </td>
                             continue;
                         }
-
-                        <td class="defaultNote" onclick="UpdateModel('@note.Note', true, '@Model.SelectedScale?.ScaleLabel')">
-                            @note.Sharp
-                        </td>
-                    }
-                </tr>
-            }
-        </table>
-    </div>
-
-    <div class="scaleResults">
-        @if (Model.Scales.Any())
-        {
-            if (Model.SelectedNotes.Count > 0)
-            {
-                if (Model.Scales.Count > 0 && Model.SelectedScale == null)
-                {
-                    <br />
-                    @if (Model.Scales.Count == 1)
-                    {
-                        <h2>@Model.Scales.Count Matching Scale</h2>
-                    }
-                    else
-                    {
-                        <h2>@Model.Scales.Count Matching Scales</h2>
-                    }
-
-                    <h4>(Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>)</h4>
-
-                }
-                if (Model.Scales.Count > 0 && Model.SelectedScale != null)
-                {
-                    <br />
-                    <h2>@(Model.Scales.Count) Matching Scales</h2>
-                    <h4>(Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale.UserReadableLabelIncludingColloquialism_Sharp</span>)</h4>
-                }
-                else if (Model.SelectedScale != null)
-                {
-                    <br />
-                    <h2>0 Scales Found</h2>
-                    <h4>(Notes Selected: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp</span>)</h4>
-                }
-            }
-
-            foreach (var scale in Model.Scales)
-            {
-                if (scale.Selected)
-                {
-                    <span><a class="scaleResultSelected" onclick="UpdateModel(null, false, '')">@scale.UserReadableLabelIncludingColloquialism_Sharp&nbsp;</a></span>
-                    continue;
-                }
-
-                <span><a class="scaleResult" onclick="UpdateModel(null, false, '@scale.ScaleLabel')">@scale.UserReadableLabelIncludingColloquialism_Sharp&nbsp;</a></span>
-            }
-        }
-    </div>
-
-    <script lang="en" type="text/javascript">
-
-        function UpdateModel(note, addNote, scale) {
-
-            var dataPost = { selectedNotes: GenerateArrayWithNewNote(note, addNote), selectedScale: scale };
-
-            $.ajax({
-                url: '@Url.Action("UpdateFretboardModel")',
-                async: 'true',
-                type: "POST",
-                data: dataPost,
-                datatype: "json",
-                success: function (data) {
-                    $("#Fretboard").html(data);
-                }
-            });
-        }
-
-        function GenerateArrayWithNewNote(note, addNote) {
-
-            var noteArray = new Array();
-
-            @foreach (var note in Model.SelectedNotes)
-            {
-                @:noteArray.push("@note.Note");
-            }
-
-            if (note != null && note != '') {
-                if (addNote === true) {
-                    noteArray.push(note);
-                }
-
-                if (addNote === false) {
-                    for (var i = 0; i < noteArray.length; i++) {
-                        if (noteArray[i] === note) {
-                            noteArray.splice(i, 1);
+                        else if (note.InSelectedScale && !note.Selected)
+                        {
+                            <td class="noteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
+                                @note.Sharp
+                            </td>
+                            continue;
                         }
                     }
+                    if (note.Selected)
+                    {
+                        <td class="selectedNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
+                            @note.Sharp
+                        </td>
+                        continue;
+                    }
+
+                    <td class="defaultNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
+                        @note.Sharp
+                    </td>
                 }
-            }
-
-            return noteArray;
+            </tr>
         }
+    </table>
+</div>
 
-        function GenerateArray() {
-
-            var noteArray = new Array();
-
-            @foreach (var note in Model.SelectedNotes)
+<div class="scaleResults">
+    @if (Model.Scales.Any())
+    {
+        if (Model.SelectedNotes.Count > 0)
+        {
+            if (Model.Scales.Count > 0 && Model.SelectedScale == null)
             {
-                @:noteArray.push("@note.Note");
+                <br />
+                @if (Model.Scales.Count == 1)
+                {
+                    <h2>@Model.Scales.Count Matching Scale</h2>
+                }
+                else
+                {
+                    <h2>@Model.Scales.Count Matching Scales</h2>
+                }
+
+                <h4>(Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>)</h4>
+
+            }
+            if (Model.Scales.Count > 0 && Model.SelectedScale != null)
+            {
+                <br />
+                <h2>@(Model.Scales.Count) Matching Scales</h2>
+                <h4>(Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale.UserReadableLabelIncludingColloquialism_Sharp</span>)</h4>
+            }
+            else if (Model.SelectedScale != null)
+            {
+                <br />
+                <h2>0 Scales Found</h2>
+                <h4>(Notes Selected: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp</span>)</h4>
+            }
+        }
+
+        foreach (var scale in Model.Scales)
+        {
+            if (scale.Selected)
+            {
+                <span>
+                    <a class="scaleResultSelected" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', null, null, @Model.SelectedNotesJson)">
+                        @scale.UserReadableLabelIncludingColloquialism_Sharp&nbsp;
+                    </a>
+                </span>
+                continue;
             }
 
-            return noteArray;
+            <span>
+                <a class="scaleResult" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@scale.ScaleLabel', null, @Model.SelectedNotesJson)">
+                    @scale.UserReadableLabelIncludingColloquialism_Sharp&nbsp;
+                </a>
+            </span>
         }
-
-        function ChangeInstrument(scale, newInstrument) {
-
-            var instrumentUrl = '/' + newInstrument + '/UpdateFretboardModel/';
-
-            var dataPost = { selectedNotes: GenerateArray(), selectedScale: scale };
-
-            $.ajax({
-                url: instrumentUrl,
-                async: 'true',
-                type: "POST",
-                data: dataPost,
-                datatype: "json",
-                success: function (data) {
-                    $("#Fretboard").html(data);
-                }
-            });
-        }
-
-    </script>
+    }
+</div>
