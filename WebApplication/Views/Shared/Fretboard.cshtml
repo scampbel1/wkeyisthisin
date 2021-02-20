@@ -25,11 +25,11 @@ else
             {
                 if (count == 0)
                 {
-                    <th class="fretboardHeading"></th>
+                    <th class="fretboardHeading" style="-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;"></th>
                     continue;
                 }
 
-                <th class="fretboardHeading">
+                <th class="fretboardHeading" style="-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;">
                     @count
                 </th>
             }
@@ -44,14 +44,14 @@ else
                         if (note.InSelectedScale && note.Selected)
                         {
                             <td class="selectedNoteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
-                                @note.Sharp
+                                @Html.Label(note.Sharp, note.Sharp, new { style = "-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; cursor: pointer;" })
                             </td>
                             continue;
                         }
                         else if (note.InSelectedScale && !note.Selected)
                         {
                             <td class="noteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
-                                @note.Sharp
+                                @Html.Label(note.Sharp, note.Sharp, new { style = "-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; cursor: pointer;" })
                             </td>
                             continue;
                         }
@@ -59,13 +59,13 @@ else
                     if (note.Selected)
                     {
                         <td class="selectedNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
-                            @note.Sharp
+                            @Html.Label(note.Sharp, note.Sharp, new { style = "-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; cursor: pointer;" })
                         </td>
                         continue;
                     }
 
                     <td class="defaultNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
-                        @note.Sharp
+                        @Html.Label(note.Sharp, note.Sharp, new { style = "-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; cursor: pointer;" })
                     </td>
                 }
             </tr>
