@@ -17,7 +17,6 @@ namespace Keyify.FrontendBuisnessLogic
             if (model.SelectedNotes.Count > 1)
             {
                 model.Scales = ScaleDictionaryHelper.GetMatchedScales(model.SelectedNotes.Select(a => a.Note), dictionaryService);
-                ApplySelectedScales(selectedScale, model);
             }
             else
             {
@@ -29,12 +28,14 @@ namespace Keyify.FrontendBuisnessLogic
                 model.SelectedScale = null;
                 model.Scales.Clear();
                 model.ResetNotesInScale();
-                
+
                 if (!selectedNotes.Any())
                 {
                     model.ResetSelectedNotes();
                 }
             }
+
+            ApplySelectedScales(selectedScale, model);
 
             model.ApplySelectedNotesToFretboard(model.SelectedNotes.Select(a => a.Note).ToList(), model.SelectedScale?.Scale.NotesSet);
         }
@@ -79,8 +80,15 @@ namespace Keyify.FrontendBuisnessLogic
 
             if (!string.IsNullOrWhiteSpace(selectedScale))
             {
-                model.SelectedScale = model.Scales.Single(a => a.ScaleLabel == selectedScale);
-                model.SelectedScale.Selected = true;
+                model.SelectedScale = model.Scales.SingleOrDefault(a => a.ScaleLabel == selectedScale);
+
+                if (model.SelectedScale != null)
+                {
+                    model.SelectedScale.Selected = true;
+                    return;
+                }
+
+                model.SelectedScale = null;
             }
             else
             {

@@ -77,17 +77,25 @@
         {
             if (Model.SelectedNotes.Count > 0)
             {
-                if (Model.Scales.Count > 1 && Model.SelectedScale == null)
+                if (Model.Scales.Count > 0 && Model.SelectedScale == null)
                 {
                     <br />
-                    <h2>@Model.Scales.Count Matching Scales</h2>
+                    @if (Model.Scales.Count == 1)
+                    {
+                        <h2>@Model.Scales.Count Matching Scale</h2>
+                    }
+                    else
+                    {
+                        <h2>@Model.Scales.Count Matching Scales</h2>
+                    }
+
                     <h4>(Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>)</h4>
-        
+
                 }
-                if (Model.Scales.Count > 1 && Model.SelectedScale != null)
+                if (Model.Scales.Count > 0 && Model.SelectedScale != null)
                 {
                     <br />
-                    <h2>@(Model.Scales.Count - 1) Matching Scales</h2>
+                    <h2>@(Model.Scales.Count) Matching Scales</h2>
                     <h4>(Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>) (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale.UserReadableLabelIncludingColloquialism_Sharp</span>)</h4>
                 }
                 else if (Model.SelectedScale != null)
