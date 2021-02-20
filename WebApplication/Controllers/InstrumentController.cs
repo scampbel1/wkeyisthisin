@@ -3,6 +3,7 @@ using Keyify.Models;
 using Keyify.Service;
 using KeyifyWebClient.Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Keyify.Controllers
 {
@@ -32,6 +33,9 @@ namespace Keyify.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            //TODO: Make this an accessible class (this code should be getting called everytime a page is hit from elsewhere... you're used to hitting the UpdateFredboardModel method)
+            _instrumentViewModel.ApplySelectedNotesToFretboard(_instrumentViewModel.SelectedNotes.Select(a => a.Note).ToList(), _instrumentViewModel.SelectedScale?.Scale.NotesSet);
+
             return View(_instrumentViewModel);
         }
     }
