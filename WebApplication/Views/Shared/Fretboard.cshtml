@@ -1,6 +1,5 @@
 ﻿@using KeyifyWebClient.Core.Models
 @model InstrumentViewModel
-<body>
     @if (Model.SelectedScale != null)
     {
         <h1>@Model.InstrumentName Fretboard (@Model.SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp)</h1>
@@ -194,4 +193,3 @@
         }
 
     </script>
-</body>
