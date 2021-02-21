@@ -10,7 +10,7 @@ namespace Keyify.Unit.Test.Json.UnitTest
         {
             var expected = "[\"A\",\"Ab\"]";
 
-            var actual = JsonSerializer.Serialize(new [] { KeyifyClassLibrary.Core.Domain.Enums.Note.A.ToString(), KeyifyClassLibrary.Core.Domain.Enums.Note.Ab.ToString() });
+            var actual = JsonSerializer.Serialize(new[] { KeyifyClassLibrary.Core.Domain.Enums.Note.A.ToString(), KeyifyClassLibrary.Core.Domain.Enums.Note.Ab.ToString() });
 
             Assert.Equal(expected, actual);
         }

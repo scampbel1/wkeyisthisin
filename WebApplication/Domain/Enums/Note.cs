@@ -2,17 +2,17 @@
 {
     public enum Note
     {
-        A,        
+        A,
         Bb,
         B,
-        C,        
+        C,
         Db,
         D,
         Eb,
         E,
         F,
         Gb,
-        G,        
+        G,
         Ab,
     }
 }

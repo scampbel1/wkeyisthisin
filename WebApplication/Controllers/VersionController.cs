@@ -5,7 +5,7 @@ namespace Keyify.Controllers
 {
     public class VersionController : Controller
     {
-        [HttpGet]        
+        [HttpGet]
         public ActionResult Index()
         {
             return Ok(Assembly.GetEntryAssembly().GetName().Version);

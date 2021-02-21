@@ -1,10 +1,11 @@
 ﻿using Keyify.Domain.Helper;
 using KeyifyClassLibrary.Core.Domain.Helper;
+using System;
 using System.Text;
 
 namespace KeyifyClassLibrary.Core.Domain
 {
-    public class ScaleEntry
+    public class ScaleEntry : IEquatable<ScaleEntry>
     {
         public Scale Scale { get; set; }
         public bool Selected { get; set; }
@@ -52,6 +53,16 @@ namespace KeyifyClassLibrary.Core.Domain
             }
 
             return sb.ToString();
+        }
+
+        public bool Equals(ScaleEntry other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            return ScaleLabel == other.ScaleLabel;
         }
     }
 }

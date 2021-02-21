@@ -29,6 +29,6 @@ namespace Keyify.Service
         public IEnumerable<ScaleEntry> GenerateScaleList()
         {
             return GetScaleEntries(_scaleDirectoryService.GetModeDefinitions());
-        }       
+        }
     }
 }

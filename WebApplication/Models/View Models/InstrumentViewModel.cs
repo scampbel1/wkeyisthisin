@@ -29,6 +29,7 @@ namespace KeyifyWebClient.Core.Models
         public ScaleEntry SelectedScale { get; set; }
         public List<ScaleEntry> Scales { get; set; } = new List<ScaleEntry>();
         public List<ScaleEntry> SelectedScales => Scales.Where(s => s.Selected).ToList();
+        public IEnumerable<ScaleEntry> AvailableScales => Scales.Where(s => !s.Equals(SelectedScale));
 
         public InstrumentViewModel(IScaleListService dictionaryService, IModeDefinitionService scaleDirectoryService)
         {
@@ -89,7 +90,7 @@ namespace KeyifyWebClient.Core.Models
                     }
 
                     if (SelectedScale != null && SelectedScale.Scale.NoteSet.Contains(fretboardNote.Note))
-                    {                        
+                    {
                         fretboardNote.InSelectedScale = true;
                     }
                 }
@@ -113,7 +114,7 @@ namespace KeyifyWebClient.Core.Models
             UpdateSelectedNotes(selectedNotes);
 
             if (SelectedNotes.Count > 1)
-            {                
+            {
                 Scales = _dictionaryService.FindScales(SelectedNotes.Select(a => a.Note)).ToList();
             }
             else

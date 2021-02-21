@@ -5,7 +5,7 @@ namespace Keyify.Service
 {
     public class ModeDefinitionService : IModeDefinitionService
     {
-        private IEnumerable<ModeDefinition> _modeDefinitions;        
+        private IEnumerable<ModeDefinition> _modeDefinitions;
 
         public ModeDefinitionService()
         {

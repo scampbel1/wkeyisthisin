@@ -16,7 +16,7 @@ namespace Keyify
             ScaleSteps = scaleSteps;
             KeysFoundForMode = Enum.GetValues(typeof(Note));
         }
-        
+
         public ModeDefinition(Mode mode, Step[] scaleSteps, Array modeKeys)
         {
             Mode = mode;
