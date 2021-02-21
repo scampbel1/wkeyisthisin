@@ -197,6 +197,9 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.W,
                     Step.W,
                     Step.W
+                }, new[] {
+                    Note.D,
+                    Note.F
                 }));
 
             modeDefinitions.Add(new ModeDefinition(
@@ -212,6 +215,10 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.h,
                     Step.W,
                     Step.h
+                }, new[] {
+                    Note.C,
+                    Note.Db,
+                    Note.D
                 }));
 
             modeDefinitions.Add(new ModeDefinition(
