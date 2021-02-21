@@ -1,5 +1,4 @@
-﻿using Keyify.Models;
-using Keyify.Service;
+﻿using Keyify.Service;
 using KeyifyClassLibrary.Core.Domain.Tuning;
 using KeyifyClassLibrary.Core.Domain.Tuning.Guitar;
 using KeyifyWebClient.Core.Models;
@@ -12,7 +11,7 @@ namespace Keyify.Controllers
         private readonly string _instrumentName = "Guitar";
         private readonly int _fretCount = 24;
 
-        public GuitarController(IScaleListService dictionary, IScaleService scaleDirectoryService, InstrumentViewModel instrumentViewModel) : base(instrumentViewModel)
+        public GuitarController(IScaleListService dictionary, IModeDefinitionService scaleDirectoryService, InstrumentViewModel instrumentViewModel) : base(instrumentViewModel)
         {
             _tuning = new StandardGuitarTuning();
 

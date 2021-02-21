@@ -11,7 +11,7 @@ namespace ScaleDictionaryTests
         [InlineData("AbMix", "Ab Mix")]
         public void DictionaryEntryLabelReturnsUserFriendlyString(string dictionaryOutput, string expected)
         {
-            var actual = ScaleListEntry.GetUserFriendlyLabel(dictionaryOutput);
+            var actual = ScaleEntry.GetUserFriendlyLabel(dictionaryOutput);
 
             Assert.Equal(expected, actual);
         }

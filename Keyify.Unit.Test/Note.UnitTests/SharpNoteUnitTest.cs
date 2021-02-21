@@ -3,7 +3,6 @@ using KeyifyClassLibrary.Core.Domain;
 using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Helper;
 using Xunit;
-using static KeyifyClassLibrary.Core.Domain.ModeDictionary;
 
 namespace Keyify.Unit.Test.Note.UnitTests
 {

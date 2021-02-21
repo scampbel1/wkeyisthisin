@@ -1,5 +1,4 @@
-﻿using Keyify.Models;
-using Keyify.Service;
+﻿using Keyify.Service;
 using KeyifyClassLibrary.Core.Domain;
 using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Helper;
@@ -15,7 +14,7 @@ namespace KeyifyWebClient.Core.Models
     public class InstrumentViewModel
     {
         protected IScaleListService _dictionaryService;
-        protected IScaleService _scaleDirectoryService;
+        protected IModeDefinitionService _scaleDirectoryService;
 
         public string InstrumentName { get; set; } = "Instrument Not Named";
         public List<FretboardNote> Notes { get; } = new List<FretboardNote>();
@@ -27,11 +26,11 @@ namespace KeyifyWebClient.Core.Models
         public List<FretboardNote> NotesPartOfScale => Notes.Where(n => n.InSelectedScale).ToList();
 
         public Fretboard Fretboard { get; private set; }
-        public ScaleListEntry SelectedScale { get; set; }
-        public List<ScaleListEntry> Scales { get; set; } = new List<ScaleListEntry>();
-        public List<ScaleListEntry> SelectedScales => Scales.Where(s => s.Selected).ToList();
+        public ScaleEntry SelectedScale { get; set; }
+        public List<ScaleEntry> Scales { get; set; } = new List<ScaleEntry>();
+        public List<ScaleEntry> SelectedScales => Scales.Where(s => s.Selected).ToList();
 
-        public InstrumentViewModel(IScaleListService dictionaryService, IScaleService scaleDirectoryService)
+        public InstrumentViewModel(IScaleListService dictionaryService, IModeDefinitionService scaleDirectoryService)
         {
             Notes = PopulateSelectedNotesList();
             _dictionaryService = dictionaryService;

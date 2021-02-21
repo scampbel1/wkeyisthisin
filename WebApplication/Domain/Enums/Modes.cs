@@ -16,7 +16,7 @@
         PentatonicMinor,
         Blues,
         WholeTone,
-        WholeHalfDiminished,
-        HalfWholeDiminished
+        DiminishedWholeHalf,
+        DiminishedHalfWhole
     }
 }

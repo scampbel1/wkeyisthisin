@@ -1,49 +1,34 @@
-﻿using Keyify.Service;
-using KeyifyClassLibrary.Core.Domain;
+﻿using KeyifyClassLibrary.Core.Domain;
 using KeyifyClassLibrary.Core.Domain.Enums;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using static KeyifyClassLibrary.Core.Domain.ModeDictionary;
 
-namespace Keyify.Models
+namespace Keyify.Service
 {
-    public class ScaleListService : IScaleListService
+    public partial class ScaleListService : IScaleListService
     {
-        private readonly IScaleService _scaleDirectoryService;
-        private readonly IEnumerable<ScaleListEntry> _scaleList;
+        private readonly IModeDefinitionService _scaleDirectoryService;
+        private readonly IEnumerable<ScaleEntry> _scaleList;
 
-        public ScaleListService(IScaleService scaleDirectoryService)
+        public ScaleListService(IModeDefinitionService scaleDirectoryService)
         {
             _scaleDirectoryService = scaleDirectoryService;
             _scaleList = GenerateScaleList();
         }
 
-        public IEnumerable<ScaleListEntry> GetScaleList()
+        public IEnumerable<ScaleEntry> GetScaleList()
         {
             return _scaleList;
         }
 
-        public IEnumerable<ScaleListEntry> FindScales(IEnumerable<Note> selectedNotes)
+        public IEnumerable<ScaleEntry> FindScales(IEnumerable<Note> selectedNotes)
         {
             return _scaleList.Where(a => a.Scale.NoteSet.IsSupersetOf(selectedNotes));
         }
 
-        public IEnumerable<ScaleListEntry> GenerateScaleList()
+        public IEnumerable<ScaleEntry> GenerateScaleList()
         {
-            List<ScaleListEntry> dictionary = new List<ScaleListEntry>();
-
-            foreach (ModeDefinition scaleDirectoryEntry in _scaleDirectoryService.GetDirectory())
-            {
-                foreach (Note note in Enum.GetValues(typeof(Note)))
-                {
-                    var scale = new Scale(note, scaleDirectoryEntry);
-
-                    dictionary.Add(new ScaleListEntry(scale));
-                }
-            }
-
-            return dictionary;
-        }
+            return GetScaleEntries(_scaleDirectoryService.GetModeDefinitions());
+        }       
     }
 }

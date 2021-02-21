@@ -4,7 +4,7 @@ using System.Text;
 
 namespace KeyifyClassLibrary.Core.Domain
 {
-    public class ScaleListEntry
+    public class ScaleEntry
     {
         public Scale Scale { get; set; }
         public bool Selected { get; set; }
@@ -18,7 +18,7 @@ namespace KeyifyClassLibrary.Core.Domain
         public readonly string ColloquialNameLabel_Sharp;
         public readonly string UserReadableLabelIncludingColloquialism_Sharp;
 
-        public ScaleListEntry(Scale scale)
+        public ScaleEntry(Scale scale)
         {
             ScaleLabel = $"{scale.RootNote}{scale.ModeDefinition.Mode}";
             Scale = scale;
@@ -40,7 +40,7 @@ namespace KeyifyClassLibrary.Core.Domain
         /// <returns>Stringbuilder modified input as a string</returns>
         public static string GetUserFriendlyLabel(string label)
         {
-            StringBuilder sb = new StringBuilder().Append(label);
+            var sb = new StringBuilder().Append(label);
             int count = 1;
 
             while (count < sb.Length - 1)

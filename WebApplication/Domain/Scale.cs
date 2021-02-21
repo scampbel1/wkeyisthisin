@@ -1,6 +1,6 @@
-﻿using KeyifyClassLibrary.Core.Domain.Enums;
+﻿using Keyify;
+using KeyifyClassLibrary.Core.Domain.Enums;
 using System.Collections.Generic;
-using static KeyifyClassLibrary.Core.Domain.ModeDictionary;
 
 namespace KeyifyClassLibrary.Core.Domain
 {

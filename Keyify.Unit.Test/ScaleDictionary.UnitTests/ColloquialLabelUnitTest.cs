@@ -1,8 +1,8 @@
-﻿using Keyify.Domain.Helper;
+﻿using Keyify;
+using Keyify.Domain.Helper;
 using KeyifyClassLibrary.Core.Domain;
 using KeyifyClassLibrary.Core.Domain.Enums;
 using Xunit;
-using static KeyifyClassLibrary.Core.Domain.ModeDictionary;
 
 namespace ScaleDictionaryTests
 {
