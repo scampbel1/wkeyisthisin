@@ -1,4 +1,4 @@
-﻿using KeyifyClassLibrary.Core.Domain.Helper;
+﻿using KeyifyClassLibrary.Core.Domain;
 using Xunit;
 
 namespace ScaleDictionaryTests
@@ -11,18 +11,7 @@ namespace ScaleDictionaryTests
         [InlineData("AbMix", "Ab Mix")]
         public void DictionaryEntryLabelReturnsUserFriendlyString(string dictionaryOutput, string expected)
         {
-            var actual = ScaleDictionaryHelper.GetUserFriendlyLabel(dictionaryOutput);
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Theory]
-        [InlineData("B Mix", "B Mix")]
-        [InlineData("Ab Mix", "Ab Mix")]
-        [InlineData("Eb Whole Half Diminished", "Eb WholeHalfDiminished")]
-        public void UserFriendlyStringReturnDictionaryEntryLabel(string dictionaryOutput, string expected)
-        {
-            var actual = ScaleDictionaryHelper.ConvertUserFriendlyLabelIntoLabel(dictionaryOutput);
+            var actual = ScaleListEntry.GetUserFriendlyLabel(dictionaryOutput);
 
             Assert.Equal(expected, actual);
         }
