@@ -19,7 +19,7 @@ namespace KeyifyClassLibrary.Core.Domain
 
         public ScaleListEntry(Scale scale)
         {
-            ScaleLabel = $"{scale.RootNote}{scale.ModeDefinition}";
+            ScaleLabel = $"{scale.RootNote}{scale.ModeDefinition.Mode}";
             Scale = scale;
             UserReadableLabel_Flat = ScaleDictionaryHelper.GetUserFriendlyLabel(ScaleLabel);
             ColloquialNameLabel_Flat = PentatonicModeHelper.GetScaleColloquialism(scale);
@@ -27,7 +27,7 @@ namespace KeyifyClassLibrary.Core.Domain
 
             string sharpNote = NoteHelper.ConvertNoteToStringEquivalent(scale.RootNote, true);
 
-            UserReadableLabel_Sharp = ScaleDictionaryHelper.GetUserFriendlyLabel($"{sharpNote}{scale.ModeDefinition}");
+            UserReadableLabel_Sharp = ScaleDictionaryHelper.GetUserFriendlyLabel($"{sharpNote}{scale.ModeDefinition.Mode}");
             ColloquialNameLabel_Sharp = PentatonicModeHelper.GetScaleColloquialism(scale, true);
             UserReadableLabelIncludingColloquialism_Sharp = !string.IsNullOrWhiteSpace(ColloquialNameLabel_Sharp) ? $"{UserReadableLabel_Sharp}/{ColloquialNameLabel_Sharp}" : $"{UserReadableLabel_Sharp}";
         }
