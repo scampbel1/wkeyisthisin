@@ -1,14 +1,15 @@
-﻿using Keyify.Service;
-using KeyifyClassLibrary.Core.Domain;
-using KeyifyClassLibrary.Core.Domain.Enums;
-using KeyifyClassLibrary.Core.Domain.Helper;
-using KeyifyClassLibrary.Core.Domain.Tuning;
+﻿using Keyify.Models.Service;
+using Keyify.Service.Interface;
+using KeyifyClassLibrary.Enums;
+using KeyifyClassLibrary.Helper;
+using KeyifyClassLibrary.Models.Interfaces;
+using KeyifyWebClient.Models.Instruments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
-namespace KeyifyWebClient.Core.Models
+namespace KeyifyWebClient.Models.ViewModels
 {
     //Be careful renaming this class! (It may not rename the reference in the Views)
     public class InstrumentViewModel
@@ -17,13 +18,13 @@ namespace KeyifyWebClient.Core.Models
         protected IModeDefinitionService _scaleDirectoryService;
 
         public string InstrumentName { get; set; } = "Instrument Not Named";
-        public List<FretboardNote> Notes { get; } = new List<FretboardNote>();
+        public List<InstrumentNote> Notes { get; } = new List<InstrumentNote>();
 
-        public List<FretboardNote> SelectedNotes => Notes.Where(n => n.Selected).ToList();
+        public List<InstrumentNote> SelectedNotes => Notes.Where(n => n.Selected).ToList();
         public string SelectedNotesJson => JsonSerializer.Serialize(SelectedNotes.Select(n => n.Note.ToString()));
 
-        public List<FretboardNote> UnselectedNotes => Notes.Where(n => !n.Selected).ToList();
-        public List<FretboardNote> NotesPartOfScale => Notes.Where(n => n.InSelectedScale).ToList();
+        public List<InstrumentNote> UnselectedNotes => Notes.Where(n => !n.Selected).ToList();
+        public List<InstrumentNote> NotesPartOfScale => Notes.Where(n => n.InSelectedScale).ToList();
 
         public Fretboard Fretboard { get; private set; }
         public ScaleEntry SelectedScale { get; set; }
@@ -80,7 +81,7 @@ namespace KeyifyWebClient.Core.Models
 
             foreach (InstrumentString guitarString in Fretboard.InstrumentStrings)
             {
-                foreach (FretboardNote fretboardNote in guitarString.Notes)
+                foreach (InstrumentNote fretboardNote in guitarString.Notes)
                 {
                     var currentNote = SelectedNotes.SingleOrDefault(s => s.Equals(fretboardNote));
 
@@ -97,13 +98,13 @@ namespace KeyifyWebClient.Core.Models
             }
         }
 
-        private List<FretboardNote> PopulateSelectedNotesList()
+        private List<InstrumentNote> PopulateSelectedNotesList()
         {
-            var fretboardNotes = new List<FretboardNote>(EnumHelper.GetEnumNameCount(typeof(Note)));
+            var fretboardNotes = new List<InstrumentNote>(EnumHelper.GetEnumNameCount(typeof(Note)));
 
             foreach (Note note in Enum.GetValues(typeof(Note)))
             {
-                fretboardNotes.Add(new FretboardNote(note));
+                fretboardNotes.Add(new InstrumentNote(note));
             }
 
             return fretboardNotes;

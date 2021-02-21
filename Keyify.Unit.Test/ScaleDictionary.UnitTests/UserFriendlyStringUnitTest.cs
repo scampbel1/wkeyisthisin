@@ -1,4 +1,4 @@
-﻿using KeyifyClassLibrary.Core.Domain;
+﻿using Keyify.Models.Service;
 using Xunit;
 
 namespace ScaleDictionaryTests

@@ -1,5 +1,6 @@
-using Keyify.Service;
-using KeyifyWebClient.Core.Models;
+using Keyify.Models.Service;
+using Keyify.Service.Interface;
+using KeyifyWebClient.Models.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -47,7 +48,7 @@ namespace Keyify
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Guitar}/{action=Index}/{id?}");
+                    pattern: "{controller=Guitar}/{action=Index}");
             });
         }
     }

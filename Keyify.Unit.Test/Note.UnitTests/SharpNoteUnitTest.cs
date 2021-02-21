@@ -1,7 +1,8 @@
-﻿using Keyify.Domain.Helper;
-using KeyifyClassLibrary.Core.Domain;
-using KeyifyClassLibrary.Core.Domain.Enums;
-using KeyifyClassLibrary.Core.Domain.Helper;
+﻿using Keyify.Helper;
+using Keyify.Models.Service;
+using KeyifyClassLibrary.Enums;
+using KeyifyClassLibrary.Helper;
+using KeyifyClassLibrary.Models.MusicTheory;
 using Xunit;
 
 namespace Keyify.Unit.Test.Note.UnitTests
@@ -9,12 +10,12 @@ namespace Keyify.Unit.Test.Note.UnitTests
     public class SharpNoteUnitTest
     {
         [Theory]
-        [InlineData(KeyifyClassLibrary.Core.Domain.Enums.Note.Ab, "G#")]
-        [InlineData(KeyifyClassLibrary.Core.Domain.Enums.Note.Bb, "A#")]
-        [InlineData(KeyifyClassLibrary.Core.Domain.Enums.Note.Db, "C#")]
-        [InlineData(KeyifyClassLibrary.Core.Domain.Enums.Note.Eb, "D#")]
-        [InlineData(KeyifyClassLibrary.Core.Domain.Enums.Note.Gb, "F#")]
-        public void FlatNotesAreConvertedToSharpNotes(KeyifyClassLibrary.Core.Domain.Enums.Note note, string expected)
+        [InlineData(KeyifyClassLibrary.Enums.Note.Ab, "G#")]
+        [InlineData(KeyifyClassLibrary.Enums.Note.Bb, "A#")]
+        [InlineData(KeyifyClassLibrary.Enums.Note.Db, "C#")]
+        [InlineData(KeyifyClassLibrary.Enums.Note.Eb, "D#")]
+        [InlineData(KeyifyClassLibrary.Enums.Note.Gb, "F#")]
+        public void FlatNotesAreConvertedToSharpNotes(KeyifyClassLibrary.Enums.Note note, string expected)
         {
             var actual = NoteHelper.ConvertNoteToStringEquivalent(note, true);
 
@@ -22,14 +23,14 @@ namespace Keyify.Unit.Test.Note.UnitTests
         }
 
         [Theory]
-        [InlineData(KeyifyClassLibrary.Core.Domain.Enums.Note.A, "A")]
-        [InlineData(KeyifyClassLibrary.Core.Domain.Enums.Note.B, "B")]
-        [InlineData(KeyifyClassLibrary.Core.Domain.Enums.Note.C, "C")]
-        [InlineData(KeyifyClassLibrary.Core.Domain.Enums.Note.D, "D")]
-        [InlineData(KeyifyClassLibrary.Core.Domain.Enums.Note.E, "E")]
-        [InlineData(KeyifyClassLibrary.Core.Domain.Enums.Note.F, "F")]
-        [InlineData(KeyifyClassLibrary.Core.Domain.Enums.Note.G, "G")]
-        public void NonFlatNotesAreNotConvertedToSharpNotes(KeyifyClassLibrary.Core.Domain.Enums.Note note, string expected)
+        [InlineData(KeyifyClassLibrary.Enums.Note.A, "A")]
+        [InlineData(KeyifyClassLibrary.Enums.Note.B, "B")]
+        [InlineData(KeyifyClassLibrary.Enums.Note.C, "C")]
+        [InlineData(KeyifyClassLibrary.Enums.Note.D, "D")]
+        [InlineData(KeyifyClassLibrary.Enums.Note.E, "E")]
+        [InlineData(KeyifyClassLibrary.Enums.Note.F, "F")]
+        [InlineData(KeyifyClassLibrary.Enums.Note.G, "G")]
+        public void NonFlatNotesAreNotConvertedToSharpNotes(KeyifyClassLibrary.Enums.Note note, string expected)
         {
             var actual = NoteHelper.ConvertNoteToStringEquivalent(note, true);
 
@@ -39,7 +40,7 @@ namespace Keyify.Unit.Test.Note.UnitTests
         [Fact]
         public void AbIonianScaleIsConvertedToAbMajor()
         {
-            var scale = new Scale(KeyifyClassLibrary.Core.Domain.Enums.Note.Ab, new ModeDefinition(Mode.Ionian, new Step[] {
+            var scale = new Scale(KeyifyClassLibrary.Enums.Note.Ab, new ModeDefinition(Mode.Ionian, new Step[] {
                     Step.R,
                     Step.W,
                     Step.W,
@@ -59,7 +60,7 @@ namespace Keyify.Unit.Test.Note.UnitTests
         [Fact]
         public void DbAeolianScaleIsConvertedToDbMinor()
         {
-            var scale = new Scale(KeyifyClassLibrary.Core.Domain.Enums.Note.Db, new ModeDefinition(Mode.Aeolian, new Step[] {
+            var scale = new Scale(KeyifyClassLibrary.Enums.Note.Db, new ModeDefinition(Mode.Aeolian, new Step[] {
                     Step.R,
                     Step.W,
                     Step.h,

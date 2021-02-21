@@ -1,4 +1,4 @@
-﻿@using KeyifyWebClient.Core.Models
+﻿@using KeyifyWebClient.Models.ViewModels
 @model InstrumentViewModel
 
 @if (Model.SelectedScale != null)
@@ -83,53 +83,79 @@ else
                 <br />
                 @if (Model.Scales.Count == 1)
                 {
-                    <h2>@Model.Scales.Count Matching Scale</h2>
+                    <h2>
+                        @Model.Scales.Count Matching Scale
+                    </h2>
                 }
                 else
                 {
-                    <h2>@Model.Scales.Count Matching Scales</h2>
+                    <h2>
+                        @Model.Scales.Count Matching Scales
+                    </h2>
                 }
 
-                <h4>(Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>)</h4>
+                <h4>
+                    Containing <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>
+                </h4>
 
             }
             if (Model.Scales.Count > 0 && Model.SelectedScale != null)
             {
                 <br />
-                <h2>@(Model.Scales.Count) Matching Scales</h2>
+                <h2>
+                    @(Model.Scales.Count) Matching Scales
+                </h2>
                 <h4>
-                    (Containing: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>)
-                    (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale.UserReadableLabelIncludingColloquialism_Sharp</span>)
+                    Containing
                 </h4>
+                <h5>
+                    <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>
+                </h5>
+                <h4>
+                    Selected Scale
+                </h4>
+                <h5>
+                    <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale.UserReadableLabelIncludingColloquialism_Sharp</span>
+                </h5>
             }
             else if (Model.SelectedScale != null)
             {
                 <br />
-                <h2>0 Scales Found</h2>
+                <h2>
+                    0 Scales Found
+                </h2>
                 <h4>
-                    (Notes Selected: <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>)
-                    (Selected Scale: <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp</span>)
+                    Containing
                 </h4>
+                <h5>
+                    <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>
+                </h5>
+                <h4>
+                    Selected Scale
+                </h4>
+                <h5>
+                    <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp</span>
+                </h5>
             }
         }
 
         @if (Model.AvailableScales.Count() == 1)
         {
-            <h4>
-                Unselected Scale:
-            </h4>
+            <h5>
+                Unselected Scale
+            </h5>
         }
         else if (!Model.AvailableScales.Any())
         {
-            <h4>
+            <h5>
                 No More Available Unselected Scales
-            </h4>
+            </h5>
         }
         else
         {
-            <h4>
-                Unselected Scales:
-            </h4>
+            <h5>
+                Unselected Scales
+            </h5>
         }
 
         foreach (var scale in Model.AvailableScales)

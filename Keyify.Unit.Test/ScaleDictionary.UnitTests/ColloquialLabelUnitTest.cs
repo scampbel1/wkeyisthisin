@@ -1,7 +1,7 @@
-﻿using Keyify;
-using Keyify.Domain.Helper;
-using KeyifyClassLibrary.Core.Domain;
-using KeyifyClassLibrary.Core.Domain.Enums;
+﻿using Keyify.Helper;
+using Keyify.Models.Service;
+using KeyifyClassLibrary.Enums;
+using KeyifyClassLibrary.Models.MusicTheory;
 using Xunit;
 
 namespace ScaleDictionaryTests

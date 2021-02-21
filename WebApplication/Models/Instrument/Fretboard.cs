@@ -1,8 +1,8 @@
-﻿using KeyifyClassLibrary.Core.Domain.Enums;
-using KeyifyClassLibrary.Core.Domain.Tuning;
+﻿using KeyifyClassLibrary.Enums;
+using KeyifyClassLibrary.Models.Interfaces;
 using System.Collections.Generic;
 
-namespace KeyifyWebClient.Core.Models
+namespace KeyifyWebClient.Models.Instruments
 {
     public class Fretboard
     {

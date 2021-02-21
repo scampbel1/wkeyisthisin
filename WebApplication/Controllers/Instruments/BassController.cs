@@ -1,6 +1,6 @@
 ﻿using Keyify.Domain.Tuning.Bass;
-using KeyifyClassLibrary.Core.Domain.Tuning;
-using KeyifyWebClient.Core.Models;
+using KeyifyClassLibrary.Models.Interfaces;
+using KeyifyWebClient.Models.ViewModels;
 
 namespace Keyify.Controllers
 {

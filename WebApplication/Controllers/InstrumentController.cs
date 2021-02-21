@@ -1,4 +1,4 @@
-﻿using KeyifyWebClient.Core.Models;
+﻿using KeyifyWebClient.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 

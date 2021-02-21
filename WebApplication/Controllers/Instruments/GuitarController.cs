@@ -1,7 +1,7 @@
-﻿using Keyify.Service;
-using KeyifyClassLibrary.Core.Domain.Tuning;
-using KeyifyClassLibrary.Core.Domain.Tuning.Guitar;
-using KeyifyWebClient.Core.Models;
+﻿using Keyify.Service.Interface;
+using KeyifyClassLibrary.Models.Interfaces;
+using KeyifyWebClient.Models.Instruments;
+using KeyifyWebClient.Models.ViewModels;
 
 namespace Keyify.Controllers
 {
