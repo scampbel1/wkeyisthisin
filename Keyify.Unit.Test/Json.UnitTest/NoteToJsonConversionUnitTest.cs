@@ -1,5 +1,4 @@
-﻿using KeyifyWebClient.Core.Models;
-using System.Linq;
+﻿using System.Text.Json;
 using Xunit;
 
 namespace Keyify.Unit.Test.Json.UnitTest
@@ -10,12 +9,8 @@ namespace Keyify.Unit.Test.Json.UnitTest
         public void NotesConvertIntoJsonArray()
         {
             var expected = "[\"A\",\"Ab\"]";
-            var model = new InstrumentViewModel();
 
-            model.Notes.FirstOrDefault().Selected = true;
-            model.Notes.LastOrDefault().Selected = true;
-
-            var actual = model.SelectedNotesJson;
+            var actual = JsonSerializer.Serialize(new [] { KeyifyClassLibrary.Core.Domain.Enums.Note.A.ToString(), KeyifyClassLibrary.Core.Domain.Enums.Note.Ab.ToString() });
 
             Assert.Equal(expected, actual);
         }

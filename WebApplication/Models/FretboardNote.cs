@@ -1,9 +1,10 @@
 ﻿using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Helper;
+using System;
 
 namespace KeyifyWebClient.Core.Models
 {
-    public class FretboardNote
+    public class FretboardNote : IEquatable<FretboardNote>
     {
         public Note Note { get; set; }
         public string Sharp { get; set; }
@@ -16,6 +17,11 @@ namespace KeyifyWebClient.Core.Models
             Selected = false;
             InSelectedScale = false;
             Sharp = NoteHelper.ConvertNoteToStringEquivalent(note, true);
+        }
+
+        public bool Equals(FretboardNote other)
+        {
+            return Note == other.Note;
         }
     }
 }

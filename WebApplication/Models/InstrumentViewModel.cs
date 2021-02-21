@@ -1,4 +1,6 @@
-﻿using KeyifyClassLibrary.Core.Domain;
+﻿using Keyify.Models;
+using Keyify.Service;
+using KeyifyClassLibrary.Core.Domain;
 using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Helper;
 using KeyifyClassLibrary.Core.Domain.Tuning;
@@ -12,6 +14,9 @@ namespace KeyifyWebClient.Core.Models
     //Be careful renaming this class! (It may not rename the reference in the Views)
     public class InstrumentViewModel
     {
+        protected IScaleListService _dictionaryService;
+        protected IScaleService _scaleDirectoryService;
+
         public string InstrumentName { get; set; } = "Instrument Not Named";
         public List<FretboardNote> Notes { get; } = new List<FretboardNote>();
 
@@ -26,9 +31,11 @@ namespace KeyifyWebClient.Core.Models
         public List<ScaleListEntry> Scales { get; set; } = new List<ScaleListEntry>();
         public List<ScaleListEntry> SelectedScales => Scales.Where(s => s.Selected).ToList();
 
-        public InstrumentViewModel()
+        public InstrumentViewModel(IScaleListService dictionaryService, IScaleService scaleDirectoryService)
         {
             Notes = PopulateSelectedNotesList();
+            _dictionaryService = dictionaryService;
+            _scaleDirectoryService = scaleDirectoryService;
         }
 
         public void UpdateViewModel(string instrumentName, ITuning tuning, int fretCount)
@@ -62,19 +69,29 @@ namespace KeyifyWebClient.Core.Models
             }
         }
 
-        public void ApplySelectedNotesToFretboard(IEnumerable<Note> selectedNotes, HashSet<Note> scaleNotes)
+        public void ApplySelectedNotesToFretboard()
         {
+            if (SelectedNotes == null || !SelectedNotes.Any())
+            {
+                return;
+            }
+
+            //TODO: This should happen when you're building the fretboard, the strings are being constructed... and then reiterated over... the first step is wasteful
+
             foreach (InstrumentString guitarString in Fretboard.InstrumentStrings)
             {
                 foreach (FretboardNote fretboardNote in guitarString.Notes)
                 {
-                    if (selectedNotes.Contains(fretboardNote.Note))
-                        fretboardNote.Selected = true;
+                    var currentNote = SelectedNotes.SingleOrDefault(s => s.Equals(fretboardNote));
 
-                    if (scaleNotes != null)
+                    if (currentNote != null)
                     {
-                        if (scaleNotes.Contains(fretboardNote.Note))
-                            fretboardNote.InSelectedScale = true;
+                        fretboardNote.Selected = currentNote.Selected;
+                    }
+
+                    if (SelectedScale != null && SelectedScale.Scale.NoteSet.Contains(fretboardNote.Note))
+                    {                        
+                        fretboardNote.InSelectedScale = true;
                     }
                 }
             }
@@ -85,9 +102,80 @@ namespace KeyifyWebClient.Core.Models
             var fretboardNotes = new List<FretboardNote>(EnumHelper.GetEnumNameCount(typeof(Note)));
 
             foreach (Note note in Enum.GetValues(typeof(Note)))
+            {
                 fretboardNotes.Add(new FretboardNote(note));
+            }
 
             return fretboardNotes;
+        }
+
+        public void ProcessNotesAndScale(string selectedScale, IEnumerable<string> selectedNotes)
+        {
+            UpdateSelectedNotes(selectedNotes);
+
+            if (SelectedNotes.Count > 1)
+            {
+                // TODO: Remove dependency on dictionaryService parameter... this is daft.
+                Scales = ScaleDictionaryHelper.GetMatchedScales(SelectedNotes.Select(a => a.Note), _dictionaryService);
+            }
+            else
+            {
+                if (Scales != null && Scales.Any(a => a.Selected))
+                {
+                    Scales.SingleOrDefault(a => a.Selected).Selected = false;
+                }
+
+                Scales.Clear();
+
+                ResetNotesInScale();
+
+                SelectedScale = null;
+
+                if (!selectedNotes.Any())
+                {
+                    ResetSelectedNotes();
+                }
+            }
+
+            ApplySelectedScales(selectedScale);
+
+            ApplySelectedNotesToFretboard();
+        }
+
+        public void UpdateSelectedNotes(IEnumerable<string> selectedNotes)
+        {
+            var noteStack = new Stack<string>(selectedNotes);
+
+            ResetSelectedNotes();
+
+            while (noteStack.Any())
+            {
+                var selectedNote = noteStack.Pop();
+
+                UnselectedNotes.Where(n => n.Note.ToString() == selectedNote).Single().Selected = true;
+            }
+        }
+
+        public void ApplySelectedScales(string selectedScale)
+        {
+            ResetSelectedScales();
+
+            if (!string.IsNullOrWhiteSpace(selectedScale))
+            {
+                SelectedScale = Scales.SingleOrDefault(a => a.ScaleLabel == selectedScale);
+
+                if (SelectedScale != null)
+                {
+                    SelectedScale.Selected = true;
+                    return;
+                }
+
+                SelectedScale = null;
+            }
+            else
+            {
+                SelectedScale = null;
+            }
         }
     }
 }

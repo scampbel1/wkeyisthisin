@@ -12,7 +12,7 @@ namespace KeyifyClassLibrary.Core.Domain.Helper
         {
             var listReference = listService.GetScaleList();
 
-            return listReference.Where(a => a.Scale.NotesSet.IsSupersetOf(selectedNotes)).ToList();
+            return listReference.Where(a => a.Scale.NoteSet.IsSupersetOf(selectedNotes)).ToList();
         }
 
         /// <summary>
