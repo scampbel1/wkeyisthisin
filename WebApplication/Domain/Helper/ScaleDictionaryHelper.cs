@@ -1,20 +1,9 @@
-﻿using Keyify.Models;
-using KeyifyClassLibrary.Core.Domain.Enums;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 
 namespace KeyifyClassLibrary.Core.Domain.Helper
 {
     public static class ScaleDictionaryHelper
     {
-        public static List<ScaleListEntry> GetMatchedScales(IEnumerable<Note> selectedNotes, IScaleListService listService)
-        {
-            var listReference = listService.GetScaleList();
-
-            return listReference.Where(a => a.Scale.NoteSet.IsSupersetOf(selectedNotes)).ToList();
-        }
-
         /// <summary>
         /// Inserts spaces found where a capital letter is found
         /// </summary>

@@ -2,7 +2,7 @@
 
 namespace KeyifyClassLibrary.Core.Domain
 {
-    public static partial class ModeDictionary
+    public partial class ModeDictionary
     {
         public class ModeDefinition
         {

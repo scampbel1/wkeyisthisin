@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace KeyifyClassLibrary.Core.Domain
 {
-    public static partial class ModeDictionary
+    public partial class ModeDictionary
     {
         public static List<ModeDefinition> GenerateDirectory()
         {

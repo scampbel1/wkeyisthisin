@@ -3,6 +3,7 @@ using KeyifyClassLibrary.Core.Domain;
 using KeyifyClassLibrary.Core.Domain.Enums;
 using KeyifyClassLibrary.Core.Domain.Helper;
 using Xunit;
+using static KeyifyClassLibrary.Core.Domain.ModeDictionary;
 
 namespace Keyify.Unit.Test.Note.UnitTests
 {
@@ -20,7 +21,7 @@ namespace Keyify.Unit.Test.Note.UnitTests
 
             Assert.Equal(expected, actual);
         }
-        
+
         [Theory]
         [InlineData(KeyifyClassLibrary.Core.Domain.Enums.Note.A, "A")]
         [InlineData(KeyifyClassLibrary.Core.Domain.Enums.Note.B, "B")]
@@ -39,7 +40,16 @@ namespace Keyify.Unit.Test.Note.UnitTests
         [Fact]
         public void AbIonianScaleIsConvertedToAbMajor()
         {
-            var scale = new Scale(KeyifyClassLibrary.Core.Domain.Enums.Note.Ab, Mode.Ionian);
+            var scale = new Scale(KeyifyClassLibrary.Core.Domain.Enums.Note.Ab, new ModeDefinition(Mode.Ionian, new Step[] {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.h
+                }));
 
             var expected = "G# Major";
             var actual = PentatonicModeHelper.GetScaleColloquialism(scale, true);
@@ -50,7 +60,16 @@ namespace Keyify.Unit.Test.Note.UnitTests
         [Fact]
         public void DbAeolianScaleIsConvertedToDbMinor()
         {
-            var scale = new Scale(KeyifyClassLibrary.Core.Domain.Enums.Note.Db, Mode.Aeolian);
+            var scale = new Scale(KeyifyClassLibrary.Core.Domain.Enums.Note.Db, new ModeDefinition(Mode.Aeolian, new Step[] {
+                    Step.R,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W
+                }));
 
             var expected = "C# Minor";
             var actual = PentatonicModeHelper.GetScaleColloquialism(scale, true);

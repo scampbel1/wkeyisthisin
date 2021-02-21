@@ -1,27 +1,45 @@
 ﻿using KeyifyClassLibrary.Core.Domain.Enums;
 using System.Collections.Generic;
+using static KeyifyClassLibrary.Core.Domain.ModeDictionary;
 
 namespace KeyifyClassLibrary.Core.Domain
 {
     public class Scale
     {
         public readonly Note RootNote;
-        public List<Note> Notes { get; set; }
-        public HashSet<Note> NoteSet { get; set; }
-        public Mode Mode { get; set; }
+        public readonly List<Note> Notes;
+        public readonly HashSet<Note> NoteSet;
+        public readonly ModeDefinition ModeDefinition;
 
-        public Scale(Note key, Mode mode)
+        public Scale(Note key, ModeDefinition modeDefinition)
         {
             RootNote = key;
             Notes = new List<Note>();
             NoteSet = new HashSet<Note>();
-            Mode = mode;
+            ModeDefinition = modeDefinition;
+
+            GenerateScale();
         }
 
-        public void AddNote(Note note)
+        private void AddNote(Note note)
         {
             Notes.Add(note);
             NoteSet.Add(note);
+        }
+
+        public void GenerateScale()
+        {
+            int noteNumber = (int)RootNote;
+
+            foreach (var scaleStep in ModeDefinition.ScaleSteps)
+            {
+                noteNumber += (int)scaleStep;
+
+                if (noteNumber > 11)
+                    noteNumber -= 12;
+
+                AddNote((Note)noteNumber);
+            }
         }
     }
 }

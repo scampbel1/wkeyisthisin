@@ -114,9 +114,8 @@ namespace KeyifyWebClient.Core.Models
             UpdateSelectedNotes(selectedNotes);
 
             if (SelectedNotes.Count > 1)
-            {
-                // TODO: Remove dependency on dictionaryService parameter... this is daft.
-                Scales = ScaleDictionaryHelper.GetMatchedScales(SelectedNotes.Select(a => a.Note), _dictionaryService);
+            {                
+                Scales = _dictionaryService.FindScales(SelectedNotes.Select(a => a.Note)).ToList();
             }
             else
             {

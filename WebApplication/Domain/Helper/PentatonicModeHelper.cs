@@ -26,7 +26,7 @@ namespace Keyify.Domain.Helper
 
         public static string GetScaleColloquialism(Scale scale, bool convertToSharp = false)
         {
-            var pentatonicModeEquivalent = GetModeNameColloquialismModeLabel(scale.Mode);
+            var pentatonicModeEquivalent = GetModeNameColloquialismModeLabel(scale.ModeDefinition.Mode);
 
             return !string.IsNullOrWhiteSpace(pentatonicModeEquivalent) ? $"{NoteHelper.ConvertNoteToStringEquivalent(scale.RootNote, convertToSharp)} {pentatonicModeEquivalent}" : pentatonicModeEquivalent;
         }
