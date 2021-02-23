@@ -18,7 +18,6 @@ namespace Keyify.Service
         {
             var request = context.HttpContext.Request;
 
-            // #1) Did this request start off as HTTP?
             string reqProtocol;
             if (request.Headers.ContainsKey("X-Forwarded-Proto"))
             {
@@ -29,8 +28,6 @@ namespace Keyify.Service
                 reqProtocol = (request.IsHttps ? "https" : "http");
             }
 
-
-            // #2) If so, redirect to HTTPS equivalent
             if (reqProtocol != "https")
             {
                 var newUrl = new StringBuilder()

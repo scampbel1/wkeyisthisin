@@ -40,14 +40,17 @@ namespace Keyify
                 app.UseHsts();
             }
 
+            if (env.IsProduction())
+            {
+                var options = new RewriteOptions()
+                    .AddRedirectToProxiedHttps()
+                    .AddRedirect("(.*)/$", "$1");  // remove trailing slash
+
+                app.UseRewriter(options);
+            }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
-            var options = new RewriteOptions()
-            .AddRedirectToProxiedHttps();
-            
-
-            app.UseRewriter(options);
 
             app.UseRouting();
 
