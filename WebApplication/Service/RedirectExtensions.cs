@@ -19,6 +19,7 @@ namespace Keyify.Service
             var request = context.HttpContext.Request;
 
             string reqProtocol;
+
             if (request.Headers.ContainsKey("X-Forwarded-Proto"))
             {
                 reqProtocol = request.Headers["X-Forwarded-Proto"][0];
@@ -31,7 +32,7 @@ namespace Keyify.Service
             if (reqProtocol != "https")
             {
                 var newUrl = new StringBuilder()
-                    .Append("http://").Append(request.Host)
+                    .Append("https://").Append(request.Host)
                     .Append(request.PathBase).Append(request.Path)
                     .Append(request.QueryString);
 
