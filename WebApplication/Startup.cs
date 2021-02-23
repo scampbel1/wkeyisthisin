@@ -37,7 +37,7 @@ namespace Keyify
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                //app.UseHsts();
+                app.UseHsts();
             }
 
             app.UseHttpsRedirection();
@@ -45,14 +45,12 @@ namespace Keyify
             app.UseRouting();
             app.UseAuthorization();
 
-            if (env.IsProduction())
-            {
-                var options = new RewriteOptions()
-                    .AddRedirectToProxiedHttps()
-                    .AddRedirect("(.*)/$", "$1");  // remove trailing slash
 
-                app.UseRewriter(options);
-            }
+            var options = new RewriteOptions()
+            .AddRedirectToProxiedHttps()
+            .AddRedirect("(.*)/$", "$1");  // remove trailing slash
+
+            app.UseRewriter(options);
 
             app.UseEndpoints(endpoints =>
             {

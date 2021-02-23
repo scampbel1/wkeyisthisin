@@ -31,7 +31,7 @@ namespace Keyify.Service
             if (reqProtocol != "https")
             {
                 var newUrl = new StringBuilder()
-                    .Append("https://").Append(request.Host)
+                    .Append("http://").Append(request.Host)
                     .Append(request.PathBase).Append(request.Path)
                     .Append(request.QueryString);
 
