@@ -1,8 +1,10 @@
 using Keyify.Models.Service;
+using Keyify.Service;
 using Keyify.Service.Interface;
 using KeyifyWebClient.Models.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -40,6 +42,12 @@ namespace Keyify
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            var options = new RewriteOptions()
+            .AddRedirectToProxiedHttps()
+            .AddRedirect("(.*)/$", "$1");  // remove trailing slash
+
+            app.UseRewriter(options);
 
             app.UseRouting();
 
