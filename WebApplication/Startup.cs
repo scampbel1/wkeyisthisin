@@ -40,12 +40,10 @@ namespace Keyify
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             var options = new RewriteOptions()
-            .AddRedirectToProxiedHttps()
-            .AddRedirect("(.*)/$", "$1");  // remove trailing slash
+            .AddRedirectToProxiedHttps();
 
             app.UseRewriter(options);
 
