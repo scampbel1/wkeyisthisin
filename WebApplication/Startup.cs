@@ -40,10 +40,12 @@ namespace Keyify
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             var options = new RewriteOptions()
             .AddRedirectToProxiedHttps();
+            
 
             app.UseRewriter(options);
 
