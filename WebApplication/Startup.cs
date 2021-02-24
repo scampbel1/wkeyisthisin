@@ -3,6 +3,7 @@ using Keyify.Service.Interface;
 using KeyifyWebClient.Models.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,10 +21,15 @@ namespace Keyify
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedProto;
+            });
+
             services.AddControllersWithViews();
             services.AddSingleton(typeof(IModeDefinitionService), typeof(ModeDefinitionService));
             services.AddSingleton(typeof(IScaleListService), typeof(ScaleListService));
-            services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
+            services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -40,10 +46,10 @@ namespace Keyify
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
+
+            app.UseForwardedHeaders();
 
             app.UseEndpoints(endpoints =>
             {
