@@ -13,7 +13,7 @@
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
 		<UserSecretsId>a50ac624-865b-41b6-b124-40c9089050d7</UserSecretsId>
-		<DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	<DockerfileContext>.</DockerfileContext>
 		<StartupObject>Keyify.Program</StartupObject>
 	</PropertyGroup>

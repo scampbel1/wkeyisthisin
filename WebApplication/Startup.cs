@@ -21,10 +21,6 @@ namespace Keyify
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<ForwardedHeadersOptions>(options =>
-            {
-                options.ForwardedHeaders = ForwardedHeaders.XForwardedProto;
-            });
 
             services.AddControllersWithViews();
             services.AddSingleton(typeof(IModeDefinitionService), typeof(ModeDefinitionService));
