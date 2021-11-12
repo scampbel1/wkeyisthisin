@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Keyify.Controllers
 {
-    public class VersionController : Controller
+    public class HealthCheckController : Controller
     {
         [HttpGet]
         public ActionResult Index()

@@ -14,9 +14,6 @@ namespace KeyifyWebClient.Models.ViewModels
     //Be careful renaming this class! (It may not rename the reference in the Views)
     public class InstrumentViewModel
     {
-        protected IScaleListService _dictionaryService;
-        protected IModeDefinitionService _scaleDirectoryService;
-
         public string InstrumentName { get; set; } = "Instrument Not Named";
         public List<InstrumentNote> Notes { get; } = new List<InstrumentNote>();
 
@@ -32,11 +29,14 @@ namespace KeyifyWebClient.Models.ViewModels
         public List<ScaleEntry> SelectedScales => Scales.Where(s => s.Selected).ToList();
         public IEnumerable<ScaleEntry> AvailableScales => Scales.Where(s => !s.Equals(SelectedScale));
 
+        protected IScaleListService DictionaryService { get; init; }
+        protected IModeDefinitionService ScaleDirectoryService { get; init; }
+
         public InstrumentViewModel(IScaleListService dictionaryService, IModeDefinitionService scaleDirectoryService)
         {
             Notes = PopulateSelectedNotesList();
-            _dictionaryService = dictionaryService;
-            _scaleDirectoryService = scaleDirectoryService;
+            DictionaryService = dictionaryService;
+            ScaleDirectoryService = scaleDirectoryService;
         }
 
         public void UpdateViewModel(string instrumentName, ITuning tuning, int fretCount)
@@ -116,7 +116,7 @@ namespace KeyifyWebClient.Models.ViewModels
 
             if (SelectedNotes.Count > 1)
             {
-                Scales = _dictionaryService.FindScales(SelectedNotes.Select(a => a.Note)).ToList();
+                Scales = DictionaryService.FindScales(SelectedNotes.Select(a => a.Note)).ToList();
             }
             else
             {
