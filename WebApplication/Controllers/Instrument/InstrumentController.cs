@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace Keyify.Controllers
+namespace Keyify.Controllers.Instrument
 {
     public class InstrumentController : Controller
     {

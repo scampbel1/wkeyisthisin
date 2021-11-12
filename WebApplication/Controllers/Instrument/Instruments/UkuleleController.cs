@@ -1,8 +1,9 @@
-﻿using KeyifyClassLibrary.Models.Interfaces;
+﻿using Keyify.Controllers.Instrument;
+using KeyifyClassLibrary.Models.Interfaces;
 using KeyifyWebClient.Models.Instruments;
 using KeyifyWebClient.Models.ViewModels;
 
-namespace Keyify.Controllers
+namespace Keyify.Controllers.Instrument.Instruments
 {
     public class UkuleleController : InstrumentController
     {

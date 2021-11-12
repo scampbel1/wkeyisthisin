@@ -1,8 +1,9 @@
-﻿using Keyify.Domain.Tuning.Bass;
+﻿using Keyify.Controllers.Instrument;
+using Keyify.Domain.Tuning.Bass;
 using KeyifyClassLibrary.Models.Interfaces;
 using KeyifyWebClient.Models.ViewModels;
 
-namespace Keyify.Controllers
+namespace Keyify.Controllers.Instrument.Instruments
 {
     public class BassController : InstrumentController
     {

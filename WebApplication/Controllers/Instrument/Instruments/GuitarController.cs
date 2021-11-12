@@ -1,9 +1,10 @@
-﻿using Keyify.Service.Interface;
+﻿using Keyify.Controllers.Instrument;
+using Keyify.Service.Interface;
 using KeyifyClassLibrary.Models.Interfaces;
 using KeyifyWebClient.Models.Instruments;
 using KeyifyWebClient.Models.ViewModels;
 
-namespace Keyify.Controllers
+namespace Keyify.Controllers.Instrument.Instruments
 {
     public class GuitarController : InstrumentController
     {
