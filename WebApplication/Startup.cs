@@ -25,20 +25,23 @@ namespace Keyify
             services.AddControllersWithViews();
             services.AddSingleton(typeof(IModeDefinitionService), typeof(ModeDefinitionService));
             services.AddSingleton(typeof(IScaleListService), typeof(ScaleListService));
-            services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));            
+            services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
-            }
+            //TODO: Implement error page
+
+            //if (env.IsDevelopment())
+            //{
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/Home/Error");
+            //    app.UseHsts();
+            //}
+            
+            app.UseDeveloperExceptionPage();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
