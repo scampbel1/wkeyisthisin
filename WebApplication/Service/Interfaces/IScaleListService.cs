@@ -8,5 +8,6 @@ namespace Keyify.Service.Interface
     {
         IEnumerable<ScaleEntry> GetScaleList();
         IEnumerable<ScaleEntry> FindScales(IEnumerable<Note> selectedNotes);
+        Dictionary<HashSet<Note>, List<ScaleEntry>> FindScalesSortByNoteSet(IEnumerable<Note> selectedNotes);
     }
 }
