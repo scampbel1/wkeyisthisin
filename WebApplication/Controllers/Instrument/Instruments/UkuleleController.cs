@@ -1,5 +1,4 @@
-﻿using Keyify.Controllers.Instrument;
-using KeyifyClassLibrary.Models.Interfaces;
+﻿using KeyifyClassLibrary.Models.Interfaces;
 using KeyifyWebClient.Models.Instruments;
 using KeyifyWebClient.Models.ViewModels;
 

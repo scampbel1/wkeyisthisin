@@ -1,12 +1,12 @@
+using Keyify.Models.Interfaces;
 using Keyify.Models.Service;
+using Keyify.Models.View_Models.Misc;
 using Keyify.Service.Interface;
 using KeyifyWebClient.Models.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace Keyify
 {
@@ -26,6 +26,7 @@ namespace Keyify
             services.AddSingleton(typeof(IModeDefinitionService), typeof(ModeDefinitionService));
             services.AddSingleton(typeof(IScaleListService), typeof(ScaleListService));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
+            services.AddTransient(typeof(IScalesGroupingService), typeof(ScalesGroupingService));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -40,7 +41,7 @@ namespace Keyify
             //    app.UseExceptionHandler("/Home/Error");
             //    app.UseHsts();
             //}
-            
+
             app.UseDeveloperExceptionPage();
 
             app.UseHttpsRedirection();

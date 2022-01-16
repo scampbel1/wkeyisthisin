@@ -1,4 +1,6 @@
-﻿using Keyify.Models.Service;
+﻿using Keyify.Models.Interfaces;
+using Keyify.Models.Service;
+using Keyify.Models.View_Models.Misc;
 using Keyify.Service.Interface;
 using KeyifyClassLibrary.Enums;
 using KeyifyClassLibrary.Helper;
@@ -14,8 +16,8 @@ namespace KeyifyWebClient.Models.ViewModels
     //Be careful renaming this class! (It may not rename the reference in the Views)
     public class InstrumentViewModel
     {
-        public string InstrumentName { get; set; } = "Instrument Not Named";
         public List<InstrumentNote> Notes { get; } = new List<InstrumentNote>();
+        public string InstrumentName { get; set; } = "Instrument Not Named";
 
         public List<InstrumentNote> SelectedNotes => Notes.Where(n => n.Selected).ToList();
         public string SelectedNotesJson => JsonSerializer.Serialize(SelectedNotes.Select(n => n.Note.ToString()));
@@ -27,16 +29,18 @@ namespace KeyifyWebClient.Models.ViewModels
         public ScaleEntry SelectedScale { get; set; }
         public List<ScaleEntry> Scales { get; set; } = new List<ScaleEntry>();
         public List<ScaleEntry> SelectedScales => Scales.Where(s => s.Selected).ToList();
-        public IEnumerable<ScaleEntry> AvailableScales => Scales.Where(s => !s.Equals(SelectedScale));
+        private IScalesGroupingService _groupedScales { get; init; }
+        public List<ScaleGroupingEntry> AvailableScaleGroups => _groupedScales.GetGroupedScales();
 
         protected IScaleListService DictionaryService { get; init; }
         protected IModeDefinitionService ScaleDirectoryService { get; init; }
 
-        public InstrumentViewModel(IScaleListService dictionaryService, IModeDefinitionService scaleDirectoryService)
+        public InstrumentViewModel(IScaleListService dictionaryService, IModeDefinitionService scaleDirectoryService, IScalesGroupingService scalesGroupingService)
         {
             Notes = PopulateSelectedNotesList();
             DictionaryService = dictionaryService;
             ScaleDirectoryService = scaleDirectoryService;
+            _groupedScales = scalesGroupingService;
         }
 
         public void UpdateViewModel(string instrumentName, ITuning tuning, int fretCount)
@@ -117,6 +121,7 @@ namespace KeyifyWebClient.Models.ViewModels
             if (SelectedNotes.Count > 1)
             {
                 Scales = DictionaryService.FindScales(SelectedNotes.Select(a => a.Note)).ToList();
+                _groupedScales.UpdateScaleGroupingModel(Scales);
             }
             else
             {

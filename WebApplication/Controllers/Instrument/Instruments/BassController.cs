@@ -1,5 +1,4 @@
-﻿using Keyify.Controllers.Instrument;
-using Keyify.Domain.Tuning.Bass;
+﻿using Keyify.Domain.Tuning.Bass;
 using KeyifyClassLibrary.Models.Interfaces;
 using KeyifyWebClient.Models.ViewModels;
 

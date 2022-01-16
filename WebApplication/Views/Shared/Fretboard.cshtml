@@ -139,13 +139,13 @@ else
             }
         }
 
-        @if (Model.AvailableScales.Count() == 1)
+        @if (Model.AvailableScaleGroups.Count() == 1)
         {
             <h5>
                 Unselected Scale
             </h5>
         }
-        else if (!Model.AvailableScales.Any())
+        else if (!Model.AvailableScaleGroups.Any())
         {
             <h5>
                 No More Available Unselected Scales
@@ -158,12 +158,18 @@ else
             </h5>
         }
 
-        foreach (var scale in Model.AvailableScales)
+        @foreach (var scaleGroups in Model.AvailableScaleGroups)
         {
             <span>
-                <a class="scaleResult" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@scale.ScaleLabel', null, @Model.SelectedNotesJson)">
-                    @scale.UserReadableLabelIncludingColloquialism_Sharp&nbsp;
-                </a>
+                <span class="scaleResult">(@scaleGroups.NotesGroupingLabel)</span>
+
+                @foreach (var scale in scaleGroups.GroupedScales)
+                {
+                    <a class="scaleResult" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@scale.ScaleLabel', null, @Model.SelectedNotesJson)">
+                        @scale.UserReadableLabelIncludingColloquialism_Sharp&nbsp;
+                    </a>
+                }
+                <br />
             </span>
         }
     }
