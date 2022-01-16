@@ -48,31 +48,7 @@ namespace KeyifyWebClient.Models.ViewModels
             //TODO: Stop creating a new fretboard everytime
             Fretboard = new Fretboard(tuning, fretCount);
             InstrumentName = instrumentName;
-        }
-
-        public void ResetSelectedNotes()
-        {
-            foreach (var selectedNote in SelectedNotes)
-            {
-                selectedNote.Selected = false;
-            }
-        }
-
-        public void ResetNotesInScale()
-        {
-            foreach (var selectedNote in NotesPartOfScale)
-            {
-                selectedNote.InSelectedScale = false;
-            }
-        }
-
-        public void ResetSelectedScales()
-        {
-            foreach (var selectedScale in SelectedScales)
-            {
-                selectedScale.Selected = false;
-            }
-        }
+        }        
 
         public void ApplySelectedNotesToFretboard()
         {
@@ -100,18 +76,6 @@ namespace KeyifyWebClient.Models.ViewModels
                     }
                 }
             }
-        }
-
-        private List<InstrumentNote> PopulateSelectedNotesList()
-        {
-            var fretboardNotes = new List<InstrumentNote>(EnumHelper.GetEnumNameCount(typeof(Note)));
-
-            foreach (Note note in Enum.GetValues(typeof(Note)))
-            {
-                fretboardNotes.Add(new InstrumentNote(note));
-            }
-
-            return fretboardNotes;
         }
 
         public void ProcessNotesAndScale(string selectedScale, IEnumerable<string> selectedNotes)
@@ -147,7 +111,19 @@ namespace KeyifyWebClient.Models.ViewModels
             ApplySelectedNotesToFretboard();
         }
 
-        public void UpdateSelectedNotes(IEnumerable<string> selectedNotes)
+        private List<InstrumentNote> PopulateSelectedNotesList()
+        {
+            var fretboardNotes = new List<InstrumentNote>(EnumHelper.GetEnumNameCount(typeof(Note)));
+
+            foreach (Note note in Enum.GetValues(typeof(Note)))
+            {
+                fretboardNotes.Add(new InstrumentNote(note));
+            }
+
+            return fretboardNotes;
+        }
+
+        private void UpdateSelectedNotes(IEnumerable<string> selectedNotes)
         {
             var noteStack = new Stack<string>(selectedNotes);
 
@@ -161,7 +137,7 @@ namespace KeyifyWebClient.Models.ViewModels
             }
         }
 
-        public void ApplySelectedScales(string selectedScale)
+        private void ApplySelectedScales(string selectedScale)
         {
             ResetSelectedScales();
 
@@ -180,6 +156,30 @@ namespace KeyifyWebClient.Models.ViewModels
             else
             {
                 SelectedScale = null;
+            }
+        }
+
+        private void ResetSelectedNotes()
+        {
+            foreach (var selectedNote in SelectedNotes)
+            {
+                selectedNote.Selected = false;
+            }
+        }
+
+        private void ResetNotesInScale()
+        {
+            foreach (var selectedNote in NotesPartOfScale)
+            {
+                selectedNote.InSelectedScale = false;
+            }
+        }
+
+        private void ResetSelectedScales()
+        {
+            foreach (var selectedScale in SelectedScales)
+            {
+                selectedScale.Selected = false;
             }
         }
     }
