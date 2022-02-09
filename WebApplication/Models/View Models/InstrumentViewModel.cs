@@ -190,7 +190,7 @@ namespace KeyifyWebClient.Models.ViewModels
 
         private string GetAvailableScaleLabel()
         {
-            var matchingScaleCount = AvailableScaleGroups.Count;
+            var matchingScaleCount = _groupedScales.GetTotalScaleCount();
 
             switch (matchingScaleCount)
             {

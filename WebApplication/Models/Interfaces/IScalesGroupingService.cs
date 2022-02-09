@@ -8,5 +8,6 @@ namespace Keyify.Models.Interfaces
     {
         void UpdateScaleGroupingModel(List<ScaleEntry> scales);
         List<ScaleGroupingEntry> GetGroupedScales();
+        int GetTotalScaleCount();
     }
 }

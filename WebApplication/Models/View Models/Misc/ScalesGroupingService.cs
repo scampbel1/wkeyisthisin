@@ -15,6 +15,11 @@ namespace Keyify.Models.View_Models.Misc
             return ScaleGroupingEntries;
         }
 
+        public int GetTotalScaleCount()
+        {
+            return ScaleGroupingEntries.Sum(s => s.Count);
+        }
+
         public void UpdateScaleGroupingModel(List<ScaleEntry> scales)
         {
             ScaleGroupingEntries.Clear();
