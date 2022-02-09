@@ -74,103 +74,21 @@ else
 </div>
 
 <div class="scaleResults">
-    @if (Model.Scales.Any())
+    <h2>
+        @Model.AvailableScalesLabel
+    </h2>
+
+    @foreach (var scaleGroups in Model.AvailableScaleGroups)
     {
-        if (Model.SelectedNotes.Count > 0)
-        {
-            if (Model.Scales.Count > 0 && Model.SelectedScale == null)
+        <span>
+            <span class="scaleResult">(@scaleGroups.NotesGroupingLabel)</span>
+            @foreach (var scale in scaleGroups.GroupedScales)
             {
-                <br />
-                @if (Model.Scales.Count == 1)
-                {
-                    <h2>
-                        @Model.Scales.Count Matching Scale
-                    </h2>
-                }
-                else
-                {
-                    <h2>
-                        @Model.Scales.Count Matching Scales
-                    </h2>
-                }
-
-                <h4>
-                    Containing <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>
-                </h4>
-
+                <a class="scaleResult" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@scale.ScaleLabel', null, @Model.SelectedNotesJson)">
+                    @scale.UserReadableLabelIncludingColloquialism_Sharp&nbsp;
+                </a>
             }
-            if (Model.Scales.Count > 0 && Model.SelectedScale != null)
-            {
-                <br />
-                <h2>
-                    @(Model.Scales.Count) Matching Scales
-                </h2>
-                <h4>
-                    Containing
-                </h4>
-                <h5>
-                    <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>
-                </h5>
-                <h4>
-                    Selected Scale
-                </h4>
-                <h5>
-                    <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale.UserReadableLabelIncludingColloquialism_Sharp</span>
-                </h5>
-            }
-            else if (Model.SelectedScale != null)
-            {
-                <br />
-                <h2>
-                    0 Scales Found
-                </h2>
-                <h4>
-                    Containing
-                </h4>
-                <h5>
-                    <span style="color:green; background-color: rgba(52, 255, 152, 0.4);">@string.Join(' ', Model.SelectedNotes.Select(a => a.Sharp))</span>
-                </h5>
-                <h4>
-                    Selected Scale
-                </h4>
-                <h5>
-                    <span style="color: darkblue; background-color: rgba(30, 144, 225, 0.4);">@Model.SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp</span>
-                </h5>
-            }
-        }
-
-        @if (Model.AvailableScaleGroups.Count() == 1)
-        {
-            <h5>
-                Unselected Scale
-            </h5>
-        }
-        else if (!Model.AvailableScaleGroups.Any())
-        {
-            <h5>
-                No More Available Unselected Scales
-            </h5>
-        }
-        else
-        {
-            <h5>
-                Unselected Scales
-            </h5>
-        }
-
-        @foreach (var scaleGroups in Model.AvailableScaleGroups)
-        {
-            <span>
-                <span class="scaleResult">(@scaleGroups.NotesGroupingLabel)</span>
-
-                @foreach (var scale in scaleGroups.GroupedScales)
-                {
-                    <a class="scaleResult" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@scale.ScaleLabel', null, @Model.SelectedNotesJson)">
-                        @scale.UserReadableLabelIncludingColloquialism_Sharp&nbsp;
-                    </a>
-                }
-                <br />
-            </span>
-        }
+            <br />
+        </span>
     }
 </div>

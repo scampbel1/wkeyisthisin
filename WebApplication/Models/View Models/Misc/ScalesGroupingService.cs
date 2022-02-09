@@ -43,7 +43,5 @@ namespace Keyify.Models.View_Models.Misc
 
             return distinctSets;
         }
-
-
     }
 }

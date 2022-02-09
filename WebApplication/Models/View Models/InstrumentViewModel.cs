@@ -29,6 +29,8 @@ namespace KeyifyWebClient.Models.ViewModels
         public ScaleEntry SelectedScale { get; set; }
         public List<ScaleEntry> Scales { get; set; } = new List<ScaleEntry>();
         public List<ScaleEntry> SelectedScales => Scales.Where(s => s.Selected).ToList();
+        public string AvailableScalesLabel => GetAvailableScaleLabel();
+
         private IScalesGroupingService _groupedScales { get; init; }
         public List<ScaleGroupingEntry> AvailableScaleGroups => _groupedScales.GetGroupedScales();
 
@@ -48,7 +50,7 @@ namespace KeyifyWebClient.Models.ViewModels
             //TODO: Stop creating a new fretboard everytime
             Fretboard = new Fretboard(tuning, fretCount);
             InstrumentName = instrumentName;
-        }        
+        }
 
         public void ApplySelectedNotesToFretboard()
         {
@@ -181,6 +183,34 @@ namespace KeyifyWebClient.Models.ViewModels
             {
                 selectedScale.Selected = false;
             }
+        }
+
+        private string GetAvailableScaleLabel()
+        {
+            var matchingScaleCount = AvailableScaleGroups.Count;
+
+            switch (matchingScaleCount)
+            {
+                case 0:
+                    return GetNoScalesFoundMessage();
+                case 1:
+                    return $"{matchingScaleCount} Matching Scale Found";
+                default:
+                    return $"{matchingScaleCount} Matching Scales Found";
+            }
+        }
+
+        private string GetNoScalesFoundMessage()
+        {
+            var selectedNoteCount = SelectedNotes.Count;
+
+            if (selectedNoteCount == 1)
+                return $"Only {selectedNoteCount} Note Selected";
+
+            if (selectedNoteCount > 1)
+                return "No Matching Scales Found";
+            else
+                return "No Notes Selected";
         }
     }
 }
