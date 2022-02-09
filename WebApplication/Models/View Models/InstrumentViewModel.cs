@@ -32,7 +32,10 @@ namespace KeyifyWebClient.Models.ViewModels
         public string AvailableScalesLabel => GetAvailableScaleLabel();
 
         private IScalesGroupingService _groupedScales { get; init; }
-        public List<ScaleGroupingEntry> AvailableScaleGroups => _groupedScales.GetGroupedScales();
+        private List<ScaleGroupingEntry> AvailableScaleGroups => _groupedScales.GetGroupedScales();
+
+        public List<ScaleGroupingEntry> Odd_Index_AvailableScaleGroups => AvailableScaleGroups.Where((a, i) => i % 2 != 0).ToList();
+        public List<ScaleGroupingEntry> Even_Index_AvailableScaleGroups => AvailableScaleGroups.Where((a, i) => i % 2 == 0).ToList();
 
         protected IScaleListService DictionaryService { get; init; }
         protected IModeDefinitionService ScaleDirectoryService { get; init; }

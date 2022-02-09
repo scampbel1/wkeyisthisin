@@ -77,18 +77,40 @@ else
     <h2>
         @Model.AvailableScalesLabel
     </h2>
+    <table>
+        <tr>
+            <td>
+                @foreach (var scaleGroups in Model.Even_Index_AvailableScaleGroups)
+                {
+                    <span>
+                        <span class="scaleResult">(@scaleGroups.NotesGroupingLabel)</span>
+                        @foreach (var scale in scaleGroups.GroupedScales)
+                        {
+                            <a class="scaleResult" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@scale.ScaleLabel', null, @Model.SelectedNotesJson)">
+                                @scale.UserReadableLabelIncludingColloquialism_Sharp&nbsp;
+                            </a>
+                        }
+                        <br />
+                    </span>
+                }
+            </td>
+            <td>
+                @foreach (var scaleGroups in Model.Odd_Index_AvailableScaleGroups)
+                {
+                    <span>
+                        <span class="scaleResult">(@scaleGroups.NotesGroupingLabel)</span>
+                        @foreach (var scale in scaleGroups.GroupedScales)
+                        {
+                            <a class="scaleResult" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@scale.ScaleLabel', null, @Model.SelectedNotesJson)">
+                                @scale.UserReadableLabelIncludingColloquialism_Sharp&nbsp;
+                            </a>
+                        }
+                        <br />
+                    </span>
+                }
+            </td>
+        </tr>
+    </table>
 
-    @foreach (var scaleGroups in Model.AvailableScaleGroups)
-    {
-        <span>
-            <span class="scaleResult">(@scaleGroups.NotesGroupingLabel)</span>
-            @foreach (var scale in scaleGroups.GroupedScales)
-            {
-                <a class="scaleResult" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@scale.ScaleLabel', null, @Model.SelectedNotesJson)">
-                    @scale.UserReadableLabelIncludingColloquialism_Sharp&nbsp;
-                </a>
-            }
-            <br />
-        </span>
-    }
+    
 </div>
