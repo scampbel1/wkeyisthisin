@@ -80,19 +80,20 @@
 
 .scaleResultLabel {
     cursor: none;
-    color: cyan;
+    color: midnightblue;
     background-color: rgba(255, 255, 255, 0.5) !important;
 }
 
 .scaleResultLabelColumn {
     width: 10%;
     max-width: 10%;
+    padding-right: 5px;
 }
 
 .scaleResultColumn {
     width: 30%;
     max-width: 30%;
-    padding-left: 15px;
+    padding-left: 5px;
 }
 
 .scaleResultSelected {
