@@ -28,44 +28,16 @@ namespace KeyifyWebClient.Models.ViewModels
 
                 if (availableScalesTotal - count >= 2)
                 {
-                    //TODO: Remove Boilerplate Code - all of this can be moved to a method
-                    sb.Append($"<td><span class=\"scaleResult\">{AvailableScaleGroups[count].NotesGroupingLabel}</span></td>");
-
-                    sb.Append($"<td>");
-
-                    foreach (var availableScale in AvailableScaleGroups[count].GroupedScales.Select(gs => new KeyValuePair<string, string>(gs.ScaleLabel, gs.UserReadableLabelIncludingColloquialism_Sharp)))
-                    {
-                        sb.Append($"<a class=\"scaleResult\" onclick=\"UpdateModel('/{InstrumentName}/UpdateFretboardModel', '{availableScale.Key}', null, {$"[{string.Join(',', SelectedNotes.Select(s => $"'{s.Note}'"))}]"} )\">{availableScale.Value}</a>&nbsp;");
-                    }
-
-                    sb.Append($"</td>");
-
-                    sb.Append($"<td><span class=\"scaleResult\">{AvailableScaleGroups[count + 1].NotesGroupingLabel}</span></td>");
-
-                    sb.Append($"<td>");
-
-                    foreach (var availableScale in AvailableScaleGroups[count + 1].GroupedScales.Select(gs => new KeyValuePair<string, string>(gs.ScaleLabel, gs.UserReadableLabelIncludingColloquialism_Sharp)))
-                    {
-                        sb.Append($"<a class=\"scaleResult\" onclick=\"UpdateModel('/{InstrumentName}/UpdateFretboardModel', '{availableScale.Key}', null, {$"[{string.Join(',', SelectedNotes.Select(s => $"'{s.Note}'"))}]"} )\">{availableScale.Value}</a>&nbsp;");
-                    }
-
-                    sb.Append($"</td>");
+                    AddScalesToNoteSet(sb, count, false);
+                    AddScalesToNoteSet(sb, count, true);
 
                     count += 2;
                 }
                 else
                 {
-                    sb.Append($"<td><span class=\"scaleResult\">{AvailableScaleGroups[count].NotesGroupingLabel}</span></td>");
+                    AddScalesToNoteSet(sb, count, false);
 
-                    sb.Append($"<td>");
-
-                    foreach (var availableScale in AvailableScaleGroups[count].GroupedScales.Select(gs => new KeyValuePair<string, string>(gs.ScaleLabel, gs.UserReadableLabelIncludingColloquialism_Sharp)))
-                    {
-                        sb.Append($"<a class=\"scaleResult\" onclick=\"UpdateModel('/{InstrumentName}/UpdateFretboardModel', '{availableScale.Key}', null, {$"[{string.Join(',', SelectedNotes.Select(s => $"'{s.Note}'"))}]"} )\">{availableScale.Value}</a>&nbsp;");
-                    }
-
-                    sb.Append($"</td>");
-
+                    //No more Scale Groups
                     sb.Append($"<td></td>");
                     sb.Append($"<td></td>");
 
@@ -78,6 +50,22 @@ namespace KeyifyWebClient.Models.ViewModels
             sb.Append("</table>");
 
             return sb.ToString();
+        }
+
+        private void AddScalesToNoteSet(StringBuilder sb, int count, bool isNeighbouringScaleGroup)
+        {
+            count = isNeighbouringScaleGroup ? count += 1 : count;
+
+            sb.Append($"<td class=\"scaleResultLabelColumn\"><span class=\"scaleResultLabel\">{AvailableScaleGroups[count].NotesGroupingLabel}</span></td>");
+
+            sb.Append($"<td>");
+
+            foreach (var availableScale in AvailableScaleGroups[count].GroupedScales.Select(gs => new KeyValuePair<string, string>(gs.ScaleLabel, gs.UserReadableLabelIncludingColloquialism_Sharp)))
+            {
+                sb.Append($"<a class=\"scaleResult\" onclick=\"UpdateModel('/{InstrumentName}/UpdateFretboardModel', '{availableScale.Key}', null, {$"[{string.Join(',', SelectedNotes.Select(s => $"'{s.Note}'"))}]"} )\">{availableScale.Value}</a>&nbsp;");
+            }
+
+            sb.Append($"</td>");
         }
     }
 }
