@@ -14,7 +14,7 @@ using System.Text.Json;
 namespace KeyifyWebClient.Models.ViewModels
 {
     //Be careful renaming this class! (It may not rename the reference in the Views)
-    public class InstrumentViewModel
+    public partial class InstrumentViewModel
     {
         public List<InstrumentNote> Notes { get; } = new List<InstrumentNote>();
         public string InstrumentName { get; set; } = "Instrument Not Named";
@@ -28,7 +28,7 @@ namespace KeyifyWebClient.Models.ViewModels
         public Fretboard Fretboard { get; private set; }
         public ScaleEntry SelectedScale { get; set; }
         public List<ScaleEntry> Scales { get; set; } = new List<ScaleEntry>();
-        public List<ScaleEntry> SelectedScales => Scales.Where(s => s.Selected).ToList();
+        
         public string AvailableScalesLabel => GetAvailableScaleLabel();
 
         private IScalesGroupingService _groupedScales { get; init; }
@@ -42,10 +42,10 @@ namespace KeyifyWebClient.Models.ViewModels
 
         public InstrumentViewModel(IScaleListService dictionaryService, IModeDefinitionService scaleDirectoryService, IScalesGroupingService scalesGroupingService)
         {
-            Notes = PopulateSelectedNotesList();
             DictionaryService = dictionaryService;
             ScaleDirectoryService = scaleDirectoryService;
             _groupedScales = scalesGroupingService;
+            Notes = PopulateSelectedNotesList();
         }
 
         public void UpdateViewModel(string instrumentName, ITuning tuning, int fretCount)
@@ -116,18 +116,6 @@ namespace KeyifyWebClient.Models.ViewModels
             ApplySelectedNotesToFretboard();
         }
 
-        private List<InstrumentNote> PopulateSelectedNotesList()
-        {
-            var fretboardNotes = new List<InstrumentNote>(EnumHelper.GetEnumNameCount(typeof(Note)));
-
-            foreach (Note note in Enum.GetValues(typeof(Note)))
-            {
-                fretboardNotes.Add(new InstrumentNote(note));
-            }
-
-            return fretboardNotes;
-        }
-
         private void UpdateSelectedNotes(IEnumerable<string> selectedNotes)
         {
             var noteStack = new Stack<string>(selectedNotes);
@@ -182,10 +170,22 @@ namespace KeyifyWebClient.Models.ViewModels
 
         private void ResetSelectedScales()
         {
-            foreach (var selectedScale in SelectedScales)
+            foreach (var selectedScale in Scales.Where(s => s.Selected))
             {
                 selectedScale.Selected = false;
             }
+        }
+
+        private List<InstrumentNote> PopulateSelectedNotesList()
+        {
+            var fretboardNotes = new List<InstrumentNote>(EnumHelper.GetEnumNameCount(typeof(Note)));
+
+            foreach (Note note in Enum.GetValues(typeof(Note)))
+            {
+                fretboardNotes.Add(new InstrumentNote(note));
+            }
+
+            return fretboardNotes;
         }
 
         private string GetAvailableScaleLabel()
