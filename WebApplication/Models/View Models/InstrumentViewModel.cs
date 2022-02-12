@@ -28,7 +28,7 @@ namespace KeyifyWebClient.Models.ViewModels
         public Fretboard Fretboard { get; private set; }
         public ScaleEntry SelectedScale { get; set; }
         public List<ScaleEntry> Scales { get; set; } = new List<ScaleEntry>();
-        
+
         public string AvailableScalesLabel => GetAvailableScaleLabel();
 
         private IScalesGroupingService _groupedScales { get; init; }

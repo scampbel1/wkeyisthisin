@@ -58,7 +58,7 @@ namespace KeyifyWebClient.Models.ViewModels
 
             sb.Append($"<td class=\"scaleResultLabelColumn\"><span class=\"scaleResultLabel\">{AvailableScaleGroups[count].NotesGroupingLabel}</span></td>");
 
-            sb.Append($"<td>");
+            sb.Append($"<td class=\"scaleResultColumn\">");
 
             foreach (var availableScale in AvailableScaleGroups[count].GroupedScales.Select(gs => new KeyValuePair<string, string>(gs.ScaleLabel, gs.UserReadableLabelIncludingColloquialism_Sharp)))
             {
