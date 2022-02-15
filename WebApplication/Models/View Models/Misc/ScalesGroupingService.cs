@@ -8,6 +8,7 @@ namespace Keyify.Models.View_Models.Misc
 {
     public class ScalesGroupingService : IScalesGroupingService
     {
+        private List<ScaleGroupingEntry> KeyGroupingEntries { get; init; } = new List<ScaleGroupingEntry>();
         private List<ScaleGroupingEntry> ScaleGroupingEntries { get; init; } = new List<ScaleGroupingEntry>();
 
         public List<ScaleGroupingEntry> GetGroupedScales()
@@ -15,9 +16,19 @@ namespace Keyify.Models.View_Models.Misc
             return ScaleGroupingEntries;
         }
 
+        public List<ScaleGroupingEntry> GetGroupedKeys()
+        {
+            return KeyGroupingEntries;
+        }
+
         public int GetTotalScaleCount()
         {
             return ScaleGroupingEntries.Sum(s => s.Count);
+        }
+
+        public int GetTotalKeyCount()
+        {
+            return KeyGroupingEntries.Sum(k => k.Count);
         }
 
         public void UpdateScaleGroupingModel(List<ScaleEntry> scales)
@@ -26,11 +37,25 @@ namespace Keyify.Models.View_Models.Misc
 
             var noteHashSets = GenerateNoteHashSets(scales);
 
+            //TODO: Remove boilerplate code
             foreach (var scaleNotes in noteHashSets)
             {
-                var groupedScales = scales.Where(s => s.Scale.NoteSet.SetEquals(scaleNotes)).ToList();
+                var groupedScales = scales.Where(s => s.IsKey == false && s.Scale.NoteSet.SetEquals(scaleNotes)).ToList();
 
-                ScaleGroupingEntries.Add(new ScaleGroupingEntry(string.Join(',', scaleNotes), groupedScales));
+                if (groupedScales.Any())
+                {
+                    ScaleGroupingEntries.Add(new ScaleGroupingEntry(string.Join(',', scaleNotes), groupedScales));
+                }
+            }
+
+            foreach (var scaleNotes in noteHashSets)
+            {
+                var groupedKeys = scales.Where(s => s.IsKey == true && s.Scale.NoteSet.SetEquals(scaleNotes)).ToList();
+
+                if (groupedKeys.Any())
+                {
+                    KeyGroupingEntries.Add(new ScaleGroupingEntry(string.Join(',', scaleNotes), groupedKeys));
+                }
             }
         }
 

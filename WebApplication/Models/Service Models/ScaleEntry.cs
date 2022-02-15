@@ -1,4 +1,5 @@
 ﻿using Keyify.Helper;
+using KeyifyClassLibrary.Enums;
 using KeyifyClassLibrary.Helper;
 using KeyifyClassLibrary.Models.MusicTheory;
 using System;
@@ -11,6 +12,12 @@ namespace Keyify.Models.Service
         public Scale Scale { get; set; }
         public bool Selected { get; set; }
         public string ScaleLabel { get; set; }
+        public bool IsKey => IsScaleEntryAKey();
+
+        private bool IsScaleEntryAKey()
+        {
+            return Scale.ModeDefinition.Mode == Mode.Ionian || Scale.ModeDefinition.Mode == Mode.Aeolian;
+        }
 
         public readonly string UserReadableLabel_Flat;
         public readonly string ColloquialNameLabel_Flat;
@@ -26,13 +33,13 @@ namespace Keyify.Models.Service
             Scale = scale;
             UserReadableLabel_Flat = GetUserFriendlyLabel(ScaleLabel);
             ColloquialNameLabel_Flat = PentatonicModeHelper.GetScaleColloquialism(scale);
-            UserReadableLabelIncludingColloquialism_Flat = !string.IsNullOrWhiteSpace(ColloquialNameLabel_Flat) ? $"{UserReadableLabel_Flat}/{ColloquialNameLabel_Flat}" : $"{UserReadableLabel_Flat}";
+            UserReadableLabelIncludingColloquialism_Flat = !string.IsNullOrWhiteSpace(ColloquialNameLabel_Flat) ? $"{ColloquialNameLabel_Flat} ({UserReadableLabel_Flat})" : $"{UserReadableLabel_Flat}";
 
             string sharpNote = NoteHelper.ConvertNoteToStringEquivalent(scale.RootNote, true);
 
             UserReadableLabel_Sharp = GetUserFriendlyLabel($"{sharpNote}{scale.ModeDefinition.Mode}");
             ColloquialNameLabel_Sharp = PentatonicModeHelper.GetScaleColloquialism(scale, true);
-            UserReadableLabelIncludingColloquialism_Sharp = !string.IsNullOrWhiteSpace(ColloquialNameLabel_Sharp) ? $"{UserReadableLabel_Sharp}/{ColloquialNameLabel_Sharp}" : $"{UserReadableLabel_Sharp}";
+            UserReadableLabelIncludingColloquialism_Sharp = !string.IsNullOrWhiteSpace(ColloquialNameLabel_Sharp) ? $"{ColloquialNameLabel_Sharp} ({UserReadableLabel_Sharp})" : $"{UserReadableLabel_Sharp}";
         }
 
         /// <summary>

@@ -30,12 +30,12 @@ namespace KeyifyWebClient.Models.ViewModels
         public List<ScaleEntry> Scales { get; set; } = new List<ScaleEntry>();
 
         public string AvailableScalesLabel => GetAvailableScaleLabel();
+        public string AvailableKeysLabel => GetAvailableKeysLabel();        
 
-        private IScalesGroupingService _groupedScales { get; init; }
-        private List<ScaleGroupingEntry> AvailableScaleGroups => _groupedScales.GetGroupedScales();
+        private IScalesGroupingService _groupedScalesService { get; init; }
 
-        public List<ScaleGroupingEntry> Odd_Index_AvailableScaleGroups => AvailableScaleGroups.Where((a, i) => i % 2 != 0).ToList();
-        public List<ScaleGroupingEntry> Even_Index_AvailableScaleGroups => AvailableScaleGroups.Where((a, i) => i % 2 == 0).ToList();
+        private List<ScaleGroupingEntry> AvailableKeyGroups => _groupedScalesService.GetGroupedKeys();
+        private List<ScaleGroupingEntry> AvailableScaleGroups => _groupedScalesService.GetGroupedScales();
 
         protected IScaleListService DictionaryService { get; init; }
         protected IModeDefinitionService ScaleDirectoryService { get; init; }
@@ -44,7 +44,7 @@ namespace KeyifyWebClient.Models.ViewModels
         {
             DictionaryService = dictionaryService;
             ScaleDirectoryService = scaleDirectoryService;
-            _groupedScales = scalesGroupingService;
+            _groupedScalesService = scalesGroupingService;
             Notes = PopulateSelectedNotesList();
         }
 
@@ -90,7 +90,7 @@ namespace KeyifyWebClient.Models.ViewModels
             if (SelectedNotes.Count > 1)
             {
                 Scales = DictionaryService.FindScales(SelectedNotes.Select(a => a.Note)).ToList();
-                _groupedScales.UpdateScaleGroupingModel(Scales);
+                _groupedScalesService.UpdateScaleGroupingModel(Scales);
             }
             else
             {
@@ -188,9 +188,38 @@ namespace KeyifyWebClient.Models.ViewModels
             return fretboardNotes;
         }
 
+        //TODO: Remove biolerplate code
+        private string GetAvailableKeysLabel()
+        {
+            var matchingScaleCount = _groupedScalesService.GetTotalKeyCount();
+
+            switch (matchingScaleCount)
+            {
+                case 0:
+                    return GetNoKeysFoundMessage();
+                case 1:
+                    return $"{matchingScaleCount} Matching Key Found";
+                default:
+                    return $"{matchingScaleCount} Matching Keys Found";
+            }
+        }
+
+        private string GetNoKeysFoundMessage()
+        {
+            var selectedNoteCount = SelectedNotes.Count;
+
+            if (selectedNoteCount == 1)
+                return $"";
+
+            if (selectedNoteCount > 1)
+                return "No Matching Keys Found";
+            else
+                return "";
+        }
+
         private string GetAvailableScaleLabel()
         {
-            var matchingScaleCount = _groupedScales.GetTotalScaleCount();
+            var matchingScaleCount = _groupedScalesService.GetTotalScaleCount();
 
             switch (matchingScaleCount)
             {

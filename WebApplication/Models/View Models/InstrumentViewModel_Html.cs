@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Keyify.Models.View_Models.Misc;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -6,36 +7,37 @@ namespace KeyifyWebClient.Models.ViewModels
 {
     public partial class InstrumentViewModel
     {
-        public string AvailableScalesTable => GenerateAvailableScalesTable();
+        public string AvailableScalesTable => GenerateAvailableScalesTable(AvailableScaleGroups);
 
-        private string GenerateAvailableScalesTable()
+        public string AvailableKeysTable => GenerateAvailableScalesTable(AvailableKeyGroups);
+
+        private string GenerateAvailableScalesTable(List<ScaleGroupingEntry> scaleGroupingEntries)
         {
-            var count = 0;
-            var availableScalesTotal = this.AvailableScaleGroups.Count;
-
-            if (availableScalesTotal < 1)
+            if (scaleGroupingEntries.Count() < 1)
             {
                 return string.Empty;
             }
 
+            var count = 0;
+
             var sb = new StringBuilder();
 
-            sb.Append("<table>");
+            sb.Append("<table class=\"scaleTable\">");
 
-            while (count < availableScalesTotal)
+            while (count < scaleGroupingEntries.Count())
             {
                 sb.Append("<tr>");
 
-                if (availableScalesTotal - count >= 2)
+                if (scaleGroupingEntries.Count() - count >= 2)
                 {
-                    AddScalesToNoteSet(sb, count, false);
-                    AddScalesToNoteSet(sb, count, true);
+                    AddScalesToNoteSet(scaleGroupingEntries, sb, count, false);
+                    AddScalesToNoteSet(scaleGroupingEntries, sb, count, true);
 
                     count += 2;
                 }
                 else
                 {
-                    AddScalesToNoteSet(sb, count, false);
+                    AddScalesToNoteSet(scaleGroupingEntries, sb, count, false);
 
                     //No more Scale Groups
                     sb.Append($"<td></td>");
@@ -52,15 +54,15 @@ namespace KeyifyWebClient.Models.ViewModels
             return sb.ToString();
         }
 
-        private void AddScalesToNoteSet(StringBuilder sb, int count, bool isNeighbouringScaleGroup)
+        private void AddScalesToNoteSet(List<ScaleGroupingEntry> scaleGroupingEntries, StringBuilder sb, int count, bool isNeighbouringScaleGroup)
         {
             count = isNeighbouringScaleGroup ? count += 1 : count;
 
-            sb.Append($"<td class=\"scaleResultLabelColumn\"><span class=\"scaleResultLabel\">{AvailableScaleGroups[count].NotesGroupingLabel}</span></td>");
+            sb.Append($"<td class=\"scaleResultLabelColumn\"><span class=\"scaleResultLabel\">{scaleGroupingEntries[count].NotesGroupingLabel}</span></td>");
 
             sb.Append($"<td class=\"scaleResultColumn\">");
 
-            foreach (var availableScale in AvailableScaleGroups[count].GroupedScales.Select(gs => new KeyValuePair<string, string>(gs.ScaleLabel, gs.UserReadableLabelIncludingColloquialism_Sharp)))
+            foreach (var availableScale in scaleGroupingEntries[count].GroupedScales.Select(gs => new KeyValuePair<string, string>(gs.ScaleLabel, gs.UserReadableLabelIncludingColloquialism_Sharp)))
             {
                 sb.Append($"<a class=\"scaleResult\" onclick=\"UpdateModel('/{InstrumentName}/UpdateFretboardModel', '{availableScale.Key}', null, {$"[{string.Join(',', SelectedNotes.Select(s => $"'{s.Note}'"))}]"} )\">{availableScale.Value}</a>&nbsp;");
             }

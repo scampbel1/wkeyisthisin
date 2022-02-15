@@ -8,6 +8,7 @@ namespace Keyify.Models.Service
         public readonly Mode Mode;
         public readonly Step[] ScaleSteps;
 
+        //Some scales are limited in the root note)
         public readonly Array KeysFoundForMode;
 
         public ModeDefinition(Mode mode, Step[] scaleSteps)

@@ -75,6 +75,15 @@ else
 
 <div class="scaleResults">
     <h2>
+        @Model.AvailableKeysLabel
+    </h2>
+    <div id="tablesDiv">
+        @Html.Raw(Model.AvailableKeysTable)
+    </div>
+</div>
+
+<div class="scaleResults">
+    <h2>
         @Model.AvailableScalesLabel
     </h2>
     <div id="tablesDiv">

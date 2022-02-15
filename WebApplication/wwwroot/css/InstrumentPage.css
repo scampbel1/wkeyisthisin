@@ -60,6 +60,7 @@
 .fretboard {
     table-layout: fixed;
     width: 80%;
+    min-width: 80%;
     max-width: 80%;
     text-align: center;
     padding-left: 15px;
@@ -68,8 +69,15 @@
 .scaleResults {
     table-layout: fixed;
     width: 80%;
+    min-width: 80%;
     max-width: 80%;
     padding-left: 15px;
+}
+
+.scaleTable {
+    width: 80%;
+    min-width: 80%;
+    max-width: 80%;
 }
 
 .scaleResult {
@@ -79,19 +87,21 @@
 }
 
 .scaleResultLabel {
-    cursor: none;
+    cursor: default;
     color: midnightblue;
     background-color: rgba(255, 255, 255, 0.5) !important;
 }
 
 .scaleResultLabelColumn {
     width: 10%;
+    min-width: 10%;
     max-width: 10%;
     padding-right: 5px;
 }
 
 .scaleResultColumn {
     width: 30%;
+    min-width: 30%;
     max-width: 30%;
     padding-left: 5px;
 }
@@ -102,8 +112,9 @@
 }
 
 #tablesDiv {
-    width: 75%;
-    max-width: 75%;
+    width: 80%;
+    min-width: 80%;
+    max-width: 80%;
     /*Note: Make sure this is kept inline so that the tables align next to each other*/
     display: inline;
     margin: 0px;
