@@ -30,8 +30,21 @@
         Prometheus,
         SixToneSymmetrical,
         Altered,
-        Balinese,
+        Balinese, //Same as Pelog
         Chinese,
-        DiminishedLydian
+        DiminishedLydian,
+        DorianB2,
+        EightToneSpanish,
+        Hindu,
+        HungarianMinor, //Gypsie
+        Kumoi,
+        Locrian2,
+        Lydian9,
+        MinorLydian,
+        MixolydianB6,
+        NeopolitanMinor,
+        Persian,
+        PrometheusNeopolitan,
+        TodiTheta
     }
 }

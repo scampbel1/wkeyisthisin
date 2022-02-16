@@ -426,7 +426,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.WW,
                     Step.h
              }));
-            
+
             modeDefinitions.Add(new ModeDefinition(
              Mode.DiminishedLydian,
              new Step[]
@@ -438,6 +438,187 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.h,
                     Step.W,
                     Step.W,
+                    Step.h
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.DorianB2,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.W
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.EightToneSpanish,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.h,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.W
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Hindu,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.HungarianMinor,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.h,
+                    Step.Wh,
+                    Step.h,
+                    Step.h,
+                    Step.Wh,
+                    Step.h
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Kumoi,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.h,
+                    Step.WW,
+                    Step.W,
+                    Step.Wh
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Locrian2,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.W
+             }));
+
+            //Lydian #9
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Lydian9,
+             new Step[]
+             {
+                    Step.R,
+                    Step.Wh,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.h
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.MinorLydian,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.h,
+                    Step.W,
+                    Step.W
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.MixolydianB6,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.NeopolitanMinor,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Persian,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.Wh,
+                    Step.h,
+                    Step.h,
+                    Step.W,
+                    Step.Wh,
+                    Step.h
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.PrometheusNeopolitan,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.Wh,
+                    Step.W,
+                    Step.Wh,
+                    Step.h,
+                    Step.W
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.TodiTheta,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.W,
+                    Step.Wh,
+                    Step.h,
+                    Step.h,
+                    Step.Wh,
                     Step.h
              }));
 
