@@ -241,6 +241,167 @@ namespace KeyifyClassLibrary.Core.Domain
                     Note.D
                 }));
 
+            modeDefinitions.Add(new ModeDefinition(
+                Mode.Mongolian,
+                new Step[]
+                {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.Wh,
+                    Step.W,
+                    Step.Wh,
+                }));
+
+            modeDefinitions.Add(new ModeDefinition(
+                Mode.Arabian,
+                new Step[]
+                {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.W
+                }));
+
+            modeDefinitions.Add(new ModeDefinition(
+                Mode.AugmentedLydian,
+                new Step[]
+                {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.h
+                }));
+
+            modeDefinitions.Add(new ModeDefinition(
+                Mode.Byzantine,
+                new Step[]
+                {
+                    Step.R,
+                    Step.h,
+                    Step.Wh,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.Wh,
+                    Step.h
+                }));
+
+            //Dorian #4
+            modeDefinitions.Add(new ModeDefinition(
+                Mode.LydianDiminished,
+                new Step[]
+                {
+                    Step.R,
+                    Step.W,
+                    Step.h,
+                    Step.Wh,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W
+                }));
+
+            modeDefinitions.Add(new ModeDefinition(
+                Mode.Egyptian,
+                new Step[]
+                {
+                    Step.R,
+                    Step.W,
+                    Step.Wh,
+                    Step.W,
+                    Step.Wh,
+                    Step.W
+                }));
+
+            modeDefinitions.Add(new ModeDefinition(
+                Mode.HungarianMajor,
+                new Step[]
+                {
+                    Step.R,
+                    Step.Wh,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W
+                }));
+
+            modeDefinitions.Add(new ModeDefinition(
+                Mode.NeopolitanMajor,
+                new Step[]
+                {
+                    Step.R,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.h
+                }));
+
+            modeDefinitions.Add(new ModeDefinition(
+                Mode.Pelog,
+                new Step[]
+                {
+                    Step.R,
+                    Step.h,
+                    Step.W,
+                    Step.WW,
+                    Step.h,
+                    Step.WW
+                }));
+
+            modeDefinitions.Add(new ModeDefinition(
+                 Mode.Prometheus,
+                 new Step[]
+                 {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.Wh,
+                    Step.h,
+                    Step.W
+                 }));
+
+            modeDefinitions.Add(new ModeDefinition(
+                 Mode.SixToneSymmetrical,
+                 new Step[]
+                 {
+                    Step.R,
+                    Step.h,
+                    Step.Wh,
+                    Step.h,
+                    Step.Wh,
+                    Step.h,
+                    Step.Wh
+                 }));
+
+            modeDefinitions.Add(new ModeDefinition(
+                 Mode.Altered,
+                 new Step[]
+                 {
+                    Step.R,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.W
+                 }));
+
             #endregion
 
             return modeDefinitions;

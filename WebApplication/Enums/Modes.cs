@@ -17,6 +17,18 @@
         Blues,
         WholeTone,
         DiminishedWholeHalf,
-        DiminishedHalfWhole
+        DiminishedHalfWhole,
+        Mongolian,
+        Arabian,
+        AugmentedLydian,
+        Byzantine,
+        LydianDiminished,
+        Egyptian,
+        HungarianMajor,
+        NeopolitanMajor,
+        Pelog,
+        Prometheus,
+        SixToneSymmetrical,
+        Altered
     }
 }
