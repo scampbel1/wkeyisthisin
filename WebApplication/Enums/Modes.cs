@@ -29,6 +29,9 @@
         Pelog,
         Prometheus,
         SixToneSymmetrical,
-        Altered
+        Altered,
+        Balinese,
+        Chinese,
+        DiminishedLydian
     }
 }

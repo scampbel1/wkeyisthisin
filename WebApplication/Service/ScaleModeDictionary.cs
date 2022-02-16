@@ -402,6 +402,47 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.W
                  }));
 
+            //Duplicate of Pelog
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Balinese,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.W,
+                    Step.WW,
+                    Step.h,
+                    Step.WW
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Chinese,
+             new Step[]
+             {
+                    Step.R,
+                    Step.WW,
+                    Step.W,
+                    Step.h,
+                    Step.WW,
+                    Step.h
+             }));
+            
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.DiminishedLydian,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.h,
+                    Step.Wh,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.h
+             }));
+
+            //https://www.scales-chords.com/scalenav.php
+
             #endregion
 
             return modeDefinitions;
