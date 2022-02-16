@@ -790,20 +790,6 @@ namespace KeyifyClassLibrary.Core.Domain
              }));
 
             modeDefinitions.Add(new ModeDefinition(
-             Mode.Overtone,
-             new Step[]
-             {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W
-             }));
-
-            modeDefinitions.Add(new ModeDefinition(
              Mode.PurviTheta,
              new Step[]
              {

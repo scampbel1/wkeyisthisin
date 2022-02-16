@@ -75,9 +75,9 @@
 }
 
 .scaleTable {
-    width: 80%;
-    min-width: 80%;
-    max-width: 80%;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
 }
 
 .scaleResult {
@@ -100,9 +100,9 @@
 }
 
 .scaleResultColumn {
-    width: 30%;
-    min-width: 30%;
-    max-width: 30%;
+    width: 35%;
+    min-width: 35%;
+    max-width: 35%;
     padding-left: 5px;
 }
 

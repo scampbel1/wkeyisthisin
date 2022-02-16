@@ -30,7 +30,7 @@ namespace KeyifyWebClient.Models.ViewModels
         public List<ScaleEntry> Scales { get; set; } = new List<ScaleEntry>();
 
         public string AvailableScalesLabel => GetAvailableScaleLabel();
-        public string AvailableKeysLabel => GetAvailableKeysLabel();        
+        public string AvailableKeysLabel => GetAvailableKeysLabel();
 
         private IScalesGroupingService _groupedScalesService { get; init; }
 
@@ -78,6 +78,11 @@ namespace KeyifyWebClient.Models.ViewModels
                     if (SelectedScale != null && SelectedScale.Scale.NoteSet.Contains(fretboardNote.Note))
                     {
                         fretboardNote.InSelectedScale = true;
+                        
+                        if (fretboardNote.InSelectedScale)
+                        {
+                            fretboardNote.PositionInScale = SelectedScale.Scale.Notes.IndexOf(fretboardNote.Note) + 1;
+                        }
                     }
                 }
             }

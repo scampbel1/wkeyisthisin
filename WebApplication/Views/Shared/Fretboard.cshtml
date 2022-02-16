@@ -44,14 +44,14 @@
                                 if (note.InSelectedScale && note.Selected)
                                 {
                                     <td class="selectedNoteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
-                                        <span class="nonSelectable">@note.Sharp</span>
+                                        <span class="nonSelectable">@note.Sharp</span> <span class="nonSelectable" style="font-size: xx-small">@note.PositionInScale</span>
                                     </td>
                                     continue;
                                 }
                                 else if (note.InSelectedScale && !note.Selected)
                                 {
                                     <td class="noteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
-                                        <span class="nonSelectable">@note.Sharp</span>
+                                        <span class="nonSelectable">@note.Sharp</span> <span class="nonSelectable" style="font-size: xx-small">@note.PositionInScale</span>
                                     </td>
                                     continue;
                                 }
