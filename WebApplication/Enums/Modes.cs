@@ -45,6 +45,19 @@
         NeopolitanMinor,
         Persian,
         PrometheusNeopolitan,
-        TodiTheta
+        TodiTheta,
+        AlteredBb7,
+        AugmentedIonian,
+        DoubleHarmonic,
+        Enigmatic,
+        Hirajoshi,
+        Ichikosucho,
+        LeadingWholeTone,
+        LydianB7,
+        MajorPhrygian,
+        Mohammedan,
+        Neopolitan,
+        Overtone,
+        PurviTheta
     }
 }

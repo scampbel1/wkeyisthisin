@@ -622,6 +622,201 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.h
              }));
 
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.AlteredBb7,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.Wh
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.AugmentedIonian,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.Wh,
+                    Step.h,
+                    Step.W,
+                    Step.h
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.DoubleHarmonic,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.Wh,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.Wh,
+                    Step.h
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Enigmatic,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.Wh,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.h
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Hirajoshi,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.h,
+                    Step.WW,
+                    Step.h,
+                    Step.WW
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Ichikosucho,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.h,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.h
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.LeadingWholeTone,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.h
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.LydianB7,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.Wh,
+                    Step.h,
+                    Step.W
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.MajorPhrygian,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.Wh,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Mohammedan,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.Wh,
+                    Step.h
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Neopolitan,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.Wh,
+                    Step.h
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Overtone,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Overtone,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W
+             }));
+
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.PurviTheta,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.Wh,
+                    Step.W,
+                    Step.h,
+                    Step.h,
+                    Step.Wh,
+                    Step.h
+             }));
+
             //https://www.scales-chords.com/scalenav.php
 
             #endregion
