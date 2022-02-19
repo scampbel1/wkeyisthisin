@@ -12,8 +12,8 @@
         HarmonicMinor,
         MelodicMinor,
         Augmented,
-        PentatonicMajor,
-        PentatonicMinor,
+        MajorPentatonic,
+        MinorPentatonic,
         Blues,
         WholeTone,
         DiminishedWholeHalf,
@@ -26,11 +26,10 @@
         Egyptian,
         HungarianMajor,
         NeopolitanMajor,
-        Pelog,
         Prometheus,
         SixToneSymmetrical,
         Altered,
-        Balinese, //Same as Pelog
+        BalinesePelog, //Same as Pelog
         Chinese,
         DiminishedLydian,
         DorianB2,

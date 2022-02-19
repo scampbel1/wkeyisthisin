@@ -81,7 +81,8 @@ namespace KeyifyWebClient.Models.ViewModels
                         
                         if (fretboardNote.InSelectedScale)
                         {
-                            fretboardNote.PositionInScale = SelectedScale.Scale.Notes.IndexOf(fretboardNote.Note) + 1;
+                            var currentNoteIndex = SelectedScale.Scale.Notes.IndexOf(fretboardNote.Note);
+                            fretboardNote.DegreeInScale = SelectedScale.Scale.ModeDefinition.ScaleDegrees[currentNoteIndex];
                         }
                     }
                 }

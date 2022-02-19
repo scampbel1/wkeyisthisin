@@ -10,7 +10,7 @@ namespace KeyifyWebClient.Models.Instruments
         public string Sharp { get; set; }
         public bool Selected { get; set; }
         public bool InSelectedScale { get; set; }
-        public int PositionInScale { get; set; }
+        public string DegreeInScale { get; set; }
 
         public InstrumentNote(Note note)
         {

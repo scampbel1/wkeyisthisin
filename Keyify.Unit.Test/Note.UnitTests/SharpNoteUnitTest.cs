@@ -49,7 +49,7 @@ namespace Keyify.Unit.Test.Note.UnitTests
                     Step.W,
                     Step.W,
                     Step.h
-                }));
+                }, new string[] { }));
 
             var expected = "G# Major";
             var actual = PentatonicModeHelper.GetScaleColloquialism(scale, true);
@@ -69,7 +69,7 @@ namespace Keyify.Unit.Test.Note.UnitTests
                     Step.h,
                     Step.W,
                     Step.W
-                }));
+                }, new string[] { }));
 
             var expected = "C# Minor";
             var actual = PentatonicModeHelper.GetScaleColloquialism(scale, true);
