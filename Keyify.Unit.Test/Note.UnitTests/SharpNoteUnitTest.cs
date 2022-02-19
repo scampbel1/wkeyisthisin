@@ -49,7 +49,17 @@ namespace Keyify.Unit.Test.Note.UnitTests
                     Step.W,
                     Step.W,
                     Step.h
-                }, new string[] { }));
+                },
+                new string[] {
+                     Degree.First,
+                     Degree.Second,
+                     Degree.Third,
+                     Degree.Fourth,
+                     Degree.Fifth,
+                     Degree.Sixth,
+                     Degree.Seventh,
+                     Degree.Eighth
+                }));
 
             var expected = "G# Major";
             var actual = PentatonicModeHelper.GetScaleColloquialism(scale, true);
@@ -69,7 +79,17 @@ namespace Keyify.Unit.Test.Note.UnitTests
                     Step.h,
                     Step.W,
                     Step.W
-                }, new string[] { }));
+                },
+                new string[] {
+                     Degree.First,
+                     Degree.Second,
+                     Degree.FlatThird,
+                     Degree.Fourth,
+                     Degree.Fifth,
+                     Degree.FlatSixth,
+                     Degree.FlatSeventh,
+                     Degree.Eighth
+                }));
 
             var expected = "C# Minor";
             var actual = PentatonicModeHelper.GetScaleColloquialism(scale, true);

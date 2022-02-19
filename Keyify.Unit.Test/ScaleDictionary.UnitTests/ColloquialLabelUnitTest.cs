@@ -47,6 +47,16 @@ namespace ScaleDictionaryTests
                     Step.W,
                     Step.W,
                     Step.h
+                 },
+                new string[] {
+                     Degree.First,
+                     Degree.Second,
+                     Degree.Third,
+                     Degree.Fourth,
+                     Degree.Fifth,
+                     Degree.Sixth,
+                     Degree.Seventh,
+                     Degree.Eighth
                 }));
 
             var expected = "Ab Major";
@@ -58,7 +68,11 @@ namespace ScaleDictionaryTests
         [Fact]
         public void DbAeolianScaleIsConvertedToDbMinor()
         {
-            var scale = new Scale(Note.Db, new ModeDefinition(Mode.Aeolian, new Step[] {
+            var scale = new Scale(
+                Note.Db,
+                new ModeDefinition(
+                    Mode.Aeolian
+                    , new Step[] {
                     Step.R,
                     Step.W,
                     Step.h,
@@ -67,6 +81,16 @@ namespace ScaleDictionaryTests
                     Step.h,
                     Step.W,
                     Step.W
+            },
+                new string[] {
+                     Degree.First,
+                     Degree.Second,
+                     Degree.FlatThird,
+                     Degree.Fourth,
+                     Degree.Fifth,
+                     Degree.FlatSixth,
+                     Degree.FlatSeventh,
+                     Degree.Eighth
                 }));
 
             var expected = "Db Minor";
