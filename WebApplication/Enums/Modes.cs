@@ -54,7 +54,6 @@
         LeadingWholeTone,
         LydianB7,
         MajorPhrygian,
-        Mohammedan,
         Neopolitan,
         Overtone,
         PurviTheta

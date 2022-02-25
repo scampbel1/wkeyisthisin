@@ -18,6 +18,7 @@
         public static string Sixth = "6";
         public static string SharpSixth = "#6";
         public static string FlatSeventh = "b7";
+        public static string FlatFlatSeventh = "bb7";
         public static string Seventh = "7";
         public static string SharpSeventh = "#7";
         public static string Eighth = "8";
