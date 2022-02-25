@@ -692,6 +692,9 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 }));
 
+            //Note: this one is messed up
+            //
+            //
             ////TODO: Sort out the Name of this... it should be "b2" not "B2"
             //modeDefinitions.Add(new ModeDefinition(
             // Mode.DorianB2,
@@ -701,137 +704,236 @@ namespace KeyifyClassLibrary.Core.Domain
             //        Step.h,
             //        Step.W,
             //        Step.W,
-            //        Step.W,
+            //        Step.h,
             //        Step.W,
             //        Step.h,
             //        Step.W
-            // }));
+            // },
+            //  new string[] {
+            //         Degree.First,
+            //         Degree.FlatSecond,
+            //         Degree.FlatThird,
+            //         Degree.Fourth,
+            //         Degree.Fifth,
+            //         Degree.Sixth,
+            //         Degree.FlatSeventh,
+            //         Degree.Eighth
+            //    }));
 
-            //modeDefinitions.Add(new ModeDefinition(
-            // Mode.EightToneSpanish,
-            // new Step[]
-            // {
-            //        Step.R,
-            //        Step.h,
-            //        Step.W,
-            //        Step.h,
-            //        Step.h,
-            //        Step.h,
-            //        Step.W,
-            //        Step.W,
-            //        Step.W
-            // }));
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.EightToneSpanish,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.h,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.W
+             },
+              new string[] {
+                     Degree.First,
+                     Degree.FlatSecond,
+                     Degree.SharpSecond,
+                     Degree.Third,
+                     Degree.Fourth,
+                     Degree.FlatFifth,
+                     Degree.FlatSixth,
+                     Degree.FlatSeventh,
+                     Degree.Eighth
+                }));
 
-            //modeDefinitions.Add(new ModeDefinition(
-            // Mode.Hindu,
-            // new Step[]
-            // {
-            //        Step.R,
-            //        Step.W,
-            //        Step.W,
-            //        Step.h,
-            //        Step.W,
-            //        Step.h,
-            //        Step.W,
-            //        Step.W
-            // }));
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Hindu,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W
+             },
+              new string[] {
+                     Degree.First,
+                     Degree.Second,
+                     Degree.Third,
+                     Degree.Fourth,
+                     Degree.Fifth,
+                     Degree.FlatSixth,
+                     Degree.FlatSeventh,
+                     Degree.Eighth
+                }));
 
-            //modeDefinitions.Add(new ModeDefinition(
-            // Mode.HungarianMinor,
-            // new Step[]
-            // {
-            //        Step.R,
-            //        Step.W,
-            //        Step.h,
-            //        Step.Wh,
-            //        Step.h,
-            //        Step.h,
-            //        Step.Wh,
-            //        Step.h
-            // }));
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.HungarianMinor,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.h,
+                    Step.Wh,
+                    Step.h,
+                    Step.h,
+                    Step.Wh,
+                    Step.h
+             },
+              new string[] {
+                     Degree.First,
+                     Degree.Second,
+                     Degree.FlatThird,
+                     Degree.SharpFourth,
+                     Degree.Fifth,
+                     Degree.FlatSixth,
+                     Degree.Seventh,
+                     Degree.Eighth
+                }));
 
-            //modeDefinitions.Add(new ModeDefinition(
-            // Mode.Kumoi,
-            // new Step[]
-            // {
-            //        Step.R,
-            //        Step.W,
-            //        Step.h,
-            //        Step.WW,
-            //        Step.W,
-            //        Step.Wh
-            // }));
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Kumoi,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.h,
+                    Step.WW,
+                    Step.W,
+                    Step.Wh
+             },
+              new string[] {
+                     Degree.First,
+                     Degree.Second,
+                     Degree.FlatThird,
+                     Degree.Fifth,
+                     Degree.Sixth,
+                     Degree.Eighth
+                }));
 
-            //modeDefinitions.Add(new ModeDefinition(
-            // Mode.Locrian2,
-            // new Step[]
-            // {
-            //        Step.R,
-            //        Step.W,
-            //        Step.h,
-            //        Step.W,
-            //        Step.h,
-            //        Step.W,
-            //        Step.W,
-            //        Step.W
-            // }));
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Locrian2,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.W
+             },
+              new string[] {
+                     Degree.First,
+                     Degree.Second,
+                     Degree.FlatThird,
+                     Degree.Fourth,
+                     Degree.FlatFifth,
+                     Degree.FlatSixth,
+                     Degree.FlatSeventh,
+                     Degree.Eighth
+                }));
 
             ////Lydian #9
-            //modeDefinitions.Add(new ModeDefinition(
-            // Mode.Lydian9,
-            // new Step[]
-            // {
-            //        Step.R,
-            //        Step.Wh,
-            //        Step.h,
-            //        Step.W,
-            //        Step.h,
-            //        Step.W,
-            //        Step.W,
-            //        Step.h
-            // }));
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.Lydian9,
+             new Step[]
+             {
+                    Step.R,
+                    Step.Wh,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.h
+             },
+              new string[] {
+                     Degree.First,
+                     Degree.SharpSecond,
+                     Degree.Third,
+                     Degree.SharpFourth,
+                     Degree.Fifth,
+                     Degree.Sixth,
+                     Degree.Seventh,
+                     Degree.Eighth
+                }));
 
-            //modeDefinitions.Add(new ModeDefinition(
-            // Mode.MinorLydian,
-            // new Step[]
-            // {
-            //        Step.R,
-            //        Step.W,
-            //        Step.W,
-            //        Step.W,
-            //        Step.h,
-            //        Step.h,
-            //        Step.W,
-            //        Step.W
-            // }));
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.MinorLydian,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.h,
+                    Step.W,
+                    Step.W
+              },
+              new string[] {
+                     Degree.First,
+                     Degree.Second,
+                     Degree.Third,
+                     Degree.SharpFourth,
+                     Degree.Fifth,
+                     Degree.FlatSixth,
+                     Degree.FlatSeventh,
+                     Degree.Eighth
+                }));
 
-            //modeDefinitions.Add(new ModeDefinition(
-            // Mode.MixolydianB6,
-            // new Step[]
-            // {
-            //        Step.R,
-            //        Step.W,
-            //        Step.W,
-            //        Step.h,
-            //        Step.W,
-            //        Step.h,
-            //        Step.W,
-            //        Step.W
-            // }));
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.MixolydianB6,
+             new Step[]
+             {
+                    Step.R,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W
+             },
+              new string[] {
+                     Degree.First,
+                     Degree.Second,
+                     Degree.Third,
+                     Degree.SharpFourth,
+                     Degree.Fifth,
+                     Degree.FlatSixth,
+                     Degree.FlatSeventh,
+                     Degree.Eighth
+                }));
 
-            //modeDefinitions.Add(new ModeDefinition(
-            // Mode.NeopolitanMinor,
-            // new Step[]
-            // {
-            //        Step.R,
-            //        Step.h,
-            //        Step.W,
-            //        Step.W,
-            //        Step.W,
-            //        Step.h,
-            //        Step.W,
-            //        Step.W,
-            // }));
+            modeDefinitions.Add(new ModeDefinition(
+             Mode.NeopolitanMinor,
+             new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+              },
+              new string[] {
+                     Degree.First,
+                     Degree.FlatSecond,
+                     Degree.FlatThird,
+                     Degree.Fourth,
+                     Degree.Fifth,
+                     Degree.FlatSixth,
+                     Degree.FlatSeventh,
+                     Degree.Eighth
+                }));
 
             //modeDefinitions.Add(new ModeDefinition(
             // Mode.Persian,
