@@ -2,11 +2,8 @@
 using Keyify.Models.Service;
 using Keyify.Models.View_Models.Misc;
 using Keyify.Service.Interface;
-using KeyifyClassLibrary.Enums;
-using KeyifyClassLibrary.Helper;
 using KeyifyClassLibrary.Models.Interfaces;
 using KeyifyWebClient.Models.Instruments;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -53,41 +50,7 @@ namespace KeyifyWebClient.Models.ViewModels
             //TODO: Stop creating a new fretboard everytime
             Fretboard = new Fretboard(tuning, fretCount);
             InstrumentName = instrumentName;
-        }
-
-        public void ApplySelectedNotesToFretboard()
-        {
-            if (SelectedNotes == null || !SelectedNotes.Any())
-            {
-                return;
-            }
-
-            //TODO: This should happen when you're building the fretboard, the strings are being constructed... and then reiterated over... the first step is wasteful
-
-            foreach (InstrumentString guitarString in Fretboard.InstrumentStrings)
-            {
-                foreach (InstrumentNote fretboardNote in guitarString.Notes)
-                {
-                    var currentNote = SelectedNotes.SingleOrDefault(s => s.Equals(fretboardNote));
-
-                    if (currentNote != null)
-                    {
-                        fretboardNote.Selected = currentNote.Selected;
-                    }
-
-                    if (SelectedScale != null && SelectedScale.Scale.NoteSet.Contains(fretboardNote.Note))
-                    {
-                        fretboardNote.InSelectedScale = true;
-                        
-                        if (fretboardNote.InSelectedScale)
-                        {
-                            var currentNoteIndex = SelectedScale.Scale.Notes.IndexOf(fretboardNote.Note);
-                            fretboardNote.DegreeInScale = SelectedScale.Scale.ModeDefinition.ScaleDegrees[currentNoteIndex];
-                        }
-                    }
-                }
-            }
-        }
+        }        
 
         public void ProcessNotesAndScale(string selectedScale, IEnumerable<string> selectedNotes)
         {
@@ -120,135 +83,6 @@ namespace KeyifyWebClient.Models.ViewModels
             ApplySelectedScales(selectedScale);
 
             ApplySelectedNotesToFretboard();
-        }
-
-        private void UpdateSelectedNotes(IEnumerable<string> selectedNotes)
-        {
-            var noteStack = new Stack<string>(selectedNotes);
-
-            ResetSelectedNotes();
-
-            while (noteStack.Any())
-            {
-                var selectedNote = noteStack.Pop();
-
-                UnselectedNotes.Where(n => n.Note.ToString() == selectedNote).Single().Selected = true;
-            }
-        }
-
-        private void ApplySelectedScales(string selectedScale)
-        {
-            ResetSelectedScales();
-
-            if (!string.IsNullOrWhiteSpace(selectedScale))
-            {
-                SelectedScale = Scales.SingleOrDefault(a => a.ScaleLabel == selectedScale);
-
-                if (SelectedScale != null)
-                {
-                    SelectedScale.Selected = true;
-                    return;
-                }
-
-                SelectedScale = null;
-            }
-            else
-            {
-                SelectedScale = null;
-            }
-        }
-
-        private void ResetSelectedNotes()
-        {
-            foreach (var selectedNote in SelectedNotes)
-            {
-                selectedNote.Selected = false;
-            }
-        }
-
-        private void ResetNotesInScale()
-        {
-            foreach (var selectedNote in NotesPartOfScale)
-            {
-                selectedNote.InSelectedScale = false;
-            }
-        }
-
-        private void ResetSelectedScales()
-        {
-            foreach (var selectedScale in Scales.Where(s => s.Selected))
-            {
-                selectedScale.Selected = false;
-            }
-        }
-
-        private List<InstrumentNote> PopulateSelectedNotesList()
-        {
-            var fretboardNotes = new List<InstrumentNote>(EnumHelper.GetEnumNameCount(typeof(Note)));
-
-            foreach (Note note in Enum.GetValues(typeof(Note)))
-            {
-                fretboardNotes.Add(new InstrumentNote(note));
-            }
-
-            return fretboardNotes;
-        }
-
-        //TODO: Remove biolerplate code
-        private string GetAvailableKeysLabel()
-        {
-            var matchingScaleCount = _groupedScalesService.GetTotalKeyCount();
-
-            switch (matchingScaleCount)
-            {
-                case 0:
-                    return GetNoKeysFoundMessage();
-                case 1:
-                    return $"{matchingScaleCount} Matching Key Found";
-                default:
-                    return $"{matchingScaleCount} Matching Keys Found";
-            }
-        }
-
-        private string GetNoKeysFoundMessage()
-        {
-            var selectedNoteCount = SelectedNotes.Count;
-
-            if (selectedNoteCount == 1)
-                return $"";
-
-            if (selectedNoteCount > 1)
-                return "No Matching Keys Found";
-            else
-                return "";
-        }
-
-        private string GetAvailableScaleLabel()
-        {
-            var matchingScaleCount = _groupedScalesService.GetTotalScaleCount();
-
-            switch (matchingScaleCount)
-            {
-                case 0:
-                    return GetNoScalesFoundMessage();
-                case 1:
-                    return $"{matchingScaleCount} Matching Scale Found";
-                default:
-                    return $"{matchingScaleCount} Matching Scales Found";
-            }
-        }
-
-        private string GetNoScalesFoundMessage()
-        {
-            var selectedNoteCount = SelectedNotes.Count;
-
-            if (selectedNoteCount == 1)
-                return $"Only {selectedNoteCount} Note Selected";
-
-            if (selectedNoteCount > 1)
-                return "No Matching Scales Found";
-            else
-                return "No Notes Selected";
         }
     }
 }

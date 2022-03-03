@@ -37,20 +37,15 @@ namespace Keyify.Models.View_Models.Misc
 
             var noteHashSets = GenerateNoteHashSets(scales);
 
-            //TODO: Remove boilerplate code
             foreach (var scaleNotes in noteHashSets)
             {
                 var groupedScales = scales.Where(s => s.IsKey == false && s.Scale.NoteSet.SetEquals(scaleNotes)).ToList();
+                var groupedKeys = scales.Where(s => s.IsKey == true && s.Scale.NoteSet.SetEquals(scaleNotes)).ToList();
 
                 if (groupedScales.Any())
                 {
                     ScaleGroupingEntries.Add(new ScaleGroupingEntry(string.Join(',', scaleNotes), groupedScales));
                 }
-            }
-
-            foreach (var scaleNotes in noteHashSets)
-            {
-                var groupedKeys = scales.Where(s => s.IsKey == true && s.Scale.NoteSet.SetEquals(scaleNotes)).ToList();
 
                 if (groupedKeys.Any())
                 {

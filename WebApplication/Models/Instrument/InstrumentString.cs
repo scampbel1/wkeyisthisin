@@ -13,6 +13,8 @@ namespace KeyifyWebClient.Models.Instruments
             Notes = PopulateFretboard(openNote, fretCount);
         }
 
+        //TODO: The characteristics of the note should be set in this method (this is currently happening in ApplySelectedNotesToFretboard)
+
         public List<InstrumentNote> PopulateFretboard(Note openNote, int fretCount)
         {
             int stringNoteIndex = (int)openNote;
