@@ -44,14 +44,31 @@
                             if (note.InSelectedScale && note.Selected)
                             {
                                 <td class="selectedNoteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
-                                    <span class="nonSelectable" style="font-size: medium">@note.Sharp</span> <span class="nonSelectable" style="font-size: xx-small">@note.DegreeInScale</span>
+                                    @*TODO: Simplify this it's very hacky*@
+                                    @if (note.DegreeInScale.Length > 2)
+
+                                    {
+                                        <span class="nonSelectable" style="font-size: medium">@note.Sharp</span> <span class="nonSelectable" style="font-size: 43%">@note.DegreeInScale</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="nonSelectable" style="font-size: medium">@note.Sharp</span> <span class="nonSelectable" style="font-size: 60%">@note.DegreeInScale</span>
+                                    }
                                 </td>
                                 continue;
                             }
                             else if (note.InSelectedScale && !note.Selected)
                             {
                                 <td class="noteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
-                                    <span class="nonSelectable" style="font-size: medium">@note.Sharp</span> <span class="nonSelectable" style="font-size: xx-small">@note.DegreeInScale</span>
+                                    @*TODO: Simplify this it's very hacky*@
+                                    @if (note.DegreeInScale.Length > 2)
+                                    {
+                                        <span class="nonSelectable" style="font-size: medium">@note.Sharp</span> <span class="nonSelectable" style="font-size: 43%">@note.DegreeInScale</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="nonSelectable" style="font-size: medium">@note.Sharp</span> <span class="nonSelectable" style="font-size: 60%">@note.DegreeInScale</span>
+                                    }
                                 </td>
                                 continue;
                             }

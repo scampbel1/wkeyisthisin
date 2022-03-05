@@ -138,6 +138,8 @@
     cursor: default;
     color: green !important;
     background-color: rgba(52, 255, 152, 0.17) !important;
+    /*Ensures that only text is "highlighted"*/
+    background-clip: content-box;
 }
 
 h1 {
