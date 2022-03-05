@@ -22,10 +22,10 @@
         {
             var selectedNoteCount = SelectedNotes.Count;
 
-            if (selectedNoteCount == 1)
+            if (selectedNoteCount <= 2)
                 return $"";
 
-            if (selectedNoteCount > 1)
+            if (selectedNoteCount > 2)
                 return "No Matching Keys Found";
             else
                 return "";
@@ -52,8 +52,10 @@
 
             if (selectedNoteCount == 1)
                 return $"Only {selectedNoteCount} Note Selected";
+            else if (selectedNoteCount <= 2)
+                return $"Only {selectedNoteCount} Notes Selected";
 
-            if (selectedNoteCount > 1)
+            if (selectedNoteCount > 2)
                 return "No Matching Scales Found";
             else
                 return "No Notes Selected";

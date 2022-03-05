@@ -56,7 +56,7 @@ namespace KeyifyWebClient.Models.ViewModels
         {
             UpdateSelectedNotes(selectedNotes);
 
-            if (SelectedNotes.Count > 1)
+            if (SelectedNotes.Count > 2)
             {
                 Scales = DictionaryService.FindScales(SelectedNotes.Select(a => a.Note)).ToList();
                 _groupedScalesService.UpdateScaleGroupingModel(Scales);
