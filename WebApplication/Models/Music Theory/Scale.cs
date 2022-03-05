@@ -10,7 +10,7 @@ namespace KeyifyClassLibrary.Models.MusicTheory
         public readonly Note RootNote;
         public readonly List<Note> Notes;
         public readonly HashSet<Note> NoteSet;
-        public readonly List<string> Notes_Sharp;
+        public readonly HashSet<string> NoteSetSharp;
         public readonly ModeDefinition ModeDefinition;
 
         public Scale(Note key, ModeDefinition modeDefinition)
@@ -18,7 +18,7 @@ namespace KeyifyClassLibrary.Models.MusicTheory
             RootNote = key;
             Notes = new List<Note>();
             NoteSet = new HashSet<Note>();
-            Notes_Sharp = new List<string>();
+            NoteSetSharp = new HashSet<string>();
             ModeDefinition = modeDefinition;
 
             GenerateScale();
@@ -28,7 +28,7 @@ namespace KeyifyClassLibrary.Models.MusicTheory
         {
             Notes.Add(note);
             NoteSet.Add(note);
-            Notes_Sharp.Add(NoteHelper.ConvertNoteToStringEquivalent(note, true));
+            NoteSetSharp.Add(NoteHelper.ConvertNoteToStringEquivalent(note, true));
         }
 
         public void GenerateScale()

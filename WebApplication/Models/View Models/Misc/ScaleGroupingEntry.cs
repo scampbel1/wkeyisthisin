@@ -26,15 +26,15 @@ namespace Keyify.Models.View_Models.Misc
 
             sb.Append("<span class=\"scaleResultLabel\">");
 
-            foreach (var note_sharp in GroupedScales.FirstOrDefault().Scale.Notes_Sharp)
+            foreach (var note_sharp in GroupedScales.FirstOrDefault().Scale.NoteSetSharp)
             {
                 if (selectedNotes.Contains(note_sharp))
                 {
-                    sb.Append($"<span class=\"matchedNoteScaleSetLabel\">{note_sharp}</span>");
+                    sb.Append($"<span class=\"scaleSetLabelNote matchedScaleSetLabelNote\">{note_sharp}</span>");
                 }
                 else
                 {
-                    sb.Append($"<span>{note_sharp}</span>");
+                    sb.Append($"<span class=\"scaleSetLabelNote\">{note_sharp}</span>");
                 }
             }
 

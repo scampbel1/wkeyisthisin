@@ -130,7 +130,11 @@
     margin: 0px;
 }
 
-.matchedNoteScaleSetLabel {    
+.scaleSetLabelNote {
+    padding-left: 4px;
+}
+
+.matchedScaleSetLabelNote {
     cursor: default;
     color: green !important;
     background-color: rgba(52, 255, 152, 0.17) !important;

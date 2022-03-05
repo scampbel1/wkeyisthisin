@@ -45,7 +45,7 @@ namespace Keyify.Models.Service
             UserReadableLabelIncludingColloquialism_Sharp = !string.IsNullOrWhiteSpace(ColloquialNameLabel_Sharp) ? $"{ColloquialNameLabel_Sharp} ({UserReadableLabel_Sharp})" : $"{UserReadableLabel_Sharp}";
 
             NoteSetLabel_Flat = string.Join(" ", Scale.NoteSet);
-            NoteSetLabel_Sharp = string.Join(" ", Scale.Notes_Sharp);
+            NoteSetLabel_Sharp = string.Join(" ", Scale.NoteSetSharp);
         }
 
         /// <summary>
