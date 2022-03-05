@@ -1,6 +1,7 @@
 ﻿using Keyify.Models.Interfaces;
 using Keyify.Models.Service;
 using KeyifyClassLibrary.Enums;
+using KeyifyClassLibrary.Helper;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,27 +32,44 @@ namespace Keyify.Models.View_Models.Misc
             return KeyGroupingEntries.Sum(k => k.Count);
         }
 
-        public void UpdateScaleGroupingModel(List<ScaleEntry> scales)
+        public void UpdateScaleGroupingModel(List<ScaleEntry> scales, IEnumerable<string> selectedNotes)
         {
             ScaleGroupingEntries.Clear();
 
             var noteHashSets = GenerateNoteHashSets(scales);
 
+            var sharpNotes = ConvertSelectedNotesToSharpNotes(selectedNotes);
+
             foreach (var scaleNotes in noteHashSets)
             {
-                var groupedScales = scales.Where(s => s.IsKey == false && s.Scale.NoteSet.SetEquals(scaleNotes)).ToList();
-                var groupedKeys = scales.Where(s => s.IsKey == true && s.Scale.NoteSet.SetEquals(scaleNotes)).ToList();
+                var allScales = scales.Where(s => s.Scale.NoteSet.SetEquals(scaleNotes)).ToList();
+                var groupedScales = allScales.Where(s => s.IsKey == false).ToList();
+                var groupedKeys = allScales.Where(s => s.IsKey == true).ToList();
 
                 if (groupedScales.Any())
                 {
-                    ScaleGroupingEntries.Add(new ScaleGroupingEntry(string.Join(',', scaleNotes), groupedScales));
+                    ScaleGroupingEntries.Add(new ScaleGroupingEntry(groupedScales, sharpNotes));
                 }
 
                 if (groupedKeys.Any())
                 {
-                    KeyGroupingEntries.Add(new ScaleGroupingEntry(string.Join(',', scaleNotes), groupedKeys));
+                    KeyGroupingEntries.Add(new ScaleGroupingEntry(groupedKeys, sharpNotes));
                 }
             }
+        }
+
+        private IEnumerable<string> ConvertSelectedNotesToSharpNotes(IEnumerable<string> selectedNotes)
+        {
+            var sharpNotes = new List<string>();
+
+            var notes = NoteHelper.ConvertNoteStringArrayIntoNotes(selectedNotes.ToArray());
+
+            foreach (var note in notes)
+            {
+                sharpNotes.Add(NoteHelper.ConvertNoteToStringEquivalent(note, true));
+            }
+
+            return sharpNotes;
         }
 
         private List<HashSet<Note>> GenerateNoteHashSets(List<ScaleEntry> scales)

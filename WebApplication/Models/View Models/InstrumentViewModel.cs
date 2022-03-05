@@ -59,7 +59,7 @@ namespace KeyifyWebClient.Models.ViewModels
             if (SelectedNotes.Count > 2)
             {
                 Scales = DictionaryService.FindScales(SelectedNotes.Select(a => a.Note)).ToList();
-                _groupedScalesService.UpdateScaleGroupingModel(Scales);
+                _groupedScalesService.UpdateScaleGroupingModel(Scales, selectedNotes);
             }
             else
             {

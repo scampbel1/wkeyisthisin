@@ -130,6 +130,12 @@
     margin: 0px;
 }
 
+.matchedNoteScaleSetLabel {    
+    cursor: default;
+    color: green !important;
+    background-color: rgba(52, 255, 152, 0.17) !important;
+}
+
 h1 {
     padding: 15px;
 }

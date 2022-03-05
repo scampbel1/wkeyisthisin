@@ -1,5 +1,6 @@
 ﻿using Keyify.Models.Service;
 using KeyifyClassLibrary.Enums;
+using KeyifyClassLibrary.Helper;
 using System.Collections.Generic;
 
 namespace KeyifyClassLibrary.Models.MusicTheory
@@ -9,6 +10,7 @@ namespace KeyifyClassLibrary.Models.MusicTheory
         public readonly Note RootNote;
         public readonly List<Note> Notes;
         public readonly HashSet<Note> NoteSet;
+        public readonly List<string> Notes_Sharp;
         public readonly ModeDefinition ModeDefinition;
 
         public Scale(Note key, ModeDefinition modeDefinition)
@@ -16,6 +18,7 @@ namespace KeyifyClassLibrary.Models.MusicTheory
             RootNote = key;
             Notes = new List<Note>();
             NoteSet = new HashSet<Note>();
+            Notes_Sharp = new List<string>();
             ModeDefinition = modeDefinition;
 
             GenerateScale();
@@ -25,6 +28,7 @@ namespace KeyifyClassLibrary.Models.MusicTheory
         {
             Notes.Add(note);
             NoteSet.Add(note);
+            Notes_Sharp.Add(NoteHelper.ConvertNoteToStringEquivalent(note, true));
         }
 
         public void GenerateScale()

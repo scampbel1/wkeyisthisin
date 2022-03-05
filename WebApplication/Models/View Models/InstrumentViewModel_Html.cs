@@ -58,7 +58,7 @@ namespace KeyifyWebClient.Models.ViewModels
         {
             count = isNeighbouringScaleGroup ? count += 1 : count;
 
-            sb.Append($"<td class=\"scaleResultLabelColumn\"><span class=\"scaleResultLabel\">{scaleGroupingEntries[count].NotesGroupingLabel}</span></td>");
+            sb.Append($"<td class=\"scaleResultLabelColumn\"><span class=\"scaleResultLabel\">{scaleGroupingEntries[count].NotesGroupingLabelHtml}</span></td>");
 
             sb.Append($"<td class=\"scaleResultColumn\">");
 

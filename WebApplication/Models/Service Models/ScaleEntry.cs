@@ -27,6 +27,9 @@ namespace Keyify.Models.Service
         public readonly string ColloquialNameLabel_Sharp;
         public readonly string UserReadableLabelIncludingColloquialism_Sharp;
 
+        public readonly string NoteSetLabel_Flat;
+        public readonly string NoteSetLabel_Sharp;
+
         public ScaleEntry(Scale scale)
         {
             ScaleLabel = $"{scale.RootNote}{scale.ModeDefinition.Mode}";
@@ -40,6 +43,9 @@ namespace Keyify.Models.Service
             UserReadableLabel_Sharp = GetUserFriendlyLabel($"{sharpNote}{scale.ModeDefinition.Mode}");
             ColloquialNameLabel_Sharp = PentatonicModeHelper.GetScaleColloquialism(scale, true);
             UserReadableLabelIncludingColloquialism_Sharp = !string.IsNullOrWhiteSpace(ColloquialNameLabel_Sharp) ? $"{ColloquialNameLabel_Sharp} ({UserReadableLabel_Sharp})" : $"{UserReadableLabel_Sharp}";
+
+            NoteSetLabel_Flat = string.Join(" ", Scale.NoteSet);
+            NoteSetLabel_Sharp = string.Join(" ", Scale.Notes_Sharp);
         }
 
         /// <summary>
@@ -71,6 +77,6 @@ namespace Keyify.Models.Service
             }
 
             return ScaleLabel == other.ScaleLabel;
-        }
+        }        
     }
 }

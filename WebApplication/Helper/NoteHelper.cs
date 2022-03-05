@@ -68,9 +68,9 @@ namespace KeyifyClassLibrary.Helper
             return notes;
         }
 
-        public static List<Note> ConvertNoteStringArrayIntoNotes(string[] notes)
+        public static List<Note> ConvertNoteStringArrayIntoNotes(IEnumerable<string> notes)
         {
-            List<Note> convertedNotes = new List<Note>(notes.Length);
+            List<Note> convertedNotes = new List<Note>();
 
             foreach (string note in notes)
             {
@@ -117,9 +117,9 @@ namespace KeyifyClassLibrary.Helper
             }
         }
 
-        public static string ConvertNoteToStringEquivalent(Note note, bool convertFlatNotes = false)
+        public static string ConvertNoteToStringEquivalent(Note note, bool convertFlatNote = false)
         {
-            if (!convertFlatNotes || !IsSharpOrFlat(note))
+            if (!convertFlatNote || !IsSharpOrFlat(note))
                 return note.ToString();
 
             if (note == Note.Ab)
