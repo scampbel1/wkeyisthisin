@@ -43,45 +43,28 @@
                         {
                             if (note.InSelectedScale && note.Selected)
                             {
-                                <td class="selectedNoteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
-                                    @*TODO: Simplify this it's very hacky*@
-                                    @if (note.DegreeInScale.Length > 2)
-
-                                    {
-                                        <span class="nonSelectable" style="font-size: medium">@note.Sharp</span> <span class="nonSelectable" style="font-size: 43%">@note.DegreeInScale</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="nonSelectable" style="font-size: medium">@note.Sharp</span> <span class="nonSelectable" style="font-size: 60%">@note.DegreeInScale</span>
-                                    }
+                                <td class="note selectedNoteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
+                                    <span class="nonSelectable" style="font-size: medium">@note.Sharp</span> <span class="nonSelectable" style="font-size: 60%">@note.DegreeInScale</span>
                                 </td>
                                 continue;
                             }
                             else if (note.InSelectedScale && !note.Selected)
                             {
-                                <td class="noteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
-                                    @*TODO: Simplify this it's very hacky*@
-                                    @if (note.DegreeInScale.Length > 2)
-                                    {
-                                        <span class="nonSelectable" style="font-size: medium">@note.Sharp</span> <span class="nonSelectable" style="font-size: 43%">@note.DegreeInScale</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="nonSelectable" style="font-size: medium">@note.Sharp</span> <span class="nonSelectable" style="font-size: 60%">@note.DegreeInScale</span>
-                                    }
+                                <td class="note noteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
+                                    <span class="nonSelectable" style="font-size: medium">@note.Sharp</span> <span class="nonSelectable" style="font-size: 60%">@note.DegreeInScale</span>
                                 </td>
                                 continue;
                             }
                         }
                         if (note.Selected)
                         {
-                            <td class="selectedNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
+                            <td class="note selectedNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
                                 <span class="nonSelectable" style="font-size: medium">@note.Sharp</span>
                             </td>
                             continue;
                         }
 
-                        <td class="defaultNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
+                        <td class="note defaultNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
                             <span class="nonSelectable" style="font-size: medium">@note.Sharp</span>
                         </td>
                     }
