@@ -3,6 +3,7 @@ using Keyify.Models.Service;
 using KeyifyClassLibrary.Enums;
 using KeyifyClassLibrary.Helper;
 using KeyifyClassLibrary.Models.MusicTheory;
+using KeyifyClassLibrary.Service_Models;
 using Xunit;
 
 namespace Keyify.Unit.Test.Note.UnitTests

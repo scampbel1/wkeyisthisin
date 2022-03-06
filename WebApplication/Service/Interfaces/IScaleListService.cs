@@ -6,8 +6,7 @@ namespace Keyify.Service.Interface
 {
     public interface IScaleListService
     {
-        IEnumerable<ScaleEntry> GetScaleList();
+        List<ScaleEntry> GetScaleList();
         IEnumerable<ScaleEntry> FindScales(IEnumerable<Note> selectedNotes);
-        Dictionary<HashSet<Note>, List<ScaleEntry>> FindScalesSortByNoteSet(IEnumerable<Note> selectedNotes);
     }
 }

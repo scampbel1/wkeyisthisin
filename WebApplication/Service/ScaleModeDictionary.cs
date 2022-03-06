@@ -1,16 +1,15 @@
 ﻿using Keyify.Models.Service;
 using KeyifyClassLibrary.Enums;
+using KeyifyClassLibrary.Service_Models;
 using System.Collections.Generic;
 
 namespace KeyifyClassLibrary.Core.Domain
 {
-    public partial class ModeDictionary
+    public partial class ScaleModeDictionary
     {
-        public static IEnumerable<ModeDefinition> GenerateModeDefinitions()
+        public static List<ModeDefinition> GenerateModeDefinitions()
         {
             var modeDefinitions = new List<ModeDefinition>();
-
-            #region Scale Steps
 
             modeDefinitions.Add(new ModeDefinition(
                 Mode.Ionian,
@@ -1290,10 +1289,6 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Seventh,
                      Degree.Eighth
                 }));
-
-            //https://www.scales-chords.com/scalenav.php
-
-            #endregion
 
             return modeDefinitions;
         }

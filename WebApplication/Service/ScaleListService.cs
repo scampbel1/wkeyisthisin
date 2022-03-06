@@ -8,7 +8,7 @@ namespace Keyify.Models.Service
     public partial class ScaleListService : IScaleListService
     {
         private readonly IModeDefinitionService _scaleDirectoryService;
-        private readonly IEnumerable<ScaleEntry> _scaleList;
+        private readonly List<ScaleEntry> _scaleList;
 
         public ScaleListService(IModeDefinitionService scaleDirectoryService)
         {
@@ -16,7 +16,7 @@ namespace Keyify.Models.Service
             _scaleList = GenerateScaleList();
         }
 
-        public IEnumerable<ScaleEntry> GetScaleList()
+        public List<ScaleEntry> GetScaleList()
         {
             return _scaleList;
         }
@@ -26,21 +26,7 @@ namespace Keyify.Models.Service
             return _scaleList.Where(a => a.Scale.NoteSet.IsSupersetOf(selectedNotes));
         }
 
-        public Dictionary<HashSet<Note>, List<ScaleEntry>> FindScalesSortByNoteSet(IEnumerable<Note> selectedNotes)
-        {
-            var scales = FindScales(selectedNotes);
-
-            var sortedScales = new Dictionary<HashSet<Note>, List<ScaleEntry>>();
-
-            foreach (var noteSet in scales.Select(s => s.Scale).Distinct())
-            {
-                sortedScales.Add(noteSet.NoteSet, scales.Where(s => s.Scale.NoteSet.SetEquals(noteSet.Notes)).ToList());
-            }
-
-            return sortedScales;
-        }
-
-        public IEnumerable<ScaleEntry> GenerateScaleList()
+        public List<ScaleEntry> GenerateScaleList()
         {
             return GetScaleEntries(_scaleDirectoryService.GetModeDefinitions());
         }

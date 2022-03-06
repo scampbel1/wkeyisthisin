@@ -1,4 +1,4 @@
-﻿namespace KeyifyClassLibrary.Enums
+﻿namespace KeyifyClassLibrary.Service_Models
 {
     public static class Degree
     {

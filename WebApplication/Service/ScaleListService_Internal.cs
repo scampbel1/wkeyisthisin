@@ -6,7 +6,7 @@ namespace Keyify.Models.Service
 {
     public partial class ScaleListService
     {
-        private IEnumerable<ScaleEntry> GetScaleEntries(IEnumerable<ModeDefinition> modeDefinitions)
+        private List<ScaleEntry> GetScaleEntries(IEnumerable<ModeDefinition> modeDefinitions)
         {
             var scaleEntries = new List<ScaleEntry>();
 

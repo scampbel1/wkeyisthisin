@@ -5,6 +5,6 @@ namespace Keyify.Service.Interface
 {
     public interface IModeDefinitionService
     {
-        IEnumerable<ModeDefinition> GetModeDefinitions();
+        List<ModeDefinition> GetModeDefinitions();
     }
 }
