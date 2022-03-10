@@ -10,7 +10,7 @@ namespace Keyify.Unit.Test.ScaleDictionary.UnitTests
     {
         private static List<ModeDefinition> _scaleEntries = new ModeDefinitionService().GetModeDefinitions();
 
-        [Fact(Skip = "")]
+        [Fact(Skip = "Come back to this after you've deployed app to docker hub")]
         public void NoDuplicateModeDefinitionsByScaleDegrees()
         {
             var scaleSteps = _scaleEntries.Select(s => string.Join(",", s.ScaleDegrees));
@@ -19,7 +19,7 @@ namespace Keyify.Unit.Test.ScaleDictionary.UnitTests
             Assert.False(scaleStepDuplicates.Any());
         }
 
-        [Fact(Skip = "")]
+        [Fact(Skip = "Come back to this after you've deployed app to docker hub")]
         public void NoDuplicateModeDefinitionsByScaleSteps()
         {
             var scaleSteps = _scaleEntries.Select(s => string.Join(",", s.ScaleSteps));
