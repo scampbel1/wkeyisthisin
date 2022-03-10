@@ -6,13 +6,18 @@
     color: darkslategrey !important;
 }
 
+.instrumentHyperlinkContainer {
+    margin: auto;
+    width: 100%;
+}
+
 #instrumentHyperlinkHeaderList {
-    margin-left: 20px;
-    margin-bottom: 25px;
+    padding: 100px 0px 30px 0px;
+    text-align: center;
 }
 
 .instrumentHyperlink {
-    margin-right: 10px;
+    margin: 0px 20px 0px 20px;
     text-decoration: none;
     font-size: larger;
     background-color: rgba(0, 148, 255, 0.05) !important;
@@ -36,6 +41,14 @@
 .defaultNote {
     background-color: rgba(255, 255, 255, 0.6) !important;
     color: darkgrey !important;
+}
+
+.noteText {
+    font-size: medium;
+}
+
+.degreeText {
+    font-size: 60%;
 }
 
 .note {
@@ -63,7 +76,10 @@
     min-width: 80%;
     max-width: 80%;
     text-align: center;
-    padding-left: 15px;
+}
+
+.scaleText {
+    font-size: small;
 }
 
 .scaleResults {
@@ -109,6 +125,10 @@
 .scaleResultSelected {
     color: darkblue;
     cursor: pointer;
+}
+
+.center {
+    margin: auto;
 }
 
 #tablesDiv {

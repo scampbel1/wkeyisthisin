@@ -13,6 +13,10 @@ namespace KeyifyWebClient.Models.ViewModels
     //Be careful renaming this class! (It may not rename the reference in the Views)
     public partial class InstrumentViewModel
     {
+        //TODO: Find a way to update ViewTitle using ajax
+        //      -->  {InstrumentName} - {SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp}
+        public string ViewTitle => $"What Key Is This In?";
+
         public List<InstrumentNote> Notes { get; } = new List<InstrumentNote>();
         public string InstrumentName { get; set; } = "Instrument Not Named";
 
