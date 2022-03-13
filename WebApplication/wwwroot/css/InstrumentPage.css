@@ -8,16 +8,16 @@
 
 .instrumentHyperlinkContainer {
     margin: auto;
-    width: 100%;
+    width: 80%;
 }
 
 #instrumentHyperlinkHeaderList {
     padding: 100px 0px 30px 0px;
-    text-align: center;
+    text-align: left;
 }
 
 .instrumentHyperlink {
-    margin: 0px 20px 0px 20px;
+    margin: 0px 7px 0px 7px;
     text-decoration: none;
     font-size: larger;
     background-color: rgba(0, 148, 255, 0.05) !important;
@@ -137,16 +137,6 @@
     max-width: 80%;
     /*Note: Make sure this is kept inline so that the tables align next to each other*/
     display: inline;
-    margin: 0px;
-}
-
-#leftTableDiv {
-    display: inline-block;
-    margin: 0px;
-}
-
-#rightTableDiv {
-    display: inline-block;
     margin: 0px;
 }
 
