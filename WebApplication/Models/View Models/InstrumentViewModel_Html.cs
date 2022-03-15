@@ -7,22 +7,30 @@ namespace KeyifyWebClient.Models.ViewModels
 {
     public partial class InstrumentViewModel
     {
-        public string AvailableScalesTable => GenerateAvailableScalesTable(AvailableScaleGroups);
+        public string AvailableKeysAndScalesTableHtml => GenerateAvailableKeysAndScalesTable(AvailableKeyGroups, AvailableScaleGroups);
 
-        public string AvailableKeysTable => GenerateAvailableScalesTable(AvailableKeyGroups);
-
-        private string GenerateAvailableScalesTable(List<ScaleGroupingEntry> scaleGroupingEntries)
+        private string GenerateAvailableKeysAndScalesTable(List<ScaleGroupingEntry> availableKeyGroups, List<ScaleGroupingEntry> availableScaleGroups)
         {
-            if (scaleGroupingEntries.Count() < 1)
+            if (!availableKeyGroups.Any() && !availableScaleGroups.Any())
             {
                 return string.Empty;
             }
 
-            var count = 0;
-
             var sb = new StringBuilder();
 
             sb.Append("<table class=\"scaleTable\">");
+
+            GenerateAvailableKeysAndScalesSection(availableKeyGroups, sb);
+            GenerateAvailableKeysAndScalesSection(availableScaleGroups, sb);
+
+            sb.Append("</table>");
+
+            return sb.ToString();
+        }
+
+        private void GenerateAvailableKeysAndScalesSection(List<ScaleGroupingEntry> scaleGroupingEntries, StringBuilder sb)
+        {
+            var count = 0;
 
             while (count < scaleGroupingEntries.Count())
             {
@@ -49,10 +57,15 @@ namespace KeyifyWebClient.Models.ViewModels
                 sb.Append("</tr>");
             }
 
-            sb.Append("</table>");
-
-            return sb.ToString();
+            //Blank Row to separate Keys and Scales
+            sb.Append("<tr class=\"keyAndScaleSeparator\">");
+            sb.Append($"<td></td>");
+            sb.Append($"<td></td>");
+            sb.Append($"<td></td>");
+            sb.Append($"<td></td>");
+            sb.Append("</tr>");
         }
+
 
         private void AddScalesToNoteSet(List<ScaleGroupingEntry> scaleGroupingEntries, StringBuilder sb, int count, bool isNeighbouringScaleGroup)
         {

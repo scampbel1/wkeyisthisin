@@ -152,6 +152,11 @@
     background-clip: content-box;
 }
 
+.keyAndScaleSeparator {
+    height: 5px;
+    background-color: rgba(0, 0, 10, 0.05) !important;
+}
+
 h1 {
     padding: 15px;
 }

@@ -1,7 +1,7 @@
 ﻿@using KeyifyWebClient.Models.ViewModels
 @model InstrumentViewModel
 
-    <div class="nonSelectable">
+<div class="nonSelectable">
     <!-- Don't remove instrument links from here, the selected notes aren't updated on the layout page-->
     <div class="instrumentHyperlinkContainer">
         <div id="instrumentHyperlinkHeaderList">
@@ -68,19 +68,10 @@
 
     <div class="scaleResults center">
         <h2>
-            @Model.AvailableKeysLabel
+            @Model.AvailableKeysAndScalesLabel
         </h2>
         <div id="tablesDiv">
-            @Html.Raw(Model.AvailableKeysTable)
-        </div>
-    </div>
-
-    <div class="scaleResults center">
-        <h2>
-            @Model.AvailableScalesLabel
-        </h2>
-        <div id="tablesDiv">
-            @Html.Raw(Model.AvailableScalesTable)
+            @Html.Raw(Model.AvailableKeysAndScalesTableHtml)
         </div>
     </div>
 </div>

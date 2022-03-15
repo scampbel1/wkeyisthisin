@@ -30,8 +30,7 @@ namespace KeyifyWebClient.Models.ViewModels
         public ScaleEntry SelectedScale { get; set; }
         public List<ScaleEntry> Scales { get; set; } = new List<ScaleEntry>();
 
-        public string AvailableScalesLabel => GetAvailableScaleLabel();
-        public string AvailableKeysLabel => GetAvailableKeysLabel();
+        public string AvailableKeysAndScalesLabel => GetAvailableKeysAndScalesLabel();
 
         private IScalesGroupingService _groupedScalesService { get; init; }
 

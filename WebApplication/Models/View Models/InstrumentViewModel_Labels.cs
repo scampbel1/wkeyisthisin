@@ -2,6 +2,11 @@
 {
     public partial class InstrumentViewModel
     {
+        private string GetAvailableKeysAndScalesLabel()
+        {
+            return $"{GetAvailableKeysLabel()} {GetAvailableScaleLabel()}";
+        }
+
         //TODO: Remove biolerplate code
         private string GetAvailableKeysLabel()
         {
@@ -12,9 +17,9 @@
                 case 0:
                     return GetNoKeysFoundMessage();
                 case 1:
-                    return $"{matchingScaleCount} Matching Key Found";
+                    return $"{matchingScaleCount} Matching Key";
                 default:
-                    return $"{matchingScaleCount} Matching Keys Found";
+                    return $"{matchingScaleCount} Matching Keys";
             }
         }
 
@@ -26,7 +31,7 @@
                 return $"";
 
             if (selectedNoteCount > 2)
-                return "No Matching Keys Found";
+                return "No Matching Keys";
             else
                 return "";
         }
@@ -40,9 +45,9 @@
                 case 0:
                     return GetNoScalesFoundMessage();
                 case 1:
-                    return $"{matchingScaleCount} Matching Scale Found";
+                    return $"{matchingScaleCount} Matching Scale";
                 default:
-                    return $"{matchingScaleCount} Matching Scales Found";
+                    return $"{matchingScaleCount} Matching Scales";
             }
         }
 
@@ -56,7 +61,7 @@
                 return $"Only {selectedNoteCount} Notes Selected";
 
             if (selectedNoteCount > 2)
-                return "No Matching Scales Found";
+                return "No Matching Scales";
             else
                 return "No Notes Selected";
         }
