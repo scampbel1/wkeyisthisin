@@ -53,7 +53,7 @@ namespace KeyifyWebClient.Models.ViewModels
             //TODO: Stop creating a new fretboard everytime
             Fretboard = new Fretboard(tuning, fretCount);
             InstrumentName = instrumentName;
-        }        
+        }
 
         public void ProcessNotesAndScale(string selectedScale, IEnumerable<string> selectedNotes)
         {

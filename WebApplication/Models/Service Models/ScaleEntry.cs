@@ -77,6 +77,6 @@ namespace Keyify.Models.Service
             }
 
             return ScaleLabel == other.ScaleLabel;
-        }        
+        }
     }
 }
