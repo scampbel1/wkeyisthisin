@@ -6,12 +6,21 @@ using System.Linq;
 
 namespace Keyify.Models.Service_Models
 {
+    //What does this represent? Is it too concrete? (i.e. does the scale need to be included?)
+    //Can't we say, here is the Chord Type and its steps in a scale (I - V - Vi etc.) ?
+    //We then use this to say, here is a chord definition, generate a definition for each chord type for each note
     public class ChordDefinition
     {
+        //TODO: Delete this...
+        //You are defining a chord by a chord type (there are many)
         private ChordType _chordType;
         private Scale _scale;
         private List<int> _stepsInScale;
 
+        //TODO: Delete this...
+        //What is this for again?
+        //Is this to build a triad for Chord Type relative to a selected scale?
+        //... I suspect so
         public List<int> _stepsInScaleIndex => GetIndexPositionsForStepsInScale();
 
         public int LargestIndexInStepsInScale => _stepsInScale.Max() - 1;
