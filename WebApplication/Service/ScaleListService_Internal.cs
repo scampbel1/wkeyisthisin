@@ -1,6 +1,7 @@
 ﻿using KeyifyClassLibrary.Enums;
 using KeyifyClassLibrary.Models.MusicTheory;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Keyify.Models.Service
 {
@@ -21,12 +22,11 @@ namespace Keyify.Models.Service
         private IEnumerable<ScaleEntry> GenerateScaleEntries(ModeDefinition modeDefinition)
         {
             var scaleEntry = new List<ScaleEntry>();
-
-            foreach (Note note in modeDefinition.KeysFoundForMode)
+            if (modeDefinition.KeysFoundForMode != null)
             {
-                var scale = new Scale(note, modeDefinition);
-
-                scaleEntry.Add(new ScaleEntry(scale));
+                scaleEntry.AddRange(from Note note in modeDefinition.KeysFoundForMode
+                                    let scale = new Scale(note, modeDefinition)
+                                    select new ScaleEntry(scale));
             }
 
             return scaleEntry;
