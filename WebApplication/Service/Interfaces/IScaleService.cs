@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace Keyify.Service.Interface
 {
-    public interface IScaleListService
+    public interface IScaleService
     {
-        List<ScaleEntry> GetScaleList();
+        public List<ScaleEntry> Scales { get; }
         IEnumerable<ScaleEntry> FindScales(IEnumerable<Note> selectedNotes);
     }
 }

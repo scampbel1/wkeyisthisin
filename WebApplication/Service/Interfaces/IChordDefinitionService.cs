@@ -5,6 +5,6 @@ namespace Keyify.Service.Interfaces
 {
     public interface IChordDefinitionService
     {
-        IEnumerable<ChordDefinition> GetChordDefinitions();
+        public List<ChordDefinition> Chords { get; }
     }
 }

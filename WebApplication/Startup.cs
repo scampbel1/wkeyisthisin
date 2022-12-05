@@ -2,7 +2,6 @@ using Keyify.Models.Interfaces;
 using Keyify.Models.Service;
 using Keyify.Models.View_Models.Misc;
 using Keyify.Service.Interface;
-using KeyifyClassLibrary.Core.Domain;
 using KeyifyWebClient.Models.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,9 +23,9 @@ namespace Keyify
         {
 
             services.AddControllersWithViews();
-            services.AddSingleton(typeof(ModeService), typeof(ModeService));
-            services.AddSingleton(typeof(IModeDefinitionService), typeof(ModeDefinitionService));
-            services.AddSingleton(typeof(IScaleListService), typeof(ScaleListService));
+            services.AddSingleton(typeof(KeyifyClassLibrary.Core.Domain.ModeDefinitionService), typeof(KeyifyClassLibrary.Core.Domain.ModeDefinitionService));
+            services.AddSingleton(typeof(IModeService), typeof(Models.Service.ModeService));
+            services.AddSingleton(typeof(IScaleService), typeof(ScaleService));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
             services.AddTransient(typeof(IScalesGroupingService), typeof(ScalesGroupingService));
         }

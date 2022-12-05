@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Keyify.Service.Interface
 {
-    public interface IModeDefinitionService
+    public interface IModeService
     {
         public List<ModeDefinition> Modes { get; }
     }

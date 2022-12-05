@@ -27,7 +27,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
         private static IEnumerable<object[]> GenerateChordTestArguments()
         {
             //Question: Should this service be mocked? Strictly speaking, this is beyond the scope of this test, this is currently being used for convenience.
-            var scaleEntries = new ScaleListService(new ModeDefinitionService(new ModeService())).GetScaleList();
+            var scaleEntries = new ScaleService(new ModeService(new ModeDefinitionService())).Scales;
 
             return new List<object[]>
             {

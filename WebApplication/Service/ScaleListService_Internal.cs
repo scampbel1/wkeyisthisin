@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Keyify.Models.Service
 {
-    public partial class ScaleListService
+    public partial class ScaleService
     {
         private List<ScaleEntry> GetScaleEntries(IEnumerable<ModeDefinition> _modeDefinitionDictionary)
         {

@@ -37,10 +37,10 @@ namespace KeyifyWebClient.Models.ViewModels
         private List<ScaleGroupingEntry> AvailableKeyGroups => _groupedScalesService.GetGroupedKeys();
         private List<ScaleGroupingEntry> AvailableScaleGroups => _groupedScalesService.GetGroupedScales();
 
-        protected IScaleListService DictionaryService { get; init; }
-        protected IModeDefinitionService ScaleDirectoryService { get; init; }
+        protected IScaleService DictionaryService { get; init; }
+        protected IModeService ScaleDirectoryService { get; init; }
 
-        public InstrumentViewModel(IScaleListService dictionaryService, IModeDefinitionService scaleDirectoryService, IScalesGroupingService scalesGroupingService)
+        public InstrumentViewModel(IScaleService dictionaryService, IModeService scaleDirectoryService, IScalesGroupingService scalesGroupingService)
         {
             DictionaryService = dictionaryService;
             ScaleDirectoryService = scaleDirectoryService;

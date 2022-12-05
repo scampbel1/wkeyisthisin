@@ -7,21 +7,11 @@ namespace Keyify.Service
 {
     public class ChordDefinitionService : IChordDefinitionService
     {
-        private IEnumerable<ChordDefinition> _chordDefinitions;
+        public List<ChordDefinition> Chords => throw new NotImplementedException();
 
         public ChordDefinitionService()
         {
-            _chordDefinitions = GenerateChordDefinitions();
-        }
-
-        public IEnumerable<ChordDefinition> GetChordDefinitions()
-        {
-            throw new NotImplementedException();
-        }
-
-        private IEnumerable<ChordDefinition> GenerateChordDefinitions()
-        {
-            throw new NotImplementedException();
+            //_chordDefinitions = GenerateChordDefinitions();
         }
     }
 }
