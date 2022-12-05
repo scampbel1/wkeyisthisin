@@ -1,16 +1,19 @@
 ﻿using Keyify.Service.Interface;
+using KeyifyClassLibrary.Core.Domain;
 using System.Collections.Generic;
-using static KeyifyClassLibrary.Core.Domain.ScaleModeDictionary;
+using System.Linq;
 
 namespace Keyify.Models.Service
 {
     public class ModeDefinitionService : IModeDefinitionService
     {
+        private readonly ModeService _scaleModeDictionary;
         private readonly List<ModeDefinition> _modeDefinitions;
 
-        public ModeDefinitionService()
+        public ModeDefinitionService(ModeService scaleModeDictionary)
         {
-            _modeDefinitions = GenerateModeDefinitions();
+            _scaleModeDictionary = scaleModeDictionary;
+            _modeDefinitions = _scaleModeDictionary.ModeDefinitions.ToList();
         }
 
         public List<ModeDefinition> GetModeDefinitions()

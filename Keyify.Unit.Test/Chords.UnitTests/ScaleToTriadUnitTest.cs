@@ -1,5 +1,6 @@
 ﻿using Keyify.Models.Music_Theory;
 using Keyify.Models.Service;
+using KeyifyClassLibrary.Core.Domain;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -26,7 +27,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
         private static IEnumerable<object[]> GenerateChordTestArguments()
         {
             //Question: Should this service be mocked? Strictly speaking, this is beyond the scope of this test, this is currently being used for convenience.
-            var scaleEntries = new ScaleListService(new ModeDefinitionService()).GetScaleList();
+            var scaleEntries = new ScaleListService(new ModeDefinitionService(new ModeService())).GetScaleList();
 
             return new List<object[]>
             {

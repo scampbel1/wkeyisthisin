@@ -1,11 +1,10 @@
-﻿using Keyify.Enums;
-using KeyifyClassLibrary.Enums;
+﻿using KeyifyClassLibrary.Enums;
 using System;
 using System.Linq;
 
 namespace Keyify.Models.Service
 {
-    public class ModeDefinition : IComparable<ModeDefinition>
+    public class ModeDefinition
     {
         public readonly Mode Mode;
         public readonly Step[] ScaleSteps;
@@ -41,11 +40,6 @@ namespace Keyify.Models.Service
         public ModeDefinition(Mode mode, Step[] scaleSteps, string[] scaleDegrees, Array explicitNotesForMode) : this(mode, scaleSteps, scaleDegrees)
         {
             ExplicitNotesForMode = explicitNotesForMode;
-        }
-
-        public int CompareTo(ModeDefinition other)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -7,11 +7,11 @@ namespace Keyify.Models.Service
 {
     public partial class ScaleListService
     {
-        private List<ScaleEntry> GetScaleEntries(IEnumerable<ModeDefinition> modeDefinitions)
+        private List<ScaleEntry> GetScaleEntries(IEnumerable<ModeDefinition> _modeDefinitionDictionary)
         {
             var scaleEntries = new List<ScaleEntry>();
 
-            foreach (var modeDefinition in modeDefinitions)
+            foreach (var modeDefinition in _modeDefinitionDictionary)
             {
                 scaleEntries.AddRange(GenerateScaleEntries(modeDefinition));
             }
