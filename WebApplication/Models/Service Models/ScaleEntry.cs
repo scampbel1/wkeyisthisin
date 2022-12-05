@@ -1,53 +1,41 @@
 ﻿using KeyifyClassLibrary.Enums;
 using KeyifyClassLibrary.Helper;
 using KeyifyClassLibrary.Models.MusicTheory;
-using System;
 using System.Text;
 
 namespace Keyify.Models.Service
 {
-    public class ScaleEntry : IEquatable<ScaleEntry>
+    public class ScaleEntry
     {
-        public GeneratedScale Scale { get; set; }
-        public bool Selected { get; set; }
-        public string ScaleLabel { get; set; }
-        public bool IsKey => IsScaleEntryAKey();
-
-
-        public readonly string FormalNameLabel_Flat;
-        public readonly string ColloquialNameLabel_Flat;
-        public readonly string ColloquialismIncludingFormalName_Flat;
-
-        public readonly string FormalNameLabel_Sharp;
-        public readonly string ColloquialNameLabel_Sharp;
-        public readonly string ColloquialismIncludingFormalName_Sharp;
-
-        public readonly string NoteSetLabel_Flat;
-        public readonly string NoteSetLabel_Sharp;
-
         public ScaleEntry(GeneratedScale scale)
         {
-            ScaleLabel = $"{scale.RootNote}{scale.ModeDefinition.Mode}";
             Scale = scale;
-            FormalNameLabel_Flat = GenerateFriendlyLabel(ScaleLabel);
-            ColloquialNameLabel_Flat = GetScaleColloquialism(scale);
-            ColloquialismIncludingFormalName_Flat = !string.IsNullOrWhiteSpace(ColloquialNameLabel_Flat) ? $"{ColloquialNameLabel_Flat} ({FormalNameLabel_Flat})" : $"{FormalNameLabel_Flat}";
-
-            string sharpNote = NoteHelper.ConvertNoteToStringEquivalent(scale.RootNote, true);
-
-            FormalNameLabel_Sharp = GenerateFriendlyLabel($"{sharpNote}{scale.ModeDefinition.Mode}");
-            ColloquialNameLabel_Sharp = GetScaleColloquialism(scale, true);
-            ColloquialismIncludingFormalName_Sharp = !string.IsNullOrWhiteSpace(ColloquialNameLabel_Sharp) ? $"{ColloquialNameLabel_Sharp} ({FormalNameLabel_Sharp})" : $"{FormalNameLabel_Sharp}";
-
-            NoteSetLabel_Flat = string.Join(" ", Scale.NoteSet);
-            NoteSetLabel_Sharp = string.Join(" ", Scale.NoteSetSharp);
         }
+
+        private string _sharpRootNote => NoteHelper.ConvertNoteToStringEquivalent(Scale.RootNote, convertFlatNoteToSharp: true);
+
+        public GeneratedScale Scale { get; set; }
+        public bool Selected { get; set; }
+        public string ScaleLabel => $"{Scale.RootNote}{Scale.ModeDefinition.Mode}";
+        public bool IsKey => IsScaleEntryAKey();
+
+        public string NoteSetLabel_Flat => string.Join(" ", Scale.NoteSet);
+        public string NoteSetLabel_Sharp => string.Join(" ", Scale.NoteSetSharp);
+
+        public string FormalNameLabel_Flat => GenerateLabel(ScaleLabel);
+        public string ColloquialNameLabel_Flat => GenerateScaleColloquialism(Scale, convertFlatNoteToSharp: false);
+        public string ColloquialismIncludingFormalName_Flat => !string.IsNullOrWhiteSpace(ColloquialNameLabel_Flat) ? $"{ColloquialNameLabel_Flat} ({FormalNameLabel_Flat})" : $"{FormalNameLabel_Flat}";
+
+        public string FormalNameLabel_Sharp => GenerateLabel($"{_sharpRootNote}{Scale.ModeDefinition.Mode}");
+        public string ColloquialNameLabel_Sharp => GenerateScaleColloquialism(Scale, true);
+        public string ColloquialismIncludingFormalName_Sharp => !string.IsNullOrWhiteSpace(ColloquialNameLabel_Sharp) ? $"{ColloquialNameLabel_Sharp} ({FormalNameLabel_Sharp})" : $"{FormalNameLabel_Sharp}";
+
         private bool IsScaleEntryAKey()
         {
             return Scale.ModeDefinition.Mode == Mode.Ionian || Scale.ModeDefinition.Mode == Mode.Aeolian;
         }
 
-        private string GenerateFriendlyLabel(string label)
+        private string GenerateLabel(string label)
         {
             var sb = new StringBuilder().Append(label);
             int count = 1;
@@ -69,16 +57,6 @@ namespace Keyify.Models.Service
             return sb.ToString();
         }
 
-        public bool Equals(ScaleEntry other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-
-            return ScaleLabel == other.ScaleLabel;
-        }
-
         private ModeColloquialism? GetModeNameColloquialism(Mode mode)
         {
             switch (mode)
@@ -97,11 +75,11 @@ namespace Keyify.Models.Service
             return GetModeNameColloquialism(mode).ToString();
         }
 
-        private string GetScaleColloquialism(GeneratedScale scale, bool convertToSharp = false)
+        private string GenerateScaleColloquialism(GeneratedScale scale, bool convertFlatNoteToSharp)
         {
             var pentatonicModeEquivalent = GetModeNameColloquialismModeLabel(scale.ModeDefinition.Mode);
 
-            return !string.IsNullOrWhiteSpace(pentatonicModeEquivalent) ? $"{NoteHelper.ConvertNoteToStringEquivalent(scale.RootNote, convertToSharp)} {pentatonicModeEquivalent}" : pentatonicModeEquivalent;
+            return !string.IsNullOrWhiteSpace(pentatonicModeEquivalent) ? $"{NoteHelper.ConvertNoteToStringEquivalent(scale.RootNote, convertFlatNoteToSharp)} {pentatonicModeEquivalent}" : pentatonicModeEquivalent;
         }
     }
 }

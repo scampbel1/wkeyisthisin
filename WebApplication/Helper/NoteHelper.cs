@@ -118,9 +118,9 @@ namespace KeyifyClassLibrary.Helper
             }
         }
 
-        public static string ConvertNoteToStringEquivalent(Note note, bool convertFlatNote = false)
+        public static string ConvertNoteToStringEquivalent(Note note, bool convertFlatNoteToSharp = false)
         {
-            if (!convertFlatNote || !IsSharpOrFlat(note))
+            if (!convertFlatNoteToSharp || !IsSharpOrFlat(note))
                 return note.ToString();
 
             if (note == Note.Ab)

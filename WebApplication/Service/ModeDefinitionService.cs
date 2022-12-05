@@ -8,12 +8,7 @@ namespace KeyifyClassLibrary.Core.Domain
 {
     public class ModeDefinitionService
     {
-        public readonly List<ModeDefinition> ModeDefinitions;
-
-        public ModeDefinitionService()
-        {
-            ModeDefinitions = GenerateModeDefinitions();
-        }
+        public List<ModeDefinition> ModeDefinitions => GenerateModeDefinitions();
 
         //TODO: Tidy this up, and aggregate duplicate Modes that contain the same note sets
         private List<ModeDefinition> GenerateModeDefinitions()
@@ -1218,17 +1213,19 @@ namespace KeyifyClassLibrary.Core.Domain
 
         private void InsertDictionaryEntry(Dictionary<string, ModeDefinition> dictionary, Mode mode, Step[] steps, string[] degrees)
         {
+            var key = string.Join(',', degrees);
+
             switch (mode)
             {
                 case Mode.WholeTone:
-                    dictionary.Add(string.Join(',', degrees), new ModeDefinition(mode, steps, degrees, new[] { Note.D, Note.F }));
+                    dictionary.Add(key, new ModeDefinition(mode, steps, degrees, new[] { Note.D, Note.F }));
                     break;
                 case Mode.DiminishedWholeHalf:
                 case Mode.DiminishedHalfWhole:
-                    dictionary.Add(string.Join(',', degrees), new ModeDefinition(mode, steps, degrees, new[] { Note.C, Note.Db, Note.D }));
+                    dictionary.Add(key, new ModeDefinition(mode, steps, degrees, new[] { Note.C, Note.Db, Note.D }));
                     break;
                 default:
-                    dictionary.Add(string.Join(',', degrees), new ModeDefinition(mode, steps, degrees));
+                    dictionary.Add(key, new ModeDefinition(mode, steps, degrees));
                     break;
             }
         }
