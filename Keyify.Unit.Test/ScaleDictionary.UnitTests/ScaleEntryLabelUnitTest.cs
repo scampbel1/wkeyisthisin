@@ -11,7 +11,11 @@ namespace ScaleDictionaryTests
         [Fact]
         public void AbIonianScaleIsConvertedToAbMajor()
         {
-            var generatedScale = new GeneratedScale(Note.Ab, new ModeDefinition(Mode.Ionian, new Step[] {
+            var generatedScale = new GeneratedScale(
+                Note.Ab,
+                new ModeDefinition(
+                    Mode.Ionian,
+                new Step[] {
                     Step.R,
                     Step.W,
                     Step.W,
@@ -125,6 +129,49 @@ namespace ScaleDictionaryTests
             var userReadableExpected = "F# Aeolian";
             var userReadableActual = scaleEntry.FormalNameLabel_Sharp;
             var combinationLabelExpected = "F# Minor (F# Aeolian)";
+            var combinationLabelActual = scaleEntry.ColloquialismIncludingFormalName_Sharp;
+
+            //Note: Best practice to have 1 Assertion - making the exception here as I'd like to group these labels together
+            Assert.Equal(colloquialExpected, colloquialActual);
+            Assert.Equal(userReadableExpected, userReadableActual);
+            Assert.Equal(combinationLabelExpected, combinationLabelActual);
+        }
+
+        [Fact]
+        public void EbDorian_b2ScaleIsConvertedToFSharpMinor()
+        {
+            var generatedScale = new GeneratedScale(
+                Note.Eb,
+                new ModeDefinition(
+                    Mode.Dorian_b2,
+                    new Step[] {
+                    Step.R,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W
+            },
+                new string[] {
+                     Degree.First,
+                     Degree.FlatSecond,
+                     Degree.FlatThird,
+                     Degree.Fourth,
+                     Degree.Fifth,
+                     Degree.Sixth,
+                     Degree.FlatSeventh,
+                     Degree.Eighth
+                }));
+
+            var scaleEntry = new ScaleEntry(generatedScale);
+
+            var colloquialExpected = string.Empty;
+            var colloquialActual = scaleEntry.ColloquialNameLabel_Sharp;
+            var userReadableExpected = "D# Dorian b2";
+            var userReadableActual = scaleEntry.FormalNameLabel_Sharp;
+            var combinationLabelExpected = "D# Dorian b2";
             var combinationLabelActual = scaleEntry.ColloquialismIncludingFormalName_Sharp;
 
             //Note: Best practice to have 1 Assertion - making the exception here as I'd like to group these labels together

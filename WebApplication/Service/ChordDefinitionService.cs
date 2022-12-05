@@ -1,17 +1,17 @@
 ﻿using Keyify.Models.Service_Models;
-using Keyify.Service.Interfaces;
-using System;
 using System.Collections.Generic;
 
 namespace Keyify.Service
 {
-    public class ChordDefinitionService : IChordDefinitionService
+    public class ChordDefinitionService
     {
-        public List<ChordDefinition> Chords => throw new NotImplementedException();
+        public List<ChordDefinition> Chords => GenerateChordDefinitions();
 
-        public ChordDefinitionService()
+        private List<ChordDefinition> GenerateChordDefinitions()
         {
-            //_chordDefinitions = GenerateChordDefinitions();
+            var chordDefinitions = new List<ChordDefinition>();
+
+            return chordDefinitions;
         }
     }
 }

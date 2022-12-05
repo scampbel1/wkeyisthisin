@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Keyify.Service.Interfaces
 {
-    public interface IChordDefinitionService
+    public interface IChordService
     {
         public List<ChordDefinition> Chords { get; }
     }
