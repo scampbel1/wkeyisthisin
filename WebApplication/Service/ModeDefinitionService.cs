@@ -6,7 +6,7 @@ namespace Keyify.Models.Service
 {
     public class ModeDefinitionService : IModeDefinitionService
     {
-        private List<ModeDefinition> _modeDefinitions;
+        private readonly List<ModeDefinition> _modeDefinitions;
 
         public ModeDefinitionService()
         {

@@ -50,7 +50,10 @@ namespace KeyifyWebClient.Models.ViewModels
                 return;
             }
 
-            //TODO: This should happen when you're building the fretboard, the strings are being constructed... and then reiterated over... the first step is wasteful
+            /*TODO: See whether the efficiency of this can be improved upon. Can this be taken care of outside of the viewmodel, and we present the "state" of the fretboard as it exists. 
+             * It seems wasteful to iterate through every note, each time there is a change in state based on user input.
+             * We could easily update a matrix and simply display that matrix on the screen.
+            */
 
             foreach (InstrumentString guitarString in Fretboard.InstrumentStrings)
             {

@@ -22,9 +22,9 @@ namespace Keyify.Models.Service
         private IEnumerable<ScaleEntry> GenerateScaleEntries(ModeDefinition modeDefinition)
         {
             var scaleEntry = new List<ScaleEntry>();
-            if (modeDefinition.KeysFoundForMode != null)
+            if (modeDefinition.ExplicitNotesForMode != null)
             {
-                scaleEntry.AddRange(from Note note in modeDefinition.KeysFoundForMode
+                scaleEntry.AddRange(from Note note in modeDefinition.ExplicitNotesForMode
                                     let scale = new GeneratedScale(note, modeDefinition)
                                     select new ScaleEntry(scale));
             }

@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace KeyifyClassLibrary.Helper
 {
+    //TODO: Convert this into service
     public static class NoteHelper
     {
         public static bool IsSharpOrFlat(Note note)

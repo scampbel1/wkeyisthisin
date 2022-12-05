@@ -7,7 +7,6 @@
             return $"{GetAvailableKeysLabel()} {GetAvailableScaleLabel()}";
         }
 
-        //TODO: Remove biolerplate code
         private string GetAvailableKeysLabel()
         {
             var matchingScaleCount = _groupedScalesService.GetTotalKeyCount();
