@@ -14,7 +14,7 @@ namespace Keyify.Models.Service
 
         //Create scales of all notes by default. Some scales are limited to a subset of notes.
         public readonly Array KeysFoundForMode = Enum.GetValues(typeof(Note));
-        
+
         //TODO: This breaks the Single Responsibility Principle - create something else for generating the chords
         public ModeDefinition(Mode mode, Step[] scaleSteps, string[] scaleDegrees, Array modeKeys = null, ChordType[] chordTypes = null)
         {

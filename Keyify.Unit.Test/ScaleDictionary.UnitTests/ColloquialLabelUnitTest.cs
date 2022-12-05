@@ -1,5 +1,4 @@
-﻿using Keyify.Helper;
-using Keyify.Models.Service;
+﻿using Keyify.Models.Service;
 using KeyifyClassLibrary.Enums;
 using KeyifyClassLibrary.Models.MusicTheory;
 using KeyifyClassLibrary.Service_Models;
@@ -9,33 +8,6 @@ namespace ScaleDictionaryTests
 {
     public class ColloquialLabelUnitTest
     {
-        [Theory]
-        [InlineData(Mode.Ionian, "Major")]
-        public void IonianModeEnumReturnsMajorLabel(Mode selectedMode, string expected)
-        {
-            var actual = PentatonicModeHelper.GetModeNameColloquialismModeLabel(selectedMode);
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Theory]
-        [InlineData(Mode.Aeolian, "Minor")]
-        public void AeolianModeEnumReturnsMinorLabel(Mode selectedMode, string expected)
-        {
-            var actual = PentatonicModeHelper.GetModeNameColloquialismModeLabel(selectedMode);
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Theory]
-        [InlineData(Mode.Mixolydian, "")]
-        public void MixolydianModeEnumReturnsEmptyString(Mode selectedMode, string expected)
-        {
-            var actual = PentatonicModeHelper.GetModeNameColloquialismModeLabel(selectedMode);
-
-            Assert.Equal(expected, actual);
-        }
-
         [Fact]
         public void AbIonianScaleIsConvertedToAbMajor()
         {
@@ -61,7 +33,7 @@ namespace ScaleDictionaryTests
                 }));
 
             var expected = "Ab Major";
-            var actual = PentatonicModeHelper.GetScaleColloquialism(scale);
+            var actual = scale.ColloquialismFlat;
 
             Assert.Equal(expected, actual);
         }
@@ -95,7 +67,7 @@ namespace ScaleDictionaryTests
                 }));
 
             var expected = "Db Minor";
-            var actual = PentatonicModeHelper.GetScaleColloquialism(scale);
+            var actual = scale.ColloquialismFlat;
 
             Assert.Equal(expected, actual);
         }

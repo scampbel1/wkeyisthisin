@@ -1,5 +1,4 @@
-﻿using Keyify.Helper;
-using KeyifyClassLibrary.Enums;
+﻿using KeyifyClassLibrary.Enums;
 using KeyifyClassLibrary.Helper;
 using KeyifyClassLibrary.Models.MusicTheory;
 using System;
@@ -35,13 +34,13 @@ namespace Keyify.Models.Service
             ScaleLabel = $"{scale.RootNote}{scale.ModeDefinition.Mode}";
             Scale = scale;
             UserReadableLabel_Flat = GetUserFriendlyLabel(ScaleLabel);
-            ColloquialNameLabel_Flat = PentatonicModeHelper.GetScaleColloquialism(scale);
+            ColloquialNameLabel_Flat = GetScaleColloquialism(scale);
             UserReadableLabelIncludingColloquialism_Flat = !string.IsNullOrWhiteSpace(ColloquialNameLabel_Flat) ? $"{ColloquialNameLabel_Flat} ({UserReadableLabel_Flat})" : $"{UserReadableLabel_Flat}";
 
             string sharpNote = NoteHelper.ConvertNoteToStringEquivalent(scale.RootNote, true);
 
             UserReadableLabel_Sharp = GetUserFriendlyLabel($"{sharpNote}{scale.ModeDefinition.Mode}");
-            ColloquialNameLabel_Sharp = PentatonicModeHelper.GetScaleColloquialism(scale, true);
+            ColloquialNameLabel_Sharp = GetScaleColloquialism(scale, true);
             UserReadableLabelIncludingColloquialism_Sharp = !string.IsNullOrWhiteSpace(ColloquialNameLabel_Sharp) ? $"{ColloquialNameLabel_Sharp} ({UserReadableLabel_Sharp})" : $"{UserReadableLabel_Sharp}";
 
             NoteSetLabel_Flat = string.Join(" ", Scale.NoteSet);
@@ -72,6 +71,31 @@ namespace Keyify.Models.Service
             }
 
             return ScaleLabel == other.ScaleLabel;
+        }
+
+        private ModeColloquialism? GetModeNameColloquialism(Mode mode)
+        {
+            switch (mode)
+            {
+                case Mode.Ionian:
+                    return ModeColloquialism.Major;
+                case Mode.Aeolian:
+                    return ModeColloquialism.Minor;
+                default:
+                    return null;
+            }
+        }
+
+        private string GetModeNameColloquialismModeLabel(Mode mode)
+        {
+            return GetModeNameColloquialism(mode).ToString();
+        }
+
+        private string GetScaleColloquialism(Scale scale, bool convertToSharp = false)
+        {
+            var pentatonicModeEquivalent = GetModeNameColloquialismModeLabel(scale.ModeDefinition.Mode);
+
+            return !string.IsNullOrWhiteSpace(pentatonicModeEquivalent) ? $"{NoteHelper.ConvertNoteToStringEquivalent(scale.RootNote, convertToSharp)} {pentatonicModeEquivalent}" : pentatonicModeEquivalent;
         }
     }
 }

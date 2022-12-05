@@ -1,5 +1,4 @@
-﻿using Keyify.Helper;
-using Keyify.Models.Service;
+﻿using Keyify.Models.Service;
 using KeyifyClassLibrary.Enums;
 using KeyifyClassLibrary.Helper;
 using KeyifyClassLibrary.Models.MusicTheory;
@@ -63,7 +62,7 @@ namespace Keyify.Unit.Test.Note.UnitTests
                 }));
 
             var expected = "G# Major";
-            var actual = PentatonicModeHelper.GetScaleColloquialism(scale, true);
+            var actual = scale.ColloquialismSharp;
 
             Assert.Equal(expected, actual);
         }
@@ -93,7 +92,7 @@ namespace Keyify.Unit.Test.Note.UnitTests
                 }));
 
             var expected = "C# Minor";
-            var actual = PentatonicModeHelper.GetScaleColloquialism(scale, true);
+            var actual = scale.ColloquialismSharp;
 
             Assert.Equal(expected, actual);
         }
