@@ -40,7 +40,7 @@ namespace Keyify.Unit.Test.Note.UnitTests
         [Fact]
         public void AbIonianScaleIsConvertedToAbMajor()
         {
-            var scale = new Scale(KeyifyClassLibrary.Enums.Note.Ab, new ModeDefinition(Mode.Ionian, new Step[] {
+            var generatedScale = new GeneratedScale(KeyifyClassLibrary.Enums.Note.Ab, new ModeDefinition(Mode.Ionian, new Step[] {
                     Step.R,
                     Step.W,
                     Step.W,
@@ -61,8 +61,10 @@ namespace Keyify.Unit.Test.Note.UnitTests
                      Degree.Eighth
                 }));
 
+            var scaleEntry = new ScaleEntry(generatedScale);
+
             var expected = "G# Major";
-            var actual = scale.ColloquialismSharp;
+            var actual = scaleEntry.ColloquialNameLabel_Sharp;
 
             Assert.Equal(expected, actual);
         }
@@ -70,7 +72,7 @@ namespace Keyify.Unit.Test.Note.UnitTests
         [Fact]
         public void DbAeolianScaleIsConvertedToDbMinor()
         {
-            var scale = new Scale(KeyifyClassLibrary.Enums.Note.Db, new ModeDefinition(Mode.Aeolian, new Step[] {
+            var generatedScale = new GeneratedScale(KeyifyClassLibrary.Enums.Note.Db, new ModeDefinition(Mode.Aeolian, new Step[] {
                     Step.R,
                     Step.W,
                     Step.h,
@@ -91,8 +93,10 @@ namespace Keyify.Unit.Test.Note.UnitTests
                      Degree.Eighth
                 }));
 
+            var scaleEntry = new ScaleEntry(generatedScale);
+
             var expected = "C# Minor";
-            var actual = scale.ColloquialismSharp;
+            var actual = scaleEntry.ColloquialNameLabel_Sharp;
 
             Assert.Equal(expected, actual);
         }

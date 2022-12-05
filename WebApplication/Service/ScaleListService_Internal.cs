@@ -25,7 +25,7 @@ namespace Keyify.Models.Service
             if (modeDefinition.KeysFoundForMode != null)
             {
                 scaleEntry.AddRange(from Note note in modeDefinition.KeysFoundForMode
-                                    let scale = new Scale(note, modeDefinition)
+                                    let scale = new GeneratedScale(note, modeDefinition)
                                     select new ScaleEntry(scale));
             }
 

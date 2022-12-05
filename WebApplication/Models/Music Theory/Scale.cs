@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace KeyifyClassLibrary.Models.MusicTheory
 {
-    public class Scale
+    public class GeneratedScale
     {
         public readonly Note RootNote;
         public readonly List<Note> Notes;
@@ -13,10 +13,7 @@ namespace KeyifyClassLibrary.Models.MusicTheory
         public readonly HashSet<string> NoteSetSharp;
         public readonly ModeDefinition ModeDefinition;
 
-        public string ColloquialismFlat => GetScaleColloquialism(convertToSharp: false);
-        public string ColloquialismSharp => GetScaleColloquialism(convertToSharp: true);
-
-        public Scale(Note key, ModeDefinition modeDefinition)
+        public GeneratedScale(Note key, ModeDefinition modeDefinition)
         {
             RootNote = key;
             Notes = new List<Note>();
@@ -46,31 +43,6 @@ namespace KeyifyClassLibrary.Models.MusicTheory
                     noteNumber -= 12;
 
                 AddNote((Note)noteNumber);
-            }
-        }
-
-        private string GetScaleColloquialism(bool convertToSharp)
-        {
-            var pentatonicModeEquivalent = GetModeNameColloquialismModeLabel(ModeDefinition.Mode);
-
-            return !string.IsNullOrWhiteSpace(pentatonicModeEquivalent) ? $"{NoteHelper.ConvertNoteToStringEquivalent(RootNote, convertToSharp)} {pentatonicModeEquivalent}" : pentatonicModeEquivalent;
-        }
-
-        private string GetModeNameColloquialismModeLabel(Mode mode)
-        {
-            return GetModeNameColloquialism(mode).ToString();
-        }
-
-        private ModeColloquialism? GetModeNameColloquialism(Mode mode)
-        {
-            switch (mode)
-            {
-                case Mode.Ionian:
-                    return ModeColloquialism.Major;
-                case Mode.Aeolian:
-                    return ModeColloquialism.Minor;
-                default:
-                    return null;
             }
         }
     }

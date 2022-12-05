@@ -14,7 +14,7 @@ namespace Keyify.Models.Service_Models
         //TODO: Delete this...
         //You are defining a chord by a chord type (there are many)
         private ChordType _chordType;
-        private Scale _scale;
+        private GeneratedScale _scale;
         private List<int> _stepsInScale;
 
         //TODO: Delete this...
@@ -26,7 +26,7 @@ namespace Keyify.Models.Service_Models
         public int LargestIndexInStepsInScale => _stepsInScale.Max() - 1;
         public int LargestIndexInScale => _scale.Notes.Count - 1;
 
-        public ChordDefinition(ChordType chordType, Scale scale, List<int> stepsInScale)
+        public ChordDefinition(ChordType chordType, GeneratedScale scale, List<int> stepsInScale)
         {
             _scale = scale;
             _stepsInScale = stepsInScale;
