@@ -48,11 +48,6 @@ namespace Keyify.Models.Service
             NoteSetLabel_Sharp = string.Join(" ", Scale.NoteSetSharp);
         }
 
-        /// <summary>
-        /// Inserts spaces found where a capital letter is found
-        /// </summary>
-        /// <param name="label"></param>
-        /// <returns>Stringbuilder modified input as a string</returns>
         public static string GetUserFriendlyLabel(string label)
         {
             var sb = new StringBuilder().Append(label);
