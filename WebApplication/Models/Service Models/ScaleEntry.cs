@@ -13,10 +13,6 @@ namespace Keyify.Models.Service
         public string ScaleLabel { get; set; }
         public bool IsKey => IsScaleEntryAKey();
 
-        private bool IsScaleEntryAKey()
-        {
-            return Scale.ModeDefinition.Mode == Mode.Ionian || Scale.ModeDefinition.Mode == Mode.Aeolian;
-        }
 
         public readonly string FormalNameLabel_Flat;
         public readonly string ColloquialNameLabel_Flat;
@@ -33,21 +29,25 @@ namespace Keyify.Models.Service
         {
             ScaleLabel = $"{scale.RootNote}{scale.ModeDefinition.Mode}";
             Scale = scale;
-            FormalNameLabel_Flat = GetUserFriendlyLabel(ScaleLabel);
+            FormalNameLabel_Flat = GenerateFriendlyLabel(ScaleLabel);
             ColloquialNameLabel_Flat = GetScaleColloquialism(scale);
             ColloquialismIncludingFormalName_Flat = !string.IsNullOrWhiteSpace(ColloquialNameLabel_Flat) ? $"{ColloquialNameLabel_Flat} ({FormalNameLabel_Flat})" : $"{FormalNameLabel_Flat}";
 
             string sharpNote = NoteHelper.ConvertNoteToStringEquivalent(scale.RootNote, true);
 
-            FormalNameLabel_Sharp = GetUserFriendlyLabel($"{sharpNote}{scale.ModeDefinition.Mode}");
+            FormalNameLabel_Sharp = GenerateFriendlyLabel($"{sharpNote}{scale.ModeDefinition.Mode}");
             ColloquialNameLabel_Sharp = GetScaleColloquialism(scale, true);
             ColloquialismIncludingFormalName_Sharp = !string.IsNullOrWhiteSpace(ColloquialNameLabel_Sharp) ? $"{ColloquialNameLabel_Sharp} ({FormalNameLabel_Sharp})" : $"{FormalNameLabel_Sharp}";
 
             NoteSetLabel_Flat = string.Join(" ", Scale.NoteSet);
             NoteSetLabel_Sharp = string.Join(" ", Scale.NoteSetSharp);
         }
+        private bool IsScaleEntryAKey()
+        {
+            return Scale.ModeDefinition.Mode == Mode.Ionian || Scale.ModeDefinition.Mode == Mode.Aeolian;
+        }
 
-        private string GetUserFriendlyLabel(string label)
+        private string GenerateFriendlyLabel(string label)
         {
             var sb = new StringBuilder().Append(label);
             int count = 1;
@@ -55,7 +55,13 @@ namespace Keyify.Models.Service
             while (count < sb.Length - 1)
             {
                 if (char.IsUpper(sb[count]) && sb[count - 1] != ' ')
+                {
                     sb.Insert(count, ' ');
+                }
+                else if (sb[count] == '_')
+                {
+                    sb[count] = ' ';
+                }
 
                 count++;
             }

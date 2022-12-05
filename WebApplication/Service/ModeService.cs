@@ -6,8 +6,7 @@ using System.Linq;
 
 namespace KeyifyClassLibrary.Core.Domain
 {
-    //TODO: Confirm - is this actually a partial class?
-    public partial class ModeService
+    public class ModeService
     {
         public readonly List<ModeDefinition> ModeDefinitions;
 
@@ -15,11 +14,12 @@ namespace KeyifyClassLibrary.Core.Domain
         {
             ModeDefinitions = GenerateModeDefinitions();
         }
-
+        
+        //TODO: Tidy this up, and aggregate duplicate Modes that contain the same note sets
         private List<ModeDefinition> GenerateModeDefinitions()
         {
             var modeDefinitionDictionary = new Dictionary<string, ModeDefinition>();
-
+            
             var ionianSteps = new Step[] {
                     Step.R,
                     Step.W,
@@ -376,27 +376,8 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var mongolianSteps = new Step[]
-                {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.Wh,
-                    Step.W,
-                    Step.Wh,
-                };
-
-            var mongolianDegrses = new string[] {
-                     Degree.First,
-                     Degree.Second,
-                     Degree.Third,
-                     Degree.Fifth,
-                     Degree.Sixth,
-                     Degree.Eighth
-                };
-
             var arabianSteps = new Step[]
-            {
+                        {
                     Step.R,
                     Step.W,
                     Step.W,
@@ -405,7 +386,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.W,
                     Step.W,
                     Step.W
-             };
+                         };
 
             var arabianDegrees = new string[] {
                      Degree.First,
@@ -829,29 +810,6 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.First,
                      Degree.Second,
                      Degree.Third,
-                     Degree.SharpFourth,
-                     Degree.Fifth,
-                     Degree.FlatSixth,
-                     Degree.FlatSeventh,
-                     Degree.Eighth
-                };
-
-            var neopolitanMinorSteps = new Step[]
-           {
-                    Step.R,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-            };
-
-            var neopolitanMinorDegrees = new string[] {
-                     Degree.First,
-                     Degree.FlatSecond,
-                     Degree.FlatThird,
                      Degree.Fourth,
                      Degree.Fifth,
                      Degree.FlatSixth,
@@ -968,29 +926,6 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Fourth,
                      Degree.SharpFifth,
                      Degree.Sixth,
-                     Degree.Seventh,
-                     Degree.Eighth
-                };
-
-            var doubleHarmonicSteps = new Step[]
-{
-                    Step.R,
-                    Step.h,
-                    Step.Wh,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.Wh,
-                    Step.h
-};
-
-            var doubleHarmonicDegrees = new string[] {
-                     Degree.First,
-                     Degree.FlatSecond,
-                     Degree.Third,
-                     Degree.Fourth,
-                     Degree.Fifth,
-                     Degree.FlatSixth,
                      Degree.Seventh,
                      Degree.Eighth
                 };
@@ -1178,7 +1113,7 @@ namespace KeyifyClassLibrary.Core.Domain
                 };
 
             var purviThetaSteps = new Step[]
-{
+            {
                     Step.R,
                     Step.h,
                     Step.Wh,
@@ -1187,7 +1122,7 @@ namespace KeyifyClassLibrary.Core.Domain
                     Step.h,
                     Step.Wh,
                     Step.h
- };
+            };
 
             var purviThetaDegrees = new string[] {
                      Degree.First,
@@ -1200,11 +1135,33 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
+            var dorian_b2Steps = new Step[]
+             {
+                    Step.R,
+                    Step.h,
+                    Step.W,
+                    Step.W,
+                    Step.h,
+                    Step.W,
+                    Step.h,
+                    Step.W
+             };
+
+            var dorian_b2Degrees = new string[] {
+                     Degree.First,
+                     Degree.FlatSecond,
+                     Degree.FlatThird,
+                     Degree.Fourth,
+                     Degree.Fifth,
+                     Degree.Sixth,
+                     Degree.FlatSeventh,
+                     Degree.Eighth
+                };
+
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Ionian, ionianSteps, ionianDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Aeolian, aeolianSteps, aeolianDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Phrygian, phrygianSteps, phrygianDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Lydian, lydianSteps, lydianDegrees);
-            InsertDictionaryEntry(modeDefinitionDictionary, Mode.Mixolydian, mixolydianSteps, mixolydianDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Mixolydian, mixolydianSteps, mixolydianDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Locrian, locrianSteps, locrianDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Dorian, dorianSteps, dorianDegrees);
@@ -1217,7 +1174,7 @@ namespace KeyifyClassLibrary.Core.Domain
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.WholeTone, wholeToneSteps, wholeToneDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.DiminishedWholeHalf, diminishedWholeHalfSteps, diminishedWholeHalfDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.DiminishedHalfWhole, diminishedHalfWholeSteps, diminishedHalfWholeDegrees);
-            InsertDictionaryEntry(modeDefinitionDictionary, Mode.Mongolian, mongolianSteps, mongolianDegrses); //The same as Major Pentatonic
+            //InsertDictionaryEntry(modeDefinitionDictionary, Mode.Mongolian, mongolianSteps, mongolianDegrses); //The same as Major Pentatonic
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Arabian, arabianSteps, arabianDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.AugmentedLydian, augmentedLydianSteps, augmentedLydianDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Byzantine, byzantineSteps, byzantineDegrees);
@@ -1231,20 +1188,20 @@ namespace KeyifyClassLibrary.Core.Domain
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Chinese, chineseSteps, chineseDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.DiminishedLydian, diminishedLydianSteps, diminishedLydianDegrees); //Dorian #4
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.EightToneSpanish, eightToneSpanishSteps, eightToneSpanishDegrees);
-            InsertDictionaryEntry(modeDefinitionDictionary, Mode.Hindu, hinduSteps, hinduDegrees);
+            //InsertDictionaryEntry(modeDefinitionDictionary, Mode.Hindu, hinduSteps, hinduDegrees); //The Hindu scale (also known as the Aeolian dominant scale, Olympian Scale, Mixolydian ♭6 [or ♭13], Aeolian major, and melodic major
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.HungarianMinor, hungarianMinorSteps, hungarianMinorDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Kumoi, kumoiSteps, kumoiDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Locrian2, locrian2Steps, locrian2Degrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Lydian9, lydian9Steps, lydian9Degrees); //Lydian #9
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.MinorLydian, minorLyrdianSteps, minorLyrdianDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.MixolydianB6, mixolydianB6Steps, mixolydianB6Degrees);
-            InsertDictionaryEntry(modeDefinitionDictionary, Mode.NeopolitanMinor, neopolitanMinorSteps, neopolitanMinorDegrees);
+            //InsertDictionaryEntry(modeDefinitionDictionary, Mode.NeopolitanMinor, neopolitanMinorSteps, neopolitanMinorDegrees); //Same as Phrygian
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Persian, persianSteps, persianDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.PrometheusNeopolitan, prometheusNeopolitanSteps, prometheusNeopolitanDegree);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.TodiTheta, todiThetaSteps, todiThetaDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.AlteredBb7, alteredBb7Steps, alteredBb7Degrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.AugmentedIonian, augmentedIonianSteps, augmentedIonianDegrees);
-            InsertDictionaryEntry(modeDefinitionDictionary, Mode.DoubleHarmonic, doubleHarmonicSteps, doubleHarmonicDegrees);
+            //InsertDictionaryEntry(modeDefinitionDictionary, Mode.DoubleHarmonic, doubleHarmonicSteps, doubleHarmonicDegrees); //Same as Byzantine
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Enigmatic, enigmaticSteps, enigmaticDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Ichikosucho, ichikosuchoSteps, ichikosuchoDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Hirajoshi, hirajoshiSteps, hirajoshiDegrees);
@@ -1253,35 +1210,8 @@ namespace KeyifyClassLibrary.Core.Domain
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.MajorPhrygian, majorPhrygianSteps, majorPhrygianDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.Neopolitan, neopolitanSteps, neopolitanDegrees);
             InsertDictionaryEntry(modeDefinitionDictionary, Mode.PurviTheta, purviThetaSteps, purviThetaDegrees);
-            InsertDictionaryEntry(modeDefinitionDictionary, Mode.Overtone, overtoneSteps, overtoneDegrees);
-
-            //Note: this one is messed up
-            //
-            //
-            ////TODO: Sort out the Name of this... it should be "b2" not "B2"
-            //_modeDefinitionDictionary.Add(new ModeDefinition(
-            // Mode.DorianB2,
-            // new Step[]
-            // {
-            //        Step.R,
-            //        Step.h,
-            //        Step.W,
-            //        Step.W,
-            //        Step.h,
-            //        Step.W,
-            //        Step.h,
-            //        Step.W
-            // },
-            //  new string[] {
-            //         Degree.First,
-            //         Degree.FlatSecond,
-            //         Degree.FlatThird,
-            //         Degree.Fourth,
-            //         Degree.Fifth,
-            //         Degree.Sixth,
-            //         Degree.FlatSeventh,
-            //         Degree.Eighth
-            //    }));
+            //InsertDictionaryEntry(modeDefinitionDictionary, Mode.Overtone, overtoneSteps, overtoneDegrees); //Same as Lydian b7
+            InsertDictionaryEntry(modeDefinitionDictionary, Mode.Dorian_b2, dorian_b2Steps, dorian_b2Degrees);
 
             return modeDefinitionDictionary.Select(m => m.Value).ToList();
         }

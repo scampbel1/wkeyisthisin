@@ -1,5 +1,6 @@
 ﻿namespace KeyifyClassLibrary.Enums
 {
+    //TODO: Tidy this up, and aggregate duplicate Modes that contain the same note sets
     public enum Mode
     {
         Ionian, //Major
@@ -32,10 +33,10 @@
         BalinesePelog, //Same as Pelog
         Chinese,
         DiminishedLydian,
-        DorianB2,
+        Dorian_b2,
         EightToneSpanish,
         Hindu,
-        HungarianMinor, //Gypsie
+        HungarianMinor, //Same as Gypsie
         Kumoi,
         Locrian2,
         Lydian9,
