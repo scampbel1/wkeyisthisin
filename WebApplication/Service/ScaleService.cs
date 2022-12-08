@@ -1,11 +1,12 @@
-﻿using Keyify.Service.Interface;
+﻿using Keyify.Service.Interfaces;
 using KeyifyClassLibrary.Enums;
+using KeyifyClassLibrary.Models.MusicTheory;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Keyify.Models.Service
 {
-    public partial class ScaleService : IScaleService
+    public class ScaleService : IScaleService
     {
         private readonly IModeService _modeService;
         private readonly List<ScaleEntry> _scaleList;
@@ -26,6 +27,32 @@ namespace Keyify.Models.Service
         private List<ScaleEntry> GenerateScaleList()
         {
             return GetScaleEntries(_modeService.Modes);
+        }
+
+        private List<ScaleEntry> GetScaleEntries(IEnumerable<ModeDefinition> modeDefinitionDictionary)
+        {
+            var scaleEntries = new List<ScaleEntry>();
+
+            foreach (var modeDefinition in modeDefinitionDictionary)
+            {
+                scaleEntries.AddRange(GenerateScaleEntries(modeDefinition));
+            }
+
+            return scaleEntries;
+        }
+
+        private List<ScaleEntry> GenerateScaleEntries(ModeDefinition modeDefinition)
+        {
+            var scaleEntry = new List<ScaleEntry>();
+
+            if (modeDefinition.ExplicitNotesForMode != null)
+            {
+                scaleEntry.AddRange(from Note note in modeDefinition.ExplicitNotesForMode
+                                    let scale = new GeneratedScale(note, modeDefinition)
+                                    select new ScaleEntry(scale));
+            }
+
+            return scaleEntry;
         }
     }
 }

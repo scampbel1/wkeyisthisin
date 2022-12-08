@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Keyify.Service
 {
-    public class ChordDefinitionService
+    public class ChordDataStore
     {
         public List<ChordDefinition> Chords => GenerateChordDefinitions();
 

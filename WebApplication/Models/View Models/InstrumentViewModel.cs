@@ -1,7 +1,7 @@
 ﻿using Keyify.Models.Interfaces;
 using Keyify.Models.Service;
 using Keyify.Models.View_Models.Misc;
-using Keyify.Service.Interface;
+using Keyify.Service.Interfaces;
 using KeyifyClassLibrary.Models.Interfaces;
 using KeyifyWebClient.Models.Instruments;
 using System.Collections.Generic;

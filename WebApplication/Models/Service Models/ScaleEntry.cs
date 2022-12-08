@@ -16,6 +16,9 @@ namespace Keyify.Models.Service
 
         public GeneratedScale Scale { get; set; }
         public bool Selected { get; set; }
+
+        //TODO: Move all of this to the GeneratedScale class, it should only be generated once
+
         public string ScaleLabel => $"{Scale.RootNote}{Scale.ModeDefinition.Mode}";
         public bool IsKey => IsScaleEntryAKey();
 

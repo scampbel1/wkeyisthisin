@@ -1,7 +1,7 @@
 ﻿using Keyify.Models.Service;
 using System.Collections.Generic;
 
-namespace Keyify.Service.Interface
+namespace Keyify.Service.Interfaces
 {
     public interface IModeService
     {

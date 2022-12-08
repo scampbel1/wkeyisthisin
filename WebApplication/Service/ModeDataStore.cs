@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace KeyifyClassLibrary.Core.Domain
 {
-    public class ModeDefinitionService
+    public class ModeDataStore
     {
         public List<ModeDefinition> ModeDefinitions => GenerateModeDefinitions();
 
-        //TODO: Tidy this up, and aggregate duplicate Modes that contain the same note sets
+        //TODO: Add duplicate Modes that contain the same note sets
         private List<ModeDefinition> GenerateModeDefinitions()
         {
             var modeDefinitionDictionary = new Dictionary<string, ModeDefinition>();
