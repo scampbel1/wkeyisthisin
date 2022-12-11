@@ -50,6 +50,9 @@ namespace Keyify.Unit.Test.Chords.UnitTests
 
         private static IEnumerable<object[]> GenerateChordTestArguments()
         {
+            var majorChordType = ChordType.Major;
+            var minorChordType = ChordType.Minor;
+
             var aMajorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.Db, KeyifyClassLibrary.Enums.Note.E };
             var bbMajorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.Bb, KeyifyClassLibrary.Enums.Note.D, KeyifyClassLibrary.Enums.Note.F };
             var bMajorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.B, KeyifyClassLibrary.Enums.Note.Eb, KeyifyClassLibrary.Enums.Note.Gb };
@@ -78,31 +81,31 @@ namespace Keyify.Unit.Test.Chords.UnitTests
 
             return new List<object[]>
             {
-                new object[] { aMajorChordNotes, new ChordTemplate(ChordType.Major, aMajorChordNotes) },
-                new object[] { bbMajorChordNotes, new ChordTemplate(ChordType.Major, bbMajorChordNotes) },
-                new object[] { bMajorChordNotes, new ChordTemplate(ChordType.Major, bMajorChordNotes) },
-                new object[] { cMajorChordNotes, new ChordTemplate(ChordType.Major, cMajorChordNotes) },
-                new object[] { dbMajorChordNotes, new ChordTemplate(ChordType.Major, dbMajorChordNotes) },
-                new object[] { dMajorChordNotes, new ChordTemplate(ChordType.Major, dMajorChordNotes) },
-                new object[] { ebMajorChordNotes, new ChordTemplate(ChordType.Major, ebMajorChordNotes) },
-                new object[] { eMajorChordNotes, new ChordTemplate(ChordType.Major, eMajorChordNotes) },
-                new object[] { fMajorChordNotes, new ChordTemplate(ChordType.Major, fMajorChordNotes) },
-                new object[] { gbMajorChordNotes, new ChordTemplate(ChordType.Major, gbMajorChordNotes) },
-                new object[] { gMajorChordNotes, new ChordTemplate(ChordType.Major, gMajorChordNotes) },
-                new object[] { abMajorChordNotes, new ChordTemplate(ChordType.Major, abMajorChordNotes) },
+                new object[] { aMajorChordNotes, new ChordTemplate(majorChordType, aMajorChordNotes) },
+                new object[] { bbMajorChordNotes, new ChordTemplate(majorChordType, bbMajorChordNotes) },
+                new object[] { bMajorChordNotes, new ChordTemplate(majorChordType, bMajorChordNotes) },
+                new object[] { cMajorChordNotes, new ChordTemplate(majorChordType, cMajorChordNotes) },
+                new object[] { dbMajorChordNotes, new ChordTemplate(majorChordType, dbMajorChordNotes) },
+                new object[] { dMajorChordNotes, new ChordTemplate(majorChordType, dMajorChordNotes) },
+                new object[] { ebMajorChordNotes, new ChordTemplate(majorChordType, ebMajorChordNotes) },
+                new object[] { eMajorChordNotes, new ChordTemplate(majorChordType, eMajorChordNotes) },
+                new object[] { fMajorChordNotes, new ChordTemplate(majorChordType, fMajorChordNotes) },
+                new object[] { gbMajorChordNotes, new ChordTemplate(majorChordType, gbMajorChordNotes) },
+                new object[] { gMajorChordNotes, new ChordTemplate(majorChordType, gMajorChordNotes) },
+                new object[] { abMajorChordNotes, new ChordTemplate(majorChordType, abMajorChordNotes) },
 
-                new object[] { aMinorChordNotes, new ChordTemplate(ChordType.Minor, aMinorChordNotes) },
-                new object[] { bbMinorChordNotes, new ChordTemplate(ChordType.Minor, bbMinorChordNotes) },
-                new object[] { bMinorChordNotes, new ChordTemplate(ChordType.Minor, bMinorChordNotes) },
-                new object[] { cMinorChordNotes, new ChordTemplate(ChordType.Minor, cMinorChordNotes) },
-                new object[] { dbMinorChordNotes, new ChordTemplate(ChordType.Minor, dbMinorChordNotes) },
-                new object[] { dMinorChordNotes, new ChordTemplate(ChordType.Minor, dMinorChordNotes) },
-                new object[] { ebMinorChordNotes, new ChordTemplate(ChordType.Minor, ebMinorChordNotes) },
-                new object[] { eMinorChordNotes, new ChordTemplate(ChordType.Minor, eMinorChordNotes) },
-                new object[] { fMinorChordNotes, new ChordTemplate(ChordType.Minor, fMinorChordNotes) },
-                new object[] { gbMinorChordNotes, new ChordTemplate(ChordType.Minor, gbMinorChordNotes) },
-                new object[] { gMinorChordNotes, new ChordTemplate(ChordType.Minor, gMinorChordNotes) },
-                new object[] { abMinorChordNotes, new ChordTemplate(ChordType.Minor, abMinorChordNotes) },
+                new object[] { aMinorChordNotes, new ChordTemplate(minorChordType, aMinorChordNotes) },
+                new object[] { bbMinorChordNotes, new ChordTemplate(minorChordType, bbMinorChordNotes) },
+                new object[] { bMinorChordNotes, new ChordTemplate(minorChordType, bMinorChordNotes) },
+                new object[] { cMinorChordNotes, new ChordTemplate(minorChordType, cMinorChordNotes) },
+                new object[] { dbMinorChordNotes, new ChordTemplate(minorChordType, dbMinorChordNotes) },
+                new object[] { dMinorChordNotes, new ChordTemplate(minorChordType, dMinorChordNotes) },
+                new object[] { ebMinorChordNotes, new ChordTemplate(minorChordType, ebMinorChordNotes) },
+                new object[] { eMinorChordNotes, new ChordTemplate(minorChordType, eMinorChordNotes) },
+                new object[] { fMinorChordNotes, new ChordTemplate(minorChordType, fMinorChordNotes) },
+                new object[] { gbMinorChordNotes, new ChordTemplate(minorChordType, gbMinorChordNotes) },
+                new object[] { gMinorChordNotes, new ChordTemplate(minorChordType, gMinorChordNotes) },
+                new object[] { abMinorChordNotes, new ChordTemplate(minorChordType, abMinorChordNotes) },
             };
         }
     }
