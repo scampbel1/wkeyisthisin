@@ -7,7 +7,7 @@ namespace Keyify.Service
 {
     public class ChordDataStore
     {
-        private Dictionary<ChordType, Interval[]> chordDefinitions;
+        private Dictionary<ChordType, Interval[]> _chordDefinitions => GenerateChordDefinitionDictionary();
 
         public readonly List<ChordTemplate> Chords;
 
@@ -20,30 +20,60 @@ namespace Keyify.Service
         {
             var chordTemplates = new List<ChordTemplate>();
 
-            //TODO: Generate Chord Templates
-
-            //foreach(var chordType in )
-
-            /*
-             * loop through each chord type (in chord type enum)
-             * loop through each letter (in note enum)
-             * generate chord for chord type using steps relative to current letter
-             * add chord definition to list
-            */
+            foreach (var chordDefinition in _chordDefinitions)
+            {
+                GenerateChordTemplatesByChordType(chordDefinition.Key, chordDefinition.Value, chordTemplates);
+            }
 
             return chordTemplates;
         }
 
-        private void GenerateChordTemplatesByChordType(ChordType chordType, List<ChordTemplate> chordTemplates)
+        private void GenerateChordTemplatesByChordType(ChordType chordType, Interval[] intervals, List<ChordTemplate> chordTemplates)
         {
             var count = 0;
             var currentNote = Note.A;
 
             while (count <= (int)Note.Ab)
             {
+                chordTemplates.Add(new ChordTemplate(chordType, GenerateChordDefinitionNotesFromInterval(currentNote, intervals)));
+
                 currentNote = currentNote != Note.Ab ? currentNote + 1 : Note.A;
                 count++;
             }
+        }
+
+        private Dictionary<ChordType, Interval[]> GenerateChordDefinitionDictionary()
+        {
+            var chordDefinitions = new Dictionary<ChordType, Interval[]>();
+
+            chordDefinitions.Add(ChordType.Major, new Interval[] { Interval.R, Interval.Wh, Interval.Wh });
+
+            return chordDefinitions;
+        }
+
+        private Note[] GenerateChordDefinitionNotesFromInterval(Note rootNote, Interval[] intervals)
+        {
+            var count = 0;
+            var currentNote = rootNote;
+            var chordNotes = new Note[intervals.Length];
+
+            foreach (var interval in intervals)
+            {
+                currentNote = interval == Interval.R ? currentNote : FindNextNote(currentNote, interval);
+                chordNotes[count] = currentNote;
+                count++;
+            }
+
+            return chordNotes;
+        }
+
+        private Note FindNextNote(Note currentNote, Interval interval)
+        {
+            var nextStep = (int)currentNote + (int)interval;
+
+            nextStep = interval == Interval.R ? nextStep++ : nextStep;
+
+            return nextStep > (int)Note.Ab ? (Note)(int)Note.A + (nextStep - (int)Note.Ab) : (Note)nextStep;
         }
     }
 }

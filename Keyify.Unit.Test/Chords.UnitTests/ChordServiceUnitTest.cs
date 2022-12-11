@@ -26,7 +26,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
         }
 
         [Fact]
-        public void Chord_SameNotes_SameChordType_DifferentSequence_AreNotEqual()
+        public void Chord_SameNotes_SameChordType_DifferentSequence_AreNotStrictEqual()
         {
             //Arrange - Given
             var chord1 = new ChordTemplate(ChordType.Minor, new[] { KeyifyClassLibrary.Enums.Note.F, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.C });
@@ -34,6 +34,17 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             var chord2 = new ChordTemplate(ChordType.Minor, new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.F });
             //Assert - Then
             Assert.NotStrictEqual(chord1, chord2);
+        }
+
+        [Fact]
+        public void Chord_SameNotes_SameChordType_DifferentSequence_AreNotEqual()
+        {
+            //Arrange - Given
+            var chord1 = new ChordTemplate(ChordType.Minor, new[] { KeyifyClassLibrary.Enums.Note.F, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.C });
+            //Act - When
+            var chord2 = new ChordTemplate(ChordType.Minor, new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.F });
+            //Assert - Then
+            Assert.NotEqual(chord1, chord2);
         }
 
         private static IEnumerable<object[]> GenerateChordTestArguments()
