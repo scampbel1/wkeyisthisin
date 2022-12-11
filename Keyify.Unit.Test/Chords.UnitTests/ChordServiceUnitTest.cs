@@ -23,7 +23,31 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             var chordResult = _chordService.FindChordWithNoteSequence(inputNotes).SingleOrDefault();
             //Assert - Then
             Assert.Equal(expected: expectedChord, actual: chordResult);
-            Assert.Equal(expected: expectedChord.ChordType, actual: chordResult.ChordType);
+            Assert.Equal(expected: expectedChord.Type, actual: chordResult.Type);
+        }
+
+        [Fact]
+        public void SearchChord_A_Major_CorrectNotes_ReturnsChord_CorrectName()
+        {
+            //Arrange - Given
+            var expectedChordName = "A Major";
+            var inputNotes = new[] { KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.Db, KeyifyClassLibrary.Enums.Note.E };
+            //Act - When
+            var chordResult = _chordService.FindChordWithNoteSequence(inputNotes).SingleOrDefault();
+            //Assert - Then
+            Assert.Equal(expectedChordName, chordResult.Name);
+        }
+        
+        [Fact]
+        public void SearchChord_Gb_Minor_CorrectNotes_ReturnsChord_CorrectName()
+        {
+            //Arrange - Given
+            var expectedChordName = "Gb Minor";
+            var inputNotes = new[] { KeyifyClassLibrary.Enums.Note.Gb, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.Db };
+            //Act - When
+            var chordResult = _chordService.FindChordWithNoteSequence(inputNotes).SingleOrDefault();
+            //Assert - Then
+            Assert.Equal(expectedChordName, chordResult.Name);
         }
 
         [Fact]
@@ -36,6 +60,8 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             //Assert - Then
             Assert.NotStrictEqual(chord1, chord2);
         }
+
+        //TODO: Test for Flat to Sharp name conversion
 
         [Fact]
         public void Chord_SameNotes_SameChordType_DifferentSequence_AreNotEqual()
@@ -52,6 +78,8 @@ namespace Keyify.Unit.Test.Chords.UnitTests
         {
             var majorChordType = ChordType.Major;
             var minorChordType = ChordType.Minor;
+
+            //TODO: Throw exception if not all chord types are tested
 
             var aMajorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.Db, KeyifyClassLibrary.Enums.Note.E };
             var bbMajorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.Bb, KeyifyClassLibrary.Enums.Note.D, KeyifyClassLibrary.Enums.Note.F };

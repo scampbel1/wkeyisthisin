@@ -8,8 +8,9 @@ namespace Keyify.Models.Service_Models
 {
     public class ChordTemplate : IEquatable<ChordTemplate>
     {
-        public readonly ChordType ChordType;
+        public readonly ChordType? Type;
         public readonly Note[] Notes;
+        public readonly string Name = string.Empty;
 
         public ChordTemplate(Note[] notes)
         {
@@ -18,7 +19,8 @@ namespace Keyify.Models.Service_Models
 
         public ChordTemplate(ChordType chordType, Note[] notes) : this(notes)
         {
-            ChordType = chordType;
+            Type = chordType;
+            Name = $"{notes[0]} {chordType}";
         }
 
         public bool Equals(ChordTemplate other)
