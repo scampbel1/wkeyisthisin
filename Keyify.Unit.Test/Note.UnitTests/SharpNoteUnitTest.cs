@@ -40,15 +40,15 @@ namespace Keyify.Unit.Test.Note.UnitTests
         [Fact]
         public void AbIonianScaleIsConvertedToAbMajor()
         {
-            var generatedScale = new GeneratedScale(KeyifyClassLibrary.Enums.Note.Ab, new ModeDefinition(Mode.Ionian, new Step[] {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h
+            var generatedScale = new GeneratedScale(KeyifyClassLibrary.Enums.Note.Ab, new ModeDefinition(Mode.Ionian, new Interval[] {
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h
                 },
                 new string[] {
                      Degree.First,
@@ -72,15 +72,15 @@ namespace Keyify.Unit.Test.Note.UnitTests
         [Fact]
         public void DbAeolianScaleIsConvertedToDbMinor()
         {
-            var generatedScale = new GeneratedScale(KeyifyClassLibrary.Enums.Note.Db, new ModeDefinition(Mode.Aeolian, new Step[] {
-                    Step.R,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W
+            var generatedScale = new GeneratedScale(KeyifyClassLibrary.Enums.Note.Db, new ModeDefinition(Mode.Aeolian, new Interval[] {
+                    Interval.R,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W
                 },
                 new string[] {
                      Degree.First,

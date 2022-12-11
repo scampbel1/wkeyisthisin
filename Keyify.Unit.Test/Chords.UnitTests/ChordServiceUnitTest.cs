@@ -15,7 +15,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
         private IChordService _chordService = new ChordService(new ChordDataStore());
 
         [Theory, MemberData(nameof(ChordTestParameters))]
-        public void PassNoteSequenceIntoChordService_ReturnsExpectedChord(KeyifyClassLibrary.Enums.Note[] selectedNotes, ChordDefinition expectedChord)
+        public void PassNoteSequenceIntoChordService_ReturnsExpectedChord(KeyifyClassLibrary.Enums.Note[] selectedNotes, ChordTemplate expectedChord)
         {
             //Arrange - Given
             var inputNotes = selectedNotes;
@@ -29,9 +29,9 @@ namespace Keyify.Unit.Test.Chords.UnitTests
         public void Chord_SameNotes_SameChordType_DifferentSequence_AreNotEqual()
         {
             //Arrange - Given
-            var chord1 = new ChordDefinition(ChordType.Minor, new[] { KeyifyClassLibrary.Enums.Note.F, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.C });
+            var chord1 = new ChordTemplate(ChordType.Minor, new[] { KeyifyClassLibrary.Enums.Note.F, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.C });
             //Act - When
-            var chord2 = new ChordDefinition(ChordType.Minor, new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.F });
+            var chord2 = new ChordTemplate(ChordType.Minor, new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.F });
             //Assert - Then
             Assert.NotStrictEqual(chord1, chord2);
         }
@@ -42,7 +42,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
 
             return new List<object[]>
             {
-                new object[] { expectedChordNotes1, new ChordDefinition(ChordType.Major, expectedChordNotes1) },
+                new object[] { expectedChordNotes1, new ChordTemplate(ChordType.Major, expectedChordNotes1) },
             };
         }
     }

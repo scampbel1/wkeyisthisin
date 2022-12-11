@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace KeyifyClassLibrary.Helper
 {
-    //TODO: Convert this into service
+    //TODO: Move everything from this class - helper classes are anti-patterns
     public static class NoteHelper
     {
         public static bool IsSharpOrFlat(Note note)
@@ -13,13 +13,9 @@ namespace KeyifyClassLibrary.Helper
             switch (note)
             {
                 case Note.Ab:
-                    return true;
                 case Note.Bb:
-                    return true;
                 case Note.Eb:
-                    return true;
                 case Note.Db:
-                    return true;
                 case Note.Gb:
                     return true;
                 default:
@@ -99,18 +95,18 @@ namespace KeyifyClassLibrary.Helper
 
             try
             {
-                Note convertedNote = ConvertStringNoteToNoteType(note[0]);
+                var convertedNote = ConvertStringNoteToNoteType(note[0]);
 
-                if ((int)convertedNote >= EnumHelper.GetEnumNameCount(typeof(Note)))
+                if (convertedNote == Note.Ab)
                 {
-                    convertedNote = (Note)0;
+                    convertedNote = Note.A;
                 }
                 else
                 {
                     convertedNote = convertedNote + 1;
                 }
 
-                return convertedNote;
+                return convertedNote == Note.Ab ? Note.A : convertedNote + 1;
             }
             catch
             {

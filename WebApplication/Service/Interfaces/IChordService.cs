@@ -6,6 +6,6 @@ namespace Keyify.Service.Interfaces
 {
     public interface IChordService
     {
-        public List<ChordDefinition> FindChordWithNoteSequence(Note[] notes);
+        public List<ChordTemplate> FindChordWithNoteSequence(Note[] notes);
     }
 }

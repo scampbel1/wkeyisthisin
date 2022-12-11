@@ -7,14 +7,14 @@ namespace Keyify.Models.Service
     public class ModeDefinition
     {
         public readonly Mode Mode;
-        public readonly Step[] ScaleSteps;
+        public readonly Interval[] ScaleSteps;
         public readonly string[] ScaleDegrees;
 
         //Create scales of all notes by default. Some scales are limited to a subset of notes.
         public readonly Array ExplicitNotesForMode = Enum.GetValues(typeof(Note));
 
         //TODO: This breaks the Single Responsibility Principle - create something else for generating the chords
-        public ModeDefinition(Mode mode, Step[] scaleSteps, string[] scaleDegrees)
+        public ModeDefinition(Mode mode, Interval[] scaleSteps, string[] scaleDegrees)
         {
             Mode = mode;
             //ChordTypes = chordTypes;
@@ -37,7 +37,7 @@ namespace Keyify.Models.Service
             //}
         }
 
-        public ModeDefinition(Mode mode, Step[] scaleSteps, string[] scaleDegrees, Array explicitNotesForMode) : this(mode, scaleSteps, scaleDegrees)
+        public ModeDefinition(Mode mode, Interval[] scaleSteps, string[] scaleDegrees, Array explicitNotesForMode) : this(mode, scaleSteps, scaleDegrees)
         {
             ExplicitNotesForMode = explicitNotesForMode;
         }

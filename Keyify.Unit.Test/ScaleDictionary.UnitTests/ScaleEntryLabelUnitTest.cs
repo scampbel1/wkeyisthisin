@@ -15,15 +15,15 @@ namespace ScaleDictionaryTests
                 Note.Ab,
                 new ModeDefinition(
                     Mode.Ionian,
-                new Step[] {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h
+                new Interval[] {
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h
                  },
                 new string[] {
                      Degree.First,
@@ -58,15 +58,15 @@ namespace ScaleDictionaryTests
                 Note.Db,
                 new ModeDefinition(
                     Mode.Aeolian
-                    , new Step[] {
-                    Step.R,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W
+                    , new Interval[] {
+                    Interval.R,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W
             },
                 new string[] {
                      Degree.First,
@@ -101,15 +101,15 @@ namespace ScaleDictionaryTests
                 Note.Gb,
                 new ModeDefinition(
                     Mode.Aeolian
-                    , new Step[] {
-                    Step.R,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W
+                    , new Interval[] {
+                    Interval.R,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W
             },
                 new string[] {
                      Degree.First,
@@ -144,15 +144,15 @@ namespace ScaleDictionaryTests
                 Note.Eb,
                 new ModeDefinition(
                     Mode.Dorian_b2,
-                    new Step[] {
-                    Step.R,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W
+                    new Interval[] {
+                    Interval.R,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W
             },
                 new string[] {
                      Degree.First,

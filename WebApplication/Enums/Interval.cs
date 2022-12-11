@@ -1,6 +1,6 @@
 ﻿namespace KeyifyClassLibrary.Enums
 {
-    public enum Step
+    public enum Interval
     {
         R = 0,
         h = 1,

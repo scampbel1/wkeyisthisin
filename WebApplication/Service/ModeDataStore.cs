@@ -15,15 +15,15 @@ namespace KeyifyClassLibrary.Core.Domain
         {
             var modeDefinitionDictionary = new Dictionary<string, ModeDefinition>();
 
-            var ionianSteps = new Step[] {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h
+            var ionianSteps = new Interval[] {
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h
                 };
 
             var ionianDegrees = new string[] {
@@ -37,15 +37,15 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var aeolianSteps = new Step[] {
-                    Step.R,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W
+            var aeolianSteps = new Interval[] {
+                    Interval.R,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W
                  };
 
             var aeolianDegrees = new string[] {
@@ -59,16 +59,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var phrygianSteps = new Step[]
+            var phrygianSteps = new Interval[]
                 {
-                    Step.R,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W
+                    Interval.R,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W
                 };
 
             var phrygianDegrees = new string[] {
@@ -82,16 +82,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var lydianSteps = new Step[]
+            var lydianSteps = new Interval[]
                 {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.h
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h
                 };
 
             var lydianDegrees = new string[] {
@@ -105,16 +105,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var mixolydianSteps = new Step[]
+            var mixolydianSteps = new Interval[]
                 {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W
                 };
 
             var mixolydianDegrees = new string[] {
@@ -128,16 +128,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var locrianSteps = new Step[]
+            var locrianSteps = new Interval[]
             {
-                    Step.R,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.W
+                    Interval.R,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W
             };
 
             var locrianDegrees = new string[] {
@@ -151,16 +151,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var dorianSteps = new Step[]
+            var dorianSteps = new Interval[]
             {
-                    Step.R,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W
+                    Interval.R,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W
             };
 
             var dorianDegrees = new string[] {
@@ -174,16 +174,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var harmonicMinorSteps = new Step[]
+            var harmonicMinorSteps = new Interval[]
              {
-                    Step.R,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.Wh,
-                    Step.h
+                    Interval.R,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h
               };
 
             var harmonicMinorDegrees = new string[] {
@@ -197,16 +197,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var melodicMinorSteps = new Step[]
+            var melodicMinorSteps = new Interval[]
             {
-                    Step.R,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h
+                    Interval.R,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h
              };
 
             var melodicMinorDegrees = new string[] {
@@ -220,15 +220,15 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var augmentedSteps = new Step[]
+            var augmentedSteps = new Interval[]
             {
-                    Step.R,
-                    Step.Wh,
-                    Step.h,
-                    Step.Wh,
-                    Step.h,
-                    Step.Wh,
-                    Step.h
+                    Interval.R,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h
              };
 
             var augmentedDegrees = new string[] {
@@ -241,14 +241,14 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var minorPentatonicSteps = new Step[]
+            var minorPentatonicSteps = new Interval[]
             {
-                    Step.R,
-                    Step.Wh,
-                    Step.W,
-                    Step.W,
-                    Step.Wh,
-                    Step.W
+                    Interval.R,
+                    Interval.Wh,
+                    Interval.W,
+                    Interval.W,
+                    Interval.Wh,
+                    Interval.W
             };
 
             var minorPentatonicDegrees = new string[] {
@@ -260,14 +260,14 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
             };
 
-            var majorPentatonicSteps = new Step[]
+            var majorPentatonicSteps = new Interval[]
               {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.Wh,
-                    Step.W,
-                    Step.Wh
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.Wh,
+                    Interval.W,
+                    Interval.Wh
                };
 
             var majorPentatonicDegrees = new string[] {
@@ -279,15 +279,15 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var bluesSteps = new Step[]
+            var bluesSteps = new Interval[]
              {
-                    Step.R,
-                    Step.Wh,
-                    Step.W,
-                    Step.h,
-                    Step.h,
-                    Step.Wh,
-                    Step.W
+                    Interval.R,
+                    Interval.Wh,
+                    Interval.W,
+                    Interval.h,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.W
               };
 
             var bluesDegrees = new string[] {
@@ -300,15 +300,15 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var wholeToneSteps = new Step[]
+            var wholeToneSteps = new Interval[]
              {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.W
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W
              };
 
             var wholeToneDegrees = new string[] {
@@ -321,17 +321,17 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var diminishedWholeHalfSteps = new Step[]
+            var diminishedWholeHalfSteps = new Interval[]
                 {
-                    Step.R,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.h
+                    Interval.R,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h
                 };
 
             var diminishedWholeHalfDegrees = new string[] {
@@ -346,17 +346,17 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var diminishedHalfWholeSteps = new Step[]
+            var diminishedHalfWholeSteps = new Interval[]
             {
-                    Step.R,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W
+                    Interval.R,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W
             };
 
             var diminishedHalfWholeDegrees = new string[] {
@@ -371,16 +371,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var arabianSteps = new Step[]
+            var arabianSteps = new Interval[]
                         {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.W
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W
                          };
 
             var arabianDegrees = new string[] {
@@ -394,16 +394,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var augmentedLydianSteps = new Step[]
+            var augmentedLydianSteps = new Interval[]
             {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.h
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h
              };
 
             var augmentedLydianDegrees = new string[] {
@@ -417,16 +417,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var byzantineSteps = new Step[]
+            var byzantineSteps = new Interval[]
             {
-                    Step.R,
-                    Step.h,
-                    Step.Wh,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.Wh,
-                    Step.h
+                    Interval.R,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h
               };
 
             var byzantineDegrees = new string[] {
@@ -440,14 +440,14 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var egyptianSteps = new Step[]
+            var egyptianSteps = new Interval[]
               {
-                    Step.R,
-                    Step.W,
-                    Step.Wh,
-                    Step.W,
-                    Step.Wh,
-                    Step.W
+                    Interval.R,
+                    Interval.W,
+                    Interval.Wh,
+                    Interval.W,
+                    Interval.Wh,
+                    Interval.W
               };
 
             var egyptianDegrees = new string[] {
@@ -459,16 +459,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var hungarianMajorSteps = new Step[]
+            var hungarianMajorSteps = new Interval[]
             {
-                    Step.R,
-                    Step.Wh,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W
+                    Interval.R,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W
             };
 
             var hungarianMajorDegrees = new string[] {
@@ -482,16 +482,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var neopolitanMajorSteps = new Step[]
+            var neopolitanMajorSteps = new Interval[]
             {
-                    Step.R,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h
+                    Interval.R,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h
             };
 
             var neopolitanMajorDegrees = new string[] {
@@ -505,14 +505,14 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var balinesePelogSteps = new Step[]
+            var balinesePelogSteps = new Interval[]
             {
-                    Step.R,
-                    Step.h,
-                    Step.W,
-                    Step.WW,
-                    Step.h,
-                    Step.WW
+                    Interval.R,
+                    Interval.h,
+                    Interval.W,
+                    Interval.WW,
+                    Interval.h,
+                    Interval.WW
              };
 
             var balinesePelogDegrees = new string[] {
@@ -524,15 +524,15 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var prometheusSteps = new Step[]
+            var prometheusSteps = new Interval[]
             {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.Wh,
-                    Step.h,
-                    Step.W
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.W
              };
 
             var prometheusDegrees = new string[] {
@@ -545,14 +545,14 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var sixToneSymmertricalSteps = new Step[] {
-                    Step.R,
-                    Step.h,
-                    Step.Wh,
-                    Step.h,
-                    Step.Wh,
-                    Step.h,
-                    Step.Wh
+            var sixToneSymmertricalSteps = new Interval[] {
+                    Interval.R,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.Wh
                  };
 
             var sixToneSymmertricalDegrees = new string[] {
@@ -565,16 +565,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var alteredSteps = new Step[]
+            var alteredSteps = new Interval[]
             {
-                    Step.R,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.W
+                    Interval.R,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W
             };
 
             var alteredDegrees = new string[] {
@@ -588,14 +588,14 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var chineseSteps = new Step[]
+            var chineseSteps = new Interval[]
            {
-                    Step.R,
-                    Step.WW,
-                    Step.W,
-                    Step.h,
-                    Step.WW,
-                    Step.h
+                    Interval.R,
+                    Interval.WW,
+                    Interval.W,
+                    Interval.h,
+                    Interval.WW,
+                    Interval.h
              };
 
             var chineseDegrees = new string[] {
@@ -607,16 +607,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var diminishedLydianSteps = new Step[]
+            var diminishedLydianSteps = new Interval[]
 {
-                    Step.R,
-                    Step.W,
-                    Step.h,
-                    Step.Wh,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.h
+                    Interval.R,
+                    Interval.W,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h
 };
 
             var diminishedLydianDegrees = new string[] {
@@ -630,17 +630,17 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var eightToneSpanishSteps = new Step[]
+            var eightToneSpanishSteps = new Interval[]
             {
-                    Step.R,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.h,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.W
+                    Interval.R,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.h,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W
             };
 
             var eightToneSpanishDegrees = new string[] {
@@ -655,16 +655,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var hinduSteps = new Step[]
+            var hinduSteps = new Interval[]
            {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W
            };
 
             var hinduDegrees = new string[] {
@@ -678,16 +678,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var hungarianMinorSteps = new Step[]
+            var hungarianMinorSteps = new Interval[]
             {
-                    Step.R,
-                    Step.W,
-                    Step.h,
-                    Step.Wh,
-                    Step.h,
-                    Step.h,
-                    Step.Wh,
-                    Step.h
+                    Interval.R,
+                    Interval.W,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h
             };
 
             var hungarianMinorDegrees = new string[] {
@@ -701,14 +701,14 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var kumoiSteps = new Step[]
+            var kumoiSteps = new Interval[]
             {
-                    Step.R,
-                    Step.W,
-                    Step.h,
-                    Step.WW,
-                    Step.W,
-                    Step.Wh
+                    Interval.R,
+                    Interval.W,
+                    Interval.h,
+                    Interval.WW,
+                    Interval.W,
+                    Interval.Wh
             };
 
             var kumoiDegrees = new string[] {
@@ -720,16 +720,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var locrian2Steps = new Step[]
+            var locrian2Steps = new Interval[]
             {
-                    Step.R,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.W
+                    Interval.R,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W
             };
 
             var locrian2Degrees = new string[] {
@@ -743,16 +743,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var lydian9Steps = new Step[]
+            var lydian9Steps = new Interval[]
             {
-                    Step.R,
-                    Step.Wh,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.h
+                    Interval.R,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h
             };
 
             var lydian9Degrees = new string[] {
@@ -766,16 +766,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var minorLyrdianSteps = new Step[]
+            var minorLyrdianSteps = new Interval[]
            {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.h,
-                    Step.W,
-                    Step.W
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W
             };
 
             var minorLyrdianDegrees = new string[] {
@@ -789,16 +789,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var mixolydianB6Steps = new Step[]
+            var mixolydianB6Steps = new Interval[]
            {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W
            };
 
             var mixolydianB6Degrees = new string[] {
@@ -812,16 +812,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var persianSteps = new Step[]
+            var persianSteps = new Interval[]
             {
-                    Step.R,
-                    Step.h,
-                    Step.Wh,
-                    Step.h,
-                    Step.h,
-                    Step.W,
-                    Step.Wh,
-                    Step.h
+                    Interval.R,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.h,
+                    Interval.W,
+                    Interval.Wh,
+                    Interval.h
             };
 
             var persianDegrees = new string[] {
@@ -835,15 +835,15 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var prometheusNeopolitanSteps = new Step[]
+            var prometheusNeopolitanSteps = new Interval[]
            {
-                    Step.R,
-                    Step.h,
-                    Step.Wh,
-                    Step.W,
-                    Step.Wh,
-                    Step.h,
-                    Step.W
+                    Interval.R,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.W,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.W
            };
 
             var prometheusNeopolitanDegree = new string[] {
@@ -856,16 +856,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var todiThetaSteps = new Step[]
+            var todiThetaSteps = new Interval[]
             {
-                    Step.R,
-                    Step.h,
-                    Step.W,
-                    Step.Wh,
-                    Step.h,
-                    Step.h,
-                    Step.Wh,
-                    Step.h
+                    Interval.R,
+                    Interval.h,
+                    Interval.W,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h
             };
 
             var todiThetaDegrees = new string[] {
@@ -879,16 +879,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var alteredBb7Steps = new Step[]
+            var alteredBb7Steps = new Interval[]
    {
-                    Step.R,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.Wh
+                    Interval.R,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.Wh
    };
 
             var alteredBb7Degrees = new string[] {
@@ -902,16 +902,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var augmentedIonianSteps = new Step[]
+            var augmentedIonianSteps = new Interval[]
             {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.Wh,
-                    Step.h,
-                    Step.W,
-                    Step.h
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h
             };
 
             var augmentedIonianDegrees = new string[] {
@@ -925,16 +925,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var enigmaticSteps = new Step[]
+            var enigmaticSteps = new Interval[]
 {
-                    Step.R,
-                    Step.h,
-                    Step.Wh,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.h
+                    Interval.R,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.h
  };
 
             var enigmaticDegrees = new string[] {
@@ -948,14 +948,14 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var hirajoshiSteps = new Step[]
+            var hirajoshiSteps = new Interval[]
 {
-                    Step.R,
-                    Step.W,
-                    Step.h,
-                    Step.WW,
-                    Step.h,
-                    Step.WW
+                    Interval.R,
+                    Interval.W,
+                    Interval.h,
+                    Interval.WW,
+                    Interval.h,
+                    Interval.WW
 };
 
             var hirajoshiDegrees = new string[] {
@@ -967,17 +967,17 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var ichikosuchoSteps = new Step[]
+            var ichikosuchoSteps = new Interval[]
             {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.h,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.h
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.h,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h
             };
 
             var ichikosuchoDegrees = new string[] {
@@ -992,16 +992,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var leadingWholeToneSteps = new Step[]
+            var leadingWholeToneSteps = new Interval[]
  {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.h
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.h
  };
 
             var leadingWholeToneDegrees = new string[] {
@@ -1015,16 +1015,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var lydianB7Steps = new Step[]
+            var lydianB7Steps = new Interval[]
             {
-                    Step.R,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.Wh,
-                    Step.h,
-                    Step.W
+                    Interval.R,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.W
             };
 
             var lydianB7Degrees = new string[] {
@@ -1038,16 +1038,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var majorPhrygianSteps = new Step[]
+            var majorPhrygianSteps = new Interval[]
 {
-                    Step.R,
-                    Step.h,
-                    Step.Wh,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.W
+                    Interval.R,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W
 };
 
             var majorPhrygianDegrees = new string[] {
@@ -1061,16 +1061,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var neopolitanSteps = new Step[]
+            var neopolitanSteps = new Interval[]
 {
-                    Step.R,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.Wh,
-                    Step.h
+                    Interval.R,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h
  };
 
             var neopolitanDegrees = new string[] {
@@ -1084,16 +1084,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var overtoneSteps = new Step[]
+            var overtoneSteps = new Interval[]
             {
-                    Step.R,
-                    Step.W,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W
+                    Interval.R,
+                    Interval.W,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W
             };
 
             var overtoneDegrees = new string[] {
@@ -1107,16 +1107,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var purviThetaSteps = new Step[]
+            var purviThetaSteps = new Interval[]
             {
-                    Step.R,
-                    Step.h,
-                    Step.Wh,
-                    Step.W,
-                    Step.h,
-                    Step.h,
-                    Step.Wh,
-                    Step.h
+                    Interval.R,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.W,
+                    Interval.h,
+                    Interval.h,
+                    Interval.Wh,
+                    Interval.h
             };
 
             var purviThetaDegrees = new string[] {
@@ -1130,16 +1130,16 @@ namespace KeyifyClassLibrary.Core.Domain
                      Degree.Eighth
                 };
 
-            var dorian_b2Steps = new Step[]
+            var dorian_b2Steps = new Interval[]
              {
-                    Step.R,
-                    Step.h,
-                    Step.W,
-                    Step.W,
-                    Step.h,
-                    Step.W,
-                    Step.h,
-                    Step.W
+                    Interval.R,
+                    Interval.h,
+                    Interval.W,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W,
+                    Interval.h,
+                    Interval.W
              };
 
             var dorian_b2Degrees = new string[] {
@@ -1211,7 +1211,7 @@ namespace KeyifyClassLibrary.Core.Domain
             return modeDefinitionDictionary.Select(m => m.Value).ToList();
         }
 
-        private void InsertDictionaryEntry(Dictionary<string, ModeDefinition> dictionary, Mode mode, Step[] steps, string[] degrees)
+        private void InsertDictionaryEntry(Dictionary<string, ModeDefinition> dictionary, Mode mode, Interval[] steps, string[] degrees)
         {
             var key = string.Join(',', degrees);
 

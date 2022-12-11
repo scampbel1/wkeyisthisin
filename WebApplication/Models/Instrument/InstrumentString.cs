@@ -1,5 +1,4 @@
 ﻿using KeyifyClassLibrary.Enums;
-using KeyifyClassLibrary.Helper;
 using System.Collections.Generic;
 
 namespace KeyifyWebClient.Models.Instruments
@@ -17,19 +16,16 @@ namespace KeyifyWebClient.Models.Instruments
 
         public List<InstrumentNote> PopulateFretboard(Note openNote, int fretCount)
         {
-            int stringNoteIndex = (int)openNote;
-            int count = 0;
-
-            List<InstrumentNote> notes = new List<InstrumentNote>(fretCount);
+            var count = 0;
+            var currentNote = openNote;
+            var notes = new List<InstrumentNote>(fretCount);
 
             while (count < fretCount)
             {
-                notes.Add(new InstrumentNote((Note)stringNoteIndex));
-                stringNoteIndex++;
-                count++;
+                notes.Add(new InstrumentNote(currentNote));
 
-                if (stringNoteIndex >= EnumHelper.GetEnumNameCount(typeof(Note)))
-                    stringNoteIndex = 0;
+                currentNote = currentNote == Note.Ab ? Note.A : currentNote + 1;
+                count++;
             }
 
             return notes;

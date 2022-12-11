@@ -1,5 +1,4 @@
 ﻿using KeyifyClassLibrary.Enums;
-using KeyifyClassLibrary.Helper;
 using KeyifyWebClient.Models.Instruments;
 using System;
 using System.Collections.Generic;
@@ -33,7 +32,7 @@ namespace KeyifyWebClient.Models.ViewModels
 
         private List<InstrumentNote> PopulateSelectedNotesList()
         {
-            var fretboardNotes = new List<InstrumentNote>(EnumHelper.GetEnumNameCount(typeof(Note)));
+            var fretboardNotes = new List<InstrumentNote>((int)Note.Ab);
 
             foreach (Note note in Enum.GetValues(typeof(Note)))
             {
