@@ -63,6 +63,19 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             var gMajorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.B, KeyifyClassLibrary.Enums.Note.D };
             var abMajorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.Ab, KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.Eb };
 
+            var aMinorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.E };
+            var bbMinorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.Bb, KeyifyClassLibrary.Enums.Note.Db, KeyifyClassLibrary.Enums.Note.F };
+            var bMinorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.B, KeyifyClassLibrary.Enums.Note.D, KeyifyClassLibrary.Enums.Note.Gb };
+            var cMinorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.Eb, KeyifyClassLibrary.Enums.Note.G };
+            var dbMinorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.Db, KeyifyClassLibrary.Enums.Note.E, KeyifyClassLibrary.Enums.Note.Ab };
+            var dMinorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.D, KeyifyClassLibrary.Enums.Note.F, KeyifyClassLibrary.Enums.Note.A };
+            var ebMinorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.Eb, KeyifyClassLibrary.Enums.Note.Gb, KeyifyClassLibrary.Enums.Note.Bb };
+            var eMinorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.E, KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.B };
+            var fMinorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.F, KeyifyClassLibrary.Enums.Note.Ab, KeyifyClassLibrary.Enums.Note.C };
+            var gbMinorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.Gb, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.Db };
+            var gMinorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.Bb, KeyifyClassLibrary.Enums.Note.D };
+            var abMinorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.Ab, KeyifyClassLibrary.Enums.Note.B, KeyifyClassLibrary.Enums.Note.Eb };
+
             return new List<object[]>
             {
                 new object[] { aMajorChordNotes, new ChordTemplate(ChordType.Major, aMajorChordNotes) },
@@ -77,6 +90,19 @@ namespace Keyify.Unit.Test.Chords.UnitTests
                 new object[] { gbMajorChordNotes, new ChordTemplate(ChordType.Major, gbMajorChordNotes) },
                 new object[] { gMajorChordNotes, new ChordTemplate(ChordType.Major, gMajorChordNotes) },
                 new object[] { abMajorChordNotes, new ChordTemplate(ChordType.Major, abMajorChordNotes) },
+
+                new object[] { aMinorChordNotes, new ChordTemplate(ChordType.Minor, aMinorChordNotes) },
+                new object[] { bbMinorChordNotes, new ChordTemplate(ChordType.Minor, bbMinorChordNotes) },
+                new object[] { bMinorChordNotes, new ChordTemplate(ChordType.Minor, bMinorChordNotes) },
+                new object[] { cMinorChordNotes, new ChordTemplate(ChordType.Minor, cMinorChordNotes) },
+                new object[] { dbMinorChordNotes, new ChordTemplate(ChordType.Minor, dbMinorChordNotes) },
+                new object[] { dMinorChordNotes, new ChordTemplate(ChordType.Minor, dMinorChordNotes) },
+                new object[] { ebMinorChordNotes, new ChordTemplate(ChordType.Minor, ebMinorChordNotes) },
+                new object[] { eMinorChordNotes, new ChordTemplate(ChordType.Minor, eMinorChordNotes) },
+                new object[] { fMinorChordNotes, new ChordTemplate(ChordType.Minor, fMinorChordNotes) },
+                new object[] { gbMinorChordNotes, new ChordTemplate(ChordType.Minor, gbMinorChordNotes) },
+                new object[] { gMinorChordNotes, new ChordTemplate(ChordType.Minor, gMinorChordNotes) },
+                new object[] { abMinorChordNotes, new ChordTemplate(ChordType.Minor, abMinorChordNotes) },
             };
         }
     }
