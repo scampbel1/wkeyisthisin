@@ -11,18 +11,41 @@ namespace Keyify.Models.Service_Models
         public readonly ChordType ChordType;
         public readonly Note[] Notes;
 
-        public ChordTemplate(ChordType chordType, Note[] notes)
+        public ChordTemplate(Note[] notes)
+        {
+            Notes = notes;
+        }
+
+        public ChordTemplate(ChordType chordType, Note[] notes) : this(notes)
         {
             ChordType = chordType;
-            Notes = notes;
         }
 
         public bool Equals(ChordTemplate other)
         {
-            var notesHashcode = ((IStructuralEquatable)Notes).GetHashCode(EqualityComparer<Note>.Default);
-            var otherNotesHashcode = ((IStructuralEquatable)other.Notes).GetHashCode(EqualityComparer<Note>.Default);
+            var notesHashcode = GetHashCode();
+            var otherNotesHashcode = other.GetHashCode();
 
-            return (ChordType == other.ChordType) && notesHashcode == otherNotesHashcode;
+            return notesHashcode == otherNotesHashcode;
+        }
+
+        public static bool operator ==(ChordTemplate a, ChordTemplate b)
+        {
+            return a.Equals(b);
+        }
+        public static bool operator !=(ChordTemplate a, ChordTemplate b)
+        {
+            return a.Equals(b);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as ChordTemplate);
+        }
+
+        public override int GetHashCode()
+        {
+            return ((IStructuralEquatable)Notes).GetHashCode(EqualityComparer<Note>.Default);
         }
     }
 }

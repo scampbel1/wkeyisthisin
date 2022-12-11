@@ -30,28 +30,16 @@ namespace Keyify.Service
 
         private void GenerateChordTemplatesByChordType(ChordType chordType, Interval[] intervals, List<ChordTemplate> chordTemplates)
         {
-            var count = 0;
             var currentNote = Note.A;
 
-            while (count <= (int)Note.Ab)
+            while (currentNote <= Note.Ab)
             {
-                chordTemplates.Add(new ChordTemplate(chordType, GenerateChordDefinitionNotesFromInterval(currentNote, intervals)));
-
-                currentNote = currentNote != Note.Ab ? currentNote + 1 : Note.A;
-                count++;
+                chordTemplates.Add(new ChordTemplate(chordType, GenerateChordDefinitionNotes(currentNote, intervals)));
+                currentNote++;
             }
         }
 
-        private Dictionary<ChordType, Interval[]> GenerateChordDefinitionDictionary()
-        {
-            var chordDefinitions = new Dictionary<ChordType, Interval[]>();
-
-            chordDefinitions.Add(ChordType.Major, new Interval[] { Interval.R, Interval.Wh, Interval.Wh });
-
-            return chordDefinitions;
-        }
-
-        private Note[] GenerateChordDefinitionNotesFromInterval(Note rootNote, Interval[] intervals)
+        private Note[] GenerateChordDefinitionNotes(Note rootNote, Interval[] intervals)
         {
             var count = 0;
             var currentNote = rootNote;
@@ -69,11 +57,21 @@ namespace Keyify.Service
 
         private Note FindNextNote(Note currentNote, Interval interval)
         {
-            var nextStep = (int)currentNote + (int)interval;
+            var nextStepIndex = (int)currentNote + (int)interval;
 
-            nextStep = interval == Interval.R ? nextStep++ : nextStep;
+            return nextStepIndex > (int)Note.Ab
+                ? (Note)(nextStepIndex - (int)Note.Ab) - 1
+                : (Note)nextStepIndex;
+        }
 
-            return nextStep > (int)Note.Ab ? (Note)(int)Note.A + (nextStep - (int)Note.Ab) : (Note)nextStep;
+        private Dictionary<ChordType, Interval[]> GenerateChordDefinitionDictionary()
+        {
+            var chordDefinitions = new Dictionary<ChordType, Interval[]>();
+
+            chordDefinitions.Add(ChordType.Major, new Interval[] { Interval.R, Interval.WW, Interval.Wh });
+            chordDefinitions.Add(ChordType.Minor, new Interval[] { Interval.R, Interval.Wh, Interval.WW });
+
+            return chordDefinitions;
         }
     }
 }
