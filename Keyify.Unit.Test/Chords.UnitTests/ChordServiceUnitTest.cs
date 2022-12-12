@@ -87,6 +87,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             var augmentedChordType = ChordType.Augmented;
             var majorNinthChordType = ChordType.MajorNinth;
             var minorNinthChordType = ChordType.MinorNinth;
+            var dominantNinthChordType = ChordType.DominantNinth;
 
             //TODO: Throw exception if not all chord types are tested
 
@@ -137,6 +138,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             var cAugmentedChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.E, KeyifyClassLibrary.Enums.Note.Ab };
             var cMajorNinthChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.E, KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.B, KeyifyClassLibrary.Enums.Note.D };
             var cMinorNinthChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.Eb, KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.Bb, KeyifyClassLibrary.Enums.Note.D };
+            var cDominantNinthChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.E, KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.Bb, KeyifyClassLibrary.Enums.Note.D };
 
             return new List<object[]>
             {
@@ -187,6 +189,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
                 new object[] { cAugmentedChordNotes, new ChordTemplate(augmentedChordType, cAugmentedChordNotes) },
                 new object[] { cMajorNinthChordNotes, new ChordTemplate(majorNinthChordType, cMajorNinthChordNotes) },
                 new object[] { cMinorNinthChordNotes, new ChordTemplate(minorNinthChordType, cMinorNinthChordNotes) },
+                new object[] { cDominantNinthChordNotes, new ChordTemplate(dominantNinthChordType, cDominantNinthChordNotes) },
             };
         }
     }

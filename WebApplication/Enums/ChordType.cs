@@ -13,5 +13,6 @@
         Augmented,
         MajorNinth,
         MinorNinth,
+        DominantNinth,
     }
 }
