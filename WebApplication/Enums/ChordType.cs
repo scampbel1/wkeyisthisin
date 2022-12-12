@@ -8,5 +8,7 @@
         MajorSeventh,
         MinorSeventh,
         DominantSeventh,
+        SuspendedSecond,
+        SuspendedFourth,
     }
 }
