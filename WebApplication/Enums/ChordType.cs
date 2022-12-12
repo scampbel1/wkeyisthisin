@@ -10,5 +10,6 @@
         DominantSeventh,
         SuspendedSecond,
         SuspendedFourth,
+        Augmented,
     }
 }
