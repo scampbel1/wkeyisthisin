@@ -79,6 +79,8 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             var majorChordType = ChordType.Major;
             var minorChordType = ChordType.Minor;
             var diminishedChordType = ChordType.Diminished;
+            var majorSeventhChordType = ChordType.MajorSeventh;
+            var minorSeventhChordType = ChordType.MinorSeventh;
 
             //TODO: Throw exception if not all chord types are tested
 
@@ -121,6 +123,9 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             var gDiminishedChordNotes = new[] { KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.Bb, KeyifyClassLibrary.Enums.Note.Db };
             var abDiminishedChordNotes = new[] { KeyifyClassLibrary.Enums.Note.Ab, KeyifyClassLibrary.Enums.Note.B, KeyifyClassLibrary.Enums.Note.D };
 
+            var cMajorSeventhChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.E, KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.B };
+            var cMinorSeventhChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.Eb, KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.Bb };
+
             return new List<object[]>
             {
                 new object[] { aMajorChordNotes, new ChordTemplate(majorChordType, aMajorChordNotes) },
@@ -161,6 +166,9 @@ namespace Keyify.Unit.Test.Chords.UnitTests
                 new object[] { gbDiminishedChordNotes, new ChordTemplate(diminishedChordType, gbDiminishedChordNotes) },
                 new object[] { gDiminishedChordNotes, new ChordTemplate(diminishedChordType, gDiminishedChordNotes) },
                 new object[] { abDiminishedChordNotes, new ChordTemplate(diminishedChordType, abDiminishedChordNotes) },
+
+                new object[] { cMajorSeventhChordNotes, new ChordTemplate(majorSeventhChordType, cMajorSeventhChordNotes) },
+                new object[] { cMinorSeventhChordNotes, new ChordTemplate(minorSeventhChordType, cMinorSeventhChordNotes) },
             };
         }
     }

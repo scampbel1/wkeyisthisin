@@ -5,5 +5,7 @@
         Major,
         Minor,
         Diminished,
+        MajorSeventh,
+        MinorSeventh,
     }
 }
