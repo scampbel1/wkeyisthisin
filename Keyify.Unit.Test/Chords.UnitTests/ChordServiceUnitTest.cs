@@ -37,7 +37,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             //Assert - Then
             Assert.Equal(expectedChordName, chordResult.Name);
         }
-        
+
         [Fact]
         public void SearchChord_Gb_Minor_CorrectNotes_ReturnsChord_CorrectName()
         {
@@ -78,6 +78,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
         {
             var majorChordType = ChordType.Major;
             var minorChordType = ChordType.Minor;
+            var diminishedChordType = ChordType.Diminished;
 
             //TODO: Throw exception if not all chord types are tested
 
@@ -107,6 +108,8 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             var gMinorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.Bb, KeyifyClassLibrary.Enums.Note.D };
             var abMinorChordNotes = new[] { KeyifyClassLibrary.Enums.Note.Ab, KeyifyClassLibrary.Enums.Note.B, KeyifyClassLibrary.Enums.Note.Eb };
 
+            var aDiminishedChordNotes = new[] { KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.Eb };
+
             return new List<object[]>
             {
                 new object[] { aMajorChordNotes, new ChordTemplate(majorChordType, aMajorChordNotes) },
@@ -134,6 +137,8 @@ namespace Keyify.Unit.Test.Chords.UnitTests
                 new object[] { gbMinorChordNotes, new ChordTemplate(minorChordType, gbMinorChordNotes) },
                 new object[] { gMinorChordNotes, new ChordTemplate(minorChordType, gMinorChordNotes) },
                 new object[] { abMinorChordNotes, new ChordTemplate(minorChordType, abMinorChordNotes) },
+
+                new object[] { aDiminishedChordNotes, new ChordTemplate(diminishedChordType, aDiminishedChordNotes) },
             };
         }
     }
