@@ -85,6 +85,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             var suspendedSecondChordType = ChordType.SuspendedSecond;
             var suspendedFourthChordType = ChordType.SuspendedFourth;
             var augmentedChordType = ChordType.Augmented;
+            var majorNinthChordType = ChordType.MajorNinth;
 
             //TODO: Throw exception if not all chord types are tested
 
@@ -133,6 +134,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             var cSuspended2ChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.D, KeyifyClassLibrary.Enums.Note.G };
             var cSuspended4ChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.F, KeyifyClassLibrary.Enums.Note.G };
             var cAugmentedChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.E, KeyifyClassLibrary.Enums.Note.Ab };
+            var cMajorNinthChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.E, KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.B, KeyifyClassLibrary.Enums.Note.D };
 
             return new List<object[]>
             {
@@ -181,6 +183,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
                 new object[] { cSuspended2ChordNotes, new ChordTemplate(suspendedSecondChordType, cSuspended2ChordNotes) },
                 new object[] { cSuspended4ChordNotes, new ChordTemplate(suspendedFourthChordType, cSuspended4ChordNotes) },
                 new object[] { cAugmentedChordNotes, new ChordTemplate(augmentedChordType, cAugmentedChordNotes) },
+                new object[] { cMajorNinthChordNotes, new ChordTemplate(majorNinthChordType, cMajorNinthChordNotes) },
             };
         }
     }
