@@ -81,6 +81,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             var diminishedChordType = ChordType.Diminished;
             var majorSeventhChordType = ChordType.MajorSeventh;
             var minorSeventhChordType = ChordType.MinorSeventh;
+            var dominantSeventhChordType = ChordType.DominantSeventh;
 
             //TODO: Throw exception if not all chord types are tested
 
@@ -125,6 +126,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
 
             var cMajorSeventhChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.E, KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.B };
             var cMinorSeventhChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.Eb, KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.Bb };
+            var cDominantSeventhChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.E, KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.Bb };
 
             return new List<object[]>
             {
@@ -169,6 +171,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
 
                 new object[] { cMajorSeventhChordNotes, new ChordTemplate(majorSeventhChordType, cMajorSeventhChordNotes) },
                 new object[] { cMinorSeventhChordNotes, new ChordTemplate(minorSeventhChordType, cMinorSeventhChordNotes) },
+                new object[] { cDominantSeventhChordNotes, new ChordTemplate(dominantSeventhChordType, cDominantSeventhChordNotes) },
             };
         }
     }

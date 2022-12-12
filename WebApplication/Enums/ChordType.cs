@@ -7,5 +7,6 @@
         Diminished,
         MajorSeventh,
         MinorSeventh,
+        DominantSeventh,
     }
 }
