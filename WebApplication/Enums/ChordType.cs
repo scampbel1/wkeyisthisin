@@ -12,5 +12,6 @@
         SuspendedFourth,
         Augmented,
         MajorNinth,
+        MinorNinth,
     }
 }
