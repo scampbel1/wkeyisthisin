@@ -16,7 +16,9 @@
         DominantNinth,
         MajorEleventh,
         MinorEleventh,
+        DominantEleventh,
         MajorThirteenth,
         MinorThirteenth,
+        DominantThirteenth,
     }
 }
