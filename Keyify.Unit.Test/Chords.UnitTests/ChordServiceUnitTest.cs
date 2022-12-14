@@ -90,7 +90,8 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             var dominantNinthChordType = ChordType.DominantNinth;
             var majorEleventhChordType = ChordType.MajorEleventh;
             var minorEleventhChordType = ChordType.MinorEleventh;
-            var majorThirteenthChordType = ChordType.Thirteenth;
+            var majorThirteenthChordType = ChordType.MajorThirteenth;
+            var minorThirteenthChordType = ChordType.MinorThirteenth;
 
             //TODO: Throw exception if not all chord types are tested
 
@@ -145,6 +146,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             var cMajorEleventhChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.E, KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.B, KeyifyClassLibrary.Enums.Note.D, KeyifyClassLibrary.Enums.Note.F };
             var cMinorEleventhChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.Eb, KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.Bb, KeyifyClassLibrary.Enums.Note.D, KeyifyClassLibrary.Enums.Note.F };
             var cMajorThirteenthChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.E, KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.B, KeyifyClassLibrary.Enums.Note.D, KeyifyClassLibrary.Enums.Note.F, KeyifyClassLibrary.Enums.Note.A };
+            var cMinorThirteenthChordNotes = new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.Eb, KeyifyClassLibrary.Enums.Note.G, KeyifyClassLibrary.Enums.Note.Bb, KeyifyClassLibrary.Enums.Note.D, KeyifyClassLibrary.Enums.Note.F, KeyifyClassLibrary.Enums.Note.A };
 
             return new List<object[]>
             {
@@ -199,6 +201,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
                 new object[] { cMajorEleventhChordNotes, new ChordTemplate(majorEleventhChordType, cMajorEleventhChordNotes) },
                 new object[] { cMinorEleventhChordNotes, new ChordTemplate(minorEleventhChordType, cMinorEleventhChordNotes) },
                 new object[] { cMajorThirteenthChordNotes, new ChordTemplate(majorThirteenthChordType, cMajorThirteenthChordNotes) },
+                new object[] { cMinorThirteenthChordNotes, new ChordTemplate(minorThirteenthChordType, cMinorThirteenthChordNotes) },
             };
         }
     }
