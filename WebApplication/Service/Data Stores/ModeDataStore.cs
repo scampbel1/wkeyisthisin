@@ -4,7 +4,7 @@ using KeyifyClassLibrary.Service_Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace KeyifyClassLibrary.Core.Domain
+namespace Keyify.Service.DataStores
 {
     public class ModeDataStore
     {

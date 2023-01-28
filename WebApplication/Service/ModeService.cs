@@ -1,5 +1,5 @@
-﻿using Keyify.Service.Interfaces;
-using KeyifyClassLibrary.Core.Domain;
+﻿using Keyify.Service.DataStores;
+using Keyify.Service.Interfaces;
 using System.Collections.Generic;
 
 namespace Keyify.Models.Service

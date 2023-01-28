@@ -35,6 +35,7 @@ namespace Keyify.Models.Service_Models
         {
             return a.Equals(b);
         }
+
         public static bool operator !=(ChordTemplate a, ChordTemplate b)
         {
             return a.Equals(b);
