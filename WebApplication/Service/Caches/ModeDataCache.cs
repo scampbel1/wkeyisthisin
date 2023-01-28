@@ -4,9 +4,9 @@ using KeyifyClassLibrary.Service_Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Keyify.Service.DataStores
+namespace Keyify.Service.Caches
 {
-    public class ModeDataStore
+    public class ModeDataCache
     {
         public List<ModeDefinition> ModeDefinitions => GenerateModeDefinitions();
 

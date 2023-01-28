@@ -1,7 +1,7 @@
 ﻿using Keyify.Enums;
 using Keyify.Models.Service_Models;
 using Keyify.Service;
-using Keyify.Service.DataStores;
+using Keyify.Service.Caches;
 using Keyify.Service.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
     {
         public static IEnumerable<object[]> ChordTestParameters => GenerateChordTestArguments();
 
-        private IChordService _chordService = new ChordService(new ChordDataStore());
+        private IChordService _chordService = new ChordService(new ChordDataCache());
 
         [Theory, MemberData(nameof(ChordTestParameters))]
         public void PassNoteSequenceIntoChordService_ReturnsExpectedChord(KeyifyClassLibrary.Enums.Note[] selectedChordNotes, ChordTemplate expectedChord)

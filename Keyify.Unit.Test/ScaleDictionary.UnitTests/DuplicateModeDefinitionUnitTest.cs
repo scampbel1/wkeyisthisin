@@ -1,5 +1,5 @@
 ﻿using Keyify.Models.Service;
-using Keyify.Service.DataStores;
+using Keyify.Service.Caches;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -8,7 +8,7 @@ namespace Keyify.Unit.Test.ScaleDictionary.UnitTests
 {
     public class DuplicateModeDefinitionUnitTest
     {
-        private List<ModeDefinition> _scaleEntries = new ModeService(new ModeDataStore()).Modes;
+        private List<ModeDefinition> _scaleEntries = new ModeService(new ModeDataCache()).Modes;
 
         [Fact]
         public void NoDuplicateModeDefinitionsByScaleDegrees()

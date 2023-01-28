@@ -3,15 +3,15 @@ using Keyify.Models.Service_Models;
 using KeyifyClassLibrary.Enums;
 using System.Collections.Generic;
 
-namespace Keyify.Service.DataStores
+namespace Keyify.Service.Caches
 {
-    public class ChordDataStore
+    public class ChordDataCache
     {
         private Dictionary<ChordType, Interval[]> _chordDefinitions => GenerateChordDefinitionDictionary();
 
         public readonly HashSet<ChordTemplate> Chords;
 
-        public ChordDataStore()
+        public ChordDataCache()
         {
             Chords = GenerateChordTemplates();
         }

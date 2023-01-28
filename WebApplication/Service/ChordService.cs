@@ -1,5 +1,5 @@
 ﻿using Keyify.Models.Service_Models;
-using Keyify.Service.DataStores;
+using Keyify.Service.Caches;
 using Keyify.Service.Interfaces;
 using KeyifyClassLibrary.Enums;
 using System.Collections.Generic;
@@ -9,9 +9,9 @@ namespace Keyify.Service
 {
     public class ChordService : IChordService
     {
-        private ChordDataStore _chordDefinitionService;
+        private ChordDataCache _chordDefinitionService;
 
-        public ChordService(ChordDataStore chordDefinitionService)
+        public ChordService(ChordDataCache chordDefinitionService)
         {
             _chordDefinitionService = chordDefinitionService;
         }
