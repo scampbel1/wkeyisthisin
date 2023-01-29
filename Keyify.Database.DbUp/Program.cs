@@ -7,7 +7,7 @@ internal class Program
     {
         var connectionString =
             args.FirstOrDefault()
-            ?? "Server=(local)\\SqlExpress; Database=MyApp; Trusted_connection=true";
+            ?? "Server=.; Database=Keyify; Trusted_connection=true; TrustServerCertificate=True";
 
         var upgrader =
             DeployChanges.To
@@ -15,6 +15,8 @@ internal class Program
                 .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
                 .LogToConsole()
                 .Build();
+
+        EnsureDatabase.For.SqlDatabase(connectionString);
 
         var result = upgrader.PerformUpgrade();
 
