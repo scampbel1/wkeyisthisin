@@ -22,28 +22,22 @@ namespace Keyify
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllersWithViews();
             services.AddSingleton(typeof(ModeDataCache), typeof(ModeDataCache));
             services.AddSingleton(typeof(IModeService), typeof(Models.Service.ModeService));
             services.AddSingleton(typeof(IScaleService), typeof(ScaleService));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
             services.AddTransient(typeof(IScalesGroupingService), typeof(ScalesGroupingService));
+
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //options.UseSqlServer(
+            //    Configuration.GetConnectionString("DefaultConnection"),
+            //    x => x.MigrationsAssembly("Keyify.Database.Migrations")
+            //));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //TODO: Implement error page
-
-            //if (env.IsDevelopment())
-            //{
-            //}
-            //else
-            //{
-            //    app.UseExceptionHandler("/Home/Error");
-            //    app.UseHsts();
-            //}
-
             app.UseDeveloperExceptionPage();
 
             app.UseHttpsRedirection();
