@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WebApplication\Keyify.Web.csproj" />
+    <ProjectReference Include="..\Keyify.Web\Keyify.Web.csproj" />
   </ItemGroup>
 
 </Project>

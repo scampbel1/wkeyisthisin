@@ -44,9 +44,4 @@
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="DAL\" />
-	  <Folder Include="Database\Migrations\" />
-	</ItemGroup>
 </Project>
