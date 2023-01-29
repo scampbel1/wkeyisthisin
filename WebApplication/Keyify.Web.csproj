@@ -31,6 +31,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Content Update="appsettings.Development.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="appsettings.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Update="wwwroot\js\fretboardFunctions.js">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
@@ -41,9 +47,6 @@
 
 	<ItemGroup>
 	  <Folder Include="DAL\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\Keyify.Database.Migrations\Keyify.Database.Migrations.csproj" />
+	  <Folder Include="Database\Migrations\" />
 	</ItemGroup>
 </Project>
