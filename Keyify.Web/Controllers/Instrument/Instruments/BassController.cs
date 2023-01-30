@@ -1,4 +1,5 @@
 ﻿using Keyify.Domain.Tunings.Bass;
+using Keyify.Web.Enums;
 using Keyify.Web.Models.Tunings;
 using KeyifyWebClient.Models.ViewModels;
 
@@ -9,6 +10,7 @@ namespace Keyify.Controllers.Instrument.Instruments
         private readonly Tuning _tuning;
         private const int _fretCount = 21;
         private const string _instrumentName = "Bass";
+        private readonly InstrumentType _instrumentType = InstrumentType.Bass;
 
         public BassController(InstrumentViewModel instrumentViewModel) : base(instrumentViewModel)
         {
