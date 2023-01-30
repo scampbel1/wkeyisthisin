@@ -9,7 +9,7 @@
 
         private string GetAvailableKeysLabel()
         {
-            var matchingScaleCount = _groupedScalesService.GetTotalKeyCount();
+            var matchingScaleCount = _groupedScalesService.TotalKeyCount;
 
             switch (matchingScaleCount)
             {
@@ -37,7 +37,7 @@
 
         private string GetAvailableScaleLabel()
         {
-            var matchingScaleCount = _groupedScalesService.GetTotalScaleCount();
+            var matchingScaleCount = _groupedScalesService.TotalScaleCount;
 
             switch (matchingScaleCount)
             {

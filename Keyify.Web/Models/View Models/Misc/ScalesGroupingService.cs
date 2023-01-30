@@ -12,25 +12,10 @@ namespace Keyify.Models.View_Models.Misc
         private List<ScaleGroupingEntry> KeyGroupingEntries { get; init; } = new List<ScaleGroupingEntry>();
         private List<ScaleGroupingEntry> ScaleGroupingEntries { get; init; } = new List<ScaleGroupingEntry>();
 
-        public List<ScaleGroupingEntry> GetGroupedScales()
-        {
-            return ScaleGroupingEntries;
-        }
-
-        public List<ScaleGroupingEntry> GetGroupedKeys()
-        {
-            return KeyGroupingEntries;
-        }
-
-        public int GetTotalScaleCount()
-        {
-            return ScaleGroupingEntries.Sum(s => s.Count);
-        }
-
-        public int GetTotalKeyCount()
-        {
-            return KeyGroupingEntries.Sum(k => k.Count);
-        }
+        public List<ScaleGroupingEntry> GroupedScales => ScaleGroupingEntries;
+        public List<ScaleGroupingEntry> GroupedKeys => KeyGroupingEntries;
+        public int TotalScaleCount => ScaleGroupingEntries.Sum(s => s.Count);
+        public int TotalKeyCount => KeyGroupingEntries.Sum(k => k.Count);
 
         public void UpdateScaleGroupingModel(List<ScaleEntry> scales, IEnumerable<string> selectedNotes)
         {

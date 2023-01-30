@@ -7,9 +7,11 @@ namespace Keyify.Models.Interfaces
     public interface IScalesGroupingService
     {
         void UpdateScaleGroupingModel(List<ScaleEntry> scales, IEnumerable<string> notes);
-        List<ScaleGroupingEntry> GetGroupedKeys();
-        List<ScaleGroupingEntry> GetGroupedScales();
-        int GetTotalScaleCount();
-        int GetTotalKeyCount();
+        List<ScaleGroupingEntry> GroupedKeys { get; }
+        List<ScaleGroupingEntry> GroupedScales { get; }
+
+        int TotalScaleCount { get; }
+
+        int TotalKeyCount { get; }
     }
 }

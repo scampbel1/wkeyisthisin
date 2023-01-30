@@ -34,8 +34,8 @@ namespace KeyifyWebClient.Models.ViewModels
 
         private IScalesGroupingService _groupedScalesService { get; init; }
 
-        private List<ScaleGroupingEntry> AvailableKeyGroups => _groupedScalesService.GetGroupedKeys();
-        private List<ScaleGroupingEntry> AvailableScaleGroups => _groupedScalesService.GetGroupedScales();
+        private List<ScaleGroupingEntry> AvailableKeyGroups => _groupedScalesService.GroupedKeys;
+        private List<ScaleGroupingEntry> AvailableScaleGroups => _groupedScalesService.GroupedScales;
 
         protected IScaleService DictionaryService { get; init; }
         protected IModeService ScaleDirectoryService { get; init; }
