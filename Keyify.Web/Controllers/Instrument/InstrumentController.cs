@@ -28,13 +28,13 @@ namespace Keyify.Controllers.Instrument
             {
                 if (!string.IsNullOrWhiteSpace(newlySelectedNote))
                 {
-                    if (!previouslySelectedNotes.Contains(newlySelectedNote))
+                    if (previouslySelectedNotes.Contains(newlySelectedNote))
                     {
-                        previouslySelectedNotes.Add(newlySelectedNote);
+                        previouslySelectedNotes.Remove(newlySelectedNote);
                     }
                     else
                     {
-                        previouslySelectedNotes.Remove(newlySelectedNote);
+                        previouslySelectedNotes.Add(newlySelectedNote);
                     }
                 }
 
