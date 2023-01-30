@@ -1,0 +1,6 @@
+CREATE TABLE Core.Instrument (
+	[Id] INT IDENTITY(1, 1) NOT NULL
+	,[Name] NVARCHAR(100) NOT NULL
+	,CONSTRAINT PK_Instrument_Id PRIMARY KEY (Id)
+	)
+GO

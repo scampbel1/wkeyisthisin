@@ -9,9 +9,15 @@
 
   <ItemGroup>
     <None Remove="Scripts\Script0001 - Create Core Schema.sql" />
+    <None Remove="Scripts\Script0002 - Create Core.Instrument.sql" />
+    <None Remove="Scripts\Script0003 - Create Core.ChordType.sql" />
+    <None Remove="Scripts\Script0004 - Create Core.Note.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\Script0004 - Create Core.Note.sql" />
+    <EmbeddedResource Include="Scripts\Script0003 - Create Core.ChordType.sql" />
+    <EmbeddedResource Include="Scripts\Script0002 - Create Core.Instrument.sql" />
     <EmbeddedResource Include="Scripts\Script0001 - Create Core Schema.sql" />
   </ItemGroup>
 
