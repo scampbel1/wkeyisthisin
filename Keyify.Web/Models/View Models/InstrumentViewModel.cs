@@ -2,7 +2,7 @@
 using Keyify.Models.Service;
 using Keyify.Models.View_Models.Misc;
 using Keyify.Service.Interfaces;
-using KeyifyClassLibrary.Models.Interfaces;
+using Keyify.Web.Models.Tunings;
 using KeyifyWebClient.Models.Instruments;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +48,7 @@ namespace KeyifyWebClient.Models.ViewModels
             Notes = PopulateSelectedNotesList();
         }
 
-        public void UpdateViewModel(string instrumentName, ITuning tuning, int fretCount)
+        public void UpdateViewModel(string instrumentName, Tuning tuning, int fretCount)
         {
             //TODO: Stop creating a new fretboard everytime
             Fretboard = new Fretboard(tuning, fretCount);

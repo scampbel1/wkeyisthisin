@@ -1,9 +1,9 @@
-﻿using KeyifyClassLibrary.Enums;
-using KeyifyClassLibrary.Models.Interfaces;
+﻿using Keyify.Web.Models.Tunings;
+using KeyifyClassLibrary.Enums;
 
 namespace KeyifyWebClient.Models.Instruments
 {
-    public class StandardGuitarTuning : ITuning
+    public class StandardGuitarTuning : Tuning
     {
         private readonly Note[] _notes = new Note[6]
         {
@@ -15,8 +15,8 @@ namespace KeyifyWebClient.Models.Instruments
             Note.E
         };
 
-        public virtual Note[] Notes => _notes;
+        public override Note[] Notes => _notes;
 
-        public int StringCount => _notes.Length;
+        public override int StringCount => _notes.Length;
     }
 }

@@ -1,7 +1,6 @@
 ﻿using KeyifyClassLibrary.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace KeyifyClassLibrary.Helper
 {
@@ -23,12 +22,6 @@ namespace KeyifyClassLibrary.Helper
             }
         }
 
-        public static bool ValidateMusicalNotes(string input)
-        {
-            Regex validCharacters = new Regex("^[ABCDEFGb#]*$");
-            return validCharacters.IsMatch(input);
-        }
-
         public static Note ConvertStringNoteToNoteType(string note)
         {
             return (Note)Enum.Parse(typeof(Note), note, true);
@@ -37,32 +30,6 @@ namespace KeyifyClassLibrary.Helper
         public static Note ConvertStringNoteToNoteType(char note)
         {
             return (Note)Enum.Parse(typeof(Note), note.ToString(), true);
-        }
-
-        public static Note[] ConvertStringInputToNotes(string input)
-        {
-            Note[] notes = new Note[input.Length];
-
-            if (!ValidateMusicalNotes(input))
-                throw new ArgumentException("Invalid string input. Unable to convert to note.");
-
-            int count = 0;
-
-            foreach (char note in input)
-            {
-                try
-                {
-                    notes[count] = ConvertStringNoteToNoteType(note);
-
-                    count++;
-                }
-                catch (Exception e)
-                {
-                    throw new Exception("Problem converting input to Note", e);
-                }
-            }
-
-            return notes;
         }
 
         public static List<Note> ConvertNoteStringArrayIntoNotes(IEnumerable<string> notes)

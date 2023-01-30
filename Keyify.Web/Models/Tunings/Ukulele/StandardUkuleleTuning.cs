@@ -1,10 +1,10 @@
-﻿using KeyifyClassLibrary.Enums;
-using KeyifyClassLibrary.Models.Interfaces;
+﻿using Keyify.Web.Models.Tunings;
+using KeyifyClassLibrary.Enums;
 using System.Linq;
 
 namespace KeyifyWebClient.Models.Instruments
 {
-    public class StandardUkuleleTuning : ITuning
+    public class StandardUkuleleTuning : Tuning
     {
         private readonly Note[] _notes;
 
@@ -13,8 +13,8 @@ namespace KeyifyWebClient.Models.Instruments
             _notes = new Note[] { Note.G, Note.C, Note.E, Note.A };
         }
 
-        public Note[] Notes => _notes;
+        public override Note[] Notes => _notes;
 
-        public int StringCount => _notes.Count();
+        public override int StringCount => _notes.Count();
     }
 }

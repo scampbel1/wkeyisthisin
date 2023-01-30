@@ -1,5 +1,5 @@
 ﻿using Keyify.Service.Interfaces;
-using KeyifyClassLibrary.Models.Interfaces;
+using Keyify.Web.Models.Tunings;
 using KeyifyWebClient.Models.Instruments;
 using KeyifyWebClient.Models.ViewModels;
 
@@ -7,7 +7,7 @@ namespace Keyify.Controllers.Instrument.Instruments
 {
     public class GuitarController : InstrumentController
     {
-        private readonly ITuning _tuning;
+        private readonly Tuning _tuning;
         private readonly string _instrumentName = "Guitar";
         private readonly int _fretCount = 24;
 

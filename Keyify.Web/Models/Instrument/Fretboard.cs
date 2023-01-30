@@ -1,5 +1,5 @@
-﻿using KeyifyClassLibrary.Enums;
-using KeyifyClassLibrary.Models.Interfaces;
+﻿using Keyify.Web.Models.Tunings;
+using KeyifyClassLibrary.Enums;
 using System.Collections.Generic;
 
 namespace KeyifyWebClient.Models.Instruments
@@ -7,10 +7,10 @@ namespace KeyifyWebClient.Models.Instruments
     public class Fretboard
     {
         public int FretCount { get; set; }
-        public ITuning Tuning { get; set; }
+        public Tuning Tuning { get; set; }
         public List<InstrumentString> InstrumentStrings { get; set; }
 
-        public Fretboard(ITuning tuning, int fretCount)
+        public Fretboard(Tuning tuning, int fretCount)
         {
             FretCount = fretCount;
             Tuning = tuning;
