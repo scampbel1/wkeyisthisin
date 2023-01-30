@@ -1,6 +1,4 @@
 ﻿using KeyifyClassLibrary.Enums;
-using System;
-using System.Collections.Generic;
 
 namespace KeyifyClassLibrary.Helper
 {
@@ -19,65 +17,6 @@ namespace KeyifyClassLibrary.Helper
                     return true;
                 default:
                     return false;
-            }
-        }
-
-        public static Note ConvertStringNoteToNoteType(string note)
-        {
-            return (Note)Enum.Parse(typeof(Note), note, true);
-        }
-
-        public static Note ConvertStringNoteToNoteType(char note)
-        {
-            return (Note)Enum.Parse(typeof(Note), note.ToString(), true);
-        }
-
-        public static List<Note> ConvertNoteStringArrayIntoNotes(IEnumerable<string> notes)
-        {
-            List<Note> convertedNotes = new List<Note>();
-
-            foreach (string note in notes)
-            {
-                try
-                {
-                    convertedNotes.Add(note.Contains("#")
-                        ? ConvertSharpNoteStringToFlatNote(note)
-                        : ConvertStringNoteToNoteType(note));
-                }
-                catch
-                {
-                    throw new Exception($"There was a problem converting string note into Note: {note}");
-                }
-            }
-
-            return convertedNotes;
-        }
-
-        public static Note ConvertSharpNoteStringToFlatNote(string note)
-        {
-            if (note.Length != 2) return ConvertStringNoteToNoteType(note);
-
-            if (note[1] != '#')
-                throw new InvalidOperationException("Note must be sharp");
-
-            try
-            {
-                var convertedNote = ConvertStringNoteToNoteType(note[0]);
-
-                if (convertedNote == Note.Ab)
-                {
-                    convertedNote = Note.A;
-                }
-                else
-                {
-                    convertedNote = convertedNote + 1;
-                }
-
-                return convertedNote == Note.Ab ? Note.A : convertedNote + 1;
-            }
-            catch
-            {
-                throw new Exception("Conversion went wrong");
             }
         }
 
