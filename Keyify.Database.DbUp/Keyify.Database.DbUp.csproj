@@ -13,10 +13,12 @@
     <None Remove="Scripts\Script0003 - Create Core.ChordType.sql" />
     <None Remove="Scripts\Script0004 - Create Core.Note.sql" />
     <None Remove="Scripts\Script0005 - Insert Notes into Note.sql" />
+    <None Remove="Scripts\Script0006 - Insert ChordTypes into ChordType.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\Script0004 - Create Core.Note.sql" />
+    <EmbeddedResource Include="Scripts\Script0006 - Insert ChordTypes into ChordType.sql" />
     <EmbeddedResource Include="Scripts\Script0005 - Insert Notes into Note.sql" />
     <EmbeddedResource Include="Scripts\Script0003 - Create Core.ChordType.sql" />
     <EmbeddedResource Include="Scripts\Script0002 - Create Core.Instrument.sql" />
