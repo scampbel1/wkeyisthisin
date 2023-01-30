@@ -12,14 +12,8 @@ namespace KeyifyWebClient.Models.Instruments
             _notes = new Note[] { Note.G, Note.D, Note.A, Note.E };
         }
 
-        public Note[] ReturnNotes()
-        {
-            return _notes;
-        }
+        public Note[] Notes => _notes;
 
-        public int ReturnStringCount()
-        {
-            return _notes.Length;
-        }
+        public int StringCount => _notes.Length;
     }
 }

@@ -19,14 +19,8 @@ namespace Keyify.Models.Tuning.Bass
             _notes = NoteHelper.ConvertStringInputToNotes(notes);
         }
 
-        public Note[] ReturnNotes()
-        {
-            throw new NotImplementedException();
-        }
+        public Note[] Notes => throw new NotImplementedException();
 
-        public int ReturnStringCount()
-        {
-            throw new NotImplementedException();
-        }
+        public int StringCount => throw new NotImplementedException();
     }
 }

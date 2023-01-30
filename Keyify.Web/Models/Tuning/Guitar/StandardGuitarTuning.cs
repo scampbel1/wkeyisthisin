@@ -15,14 +15,8 @@ namespace KeyifyWebClient.Models.Instruments
             Note.E
         };
 
-        public virtual Note[] ReturnNotes()
-        {
-            return _notes;
-        }
+        public virtual Note[] Notes => _notes;
 
-        public int ReturnStringCount()
-        {
-            return _notes.Length;
-        }
+        public int StringCount => _notes.Length;
     }
 }

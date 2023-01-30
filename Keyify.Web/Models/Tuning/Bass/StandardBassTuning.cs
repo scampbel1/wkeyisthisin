@@ -13,14 +13,8 @@ namespace Keyify.Domain.Tuning.Bass
             Note.G
         };
 
-        public Note[] ReturnNotes()
-        {
-            return _notes;
-        }
+        public Note[] Notes => _notes;
 
-        public int ReturnStringCount()
-        {
-            return _notes.Length;
-        }
+        public int StringCount => _notes.Length;
     }
 }

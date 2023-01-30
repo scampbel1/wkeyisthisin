@@ -18,14 +18,8 @@ namespace KeyifyWebClient.Models.Instruments
             _notes = NoteHelper.ConvertStringInputToNotes(notes);
         }
 
-        public Note[] ReturnNotes()
-        {
-            return _notes;
-        }
+        public Note[] Notes => _notes;
 
-        public int ReturnStringCount()
-        {
-            return _notes.Length;
-        }
+        public int StringCount => _notes.Length;
     }
 }

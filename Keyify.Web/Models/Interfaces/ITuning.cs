@@ -4,7 +4,7 @@ namespace KeyifyClassLibrary.Models.Interfaces
 {
     public interface ITuning
     {
-        Note[] ReturnNotes();
-        int ReturnStringCount();
+        Note[] Notes { get; }
+        int StringCount { get; }
     }
 }

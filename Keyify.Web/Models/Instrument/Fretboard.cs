@@ -14,7 +14,7 @@ namespace KeyifyWebClient.Models.Instruments
         {
             FretCount = fretCount;
             Tuning = tuning;
-            InstrumentStrings = new List<InstrumentString>(tuning.ReturnStringCount());
+            InstrumentStrings = new List<InstrumentString>(tuning.StringCount);
             PopulateFretboard();
         }
 
@@ -24,7 +24,7 @@ namespace KeyifyWebClient.Models.Instruments
         /// </summary>
         private void PopulateFretboard()
         {
-            foreach (Note note in Tuning.ReturnNotes())
+            foreach (Note note in Tuning.Notes)
             {
                 InstrumentStrings.Add(new InstrumentString(note, FretCount));
             }
