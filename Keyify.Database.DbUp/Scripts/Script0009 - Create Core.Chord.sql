@@ -1,0 +1,15 @@
+CREATE TABLE Core.Chord (
+	[Id] INT IDENTITY(0, 1) NOT NULL
+	,[ChordTypeId] INT NOT NULL
+	,[RootNoteId] INT NOT NULL
+	,[TuningId] INT NOT NULL
+	,[Tabs] BINARY NOT NULL
+	,[Created] DATETIME NOT NULL
+	,[LastModified] DATETIME NOT NULL
+	,[Deleted] BIT NOT NULL
+	,CONSTRAINT PK_Chord_Id PRIMARY KEY (Id)
+	,CONSTRAINT FK_ChordTypeId FOREIGN KEY (ChordTypeId) REFERENCES Core.ChordType(Id)
+	,CONSTRAINT FK_RootNoteId FOREIGN KEY (RootNoteId) REFERENCES Core.Note(Id)
+	,CONSTRAINT FK_TuningId FOREIGN KEY (TuningId) REFERENCES Core.Tuning(Id)
+	)
+GO
