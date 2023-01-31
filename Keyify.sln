@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Web", "Keyify.Web\Keyify.Web.csproj", "{341BF9AB-63E6-4F23-8D41-E11846B4A3B3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Unit.Test", "Keyify.Unit.Test\Keyify.Unit.Test.csproj", "{03786211-80C7-4964-84EB-701FA6D3B938}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Web.Unit.Test", "Keyify.Unit.Test\Keyify.Web.Unit.Test.csproj", "{03786211-80C7-4964-84EB-701FA6D3B938}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Database.DbUp", "Keyify.Database.DbUp\Keyify.Database.DbUp.csproj", "{7E200875-1A02-4EC4-A435-9E9E5CB9BEFE}"
 EndProject
