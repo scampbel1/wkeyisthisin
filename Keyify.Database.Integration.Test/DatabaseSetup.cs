@@ -5,7 +5,7 @@ namespace Keyify.Database.Integration.Test
 {
     internal static class DatabaseSetup
     {
-        internal static async Task<ThrowawayDatabase> Create()
+        internal static async Task<ThrowawayDatabase> CreateThrowawayDbInstanceAsync()
         {
             var scriptsDirectory = $"{Environment.CurrentDirectory}\\Scripts";
             var database = ThrowawayDatabase.FromLocalInstance(".");
@@ -18,7 +18,7 @@ namespace Keyify.Database.Integration.Test
                 var sqlScriptContent = DatabaseTestHelper.FormatSqlScriptForThrowawayDbInstance(File.ReadAllText(file));
 
                 var sqlCommand = new SqlCommand(sqlScriptContent, connection);
-
+                
                 await sqlCommand.ExecuteNonQueryAsync();
             }
 

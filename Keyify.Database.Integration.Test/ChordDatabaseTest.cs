@@ -10,9 +10,9 @@ namespace Keyify.Database.Integration.Test
         [Fact]
         public async Task Can_Select_Chord_Entry_From_Database()
         {
-            using (var database = await DatabaseSetup.Create())
-            {
-
+            using (var throwawayDbInstance = await DatabaseSetup.CreateThrowawayDbInstanceAsync())
+            {   
+                
             }
         }
     }
