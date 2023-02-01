@@ -1,4 +1,4 @@
-﻿namespace Keyify.Database.Integration.Test
+﻿namespace Keyify.Database.Integration.Test.Helper
 {
     internal static class DatabaseTestHelper
     {
