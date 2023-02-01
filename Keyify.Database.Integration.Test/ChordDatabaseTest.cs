@@ -16,6 +16,8 @@ namespace Keyify.Database.Integration.Test
             {
                 Console.WriteLine($"Created database {database.Name}");
 
+                //var solutiondir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+
                 // - Apply database migrations here if necessary
                 // - Seed the database with data
                 // - Execute your code against this database

@@ -8,31 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Scripts\Script0001 - Create Core Schema.sql" />
-    <None Remove="Scripts\Script0002 - Create Core.Instrument.sql" />
-    <None Remove="Scripts\Script0003 - Create Core.ChordType.sql" />
-    <None Remove="Scripts\Script0004 - Create Core.Note.sql" />
-    <None Remove="Scripts\Script0005 - Insert Notes into Note.sql" />
-    <None Remove="Scripts\Script0006 - Insert ChordTypes into ChordType.sql" />
-    <None Remove="Scripts\Script0007 - Insert Instruments into Instrument.sql" />
-    <None Remove="Scripts\Script0008 - Create Core.Tuning.sql" />
-    <None Remove="Scripts\Script0009 - Create Core.Chord.sql" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Scripts\Script0004 - Create Core.Note.sql" />
-    <EmbeddedResource Include="Scripts\Script0008 - Create Core.Tuning.sql" />
-    <EmbeddedResource Include="Scripts\Script0009 - Create Core.Chord.sql" />
-    <EmbeddedResource Include="Scripts\Script0007 - Insert Instruments into Instrument.sql" />
-    <EmbeddedResource Include="Scripts\Script0006 - Insert ChordTypes into ChordType.sql" />
-    <EmbeddedResource Include="Scripts\Script0005 - Insert Notes into Note.sql" />
-    <EmbeddedResource Include="Scripts\Script0003 - Create Core.ChordType.sql" />
-    <EmbeddedResource Include="Scripts\Script0002 - Create Core.Instrument.sql" />
-    <EmbeddedResource Include="Scripts\Script0001 - Create Core Schema.sql" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="DbUp" Version="5.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Keyify.Database.DbUp.Scripts\Keyify.Database.DbUp.Scripts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Program.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
 
 </Project>
