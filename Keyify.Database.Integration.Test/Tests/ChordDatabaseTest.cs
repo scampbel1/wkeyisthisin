@@ -2,9 +2,9 @@
 using Xunit;
 using System.Text.Json;
 using Microsoft.Data.SqlClient;
-using Dapper;
 using Keyify.Database.Integration.Test.Helper;
 using KeyifyClassLibrary.Enums;
+using Dapper;
 
 namespace Keyify.Database.Integration.Tests.Test
 {
@@ -24,13 +24,7 @@ namespace Keyify.Database.Integration.Tests.Test
                 var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
                 sqlCconnection.Open();
 
-                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), new
-                {
-                    InstrumentId = 0,
-                    Name = "Standard Tuning",
-                    Description = "The tuning your guitar gets delivered with",
-                    Notes = memoryStream.ToArray()
-                });
+                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertTuningSqlScriptParameters(memoryStream));
             }
         }
     }

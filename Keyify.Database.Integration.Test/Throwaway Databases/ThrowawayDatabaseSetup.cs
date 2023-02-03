@@ -6,11 +6,13 @@ namespace Keyify.Database.Integration.Test.ThrowawayDatabases
 {
     internal static class ThrowawayDatabaseSetup
     {
+        private const string _localDatabase = "(LocalDb)\\MSSQLLocalDB";
+
         internal static async Task<ThrowawayDatabase> CreateThrowawayDbInstanceAsync()
         {
             var databaseCreationSqlScriptsDirectory = $"{Environment.CurrentDirectory}\\Scripts";
 
-            var throwawayDbInstance = ThrowawayDatabase.FromLocalInstance(".");
+            var throwawayDbInstance = ThrowawayDatabase.FromLocalInstance(_localDatabase);
             var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
 
             sqlCconnection.Open();

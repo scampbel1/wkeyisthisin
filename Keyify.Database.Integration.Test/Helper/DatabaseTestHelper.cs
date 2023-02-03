@@ -32,5 +32,16 @@ namespace Keyify.Database.Integration.Test.Helper
 
             return sb.ToString();
         }
+
+        internal static object CreateInsertTuningSqlScriptParameters(MemoryStream memoryStream)
+        {
+            return new
+            {
+                InstrumentId = 0,
+                Name = "Standard Tuning",
+                Description = "The tuning your guitar gets delivered with",
+                Notes = memoryStream.ToArray()
+            };
+        }
     }
 }
