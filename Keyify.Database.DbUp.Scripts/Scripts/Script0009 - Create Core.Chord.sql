@@ -3,6 +3,8 @@ CREATE TABLE Core.Chord (
 	,[ChordTypeId] INT NOT NULL
 	,[RootNoteId] INT NOT NULL
 	,[TuningId] INT NOT NULL
+	,[Name] NVARCHAR(100) NOT NULL
+	,[Description] INT NULL
 	,[Tabs] VARBINARY(MAX) NOT NULL
 	,[Created] DATETIME NOT NULL DEFAULT GETUTCDATE()
 	,[LastModified] DATETIME NULL

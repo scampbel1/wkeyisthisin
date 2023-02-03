@@ -1,9 +1,7 @@
 ﻿using Keyify.Database.Integration.Test.ThrowawayDatabases;
 using Xunit;
-using System.Text.Json;
 using Microsoft.Data.SqlClient;
 using Keyify.Database.Integration.Test.Helper;
-using KeyifyClassLibrary.Enums;
 using Dapper;
 
 namespace Keyify.Database.Integration.Tests.Test
@@ -15,16 +13,12 @@ namespace Keyify.Database.Integration.Tests.Test
         {
             using (var throwawayDbInstance = await ThrowawayDatabaseSetup.CreateThrowawayDbInstanceAsync())
             {
-                var tuningEntry = new[] { Note.E, Note.A, Note.D, Note.G, Note.B, Note.E, };
-
-                using var memoryStream = new MemoryStream();
-
-                JsonSerializer.Serialize(memoryStream, tuningEntry);
-
-                var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
+                using var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
                 sqlCconnection.Open();
 
-                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertTuningSqlScriptParameters(memoryStream));
+                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertStandardTuningSqlScriptParameters());
+
+                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordSqlScript(), DatabaseTestHelper.CreateInsertEMajorChordSqlScriptParameters());
             }
         }
     }

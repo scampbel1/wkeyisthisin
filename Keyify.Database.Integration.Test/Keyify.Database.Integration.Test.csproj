@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Keyify.Database.DbUp.Scripts\Keyify.Database.DbUp.Scripts.csproj" />
-    <ProjectReference Include="..\Keyify.Web\Keyify.Web.csproj" />
   </ItemGroup>
 
 </Project>
