@@ -1,5 +1,4 @@
 ﻿using DbUp;
-using System.Reflection;
 
 internal class Program
 {
@@ -9,10 +8,12 @@ internal class Program
             args.FirstOrDefault()
             ?? "Server=.; Database=Keyify; Trusted_connection=true; TrustServerCertificate=True";
 
+        var scriptsDirectory = $"{Environment.CurrentDirectory}\\Scripts";
+
         var upgrader =
             DeployChanges.To
                 .SqlDatabase(connectionString)
-                .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
+                .WithScriptsFromFileSystem(scriptsDirectory)
                 .LogToConsole()
                 .Build();
 

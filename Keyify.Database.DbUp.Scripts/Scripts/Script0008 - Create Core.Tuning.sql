@@ -3,10 +3,10 @@ CREATE TABLE Core.Tuning (
 	,[InstrumentId] INT NOT NULL
 	,[Name] NVARCHAR(100) NOT NULL
 	,[Description] NVARCHAR(500) NULL
-	,[Notes] BINARY NOT NULL
-	,[Created] DATETIME NOT NULL
-	,[LastModified] DATETIME NOT NULL
-	,[Deleted] BIT NOT NULL
+	,[Notes] VARBINARY(MAX) NOT NULL
+	,[Created] DATETIME NOT NULL DEFAULT GETUTCDATE()
+	,[LastModified] DATETIME NULL
+	,[Deleted] BIT NOT NULL DEFAULT 0
 	,CONSTRAINT PK_Tuning_Id PRIMARY KEY (Id)
 	,CONSTRAINT FK_InstrumentId FOREIGN KEY (InstrumentId) REFERENCES Core.Instrument(Id)	
 	)

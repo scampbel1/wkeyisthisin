@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Web.Unit.Test", "Key
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Database.DbUp", "Keyify.Database.DbUp\Keyify.Database.DbUp.csproj", "{7E200875-1A02-4EC4-A435-9E9E5CB9BEFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keyify.Database.Integration.Test", "Keyify.Database.Integration.Test\Keyify.Database.Integration.Test.csproj", "{5845F49D-4E60-48C3-A317-1FB9B17E49C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Database.Integration.Test", "Keyify.Database.Integration.Test\Keyify.Database.Integration.Test.csproj", "{5845F49D-4E60-48C3-A317-1FB9B17E49C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keyify.Database.DbUp.Scripts", "Keyify.Database.DbUp.Scripts\Keyify.Database.DbUp.Scripts.csproj", "{5FC2A4C7-A1C2-4718-811C-19994F2E4283}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5845F49D-4E60-48C3-A317-1FB9B17E49C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5845F49D-4E60-48C3-A317-1FB9B17E49C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5845F49D-4E60-48C3-A317-1FB9B17E49C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC2A4C7-A1C2-4718-811C-19994F2E4283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC2A4C7-A1C2-4718-811C-19994F2E4283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC2A4C7-A1C2-4718-811C-19994F2E4283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC2A4C7-A1C2-4718-811C-19994F2E4283}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
