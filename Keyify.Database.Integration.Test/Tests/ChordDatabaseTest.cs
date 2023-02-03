@@ -1,7 +1,9 @@
 ﻿using Dapper;
+using Keyify.Database.Integration.Test.Enums;
 using Keyify.Database.Integration.Test.Helper;
 using Keyify.Database.Integration.Test.ThrowawayDatabases;
 using Microsoft.Data.SqlClient;
+using System.Text.Json;
 using Xunit;
 
 namespace Keyify.Database.Integration.Tests.Test
@@ -9,26 +11,29 @@ namespace Keyify.Database.Integration.Tests.Test
     public class ChordDatabaseTest
     {
         [Fact]
-        public async Task CreateChord_RecordCreatedInDatabase_ReturnsSingleRecord()
+        public async Task CreateChord_RecordCreatedInDatabase_ReturnsSingleRecord_ReturnsCorrectTabsIntArray()
         {
             using (var throwawayDbInstance = await ThrowawayDatabaseSetup.CreateThrowawayDbInstanceAsync())
             {
                 using var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
                 sqlCconnection.Open();
-
+                
+                //Arrange
                 await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertStandardTuningSqlScriptParameters());
-
                 await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordSqlScript(), DatabaseTestHelper.CreateInsertEMajorChordSqlScriptParameters());
 
-                var reader = await sqlCconnection.ExecuteReaderAsync("SELECT COUNT(*) FROM [Core].[Chord]");
+                //Act
+                var sqlQuery = "SELECT [Tabs] FROM [Core].[Chord]";
+                var chord = await sqlCconnection.QuerySingleAsync(sqlQuery);
 
-                while (reader.Read())
-                {
-                    var count = reader.GetInt32(0);
+                using var memoryStream = new MemoryStream(chord.Tabs);
+                var tabResult = await JsonSerializer.DeserializeAsync<int[]>(memoryStream);
 
-                    Assert.Equal(1, count);
-                    Assert.NotEqual(2, count);
-                }
+                await sqlCconnection.CloseAsync();
+
+                //Assert
+                Assert.Single(chord);
+                Assert.Equal(GuitarChordTabConstant.StandardTuning_E_Major, tabResult);
             }
         }
     }
