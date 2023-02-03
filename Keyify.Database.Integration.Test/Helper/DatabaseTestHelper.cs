@@ -1,4 +1,6 @@
-﻿namespace Keyify.Database.Integration.Test.Helper
+﻿using System.Text;
+
+namespace Keyify.Database.Integration.Test.Helper
 {
     internal static class DatabaseTestHelper
     {
@@ -8,6 +10,27 @@
             sqlScript = sqlScript.Replace("GO", "");
 
             return sqlScript;
+        }
+
+        internal static string CreateInsertTuningSqlScript()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine("INSERT INTO [Core].[Tuning] (");
+            sb.AppendLine(" [InstrumentId]");
+            sb.AppendLine(",[Name]");
+            sb.AppendLine(",[Description]");
+            sb.AppendLine(",[Notes]");
+            sb.AppendLine(")");
+            sb.AppendLine("VALUES");
+            sb.AppendLine("(");
+            sb.AppendLine("@InstrumentId");
+            sb.AppendLine(",@Name");
+            sb.AppendLine(",@Description");
+            sb.AppendLine(",@Notes");
+            sb.AppendLine(")");
+
+            return sb.ToString();
         }
     }
 }
