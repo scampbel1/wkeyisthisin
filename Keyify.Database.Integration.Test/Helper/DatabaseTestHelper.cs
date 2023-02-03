@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Keyify.Database.Integration.Test.Enums;
+using System.Text;
 using System.Text.Json;
 
 namespace Keyify.Database.Integration.Test.Helper
@@ -37,10 +38,8 @@ namespace Keyify.Database.Integration.Test.Helper
         internal static object CreateInsertStandardTuningSqlScriptParameters()
         {
             using var memoryStream = new MemoryStream();
-            var tuningEntry = new[] { 7, 0, 5, 10, 2, 7, };
 
-
-            JsonSerializer.Serialize(memoryStream, tuningEntry);
+            JsonSerializer.Serialize(memoryStream, GuitarTuningConstant.StandardTuning);
 
             return new
             {
@@ -77,9 +76,8 @@ namespace Keyify.Database.Integration.Test.Helper
         internal static object CreateInsertEMajorChordSqlScriptParameters()
         {
             using var memoryStream = new MemoryStream();
-            var eMajorChordTabEntry = new[] { -1, 2, 2, 1, 0, 0, };
 
-            JsonSerializer.Serialize(memoryStream, eMajorChordTabEntry);
+            JsonSerializer.Serialize(memoryStream, GuitarChordTabConstant.StandardTuning_E_Major);
 
             return new
             {
