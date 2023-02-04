@@ -9,10 +9,19 @@ using Xunit;
 namespace Keyify.Database.Integration.Test.Tests
 {
     public class LookupTableConsistencyTest
-    {        
+    {
+        //Arrange
         private int _noteTypeTableEntryCount;
         private int _chordTypeTableEntryCount;
         private int _instrumentTypeTableEntryCount;
+
+        private int _noteTypeEnumCount = Enum.GetNames(typeof(Note)).Length;
+        private int _chordTypeEnumCount = Enum.GetNames(typeof(ChordType)).Length;
+        private int _instrumentTypeEnumCount = Enum.GetNames(typeof(InstrumentType)).Length;
+
+        private const string _noteTypeCountSqlQuery = "SELECT COUNT(1) FROM [Core].[Note]";
+        private const string _chordTypeCountSqlQuery = "SELECT COUNT(1) FROM [Core].[ChordType]";
+        private const string _instrumentTypeCountSqlQuery = "SELECT COUNT(1) FROM [Core].[Instrument]";
 
         public LookupTableConsistencyTest()
         {
@@ -25,47 +34,33 @@ namespace Keyify.Database.Integration.Test.Tests
             {
                 using var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
                 sqlCconnection.Open();
-                
-                //Arrange
-                var noteTypeCountSqlQuery = "SELECT COUNT(1) FROM [Core].[Note]";
-                var chordTypeCountSqlQuery = "SELECT COUNT(1) FROM [Core].[ChordType]";
-                var instrumentTypeCountSqlQuery = "SELECT COUNT(1) FROM [Core].[Instrument]";
 
                 //Act
-                _noteTypeTableEntryCount = await sqlCconnection.QuerySingleAsync<int>(noteTypeCountSqlQuery);
-                _chordTypeTableEntryCount = await sqlCconnection.QuerySingleAsync<int>(chordTypeCountSqlQuery);
-                _instrumentTypeTableEntryCount = await sqlCconnection.QuerySingleAsync<int>(instrumentTypeCountSqlQuery);
+                _noteTypeTableEntryCount = await sqlCconnection.QuerySingleAsync<int>(_noteTypeCountSqlQuery);
+                _chordTypeTableEntryCount = await sqlCconnection.QuerySingleAsync<int>(_chordTypeCountSqlQuery);
+                _instrumentTypeTableEntryCount = await sqlCconnection.QuerySingleAsync<int>(_instrumentTypeCountSqlQuery);
             }
         }
 
         [Fact]
         public void NoteTypeEnum_NoteTypeEntry_CountsAreEqual()
         {
-            //Act
-            var noteEnumLength = Enum.GetNames(typeof(Note)).Length;
-
             //Assert
-            Assert.Equal(noteEnumLength, _noteTypeTableEntryCount);
+            Assert.Equal(_noteTypeEnumCount, _noteTypeTableEntryCount);
         }
 
         [Fact]
         public void ChordTypeEnum_ChordTypeEntry_CountsAreEqual()
         {
-            //Act
-            var chordTypeEnumLength = Enum.GetNames(typeof(ChordType)).Length;
-
             //Assert
-            Assert.Equal(chordTypeEnumLength, _chordTypeTableEntryCount);
+            Assert.Equal(_chordTypeEnumCount, _chordTypeTableEntryCount);
         }
 
         [Fact]
         public void InstrumentTypeEnum_InstrumentTypeEntry_CountsAreEqual()
         {
-            //Act
-            var instrumentTypeEnumLength = Enum.GetNames(typeof(InstrumentType)).Length;
-
             //Assert
-            Assert.Equal(instrumentTypeEnumLength, _instrumentTypeTableEntryCount);
+            Assert.Equal(_instrumentTypeEnumCount, _instrumentTypeTableEntryCount);
         }
     }
 }
