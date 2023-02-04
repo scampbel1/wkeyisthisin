@@ -48,6 +48,7 @@ namespace Keyify.Models.Service_Models
 
         public override int GetHashCode()
         {
+            //Ensures notes are in the same order
             return ((IStructuralEquatable)Notes).GetHashCode(EqualityComparer<Note>.Default);
         }
     }
