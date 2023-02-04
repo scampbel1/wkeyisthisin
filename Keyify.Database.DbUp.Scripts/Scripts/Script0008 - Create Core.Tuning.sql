@@ -1,5 +1,3 @@
--- VARBINARY Length set to 900. Read here for more info: https://stackoverflow.com/a/28298683/2087167
-
 CREATE TABLE Core.Tuning (
 	[Id] INT IDENTITY(0, 1) NOT NULL
 	,[InstrumentId] INT NOT NULL
@@ -10,6 +8,10 @@ CREATE TABLE Core.Tuning (
 	,[LastModified] DATETIME NULL
 	,[Deleted] BIT NOT NULL DEFAULT 0
 	,CONSTRAINT PK_Tuning_Id PRIMARY KEY (Id ASC)
-	,CONSTRAINT FK_InstrumentId FOREIGN KEY (InstrumentId) REFERENCES Core.Instrument(Id)	 
+	,CONSTRAINT FK_InstrumentId FOREIGN KEY (InstrumentId) REFERENCES Core.Instrument(Id)
+	,CONSTRAINT [UQ_Instrument_Tuning] UNIQUE NONCLUSTERED
+    (
+        [InstrumentId], [Notes]
+    )
 	)
 GO

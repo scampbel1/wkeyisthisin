@@ -1,5 +1,3 @@
--- VARBINARY Length set to 900. Read here for more info: https://stackoverflow.com/a/28298683/2087167
-
 CREATE TABLE Core.Chord (
 	[Id] INT IDENTITY(0, 1) NOT NULL
 	,[ChordTypeId] INT NOT NULL
@@ -17,7 +15,7 @@ CREATE TABLE Core.Chord (
 	,CONSTRAINT FK_TuningId FOREIGN KEY (TuningId) REFERENCES Core.Tuning(Id)
 	,CONSTRAINT [UQ_Instrument_Chord] UNIQUE NONCLUSTERED
     (
-        [TuningId], [RootNoteId], [ChordTypeId], [Tabs], [Deleted]
+        [TuningId], [RootNoteId], [ChordTypeId], [Tabs]
     )
 	)
 GO
