@@ -12,20 +12,43 @@ namespace Keyify.Database.Integration.Test.ThrowawayDatabases
         internal static async Task<ThrowawayDatabase> CreateThrowawayDbInstanceAsync()
         {
             var throwawayDbInstance = ThrowawayDatabase.FromLocalInstance(_localDatabase);
-            var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
+            var sqlScriptFileNames = GetSqlScriptFileNames();
 
-            sqlCconnection.Open();
-
-            foreach (var sqlScriptFileDirectory in Directory.GetFiles(_databaseCreationSqlScriptsDirectory))
-            {
-                var sqlScriptContent = DatabaseTestHelper.FormatSqlScriptForThrowawayDbInstance(File.ReadAllText(sqlScriptFileDirectory));
-
-                using var sqlCommand = new SqlCommand(sqlScriptContent, sqlCconnection);
-
-                await sqlCommand.ExecuteNonQueryAsync();
-            }
+            await ExecuteSqlScriptsAgainstThrowawayDbInstanceAsync(sqlScriptFileNames, throwawayDbInstance);
 
             return throwawayDbInstance;
+        }
+
+        private static List<string> GetSqlScriptFileNames()
+        {
+            var sqlScriptFilesNames = new List<string>();
+
+            foreach (var sqlScriptFileName in Directory.GetFiles(_databaseCreationSqlScriptsDirectory))
+            {
+                sqlScriptFilesNames.Add(sqlScriptFileName);
+            }
+
+            return sqlScriptFilesNames;
+        }
+
+        private static async Task ExecuteSqlScriptsAgainstThrowawayDbInstanceAsync(List<string> sqlScriptFileNames, ThrowawayDatabase throwawayDbInstance)
+        {
+            foreach (var sqlScriptFileName in sqlScriptFileNames)
+            {
+                var sqlScriptContent = DatabaseTestHelper.FormatSqlScriptForThrowawayDbInstance(await File.ReadAllTextAsync(sqlScriptFileName));
+
+                await ExecuteSqlQueryAsync(sqlScriptContent, throwawayDbInstance);
+            }
+        }
+
+        private static async Task ExecuteSqlQueryAsync(string sqlScriptContent, ThrowawayDatabase throwawayDbInstance)
+        {
+            using var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
+            sqlCconnection.Open();
+
+            using var sqlCommand = new SqlCommand(sqlScriptContent, sqlCconnection);
+
+            await sqlCommand.ExecuteNonQueryAsync();
         }
     }
 }
