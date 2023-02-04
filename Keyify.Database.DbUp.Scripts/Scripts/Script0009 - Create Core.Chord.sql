@@ -4,7 +4,7 @@ CREATE TABLE Core.Chord (
 	[RootNoteId] INT NOT NULL,
 	[TuningId] INT NOT NULL,
 	[Name] NVARCHAR(100) NOT NULL,
-	[Description] INT NULL,
+	[Description] NVARCHAR(300) NULL,
 	[Tabs] VARBINARY(900) NOT NULL,
 	[Created] DATETIME NOT NULL DEFAULT GETUTCDATE(),
 	[LastModified] DATETIME NULL,
