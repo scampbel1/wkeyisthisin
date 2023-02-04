@@ -1,12 +1,7 @@
 ﻿using Keyify.Web.Enums;
 using Keyify.Web.Enums.Tuning;
+using Keyify.Web.Models.QuickLink;
 using KeyifyClassLibrary.Enums;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
 using Xunit;
 
 namespace Keyify.Web.Unit.Test.QuickLink.UnitTests
@@ -14,59 +9,37 @@ namespace Keyify.Web.Unit.Test.QuickLink.UnitTests
     public class QuicklinkUnitTest
     {
         [Fact]
-        public void CreateBase64StringFromParams_DeserializeBase64String_SameParametersValuesReturned()
+        public void QuickLinkParameters_NotesSameButDifferentOrder_Base64StringsAreEqual()
         {
             //Arrange - Given
-            var parameters = new
+            var quickLinkParameters1 = new QuickLinkParameters
             {
-                instrumentType = InstrumentType.Guitar,
-                tuning = GuitarTuning.Standard,
-                selectedNotes = new Note[] { Note.A, Note.E, Note.Gb },
-                selectedScale = "GbAeolian"
+                InstrumentType = InstrumentType.Guitar,
+                Tuning = GuitarTuning.Standard,
+                SelectedNotes = new Note[] { Note.A, Note.E, Note.Gb },
+                SelectedScale = "GbAeolian"
             };
 
-            var sameParametersNotesInDifferentOrder = new
+            var quickLinkParameters2 = new QuickLinkParameters
             {
-                instrumentType = InstrumentType.Guitar,
-                tuning = GuitarTuning.Standard,
-                selectedNotes = new Note[] { Note.E, Note.A, Note.Gb },
-                selectedScale = "GbAeolian"
+                InstrumentType = InstrumentType.Guitar,
+                Tuning = GuitarTuning.Standard,
+                SelectedNotes = new Note[] { Note.E, Note.A, Note.Gb },
+                SelectedScale = "GbAeolian"
             };
 
             //Act - When
-            var parametersHashCode = GetHashCodeImplementation(
-                parameters.instrumentType,
-                parameters.tuning,
-                parameters.selectedNotes,
-                parameters.selectedScale);
-
-            var sameParametersHashCode = GetHashCodeImplementation(
-                sameParametersNotesInDifferentOrder.instrumentType,
-                sameParametersNotesInDifferentOrder.tuning,
-                sameParametersNotesInDifferentOrder.selectedNotes,
-                sameParametersNotesInDifferentOrder.selectedScale);
-
-            var parametersJson = JsonSerializer.Serialize(parametersHashCode);
-            var parametersJson2 = JsonSerializer.Serialize(sameParametersHashCode);
-            var parametersJsonBytes = Encoding.Default.GetBytes(parametersJson);
-            var parametersJsonBytes2 = Encoding.Default.GetBytes(parametersJson2);
-            var parametersBase64String = Convert.ToBase64String(parametersJsonBytes);
-            var parametersBase64String2 = Convert.ToBase64String(parametersJsonBytes2);
+            var parameterBase64Representation1 = quickLinkParameters1.Base64;
+            var parameterBase64Representation2 = quickLinkParameters2.Base64;
 
             //Assert - Then
-            Assert.Equal(parametersBase64String, parametersBase64String2);
+            Assert.Equal(parameterBase64Representation1, parameterBase64Representation2);
         }
 
-        private static int GetHashCodeImplementation(InstrumentType instrumentType, GuitarTuning tuning, Note[] selectedNotes, string selectedScale)
+        [Fact(Skip = "Not yet implemented")]
+        public void CreateBase64StringFromParams_DeserializeBase64String_SameParametersValuesReturned()
         {
-            var hashCode = 17;
 
-            hashCode = hashCode * 23 + instrumentType.GetHashCode();
-            hashCode = hashCode * 23 + tuning.GetHashCode();
-            hashCode = hashCode * 23 + ((IStructuralEquatable)selectedNotes.OrderBy(n => n).ToArray()).GetHashCode(EqualityComparer<Note>.Default);
-            hashCode = hashCode * 23 + selectedScale.GetHashCode();
-
-            return hashCode;
         }
     }
 }
