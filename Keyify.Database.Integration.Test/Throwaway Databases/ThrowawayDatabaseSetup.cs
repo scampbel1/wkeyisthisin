@@ -7,17 +7,16 @@ namespace Keyify.Database.Integration.Test.ThrowawayDatabases
     internal static class ThrowawayDatabaseSetup
     {
         private const string _localDatabase = "(LocalDb)\\MSSQLLocalDB";
+        private static string _databaseCreationSqlScriptsDirectory => $"{Environment.CurrentDirectory}\\Scripts";
 
         internal static async Task<ThrowawayDatabase> CreateThrowawayDbInstanceAsync()
         {
-            var databaseCreationSqlScriptsDirectory = $"{Environment.CurrentDirectory}\\Scripts";
-
             var throwawayDbInstance = ThrowawayDatabase.FromLocalInstance(_localDatabase);
             var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
 
             sqlCconnection.Open();
 
-            foreach (var sqlScriptFileDirectory in Directory.GetFiles(databaseCreationSqlScriptsDirectory))
+            foreach (var sqlScriptFileDirectory in Directory.GetFiles(_databaseCreationSqlScriptsDirectory))
             {
                 var sqlScriptContent = DatabaseTestHelper.FormatSqlScriptForThrowawayDbInstance(File.ReadAllText(sqlScriptFileDirectory));
 
