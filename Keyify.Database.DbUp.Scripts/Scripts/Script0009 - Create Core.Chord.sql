@@ -8,13 +8,13 @@ CREATE TABLE Core.Chord (
 	[Tabs] VARBINARY(MAX) NOT NULL,
 	[Created] DATETIME NOT NULL DEFAULT GETUTCDATE(),
 	[LastModified] DATETIME NULL,
-	[Deleted] BIT NOT NULL DEFAULT 0	,
+	[Deleted] BIT NOT NULL DEFAULT 0,
 	CONSTRAINT FK_ChordTypeId FOREIGN KEY (ChordTypeId) REFERENCES Core.ChordType(Id),
 	CONSTRAINT FK_RootNoteId FOREIGN KEY (RootNoteId) REFERENCES Core.Note(Id),
 	CONSTRAINT FK_TuningId FOREIGN KEY (TuningId) REFERENCES Core.Tuning(Id),
 	CONSTRAINT [UQ_Instrument_Chord] UNIQUE NONCLUSTERED
     (
-        [TuningId], [RootNoteId], [ChordTypeId], [Deleted]
+        [TuningId], [RootNoteId], [ChordTypeId], [Tabs]
     )
 	)
 GO
