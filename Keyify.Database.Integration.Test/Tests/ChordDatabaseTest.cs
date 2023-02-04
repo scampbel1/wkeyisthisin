@@ -36,5 +36,25 @@ namespace Keyify.Database.Integration.Tests.Test
                 Assert.Equal(GuitarChordTabConstant.StandardTuning_E_Major, tabResult);
             }
         }
+
+        [Fact]
+        public async Task CreateChord_InsertIntoDatabaseTwice_ThrowsException()
+        {
+            using (var throwawayDbInstance = await ThrowawayDatabaseSetup.CreateThrowawayDbInstanceAsync())
+            {
+                using var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
+                sqlCconnection.Open();
+
+                //Arrange
+                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertStandardTuningSqlScriptParameters());
+                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordSqlScript(), DatabaseTestHelper.CreateInsertEMajorChordSqlScriptParameters());
+
+                //Act
+                Func<Task> duplicateRecordInsertAttempt = () => sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordSqlScript(), DatabaseTestHelper.CreateInsertEMajorChordSqlScriptParameters());
+
+                //Assert
+                await Assert.ThrowsAsync<SqlException>(duplicateRecordInsertAttempt);                
+            }
+        }
     }
 }

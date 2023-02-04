@@ -9,9 +9,13 @@ CREATE TABLE Core.Chord (
 	,[Created] DATETIME NOT NULL DEFAULT GETUTCDATE()
 	,[LastModified] DATETIME NULL
 	,[Deleted] BIT NOT NULL DEFAULT 0
-	,CONSTRAINT PK_Chord_Id PRIMARY KEY (Id)
+	,CONSTRAINT PK_Chord_Id PRIMARY KEY (Id ASC)
 	,CONSTRAINT FK_ChordTypeId FOREIGN KEY (ChordTypeId) REFERENCES Core.ChordType(Id)
 	,CONSTRAINT FK_RootNoteId FOREIGN KEY (RootNoteId) REFERENCES Core.Note(Id)
 	,CONSTRAINT FK_TuningId FOREIGN KEY (TuningId) REFERENCES Core.Tuning(Id)
+	,CONSTRAINT [UQ_Instrument_Chord] UNIQUE NONCLUSTERED
+    (
+        [TuningId], [RootNoteId], [ChordTypeId], [Deleted]
+    )
 	)
 GO

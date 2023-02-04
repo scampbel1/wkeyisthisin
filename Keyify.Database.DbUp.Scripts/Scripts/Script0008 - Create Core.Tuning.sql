@@ -7,7 +7,7 @@ CREATE TABLE Core.Tuning (
 	,[Created] DATETIME NOT NULL DEFAULT GETUTCDATE()
 	,[LastModified] DATETIME NULL
 	,[Deleted] BIT NOT NULL DEFAULT 0
-	,CONSTRAINT PK_Tuning_Id PRIMARY KEY (Id)
-	,CONSTRAINT FK_InstrumentId FOREIGN KEY (InstrumentId) REFERENCES Core.Instrument(Id)	
+	,CONSTRAINT PK_Tuning_Id PRIMARY KEY (Id ASC)
+	,CONSTRAINT FK_InstrumentId FOREIGN KEY (InstrumentId) REFERENCES Core.Instrument(Id)	 
 	)
 GO
