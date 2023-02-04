@@ -11,6 +11,7 @@
   <ItemGroup>
 	  <PackageReference Include="Dapper.Contrib" Version="2.0.78" />
 	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+	  <PackageReference Include="NUnit" Version="3.13.3" />
 	  <PackageReference Include="ThrowawayDb" Version="1.5.0" />
 	  <PackageReference Include="xunit" Version="2.4.2" />
 	  <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
@@ -21,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Keyify.Database.DbUp.Scripts\Keyify.Database.DbUp.Scripts.csproj" />
+    <ProjectReference Include="..\Keyify.Web\Keyify.Web.csproj" />
   </ItemGroup>
 
 </Project>

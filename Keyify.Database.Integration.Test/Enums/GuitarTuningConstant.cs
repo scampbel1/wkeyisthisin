@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Keyify.Database.Integration.Test.Enums
+﻿namespace Keyify.Database.Integration.Test.Enums
 {
     internal static class GuitarTuningConstant
     {

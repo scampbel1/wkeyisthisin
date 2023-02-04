@@ -17,7 +17,7 @@ namespace Keyify.Database.Integration.Tests.Test
             {
                 using var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
                 sqlCconnection.Open();
-                
+
                 //Arrange
                 await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertStandardTuningSqlScriptParameters());
                 await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordSqlScript(), DatabaseTestHelper.CreateInsertEMajorChordSqlScriptParameters());
@@ -38,7 +38,7 @@ namespace Keyify.Database.Integration.Tests.Test
         }
 
         [Fact]
-        public async Task CreateChord_InsertIntoDatabaseTwice_ThrowsException()
+        public async Task CreateChord_AttemptInsertIntoDatabaseTwice_TriggersUniqueConstraint_ThrowsException()
         {
             using (var throwawayDbInstance = await ThrowawayDatabaseSetup.CreateThrowawayDbInstanceAsync())
             {
@@ -53,7 +53,7 @@ namespace Keyify.Database.Integration.Tests.Test
                 Func<Task> duplicateRecordInsertAttempt = () => sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordSqlScript(), DatabaseTestHelper.CreateInsertEMajorChordSqlScriptParameters());
 
                 //Assert
-                await Assert.ThrowsAsync<SqlException>(duplicateRecordInsertAttempt);                
+                await Assert.ThrowsAsync<SqlException>(duplicateRecordInsertAttempt);
             }
         }
     }
