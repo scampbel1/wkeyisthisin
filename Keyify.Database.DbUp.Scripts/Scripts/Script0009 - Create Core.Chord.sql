@@ -5,7 +5,7 @@ CREATE TABLE Core.Chord (
 	,[TuningId] INT NOT NULL
 	,[Name] NVARCHAR(100) NOT NULL
 	,[Description] INT NULL
-	,[Tabs] VARBINARY(MAX) NOT NULL
+	,[Tabs] VARBINARY(900) NOT NULL
 	,[Created] DATETIME NOT NULL DEFAULT GETUTCDATE()
 	,[LastModified] DATETIME NULL
 	,[Deleted] BIT NOT NULL DEFAULT 0
@@ -15,7 +15,7 @@ CREATE TABLE Core.Chord (
 	,CONSTRAINT FK_TuningId FOREIGN KEY (TuningId) REFERENCES Core.Tuning(Id)
 	,CONSTRAINT [UQ_Instrument_Chord] UNIQUE NONCLUSTERED
     (
-        [TuningId], [RootNoteId], [ChordTypeId], [Deleted]
+        [TuningId], [RootNoteId], [ChordTypeId], [Tabs]
     )
 	)
 GO

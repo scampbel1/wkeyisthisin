@@ -35,5 +35,24 @@ namespace Keyify.Database.Integration.Test.Tests
                 Assert.Equal(GuitarTuningConstant.StandardTuning, notesResult);
             }
         }
+
+        [Fact]
+        public async Task CreateTuning_AttemptToInsertDuplicateRecords_TriggersUniqueConstraint_ThrowsException()
+        {
+            using (var throwawayDbInstance = await ThrowawayDatabaseSetup.CreateThrowawayDbInstanceAsync())
+            {
+                using var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
+                sqlCconnection.Open();
+
+                //Arrange
+                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertStandardTuningSqlScriptParameters());                
+
+                //Act
+                Func<Task> duplicateRecordInsertAttempt = () => sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertStandardTuningSqlScriptParameters());
+
+                //Assert
+                await Assert.ThrowsAsync<SqlException>(duplicateRecordInsertAttempt);
+            }
+        }
     }
 }
