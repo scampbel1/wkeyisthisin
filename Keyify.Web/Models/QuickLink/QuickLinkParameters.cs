@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 
 namespace Keyify.Web.Models.QuickLink
@@ -20,14 +19,17 @@ namespace Keyify.Web.Models.QuickLink
 
         public string SelectedScale { get; set; }
 
-        public string Base64 => GenerateBase64Representation();
+        public QuickLinkParameters() { }
 
-        private string GenerateBase64Representation()
+        public QuickLinkParameters(string base64String)
         {
-            var parametersJson = JsonSerializer.Serialize(GetHashCode());
-            var parametersJsonBytes = Encoding.Default.GetBytes(parametersJson);
+            var base64Bytes = Convert.FromBase64String(base64String);
+            var deserializedQuickLinkParameters = JsonSerializer.Deserialize<QuickLinkParameters>(base64Bytes);
 
-            return Convert.ToBase64String(parametersJsonBytes);
+            Tuning = deserializedQuickLinkParameters.Tuning;
+            SelectedNotes = deserializedQuickLinkParameters.SelectedNotes;
+            SelectedScale = deserializedQuickLinkParameters.SelectedScale;
+            InstrumentType = deserializedQuickLinkParameters.InstrumentType;
         }
 
         public bool Equals(QuickLinkParameters other)

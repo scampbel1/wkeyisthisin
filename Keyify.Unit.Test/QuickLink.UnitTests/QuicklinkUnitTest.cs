@@ -2,6 +2,9 @@
 using Keyify.Web.Enums.Tuning;
 using Keyify.Web.Models.QuickLink;
 using KeyifyClassLibrary.Enums;
+using System;
+using System.Text;
+using System.Text.Json;
 using Xunit;
 
 namespace Keyify.Web.Unit.Test.QuickLink.UnitTests
@@ -9,7 +12,7 @@ namespace Keyify.Web.Unit.Test.QuickLink.UnitTests
     public class QuicklinkUnitTest
     {
         [Fact]
-        public void QuickLinkParameters_NotesSameButDifferentOrder_Base64StringsAreEqual()
+        public void QuickLinkParameters_NotesSameButDifferentOrder_ObjectsAreEqual()
         {
             //Arrange - Given
             var quickLinkParameters1 = new QuickLinkParameters
@@ -20,6 +23,7 @@ namespace Keyify.Web.Unit.Test.QuickLink.UnitTests
                 SelectedScale = "GbAeolian"
             };
 
+            //Act - When
             var quickLinkParameters2 = new QuickLinkParameters
             {
                 InstrumentType = InstrumentType.Guitar,
@@ -28,18 +32,38 @@ namespace Keyify.Web.Unit.Test.QuickLink.UnitTests
                 SelectedScale = "GbAeolian"
             };
 
-            //Act - When
-            var parameterBase64Representation1 = quickLinkParameters1.Base64;
-            var parameterBase64Representation2 = quickLinkParameters2.Base64;
-
             //Assert - Then
-            Assert.Equal(parameterBase64Representation1, parameterBase64Representation2);
+            Assert.Equal(quickLinkParameters1, quickLinkParameters2);
         }
 
-        [Fact(Skip = "Not yet implemented")]
-        public void CreateBase64StringFromParams_DeserializeBase64String_SameParametersValuesReturned()
+        [Fact]
+        public void CreateBase64StringFromQuickLinkParameters_CreateCopyFromBase64String_SameParametersValuesReturned()
         {
+            //Arrange - Given
+            var expectedQuickLink = new QuickLinkParameters
+            {
+                InstrumentType = InstrumentType.Guitar,
+                Tuning = GuitarTuning.Standard,
+                SelectedNotes = new Note[] { Note.A, Note.E, Note.Gb },
+                SelectedScale = "GbAeolian"
+            };
 
+            var base64String = GenerateBase64(expectedQuickLink);
+
+            //Act - When
+            var result = new QuickLinkParameters(base64String);
+
+            //Assert - Then
+            Assert.Equal(expectedQuickLink, result);
+        }
+
+        //TODO: Move this elsewhere
+        private string GenerateBase64(QuickLinkParameters quickLinkParameters)
+        {
+            var quickLinkParameterJson = JsonSerializer.Serialize(quickLinkParameters);
+            var quickLinkParameterBytes = Encoding.Default.GetBytes(quickLinkParameterJson);
+
+            return Convert.ToBase64String(quickLinkParameterBytes);
         }
     }
 }
