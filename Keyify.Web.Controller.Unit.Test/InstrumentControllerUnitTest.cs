@@ -112,5 +112,11 @@ namespace Keyify.Web.Controller.Unit.Test
             Assert.Equal(3, instrumentViewModel.SelectedNotes.Count);
             Assert.Equal(qlScale, instrumentViewModel.SelectedScale.ScaleLabel);
         }
+
+        [Fact]
+        public void InstrumentController_UpdateFretboardModel()
+        {
+            throw new NotImplementedException("Need to test the update functionality!");
+        }
     }
 }
