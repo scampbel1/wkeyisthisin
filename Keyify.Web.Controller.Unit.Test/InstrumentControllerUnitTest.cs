@@ -114,9 +114,19 @@ namespace Keyify.Web.Controller.Unit.Test
         }
 
         [Fact]
-        public void InstrumentController_UpdateFretboardModel()
+        public void InstrumentController_UpdateFretboardModel_NewNoteAddedToSelectedNotes()
         {
-            throw new NotImplementedException("Need to test the update functionality!");
+            var newNote = Note.B;
+            var selectedScale = "CKumoi";
+            var previouslySeletedNotes = new List<Note> { Note.A, Note.C, Note.G };
+            var expectedSelectedNotes = new List<Note>(previouslySeletedNotes) { newNote };
+
+            var instrumentController = new InstrumentController(instrumentViewModel);
+
+            instrumentController.UpdateFretboardModel(previouslySeletedNotes.Select(p => p.ToString()).ToList(), newNote.ToString(), selectedScale);
+
+            Assert.Equal(selectedScale, instrumentViewModel.SelectedScale.ScaleLabel);
+            Assert.Equal(expectedSelectedNotes.OrderBy(e => e), instrumentViewModel.SelectedNotes.Select(s => s.Note).OrderBy(o => o));
         }
     }
 }
