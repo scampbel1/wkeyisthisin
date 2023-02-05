@@ -3,6 +3,8 @@ using Keyify.Models.Service;
 using Keyify.Models.View_Models.Misc;
 using Keyify.Service.Caches;
 using Keyify.Service.Interfaces;
+using Keyify.Web.Service;
+using Keyify.Web.Service.Interfaces;
 using KeyifyWebClient.Models.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,16 +26,11 @@ namespace Keyify
         {
             services.AddControllersWithViews();
             services.AddSingleton(typeof(ModeDataCache), typeof(ModeDataCache));
-            services.AddSingleton(typeof(IModeService), typeof(Models.Service.ModeService));
+            services.AddSingleton(typeof(IModeService), typeof(ModeService));
+            services.AddSingleton(typeof(IQuickLinkService), typeof(QuickLinkService));
             services.AddSingleton(typeof(IScaleService), typeof(ScaleService));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
             services.AddTransient(typeof(IScalesGroupingService), typeof(ScalesGroupingService));
-
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //options.UseSqlServer(
-            //    Configuration.GetConnectionString("DefaultConnection"),
-            //    x => x.MigrationsAssembly("Keyify.Database.Migrations")
-            //));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -16,7 +16,7 @@ namespace Keyify.Web.Service
             return Convert.ToBase64String(quickLinkParameterBytes);
         }
 
-        public QuickLink GenerateQuickLinkParameters(string base64String)
+        public QuickLink GenerateQuickLinkFromBase64String(string base64String)
         {
             var base64Bytes = Convert.FromBase64String(base64String);
 

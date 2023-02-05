@@ -57,7 +57,7 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
             var quickLinkBase64String = _quickLinkService.GenerateBase64(quickLink1);
 
             //Act - When
-            var quickLink2 = _quickLinkService.GenerateQuickLinkParameters(quickLinkBase64String);
+            var quickLink2 = _quickLinkService.GenerateQuickLinkFromBase64String(quickLinkBase64String);
 
             //Assert - Then
             Assert.Equal(quickLink1, quickLink2);

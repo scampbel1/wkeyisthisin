@@ -18,6 +18,8 @@ namespace Keyify.Web.Models.QuickLink
 
         public string SelectedScale { get; set; }
 
+        public string InstrumentName => InstrumentType.ToString();
+
         public bool Equals(QuickLink other)
         {
             var quickLinkParameters = GetHashCode();

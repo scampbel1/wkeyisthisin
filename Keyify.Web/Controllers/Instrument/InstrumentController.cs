@@ -21,6 +21,7 @@ namespace Keyify.Controllers.Instrument
             return View(_instrumentViewModel);
         }
 
+        //TODO: Change this to PUT (?)
         [HttpPost]
         public ActionResult UpdateFretboardModel(List<string> previouslySelectedNotes, string newlySelectedNote, string selectedScale)
         {
@@ -42,6 +43,18 @@ namespace Keyify.Controllers.Instrument
             }
 
             return PartialView("Fretboard", _instrumentViewModel);
+        }
+
+        //TODO: Change this to POST (or most relevant method) - shouldn't be able to see parameters in the URL
+        [HttpGet]
+        public ActionResult QuickLink(List<string> selectedNotes, string selectedScale)
+        {
+            if (selectedNotes != null)
+            {
+                _instrumentViewModel.ProcessNotesAndScale(selectedScale, selectedNotes);
+            }
+
+            return View("Index", _instrumentViewModel);
         }
     }
 }
