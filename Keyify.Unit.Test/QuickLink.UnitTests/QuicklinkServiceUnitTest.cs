@@ -62,5 +62,9 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
             //Assert - Then
             Assert.Equal(quickLink1, quickLink2);
         }
+
+        //TODO: Add tests based on Base64 values (copy and paste)
+
+        //TODO: Add tests for objects that don't contain notes, scales, both, null values etc.
     }
 }
