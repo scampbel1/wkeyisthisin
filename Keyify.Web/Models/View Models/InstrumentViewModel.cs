@@ -55,6 +55,7 @@ namespace KeyifyWebClient.Models.ViewModels
             InstrumentName = instrumentName;
         }
 
+        //TODO: Selected Note string should be replaced with Note type
         public void ProcessNotesAndScale(string selectedScale, IEnumerable<string> selectedNotes)
         {
             UpdateSelectedNotes(selectedNotes);

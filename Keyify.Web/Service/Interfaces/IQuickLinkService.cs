@@ -4,7 +4,7 @@ namespace Keyify.Web.Service.Interfaces
 {
     public interface IQuickLinkService
     {
-        public string GenerateBase64(QuickLink quickLinkParameters);
-        public QuickLink GenerateQuickLinkFromBase64String(string base64String);
+        public string ConvertQuickLinkToBase64(QuickLink quickLinkParameters);
+        public QuickLink DeserializeQuickLink(string base64String);
     }
 }

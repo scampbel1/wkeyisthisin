@@ -18,7 +18,7 @@ namespace Keyify.Web.Controllers.Quicklink
         [HttpGet("/{code}")]
         public IActionResult Index(string code)
         {
-            var quickLink = _quickLinkService.GenerateQuickLinkFromBase64String(code);
+            var quickLink = _quickLinkService.DeserializeQuickLink(code);
 
             TempData[_configuration["QuickLinkTempDataKey:Tuning"]] = quickLink.Tuning;
             TempData[_configuration["QuickLinkTempDataKey:SelectedScale"]] = quickLink.SelectedScale;

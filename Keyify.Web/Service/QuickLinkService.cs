@@ -8,7 +8,7 @@ namespace Keyify.Web.Service
 {
     public class QuickLinkService : IQuickLinkService
     {
-        public string GenerateBase64(QuickLink quickLinkParameters)
+        public string ConvertQuickLinkToBase64(QuickLink quickLinkParameters)
         {
             var quickLinkParameterJson = JsonSerializer.Serialize(quickLinkParameters);
             var quickLinkParameterBytes = Encoding.Default.GetBytes(quickLinkParameterJson);
@@ -16,7 +16,7 @@ namespace Keyify.Web.Service
             return Convert.ToBase64String(quickLinkParameterBytes);
         }
 
-        public QuickLink GenerateQuickLinkFromBase64String(string base64String)
+        public QuickLink DeserializeQuickLink(string base64String)
         {
             var base64Bytes = Convert.FromBase64String(base64String);
 

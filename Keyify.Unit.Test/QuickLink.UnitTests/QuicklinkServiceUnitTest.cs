@@ -54,10 +54,10 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
                 SelectedScale = "GbAeolian"
             };
 
-            var quickLinkBase64String = _quickLinkService.GenerateBase64(quickLink1);
+            var quickLinkBase64String = _quickLinkService.ConvertQuickLinkToBase64(quickLink1);
 
             //Act - When
-            var quickLink2 = _quickLinkService.GenerateQuickLinkFromBase64String(quickLinkBase64String);
+            var quickLink2 = _quickLinkService.DeserializeQuickLink(quickLinkBase64String);
 
             //Assert - Then
             Assert.Equal(quickLink1, quickLink2);
