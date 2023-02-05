@@ -84,8 +84,6 @@ namespace KeyifyWebClient.Models.ViewModels
             }
 
             ApplySelectedScales(selectedScale);
-
-            ApplySelectedNotesToFretboard();
         }
     }
 }

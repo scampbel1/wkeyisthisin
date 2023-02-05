@@ -1,6 +1,8 @@
-﻿using KeyifyWebClient.Models.ViewModels;
+﻿using KeyifyClassLibrary.Enums;
+using KeyifyWebClient.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Keyify.Controllers.Instrument
 {
@@ -16,6 +18,15 @@ namespace Keyify.Controllers.Instrument
         [HttpGet]
         public ActionResult Index()
         {
+            var selectedNotes = (IEnumerable<Note>)TempData["QLnotes"];
+            var selectedScale = (string)TempData["QLscale"];
+
+            //TODO: What happens if there are no selected notes, but there is a selected scale?
+            if (selectedNotes != null || selectedScale != null)
+            {
+                _instrumentViewModel.ProcessNotesAndScale(selectedScale, selectedNotes.Select(n => n.ToString()));
+            }
+
             _instrumentViewModel.ApplySelectedNotesToFretboard();
 
             return View(_instrumentViewModel);
@@ -40,21 +51,10 @@ namespace Keyify.Controllers.Instrument
                 }
 
                 _instrumentViewModel.ProcessNotesAndScale(selectedScale, previouslySelectedNotes);
+                _instrumentViewModel.ApplySelectedNotesToFretboard();
             }
 
             return PartialView("Fretboard", _instrumentViewModel);
-        }
-
-        //TODO: Change this to POST (or most relevant method) - shouldn't be able to see parameters in the URL
-        [HttpGet]
-        public ActionResult QuickLink(List<string> selectedNotes, string selectedScale)
-        {
-            if (selectedNotes != null)
-            {
-                _instrumentViewModel.ProcessNotesAndScale(selectedScale, selectedNotes);
-            }
-
-            return View("Index", _instrumentViewModel);
         }
     }
 }
