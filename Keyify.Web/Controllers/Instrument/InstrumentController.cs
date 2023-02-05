@@ -21,8 +21,7 @@ namespace Keyify.Controllers.Instrument
             var selectedNotes = (IEnumerable<Note>)TempData["QLnotes"];
             var selectedScale = (string)TempData["QLscale"];
 
-            //TODO: What happens if there are no selected notes, but there is a selected scale?
-            if (selectedNotes != null || selectedScale != null)
+            if (selectedNotes != null)
             {
                 _instrumentViewModel.ProcessNotesAndScale(selectedScale, selectedNotes.Select(n => n.ToString()));
             }

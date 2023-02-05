@@ -52,6 +52,46 @@ namespace Keyify.Web.Controller.Unit.Test
         }
 
         [Fact]
+        public void InstrumentController_CallIndex_ScaleOnlyInQuickLinkTempData_ScaleShouldBeNull()
+        {
+            var qlScale = "CKumoi";
+
+            var instrumentController = new InstrumentController(instrumentViewModel)
+            {
+                TempData = new TempDataDictionary(
+                    Mock.Of<HttpContext>(),
+                    Mock.Of<ITempDataProvider>())
+            };
+
+            instrumentController.TempData["QLscale"] = qlScale;
+
+            instrumentController.Index();
+
+            Assert.Empty(instrumentViewModel.SelectedNotes);
+            Assert.Null(instrumentViewModel.SelectedScale);
+        }
+
+        [Fact]
+        public void InstrumentController_CallIndex_NotesnlyInQuickLinkTempData_ScaleShouldBeNull_NotesShouldContainSelectedNotes()
+        {
+            var qlNotes = new List<Note> { Note.A, Note.C, Note.G };
+
+            var instrumentController = new InstrumentController(instrumentViewModel)
+            {
+                TempData = new TempDataDictionary(
+                    Mock.Of<HttpContext>(),
+                    Mock.Of<ITempDataProvider>())
+            };
+
+            instrumentController.TempData["QLnotes"] = qlNotes;
+
+            instrumentController.Index();
+
+            Assert.Equal(3, instrumentViewModel.SelectedNotes.Count);
+            Assert.Null(instrumentViewModel.SelectedScale);
+        }
+
+        [Fact]
         public void InstrumentController_CallIndex_QuickLinkTempData_ViewModelShouldContainQuickLinkValues()
         {
             var qlNotes = new List<Note> { Note.A, Note.C, Note.G };
