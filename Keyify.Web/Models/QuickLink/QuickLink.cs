@@ -5,11 +5,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 
 namespace Keyify.Web.Models.QuickLink
 {
-    public class QuickLinkParameters : IEquatable<QuickLinkParameters>
+    public class QuickLink : IEquatable<QuickLink>
     {
         public InstrumentType InstrumentType { get; set; }
 
@@ -19,20 +18,7 @@ namespace Keyify.Web.Models.QuickLink
 
         public string SelectedScale { get; set; }
 
-        public QuickLinkParameters() { }
-
-        public QuickLinkParameters(string base64String)
-        {
-            var base64Bytes = Convert.FromBase64String(base64String);
-            var deserializedQuickLinkParameters = JsonSerializer.Deserialize<QuickLinkParameters>(base64Bytes);
-
-            Tuning = deserializedQuickLinkParameters.Tuning;
-            SelectedNotes = deserializedQuickLinkParameters.SelectedNotes;
-            SelectedScale = deserializedQuickLinkParameters.SelectedScale;
-            InstrumentType = deserializedQuickLinkParameters.InstrumentType;
-        }
-
-        public bool Equals(QuickLinkParameters other)
+        public bool Equals(QuickLink other)
         {
             var quickLinkParameters = GetHashCode();
             var otherQuickLinkParameters = other.GetHashCode();
@@ -40,19 +26,19 @@ namespace Keyify.Web.Models.QuickLink
             return quickLinkParameters == otherQuickLinkParameters;
         }
 
-        public static bool operator ==(QuickLinkParameters a, QuickLinkParameters b)
+        public static bool operator ==(QuickLink a, QuickLink b)
         {
             return a.Equals(b);
         }
 
-        public static bool operator !=(QuickLinkParameters a, QuickLinkParameters b)
+        public static bool operator !=(QuickLink a, QuickLink b)
         {
             return a.Equals(b);
         }
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as QuickLinkParameters);
+            return Equals(obj as QuickLink);
         }
 
         public override int GetHashCode()
