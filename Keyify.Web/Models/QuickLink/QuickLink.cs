@@ -12,7 +12,7 @@ namespace Keyify.Web.Models.QuickLink
     {
         public InstrumentType InstrumentType { get; set; }
 
-        public GuitarTuning Tuning { get; set; }
+        public Tuning Tuning { get; set; }
 
         public Note[] SelectedNotes { get; set; }
 

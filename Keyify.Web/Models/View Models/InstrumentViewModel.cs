@@ -35,10 +35,8 @@ namespace KeyifyWebClient.Models.ViewModels
 
         public string AvailableKeysAndScalesLabel => GetAvailableKeysAndScalesLabel();
 
-
         private List<ScaleGroupingEntry> AvailableKeyGroups => _groupedScalesService.GroupedKeys;
         private List<ScaleGroupingEntry> AvailableScaleGroups => _groupedScalesService.GroupedScales;
-
 
         public InstrumentViewModel(IScaleService dictionaryService, IScalesGroupingService scalesGroupingService)
         {

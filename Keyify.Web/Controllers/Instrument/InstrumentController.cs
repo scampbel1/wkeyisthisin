@@ -31,24 +31,24 @@ namespace Keyify.Controllers.Instrument
             return View(_instrumentViewModel);
         }
 
-        //TODO: Change this to PUT (?)
         [HttpPost]
-        public ActionResult UpdateFretboardModel(List<string> existingNoteSelections, string selectedNote, string selectedScale)
+        //DON'T CHANGE THE NAMES OF THESE PARAMETERS
+        public ActionResult UpdateFretboardModel(List<string> previouslySelectedNotes, string newlySelectedNote, string selectedScale)
         {
-            if (!string.IsNullOrWhiteSpace(selectedNote))
+            if (!string.IsNullOrWhiteSpace(newlySelectedNote))
             {
-                switch (existingNoteSelections.Contains(selectedNote))
+                switch (previouslySelectedNotes.Contains(newlySelectedNote))
                 {
                     case true:
-                        existingNoteSelections.Remove(selectedNote);
+                        previouslySelectedNotes.Remove(newlySelectedNote);
                         break;
                     case false:
-                        existingNoteSelections.Add(selectedNote);
+                        previouslySelectedNotes.Add(newlySelectedNote);
                         break;
                 }
             }
 
-            _instrumentViewModel.ProcessNotesAndScale(selectedScale, existingNoteSelections);
+            _instrumentViewModel.ProcessNotesAndScale(selectedScale, previouslySelectedNotes);
             _instrumentViewModel.ApplySelectedNotesToFretboard();
 
             return PartialView("Fretboard", _instrumentViewModel);
