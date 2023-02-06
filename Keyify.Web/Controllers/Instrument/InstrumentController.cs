@@ -1,6 +1,8 @@
-﻿using KeyifyWebClient.Models.ViewModels;
+﻿using KeyifyClassLibrary.Enums;
+using KeyifyWebClient.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Keyify.Controllers.Instrument
 {
@@ -16,30 +18,38 @@ namespace Keyify.Controllers.Instrument
         [HttpGet]
         public ActionResult Index()
         {
+            var selectedNotes = (IEnumerable<Note>)TempData["QLnotes"];
+            var selectedScale = (string)TempData["QLscale"];
+
+            if (selectedNotes != null)
+            {
+                _instrumentViewModel.ProcessNotesAndScale(selectedScale, selectedNotes.Select(n => n.ToString()));
+            }
+
             _instrumentViewModel.ApplySelectedNotesToFretboard();
 
             return View(_instrumentViewModel);
         }
 
         [HttpPost]
+        //DON'T CHANGE THE NAMES OF THESE PARAMETERS
         public ActionResult UpdateFretboardModel(List<string> previouslySelectedNotes, string newlySelectedNote, string selectedScale)
         {
-            if (!string.IsNullOrWhiteSpace(newlySelectedNote) || previouslySelectedNotes != null)
+            if (!string.IsNullOrWhiteSpace(newlySelectedNote))
             {
-                if (!string.IsNullOrWhiteSpace(newlySelectedNote))
+                switch (previouslySelectedNotes.Contains(newlySelectedNote))
                 {
-                    if (previouslySelectedNotes.Contains(newlySelectedNote))
-                    {
+                    case true:
                         previouslySelectedNotes.Remove(newlySelectedNote);
-                    }
-                    else
-                    {
+                        break;
+                    case false:
                         previouslySelectedNotes.Add(newlySelectedNote);
-                    }
+                        break;
                 }
-
-                _instrumentViewModel.ProcessNotesAndScale(selectedScale, previouslySelectedNotes);
             }
+
+            _instrumentViewModel.ProcessNotesAndScale(selectedScale, previouslySelectedNotes);
+            _instrumentViewModel.ApplySelectedNotesToFretboard();
 
             return PartialView("Fretboard", _instrumentViewModel);
         }

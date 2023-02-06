@@ -13,12 +13,15 @@ namespace KeyifyWebClient.Models.ViewModels
     //Be careful renaming this class! (It may not rename the reference in the Views)
     public partial class InstrumentViewModel
     {
+        private IScaleService _dictionaryService;
+        private IScalesGroupingService _groupedScalesService;
+
         //TODO: Find a way to update ViewTitle using ajax
         //      -->  {InstrumentName} - {SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp}
         public string ViewTitle => $"What Key Is This In?";
 
         public List<InstrumentNote> Notes { get; } = new List<InstrumentNote>();
-        public string InstrumentName { get; set; } = "Instrument Not Named";
+        public string InstrumentName { get; set; }
 
         public List<InstrumentNote> SelectedNotes => Notes.Where(n => n.Selected).ToList();
         public string SelectedNotesJson => JsonSerializer.Serialize(SelectedNotes.Select(n => n.Note.ToString()));
@@ -32,19 +35,14 @@ namespace KeyifyWebClient.Models.ViewModels
 
         public string AvailableKeysAndScalesLabel => GetAvailableKeysAndScalesLabel();
 
-        private IScalesGroupingService _groupedScalesService { get; init; }
-
         private List<ScaleGroupingEntry> AvailableKeyGroups => _groupedScalesService.GroupedKeys;
         private List<ScaleGroupingEntry> AvailableScaleGroups => _groupedScalesService.GroupedScales;
 
-        protected IScaleService DictionaryService { get; init; }
-        protected IModeService ScaleDirectoryService { get; init; }
-
-        public InstrumentViewModel(IScaleService dictionaryService, IModeService scaleDirectoryService, IScalesGroupingService scalesGroupingService)
+        public InstrumentViewModel(IScaleService dictionaryService, IScalesGroupingService scalesGroupingService)
         {
-            DictionaryService = dictionaryService;
-            ScaleDirectoryService = scaleDirectoryService;
+            _dictionaryService = dictionaryService;
             _groupedScalesService = scalesGroupingService;
+
             Notes = PopulateSelectedNotesList();
         }
 
@@ -55,13 +53,14 @@ namespace KeyifyWebClient.Models.ViewModels
             InstrumentName = instrumentName;
         }
 
+        //TODO: Selected Note string should be replaced with Note type
         public void ProcessNotesAndScale(string selectedScale, IEnumerable<string> selectedNotes)
         {
             UpdateSelectedNotes(selectedNotes);
 
             if (SelectedNotes.Count > 2)
             {
-                Scales = DictionaryService.FindScales(SelectedNotes.Select(a => a.Note)).ToList();
+                Scales = _dictionaryService.FindScales(SelectedNotes.Select(a => a.Note)).ToList();
                 _groupedScalesService.UpdateScaleGroupingModel(Scales, selectedNotes);
             }
             else
@@ -84,8 +83,6 @@ namespace KeyifyWebClient.Models.ViewModels
             }
 
             ApplySelectedScales(selectedScale);
-
-            ApplySelectedNotesToFretboard();
         }
     }
 }

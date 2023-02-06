@@ -54,25 +54,28 @@ namespace KeyifyWebClient.Models.ViewModels
              * We could easily update a matrix and simply display that matrix on the screen.
             */
 
-            foreach (InstrumentString guitarString in Fretboard.InstrumentStrings)
+            if (Fretboard != null && Fretboard.InstrumentStrings.Any())
             {
-                foreach (InstrumentNote instrumentNote in guitarString.Notes)
+                foreach (var guitarString in Fretboard.InstrumentStrings)
                 {
-                    var currentNote = SelectedNotes.SingleOrDefault(s => s.Equals(instrumentNote));
-
-                    if (currentNote != null)
+                    foreach (var instrumentNote in guitarString.Notes)
                     {
-                        instrumentNote.Selected = currentNote.Selected;
-                    }
+                        var currentNote = SelectedNotes.SingleOrDefault(s => s.Equals(instrumentNote));
 
-                    if (SelectedScale != null && SelectedScale.Scale.NoteSet.Contains(instrumentNote.Note))
-                    {
-                        instrumentNote.InSelectedScale = true;
-
-                        if (instrumentNote.InSelectedScale)
+                        if (currentNote != null)
                         {
-                            var currentNoteIndex = SelectedScale.Scale.Notes.IndexOf(instrumentNote.Note);
-                            instrumentNote.DegreeInScale = SelectedScale.Scale.ModeDefinition.ScaleDegrees[currentNoteIndex];
+                            instrumentNote.Selected = currentNote.Selected;
+                        }
+
+                        if (SelectedScale != null && SelectedScale.Scale.NoteSet.Contains(instrumentNote.Note))
+                        {
+                            instrumentNote.InSelectedScale = true;
+
+                            if (instrumentNote.InSelectedScale)
+                            {
+                                var currentNoteIndex = SelectedScale.Scale.Notes.IndexOf(instrumentNote.Note);
+                                instrumentNote.DegreeInScale = SelectedScale.Scale.ModeDefinition.ScaleDegrees[currentNoteIndex];
+                            }
                         }
                     }
                 }
