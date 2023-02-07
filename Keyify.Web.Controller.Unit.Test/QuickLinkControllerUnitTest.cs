@@ -22,8 +22,8 @@ namespace Keyify.Web.Controller.Unit.Test
         public void ValidTokenPassed_TokenConverted_RetrievesGuitarQuickLink_RedirectToHomePageGuitarPage()
         {
             //Arrange
-            var validToken = "validToken";
-            var expected = "/Guitar/";
+            const string expected = "/Guitar/";
+            const string validToken = "validToken";
 
             m_mockConfiguration = new Mock<IConfiguration>();
             m_mockQuickLinkService = new Mock<IQuickLinkService>();
@@ -47,6 +47,62 @@ namespace Keyify.Web.Controller.Unit.Test
 
             //Act
             var result = (RedirectResult)_quickLinkController.Index(validToken);
+
+            //Assert
+            Assert.Equal(expected, result.Url);
+        }
+
+        [Fact]
+        public void InvalidTokenPassed_ExceptionThrown_RedirectedToIndexPage()
+        {
+            //Arrange
+            const string expected = "/";
+            const string invalidToken = "invalidToken";
+
+            m_mockConfiguration = new Mock<IConfiguration>();
+            m_mockQuickLinkService = new Mock<IQuickLinkService>();
+
+            m_mockConfiguration.Setup(c => c[It.IsAny<string>()]).Returns(string.Empty);
+
+            m_mockQuickLinkService.Setup(q => q.DeserializeQuickLink(invalidToken)).Throws(new FormatException("Invalid Format"));
+
+            _quickLinkController = new QuickLinkController(m_mockConfiguration.Object, m_mockQuickLinkService.Object)
+            {
+                TempData = new TempDataDictionary(
+                    Mock.Of<HttpContext>(),
+                    Mock.Of<ITempDataProvider>())
+            };
+
+            //Act
+            var result = (RedirectResult)_quickLinkController.Index(invalidToken);
+
+            //Assert
+            Assert.Equal(expected, result.Url);
+        }
+        
+        [Fact]
+        public void NullToken_ExceptionThrown_RedirectedToIndexPage()
+        {
+            //Arrange
+            const string expected = "/";
+            const string? invalidToken = null;
+
+            m_mockConfiguration = new Mock<IConfiguration>();
+            m_mockQuickLinkService = new Mock<IQuickLinkService>();
+
+            m_mockConfiguration.Setup(c => c[It.IsAny<string>()]).Returns(string.Empty);
+
+            m_mockQuickLinkService.Setup(q => q.DeserializeQuickLink(invalidToken)).Throws(new NullReferenceException("Null Reference"));
+
+            _quickLinkController = new QuickLinkController(m_mockConfiguration.Object, m_mockQuickLinkService.Object)
+            {
+                TempData = new TempDataDictionary(
+                    Mock.Of<HttpContext>(),
+                    Mock.Of<ITempDataProvider>())
+            };
+
+            //Act
+            var result = (RedirectResult)_quickLinkController.Index(invalidToken);
 
             //Assert
             Assert.Equal(expected, result.Url);
