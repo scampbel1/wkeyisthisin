@@ -13,6 +13,7 @@ namespace KeyifyWebClient.Models.ViewModels
     //Be careful renaming this class! (It may not rename the reference in the Views)
     public partial class InstrumentViewModel
     {
+        //TODO: This all needs to be moved to its own service (far too crowded for a View Model!)
         private IScaleService _dictionaryService;
         private IScalesGroupingService _groupedScalesService;
         private IChordTemplateService _chordService;

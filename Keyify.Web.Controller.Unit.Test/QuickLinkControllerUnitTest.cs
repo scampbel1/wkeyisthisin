@@ -3,7 +3,6 @@ using Keyify.Web.Enums;
 using Keyify.Web.Enums.Tuning;
 using Keyify.Web.Models.QuickLink;
 using Keyify.Web.Service.Interfaces;
-using KeyifyClassLibrary.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;

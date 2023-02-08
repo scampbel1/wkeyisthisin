@@ -1,21 +1,23 @@
 using Keyify.Models.Interfaces;
 using Keyify.Models.Service;
 using Keyify.Service.Interfaces;
-using KeyifyClassLibrary.Enums;
 using KeyifyClassLibrary.Models.MusicTheory;
 using KeyifyClassLibrary.Service_Models;
 using KeyifyWebClient.Models.ViewModels;
 
 namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 {
-    public class BaseInstrumentControllerUnitTest
+    public class InstrumentControllerUnitTest
     {
+        protected const string _quickLinkScaleKey = "QLscale";
+        protected const string _quickLinkNotesKey = "QLnotes";
+
         protected InstrumentViewModel instrumentViewModel;
         protected Mock<IScaleService> m_MockScaleService;
         protected Mock<IChordTemplateService> m_MockChordTemplateService;
         protected Mock<IScalesGroupingService> m_MockScalesGroupingService;
 
-        public BaseInstrumentControllerUnitTest()
+        public InstrumentControllerUnitTest()
         {
             m_MockScaleService = new Mock<IScaleService>();
             m_MockScalesGroupingService = new Mock<IScalesGroupingService>();

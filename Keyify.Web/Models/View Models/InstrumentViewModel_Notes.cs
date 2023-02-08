@@ -8,6 +8,7 @@ namespace KeyifyWebClient.Models.ViewModels
 {
     public partial class InstrumentViewModel
     {
+        //TODO: This can be replaced by passing in int/enum values as part of the request - conversion is needless
         private void UpdateSelectedNotes(IEnumerable<string> selectedNotes)
         {
             var noteStack = new Stack<string>(selectedNotes);
