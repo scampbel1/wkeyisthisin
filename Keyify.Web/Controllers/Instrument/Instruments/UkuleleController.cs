@@ -16,7 +16,7 @@ namespace Keyify.Controllers.Instrument.Instruments
         {
             _tuning = new StandardUkuleleTuning();
 
-            _instrumentViewModel.UpdateViewModel(_instrumentName, _tuning, _fretCount);
+            ViewModel.UpdateViewModel(_instrumentName, _tuning, _fretCount);
         }
     }
 }

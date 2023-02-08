@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Keyify.Web.Controller.Unit.Test
 {
-    public class QuickLinkControllerUnitTest
+    public class QuickLinkControllerUnitTests
     {
         private QuickLinkController? _quickLinkController;
         private Mock<IConfiguration>? m_mockConfiguration;

@@ -1,21 +1,18 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+﻿using Keyify.Models.Service;
+using KeyifyClassLibrary.Models.MusicTheory;
+using KeyifyClassLibrary.Service_Models;
 
 namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 {
-    public class QuickLinkInstrumentControllerUnitTests : InstrumentControllerUnitTest
+    public class QuickLinkInstrumentControllerUnitTests : InstrumentControllerUnitTests
     {
         [Fact]
         public void QuickLink_ScaleOnlyInQuickLinkTempData_ScaleShouldBeNull()
         {
             const string quickLinkScale = "CKumoi";
 
-            var instrumentController = new InstrumentController(instrumentViewModel)
-            {
-                TempData = new TempDataDictionary(
-                    Mock.Of<HttpContext>(),
-                    Mock.Of<ITempDataProvider>())
-            };
+            var instrumentViewModel = InstrumentViewModel;
+            var instrumentController = CreateNewInstrumentController(instrumentViewModel);
 
             instrumentController.TempData[_quickLinkScaleKey] = quickLinkScale;
 
@@ -31,12 +28,8 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             const int _expectedNotesCount = 3;
             var qlNotes = new List<Note> { Note.A, Note.C, Note.G };
 
-            var instrumentController = new InstrumentController(instrumentViewModel)
-            {
-                TempData = new TempDataDictionary(
-                    Mock.Of<HttpContext>(),
-                    Mock.Of<ITempDataProvider>())
-            };
+            var instrumentViewModel = InstrumentViewModel;
+            var instrumentController = CreateNewInstrumentController(instrumentViewModel);
 
             instrumentController.TempData[_quickLinkNotesKey] = qlNotes;
 
@@ -53,17 +46,25 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             const string _excpectedQuickLinkScale = "CKumoi";
             var qlNotes = new List<Note> { Note.A, Note.C, Note.G };
 
-            var instrumentController = new InstrumentController(instrumentViewModel)
-            {
-                TempData = new TempDataDictionary(
-                    Mock.Of<HttpContext>(),
-                    Mock.Of<ITempDataProvider>())
-            };
+            var instrumentViewModel = InstrumentViewModel;
+            var instrumentController = CreateNewInstrumentController(instrumentViewModel);
+
+            m_MockScaleService.Setup(m => m.FindScales(It.IsAny<IEnumerable<Note>>())).Returns(
+                new[] {
+                    new ScaleEntry(new GeneratedScale(
+                        Note.C,
+                        new ModeDefinition(
+                            Mode.Kumoi,
+                            new Interval[] { Interval.R, Interval.W, Interval.h, Interval.WW, Interval.W, Interval.Wh},
+                            new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fifth, Degree.Sixth, Degree.Eighth })))
+                });
 
             instrumentController.TempData[_quickLinkNotesKey] = qlNotes;
             instrumentController.TempData[_quickLinkScaleKey] = _excpectedQuickLinkScale;
 
             instrumentController.Index();
+
+            m_MockScaleService.Reset();
 
             Assert.Equal(_expectedNotesCount, instrumentViewModel.SelectedNotes.Count);
             Assert.Equal(_excpectedQuickLinkScale, instrumentViewModel.SelectedScale.ScaleLabel);

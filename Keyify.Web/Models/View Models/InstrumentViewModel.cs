@@ -22,6 +22,8 @@ namespace KeyifyWebClient.Models.ViewModels
         //      -->  {InstrumentName} - {SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp}
         public string ViewTitle => $"What Key Is This In?";
 
+        public bool IsSelectionLocked { get; set; }
+
         public List<InstrumentNote> Notes { get; } = new List<InstrumentNote>();
         public string InstrumentName { get; set; }
 
