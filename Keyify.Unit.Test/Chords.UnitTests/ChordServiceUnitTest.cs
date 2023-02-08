@@ -5,7 +5,6 @@ using Keyify.Service.Caches;
 using Keyify.Service.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
 
 namespace Keyify.Unit.Test.Chords.UnitTests
 {

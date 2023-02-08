@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Keyify.Web\Keyify.Web.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ChordDictionary.UnitTest\" />
+  </ItemGroup>
+
 </Project>

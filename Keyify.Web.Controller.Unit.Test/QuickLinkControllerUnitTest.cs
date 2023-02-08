@@ -79,7 +79,7 @@ namespace Keyify.Web.Controller.Unit.Test
             //Assert
             Assert.Equal(expected, result.Url);
         }
-        
+
         [Fact]
         public void NullToken_ExceptionThrown_RedirectedToIndexPage()
         {
