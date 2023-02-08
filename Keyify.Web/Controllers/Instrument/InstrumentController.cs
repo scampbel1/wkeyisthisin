@@ -53,5 +53,11 @@ namespace Keyify.Controllers.Instrument
 
             return PartialView("Fretboard", _instrumentViewModel);
         }
+
+        [HttpPost]
+        public ActionResult LockChordSelection(List<string> selectedNotes, string selectedScale)
+        {
+            return PartialView("Fretboard", _instrumentViewModel);
+        }
     }
 }
