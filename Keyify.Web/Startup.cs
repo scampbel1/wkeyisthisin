@@ -27,10 +27,12 @@ namespace Keyify
         {
             services.AddControllersWithViews();
             services.AddSingleton(typeof(ModeDataCache), typeof(ModeDataCache));
+            services.AddSingleton(typeof(ChordTemplateDataCache), typeof(ChordTemplateDataCache));
+            services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
+            
             services.AddSingleton(typeof(IModeService), typeof(ModeService));
             services.AddSingleton(typeof(IQuickLinkService), typeof(QuickLinkService));
             services.AddSingleton(typeof(IScaleService), typeof(ScaleService));
-            services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
             services.AddTransient(typeof(IScalesGroupingService), typeof(ScalesGroupingService));
             services.AddSingleton(typeof(IChordTemplateService), typeof(ChordTemplateService));
         }
