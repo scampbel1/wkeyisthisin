@@ -76,11 +76,14 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
 
         private static IEnumerable<object[]> GenerateQuickLinkTestArguments()
         {
+            const string quickLinkCode1 = "eyJJbnN0cnVtZW50VHlwZSI6MCwiVHVuaW5nIjowLCJTZWxlY3RlZE5vdGVzIjpbMCwyLDMsNSw3LDgsMTBdLCJTZWxlY3RlZFNjYWxlIjoiQ0lvbmlhbiIsIkluc3RydW1lbnROYW1lIjoiR3VpdGFyIn0=";
+            const string quickLinkCode2 = "eyJJbnN0cnVtZW50VHlwZSI6MSwiVHVuaW5nIjoxLCJTZWxlY3RlZE5vdGVzIjpbOSwxLDExLDQsNl0sIlNlbGVjdGVkU2NhbGUiOiJCSW9uaWFuIiwiSW5zdHJ1bWVudE5hbWUiOiJCYXNzIn0=";
+
             return new List<object[]>
             {
                 new object[]
                 {
-                    "eyJJbnN0cnVtZW50VHlwZSI6MCwiVHVuaW5nIjowLCJTZWxlY3RlZE5vdGVzIjpbMCwyLDMsNSw3LDgsMTBdLCJTZWxlY3RlZFNjYWxlIjoiQ0lvbmlhbiIsIkluc3RydW1lbnROYW1lIjoiR3VpdGFyIn0=",
+                    quickLinkCode1,
                     new QuickLink() {
                         InstrumentType = InstrumentType.Guitar,
                         Tuning = Tuning.Guitar_Standard,
@@ -90,7 +93,7 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
                 },
                 new object[]
                 {
-                    "eyJJbnN0cnVtZW50VHlwZSI6MSwiVHVuaW5nIjoxLCJTZWxlY3RlZE5vdGVzIjpbOSwxLDExLDQsNl0sIlNlbGVjdGVkU2NhbGUiOiJCSW9uaWFuIiwiSW5zdHJ1bWVudE5hbWUiOiJCYXNzIn0=",
+                    quickLinkCode2,
                     new QuickLink() {
                         InstrumentType = InstrumentType.Bass,
                         Tuning = Tuning.Bass_Standard,
