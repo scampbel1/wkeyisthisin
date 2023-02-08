@@ -33,7 +33,7 @@ namespace Keyify.Database.Integration.Tests.Test
 
                 //Assert
                 Assert.Single(chord);
-                Assert.Equal(GuitarChordTabConstant.StandardTuning_E_Major, tabResult);
+                Assert.Equal(TestGuitarChordTabConstant.StandardTuning_E_Major, tabResult);
             }
         }
 

@@ -16,13 +16,15 @@ namespace Keyify.Web.Controller.Unit.Test
     {
         private InstrumentViewModel instrumentViewModel;
         private Mock<IScaleService> m_MockScaleService;
+        private Mock<IChordTemplateService> m_MockChordTemplateService;
         private Mock<IScalesGroupingService> m_MockScalesGroupingService;
 
         public InstrumentControllerUnitTest()
         {
             m_MockScaleService = new Mock<IScaleService>();
             m_MockScalesGroupingService = new Mock<IScalesGroupingService>();
-            instrumentViewModel = new InstrumentViewModel(m_MockScaleService.Object, m_MockScalesGroupingService.Object);
+            m_MockChordTemplateService = new Mock<IChordTemplateService>();
+            instrumentViewModel = new InstrumentViewModel(m_MockScaleService.Object, m_MockScalesGroupingService.Object, m_MockChordTemplateService.Object);
 
             m_MockScaleService.Setup(m => m.FindScales(It.IsAny<IEnumerable<Note>>())).Returns(
                 new[] {

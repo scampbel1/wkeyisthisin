@@ -5,24 +5,24 @@ using System.Collections.Generic;
 
 namespace Keyify.Service.Caches
 {
-    public class ChordDataCache
+    public class ChordTemplateDataCache
     {
-        private Dictionary<ChordType, Interval[]> _chordDefinitions => GenerateChordDefinitionDictionary();
+        private Dictionary<ChordType, Interval[]> _chordTemplateDefinitions => GenerateChordTemplateDefinitions();
 
-        public readonly HashSet<ChordTemplate> Chords;
+        public readonly HashSet<ChordTemplate> ChordTemplates;
 
-        public ChordDataCache()
+        public ChordTemplateDataCache()
         {
-            Chords = GenerateChordTemplates();
+            ChordTemplates = GenerateChordTemplates();
         }
 
         private HashSet<ChordTemplate> GenerateChordTemplates()
         {
             var chordTemplates = new HashSet<ChordTemplate>();
 
-            foreach (var chordDefinition in _chordDefinitions)
+            foreach (var chordTemplateDefinition in _chordTemplateDefinitions)
             {
-                GenerateChordTemplatesByChordType(chordDefinition.Key, chordDefinition.Value, chordTemplates);
+                GenerateChordTemplatesByChordType(chordTemplateDefinition.Key, chordTemplateDefinition.Value, chordTemplates);
             }
 
             return chordTemplates;
@@ -34,12 +34,12 @@ namespace Keyify.Service.Caches
 
             while (currentNote <= Note.Ab)
             {
-                chordTemplates.Add(new ChordTemplate(chordType, GenerateChordDefinitionNotes(currentNote, intervals)));
+                chordTemplates.Add(new ChordTemplate(chordType, GenerateChordTemplateDefinitionNotes(currentNote, intervals)));
                 currentNote++;
             }
         }
 
-        private Note[] GenerateChordDefinitionNotes(Note rootNote, Interval[] intervals)
+        private Note[] GenerateChordTemplateDefinitionNotes(Note rootNote, Interval[] intervals)
         {
             var count = 0;
             var currentNote = rootNote;
@@ -71,7 +71,7 @@ namespace Keyify.Service.Caches
          * -> could use a Builder Pattern here.
          */
 
-        private Dictionary<ChordType, Interval[]> GenerateChordDefinitionDictionary()
+        private Dictionary<ChordType, Interval[]> GenerateChordTemplateDefinitions()
         {
             var chordDefinitions = new Dictionary<ChordType, Interval[]>();
 

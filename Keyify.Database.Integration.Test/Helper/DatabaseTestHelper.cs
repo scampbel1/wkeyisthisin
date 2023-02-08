@@ -77,7 +77,7 @@ namespace Keyify.Database.Integration.Test.Helper
         {
             using var memoryStream = new MemoryStream();
 
-            JsonSerializer.Serialize(memoryStream, GuitarChordTabConstant.StandardTuning_E_Major);
+            JsonSerializer.Serialize(memoryStream, TestGuitarChordTabConstant.StandardTuning_E_Major);
 
             return new
             {

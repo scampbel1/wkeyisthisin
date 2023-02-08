@@ -1,6 +1,7 @@
 using Keyify.Models.Interfaces;
 using Keyify.Models.Service;
 using Keyify.Models.View_Models.Misc;
+using Keyify.Service;
 using Keyify.Service.Caches;
 using Keyify.Service.Interfaces;
 using Keyify.Web.Service;
@@ -31,6 +32,7 @@ namespace Keyify
             services.AddSingleton(typeof(IScaleService), typeof(ScaleService));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
             services.AddTransient(typeof(IScalesGroupingService), typeof(ScalesGroupingService));
+            services.AddSingleton(typeof(IChordTemplateService), typeof(ChordTemplateService));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

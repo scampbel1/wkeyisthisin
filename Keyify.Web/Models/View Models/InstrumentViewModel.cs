@@ -15,6 +15,7 @@ namespace KeyifyWebClient.Models.ViewModels
     {
         private IScaleService _dictionaryService;
         private IScalesGroupingService _groupedScalesService;
+        private IChordTemplateService _chordService;
 
         //TODO: Find a way to update ViewTitle using ajax
         //      -->  {InstrumentName} - {SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp}
@@ -38,10 +39,11 @@ namespace KeyifyWebClient.Models.ViewModels
         private List<ScaleGroupingEntry> AvailableKeyGroups => _groupedScalesService.GroupedKeys;
         private List<ScaleGroupingEntry> AvailableScaleGroups => _groupedScalesService.GroupedScales;
 
-        public InstrumentViewModel(IScaleService dictionaryService, IScalesGroupingService scalesGroupingService)
+        public InstrumentViewModel(IScaleService dictionaryService, IScalesGroupingService scalesGroupingService, IChordTemplateService chordService)
         {
             _dictionaryService = dictionaryService;
             _groupedScalesService = scalesGroupingService;
+            _chordService = chordService;
 
             Notes = PopulateSelectedNotesList();
         }
