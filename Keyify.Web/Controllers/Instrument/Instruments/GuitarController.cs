@@ -16,7 +16,7 @@ namespace Keyify.Controllers.Instrument.Instruments
         {
             _tuning = new StandardGuitarTuning();
 
-            ViewModel.UpdateViewModel(_instrumentName, _tuning, _fretCount);
+            Model.UpdateViewModel(_instrumentName, _tuning, _fretCount);
         }
     }
 }

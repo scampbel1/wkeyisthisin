@@ -8,11 +8,11 @@ namespace Keyify.Controllers.Instrument
 {
     public class InstrumentController : Controller
     {
-        protected InstrumentViewModel ViewModel;
+        protected InstrumentViewModel Model;
 
         public InstrumentController(InstrumentViewModel instrumentViewModel)
         {
-            ViewModel = instrumentViewModel;
+            Model = instrumentViewModel;
         }
 
         [HttpGet]
@@ -23,12 +23,12 @@ namespace Keyify.Controllers.Instrument
 
             if (selectedNotes != null)
             {
-                ViewModel.ProcessNotesAndScale(selectedScale, selectedNotes.Select(n => n.ToString()));
+                Model.ProcessNotesAndScale(selectedScale, selectedNotes.Select(n => n.ToString()));
             }
 
-            ViewModel.ApplySelectedNotesToFretboard();
+            Model.ApplySelectedNotesToFretboard();
 
-            return View(ViewModel);
+            return View(Model);
         }
 
         [HttpPost]
@@ -48,26 +48,28 @@ namespace Keyify.Controllers.Instrument
                 }
             }
 
-            ViewModel.ProcessNotesAndScale(selectedScale, previouslySelectedNotes);
-            ViewModel.ApplySelectedNotesToFretboard();
+            Model.ProcessNotesAndScale(selectedScale, previouslySelectedNotes);
+            Model.ApplySelectedNotesToFretboard();
 
-            return PartialView("Fretboard", ViewModel);
+            return PartialView("Fretboard", Model);
         }
 
         [HttpPost]
-        public ActionResult LockSelection(List<string> selectedNotes, string selectedScale)
+        public ActionResult LockSelection(string selectedScale, Note[] selectedNotes)
         {
-            ViewModel.IsSelectionLocked = true;
+            Model.IsSelectionLocked = true;
 
-            return PartialView("Fretboard", ViewModel);
+            var chordTemplates = Model.GetChordsTemplatesForSelection(selectedScale, selectedNotes);
+
+            return PartialView("Fretboard", Model);
         }
 
         [HttpPost]
-        public ActionResult UnockSelection()
+        public ActionResult UnockSelection(string selectedScale, Note[] selectedNotes)
         {
-            ViewModel.IsSelectionLocked = false;
+            Model.IsSelectionLocked = false;
 
-            return PartialView("Fretboard", ViewModel);
+            return PartialView("Fretboard", Model);
         }
     }
 }
