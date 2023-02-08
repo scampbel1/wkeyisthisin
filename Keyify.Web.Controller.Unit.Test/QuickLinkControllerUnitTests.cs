@@ -3,16 +3,14 @@ using Keyify.Web.Enums;
 using Keyify.Web.Enums.Tuning;
 using Keyify.Web.Models.QuickLink;
 using Keyify.Web.Service.Interfaces;
-using KeyifyClassLibrary.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Configuration;
-using Moq;
 
 namespace Keyify.Web.Controller.Unit.Test
 {
-    public class QuickLinkControllerUnitTest
+    public class QuickLinkControllerUnitTests
     {
         private QuickLinkController? _quickLinkController;
         private Mock<IConfiguration>? m_mockConfiguration;
@@ -79,7 +77,7 @@ namespace Keyify.Web.Controller.Unit.Test
             //Assert
             Assert.Equal(expected, result.Url);
         }
-        
+
         [Fact]
         public void NullToken_ExceptionThrown_RedirectedToIndexPage()
         {

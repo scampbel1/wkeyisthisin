@@ -5,15 +5,14 @@ using Keyify.Service.Caches;
 using Keyify.Service.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
 
-namespace Keyify.Unit.Test.Chords.UnitTests
+namespace Keyify.Unit.Test.ChordTemplates.UnitTests
 {
-    public class ChordServiceUnitTest
+    public class ChordTemplateServiceUnitTest
     {
         public static IEnumerable<object[]> ChordTestParameters => GenerateChordTestArguments();
 
-        private IChordService _chordService = new ChordService(new ChordDataCache());
+        private IChordTemplateService _chordTemplateService = new ChordTemplateService(new ChordTemplateDataCache());
 
         [Theory, MemberData(nameof(ChordTestParameters))]
         public void PassNoteSequenceIntoChordService_ReturnsExpectedChord(KeyifyClassLibrary.Enums.Note[] selectedChordNotes, ChordTemplate expectedChord)
@@ -21,7 +20,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             //Arrange - Given
             var inputNotes = selectedChordNotes;
             //Act - When
-            var chordResult = _chordService.FindChordWithNoteSequence(inputNotes).SingleOrDefault();
+            var chordResult = _chordTemplateService.FindChordTemplateWithNoteSequence(inputNotes).SingleOrDefault();
             //Assert - Then
             Assert.Equal(expected: expectedChord, actual: chordResult);
             Assert.Equal(expected: expectedChord.Type, actual: chordResult.Type);
@@ -34,7 +33,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             var expectedChordName = "A Major";
             var inputNotes = new[] { KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.Db, KeyifyClassLibrary.Enums.Note.E };
             //Act - When
-            var chordResult = _chordService.FindChordWithNoteSequence(inputNotes).SingleOrDefault();
+            var chordResult = _chordTemplateService.FindChordTemplateWithNoteSequence(inputNotes).SingleOrDefault();
             //Assert - Then
             Assert.Equal(expectedChordName, chordResult.Name);
         }
@@ -46,7 +45,7 @@ namespace Keyify.Unit.Test.Chords.UnitTests
             var expectedChordName = "Gb Minor";
             var inputNotes = new[] { KeyifyClassLibrary.Enums.Note.Gb, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.Db };
             //Act - When
-            var chordResult = _chordService.FindChordWithNoteSequence(inputNotes).SingleOrDefault();
+            var chordResult = _chordTemplateService.FindChordTemplateWithNoteSequence(inputNotes).SingleOrDefault();
             //Assert - Then
             Assert.Equal(expectedChordName, chordResult.Name);
         }

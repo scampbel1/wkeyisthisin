@@ -2,7 +2,6 @@
 using Keyify.Service.Caches;
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
 
 namespace Keyify.Unit.Test.ScaleDictionary.UnitTests
 {

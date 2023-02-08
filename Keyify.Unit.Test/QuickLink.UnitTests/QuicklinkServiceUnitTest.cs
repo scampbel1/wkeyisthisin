@@ -5,7 +5,6 @@ using Keyify.Web.Service;
 using Keyify.Web.Service.Interfaces;
 using KeyifyClassLibrary.Enums;
 using System.Collections.Generic;
-using Xunit;
 
 namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
 {

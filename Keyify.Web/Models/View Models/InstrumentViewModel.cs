@@ -1,9 +1,12 @@
 ﻿using Keyify.Models.Interfaces;
 using Keyify.Models.Service;
+using Keyify.Models.Service_Models;
 using Keyify.Models.View_Models.Misc;
 using Keyify.Service.Interfaces;
 using Keyify.Web.Models.Tunings;
+using KeyifyClassLibrary.Enums;
 using KeyifyWebClient.Models.Instruments;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -13,12 +16,16 @@ namespace KeyifyWebClient.Models.ViewModels
     //Be careful renaming this class! (It may not rename the reference in the Views)
     public partial class InstrumentViewModel
     {
+        //TODO: This all needs to be moved to its own service (far too crowded for a View Model!)
         private IScaleService _dictionaryService;
         private IScalesGroupingService _groupedScalesService;
+        private IChordTemplateService _chordTemplateService;
 
         //TODO: Find a way to update ViewTitle using ajax
         //      -->  {InstrumentName} - {SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp}
         public string ViewTitle => $"What Key Is This In?";
+
+        public bool IsSelectionLocked { get; set; }
 
         public List<InstrumentNote> Notes { get; } = new List<InstrumentNote>();
         public string InstrumentName { get; set; }
@@ -38,10 +45,11 @@ namespace KeyifyWebClient.Models.ViewModels
         private List<ScaleGroupingEntry> AvailableKeyGroups => _groupedScalesService.GroupedKeys;
         private List<ScaleGroupingEntry> AvailableScaleGroups => _groupedScalesService.GroupedScales;
 
-        public InstrumentViewModel(IScaleService dictionaryService, IScalesGroupingService scalesGroupingService)
+        public InstrumentViewModel(IScaleService dictionaryService, IScalesGroupingService scalesGroupingService, IChordTemplateService chordService)
         {
             _dictionaryService = dictionaryService;
             _groupedScalesService = scalesGroupingService;
+            _chordTemplateService = chordService;
 
             Notes = PopulateSelectedNotesList();
         }
@@ -83,6 +91,15 @@ namespace KeyifyWebClient.Models.ViewModels
             }
 
             ApplySelectedScales(selectedScale);
+        }
+
+        public List<ChordTemplate> GetChordsTemplatesForSelection(string selectedScale, Note[] selectedNotes)
+        {
+            //TODO: Implement and test scale selection (prioritise scale over note)
+
+            var chordTemplates = _chordTemplateService.FindChordTemplateWithNoteSequence(selectedNotes);
+
+            return chordTemplates;
         }
     }
 }

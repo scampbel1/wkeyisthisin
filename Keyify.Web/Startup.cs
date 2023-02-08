@@ -1,6 +1,7 @@
 using Keyify.Models.Interfaces;
 using Keyify.Models.Service;
 using Keyify.Models.View_Models.Misc;
+using Keyify.Service;
 using Keyify.Service.Caches;
 using Keyify.Service.Interfaces;
 using Keyify.Web.Service;
@@ -26,11 +27,14 @@ namespace Keyify
         {
             services.AddControllersWithViews();
             services.AddSingleton(typeof(ModeDataCache), typeof(ModeDataCache));
+            services.AddSingleton(typeof(ChordTemplateDataCache), typeof(ChordTemplateDataCache));
+            services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
+            
             services.AddSingleton(typeof(IModeService), typeof(ModeService));
             services.AddSingleton(typeof(IQuickLinkService), typeof(QuickLinkService));
             services.AddSingleton(typeof(IScaleService), typeof(ScaleService));
-            services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
             services.AddTransient(typeof(IScalesGroupingService), typeof(ScalesGroupingService));
+            services.AddSingleton(typeof(IChordTemplateService), typeof(ChordTemplateService));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

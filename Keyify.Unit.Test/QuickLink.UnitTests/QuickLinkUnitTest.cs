@@ -2,7 +2,6 @@
 using Keyify.Web.Enums.Tuning;
 using Keyify.Web.Models.QuickLink;
 using KeyifyClassLibrary.Enums;
-using Xunit;
 
 namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
 {

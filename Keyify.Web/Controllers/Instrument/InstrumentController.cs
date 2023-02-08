@@ -8,11 +8,11 @@ namespace Keyify.Controllers.Instrument
 {
     public class InstrumentController : Controller
     {
-        protected InstrumentViewModel _instrumentViewModel;
+        protected InstrumentViewModel Model;
 
         public InstrumentController(InstrumentViewModel instrumentViewModel)
         {
-            _instrumentViewModel = instrumentViewModel;
+            Model = instrumentViewModel;
         }
 
         [HttpGet]
@@ -23,12 +23,12 @@ namespace Keyify.Controllers.Instrument
 
             if (selectedNotes != null)
             {
-                _instrumentViewModel.ProcessNotesAndScale(selectedScale, selectedNotes.Select(n => n.ToString()));
+                Model.ProcessNotesAndScale(selectedScale, selectedNotes.Select(n => n.ToString()));
             }
 
-            _instrumentViewModel.ApplySelectedNotesToFretboard();
+            Model.ApplySelectedNotesToFretboard();
 
-            return View(_instrumentViewModel);
+            return View(Model);
         }
 
         [HttpPost]
@@ -48,10 +48,28 @@ namespace Keyify.Controllers.Instrument
                 }
             }
 
-            _instrumentViewModel.ProcessNotesAndScale(selectedScale, previouslySelectedNotes);
-            _instrumentViewModel.ApplySelectedNotesToFretboard();
+            Model.ProcessNotesAndScale(selectedScale, previouslySelectedNotes);
+            Model.ApplySelectedNotesToFretboard();
 
-            return PartialView("Fretboard", _instrumentViewModel);
+            return PartialView("Fretboard", Model);
+        }
+
+        [HttpPost]
+        public ActionResult LockSelection(string selectedScale, Note[] selectedNotes)
+        {
+            Model.IsSelectionLocked = true;
+
+            var chordTemplates = Model.GetChordsTemplatesForSelection(selectedScale, selectedNotes);
+
+            return PartialView("Fretboard", Model);
+        }
+
+        [HttpPost]
+        public ActionResult UnockSelection(string selectedScale, Note[] selectedNotes)
+        {
+            Model.IsSelectionLocked = false;
+
+            return PartialView("Fretboard", Model);
         }
     }
 }

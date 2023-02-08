@@ -2,7 +2,6 @@
 using KeyifyClassLibrary.Enums;
 using KeyifyClassLibrary.Models.MusicTheory;
 using KeyifyClassLibrary.Service_Models;
-using Xunit;
 
 namespace ScaleDictionaryTests
 {
