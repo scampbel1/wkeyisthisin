@@ -13,11 +13,6 @@ namespace Keyify.Models.Tunings.Bass
             _notes = notes;
         }
 
-        public CustomBassTuning(string notes)
-        {
-            _notes = ConvertStringInputToNotes(notes);
-        }
-
         public override Note[] Notes => throw new NotImplementedException();
 
         public override int StringCount => throw new NotImplementedException();

@@ -1,5 +1,7 @@
 using Keyify.Models.Interfaces;
-using Keyify.Service.Interfaces;
+using Keyify.Web.Service;
+using Keyify.Web.Service.Interfaces;
+using KeyifyWebClient.Models.Instruments;
 using KeyifyWebClient.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -11,22 +13,22 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
         protected const string _quickLinkScaleKey = "QLscale";
         protected const string _quickLinkNotesKey = "QLnotes";
 
-        protected Mock<IScaleService> m_MockScaleService;
-        protected Mock<IChordTemplateService> m_MockChordTemplateService;
-        protected Mock<IScalesGroupingService> m_MockScalesGroupingService;
+        protected Mock<IMusicTheoryService> m_MockMusicTheoryService;
+        protected Mock<IGroupedScalesService> m_MockGroupedScalesService;
+        protected IFretboardService FretboardService;
 
-        protected InstrumentViewModel InstrumentViewModel => new InstrumentViewModel(m_MockScaleService.Object, m_MockScalesGroupingService.Object, m_MockChordTemplateService.Object);
+        protected InstrumentViewModel InstrumentViewModel => new InstrumentViewModel(new Fretboard());
 
         public InstrumentControllerUnitTests()
         {
-            m_MockScaleService = new Mock<IScaleService>();
-            m_MockScalesGroupingService = new Mock<IScalesGroupingService>();
-            m_MockChordTemplateService = new Mock<IChordTemplateService>();
+            m_MockMusicTheoryService = new Mock<IMusicTheoryService>();
+            m_MockGroupedScalesService = new Mock<IGroupedScalesService>();
+            FretboardService = new FretboardService(m_MockMusicTheoryService.Object, m_MockGroupedScalesService.Object);
         }
 
-        protected static InstrumentController CreateNewInstrumentController(InstrumentViewModel instrumentViewModel)
+        protected InstrumentController CreateNewInstrumentController(InstrumentViewModel instrumentViewModel)
         {
-            return new InstrumentController(instrumentViewModel)
+            return new InstrumentController(instrumentViewModel, m_MockMusicTheoryService.Object, m_MockGroupedScalesService.Object, FretboardService)
             {
                 TempData = new TempDataDictionary(
                     Mock.Of<HttpContext>(),

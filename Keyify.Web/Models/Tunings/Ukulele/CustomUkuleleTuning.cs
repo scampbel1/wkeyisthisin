@@ -13,11 +13,6 @@ namespace KeyifyWebClient.Models.Instruments
             _notes = notes;
         }
 
-        public CustomUkuleleTuning(string notes)
-        {
-            _notes = ConvertStringInputToNotes(notes);
-        }
-
         public override Note[] Notes => _notes;
 
         public override int StringCount => _notes.Count();

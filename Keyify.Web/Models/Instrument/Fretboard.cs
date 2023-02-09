@@ -1,4 +1,5 @@
-﻿using Keyify.Web.Models.Tunings;
+﻿using Keyify.Web.Enums;
+using Keyify.Web.Models.Tunings;
 using KeyifyClassLibrary.Enums;
 using System.Collections.Generic;
 
@@ -6,15 +7,20 @@ namespace KeyifyWebClient.Models.Instruments
 {
     public class Fretboard
     {
+        public InstrumentType InstrumentType { get; set; }
         public int FretCount { get; set; }
         public Tuning Tuning { get; set; }
-        public List<InstrumentString> InstrumentStrings { get; set; }
+        public List<FretboardString> InstrumentStrings { get; set; } = new List<FretboardString>();
 
-        public Fretboard(Tuning tuning, int fretCount)
+        public void UpdateFretboard(InstrumentType instrumentType, Tuning tuning, int fretCount)
         {
+            InstrumentStrings = null;
+
+            InstrumentType = instrumentType;
             FretCount = fretCount;
             Tuning = tuning;
-            InstrumentStrings = new List<InstrumentString>(tuning.StringCount);
+            InstrumentStrings = new List<FretboardString>(tuning.StringCount);
+
             PopulateFretboard();
         }
 
@@ -26,7 +32,7 @@ namespace KeyifyWebClient.Models.Instruments
         {
             foreach (Note note in Tuning.Notes)
             {
-                InstrumentStrings.Add(new InstrumentString(note, FretCount));
+                InstrumentStrings.Add(new FretboardString(note, FretCount));
             }
 
             InstrumentStrings.Reverse();

@@ -8,17 +8,18 @@ using System.Linq;
 
 namespace Keyify.Models.View_Models.Misc
 {
-    public class ScalesGroupingService : IScalesGroupingService
+    public class GroupedScalesService : IGroupedScalesService
     {
         private List<ScaleGroupingEntry> KeyGroupingEntries { get; init; } = new List<ScaleGroupingEntry>();
         private List<ScaleGroupingEntry> ScaleGroupingEntries { get; init; } = new List<ScaleGroupingEntry>();
 
         public List<ScaleGroupingEntry> GroupedScales => ScaleGroupingEntries;
         public List<ScaleGroupingEntry> GroupedKeys => KeyGroupingEntries;
+
         public int TotalScaleCount => ScaleGroupingEntries.Sum(s => s.Count);
         public int TotalKeyCount => KeyGroupingEntries.Sum(k => k.Count);
 
-        public void UpdateScaleGroupingModel(List<ScaleEntry> scales, IEnumerable<string> selectedNotes)
+        public void UpdateScaleGroupingModel(IEnumerable<ScaleEntry> scales, IEnumerable<Note> selectedNotes)
         {
             ScaleGroupingEntries.Clear();
 
@@ -44,13 +45,11 @@ namespace Keyify.Models.View_Models.Misc
             }
         }
 
-        private IEnumerable<string> ConvertSelectedNotesToSharpNotes(IEnumerable<string> selectedNotes)
+        private IEnumerable<string> ConvertSelectedNotesToSharpNotes(IEnumerable<Note> selectedNotes)
         {
             var sharpNotes = new List<string>();
 
-            var notes = ConvertNoteStringArrayIntoNotes(selectedNotes.ToArray());
-
-            foreach (var note in notes)
+            foreach (var note in selectedNotes)
             {
                 sharpNotes.Add(NoteHelper.ConvertNoteToStringEquivalent(note, true));
             }
@@ -58,7 +57,7 @@ namespace Keyify.Models.View_Models.Misc
             return sharpNotes;
         }
 
-        private List<HashSet<Note>> GenerateNoteHashSets(List<ScaleEntry> scales)
+        private IEnumerable<HashSet<Note>> GenerateNoteHashSets(IEnumerable<ScaleEntry> scales)
         {
             var distinctSets = new List<HashSet<Note>>();
 

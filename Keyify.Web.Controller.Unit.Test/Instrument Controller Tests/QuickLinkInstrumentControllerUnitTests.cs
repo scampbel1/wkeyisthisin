@@ -49,7 +49,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             var instrumentViewModel = InstrumentViewModel;
             var instrumentController = CreateNewInstrumentController(instrumentViewModel);
 
-            m_MockScaleService.Setup(m => m.FindScales(It.IsAny<IEnumerable<Note>>())).Returns(
+            m_MockMusicTheoryService.Setup(m => m.FindScales(It.IsAny<IEnumerable<Note>>())).Returns(
                 new[] {
                     new ScaleEntry(new GeneratedScale(
                         Note.C,
@@ -64,7 +64,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             instrumentController.Index();
 
-            m_MockScaleService.Reset();
+            m_MockMusicTheoryService.Reset();
 
             Assert.Equal(_expectedNotesCount, instrumentViewModel.SelectedNotes.Count);
             Assert.Equal(_excpectedQuickLinkScale, instrumentViewModel.SelectedScale.ScaleLabel);

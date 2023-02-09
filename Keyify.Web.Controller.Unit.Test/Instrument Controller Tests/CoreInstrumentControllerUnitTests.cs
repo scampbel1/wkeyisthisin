@@ -1,9 +1,6 @@
 ﻿using Keyify.Models.Service;
 using KeyifyClassLibrary.Models.MusicTheory;
 using KeyifyClassLibrary.Service_Models;
-using KeyifyWebClient.Models.ViewModels;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 {
@@ -36,7 +33,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             var instrumentController = CreateNewInstrumentController(instrumentViewModel);
 
 
-            m_MockScaleService.Setup(m => m.FindScales(It.IsAny<IEnumerable<Note>>())).Returns(new[] {
+            m_MockMusicTheoryService.Setup(m => m.FindScales(It.IsAny<IEnumerable<Note>>())).Returns(new[] {
                     new ScaleEntry(new GeneratedScale(
                         Note.C,
                         new ModeDefinition(
@@ -45,9 +42,9 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
                             new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fifth, Degree.Sixth, Degree.Eighth })))
             });
 
-            instrumentController.UpdateFretboardModel(previouslySeletedNotes.Select(p => p.ToString()).ToList(), newNote.ToString(), selectedScale);
+            instrumentController.UpdateFretboardModel(previouslySeletedNotes, newNote, selectedScale);
 
-            m_MockScaleService.Reset();
+            m_MockMusicTheoryService.Reset();
 
             Assert.Equal(selectedScale, instrumentViewModel.SelectedScale.ScaleLabel);
             Assert.Equal(expectedSelectedNotes.OrderBy(e => e), instrumentViewModel.SelectedNotes.Select(s => s.Note).OrderBy(o => o));

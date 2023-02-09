@@ -6,6 +6,7 @@ using Keyify.Service.Caches;
 using Keyify.Service.Interfaces;
 using Keyify.Web.Service;
 using Keyify.Web.Service.Interfaces;
+using KeyifyWebClient.Models.Instruments;
 using KeyifyWebClient.Models.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,15 +27,18 @@ namespace Keyify
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton(typeof(Fretboard), typeof(Fretboard));
             services.AddSingleton(typeof(ModeDataCache), typeof(ModeDataCache));
             services.AddSingleton(typeof(ChordTemplateDataCache), typeof(ChordTemplateDataCache));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
-            
+
             services.AddSingleton(typeof(IModeService), typeof(ModeService));
             services.AddSingleton(typeof(IQuickLinkService), typeof(QuickLinkService));
             services.AddSingleton(typeof(IScaleService), typeof(ScaleService));
-            services.AddTransient(typeof(IScalesGroupingService), typeof(ScalesGroupingService));
+            services.AddTransient(typeof(IGroupedScalesService), typeof(GroupedScalesService));
             services.AddSingleton(typeof(IChordTemplateService), typeof(ChordTemplateService));
+            services.AddSingleton(typeof(IMusicTheoryService), typeof(MusicTheoryService));
+            services.AddSingleton(typeof(IFretboardService), typeof(FretboardService));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
