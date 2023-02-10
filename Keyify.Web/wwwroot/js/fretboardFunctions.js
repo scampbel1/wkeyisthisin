@@ -29,3 +29,16 @@ function ChangeInstrument(url, scale, selectedNotes) {
         }
     });
 }
+
+
+async function copyContent(quickLinkCode) {
+    try {
+        var quickLinkUrl = document.location.protocol + "//" + document.location.host + "/ql/v1/" + quickLinkCode;
+
+        await navigator.clipboard.writeText(quickLinkUrl);
+
+        console.log('Quick Link copied to clipboard');
+    } catch (err) {
+        console.error('Failed to copy Quick Link: ', err);
+    }
+}
