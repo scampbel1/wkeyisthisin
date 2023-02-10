@@ -1,4 +1,5 @@
-﻿using Keyify.Web.Service.Interfaces;
+﻿using Keyify.Web.Models.QuickLink;
+using Keyify.Web.Service.Interfaces;
 using KeyifyClassLibrary.Enums;
 using KeyifyWebClient.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -11,15 +12,17 @@ namespace Keyify.Controllers.Instrument
         private IMusicTheoryService _musicTheoryService;
         private IFretboardService _fretboardService;
         private IScaleGroupingHtmlService _scaleGroupingHtmlService;
+        private IQuickLinkService _quickLinkService;
 
         protected InstrumentViewModel Model;
 
-        public InstrumentController(InstrumentViewModel model, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService)
+        public InstrumentController(InstrumentViewModel model, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService, IQuickLinkService quickLinkService)
         {
             Model = model;
             _musicTheoryService = musicTheoryService;
             _fretboardService = fretboardService;
             _scaleGroupingHtmlService = scaleGroupingHtmlService;
+            _quickLinkService = quickLinkService;
         }
 
         [HttpGet]
@@ -36,6 +39,8 @@ namespace Keyify.Controllers.Instrument
             _fretboardService.ApplyNotesToFretboard(Model.Fretboard, Model.SelectedNotes, Model.SelectedScale);
 
             Model.AvailableKeysAndScalesTableHtml = _scaleGroupingHtmlService.GenerateAvailableKeysAndScalesTable(selectedNotes, Model.Fretboard.InstrumentType, Model.AvailableKeyGroups, Model.AvailableScaleGroups);
+
+            Model.UpdateQuickLinkCode(_quickLinkService.ConvertQuickLinkToBase64(new QuickLink(Model)));
 
             return View(Model);
         }
@@ -62,6 +67,8 @@ namespace Keyify.Controllers.Instrument
             _fretboardService.ApplyNotesToFretboard(Model.Fretboard, Model.SelectedNotes, Model.SelectedScale);
 
             Model.AvailableKeysAndScalesTableHtml = _scaleGroupingHtmlService.GenerateAvailableKeysAndScalesTable(previouslySelectedNotes, Model.Fretboard.InstrumentType, Model.AvailableKeyGroups, Model.AvailableScaleGroups);
+
+            Model.UpdateQuickLinkCode(_quickLinkService.ConvertQuickLinkToBase64(new QuickLink(Model)));
 
             return PartialView("Fretboard", Model);
         }

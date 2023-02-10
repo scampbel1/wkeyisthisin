@@ -17,6 +17,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
         protected Mock<IMusicTheoryService> m_MockMusicTheoryService;
         protected Mock<IGroupedScalesService> m_MockGroupedScalesService;
         protected Mock<IScaleGroupingHtmlService> m_MockScaleGroupingHtmlService;
+        protected Mock<IQuickLinkService> m_MockQuickLinkService;
 
         protected InstrumentViewModel InstrumentViewModel => new InstrumentViewModel(new Fretboard());
 
@@ -25,12 +26,14 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             m_MockMusicTheoryService = new Mock<IMusicTheoryService>();
             m_MockGroupedScalesService = new Mock<IGroupedScalesService>();
             m_MockScaleGroupingHtmlService = new Mock<IScaleGroupingHtmlService>();
+            m_MockQuickLinkService = new Mock<IQuickLinkService>();
+
             FretboardService = new FretboardService(m_MockMusicTheoryService.Object, m_MockGroupedScalesService.Object);
         }
 
         protected InstrumentController CreateNewInstrumentController(InstrumentViewModel instrumentViewModel)
         {
-            return new InstrumentController(instrumentViewModel, m_MockMusicTheoryService.Object, FretboardService, m_MockScaleGroupingHtmlService.Object)
+            return new InstrumentController(instrumentViewModel, m_MockMusicTheoryService.Object, FretboardService, m_MockScaleGroupingHtmlService.Object, m_MockQuickLinkService.Object)
             {
                 TempData = new TempDataDictionary(
                     Mock.Of<HttpContext>(),

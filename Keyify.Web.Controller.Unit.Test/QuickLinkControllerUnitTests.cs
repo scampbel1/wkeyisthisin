@@ -1,6 +1,5 @@
 ﻿using Keyify.Web.Controllers.Quicklink;
 using Keyify.Web.Enums;
-using Keyify.Web.Enums.Tuning;
 using Keyify.Web.Models.QuickLink;
 using Keyify.Web.Service.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -31,7 +30,7 @@ namespace Keyify.Web.Controller.Unit.Test
             m_mockQuickLinkService.Setup(q => q.DeserializeQuickLink(validToken)).Returns(new QuickLink()
             {
                 InstrumentType = InstrumentType.Guitar,
-                Tuning = Tuning.Guitar_Standard,
+                Tuning = new Note[6] { Note.E, Note.A, Note.D, Note.G, Note.B, Note.E },
                 SelectedNotes = new Note[] { Note.A, Note.E, Note.Gb },
                 SelectedScale = "GbAeolian"
             });
