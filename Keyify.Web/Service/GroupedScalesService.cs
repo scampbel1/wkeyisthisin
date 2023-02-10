@@ -1,5 +1,5 @@
 ﻿using Keyify.Models.Service;
-using Keyify.Models.View_Models.Misc;
+using Keyify.Models.ViewModels.Misc;
 using Keyify.Web.Service.Interfaces;
 using KeyifyClassLibrary.Enums;
 using System;

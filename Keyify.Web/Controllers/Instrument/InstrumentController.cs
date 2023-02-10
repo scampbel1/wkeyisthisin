@@ -10,14 +10,16 @@ namespace Keyify.Controllers.Instrument
     {
         private IMusicTheoryService _musicTheoryService;
         private IFretboardService _fretboardService;
+        private IScaleGroupingHtmlService _scaleGroupingHtmlService;
 
         protected InstrumentViewModel Model;
 
-        public InstrumentController(InstrumentViewModel model, IMusicTheoryService musicTheoryService, IFretboardService fretboardService)
+        public InstrumentController(InstrumentViewModel model, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService)
         {
             Model = model;
             _musicTheoryService = musicTheoryService;
             _fretboardService = fretboardService;
+            _scaleGroupingHtmlService = scaleGroupingHtmlService;
         }
 
         [HttpGet]
@@ -33,6 +35,8 @@ namespace Keyify.Controllers.Instrument
 
             _fretboardService.ApplyNotesToFretboard(Model.Fretboard, Model.SelectedNotes, Model.SelectedScale);
 
+            Model.AvailableKeysAndScalesTableHtml = _scaleGroupingHtmlService.GenerateAvailableKeysAndScalesTable(selectedNotes, Model.Fretboard.InstrumentType, Model.AvailableKeyGroups, Model.AvailableScaleGroups);
+
             return View(Model);
         }
 
@@ -40,7 +44,7 @@ namespace Keyify.Controllers.Instrument
         //DON'T CHANGE THE NAMES OF THESE PARAMETERS
         public ActionResult UpdateFretboardModel(List<Note> previouslySelectedNotes, Note? newlySelectedNote, string selectedScale)
         {
-            if (newlySelectedNote != null)
+            if (newlySelectedNote.HasValue)
             {
                 switch (previouslySelectedNotes.Contains(newlySelectedNote.Value))
                 {
@@ -56,6 +60,8 @@ namespace Keyify.Controllers.Instrument
             _fretboardService.ProcessNotesAndScale(Model, previouslySelectedNotes, selectedScale);
 
             _fretboardService.ApplyNotesToFretboard(Model.Fretboard, Model.SelectedNotes, Model.SelectedScale);
+
+            Model.AvailableKeysAndScalesTableHtml = _scaleGroupingHtmlService.GenerateAvailableKeysAndScalesTable(previouslySelectedNotes, Model.Fretboard.InstrumentType, Model.AvailableKeyGroups, Model.AvailableScaleGroups);
 
             return PartialView("Fretboard", Model);
         }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Keyify.Models.View_Models.Misc
+namespace Keyify.Models.ViewModels.Misc
 {
     public class ScaleGroupingEntry
     {
@@ -22,6 +22,7 @@ namespace Keyify.Models.View_Models.Misc
             NotesGroupingLabelHtml = GenerateNotesGroupingLabelHtml(selectedNotes);
         }
 
+        //TODO - Move this to a HTML Service
         private string GenerateNotesGroupingLabelHtml(IEnumerable<Note> selectedNotes)
         {
             var sb = new StringBuilder();

@@ -1,5 +1,5 @@
 ﻿using Keyify.Models.Service;
-using Keyify.Models.View_Models.Misc;
+using Keyify.Models.ViewModels.Misc;
 using KeyifyClassLibrary.Enums;
 using KeyifyClassLibrary.Models.MusicTheory;
 using KeyifyWebClient.Models.ViewModels;

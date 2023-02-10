@@ -12,7 +12,7 @@ namespace Keyify.Controllers.Instrument.Instruments
         private readonly int _fretCount = 24;
         private readonly InstrumentType _instrumentType = InstrumentType.Guitar;
 
-        public GuitarController(InstrumentViewModel instrumentViewModel, IMusicTheoryService musicTheoryService, IFretboardService fretboardService) : base(instrumentViewModel, musicTheoryService, fretboardService)
+        public GuitarController(InstrumentViewModel instrumentViewModel, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService) : base(instrumentViewModel, musicTheoryService, fretboardService, scaleGroupingHtmlService)
         {
             _tuning = new StandardGuitarTuning();
 

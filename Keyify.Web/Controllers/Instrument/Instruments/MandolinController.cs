@@ -12,7 +12,7 @@ namespace Keyify.Controllers.Instrument.Instruments
         private readonly int _fretCount = 20;
         private readonly InstrumentType _instrumentType = InstrumentType.Mandolin;
 
-        public MandolinController(InstrumentViewModel instrumentViewModel, IMusicTheoryService musicTheoryService, IFretboardService fretboardService) : base(instrumentViewModel, musicTheoryService, fretboardService)
+        public MandolinController(InstrumentViewModel instrumentViewModel, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService) : base(instrumentViewModel, musicTheoryService, fretboardService, scaleGroupingHtmlService)
         {
             _tuning = new StandardMandolinTuning();
 

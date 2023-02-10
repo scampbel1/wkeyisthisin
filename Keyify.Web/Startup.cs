@@ -37,6 +37,7 @@ namespace Keyify
             services.AddSingleton(typeof(IChordTemplateService), typeof(ChordTemplateService));
             services.AddSingleton(typeof(IMusicTheoryService), typeof(MusicTheoryService));
             services.AddSingleton(typeof(IFretboardService), typeof(FretboardService));
+            services.AddSingleton(typeof(IScaleGroupingHtmlService), typeof(ScaleGroupingHtmlService));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
