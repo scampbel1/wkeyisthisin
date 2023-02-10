@@ -1,5 +1,4 @@
 ﻿using Keyify.Web.Enums;
-using Keyify.Web.Enums.Tuning;
 using Keyify.Web.Models.QuickLink;
 using Keyify.Web.Service;
 using Keyify.Web.Service.Interfaces;
@@ -26,7 +25,7 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
             var quickLink1 = new QuickLink()
             {
                 InstrumentType = InstrumentType.Guitar,
-                Tuning = Tuning.Guitar_Standard,
+                Tuning = new Note[6] { Note.E, Note.A, Note.D, Note.G, Note.B, Note.E },
                 SelectedNotes = new Note[] { Note.A, Note.E, Note.Gb },
                 SelectedScale = "GbAeolian"
             };
@@ -35,7 +34,7 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
             var quickLink2 = new QuickLink()
             {
                 InstrumentType = InstrumentType.Guitar,
-                Tuning = Tuning.Guitar_Standard,
+                Tuning = new Note[6] { Note.E, Note.A, Note.D, Note.G, Note.B, Note.E },
                 SelectedNotes = new Note[] { Note.E, Note.A, Note.Gb },
                 SelectedScale = "GbAeolian"
             };
@@ -51,7 +50,7 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
             var quickLink1 = new QuickLink()
             {
                 InstrumentType = InstrumentType.Bass,
-                Tuning = Tuning.Bass_Standard,
+                Tuning = new Note[6] { Note.E, Note.A, Note.D, Note.G, Note.B, Note.E },
                 SelectedNotes = new Note[] { Note.A, Note.E, Note.Gb },
                 SelectedScale = "GbAeolian"
             };
@@ -75,8 +74,8 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
 
         private static IEnumerable<object[]> GenerateQuickLinkTestArguments()
         {
-            const string quickLinkCode1 = "eyJJbnN0cnVtZW50VHlwZSI6MCwiVHVuaW5nIjowLCJTZWxlY3RlZE5vdGVzIjpbMCwyLDMsNSw3LDgsMTBdLCJTZWxlY3RlZFNjYWxlIjoiQ0lvbmlhbiIsIkluc3RydW1lbnROYW1lIjoiR3VpdGFyIn0=";
-            const string quickLinkCode2 = "eyJJbnN0cnVtZW50VHlwZSI6MSwiVHVuaW5nIjoxLCJTZWxlY3RlZE5vdGVzIjpbOSwxLDExLDQsNl0sIlNlbGVjdGVkU2NhbGUiOiJCSW9uaWFuIiwiSW5zdHJ1bWVudE5hbWUiOiJCYXNzIn0=";
+            const string quickLinkCode1 = "eyJJbnN0cnVtZW50VHlwZSI6MCwiVHVuaW5nIjpbNywwLDUsMTAsMiw3XSwiU2VsZWN0ZWROb3RlcyI6WzAsMiwzLDUsNyw4LDEwXSwiU2VsZWN0ZWRTY2FsZSI6IkNJb25pYW4iLCJJbnN0cnVtZW50TmFtZSI6Ikd1aXRhciJ9";
+            const string quickLinkCode2 = "eyJJbnN0cnVtZW50VHlwZSI6MSwiVHVuaW5nIjpbNywwLDUsMTAsMiw3XSwiU2VsZWN0ZWROb3RlcyI6WzksMSwxMSw0LDZdLCJTZWxlY3RlZFNjYWxlIjoiQklvbmlhbiIsIkluc3RydW1lbnROYW1lIjoiQmFzcyJ9";
 
             return new List<object[]>
             {
@@ -85,7 +84,7 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
                     quickLinkCode1,
                     new QuickLink() {
                         InstrumentType = InstrumentType.Guitar,
-                        Tuning = Tuning.Guitar_Standard,
+                        Tuning = new Note[6] { Note.E, Note.A, Note.D, Note.G, Note.B, Note.E },
                         SelectedNotes = new Note[] { Note.A, Note.B, Note.C, Note.D, Note.E, Note.F, Note.G },
                         SelectedScale = "CIonian"
                     }
@@ -95,7 +94,7 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
                     quickLinkCode2,
                     new QuickLink() {
                         InstrumentType = InstrumentType.Bass,
-                        Tuning = Tuning.Bass_Standard,
+                        Tuning = new Note[6] { Note.E, Note.A, Note.D, Note.G, Note.B, Note.E },
                         SelectedNotes = new Note[] { Note.Gb, Note.Bb, Note.Ab, Note.Db, Note.Eb, },
                         SelectedScale = "BIonian"
                     }

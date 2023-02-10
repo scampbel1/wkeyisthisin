@@ -12,7 +12,7 @@ namespace Keyify.Controllers.Instrument.Instruments
         private const int _fretCount = 21;
         private readonly InstrumentType _instrumentType = InstrumentType.Bass;
 
-        public BassController(InstrumentViewModel instrumentViewModel, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService) : base(instrumentViewModel, musicTheoryService, fretboardService, scaleGroupingHtmlService)
+        public BassController(InstrumentViewModel instrumentViewModel, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService, IQuickLinkService quickLinkService) : base(instrumentViewModel, musicTheoryService, fretboardService, scaleGroupingHtmlService, quickLinkService)
         {
             _tuning = new StandardBassTuning();
 

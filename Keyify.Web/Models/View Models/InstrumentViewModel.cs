@@ -12,6 +12,8 @@ namespace KeyifyWebClient.Models.ViewModels
     //WARNING: Be careful renaming this class! (It may not rename the reference in the Views)
     public partial class InstrumentViewModel
     {
+        public string QuickLinkCode { get; private set; }
+
         public string ViewTitle = $"What Key Is This In?";
 
         public int TotalKeyCount { get; set; }
@@ -30,9 +32,13 @@ namespace KeyifyWebClient.Models.ViewModels
         }
 
         public void UpdateViewModel(Fretboard fretboard) => Fretboard = fretboard;
+
+        public void UpdateQuickLinkCode(string quickLinkCode) => QuickLinkCode = quickLinkCode;
+
         public string SelectedNotesJson => JsonSerializer.Serialize(SelectedNotes.Select(n => n.Note.ToString()));
+
         public string AvailableKeysAndScalesLabel => $"{GetAvailableKeysLabel()} {GetAvailableScaleLabel()}";
-        public string AvailableKeysAndScalesTableHtml {get;set; }
+        public string AvailableKeysAndScalesTableHtml { get; set; }
 
         public List<FretboardNote> SelectedNotes => NotesMatrix.Where(n => n.Selected).ToList();
         public List<FretboardNote> UnselectedNotes => NotesMatrix.Where(n => !n.Selected).ToList();
