@@ -1,13 +1,16 @@
 ﻿using Keyify.Models.Service;
-using Keyify.Models.View_Models.Misc;
+using Keyify.Models.ViewModels.Misc;
+using KeyifyClassLibrary.Enums;
 using System.Collections.Generic;
 
-namespace Keyify.Models.Interfaces
+namespace Keyify.Web.Service.Interfaces
 {
-    public interface IScalesGroupingService
+    public interface IGroupedScalesService
     {
-        void UpdateScaleGroupingModel(List<ScaleEntry> scales, IEnumerable<string> notes);
+        void UpdateScaleGroupingModel(IEnumerable<ScaleEntry> scaleEntries, IEnumerable<Note> notes);
+
         List<ScaleGroupingEntry> GroupedKeys { get; }
+
         List<ScaleGroupingEntry> GroupedScales { get; }
 
         int TotalScaleCount { get; }

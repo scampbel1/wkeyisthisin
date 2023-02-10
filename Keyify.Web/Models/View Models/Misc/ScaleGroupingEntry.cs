@@ -1,10 +1,12 @@
 ﻿using Keyify.Models.Service;
+using KeyifyClassLibrary.Enums;
+using KeyifyClassLibrary.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Keyify.Models.View_Models.Misc
+namespace Keyify.Models.ViewModels.Misc
 {
     public class ScaleGroupingEntry
     {
@@ -13,28 +15,29 @@ namespace Keyify.Models.View_Models.Misc
         public List<ScaleEntry> GroupedScales { get; init; } = new List<ScaleEntry>();
         public int Count => GroupedScales.Count;
 
-        public ScaleGroupingEntry(List<ScaleEntry> groupedScales, IEnumerable<string> selectedNotes = null)
+        public ScaleGroupingEntry(List<ScaleEntry> groupedScales, IEnumerable<Note> selectedNotes)
         {
             NotesGroupingLabel = groupedScales.FirstOrDefault().NoteSetLabel_Sharp;
             GroupedScales = groupedScales;
             NotesGroupingLabelHtml = GenerateNotesGroupingLabelHtml(selectedNotes);
         }
 
-        private string GenerateNotesGroupingLabelHtml(IEnumerable<string> selectedNotes = null)
+        //TODO - Move this to a HTML Service
+        private string GenerateNotesGroupingLabelHtml(IEnumerable<Note> selectedNotes)
         {
             var sb = new StringBuilder();
 
             sb.Append("<span class=\"scaleResultLabel\">");
 
-            foreach (var note_sharp in GroupedScales.FirstOrDefault().Scale.NoteSetSharp)
+            foreach (var note in GroupedScales.FirstOrDefault().Scale.NoteSet)
             {
-                if (selectedNotes.Contains(note_sharp))
+                if (selectedNotes.Contains(note))
                 {
-                    sb.Append($"<span class=\"scaleSetLabelNote matchedScaleSetLabelNote\">{note_sharp}</span>");
+                    sb.Append($"<span class=\"scaleSetLabelNote matchedScaleSetLabelNote\">{NoteHelper.ConvertNoteToStringEquivalent(note, true)}</span>");
                 }
                 else
                 {
-                    sb.Append($"<span class=\"scaleSetLabelNote\">{note_sharp}</span>");
+                    sb.Append($"<span class=\"scaleSetLabelNote\">{NoteHelper.ConvertNoteToStringEquivalent(note, true)}</span>");
                 }
             }
 

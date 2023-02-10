@@ -3,7 +3,7 @@
     public class ChordInsturmentControllerUnitTests : InstrumentControllerUnitTests
     {
         private const string _selectedScale = "scale";
-        private Note[] _selectedNotes = new [] { Note.A, Note.C, Note.G };
+        private Note[] _selectedNotes = new[] { Note.A, Note.C, Note.G };
 
         [Fact]
         public void LockNoteAndChordSelection_IsSelectionLocked_IsTrue()
@@ -26,11 +26,7 @@
 
             instrumentController.LockSelection(_selectedScale, _selectedNotes);
 
-            m_MockChordTemplateService.Verify(c => c.FindChordTemplateWithNoteSequence(It.IsAny<Note[]>()), Times.Once);
-
-            m_MockChordTemplateService.VerifyAll();
-
-            m_MockChordTemplateService.Reset();
+            m_MockMusicTheoryService.Verify(c => c.GetChordsTemplates(It.IsAny<string>(), It.IsAny<Note[]>()), Times.Once);
         }
 
         [Fact]

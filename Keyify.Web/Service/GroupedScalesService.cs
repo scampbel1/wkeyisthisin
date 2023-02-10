@@ -1,64 +1,50 @@
-﻿using Keyify.Models.Interfaces;
-using Keyify.Models.Service;
+﻿using Keyify.Models.Service;
+using Keyify.Models.ViewModels.Misc;
+using Keyify.Web.Service.Interfaces;
 using KeyifyClassLibrary.Enums;
-using KeyifyClassLibrary.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Keyify.Models.View_Models.Misc
+namespace Keyify.Web.Service
 {
-    public class ScalesGroupingService : IScalesGroupingService
+    public class GroupedScalesService : IGroupedScalesService
     {
         private List<ScaleGroupingEntry> KeyGroupingEntries { get; init; } = new List<ScaleGroupingEntry>();
         private List<ScaleGroupingEntry> ScaleGroupingEntries { get; init; } = new List<ScaleGroupingEntry>();
 
         public List<ScaleGroupingEntry> GroupedScales => ScaleGroupingEntries;
         public List<ScaleGroupingEntry> GroupedKeys => KeyGroupingEntries;
+
         public int TotalScaleCount => ScaleGroupingEntries.Sum(s => s.Count);
         public int TotalKeyCount => KeyGroupingEntries.Sum(k => k.Count);
 
-        public void UpdateScaleGroupingModel(List<ScaleEntry> scales, IEnumerable<string> selectedNotes)
+        public void UpdateScaleGroupingModel(IEnumerable<ScaleEntry> scales, IEnumerable<Note> selectedNotes)
         {
+            KeyGroupingEntries.Clear();
             ScaleGroupingEntries.Clear();
 
             var noteHashSets = GenerateNoteHashSets(scales);
 
-            var sharpNotes = ConvertSelectedNotesToSharpNotes(selectedNotes);
-
             foreach (var scaleNotes in noteHashSets)
             {
                 var allScales = scales.Where(s => s.Scale.NoteSet.SetEquals(scaleNotes)).ToList();
-                var groupedScales = allScales.Where(s => s.IsKey == false).ToList();
                 var groupedKeys = allScales.Where(s => s.IsKey == true).ToList();
+                var groupedScales = allScales.Where(s => s.IsKey == false).ToList();
 
                 if (groupedScales.Any())
                 {
-                    ScaleGroupingEntries.Add(new ScaleGroupingEntry(groupedScales, sharpNotes));
+                    ScaleGroupingEntries.Add(new ScaleGroupingEntry(groupedScales, selectedNotes));
                 }
 
                 if (groupedKeys.Any())
                 {
-                    KeyGroupingEntries.Add(new ScaleGroupingEntry(groupedKeys, sharpNotes));
+                    KeyGroupingEntries.Add(new ScaleGroupingEntry(groupedKeys, selectedNotes));
                 }
             }
         }
 
-        private IEnumerable<string> ConvertSelectedNotesToSharpNotes(IEnumerable<string> selectedNotes)
-        {
-            var sharpNotes = new List<string>();
-
-            var notes = ConvertNoteStringArrayIntoNotes(selectedNotes.ToArray());
-
-            foreach (var note in notes)
-            {
-                sharpNotes.Add(NoteHelper.ConvertNoteToStringEquivalent(note, true));
-            }
-
-            return sharpNotes;
-        }
-
-        private List<HashSet<Note>> GenerateNoteHashSets(List<ScaleEntry> scales)
+        private IEnumerable<HashSet<Note>> GenerateNoteHashSets(IEnumerable<ScaleEntry> scales)
         {
             var distinctSets = new List<HashSet<Note>>();
 

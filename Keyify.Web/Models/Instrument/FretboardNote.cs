@@ -4,7 +4,7 @@ using System;
 
 namespace KeyifyWebClient.Models.Instruments
 {
-    public class InstrumentNote : IEquatable<InstrumentNote>
+    public class FretboardNote : IEquatable<FretboardNote>
     {
         public Note Note { get; set; }
         public string Sharp { get; set; }
@@ -12,7 +12,7 @@ namespace KeyifyWebClient.Models.Instruments
         public bool InSelectedScale { get; set; }
         public string DegreeInScale { get; set; }
 
-        public InstrumentNote(Note note)
+        public FretboardNote(Note note)
         {
             Note = note;
             Selected = false;
@@ -20,7 +20,7 @@ namespace KeyifyWebClient.Models.Instruments
             Sharp = NoteHelper.ConvertNoteToStringEquivalent(note, true);
         }
 
-        public bool Equals(InstrumentNote other)
+        public bool Equals(FretboardNote other)
         {
             return Note == other.Note;
         }

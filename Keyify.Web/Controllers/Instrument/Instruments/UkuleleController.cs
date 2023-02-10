@@ -1,5 +1,6 @@
 ﻿using Keyify.Web.Enums;
 using Keyify.Web.Models.Tunings;
+using Keyify.Web.Service.Interfaces;
 using KeyifyWebClient.Models.Instruments;
 using KeyifyWebClient.Models.ViewModels;
 
@@ -9,14 +10,15 @@ namespace Keyify.Controllers.Instrument.Instruments
     {
         private readonly Tuning _tuning;
         private readonly int _fretCount = 13;
-        private readonly string _instrumentName = "Ukulele";
         private readonly InstrumentType _instrumentType = InstrumentType.Ukulele;
 
-        public UkuleleController(InstrumentViewModel instrumentViewModel) : base(instrumentViewModel)
+        public UkuleleController(InstrumentViewModel instrumentViewModel, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService) : base(instrumentViewModel, musicTheoryService, fretboardService, scaleGroupingHtmlService)
         {
             _tuning = new StandardUkuleleTuning();
 
-            Model.UpdateViewModel(_instrumentName, _tuning, _fretCount);
+            instrumentViewModel.Fretboard.UpdateFretboard(_instrumentType, _tuning, _fretCount);
+
+            Model.UpdateViewModel(instrumentViewModel.Fretboard);
         }
     }
 }

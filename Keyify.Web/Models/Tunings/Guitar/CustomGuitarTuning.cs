@@ -12,11 +12,6 @@ namespace KeyifyWebClient.Models.Instruments
             _notes = inputNotes;
         }
 
-        public CustomGuitarTuning(string inputNotes)
-        {
-            _notes = ConvertStringInputToNotes(inputNotes);
-        }
-
         public override Note[] Notes => _notes;
 
         public override int StringCount => _notes.Length;

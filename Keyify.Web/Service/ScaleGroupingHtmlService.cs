@@ -1,15 +1,18 @@
-﻿using Keyify.Models.View_Models.Misc;
+﻿using Keyify.Models.ViewModels.Misc;
+using Keyify.Web.Enums;
+using Keyify.Web.Service.Interfaces;
+using KeyifyClassLibrary.Enums;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace KeyifyWebClient.Models.ViewModels
+namespace Keyify.Web.Service
 {
-    public partial class InstrumentViewModel
+    public class ScaleGroupingHtmlService : IScaleGroupingHtmlService
     {
-        public string AvailableKeysAndScalesTableHtml => GenerateAvailableKeysAndScalesTable(AvailableKeyGroups, AvailableScaleGroups);
 
-        private string GenerateAvailableKeysAndScalesTable(List<ScaleGroupingEntry> availableKeyGroups, List<ScaleGroupingEntry> availableScaleGroups)
+        //TODO: Convert parameters to Model
+        public string GenerateAvailableKeysAndScalesTable(IEnumerable<Note> selectedNotes, InstrumentType instrumentType, List<ScaleGroupingEntry> availableKeyGroups, List<ScaleGroupingEntry> availableScaleGroups)
         {
             if (!availableKeyGroups.Any() && !availableScaleGroups.Any())
             {
@@ -20,15 +23,16 @@ namespace KeyifyWebClient.Models.ViewModels
 
             sb.Append("<table class=\"scaleTable\">");
 
-            GenerateAvailableKeysAndScalesSection(availableKeyGroups, sb);
-            GenerateAvailableKeysAndScalesSection(availableScaleGroups, sb);
+            GenerateAvailableKeysAndScalesSection(selectedNotes, instrumentType, availableKeyGroups, sb);
+            GenerateAvailableKeysAndScalesSection(selectedNotes, instrumentType, availableScaleGroups, sb);
 
             sb.Append("</table>");
 
             return sb.ToString();
         }
 
-        private void GenerateAvailableKeysAndScalesSection(List<ScaleGroupingEntry> scaleGroupingEntries, StringBuilder sb)
+        //TODO: Convert parameters to Model
+        private void GenerateAvailableKeysAndScalesSection(IEnumerable<Note> selectedNotes, InstrumentType instrumentType, List<ScaleGroupingEntry> scaleGroupingEntries, StringBuilder sb)
         {
             var count = 0;
 
@@ -38,14 +42,14 @@ namespace KeyifyWebClient.Models.ViewModels
 
                 if (scaleGroupingEntries.Count() - count >= 2)
                 {
-                    AddScalesToNoteSet(scaleGroupingEntries, sb, count, false);
-                    AddScalesToNoteSet(scaleGroupingEntries, sb, count, true);
+                    AddScalesToNoteSet(selectedNotes, instrumentType, scaleGroupingEntries, sb, count, false);
+                    AddScalesToNoteSet(selectedNotes, instrumentType, scaleGroupingEntries, sb, count, true);
 
                     count += 2;
                 }
                 else
                 {
-                    AddScalesToNoteSet(scaleGroupingEntries, sb, count, false);
+                    AddScalesToNoteSet(selectedNotes, instrumentType, scaleGroupingEntries, sb, count, false);
 
                     //No more Scale Groups
                     sb.Append($"<td></td>");
@@ -66,8 +70,8 @@ namespace KeyifyWebClient.Models.ViewModels
             sb.Append("</tr>");
         }
 
-
-        private void AddScalesToNoteSet(List<ScaleGroupingEntry> scaleGroupingEntries, StringBuilder sb, int count, bool isNeighbouringScaleGroup)
+        //TODO: Convert parameters to Model
+        private void AddScalesToNoteSet(IEnumerable<Note> selectedNotes, InstrumentType instrumentType, List<ScaleGroupingEntry> scaleGroupingEntries, StringBuilder sb, int count, bool isNeighbouringScaleGroup)
         {
             count = isNeighbouringScaleGroup ? count += 1 : count;
 
@@ -77,7 +81,7 @@ namespace KeyifyWebClient.Models.ViewModels
 
             foreach (var availableScale in scaleGroupingEntries[count].GroupedScales.Select(gs => new KeyValuePair<string, string>(gs.ScaleLabel, gs.ColloquialismIncludingFormalName_Sharp)))
             {
-                sb.Append($"<a class=\"scaleResult scaleText\" onclick=\"UpdateModel('/{InstrumentName}/UpdateFretboardModel', '{availableScale.Key}', null, {$"[{string.Join(',', SelectedNotes.Select(s => $"'{s.Note}'"))}]"} )\">{availableScale.Value}</a>&nbsp;");
+                sb.Append($"<a class=\"scaleResult scaleText\" onclick=\"UpdateModel('/{instrumentType.ToString()}/UpdateFretboardModel', '{availableScale.Key}', null, {$"[{string.Join(',', selectedNotes.Select(s => $"'{s}'"))}]"} )\">{availableScale.Value}</a>&nbsp;");
             }
 
             sb.Append($"</td>");
