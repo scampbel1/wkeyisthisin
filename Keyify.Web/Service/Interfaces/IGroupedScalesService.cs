@@ -3,7 +3,7 @@ using Keyify.Models.View_Models.Misc;
 using KeyifyClassLibrary.Enums;
 using System.Collections.Generic;
 
-namespace Keyify.Models.Interfaces
+namespace Keyify.Web.Service.Interfaces
 {
     public interface IGroupedScalesService
     {

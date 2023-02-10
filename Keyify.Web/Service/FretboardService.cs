@@ -1,5 +1,4 @@
-﻿using Keyify.Models.Interfaces;
-using Keyify.Models.Service;
+﻿using Keyify.Models.Service;
 using Keyify.Web.Service.Interfaces;
 using KeyifyClassLibrary.Enums;
 using KeyifyWebClient.Models.Instruments;
@@ -32,6 +31,7 @@ namespace Keyify.Web.Service
                 viewModel.AvailableKeyGroups = _groupedScalesService.GroupedKeys;
                 viewModel.AvailableScaleGroups = _groupedScalesService.GroupedScales;
 
+                //TODO: This can just be worked out on the View Model
                 viewModel.TotalScaleCount = _groupedScalesService.TotalScaleCount;
                 viewModel.TotalKeyCount = _groupedScalesService.TotalKeyCount;
             }

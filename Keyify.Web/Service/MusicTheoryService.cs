@@ -4,7 +4,6 @@ using Keyify.Service.Interfaces;
 using Keyify.Web.Service.Interfaces;
 using KeyifyClassLibrary.Enums;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Keyify.Web.Service
 {
@@ -21,9 +20,11 @@ namespace Keyify.Web.Service
 
         public IEnumerable<ScaleEntry> FindScales(IEnumerable<Note> selectedNotes)
         {
-            var minimumNoteSelectionCount = 2;
+            //var minimumNoteSelectionCount = 2;
 
-            return selectedNotes.Count() > minimumNoteSelectionCount ? _scaleService.FindScales(selectedNotes) : null;
+            //selectedNotes.Count() > minimumNoteSelectionCount ?
+
+            return _scaleService.FindScales(selectedNotes);
         }
 
         public IEnumerable<ChordTemplate> GetChordsTemplates(string selectedScale, Note[] selectedNotes)

@@ -10,49 +10,39 @@ using System.Text.Json;
 
 namespace KeyifyWebClient.Models.ViewModels
 {
-    //Be careful renaming this class! (It may not rename the reference in the Views)
+    //WARNING: Be careful renaming this class! (It may not rename the reference in the Views)
     public partial class InstrumentViewModel
     {
-        //      -->  {InstrumentName} - {SelectedScale?.UserReadableLabelIncludingColloquialism_Sharp}
+        public string ViewTitle = $"What Key Is This In?";
 
-        //TODO: Find a way to update ViewTitle using ajax
-        public string ViewTitle => $"What Key Is This In?";
-
-        public bool IsSelectionLocked { get; set; }
-        public int TotalScaleCount { get; set; }
         public int TotalKeyCount { get; set; }
+        public int TotalScaleCount { get; set; }
+        public bool IsSelectionLocked { get; set; }
 
         public Fretboard Fretboard { get; set; }
-
-        public List<FretboardNote> Notes { get; } = new List<FretboardNote>();
-
-        public List<FretboardNote> SelectedNotes => Notes.Where(n => n.Selected).ToList();
-        public string SelectedNotesJson => JsonSerializer.Serialize(SelectedNotes.Select(n => n.Note.ToString()));
-
-        public List<FretboardNote> UnselectedNotes => Notes.Where(n => !n.Selected).ToList();
-        public List<FretboardNote> NotesPartOfScale => Notes.Where(n => n.InSelectedScale).ToList();
-
         public ScaleEntry SelectedScale { get; set; }
         public List<ScaleEntry> Scales { get; set; } = new List<ScaleEntry>();
-
-        public string AvailableKeysAndScalesLabel => GetAvailableKeysAndScalesLabel();
-
-        public List<ScaleGroupingEntry> AvailableKeyGroups { get; set; } = new List<ScaleGroupingEntry>();
-        public List<ScaleGroupingEntry> AvailableScaleGroups { get; set; } = new List<ScaleGroupingEntry>();
-
+        private List<FretboardNote> NotesMatrix { get; } = new List<FretboardNote>();
 
         public InstrumentViewModel(Fretboard fretboard)
         {
             Fretboard = fretboard;
-            Notes = PopulateSelectedNotesMatrix();
+            NotesMatrix = InitialiseNotesMatrix();
         }
 
-        public void UpdateViewModel(Fretboard fretboard)
-        {
-            Fretboard = fretboard;
-        }
+        public void UpdateViewModel(Fretboard fretboard) => Fretboard = fretboard;
+        public string SelectedNotesJson => JsonSerializer.Serialize(SelectedNotes.Select(n => n.Note.ToString()));
+        public string AvailableKeysAndScalesLabel => $"{GetAvailableKeysLabel()} {GetAvailableScaleLabel()}";
+        public string AvailableKeysAndScalesTableHtml => GenerateAvailableKeysAndScalesTable(AvailableKeyGroups, AvailableScaleGroups);
 
-        private List<FretboardNote> PopulateSelectedNotesMatrix()
+        public List<FretboardNote> SelectedNotes => NotesMatrix.Where(n => n.Selected).ToList();
+        public List<FretboardNote> UnselectedNotes => NotesMatrix.Where(n => !n.Selected).ToList();
+        public List<FretboardNote> NotesPartOfScale => NotesMatrix.Where(n => n.InSelectedScale).ToList();
+
+        public List<ScaleGroupingEntry> AvailableKeyGroups { get; set; } = new List<ScaleGroupingEntry>();
+        public List<ScaleGroupingEntry> AvailableScaleGroups { get; set; } = new List<ScaleGroupingEntry>();
+
+        private List<FretboardNote> InitialiseNotesMatrix()
         {
             var fretboardNotes = new List<FretboardNote>((int)Note.Ab);
 
@@ -62,11 +52,6 @@ namespace KeyifyWebClient.Models.ViewModels
             }
 
             return fretboardNotes;
-        }
-
-        private string GetAvailableKeysAndScalesLabel()
-        {
-            return $"{GetAvailableKeysLabel()} {GetAvailableScaleLabel()}";
         }
 
         private string GetAvailableKeysLabel()
@@ -127,8 +112,6 @@ namespace KeyifyWebClient.Models.ViewModels
                 return "No Notes Selected";
         }
 
-        public string AvailableKeysAndScalesTableHtml => GenerateAvailableKeysAndScalesTable(AvailableKeyGroups, AvailableScaleGroups);
-
         private string GenerateAvailableKeysAndScalesTable(List<ScaleGroupingEntry> availableKeyGroups, List<ScaleGroupingEntry> availableScaleGroups)
         {
             if (!availableKeyGroups.Any() && !availableScaleGroups.Any())
@@ -185,7 +168,6 @@ namespace KeyifyWebClient.Models.ViewModels
             sb.Append($"<td></td>");
             sb.Append("</tr>");
         }
-
 
         private void AddScalesToNoteSet(List<ScaleGroupingEntry> scaleGroupingEntries, StringBuilder sb, int count, bool isNeighbouringScaleGroup)
         {

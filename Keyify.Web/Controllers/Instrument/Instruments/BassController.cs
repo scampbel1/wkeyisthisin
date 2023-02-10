@@ -1,5 +1,4 @@
 ﻿using Keyify.Domain.Tunings.Bass;
-using Keyify.Models.Interfaces;
 using Keyify.Web.Enums;
 using Keyify.Web.Models.Tunings;
 using Keyify.Web.Service.Interfaces;
@@ -13,7 +12,7 @@ namespace Keyify.Controllers.Instrument.Instruments
         private const int _fretCount = 21;
         private readonly InstrumentType _instrumentType = InstrumentType.Bass;
 
-        public BassController(InstrumentViewModel instrumentViewModel, IMusicTheoryService musicTheoryService, IGroupedScalesService scalesPresentationService, IFretboardService fretboardService) : base(instrumentViewModel, musicTheoryService, scalesPresentationService, fretboardService)
+        public BassController(InstrumentViewModel instrumentViewModel, IMusicTheoryService musicTheoryService, IFretboardService fretboardService) : base(instrumentViewModel, musicTheoryService, fretboardService)
         {
             _tuning = new StandardBassTuning();
 
