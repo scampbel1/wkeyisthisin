@@ -15,39 +15,50 @@ namespace Keyify.Unit.Test.ChordTemplates.UnitTests
         private IChordTemplateService _chordTemplateService = new ChordTemplateService(new ChordTemplateDataCache());
 
         [Theory, MemberData(nameof(ChordTestParameters))]
-        public void PassNoteSequenceIntoChordService_ReturnsExpectedChord(KeyifyClassLibrary.Enums.Note[] selectedChordNotes, ChordTemplate expectedChord)
+        public void PassNoteSequenceIntoChordService_ReturnsExpectedChord(KeyifyClassLibrary.Enums.Note[] selectedChordNotes, ChordTemplate expectedChordTemplate)
         {
             //Arrange - Given
             var inputNotes = selectedChordNotes;
+
             //Act - When
-            var chordResult = _chordTemplateService.FindChordTemplateWithNoteSequence(inputNotes).SingleOrDefault();
+            var chordTemplates = _chordTemplateService.FindChordTemplates(inputNotes);
+            var result = chordTemplates.SingleOrDefault(c => c == expectedChordTemplate);
+
             //Assert - Then
-            Assert.Equal(expected: expectedChord, actual: chordResult);
-            Assert.Equal(expected: expectedChord.Type, actual: chordResult.Type);
+            Assert.Equal(expectedChordTemplate, result);
+            Assert.Equal(expectedChordTemplate.Type, result.Type);
         }
 
         [Fact]
-        public void SearchChord_A_Major_CorrectNotes_ReturnsChord_CorrectName()
+        public void SearchChord_A_Major_Notes_ReturnsChordWithinSet()
         {
             //Arrange - Given
             var expectedChordName = "A Major";
-            var inputNotes = new[] { KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.Db, KeyifyClassLibrary.Enums.Note.E };
+            var inputNotes = new[] { KeyifyClassLibrary.Enums.Note.Gb, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.Db };
             //Act - When
-            var chordResult = _chordTemplateService.FindChordTemplateWithNoteSequence(inputNotes).SingleOrDefault();
+            var chordTemplates = _chordTemplateService.FindChordTemplates(inputNotes);
+
+            var result = chordTemplates.SingleOrDefault(c => c.Name == expectedChordName);
+
             //Assert - Then
-            Assert.Equal(expectedChordName, chordResult.Name);
+            Assert.NotNull(result);
+            Assert.Equal(expectedChordName, result.Name);
         }
 
         [Fact]
-        public void SearchChord_Gb_Minor_CorrectNotes_ReturnsChord_CorrectName()
+        public void SearchChord_Gb_Minor_Notes_ReturnsChordWithinSet()
         {
             //Arrange - Given
             var expectedChordName = "Gb Minor";
             var inputNotes = new[] { KeyifyClassLibrary.Enums.Note.Gb, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.Db };
             //Act - When
-            var chordResult = _chordTemplateService.FindChordTemplateWithNoteSequence(inputNotes).SingleOrDefault();
+            var chordTemplates = _chordTemplateService.FindChordTemplates(inputNotes);
+
+            var result = chordTemplates.SingleOrDefault(c => c.Name == expectedChordName);
+
             //Assert - Then
-            Assert.Equal(expectedChordName, chordResult.Name);
+            Assert.NotNull(result);
+            Assert.Equal(expectedChordName, result.Name);
         }
 
         [Fact]

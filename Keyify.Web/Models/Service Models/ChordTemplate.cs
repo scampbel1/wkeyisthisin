@@ -3,6 +3,7 @@ using KeyifyClassLibrary.Enums;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Keyify.Models.Service_Models
 {
@@ -21,6 +22,11 @@ namespace Keyify.Models.Service_Models
         {
             Type = chordType;
             Name = $"{notes[0]} {chordType}";
+        }
+
+        public bool Contains(Note[] notes)
+        {
+            return notes.ToHashSet().IsSupersetOf(notes);
         }
 
         public bool Equals(ChordTemplate other)

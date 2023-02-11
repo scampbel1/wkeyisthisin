@@ -16,9 +16,11 @@ namespace Keyify.Service
             _chordDefinitionService = chordDefinitionService;
         }
 
-        public List<ChordTemplate> FindChordTemplateWithNoteSequence(Note[] notes)
+        public List<ChordTemplate> FindChordTemplates(Note[] notes)
         {
-            return _chordDefinitionService.ChordTemplates.Where(c => c == new ChordTemplate(notes)).ToList();
+            var chordDefinitions = _chordDefinitionService.ChordTemplates.Where(c => c.Contains(notes)).ToList();
+
+            return chordDefinitions;
         }
     }
 }

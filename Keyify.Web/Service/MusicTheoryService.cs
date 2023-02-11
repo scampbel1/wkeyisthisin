@@ -30,7 +30,7 @@ namespace Keyify.Web.Service
         public IEnumerable<ChordTemplate> GetChordsTemplates(string selectedScale, Note[] selectedNotes)
         {
             //TODO: Implement logic for deciding whether to get chords by notes or scale
-            return _chordTemplateSerice.FindChordTemplateWithNoteSequence(selectedNotes);
+            return _chordTemplateSerice.FindChordTemplates(selectedNotes);
         }
     }
 }

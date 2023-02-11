@@ -12,6 +12,7 @@
         </div>
         <div id="copyQuickLinkHeader">
             <a class="copyToClipboard" onclick="copyContent('@Model.QuickLinkCode')">Copy To Clipboard</a>
+            <a class="copyToClipboard" onclick="LockSelection('@Url.Action("LockSelection", Model.Fretboard.InstrumentType.ToString())','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Lock Fretboard</a>
         </div>
     </div>
     <div>
