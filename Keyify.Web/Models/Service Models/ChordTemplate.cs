@@ -9,7 +9,7 @@ namespace Keyify.Models.Service_Models
 {
     public class ChordTemplate : IEquatable<ChordTemplate>
     {
-        public readonly ChordType? Type;
+        public readonly ChordType Type;
         public readonly Note[] Notes;
         public readonly string Name = string.Empty;
 
@@ -24,9 +24,9 @@ namespace Keyify.Models.Service_Models
             Name = $"{notes[0]} {chordType}";
         }
 
-        public bool Contains(Note[] notes)
+        public bool IsSubsetOf(Note[] selectedNotes)
         {
-            return notes.ToHashSet().IsSupersetOf(notes);
+            return selectedNotes.ToHashSet().IsSupersetOf(Notes);
         }
 
         public bool Equals(ChordTemplate other)

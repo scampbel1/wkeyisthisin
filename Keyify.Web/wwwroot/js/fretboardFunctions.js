@@ -43,9 +43,9 @@ async function copyContent(quickLinkCode) {
     }
 }
 
-function LockSelection(url, scale, selectedNotes) {
+function ToggleLockSelection(url, scale, selectedNotes, lockSelection) {
 
-    var dataPost = { selectedNotes: selectedNotes, selectedScale: scale };
+    var dataPost = { selectedNotes: selectedNotes, selectedScale: scale, lockSelection: lockSelection };
 
     $.ajax({
         url: url,

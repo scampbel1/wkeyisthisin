@@ -4,6 +4,7 @@ using KeyifyClassLibrary.Enums;
 using KeyifyWebClient.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Keyify.Controllers.Instrument
 {
@@ -74,19 +75,14 @@ namespace Keyify.Controllers.Instrument
         }
 
         [HttpPost]
-        public ActionResult LockSelection(string selectedScale, Note[] selectedNotes)
+        public ActionResult ToggleLockSelection(string selectedScale, Note[] selectedNotes, bool lockSelection)
         {
-            Model.IsSelectionLocked = true;
+            if (lockSelection)
+            {
+                Model.ChordTemplates = _musicTheoryService.GetChordsTemplates(selectedScale, selectedNotes).ToList();
+            }
 
-            var chordTemplates = _musicTheoryService.GetChordsTemplates(selectedScale, selectedNotes);
-
-            return PartialView("Fretboard", Model);
-        }
-
-        [HttpPost]
-        public ActionResult UnockSelection(string selectedScale, Note[] selectedNotes)
-        {
-            Model.IsSelectionLocked = false;
+            Model.IsSelectionLocked = lockSelection;
 
             return PartialView("Fretboard", Model);
         }

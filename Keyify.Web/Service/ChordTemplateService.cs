@@ -18,7 +18,7 @@ namespace Keyify.Service
 
         public List<ChordTemplate> FindChordTemplates(Note[] notes)
         {
-            var chordDefinitions = _chordDefinitionService.ChordTemplates.Where(c => c.Contains(notes)).ToList();
+            var chordDefinitions = _chordDefinitionService.ChordTemplates.Where(c => c.IsSubsetOf(notes)).ToList();
 
             return chordDefinitions;
         }

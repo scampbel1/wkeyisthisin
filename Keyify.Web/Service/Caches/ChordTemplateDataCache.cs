@@ -9,16 +9,16 @@ namespace Keyify.Service.Caches
     {
         private Dictionary<ChordType, Interval[]> _chordTemplateDefinitions => GenerateChordTemplateDefinitions();
 
-        public readonly HashSet<ChordTemplate> ChordTemplates;
+        public readonly List<ChordTemplate> ChordTemplates;
 
         public ChordTemplateDataCache()
         {
             ChordTemplates = GenerateChordTemplates();
         }
 
-        private HashSet<ChordTemplate> GenerateChordTemplates()
+        private List<ChordTemplate> GenerateChordTemplates()
         {
-            var chordTemplates = new HashSet<ChordTemplate>();
+            var chordTemplates = new List<ChordTemplate>();
 
             foreach (var chordTemplateDefinition in _chordTemplateDefinitions)
             {
@@ -28,7 +28,7 @@ namespace Keyify.Service.Caches
             return chordTemplates;
         }
 
-        private void GenerateChordTemplatesByChordType(ChordType chordType, Interval[] intervals, HashSet<ChordTemplate> chordTemplates)
+        private void GenerateChordTemplatesByChordType(ChordType chordType, Interval[] intervals, List<ChordTemplate> chordTemplates)
         {
             var currentNote = Note.A;
 

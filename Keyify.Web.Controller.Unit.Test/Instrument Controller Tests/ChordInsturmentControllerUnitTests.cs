@@ -8,37 +8,43 @@
         [Fact]
         public void LockNoteAndChordSelection_IsSelectionLocked_IsTrue()
         {
+            const bool lockSelection = true;
+
             var instrumentViewModel = InstrumentViewModel;
 
             var instrumentController = CreateNewInstrumentController(instrumentViewModel);
 
-            instrumentController.LockSelection(_selectedScale, _selectedNotes);
+            instrumentController.ToggleLockSelection(_selectedScale, _selectedNotes, lockSelection);
 
             Assert.True(instrumentViewModel.IsSelectionLocked);
         }
 
         [Fact]
-        public void LockNoteAndChordSelection_ChordTemplateService_IsCalled()
+        public void ToggleLockSelection_LockSelection_ChordTemplateService_IsCalled()
         {
+            const bool lockSelection = true;
+
             var instrumentViewModel = InstrumentViewModel;
 
             var instrumentController = CreateNewInstrumentController(instrumentViewModel);
 
-            instrumentController.LockSelection(_selectedScale, _selectedNotes);
+            instrumentController.ToggleLockSelection(_selectedScale, _selectedNotes, lockSelection);
 
             m_MockMusicTheoryService.Verify(c => c.GetChordsTemplates(It.IsAny<string>(), It.IsAny<Note[]>()), Times.Once);
         }
 
         [Fact]
-        public void UnlockNoteAndChordSelection_IsSelectionLocked_IsFalse()
+        public void ToggleLockSelection_UnlockSelection_ChordTemplateService_IsNotCalled()
         {
+            const bool lockSelection = false;
+
             var instrumentViewModel = InstrumentViewModel;
 
             var instrumentController = CreateNewInstrumentController(instrumentViewModel);
 
-            instrumentController.UnockSelection(_selectedScale, _selectedNotes);
+            instrumentController.ToggleLockSelection(_selectedScale, _selectedNotes, lockSelection);
 
-            Assert.False(instrumentViewModel.IsSelectionLocked);
+            m_MockMusicTheoryService.Verify(c => c.GetChordsTemplates(It.IsAny<string>(), It.IsAny<Note[]>()), Times.Never);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Keyify.Models.Service;
+using Keyify.Models.Service_Models;
 using Keyify.Models.ViewModels.Misc;
 using KeyifyClassLibrary.Enums;
 using KeyifyWebClient.Models.Instruments;
@@ -12,6 +13,8 @@ namespace KeyifyWebClient.Models.ViewModels
     //WARNING: Be careful renaming this class! (It may not rename the reference in the Views)
     public partial class InstrumentViewModel
     {
+        private List<FretboardNote> NotesMatrix { get; } = new List<FretboardNote>();
+
         public string QuickLinkCode { get; private set; }
 
         public string ViewTitle = $"What Key Is This In?";
@@ -23,7 +26,7 @@ namespace KeyifyWebClient.Models.ViewModels
         public Fretboard Fretboard { get; set; }
         public ScaleEntry SelectedScale { get; set; }
         public List<ScaleEntry> Scales { get; set; } = new List<ScaleEntry>();
-        private List<FretboardNote> NotesMatrix { get; } = new List<FretboardNote>();
+        public List<ChordTemplate> ChordTemplates { get; set; } = new List<ChordTemplate>();
 
         public InstrumentViewModel(Fretboard fretboard)
         {

@@ -34,7 +34,8 @@ namespace Keyify.Unit.Test.ChordTemplates.UnitTests
         {
             //Arrange - Given
             var expectedChordName = "A Major";
-            var inputNotes = new[] { KeyifyClassLibrary.Enums.Note.Gb, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.Db };
+            var inputNotes = new[] { KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.Db, KeyifyClassLibrary.Enums.Note.E };
+            
             //Act - When
             var chordTemplates = _chordTemplateService.FindChordTemplates(inputNotes);
 
@@ -51,6 +52,7 @@ namespace Keyify.Unit.Test.ChordTemplates.UnitTests
             //Arrange - Given
             var expectedChordName = "Gb Minor";
             var inputNotes = new[] { KeyifyClassLibrary.Enums.Note.Gb, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.Db };
+            
             //Act - When
             var chordTemplates = _chordTemplateService.FindChordTemplates(inputNotes);
 
@@ -66,8 +68,10 @@ namespace Keyify.Unit.Test.ChordTemplates.UnitTests
         {
             //Arrange - Given
             var chord1 = new ChordTemplate(new[] { KeyifyClassLibrary.Enums.Note.F, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.C });
+            
             //Act - When
             var chord2 = new ChordTemplate(new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.F });
+            
             //Assert - Then
             Assert.NotStrictEqual(chord1, chord2);
         }
@@ -79,8 +83,10 @@ namespace Keyify.Unit.Test.ChordTemplates.UnitTests
         {
             //Arrange - Given
             var chord1 = new ChordTemplate(new[] { KeyifyClassLibrary.Enums.Note.F, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.C });
+            
             //Act - When
             var chord2 = new ChordTemplate(new[] { KeyifyClassLibrary.Enums.Note.C, KeyifyClassLibrary.Enums.Note.A, KeyifyClassLibrary.Enums.Note.F });
+            
             //Assert - Then
             Assert.NotEqual(chord1, chord2);
         }
