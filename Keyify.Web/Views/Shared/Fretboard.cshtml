@@ -80,4 +80,20 @@
             @Html.Raw(Model.AvailableKeysAndScalesTableHtml)
         </div>
     </div>
+
+    <div class="scaleResults center">
+        @if(Model.IsSelectionLocked)
+        {
+        <table>            
+            @foreach(var chordTemplate in Model.ChordTemplates)
+                {
+                    <tr>
+                        <td>
+                            <span class="nonSelectable noteText">@chordTemplate.Name</span>
+                        </td>
+                    </tr>
+                }
+            </table>            
+        }
+    </div>
 </div>

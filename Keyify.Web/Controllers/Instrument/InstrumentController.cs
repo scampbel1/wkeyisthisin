@@ -32,16 +32,7 @@ namespace Keyify.Controllers.Instrument
             var selectedScale = (string)TempData["QLscale"];
             var selectedNotes = (IEnumerable<Note>)TempData["QLnotes"];
 
-            if (selectedNotes != null)
-            {
-                _fretboardService.ProcessNotesAndScale(Model, selectedNotes, selectedScale);
-            }
-
-            _fretboardService.ApplyNotesToFretboard(Model.Fretboard, Model.SelectedNotes, Model.SelectedScale);
-
-            Model.AvailableKeysAndScalesTableHtml = _scaleGroupingHtmlService.GenerateAvailableKeysAndScalesTable(selectedNotes, Model.Fretboard.InstrumentType, Model.AvailableKeyGroups, Model.AvailableScaleGroups);
-
-            Model.UpdateQuickLinkCode(_quickLinkService.ConvertQuickLinkToBase64(new QuickLink(Model)));
+            UpdateFretboard(selectedNotes?.ToArray(), selectedScale);
 
             return View(Model);
         }
@@ -63,13 +54,7 @@ namespace Keyify.Controllers.Instrument
                 }
             }
 
-            _fretboardService.ProcessNotesAndScale(Model, previouslySelectedNotes, selectedScale);
-
-            _fretboardService.ApplyNotesToFretboard(Model.Fretboard, Model.SelectedNotes, Model.SelectedScale);
-
-            Model.AvailableKeysAndScalesTableHtml = _scaleGroupingHtmlService.GenerateAvailableKeysAndScalesTable(previouslySelectedNotes, Model.Fretboard.InstrumentType, Model.AvailableKeyGroups, Model.AvailableScaleGroups);
-
-            Model.UpdateQuickLinkCode(_quickLinkService.ConvertQuickLinkToBase64(new QuickLink(Model)));
+            UpdateFretboard(previouslySelectedNotes.ToArray(), selectedScale);
 
             return PartialView("Fretboard", Model);
         }
@@ -77,14 +62,31 @@ namespace Keyify.Controllers.Instrument
         [HttpPost]
         public ActionResult ToggleLockSelection(string selectedScale, Note[] selectedNotes, bool lockSelection)
         {
-            if (lockSelection)
-            {
-                Model.ChordTemplates = _musicTheoryService.GetChordsTemplates(selectedScale, selectedNotes).ToList();
-            }
-
             Model.IsSelectionLocked = lockSelection;
 
+            UpdateFretboard(selectedNotes, selectedScale);
+
+            if (lockSelection)
+            {
+                Model.ChordTemplates = _musicTheoryService.GetChordsTemplates(Model.SelectedScale?.Scale?.Notes?.ToArray(), selectedNotes).ToList();
+            }
+
             return PartialView("Fretboard", Model);
+        }
+
+        //TODO: Move all of this out of the controller
+        private void UpdateFretboard(Note[] selectedNotes, string selectedScale)
+        {
+            if (selectedNotes != null)
+            {
+                _fretboardService.ProcessNotesAndScale(Model, selectedNotes, selectedScale);
+            }
+
+            _fretboardService.ApplyNotesToFretboard(Model.Fretboard, Model.SelectedNotes, Model.SelectedScale);
+
+            Model.AvailableKeysAndScalesTableHtml = _scaleGroupingHtmlService.GenerateAvailableKeysAndScalesTable(selectedNotes, Model.Fretboard.InstrumentType, Model.AvailableKeyGroups, Model.AvailableScaleGroups);
+
+            Model.UpdateQuickLinkCode(_quickLinkService.ConvertQuickLinkToBase64(new QuickLink(Model)));
         }
     }
 }
