@@ -10,20 +10,22 @@ namespace Keyify.Controllers.Instrument
 {
     public class InstrumentController : Controller
     {
-        private IMusicTheoryService _musicTheoryService;
-        private IFretboardService _fretboardService;
-        private IScaleGroupingHtmlService _scaleGroupingHtmlService;
-        private IQuickLinkService _quickLinkService;
+        private readonly IMusicTheoryService _musicTheoryService;
+        private readonly IFretboardService _fretboardService;
+        private readonly IScaleGroupingHtmlService _scaleGroupingHtmlService;
+        private readonly IQuickLinkService _quickLinkService;
+        private readonly IChordTemplateGroupingHtmlService _chordTemplateGroupingHtmlService;
 
         protected InstrumentViewModel Model;
 
-        public InstrumentController(InstrumentViewModel model, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService, IQuickLinkService quickLinkService)
+        public InstrumentController(InstrumentViewModel model, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService, IQuickLinkService quickLinkService, IChordTemplateGroupingHtmlService chordTemplateGroupingHtmlService)
         {
             Model = model;
             _musicTheoryService = musicTheoryService;
             _fretboardService = fretboardService;
             _scaleGroupingHtmlService = scaleGroupingHtmlService;
             _quickLinkService = quickLinkService;
+            _chordTemplateGroupingHtmlService = chordTemplateGroupingHtmlService;
         }
 
         [HttpGet]
@@ -68,7 +70,11 @@ namespace Keyify.Controllers.Instrument
 
             if (lockSelection)
             {
-                Model.ChordTemplates = _musicTheoryService.GetChordsTemplates(Model.SelectedScale?.Scale?.Notes?.ToArray(), selectedNotes).ToList();
+                var chordTemplates = _musicTheoryService.GetChordsTemplates(Model.SelectedScale?.Scale?.Notes?.ToArray(), selectedNotes).ToList();
+                var availableChordTemplatesTableHtml = _chordTemplateGroupingHtmlService.GenerateChordTemplateTableHtml(chordTemplates);
+
+                Model.ChordTemplates = chordTemplates;
+                Model.UpdateAvailableChordTemplatesTableHtml(availableChordTemplatesTableHtml);
             }
 
             return PartialView("Fretboard", Model);
@@ -79,14 +85,17 @@ namespace Keyify.Controllers.Instrument
         {
             if (selectedNotes != null)
             {
-                _fretboardService.ProcessNotesAndScale(Model, selectedNotes, selectedScale);
+                _fretboardService.UpdateViewModel(Model, selectedNotes, selectedScale);
             }
 
-            _fretboardService.ApplyNotesToFretboard(Model.Fretboard, Model.SelectedNotes, Model.SelectedScale);
+            _fretboardService.UpdateFretboard(Model);
 
-            Model.AvailableKeysAndScalesTableHtml = _scaleGroupingHtmlService.GenerateAvailableKeysAndScalesTable(selectedNotes, Model.Fretboard.InstrumentType, Model.AvailableKeyGroups, Model.AvailableScaleGroups);
+            var quickLink = new QuickLink(Model);
+            var quickLinkBase64 = _quickLinkService.ConvertQuickLinkToBase64(quickLink);
+            var availableKeysAndScalesTableHtml = _scaleGroupingHtmlService.GenerateAvailableKeysAndScalesTable(selectedNotes, Model.Fretboard.InstrumentType, Model.AvailableKeyGroups, Model.AvailableScaleGroups);
 
-            Model.UpdateQuickLinkCode(_quickLinkService.ConvertQuickLinkToBase64(new QuickLink(Model)));
+            Model.UpdateQuickLinkCode(quickLinkBase64);
+            Model.UpdateAvailableKeysAndScalesTableHtml(availableKeysAndScalesTableHtml);
         }
     }
 }

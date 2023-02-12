@@ -1,5 +1,5 @@
 ﻿using Keyify.Enums;
-using Keyify.Models.Service_Models;
+using Keyify.Models.ServiceModels;
 using KeyifyClassLibrary.Enums;
 using System.Collections.Generic;
 
@@ -63,13 +63,6 @@ namespace Keyify.Service.Caches
                 ? (Note)(nextStepIndex - (int)Note.Ab) - 1
                 : (Note)nextStepIndex;
         }
-
-        /*
-         * TODO: Look into a more efficient way of building these chord templates, there's alot of repeated work going on here
-         * 
-         * For example, Seventh chords are build upon Major/Minor, and other chords are built upon this
-         * -> could use a Builder Pattern here.
-         */
 
         private Dictionary<ChordType, Interval[]> GenerateChordTemplateDefinitions()
         {

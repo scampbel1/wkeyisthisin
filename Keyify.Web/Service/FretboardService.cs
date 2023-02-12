@@ -1,7 +1,5 @@
-﻿using Keyify.Models.Service;
-using Keyify.Web.Service.Interfaces;
+﻿using Keyify.Web.Service.Interfaces;
 using KeyifyClassLibrary.Enums;
-using KeyifyWebClient.Models.Instruments;
 using KeyifyWebClient.Models.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +17,7 @@ namespace Keyify.Web.Service
             _groupedScalesService = groupedScalesService;
         }
 
-        public void ProcessNotesAndScale(InstrumentViewModel viewModel, IEnumerable<Note> selectedNotes, string selectedScale)
+        public void UpdateViewModel(InstrumentViewModel viewModel, IEnumerable<Note> selectedNotes, string selectedScale)
         {
             UpdateSelectedNotes(viewModel, selectedNotes);
 
@@ -57,10 +55,9 @@ namespace Keyify.Web.Service
             ApplySelectedScales(viewModel, selectedScale);
         }
 
-        public void ApplyNotesToFretboard(Fretboard fretboard, IEnumerable<FretboardNote> selectedNotes, ScaleEntry selectedScale)
+        public void UpdateFretboard(InstrumentViewModel instrumentViewModel)
         {
-
-            if (selectedNotes == null || !selectedNotes.Any())
+            if (instrumentViewModel.SelectedNotes == null || !instrumentViewModel.SelectedNotes.Any())
             {
                 return;
             }
@@ -72,27 +69,27 @@ namespace Keyify.Web.Service
              * References/Pointers could be used for the scale notes! We won't be sharing this "layer" with chords, only to display selected notes, each state will have the same characteristic!
             */
 
-            if (fretboard != null && fretboard.InstrumentStrings.Any())
+            if (instrumentViewModel.Fretboard != null && instrumentViewModel.Fretboard.InstrumentStrings.Any())
             {
-                foreach (var guitarString in fretboard.InstrumentStrings)
+                foreach (var guitarString in instrumentViewModel.Fretboard.InstrumentStrings)
                 {
                     foreach (var instrumentNote in guitarString.Notes)
                     {
-                        var currentNote = selectedNotes.SingleOrDefault(s => s.Equals(instrumentNote));
+                        var currentNote = instrumentViewModel.SelectedNotes.SingleOrDefault(s => s.Equals(instrumentNote));
 
                         if (currentNote != null)
                         {
                             instrumentNote.Selected = currentNote.Selected;
                         }
 
-                        if (selectedScale != null && selectedScale.Scale.NoteSet.Contains(instrumentNote.Note))
+                        if (instrumentViewModel.SelectedScale != null && instrumentViewModel.SelectedScale.Scale.NoteSet.Contains(instrumentNote.Note))
                         {
                             instrumentNote.InSelectedScale = true;
 
                             if (instrumentNote.InSelectedScale)
                             {
-                                var currentNoteIndex = selectedScale.Scale.Notes.IndexOf(instrumentNote.Note);
-                                instrumentNote.DegreeInScale = selectedScale.Scale.ModeDefinition.ScaleDegrees[currentNoteIndex];
+                                var currentNoteIndex = instrumentViewModel.SelectedScale.Scale.Notes.IndexOf(instrumentNote.Note);
+                                instrumentNote.DegreeInScale = instrumentViewModel.SelectedScale.Scale.ModeDefinition.ScaleDegrees[currentNoteIndex];
                             }
                         }
                     }

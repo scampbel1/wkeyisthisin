@@ -44,7 +44,7 @@ namespace Keyify.Web.Unit.Test.FretboardServiceTest.UnitTests
             m_MockMusicTheoryService.Setup(s => s.FindScales(It.IsAny<IEnumerable<Note>>())).Returns(new List<ScaleEntry>());
             m_MockGroupedScalesService.Setup(s => s.UpdateScaleGroupingModel(It.IsAny<IEnumerable<ScaleEntry>>(), It.IsAny<IEnumerable<Note>>()));
 
-            _service.ProcessNotesAndScale(viewModel, selectedNotes, selectedScale);
+            _service.UpdateViewModel(viewModel, selectedNotes, selectedScale);
 
             Assert.Null(viewModel.AvailableKeyGroups);
             Assert.Null(viewModel.AvailableScaleGroups);

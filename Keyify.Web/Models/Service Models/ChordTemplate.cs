@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Keyify.Models.Service_Models
+namespace Keyify.Models.ServiceModels
 {
     public class ChordTemplate : IEquatable<ChordTemplate>
     {

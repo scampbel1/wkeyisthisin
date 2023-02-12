@@ -1,4 +1,4 @@
-﻿using Keyify.Models.Service_Models;
+﻿using Keyify.Models.ServiceModels;
 using Keyify.Service.Caches;
 using Keyify.Service.Interfaces;
 using KeyifyClassLibrary.Enums;

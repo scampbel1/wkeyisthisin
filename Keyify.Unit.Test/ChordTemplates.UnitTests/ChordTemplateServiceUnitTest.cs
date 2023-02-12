@@ -1,5 +1,5 @@
 ﻿using Keyify.Enums;
-using Keyify.Models.Service_Models;
+using Keyify.Models.ServiceModels;
 using Keyify.Service;
 using Keyify.Service.Caches;
 using Keyify.Service.Interfaces;
