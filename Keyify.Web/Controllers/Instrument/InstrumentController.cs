@@ -70,11 +70,7 @@ namespace Keyify.Controllers.Instrument
 
             if (lockSelection)
             {
-                var chordTemplates = _musicTheoryService.GetChordsTemplates(Model.SelectedScale?.Scale?.Notes?.ToArray(), selectedNotes).ToList();
-                var availableChordTemplatesTableHtml = _chordTemplateGroupingHtmlService.GenerateChordTemplateTableHtml(chordTemplates);
 
-                Model.ChordTemplates = chordTemplates;
-                Model.UpdateAvailableChordTemplatesTableHtml(availableChordTemplatesTableHtml);
             }
 
             return PartialView("Fretboard", Model);
@@ -96,6 +92,12 @@ namespace Keyify.Controllers.Instrument
 
             Model.UpdateQuickLinkCode(quickLinkBase64);
             Model.UpdateAvailableKeysAndScalesTableHtml(availableKeysAndScalesTableHtml);
+
+            var chordTemplates = _musicTheoryService.GetChordsTemplates(Model.SelectedScale?.Scale?.Notes?.ToArray(), selectedNotes).ToList();
+            var availableChordTemplatesTableHtml = _chordTemplateGroupingHtmlService.GenerateChordTemplateTableHtml(chordTemplates);
+
+            Model.ChordTemplates = chordTemplates;
+            Model.UpdateAvailableChordTemplatesTableHtml(availableChordTemplatesTableHtml);
         }
     }
 }

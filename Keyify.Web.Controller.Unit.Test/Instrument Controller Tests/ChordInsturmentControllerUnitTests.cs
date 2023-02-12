@@ -92,7 +92,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             m_MockMusicTheoryService.Verify(c => c.GetChordsTemplates(It.IsAny<Note[]>(), It.IsAny<Note[]>()), Times.Once);
         }
 
-        [Fact]
+        [Fact(Skip = "Not required until Chord Implementations are present in database")]
         public void ToggleLockSelection_UnlockSelection_ChordTemplateService_IsNotCalled()
         {
             const bool lockSelection = false;

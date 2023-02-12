@@ -1,4 +1,5 @@
 ﻿using Keyify.Models.Service;
+using Keyify.Models.ServiceModels;
 using Keyify.Models.ViewModels.Misc;
 using Keyify.Web.Enums;
 using KeyifyClassLibrary.Models.MusicTheory;
@@ -19,8 +20,10 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             instrumentController.Index();
 
             m_MockScaleGroupingHtmlService.Verify(m => m.GenerateAvailableKeysAndScalesTable(It.IsAny<IEnumerable<Note>>(), It.IsAny<InstrumentType>(), It.IsAny<List<ScaleGroupingEntry>>(), It.IsAny<List<ScaleGroupingEntry>>()), Times.Once);
+            m_MockChordTemplateGroupingHtmlService.Verify(m => m.GenerateChordTemplateTableHtml(It.IsAny<IEnumerable<ChordTemplate>>()), Times.Once);
 
             m_MockScaleGroupingHtmlService.Reset();
+            m_MockChordTemplateGroupingHtmlService.Reset();
 
             Assert.Empty(instrumentViewModel.SelectedNotes);
             Assert.Null(instrumentViewModel.SelectedScale);
@@ -51,9 +54,11 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             instrumentController.UpdateFretboardModel(previouslySeletedNotes, newNote, selectedScale);
 
             m_MockScaleGroupingHtmlService.Verify(m => m.GenerateAvailableKeysAndScalesTable(It.IsAny<IEnumerable<Note>>(), It.IsAny<InstrumentType>(), It.IsAny<List<ScaleGroupingEntry>>(), It.IsAny<List<ScaleGroupingEntry>>()), Times.Once);
+            m_MockChordTemplateGroupingHtmlService.Verify(m => m.GenerateChordTemplateTableHtml(It.IsAny<IEnumerable<ChordTemplate>>()), Times.Once);
 
             m_MockMusicTheoryService.Reset();
             m_MockScaleGroupingHtmlService.Reset();
+            m_MockChordTemplateGroupingHtmlService.Reset();
 
             Assert.Equal(selectedScale, instrumentViewModel.SelectedScale.ScaleLabel);
             Assert.Equal(expectedSelectedNotes.OrderBy(e => e), instrumentViewModel.SelectedNotes.Select(s => s.Note).OrderBy(o => o));
