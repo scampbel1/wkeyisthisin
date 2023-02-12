@@ -37,32 +37,30 @@ namespace Keyify.Web.Service
 
                 if (chordTemplates.Count() - count >= 2)
                 {
-                    AddScalesToNoteSet(chordTemplateList[count], sb, count, false);
-                    AddScalesToNoteSet(chordTemplateList[count], sb, count, true);
-
-                    count += 2;
+                    AddScalesToNoteSet(chordTemplateList[count], sb, ref count, false);
+                    AddScalesToNoteSet(chordTemplateList[count], sb, ref count, true);
                 }
                 else
                 {
-                    AddScalesToNoteSet(chordTemplateList[count], sb, count, false);
+                    AddScalesToNoteSet(chordTemplateList[count], sb, ref count, false);
 
                     sb.Append($"<td></td>");
                     sb.Append($"<td></td>");
-
-                    count++;
                 }
 
                 sb.Append("</tr>");
             }
         }
 
-        private void AddScalesToNoteSet(ChordTemplate chordTemplate, StringBuilder sb, int count, bool isNeighbouringScaleGroup)
+        private void AddScalesToNoteSet(ChordTemplate chordTemplate, StringBuilder sb, ref int count, bool isNeighbouringScaleGroup)
         {
             count = isNeighbouringScaleGroup ? count += 1 : count;
 
             sb.Append($"<td class=\"scaleResultColumn\">");
-            sb.Append($"{chordTemplate.Name}");
+            sb.Append($"<span class=\"scaleResult scaleText\">{chordTemplate.Name}</span>");
             sb.Append($"</td>");
+
+            count++;
         }
     }
 }
