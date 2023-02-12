@@ -1,7 +1,7 @@
 ﻿using Keyify.Enums;
 using KeyifyClassLibrary.Enums;
 
-namespace Keyify.Models.Service_Models
+namespace Keyify.Models.ServiceModels
 {
     public class ChordTypeDefinition
     {

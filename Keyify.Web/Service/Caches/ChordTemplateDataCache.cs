@@ -1,5 +1,5 @@
 ﻿using Keyify.Enums;
-using Keyify.Models.Service_Models;
+using Keyify.Models.ServiceModels;
 using KeyifyClassLibrary.Enums;
 using System.Collections.Generic;
 
@@ -9,16 +9,16 @@ namespace Keyify.Service.Caches
     {
         private Dictionary<ChordType, Interval[]> _chordTemplateDefinitions => GenerateChordTemplateDefinitions();
 
-        public readonly HashSet<ChordTemplate> ChordTemplates;
+        public readonly List<ChordTemplate> ChordTemplates;
 
         public ChordTemplateDataCache()
         {
             ChordTemplates = GenerateChordTemplates();
         }
 
-        private HashSet<ChordTemplate> GenerateChordTemplates()
+        private List<ChordTemplate> GenerateChordTemplates()
         {
-            var chordTemplates = new HashSet<ChordTemplate>();
+            var chordTemplates = new List<ChordTemplate>();
 
             foreach (var chordTemplateDefinition in _chordTemplateDefinitions)
             {
@@ -28,7 +28,7 @@ namespace Keyify.Service.Caches
             return chordTemplates;
         }
 
-        private void GenerateChordTemplatesByChordType(ChordType chordType, Interval[] intervals, HashSet<ChordTemplate> chordTemplates)
+        private void GenerateChordTemplatesByChordType(ChordType chordType, Interval[] intervals, List<ChordTemplate> chordTemplates)
         {
             var currentNote = Note.A;
 
@@ -63,13 +63,6 @@ namespace Keyify.Service.Caches
                 ? (Note)(nextStepIndex - (int)Note.Ab) - 1
                 : (Note)nextStepIndex;
         }
-
-        /*
-         * TODO: Look into a more efficient way of building these chord templates, there's alot of repeated work going on here
-         * 
-         * For example, Seventh chords are build upon Major/Minor, and other chords are built upon this
-         * -> could use a Builder Pattern here.
-         */
 
         private Dictionary<ChordType, Interval[]> GenerateChordTemplateDefinitions()
         {

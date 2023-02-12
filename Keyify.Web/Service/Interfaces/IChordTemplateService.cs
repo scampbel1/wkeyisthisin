@@ -1,4 +1,4 @@
-﻿using Keyify.Models.Service_Models;
+﻿using Keyify.Models.ServiceModels;
 using KeyifyClassLibrary.Enums;
 using System.Collections.Generic;
 
@@ -6,6 +6,6 @@ namespace Keyify.Service.Interfaces
 {
     public interface IChordTemplateService
     {
-        public List<ChordTemplate> FindChordTemplateWithNoteSequence(Note[] notes);
+        public List<ChordTemplate> FindChordTemplates(Note[] notes);
     }
 }

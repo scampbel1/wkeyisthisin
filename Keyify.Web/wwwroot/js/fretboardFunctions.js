@@ -42,3 +42,19 @@ async function copyContent(quickLinkCode) {
         console.error('Failed to copy Quick Link: ', err);
     }
 }
+
+function ToggleLockSelection(url, scale, selectedNotes, lockSelection) {
+
+    var dataPost = { selectedNotes: selectedNotes, selectedScale: scale, lockSelection: lockSelection };
+
+    $.ajax({
+        url: url,
+        async: 'true',
+        type: "POST",
+        data: dataPost,
+        datatype: "json",
+        success: function (data) {
+            $("#Fretboard").html(data);
+        }
+    });
+}

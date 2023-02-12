@@ -1,5 +1,5 @@
 ﻿using Keyify.Models.Service;
-using Keyify.Models.Service_Models;
+using Keyify.Models.ServiceModels;
 using Keyify.Service.Interfaces;
 using Keyify.Web.Service.Interfaces;
 using KeyifyClassLibrary.Enums;
@@ -20,17 +20,15 @@ namespace Keyify.Web.Service
 
         public IEnumerable<ScaleEntry> FindScales(IEnumerable<Note> selectedNotes)
         {
-            //var minimumNoteSelectionCount = 2;
-
-            //selectedNotes.Count() > minimumNoteSelectionCount ?
 
             return _scaleService.FindScales(selectedNotes);
         }
 
-        public IEnumerable<ChordTemplate> GetChordsTemplates(string selectedScale, Note[] selectedNotes)
+        public IEnumerable<ChordTemplate> GetChordsTemplates(Note[] selectedScaleNotes, Note[] selectedNotes)
         {
-            //TODO: Implement logic for deciding whether to get chords by notes or scale
-            return _chordTemplateSerice.FindChordTemplateWithNoteSequence(selectedNotes);
+            var notes = selectedScaleNotes != null && selectedScaleNotes.Length >= selectedNotes.Length ? selectedScaleNotes : selectedNotes;
+
+            return _chordTemplateSerice.FindChordTemplates(notes);
         }
     }
 }

@@ -4,25 +4,28 @@ using KeyifyClassLibrary.Enums;
 using KeyifyWebClient.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Keyify.Controllers.Instrument
 {
     public class InstrumentController : Controller
     {
-        private IMusicTheoryService _musicTheoryService;
-        private IFretboardService _fretboardService;
-        private IScaleGroupingHtmlService _scaleGroupingHtmlService;
-        private IQuickLinkService _quickLinkService;
+        private readonly IMusicTheoryService _musicTheoryService;
+        private readonly IFretboardService _fretboardService;
+        private readonly IScaleGroupingHtmlService _scaleGroupingHtmlService;
+        private readonly IQuickLinkService _quickLinkService;
+        private readonly IChordTemplateGroupingHtmlService _chordTemplateGroupingHtmlService;
 
         protected InstrumentViewModel Model;
 
-        public InstrumentController(InstrumentViewModel model, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService, IQuickLinkService quickLinkService)
+        public InstrumentController(InstrumentViewModel model, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService, IQuickLinkService quickLinkService, IChordTemplateGroupingHtmlService chordTemplateGroupingHtmlService)
         {
             Model = model;
             _musicTheoryService = musicTheoryService;
             _fretboardService = fretboardService;
             _scaleGroupingHtmlService = scaleGroupingHtmlService;
             _quickLinkService = quickLinkService;
+            _chordTemplateGroupingHtmlService = chordTemplateGroupingHtmlService;
         }
 
         [HttpGet]
@@ -31,16 +34,7 @@ namespace Keyify.Controllers.Instrument
             var selectedScale = (string)TempData["QLscale"];
             var selectedNotes = (IEnumerable<Note>)TempData["QLnotes"];
 
-            if (selectedNotes != null)
-            {
-                _fretboardService.ProcessNotesAndScale(Model, selectedNotes, selectedScale);
-            }
-
-            _fretboardService.ApplyNotesToFretboard(Model.Fretboard, Model.SelectedNotes, Model.SelectedScale);
-
-            Model.AvailableKeysAndScalesTableHtml = _scaleGroupingHtmlService.GenerateAvailableKeysAndScalesTable(selectedNotes, Model.Fretboard.InstrumentType, Model.AvailableKeyGroups, Model.AvailableScaleGroups);
-
-            Model.UpdateQuickLinkCode(_quickLinkService.ConvertQuickLinkToBase64(new QuickLink(Model)));
+            UpdateFretboard(selectedNotes?.ToArray(), selectedScale);
 
             return View(Model);
         }
@@ -62,33 +56,48 @@ namespace Keyify.Controllers.Instrument
                 }
             }
 
-            _fretboardService.ProcessNotesAndScale(Model, previouslySelectedNotes, selectedScale);
-
-            _fretboardService.ApplyNotesToFretboard(Model.Fretboard, Model.SelectedNotes, Model.SelectedScale);
-
-            Model.AvailableKeysAndScalesTableHtml = _scaleGroupingHtmlService.GenerateAvailableKeysAndScalesTable(previouslySelectedNotes, Model.Fretboard.InstrumentType, Model.AvailableKeyGroups, Model.AvailableScaleGroups);
-
-            Model.UpdateQuickLinkCode(_quickLinkService.ConvertQuickLinkToBase64(new QuickLink(Model)));
+            UpdateFretboard(previouslySelectedNotes.ToArray(), selectedScale);
 
             return PartialView("Fretboard", Model);
         }
 
         [HttpPost]
-        public ActionResult LockSelection(string selectedScale, Note[] selectedNotes)
+        public ActionResult ToggleLockSelection(string selectedScale, Note[] selectedNotes, bool lockSelection)
         {
-            Model.IsSelectionLocked = true;
+            Model.IsSelectionLocked = lockSelection;
 
-            var chordTemplates = _musicTheoryService.GetChordsTemplates(selectedScale, selectedNotes);
+            UpdateFretboard(selectedNotes, selectedScale);
+
+            if (lockSelection)
+            {
+
+            }
 
             return PartialView("Fretboard", Model);
         }
 
-        [HttpPost]
-        public ActionResult UnockSelection(string selectedScale, Note[] selectedNotes)
+        //TODO: Move all of this out of the controller
+        private void UpdateFretboard(Note[] selectedNotes, string selectedScale)
         {
-            Model.IsSelectionLocked = false;
+            if (selectedNotes != null)
+            {
+                _fretboardService.UpdateViewModel(Model, selectedNotes, selectedScale);
+            }
 
-            return PartialView("Fretboard", Model);
+            _fretboardService.UpdateFretboard(Model);
+
+            var quickLink = new QuickLink(Model);
+            var quickLinkBase64 = _quickLinkService.ConvertQuickLinkToBase64(quickLink);
+            var availableKeysAndScalesTableHtml = _scaleGroupingHtmlService.GenerateAvailableKeysAndScalesTable(selectedNotes, Model.Fretboard.InstrumentType, Model.AvailableKeyGroups, Model.AvailableScaleGroups);
+
+            Model.UpdateQuickLinkCode(quickLinkBase64);
+            Model.UpdateAvailableKeysAndScalesTableHtml(availableKeysAndScalesTableHtml);
+
+            var chordTemplates = _musicTheoryService.GetChordsTemplates(Model.SelectedScale?.Scale?.Notes?.ToArray(), selectedNotes).ToList();
+            var availableChordTemplatesTableHtml = _chordTemplateGroupingHtmlService.GenerateChordTemplateTableHtml(chordTemplates);
+
+            Model.ChordTemplates = chordTemplates;
+            Model.UpdateAvailableChordTemplatesTableHtml(availableChordTemplatesTableHtml);
         }
     }
 }

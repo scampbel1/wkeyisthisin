@@ -1,4 +1,4 @@
-﻿using Keyify.Models.Service_Models;
+﻿using Keyify.Models.ServiceModels;
 using Keyify.Service.Caches;
 using Keyify.Service.Interfaces;
 using KeyifyClassLibrary.Enums;
@@ -16,9 +16,18 @@ namespace Keyify.Service
             _chordDefinitionService = chordDefinitionService;
         }
 
-        public List<ChordTemplate> FindChordTemplateWithNoteSequence(Note[] notes)
+        public List<ChordTemplate> FindChordTemplates(Note[] notes)
         {
-            return _chordDefinitionService.ChordTemplates.Where(c => c == new ChordTemplate(notes)).ToList();
+            var result = new List<ChordTemplate>();
+
+            if (notes != null)
+            {
+                var chordTemplates = _chordDefinitionService.ChordTemplates.Where(c => c.IsSubsetOf(notes)).ToList();
+
+                result.AddRange(chordTemplates);
+            }
+
+            return result;
         }
     }
 }
