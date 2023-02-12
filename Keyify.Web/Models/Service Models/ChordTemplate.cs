@@ -16,14 +16,10 @@ namespace Keyify.Models.ServiceModels
 
         public string Label => GenerateLabel(Name);
 
-        public ChordTemplate(Note[] notes)
-        {
-            Notes = notes;
-        }
-
-        public ChordTemplate(ChordType chordType, Note[] notes) : this(notes)
+        public ChordTemplate(ChordType chordType, Note[] notes)
         {
             Type = chordType;
+            Notes = notes;
             Name = $"{notes[0]} {chordType}";
         }
 
@@ -57,8 +53,12 @@ namespace Keyify.Models.ServiceModels
 
         public override int GetHashCode()
         {
-            //Ensures notes are in the same order
-            return ((IStructuralEquatable)Notes).GetHashCode(EqualityComparer<Note>.Default);
+            var hashCode = 17;
+
+            hashCode = hashCode * 23 + Type.GetHashCode();
+            hashCode = hashCode * 23 + ((IStructuralEquatable)Notes).GetHashCode(EqualityComparer<Note>.Default);
+
+            return hashCode;
         }
 
         //TODO: Boilerplate code - move to service or define in database or both
