@@ -38,6 +38,7 @@ namespace Keyify.Models.Service
             return Scale.ModeDefinition.Mode == Mode.Ionian || Scale.ModeDefinition.Mode == Mode.Aeolian;
         }
 
+        //TODO: Boilerplate code - move to service or define in database or both
         private string GenerateLabel(string label)
         {
             var sb = new StringBuilder().Append(label);

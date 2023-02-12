@@ -17,11 +17,16 @@ namespace Keyify.Web.Service
 
             var sb = new StringBuilder();
 
-            sb.Append("<table class=\"scaleTable\">");
+            //sb.Append("<table class=\"scaleTable\">");
 
-            GeneratePopulatedRows(sb, chordTemplates);
+            //GeneratePopulatedRows(sb, chordTemplates);
 
-            sb.Append("</table>");
+            foreach (var chordTemplate in chordTemplates)
+            {
+                sb.Append($"<span class=\"scaleResult scaleText\">{chordTemplate.Label} </span>");
+            }
+
+            //sb.Append("</table>");
 
             return sb.ToString();
         }

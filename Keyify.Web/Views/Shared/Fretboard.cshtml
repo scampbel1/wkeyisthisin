@@ -14,7 +14,7 @@
         </div>
         <div id="copyQuickLinkHeader">
             <a class="copyToClipboard" onclick="copyContent('@Model.QuickLinkCode')">Copy To Clipboard</a>
-            <a class="copyToClipboard" onclick="ToggleLockSelection('@Url.Action("ToggleLockSelection", Model.Fretboard.InstrumentType.ToString())','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson, @(lockFretboard.ToString().ToLower()))">Lock Fretboard</a>
+            @*<a class="copyToClipboard" onclick="ToggleLockSelection('@Url.Action("ToggleLockSelection", Model.Fretboard.InstrumentType.ToString())','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson, @(lockFretboard.ToString().ToLower()))">Lock Fretboard</a>*@
         </div>
     </div>
     <div>

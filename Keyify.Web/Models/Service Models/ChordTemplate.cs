@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Keyify.Models.ServiceModels
 {
@@ -12,6 +13,8 @@ namespace Keyify.Models.ServiceModels
         public readonly ChordType Type;
         public readonly Note[] Notes;
         public readonly string Name = string.Empty;
+
+        public string Label => GenerateLabel(Name);
 
         public ChordTemplate(Note[] notes)
         {
@@ -56,6 +59,29 @@ namespace Keyify.Models.ServiceModels
         {
             //Ensures notes are in the same order
             return ((IStructuralEquatable)Notes).GetHashCode(EqualityComparer<Note>.Default);
+        }
+
+        //TODO: Boilerplate code - move to service or define in database or both
+        private string GenerateLabel(string label)
+        {
+            var sb = new StringBuilder().Append(label);
+            int count = 1;
+
+            while (count < sb.Length - 1)
+            {
+                if (char.IsUpper(sb[count]) && sb[count - 1] != ' ')
+                {
+                    sb.Insert(count, ' ');
+                }
+                else if (sb[count] == '_')
+                {
+                    sb[count] = ' ';
+                }
+
+                count++;
+            }
+
+            return sb.ToString();
         }
     }
 }
