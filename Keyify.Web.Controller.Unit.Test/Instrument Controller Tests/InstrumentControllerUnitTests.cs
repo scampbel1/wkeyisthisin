@@ -18,7 +18,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
         protected readonly Mock<IGroupedScalesService> m_MockGroupedScalesService;
         protected readonly Mock<IScaleGroupingHtmlService> m_MockScaleGroupingHtmlService;
         protected readonly Mock<IQuickLinkService> m_MockQuickLinkService;
-        protected readonly Mock<IChordTemplateGroupingHtmlService> m_MockChordTemplateGroupingHtmlService;
+        protected readonly Mock<IChordDefinitionGroupingHtmlService> m_MockChordDefinitionsGroupingHtmlService;
 
         protected InstrumentViewModel InstrumentViewModel => new InstrumentViewModel(new Fretboard());
 
@@ -27,7 +27,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             m_MockMusicTheoryService = new Mock<IMusicTheoryService>();
             m_MockGroupedScalesService = new Mock<IGroupedScalesService>();
             m_MockScaleGroupingHtmlService = new Mock<IScaleGroupingHtmlService>();
-            m_MockChordTemplateGroupingHtmlService = new Mock<IChordTemplateGroupingHtmlService>();
+            m_MockChordDefinitionsGroupingHtmlService = new Mock<IChordDefinitionGroupingHtmlService>();
             m_MockQuickLinkService = new Mock<IQuickLinkService>();
 
             FretboardService = new FretboardService(m_MockMusicTheoryService.Object, m_MockGroupedScalesService.Object);
@@ -35,7 +35,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
         protected InstrumentController CreateNewInstrumentController(InstrumentViewModel instrumentViewModel)
         {
-            return new InstrumentController(instrumentViewModel, m_MockMusicTheoryService.Object, FretboardService, m_MockScaleGroupingHtmlService.Object, m_MockQuickLinkService.Object, m_MockChordTemplateGroupingHtmlService.Object)
+            return new InstrumentController(instrumentViewModel, m_MockMusicTheoryService.Object, FretboardService, m_MockScaleGroupingHtmlService.Object, m_MockQuickLinkService.Object, m_MockChordDefinitionsGroupingHtmlService.Object)
             {
                 TempData = new TempDataDictionary(
                     Mock.Of<HttpContext>(),

@@ -79,7 +79,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
         }
 
         [Fact]
-        public void ToggleLockSelection_LockSelection_ChordTemplateService_IsCalled()
+        public void ToggleLockSelection_LockSelection_ChordDefinitionsService_IsCalled()
         {
             const bool lockSelection = true;
 
@@ -89,11 +89,11 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             _instrumentController.ToggleLockSelection(_selectedScale, _selectedNotes, lockSelection);
 
-            m_MockMusicTheoryService.Verify(c => c.GetChordsTemplates(It.IsAny<Note[]>(), It.IsAny<Note[]>()), Times.Once);
+            m_MockMusicTheoryService.Verify(c => c.GetChordsDefinitions(It.IsAny<Note[]>(), It.IsAny<Note[]>()), Times.Once);
         }
 
         [Fact(Skip = "Not required until Chord Implementations are present in database")]
-        public void ToggleLockSelection_UnlockSelection_ChordTemplateService_IsNotCalled()
+        public void ToggleLockSelection_UnlockSelection_ChordDefinitionService_IsNotCalled()
         {
             const bool lockSelection = false;
 
@@ -103,7 +103,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             _instrumentController.ToggleLockSelection(_selectedScale, _selectedNotes, lockSelection);
 
-            m_MockMusicTheoryService.Verify(c => c.GetChordsTemplates(It.IsAny<Note[]>(), It.IsAny<Note[]>()), Times.Never);
+            m_MockMusicTheoryService.Verify(c => c.GetChordsDefinitions(It.IsAny<Note[]>(), It.IsAny<Note[]>()), Times.Never);
         }
     }
 }

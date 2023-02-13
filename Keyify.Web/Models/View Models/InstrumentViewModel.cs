@@ -31,17 +31,17 @@ namespace KeyifyWebClient.Models.ViewModels
         public Fretboard Fretboard { get; set; }
         public ScaleEntry SelectedScale { get; set; }
         public List<ScaleEntry> Scales { get; set; } = new List<ScaleEntry>();
-        public List<ChordTemplate> ChordTemplates { get; set; } = new List<ChordTemplate>();
+        public List<ChordDefinition> ChordDefinitions { get; set; } = new List<ChordDefinition>();
 
         public void UpdateViewModel(Fretboard fretboard) => Fretboard = fretboard;
         public void UpdateQuickLinkCode(string quickLinkCode) => QuickLinkCode = quickLinkCode;
         public void UpdateAvailableKeysAndScalesTableHtml(string htmlContent) => AvailableKeysAndScalesTableHtml = htmlContent;
-        public void UpdateAvailableChordTemplatesTableHtml(string htmlContent) => AvailableChordTemplatesTableHtml = htmlContent;
+        public void UpdateAvailableChordDefinitionsTableHtml(string htmlContent) => AvailableChordDefinitionsTableHtml = htmlContent;
 
         public string SelectedNotesJson => JsonSerializer.Serialize(SelectedNotes.Select(n => n.Note.ToString()));
 
         public string AvailableKeysAndScalesTableHtml { get; private set; }
-        public string AvailableChordTemplatesTableHtml { get; private set; }
+        public string AvailableChordDefinitionsTableHtml { get; private set; }
         public string AvailableKeysAndScalesLabel => $"{GetAvailableKeysLabel()} {GetAvailableScaleLabel()}";
 
         public List<FretboardNote> SelectedNotes => NotesMatrix.Where(n => n.Selected).ToList();

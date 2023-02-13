@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Keyify.Models.ServiceModels
 {
-    public class ChordTemplate : IEquatable<ChordTemplate>
+    public class ChordDefinition : IEquatable<ChordDefinition>
     {
         public readonly ChordType Type;
         public readonly Note[] Notes;
@@ -16,7 +16,7 @@ namespace Keyify.Models.ServiceModels
 
         public string Label => GenerateLabel(Name);
 
-        public ChordTemplate(ChordType chordType, Note[] notes)
+        public ChordDefinition(ChordType chordType, Note[] notes)
         {
             Type = chordType;
             Notes = notes;
@@ -28,7 +28,7 @@ namespace Keyify.Models.ServiceModels
             return selectedNotes.ToHashSet().IsSupersetOf(Notes);
         }
 
-        public bool Equals(ChordTemplate other)
+        public bool Equals(ChordDefinition other)
         {
             var notesHashcode = GetHashCode();
             var otherNotesHashcode = other.GetHashCode();
@@ -36,19 +36,19 @@ namespace Keyify.Models.ServiceModels
             return notesHashcode == otherNotesHashcode;
         }
 
-        public static bool operator ==(ChordTemplate a, ChordTemplate b)
+        public static bool operator ==(ChordDefinition a, ChordDefinition b)
         {
             return a.Equals(b);
         }
 
-        public static bool operator !=(ChordTemplate a, ChordTemplate b)
+        public static bool operator !=(ChordDefinition a, ChordDefinition b)
         {
             return a.Equals(b);
         }
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as ChordTemplate);
+            return Equals(obj as ChordDefinition);
         }
 
         public override int GetHashCode()

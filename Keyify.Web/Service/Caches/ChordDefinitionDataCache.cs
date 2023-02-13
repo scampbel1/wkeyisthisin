@@ -5,41 +5,41 @@ using System.Collections.Generic;
 
 namespace Keyify.Service.Caches
 {
-    public class ChordTemplateDataCache
+    public class ChordDefinitionDataCache
     {
-        private Dictionary<ChordType, Interval[]> _chordTemplateDefinitions => GenerateChordTemplateDefinitions();
+        private Dictionary<ChordType, Interval[]> _chordDefinitions => GenerateChordDefinitions();
 
-        public readonly List<ChordTemplate> ChordTemplates;
+        public readonly List<ChordDefinition> ChordDefintions;
 
-        public ChordTemplateDataCache()
+        public ChordDefinitionDataCache()
         {
-            ChordTemplates = GenerateChordTemplates();
+            ChordDefintions = GenerateChordDefintions();
         }
 
-        private List<ChordTemplate> GenerateChordTemplates()
+        private List<ChordDefinition> GenerateChordDefintions()
         {
-            var chordTemplates = new List<ChordTemplate>();
+            var chordDefinitions = new List<ChordDefinition>();
 
-            foreach (var chordTemplateDefinition in _chordTemplateDefinitions)
+            foreach (var chordDefinition in _chordDefinitions)
             {
-                GenerateChordTemplatesByChordType(chordTemplateDefinition.Key, chordTemplateDefinition.Value, chordTemplates);
+                GenerateChordDefinitionByChordType(chordDefinition.Key, chordDefinition.Value, chordDefinitions);
             }
 
-            return chordTemplates;
+            return chordDefinitions;
         }
 
-        private void GenerateChordTemplatesByChordType(ChordType chordType, Interval[] intervals, List<ChordTemplate> chordTemplates)
+        private void GenerateChordDefinitionByChordType(ChordType chordType, Interval[] intervals, List<ChordDefinition> chordDefinitions)
         {
             var currentNote = Note.A;
 
             while (currentNote <= Note.Ab)
             {
-                chordTemplates.Add(new ChordTemplate(chordType, GenerateChordTemplateDefinitionNotes(currentNote, intervals)));
+                chordDefinitions.Add(new ChordDefinition(chordType, GenerateChordDefinitionNotes(currentNote, intervals)));
                 currentNote++;
             }
         }
 
-        private Note[] GenerateChordTemplateDefinitionNotes(Note rootNote, Interval[] intervals)
+        private Note[] GenerateChordDefinitionNotes(Note rootNote, Interval[] intervals)
         {
             var count = 0;
             var currentNote = rootNote;
@@ -64,7 +64,7 @@ namespace Keyify.Service.Caches
                 : (Note)nextStepIndex;
         }
 
-        private Dictionary<ChordType, Interval[]> GenerateChordTemplateDefinitions()
+        private Dictionary<ChordType, Interval[]> GenerateChordDefinitions()
         {
             var chordDefinitions = new Dictionary<ChordType, Interval[]>();
 

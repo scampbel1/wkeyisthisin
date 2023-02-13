@@ -8,6 +8,6 @@ namespace Keyify.Web.Service.Interfaces
     public interface IMusicTheoryService
     {
         IEnumerable<ScaleEntry> FindScales(IEnumerable<Note> selectedNotes);
-        IEnumerable<ChordTemplate> GetChordsTemplates(Note[] selectedScaleNotes, Note[] selectedNotes);
+        IEnumerable<ChordDefinition> GetChordsDefinitions(Note[] selectedScaleNotes, Note[] selectedNotes);
     }
 }

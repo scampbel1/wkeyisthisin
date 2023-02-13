@@ -14,18 +14,18 @@ namespace Keyify.Controllers.Instrument
         private readonly IFretboardService _fretboardService;
         private readonly IScaleGroupingHtmlService _scaleGroupingHtmlService;
         private readonly IQuickLinkService _quickLinkService;
-        private readonly IChordTemplateGroupingHtmlService _chordTemplateGroupingHtmlService;
+        private readonly IChordDefinitionGroupingHtmlService _chordDefinitionsGroupingHtmlService;
 
         protected InstrumentViewModel Model;
 
-        public InstrumentController(InstrumentViewModel model, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService, IQuickLinkService quickLinkService, IChordTemplateGroupingHtmlService chordTemplateGroupingHtmlService)
+        public InstrumentController(InstrumentViewModel model, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService, IQuickLinkService quickLinkService, IChordDefinitionGroupingHtmlService chordDefinitionsGroupingHtmlService)
         {
             Model = model;
             _musicTheoryService = musicTheoryService;
             _fretboardService = fretboardService;
             _scaleGroupingHtmlService = scaleGroupingHtmlService;
             _quickLinkService = quickLinkService;
-            _chordTemplateGroupingHtmlService = chordTemplateGroupingHtmlService;
+            _chordDefinitionsGroupingHtmlService = chordDefinitionsGroupingHtmlService;
         }
 
         [HttpGet]
@@ -93,11 +93,11 @@ namespace Keyify.Controllers.Instrument
             Model.UpdateQuickLinkCode(quickLinkBase64);
             Model.UpdateAvailableKeysAndScalesTableHtml(availableKeysAndScalesTableHtml);
 
-            var chordTemplates = _musicTheoryService.GetChordsTemplates(Model.SelectedScale?.Scale?.Notes?.ToArray(), selectedNotes).ToList();
-            var availableChordTemplatesTableHtml = _chordTemplateGroupingHtmlService.GenerateChordTemplateTableHtml(chordTemplates);
+            var chordDefintiions = _musicTheoryService.GetChordsDefinitions(Model.SelectedScale?.Scale?.Notes?.ToArray(), selectedNotes).ToList();
+            var availableChordDefinitionsTableHtml = _chordDefinitionsGroupingHtmlService.GenerateChordDefinitionsTableHtml(chordDefintiions);
 
-            Model.ChordTemplates = chordTemplates;
-            Model.UpdateAvailableChordTemplatesTableHtml(availableChordTemplatesTableHtml);
+            Model.ChordDefinitions = chordDefintiions;
+            Model.UpdateAvailableChordDefinitionsTableHtml(availableChordDefinitionsTableHtml);
         }
     }
 }

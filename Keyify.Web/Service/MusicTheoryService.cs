@@ -10,12 +10,12 @@ namespace Keyify.Web.Service
     public class MusicTheoryService : IMusicTheoryService
     {
         private readonly IScaleService _scaleService;
-        private readonly IChordTemplateService _chordTemplateSerice;
+        private readonly IChordDefinitionService _chordDefinitionsSerice;
 
-        public MusicTheoryService(IScaleService scaleService, IChordTemplateService chordTemplateSerice)
+        public MusicTheoryService(IScaleService scaleService, IChordDefinitionService chordDefinitionService)
         {
             _scaleService = scaleService;
-            _chordTemplateSerice = chordTemplateSerice;
+            _chordDefinitionsSerice = chordDefinitionService;
         }
 
         public IEnumerable<ScaleEntry> FindScales(IEnumerable<Note> selectedNotes)
@@ -24,11 +24,11 @@ namespace Keyify.Web.Service
             return _scaleService.FindScales(selectedNotes);
         }
 
-        public IEnumerable<ChordTemplate> GetChordsTemplates(Note[] selectedScaleNotes, Note[] selectedNotes)
+        public IEnumerable<ChordDefinition> GetChordsDefinitions(Note[] selectedScaleNotes, Note[] selectedNotes)
         {
             var notes = selectedScaleNotes != null && selectedScaleNotes.Length >= selectedNotes.Length ? selectedScaleNotes : selectedNotes;
 
-            return _chordTemplateSerice.FindChordTemplates(notes);
+            return _chordDefinitionsSerice.FindChordDefinitions(notes);
         }
     }
 }

@@ -27,18 +27,18 @@ namespace Keyify
             services.AddControllersWithViews();
             services.AddSingleton(typeof(Fretboard), typeof(Fretboard));
             services.AddSingleton(typeof(ModeDataCache), typeof(ModeDataCache));
-            services.AddSingleton(typeof(ChordTemplateDataCache), typeof(ChordTemplateDataCache));
+            services.AddSingleton(typeof(ChordDefinitionDataCache), typeof(ChordDefinitionDataCache));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
 
             services.AddSingleton(typeof(IModeService), typeof(ModeService));
             services.AddSingleton(typeof(IQuickLinkService), typeof(QuickLinkService));
             services.AddSingleton(typeof(IScaleService), typeof(ScaleService));
             services.AddTransient(typeof(IGroupedScalesService), typeof(GroupedScalesService));
-            services.AddSingleton(typeof(IChordTemplateService), typeof(ChordTemplateService));
+            services.AddSingleton(typeof(IChordDefinitionService), typeof(ChordDefinitionService));
             services.AddSingleton(typeof(IMusicTheoryService), typeof(MusicTheoryService));
             services.AddSingleton(typeof(IFretboardService), typeof(FretboardService));
             services.AddSingleton(typeof(IScaleGroupingHtmlService), typeof(ScaleGroupingHtmlService));
-            services.AddSingleton(typeof(IChordTemplateGroupingHtmlService), typeof(ChordTemplateGroupingHtmlService));
+            services.AddSingleton(typeof(IChordDefinitionGroupingHtmlService), typeof(ChordDefinitionsGroupingHtmlService));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

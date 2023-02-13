@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 namespace Keyify.Service.Interfaces
 {
-    public interface IChordTemplateService
+    public interface IChordDefinitionService
     {
-        public List<ChordTemplate> FindChordTemplates(Note[] notes);
+        public List<ChordDefinition> FindChordDefinitions(Note[] notes);
     }
 }
