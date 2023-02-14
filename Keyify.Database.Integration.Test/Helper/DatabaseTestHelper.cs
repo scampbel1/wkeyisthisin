@@ -1,4 +1,6 @@
-﻿using Keyify.Database.Integration.Test.Enums;
+﻿using EnumsNET;
+using Keyify.Database.Integration.Test.Enums;
+using Keyify.Enums;
 using System.Text;
 using System.Text.Json;
 
@@ -12,6 +14,36 @@ namespace Keyify.Database.Integration.Test.Helper
             sqlScript = sqlScript.Replace("GO", "");
 
             return sqlScript;
+        }
+
+        internal static string CreateInsertChordDefinitionSqlScript()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine("INSERT INTO [Core].[ChordDefinition] (");
+            sb.AppendLine("[Name],");
+            sb.AppendLine("[Intervals]");
+            sb.AppendLine(")");
+            sb.AppendLine("VALUES");
+            sb.AppendLine("(");
+            sb.AppendLine("@Name,");
+            sb.AppendLine("@Intervals");
+            sb.AppendLine(")");
+
+            return sb.ToString();
+        }
+
+        internal static object CreateInsertChordTemplateSqlScriptParameters()
+        {
+            using var memoryStream = new MemoryStream();
+
+            JsonSerializer.Serialize(memoryStream, TestChordDefinitionConstant.Major);
+
+            return new
+            {
+                Name = ChordType.Major.AsString(EnumFormat.Description),
+                Intervals = memoryStream.ToArray()
+            };
         }
 
         internal static string CreateInsertTuningSqlScript()
@@ -39,7 +71,7 @@ namespace Keyify.Database.Integration.Test.Helper
         {
             using var memoryStream = new MemoryStream();
 
-            JsonSerializer.Serialize(memoryStream, GuitarTuningConstant.StandardTuning);
+            JsonSerializer.Serialize(memoryStream, TestGuitarTuningConstant.StandardTuning);
 
             return new
             {
@@ -54,8 +86,8 @@ namespace Keyify.Database.Integration.Test.Helper
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("INSERT INTO[Core].[Chord]");
-            sb.AppendLine("([ChordTypeId]");
+            sb.AppendLine("INSERT INTO [Core].[Chord](");            
+            sb.AppendLine(" [ChordTypeId]");
             sb.AppendLine(",[RootNoteId]");
             sb.AppendLine(",[TuningId]");
             sb.AppendLine(",[Name]");

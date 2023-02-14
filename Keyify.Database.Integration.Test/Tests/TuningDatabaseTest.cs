@@ -32,7 +32,7 @@ namespace Keyify.Database.Integration.Test.Tests
 
                 //Assert
                 Assert.Single(tuning);
-                Assert.Equal(GuitarTuningConstant.StandardTuning, notesResult);
+                Assert.Equal(TestGuitarTuningConstant.StandardTuning, notesResult);
             }
         }
 
