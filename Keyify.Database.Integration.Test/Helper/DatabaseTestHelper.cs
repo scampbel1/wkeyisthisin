@@ -33,7 +33,7 @@ namespace Keyify.Database.Integration.Test.Helper
             return sb.ToString();
         }
 
-        internal static object CreateInsertChordTemplateSqlScriptParameters()
+        internal static object CreateInsertChordDefinitionSqlScriptParameters()
         {
             using var memoryStream = new MemoryStream();
 
@@ -86,7 +86,7 @@ namespace Keyify.Database.Integration.Test.Helper
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("INSERT INTO [Core].[Chord](");            
+            sb.AppendLine("INSERT INTO [Core].[Chord](");
             sb.AppendLine(" [ChordTypeId]");
             sb.AppendLine(",[RootNoteId]");
             sb.AppendLine(",[TuningId]");

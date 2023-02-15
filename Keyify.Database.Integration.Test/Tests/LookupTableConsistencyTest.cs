@@ -3,7 +3,6 @@ using Keyify.Database.Integration.Test.ThrowawayDatabases;
 using Keyify.Web.Enums;
 using KeyifyClassLibrary.Enums;
 using Microsoft.Data.SqlClient;
-using Xunit;
 
 namespace Keyify.Database.Integration.Test.Tests
 {

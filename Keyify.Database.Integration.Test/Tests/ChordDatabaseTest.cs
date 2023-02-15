@@ -5,7 +5,6 @@ using Keyify.Database.Integration.Test.ThrowawayDatabases;
 using KeyifyClassLibrary.Enums;
 using Microsoft.Data.SqlClient;
 using System.Text.Json;
-using Xunit;
 
 namespace Keyify.Database.Integration.Tests.Test
 {
@@ -20,7 +19,7 @@ namespace Keyify.Database.Integration.Tests.Test
                 sqlCconnection.Open();
 
                 //Arrange
-                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordDefinitionSqlScript(), DatabaseTestHelper.CreateInsertChordTemplateSqlScriptParameters());
+                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordDefinitionSqlScript(), DatabaseTestHelper.CreateInsertChordDefinitionSqlScriptParameters());
                 await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertStandardTuningSqlScriptParameters());
                 await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordSqlScript(), DatabaseTestHelper.CreateInsertEMajorChordSqlScriptParameters());
 
@@ -48,7 +47,7 @@ namespace Keyify.Database.Integration.Tests.Test
                 sqlCconnection.Open();
 
                 //Arrange
-                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordDefinitionSqlScript(), DatabaseTestHelper.CreateInsertChordTemplateSqlScriptParameters());
+                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordDefinitionSqlScript(), DatabaseTestHelper.CreateInsertChordDefinitionSqlScriptParameters());
                 await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertStandardTuningSqlScriptParameters());
                 await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordSqlScript(), DatabaseTestHelper.CreateInsertEMajorChordSqlScriptParameters());
 
@@ -90,7 +89,7 @@ namespace Keyify.Database.Integration.Tests.Test
                 new Interval[] { Interval.R, Interval.WW, Interval.Wh, Interval.Wh, Interval.WW, Interval.Wh, Interval.WW },
             };
 
-            var results = new List<Byte[]>();
+            var results = new List<byte[]>();
 
             foreach (var interval in mainArray)
             {

@@ -4,7 +4,6 @@ using Keyify.Database.Integration.Test.Helper;
 using Keyify.Database.Integration.Test.ThrowawayDatabases;
 using Microsoft.Data.SqlClient;
 using System.Text.Json;
-using Xunit;
 
 namespace Keyify.Database.Integration.Test.Tests
 {
