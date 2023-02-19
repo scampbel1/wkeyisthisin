@@ -62,7 +62,7 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
 
             foreach (var chordDefinition in chordDefinitions)
             {
-                GenerateChordTemplatesByChordType(chordDefinition.Key, chordDefinition.Value, generatedChordDefinitions);
+                await GenerateChordTemplatesByChordType(chordDefinition.Key, chordDefinition.Value, generatedChordDefinitions);
             }
 
             ChordDefinitions = generatedChordDefinitions;

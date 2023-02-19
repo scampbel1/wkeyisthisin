@@ -76,8 +76,7 @@ namespace Keyify.Web.Service
 
             sb.Append($"<td class=\"scaleResultColumn\">");
 
-            //TODO: Reintroduce sharps
-            foreach (var availableScale in scaleGroupingEntries[count].GroupedScales.Select(gs => new KeyValuePair<string, string>(gs.ScaleLabel, gs.ColloquialismIncludingFormalName_Flat)))
+            foreach (var availableScale in scaleGroupingEntries[count].GroupedScales.Select(gs => new KeyValuePair<string, string>(gs.ScaleLabel, gs.ColloquialismIncludingFormalName_Sharp)))
             {
                 sb.Append($"<a class=\"scaleResult scaleText\" onclick=\"UpdateModel('/{instrumentType.ToString()}/UpdateFretboardModel', '{availableScale.Key}', null, {$"[{string.Join(',', selectedNotes.Select(s => $"'{s}'"))}]"} )\">{availableScale.Value}</a>&nbsp;");
             }

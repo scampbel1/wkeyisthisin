@@ -3,6 +3,8 @@ using Keyify.Infrastructure.Repository;
 using Keyify.Models.Service;
 using Keyify.Service;
 using Keyify.Service.Interfaces;
+using Keyify.Services.Formatter.Interfaces;
+using Keyify.Services.Formatter.Services;
 using Keyify.Web.Infrastructure.Caches;
 using Keyify.Web.Infrastructure.Repository.Interfaces;
 using Keyify.Web.Models.Instruments;
@@ -45,6 +47,7 @@ namespace Keyify
             services.AddSingleton(typeof(IChordDefinitionGroupingHtmlService), typeof(ChordDefinitionsGroupingHtmlService));
             services.AddSingleton(typeof(IChordDefinitionDataCache), typeof(ChordDefinitionDataCache));
             services.AddSingleton(typeof(IChordDefinitionRepository), typeof(ChordDefinitionRepository));
+            services.AddSingleton(typeof(INoteFormatService), typeof(NoteFormatService));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -94,7 +94,7 @@ namespace Keyify.Web.Services
                             if (instrumentNote.InSelectedScale)
                             {
                                 var currentNoteIndex = instrumentViewModel.SelectedScale.Scale.Notes.IndexOf(instrumentNote.Note);
-                                instrumentNote.DegreeInScale = instrumentViewModel.SelectedScale.Scale.ModeDefinition.ScaleDegrees[currentNoteIndex];
+                                instrumentNote.DegreeInScale = instrumentViewModel.SelectedScale.Scale.ScaleDegrees[currentNoteIndex];
                             }
                         }
                     }

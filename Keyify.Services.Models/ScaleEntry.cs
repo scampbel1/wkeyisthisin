@@ -10,15 +10,15 @@ namespace Keyify.Services.Models
             Scale = scale;
         }
 
-        //private string _sharpRootNote => _noteFormatService.ConvertNoteToStringEquivalent(Scale.RootNote, convertFlatNoteToSharp: true);
+        private string _sharpRootNote => Scale.SharpRootNote;
 
         public GeneratedScale Scale { get; set; }
         public bool Selected { get; set; }
 
         //TODO: Move all of this to the GeneratedScale class, it should only be generated once
 
-        public string ScaleLabel => $"{Scale.RootNote}{Scale.ModeDefinition.Mode}";
-        public bool IsKey => IsScaleEntryAKey();
+        public string ScaleLabel => $"{Scale.RootNote}{Scale.Mode}";
+        public bool IsKey => Scale.IsKey;
 
         public string NoteSetLabel_Flat => string.Join(" ", Scale.NoteSet);
         public string NoteSetLabel_Sharp => string.Join(" ", Scale.NoteSetSharp);
@@ -27,14 +27,10 @@ namespace Keyify.Services.Models
         public string ColloquialNameLabel_Flat => GenerateScaleColloquialism(Scale, convertFlatNoteToSharp: false);
         public string ColloquialismIncludingFormalName_Flat => !string.IsNullOrWhiteSpace(ColloquialNameLabel_Flat) ? $"{ColloquialNameLabel_Flat} ({FormalNameLabel_Flat})" : $"{FormalNameLabel_Flat}";
 
-        //public string FormalNameLabel_Sharp => GenerateLabel($"{_sharpRootNote}{Scale.ModeDefinition.Mode}");
+        public string FormalNameLabel_Sharp => GenerateLabel($"{Scale.SharpRootNote}{Scale.Mode}");
         public string ColloquialNameLabel_Sharp => GenerateScaleColloquialism(Scale, convertFlatNoteToSharp: true);
-        //public string ColloquialismIncludingFormalName_Sharp => !string.IsNullOrWhiteSpace(ColloquialNameLabel_Sharp) ? $"{ColloquialNameLabel_Sharp} ({FormalNameLabel_Sharp})" : $"{FormalNameLabel_Sharp}";
+        public string ColloquialismIncludingFormalName_Sharp => !string.IsNullOrWhiteSpace(ColloquialNameLabel_Sharp) ? $"{ColloquialNameLabel_Sharp} ({FormalNameLabel_Sharp})" : $"{FormalNameLabel_Sharp}";
 
-        private bool IsScaleEntryAKey()
-        {
-            return Scale.ModeDefinition.Mode == Mode.Ionian || Scale.ModeDefinition.Mode == Mode.Aeolian;
-        }
 
         //TODO: Boilerplate code - move to service or define in database or both
         private string GenerateLabel(string label)
@@ -59,31 +55,27 @@ namespace Keyify.Services.Models
             return sb.ToString();
         }
 
-        private ModeColloquialism? GetModeNameColloquialism(Mode mode)
+        //TODO: Move this to GeneratedScale class
+        private string GetModeNameColloquialism(Mode mode)
         {
             switch (mode)
             {
                 case Mode.Ionian:
-                    return ModeColloquialism.Major;
+                    return ModeColloquialism.Major.ToString();
                 case Mode.Aeolian:
-                    return ModeColloquialism.Minor;
+                    return ModeColloquialism.Minor.ToString();
                 default:
-                    return null;
+                    return string.Empty;
             }
-        }
-
-        private string GetModeNameColloquialismLabel(Mode mode)
-        {
-            return GetModeNameColloquialism(mode).ToString();
         }
 
         private string GenerateScaleColloquialism(GeneratedScale scale, bool convertFlatNoteToSharp)
         {
-            var modeEquivalent = GetModeNameColloquialismLabel(scale.ModeDefinition.Mode);
+            var rootNote = convertFlatNoteToSharp ? Scale.SharpRootNote : Scale.RootNote.ToString();
 
-            //return !string.IsNullOrWhiteSpace(modeEquivalent) ? $"{_noteFormatService.ConvertNoteToStringEquivalent(scale.RootNote, convertFlatNoteToSharp)} {modeEquivalent}" : modeEquivalent;
+            var modeEquivalent = GetModeNameColloquialism(scale.Mode);
 
-            return $"{scale.RootNote} {modeEquivalent}";
+            return !string.IsNullOrWhiteSpace(modeEquivalent) ? $"{rootNote} {modeEquivalent}" : modeEquivalent;
         }
     }
 }

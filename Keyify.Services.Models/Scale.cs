@@ -4,42 +4,27 @@ namespace Keyify.Services.Models
 {
     public class GeneratedScale
     {
+        public readonly bool IsKey;
         public readonly Note RootNote;
+        public readonly string SharpRootNote;
         public readonly List<Note> Notes;
         public readonly HashSet<Note> NoteSet;
         public readonly HashSet<string> NoteSetSharp;
-        public readonly ModeDefinition ModeDefinition;
+        public readonly Mode Mode;
+        public readonly string[] ScaleDegrees;
 
-        public GeneratedScale(Note key, ModeDefinition modeDefinition)
+
+        public GeneratedScale(Note rootNote, string rootNoteSharp, List<Note> notes, List<string> noteSetSharp, Mode mode, string[] scaleDegrees)
         {
-            RootNote = key;
-            Notes = new List<Note>();
-            NoteSet = new HashSet<Note>();
-            NoteSetSharp = new HashSet<string>();
-            ModeDefinition = modeDefinition;
+            RootNote = rootNote;
+            SharpRootNote = rootNoteSharp;
+            Notes = notes;
+            NoteSet = notes.ToHashSet();
+            NoteSetSharp = noteSetSharp.ToHashSet();
+            Mode = mode;
+            ScaleDegrees = scaleDegrees;
 
-            GenerateScale();
-        }
-
-        private void AddNote(Note note)
-        {
-            Notes.Add(note);
-            NoteSet.Add(note);
-        }
-
-        private void GenerateScale()
-        {
-            int noteNumber = (int)RootNote;
-
-            foreach (var scaleStep in ModeDefinition.ScaleSteps)
-            {
-                noteNumber += (int)scaleStep;
-
-                if (noteNumber > 11)
-                    noteNumber -= 12;
-
-                AddNote((Note)noteNumber);
-            }
+            IsKey = (mode == Mode.Ionian || mode == Mode.Aeolian);
         }
     }
 }

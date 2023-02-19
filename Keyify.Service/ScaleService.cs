@@ -1,5 +1,6 @@
 ﻿using Keyify.MusicTheory.Enums;
 using Keyify.Service.Interfaces;
+using Keyify.Services.Formatter.Interfaces;
 using Keyify.Services.Models;
 
 namespace Keyify.Models.Service
@@ -7,13 +8,19 @@ namespace Keyify.Models.Service
     public class ScaleService : IScaleService
     {
         private readonly IModeService _modeService;
+        private readonly INoteFormatService _noteFormatService;
+
         private readonly List<ScaleEntry> _scaleList;
+        private readonly Dictionary<Note, string> _sharpNoteDictionary;
 
         public List<ScaleEntry> Scales => _scaleList;
 
-        public ScaleService(IModeService modeService)
+        public ScaleService(IModeService modeService, INoteFormatService noteFormatService)
         {
             _modeService = modeService;
+            _noteFormatService = noteFormatService;
+
+            _sharpNoteDictionary = _noteFormatService.SharpNoteDictionary;
             _scaleList = GenerateScaleList();
         }
 
@@ -46,11 +53,36 @@ namespace Keyify.Models.Service
             if (modeDefinition.ExplicitNotesForMode != null)
             {
                 scaleEntry.AddRange(from Note note in modeDefinition.ExplicitNotesForMode
-                                    let scale = new GeneratedScale(note, modeDefinition)
-                                    select new ScaleEntry(scale));
+                                    let generatedScale = CreateGeneratedScale(note, modeDefinition)
+                                    select new ScaleEntry(generatedScale));
             }
 
             return scaleEntry;
+        }
+
+        //TODO: Move this to Factory pattern
+        private GeneratedScale CreateGeneratedScale(Note rootNote, ModeDefinition modeDefinition)
+        {
+            var notes = new List<Note>();
+            var sharpRootNote = _sharpNoteDictionary[rootNote];
+            var sharpNotes = new List<string>();
+            
+            var noteNumber = (int)rootNote;
+
+            foreach (var scaleStep in modeDefinition.ScaleSteps)
+            {
+                noteNumber += (int)scaleStep;
+
+                if (noteNumber > 11)
+                    noteNumber -= 12;
+
+                var note = (Note)noteNumber;
+
+                notes.Add(note);
+                sharpNotes.Add(_sharpNoteDictionary[note]);
+            }
+
+            return new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, modeDefinition.Mode, modeDefinition.ScaleDegrees);
         }
     }
 }

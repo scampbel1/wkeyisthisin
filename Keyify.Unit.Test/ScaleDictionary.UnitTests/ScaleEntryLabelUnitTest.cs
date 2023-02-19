@@ -1,5 +1,6 @@
 ﻿using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
+using System.Collections.Generic;
 
 namespace ScaleDictionaryTests
 {
@@ -8,30 +9,14 @@ namespace ScaleDictionaryTests
         [Fact]
         public void AbIonianScaleIsConvertedToAbMajor()
         {
-            var generatedScale = new GeneratedScale(
-                Note.Ab,
-                new ModeDefinition(
-                    Mode.Ionian,
-                new Interval[] {
-                    Interval.R,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h
-                 },
-                new string[] {
-                     Degree.First,
-                     Degree.Second,
-                     Degree.Third,
-                     Degree.Fourth,
-                     Degree.Fifth,
-                     Degree.Sixth,
-                     Degree.Seventh,
-                     Degree.Eighth
-                }));
+            var rootNote = Note.Ab;
+            var sharpRootNote = "Ab";
+            var notes = new List<Note>();
+            var sharpNotes = new List<string>();
+            var mode = Mode.Ionian;
+            var scaleDegrees = new string[6];
+
+            var generatedScale = new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, mode, scaleDegrees);
 
             var scaleEntry = new ScaleEntry(generatedScale);
 
@@ -51,30 +36,14 @@ namespace ScaleDictionaryTests
         [Fact]
         public void DbAeolianScaleIsConvertedToDbMinor()
         {
-            var generatedScale = new GeneratedScale(
-                Note.Db,
-                new ModeDefinition(
-                    Mode.Aeolian
-                    , new Interval[] {
-                    Interval.R,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W
-            },
-                new string[] {
-                     Degree.First,
-                     Degree.Second,
-                     Degree.FlatThird,
-                     Degree.Fourth,
-                     Degree.Fifth,
-                     Degree.FlatSixth,
-                     Degree.FlatSeventh,
-                     Degree.Eighth
-                }));
+            var rootNote = Note.Db;
+            var sharpRootNote = "Db";
+            var notes = new List<Note>();
+            var sharpNotes = new List<string>();
+            var mode = Mode.Aeolian;
+            var scaleDegrees = new string[6];
+
+            var generatedScale = new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, mode, scaleDegrees);
 
             var scaleEntry = new ScaleEntry(generatedScale);
 
@@ -94,91 +63,55 @@ namespace ScaleDictionaryTests
         [Fact]
         public void GbAeolianScaleIsConvertedToFSharpMinor()
         {
-            var generatedScale = new GeneratedScale(
-                Note.Gb,
-                new ModeDefinition(
-                    Mode.Aeolian
-                    , new Interval[] {
-                    Interval.R,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W
-            },
-                new string[] {
-                     Degree.First,
-                     Degree.Second,
-                     Degree.FlatThird,
-                     Degree.Fourth,
-                     Degree.Fifth,
-                     Degree.FlatSixth,
-                     Degree.FlatSeventh,
-                     Degree.Eighth
-                }));
+            var rootNote = Note.Gb;
+            var sharpRootNote = "F#";
+            var notes = new List<Note>();
+            var sharpNotes = new List<string>();
+            var mode = Mode.Aeolian;
+            var scaleDegrees = new string[6];
+
+            var generatedScale = new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, mode, scaleDegrees);
 
             var scaleEntry = new ScaleEntry(generatedScale);
-
-            //TODO: Fix this test
 
             var colloquialExpected = "F# Minor";
             var colloquialActual = scaleEntry.ColloquialNameLabel_Sharp;
             var userReadableExpected = "F# Aeolian";
-            //var userReadableActual = scaleEntry.FormalNameLabel_Sharp;
+            var userReadableActual = scaleEntry.FormalNameLabel_Sharp;
             var combinationLabelExpected = "F# Minor (F# Aeolian)";
-            //var combinationLabelActual = scaleEntry.ColloquialismIncludingFormalName_Sharp;
+            var combinationLabelActual = scaleEntry.ColloquialismIncludingFormalName_Sharp;
 
             //Note: Best practice to have 1 Assertion - making the exception here as I'd like to group these labels together
-            //Assert.Equal(colloquialExpected, colloquialActual);
-            //Assert.Equal(userReadableExpected, userReadableActual);
-            //Assert.Equal(combinationLabelExpected, combinationLabelActual);
+            Assert.Equal(colloquialExpected, colloquialActual);
+            Assert.Equal(userReadableExpected, userReadableActual);
+            Assert.Equal(combinationLabelExpected, combinationLabelActual);
         }
 
         [Fact]
         public void EbDorian_b2ScaleIsConvertedToFSharpMinor()
         {
-            var generatedScale = new GeneratedScale(
-                Note.Eb,
-                new ModeDefinition(
-                    Mode.Dorian_b2,
-                    new Interval[] {
-                    Interval.R,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W
-            },
-                new string[] {
-                     Degree.First,
-                     Degree.FlatSecond,
-                     Degree.FlatThird,
-                     Degree.Fourth,
-                     Degree.Fifth,
-                     Degree.Sixth,
-                     Degree.FlatSeventh,
-                     Degree.Eighth
-                }));
+            var rootNote = Note.Eb;
+            var sharpRootNote = "D#";
+            var notes = new List<Note>();
+            var sharpNotes = new List<string>();
+            var mode = Mode.Dorian_b2;
+            var scaleDegrees = new string[6];
+
+            var generatedScale = new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, mode, scaleDegrees);
 
             var scaleEntry = new ScaleEntry(generatedScale);
-
-            //TODO: Fix this test
 
             var colloquialExpected = string.Empty;
             var colloquialActual = scaleEntry.ColloquialNameLabel_Sharp;
             var userReadableExpected = "D# Dorian b2";
-            //var userReadableActual = scaleEntry.FormalNameLabel_Sharp;
+            var userReadableActual = scaleEntry.FormalNameLabel_Sharp;
             var combinationLabelExpected = "D# Dorian b2";
-            //var combinationLabelActual = scaleEntry.ColloquialismIncludingFormalName_Sharp;
+            var combinationLabelActual = scaleEntry.ColloquialismIncludingFormalName_Sharp;
 
             //Note: Best practice to have 1 Assertion - making the exception here as I'd like to group these labels together
-            //Assert.Equal(colloquialExpected, colloquialActual);
-            //Assert.Equal(userReadableExpected, userReadableActual);
-            //Assert.Equal(combinationLabelExpected, combinationLabelActual);
+            Assert.Equal(colloquialExpected, colloquialActual);
+            Assert.Equal(userReadableExpected, userReadableActual);
+            Assert.Equal(combinationLabelExpected, combinationLabelActual);
         }
     }
 }
