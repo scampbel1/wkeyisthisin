@@ -1,6 +1,5 @@
-﻿using Keyify.Web.Enums;
+﻿using Keyify.MusicTheory.Enums;
 using Keyify.Web.Models.QuickLink;
-using KeyifyClassLibrary.Enums;
 
 namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
 {

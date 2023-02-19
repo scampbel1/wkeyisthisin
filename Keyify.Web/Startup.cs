@@ -1,11 +1,16 @@
+using Keyify.Infrastructure.Caches.Interfaces;
+using Keyify.Infrastructure.Repository;
 using Keyify.Models.Service;
 using Keyify.Service;
-using Keyify.Service.Caches;
 using Keyify.Service.Interfaces;
+using Keyify.Web.Infrastructure.Caches;
+using Keyify.Web.Infrastructure.Repository.Interfaces;
+using Keyify.Web.Models.Instruments;
+using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Service;
 using Keyify.Web.Service.Interfaces;
-using KeyifyWebClient.Models.Instruments;
-using KeyifyWebClient.Models.ViewModels;
+using Keyify.Web.Services;
+using Keyify.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,7 +32,6 @@ namespace Keyify
             services.AddControllersWithViews();
             services.AddSingleton(typeof(Fretboard), typeof(Fretboard));
             services.AddSingleton(typeof(ModeDataCache), typeof(ModeDataCache));
-            services.AddSingleton(typeof(ChordDefinitionDataCache), typeof(ChordDefinitionDataCache));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
 
             services.AddSingleton(typeof(IModeService), typeof(ModeService));
@@ -38,7 +42,9 @@ namespace Keyify
             services.AddSingleton(typeof(IMusicTheoryService), typeof(MusicTheoryService));
             services.AddSingleton(typeof(IFretboardService), typeof(FretboardService));
             services.AddSingleton(typeof(IScaleGroupingHtmlService), typeof(ScaleGroupingHtmlService));
-            services.AddSingleton(typeof(IChordDefinitionGroupingHtmlService), typeof(ChordDefinitionsGroupingHtmlService));
+            services.AddSingleton(typeof(IChordDefinitionGroupingHtmlService), typeof(ChordDefinitionsGroupingHtmlService));            
+            services.AddSingleton(typeof(IChordDefinitionDataCache), typeof(ChordDefinitionDataCache));
+            services.AddSingleton(typeof(IChordDefinitionRepository), typeof(ChordDefinitionRepository));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

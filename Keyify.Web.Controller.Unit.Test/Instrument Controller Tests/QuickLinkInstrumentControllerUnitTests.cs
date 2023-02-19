@@ -1,6 +1,5 @@
-﻿using Keyify.Models.Service;
-using KeyifyClassLibrary.Models.MusicTheory;
-using KeyifyClassLibrary.Service_Models;
+﻿using Keyify.MusicTheory.Enums;
+using Keyify.Services.Models;
 
 namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 {
@@ -49,7 +48,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             var instrumentViewModel = InstrumentViewModel;
             var instrumentController = CreateNewInstrumentController(instrumentViewModel);
 
-            m_MockMusicTheoryService.Setup(m => m.FindScales(It.IsAny<IEnumerable<Note>>())).Returns(
+            m_MockMusicTheoryService.Setup(m => m.FindScales(It.IsAny<IEnumerable<Note>>())).ReturnsAsync(
                 new[] {
                     new ScaleEntry(new GeneratedScale(
                         Note.C,

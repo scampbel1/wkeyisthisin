@@ -1,10 +1,13 @@
-﻿using Keyify.Web.Models.QuickLink;
+﻿using Keyify.MusicTheory.Enums;
+using Keyify.Service.Interfaces;
+using Keyify.Web.Models.QuickLink;
+using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Service.Interfaces;
-using KeyifyClassLibrary.Enums;
-using KeyifyWebClient.Models.ViewModels;
+using Keyify.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Keyify.Controllers.Instrument
 {
@@ -77,7 +80,7 @@ namespace Keyify.Controllers.Instrument
         }
 
         //TODO: Move all of this out of the controller
-        private void UpdateFretboard(Note[] selectedNotes, string selectedScale)
+        private async Task UpdateFretboard(Note[] selectedNotes, string selectedScale)
         {
             if (selectedNotes != null)
             {
@@ -93,10 +96,10 @@ namespace Keyify.Controllers.Instrument
             Model.UpdateQuickLinkCode(quickLinkBase64);
             Model.UpdateAvailableKeysAndScalesTableHtml(availableKeysAndScalesTableHtml);
 
-            var chordDefintiions = _musicTheoryService.GetChordsDefinitions(Model.SelectedScale?.Scale?.Notes?.ToArray(), selectedNotes).ToList();
+            var chordDefintiions = await _musicTheoryService.GetChordsDefinitions(Model.SelectedScale?.Scale?.Notes?.ToArray(), selectedNotes);
             var availableChordDefinitionsTableHtml = _chordDefinitionsGroupingHtmlService.GenerateChordDefinitionsTableHtml(chordDefintiions);
 
-            Model.ChordDefinitions = chordDefintiions;
+            Model.ChordDefinitions = chordDefintiions.ToList();
             Model.UpdateAvailableChordDefinitionsTableHtml(availableChordDefinitionsTableHtml);
         }
     }

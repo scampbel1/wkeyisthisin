@@ -1,4 +1,4 @@
-﻿using KeyifyClassLibrary.Enums;
+﻿using Keyify.MusicTheory.Enums;
 
 namespace Keyify.Database.Integration.Test.Enums
 {

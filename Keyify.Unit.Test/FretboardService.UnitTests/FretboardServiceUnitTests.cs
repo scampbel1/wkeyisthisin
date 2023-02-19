@@ -1,8 +1,9 @@
-﻿using Keyify.Web.Enums;
-using Keyify.Web.Service;
+﻿using Keyify.MusicTheory.Enums;
+using Keyify.Web.Models.Instruments;
 using Keyify.Web.Service.Interfaces;
+using Keyify.Web.Services;
+using Keyify.Web.Services.Interfaces;
 using KeyifyWebClient.Models.Instruments;
-using Moq;
 
 namespace Keyify.Web.Unit.Test.FretboardServiceTest.UnitTests
 {

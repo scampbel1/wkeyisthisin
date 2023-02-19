@@ -1,14 +1,12 @@
-﻿using Keyify.Models.Service;
-using Keyify.Models.ServiceModels;
-using Keyify.Models.ViewModels.Misc;
-using KeyifyClassLibrary.Enums;
-using KeyifyWebClient.Models.Instruments;
+﻿using Keyify.MusicTheory.Enums;
+using Keyify.Services.Models;
+using Keyify.Web.Models.Instruments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
-namespace KeyifyWebClient.Models.ViewModels
+namespace Keyify.Web.Models.ViewModels
 {
     //WARNING: Be careful renaming this class! (It may not rename the reference in the Views)
     public partial class InstrumentViewModel

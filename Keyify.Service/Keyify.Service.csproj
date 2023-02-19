@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Keyify.Infrastructure\Keyify.Infrastructure.csproj" />
+    <ProjectReference Include="..\Keyify.MusicTheory\Keyify.MusicTheory.csproj" />
+    <ProjectReference Include="..\Keyify.Services.Models\Keyify.Services.Models.csproj" />
+  </ItemGroup>
+
+</Project>

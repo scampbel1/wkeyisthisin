@@ -2,7 +2,7 @@
 using Keyify.Database.Integration.Test.Enums;
 using Keyify.Database.Integration.Test.Helper;
 using Keyify.Database.Integration.Test.ThrowawayDatabases;
-using KeyifyClassLibrary.Enums;
+using Keyify.MusicTheory.Enums;
 using Microsoft.Data.SqlClient;
 using System.Text.Json;
 

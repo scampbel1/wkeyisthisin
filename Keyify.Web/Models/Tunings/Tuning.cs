@@ -1,4 +1,4 @@
-﻿using KeyifyClassLibrary.Enums;
+﻿using Keyify.MusicTheory.Enums;
 
 namespace Keyify.Web.Models.Tunings
 {

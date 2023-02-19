@@ -1,6 +1,6 @@
 ﻿using EnumsNET;
 using Keyify.Database.Integration.Test.Enums;
-using Keyify.Enums;
+using Keyify.MusicTheory.Enums;
 using System.Text;
 using System.Text.Json;
 

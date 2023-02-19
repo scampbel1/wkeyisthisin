@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using Keyify.Database.Integration.Test.ThrowawayDatabases;
-using Keyify.Web.Enums;
-using KeyifyClassLibrary.Enums;
+using Keyify.MusicTheory.Enums;
 using Microsoft.Data.SqlClient;
 
 namespace Keyify.Database.Integration.Test.Tests

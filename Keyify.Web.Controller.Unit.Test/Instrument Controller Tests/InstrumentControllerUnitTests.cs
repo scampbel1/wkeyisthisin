@@ -1,7 +1,10 @@
-using Keyify.Web.Service;
+using Keyify.Controllers.Instrument;
+using Keyify.Service.Interfaces;
+using Keyify.Web.Models.Instruments;
+using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Service.Interfaces;
-using KeyifyWebClient.Models.Instruments;
-using KeyifyWebClient.Models.ViewModels;
+using Keyify.Web.Services;
+using Keyify.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 

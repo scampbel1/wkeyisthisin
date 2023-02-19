@@ -1,8 +1,7 @@
-﻿using Keyify.Web.Enums;
+﻿using Keyify.MusicTheory.Enums;
 using Keyify.Web.Models.QuickLink;
-using Keyify.Web.Service;
-using Keyify.Web.Service.Interfaces;
-using KeyifyClassLibrary.Enums;
+using Keyify.Web.Services;
+using Keyify.Web.Services.Interfaces;
 using System.Collections.Generic;
 
 namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests

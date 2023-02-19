@@ -1,6 +1,5 @@
-﻿using Keyify.Web.Enums;
-using KeyifyClassLibrary.Enums;
-using KeyifyWebClient.Models.ViewModels;
+﻿using Keyify.MusicTheory.Enums;
+using Keyify.Web.Models.ViewModels;
 using System;
 using System.Collections;
 using System.Collections.Generic;

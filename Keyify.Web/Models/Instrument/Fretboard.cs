@@ -1,9 +1,8 @@
-﻿using Keyify.Web.Enums;
+﻿using Keyify.MusicTheory.Enums;
 using Keyify.Web.Models.Tunings;
-using KeyifyClassLibrary.Enums;
 using System.Collections.Generic;
 
-namespace KeyifyWebClient.Models.Instruments
+namespace Keyify.Web.Models.Instruments
 {
     public class Fretboard
     {

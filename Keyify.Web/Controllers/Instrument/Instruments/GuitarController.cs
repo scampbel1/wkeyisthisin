@@ -1,8 +1,10 @@
-﻿using Keyify.Web.Enums;
+﻿using Keyify.MusicTheory.Enums;
+using Keyify.Service.Interfaces;
 using Keyify.Web.Models.Tunings;
+using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Service.Interfaces;
+using Keyify.Web.Services.Interfaces;
 using KeyifyWebClient.Models.Instruments;
-using KeyifyWebClient.Models.ViewModels;
 
 namespace Keyify.Controllers.Instrument.Instruments
 {
