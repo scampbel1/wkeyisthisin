@@ -25,7 +25,7 @@ namespace Keyify.Web.Services
 
             if (viewModel.SelectedNotes.Count > 2)
             {
-                var scales = await _musicTheoryService.FindScales(viewModel.SelectedNotes.Select(a => a.Note));
+                var scales = _musicTheoryService.FindScales(viewModel.SelectedNotes.Select(a => a.Note));
 
                 viewModel.Scales = scales.ToList();
 

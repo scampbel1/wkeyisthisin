@@ -6,10 +6,17 @@ namespace Keyify.Web.Models.Instruments
 {
     public class Fretboard
     {
+        public readonly Dictionary<Note, string> SharpNotesDictionary;
+
         public InstrumentType InstrumentType { get; set; }
         public int FretCount { get; set; }
         public Tuning Tuning { get; set; }
         public List<FretboardString> InstrumentStrings { get; set; } = new List<FretboardString>();
+
+        public Fretboard(Dictionary<Note, string> sharpNotesDictionary)
+        {
+            SharpNotesDictionary = sharpNotesDictionary;
+        }
 
         public void UpdateFretboard(InstrumentType instrumentType, Tuning tuning, int fretCount)
         {
@@ -31,10 +38,34 @@ namespace Keyify.Web.Models.Instruments
         {
             foreach (Note note in Tuning.Notes)
             {
-                InstrumentStrings.Add(new FretboardString(note, FretCount));
+                var fretboardString = CreateFretboardString(note, FretCount);
+
+                InstrumentStrings.Add(new FretboardString(fretboardString));
             }
 
             InstrumentStrings.Reverse();
+        }
+
+        //TODO: The characteristics of the note should be set in this method (this is currently happening in ApplySelectedNotesToFretboard)
+
+        public List<FretboardNote> CreateFretboardString(Note openNote, int fretCount)
+        {
+            var count = 0;
+            var currentNote = openNote;
+            var currentSharpNote = SharpNotesDictionary[currentNote];
+
+            var notes = new List<FretboardNote>(fretCount);
+
+            while (count < fretCount)
+            {
+                notes.Add(new FretboardNote(currentNote, currentSharpNote));
+
+                currentNote = currentNote == Note.Ab ? Note.A : currentNote + 1;
+                currentSharpNote = SharpNotesDictionary[currentNote];
+                count++;
+            }
+
+            return notes;
         }
     }
 }

@@ -32,9 +32,6 @@ namespace Keyify
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton(typeof(Fretboard), typeof(Fretboard));
-            services.AddSingleton(typeof(ModeDataCache), typeof(ModeDataCache));
-            services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
 
             services.AddSingleton(typeof(IModeService), typeof(ModeService));
             services.AddSingleton(typeof(IQuickLinkService), typeof(QuickLinkService));
@@ -48,6 +45,11 @@ namespace Keyify
             services.AddSingleton(typeof(IChordDefinitionDataCache), typeof(ChordDefinitionDataCache));
             services.AddSingleton(typeof(IChordDefinitionRepository), typeof(ChordDefinitionRepository));
             services.AddSingleton(typeof(INoteFormatService), typeof(NoteFormatService));
+
+
+            services.AddSingleton(typeof(ModeDataCache), typeof(ModeDataCache));
+            services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
+            services.AddSingleton(f => new Fretboard(f.GetRequiredService<INoteFormatService>().SharpNoteDictionary));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

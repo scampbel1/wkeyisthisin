@@ -1,34 +1,14 @@
-﻿using Keyify.MusicTheory.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Keyify.Web.Models.Instruments
 {
     public class FretboardString
     {
-        public List<FretboardNote> Notes { get; set; }
+        public List<FretboardNote> Notes { get; private set; }
 
-        public FretboardString(Note openNote, int fretCount)
+        public FretboardString(List<FretboardNote> notes)
         {
-            Notes = PopulateFretboard(openNote, fretCount);
-        }
-
-        //TODO: The characteristics of the note should be set in this method (this is currently happening in ApplySelectedNotesToFretboard)
-
-        public List<FretboardNote> PopulateFretboard(Note openNote, int fretCount)
-        {
-            var count = 0;
-            var currentNote = openNote;
-            var notes = new List<FretboardNote>(fretCount);
-
-            while (count < fretCount)
-            {
-                notes.Add(new FretboardNote(currentNote));
-
-                currentNote = currentNote == Note.Ab ? Note.A : currentNote + 1;
-                count++;
-            }
-
-            return notes;
+            Notes = notes;
         }
     }
 }

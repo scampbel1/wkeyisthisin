@@ -11,13 +11,12 @@ namespace Keyify.Web.Models.Instruments
         public bool InSelectedScale { get; set; }
         public string DegreeInScale { get; set; }
 
-        public FretboardNote(Note note)
+        public FretboardNote(Note note, string sharpNote)
         {
             Note = note;
             Selected = false;
             InSelectedScale = false;
-            //TODO: Implement this here or somewhere else (possibly don't need it on the model)
-            //Sharp = sharpNote;
+            Sharp = sharpNote;
         }
 
         public bool Equals(FretboardNote other)

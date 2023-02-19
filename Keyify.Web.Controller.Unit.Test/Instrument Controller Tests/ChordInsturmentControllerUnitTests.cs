@@ -1,5 +1,4 @@
 ﻿using Keyify.MusicTheory.Enums;
-using Keyify.Services.Models;
 
 namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 {

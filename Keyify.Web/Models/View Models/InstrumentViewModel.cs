@@ -11,9 +11,12 @@ namespace Keyify.Web.Models.ViewModels
     //WARNING: Be careful renaming this class! (It may not rename the reference in the Views)
     public partial class InstrumentViewModel
     {
+        private readonly Dictionary<Note, string> _sharpNotesDictionary;
+
         public InstrumentViewModel(Fretboard fretboard)
         {
             Fretboard = fretboard;
+            _sharpNotesDictionary = fretboard.SharpNotesDictionary;
             NotesMatrix = InitialiseNotesMatrix();
         }
 
@@ -55,7 +58,7 @@ namespace Keyify.Web.Models.ViewModels
 
             foreach (Note note in Enum.GetValues(typeof(Note)))
             {
-                fretboardNotes.Add(new FretboardNote(note));
+                fretboardNotes.Add(new FretboardNote(note, _sharpNotesDictionary[note]));
             }
 
             return fretboardNotes;

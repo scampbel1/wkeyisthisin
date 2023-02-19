@@ -16,9 +16,9 @@ namespace Keyify.Web.Service
             _chordDefinitionsSerice = chordDefinitionService;
         }
 
-        public async Task<IEnumerable<ScaleEntry>> FindScales(IEnumerable<Note> selectedNotes)
+        public IEnumerable<ScaleEntry> FindScales(IEnumerable<Note> selectedNotes)
         {
-            return await _scaleService.FindScales(selectedNotes);
+            return _scaleService.FindScales(selectedNotes);
         }
 
         public async Task<IEnumerable<ChordDefinition>> GetChordsDefinitions(Note[] selectedScaleNotes, Note[] selectedNotes)

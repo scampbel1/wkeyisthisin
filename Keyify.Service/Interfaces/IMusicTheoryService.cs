@@ -5,7 +5,7 @@ namespace Keyify.Web.Services.Interfaces
 {
     public interface IMusicTheoryService
     {
-        Task<IEnumerable<ScaleEntry>> FindScales(IEnumerable<Note> selectedNotes);
+        IEnumerable<ScaleEntry> FindScales(IEnumerable<Note> selectedNotes);
         Task<IEnumerable<ChordDefinition>> GetChordsDefinitions(Note[] selectedScaleNotes, Note[] selectedNotes);
     }
 }

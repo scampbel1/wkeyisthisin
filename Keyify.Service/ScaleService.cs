@@ -24,7 +24,7 @@ namespace Keyify.Models.Service
             _scaleList = GenerateScaleList();
         }
 
-        public async Task<IEnumerable<ScaleEntry>> FindScales(IEnumerable<Note> selectedNotes)
+        public IEnumerable<ScaleEntry> FindScales(IEnumerable<Note> selectedNotes)
         {
             return _scaleList.Where(a => a.Scale.NoteSet.IsSupersetOf(selectedNotes));
         }
@@ -66,7 +66,7 @@ namespace Keyify.Models.Service
             var notes = new List<Note>();
             var sharpRootNote = _sharpNoteDictionary[rootNote];
             var sharpNotes = new List<string>();
-            
+
             var noteNumber = (int)rootNote;
 
             foreach (var scaleStep in modeDefinition.ScaleSteps)
