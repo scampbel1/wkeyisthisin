@@ -1,6 +1,4 @@
 ﻿using Keyify.Web.Infrastructure.Models.ChordDefinition;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Keyify.Web.Infrastructure.Repository.Interfaces
 {

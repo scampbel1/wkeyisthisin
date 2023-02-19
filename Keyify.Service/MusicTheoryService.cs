@@ -21,7 +21,7 @@ namespace Keyify.Web.Service
             return await _scaleService.FindScales(selectedNotes);
         }
 
-        public async Task <IEnumerable<ChordDefinition>> GetChordsDefinitions(Note[] selectedScaleNotes, Note[] selectedNotes)
+        public async Task<IEnumerable<ChordDefinition>> GetChordsDefinitions(Note[] selectedScaleNotes, Note[] selectedNotes)
         {
             var notes = selectedScaleNotes != null && selectedScaleNotes.Length >= selectedNotes.Length ? selectedScaleNotes : selectedNotes;
 

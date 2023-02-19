@@ -7,7 +7,7 @@ namespace Keyify.Services.Models
     {
         public ScaleEntry(GeneratedScale scale)
         {
-            Scale = scale;            
+            Scale = scale;
         }
 
         //private string _sharpRootNote => _noteFormatService.ConvertNoteToStringEquivalent(Scale.RootNote, convertFlatNoteToSharp: true);

@@ -2,7 +2,6 @@
 using Keyify.Service.Interfaces;
 using Keyify.Web.Models.Tunings;
 using Keyify.Web.Models.ViewModels;
-using Keyify.Web.Service.Interfaces;
 using Keyify.Web.Services.Interfaces;
 using KeyifyWebClient.Models.Instruments;
 

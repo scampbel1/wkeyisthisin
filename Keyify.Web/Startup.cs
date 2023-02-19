@@ -42,7 +42,7 @@ namespace Keyify
             services.AddSingleton(typeof(IMusicTheoryService), typeof(MusicTheoryService));
             services.AddSingleton(typeof(IFretboardService), typeof(FretboardService));
             services.AddSingleton(typeof(IScaleGroupingHtmlService), typeof(ScaleGroupingHtmlService));
-            services.AddSingleton(typeof(IChordDefinitionGroupingHtmlService), typeof(ChordDefinitionsGroupingHtmlService));            
+            services.AddSingleton(typeof(IChordDefinitionGroupingHtmlService), typeof(ChordDefinitionsGroupingHtmlService));
             services.AddSingleton(typeof(IChordDefinitionDataCache), typeof(ChordDefinitionDataCache));
             services.AddSingleton(typeof(IChordDefinitionRepository), typeof(ChordDefinitionRepository));
         }

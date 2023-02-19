@@ -1,5 +1,4 @@
 ﻿using Keyify.Infrastructure.Caches.Interfaces;
-
 using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
 
@@ -23,7 +22,7 @@ namespace Keyify.Web.Infrastructure.Caches
         //TODO: Move to some sort of generator tool
         private async Task<List<ChordDefinition>> GenerateChordDefintions(Dictionary<string, Interval[]> chordDefinitions)
         {
-            var result = new List<ChordDefinition>();            
+            var result = new List<ChordDefinition>();
 
             foreach (var chordDefinition in chordDefinitions)
             {

@@ -24,7 +24,7 @@ namespace Keyify.Services.Models
         private void AddNote(Note note)
         {
             Notes.Add(note);
-            NoteSet.Add(note);            
+            NoteSet.Add(note);
         }
 
         private void GenerateScale()
