@@ -1,5 +1,7 @@
 using Keyify.Controllers.Instrument;
+using Keyify.MusicTheory.Enums;
 using Keyify.Service.Interfaces;
+using Keyify.Services.Formatter.Services;
 using Keyify.Web.Models.Instruments;
 using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Service.Interfaces;
@@ -23,10 +25,16 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
         protected readonly Mock<IQuickLinkService> m_MockQuickLinkService;
         protected readonly Mock<IChordDefinitionGroupingHtmlService> m_MockChordDefinitionsGroupingHtmlService;
 
-        protected InstrumentViewModel InstrumentViewModel => new InstrumentViewModel(new Fretboard());
+        private readonly Dictionary<Note, string> _sharpNotesDictionary;
+
+        protected InstrumentViewModel InstrumentViewModel;
 
         public InstrumentControllerUnitTests()
         {
+            _sharpNotesDictionary = new NoteFormatService().SharpNoteDictionary;
+
+            InstrumentViewModel = new InstrumentViewModel(new Fretboard(_sharpNotesDictionary));
+
             m_MockMusicTheoryService = new Mock<IMusicTheoryService>();
             m_MockGroupedScalesService = new Mock<IGroupedScalesService>();
             m_MockScaleGroupingHtmlService = new Mock<IScaleGroupingHtmlService>();

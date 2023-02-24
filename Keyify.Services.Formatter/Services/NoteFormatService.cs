@@ -5,7 +5,7 @@ namespace Keyify.Services.Formatter.Services
 {
     public class NoteFormatService : INoteFormatService
     {
-        Dictionary<Note, string> INoteFormatService.SharpNoteDictionary => GenerateSharpNoteDictionary();
+        public Dictionary<Note, string> SharpNoteDictionary => GenerateSharpNoteDictionary();
 
         private Dictionary<Note, string> GenerateSharpNoteDictionary()
         {

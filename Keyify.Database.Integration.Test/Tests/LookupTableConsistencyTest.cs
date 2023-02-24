@@ -19,7 +19,7 @@ namespace Keyify.Database.Integration.Test.Tests
 
         public LookupTableConsistencyTest()
         {
-            Task.Run(SetupFixture).Wait();
+            Task.WaitAll(SetupFixture());
         }
 
         private async Task SetupFixture()

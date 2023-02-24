@@ -1,4 +1,5 @@
 ﻿using Keyify.MusicTheory.Enums;
+using Keyify.Services.Models;
 
 namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 {
@@ -8,7 +9,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
         private Note[] _selectedNotes = new[] { Note.A, Note.C, Note.G };
 
         [Fact]
-        public void ToggleLockSelection_True_IsSelectionLocked_IsTrue()
+        public async Task ToggleLockSelection_True_IsSelectionLocked_IsTrue()
         {
             const bool lockSelection = true;
 
@@ -16,13 +17,13 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             var _instrumentController = CreateNewInstrumentController(_instrumentViewModel);
 
-            _instrumentController.ToggleLockSelection(_selectedScale, _selectedNotes, lockSelection);
+            await _instrumentController.ToggleLockSelection(_selectedScale, _selectedNotes, lockSelection);
 
             Assert.True(_instrumentViewModel.IsSelectionLocked);
         }
 
         [Fact]
-        public void ToggleLockSelection_False_IsSelectionLocked_IsTrue()
+        public async Task ToggleLockSelection_False_IsSelectionLocked_IsTrue()
         {
             const bool lockSelection = false;
 
@@ -30,42 +31,46 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             var _instrumentController = CreateNewInstrumentController(_instrumentViewModel);
 
-            _instrumentController.ToggleLockSelection(_selectedScale, _selectedNotes, lockSelection);
+            await _instrumentController.ToggleLockSelection(_selectedScale, _selectedNotes, lockSelection);
 
             Assert.False(_instrumentViewModel.IsSelectionLocked);
         }
 
         [Fact]
-        public void ToggleLockSeletion_InputScale_IsTheSame()
+        public async Task ToggleLockSeletion_InputScale_IsTheSame()
         {
             const bool lockSelection = true;
             const string _excpectedQuickLinkScale = "CKumoi";
 
+            var mockGeneratedScale = new GeneratedScale(
+                        Note.C,
+                        Note.C.ToString(),
+                        new List<Note>() { Note.C },
+                        new List<string>() { "C" },
+                        Mode.Kumoi,
+                        new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fifth, Degree.Sixth, Degree.Eighth });
+
+            var mockScaleResult = new ScaleEntry(mockGeneratedScale);
+
             var _instrumentViewModel = InstrumentViewModel;
 
             var _instrumentController = CreateNewInstrumentController(_instrumentViewModel);
 
-            //new GeneratedScale(
-            //            Note.C,
-            //            new ModeDefinition(
-            //                Mode.Kumoi,
-            //                new Interval[] { Interval.R, Interval.W, Interval.h, Interval.WW, Interval.W, Interval.Wh },
-            //                new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fifth, Degree.Sixth, Degree.Eighth }))
 
-            //m_MockMusicTheoryService.Setup(m => m.FindScales(It.IsAny<IEnumerable<Note>>())).ReturnsAsync(
-            //    new[] {
-            //        new ScaleEntry()
-            //    });
+            m_MockMusicTheoryService.Setup(m => m.FindScales(It.IsAny<IEnumerable<Note>>())).Returns(
+                new[] {
+                    mockScaleResult
+                });
 
-            _instrumentController.ToggleLockSelection(_excpectedQuickLinkScale, _selectedNotes, lockSelection);
+            await _instrumentController.ToggleLockSelection(_excpectedQuickLinkScale, _selectedNotes, lockSelection);
 
-            //m_MockMusicTheoryService.Reset();
+            m_MockMusicTheoryService.Reset();
 
-            //Assert.Equal(_excpectedQuickLinkScale, _instrumentViewModel.SelectedScale.ScaleLabel);
+            Assert.Equal(_excpectedQuickLinkScale, _instrumentViewModel.SelectedScale.ScaleLabel);
         }
 
         [Fact]
-        public void ToggleLockSeletion_InputNotesArray_IsTheSame()
+        public async Task ToggleLockSeletion_InputNotesArray_IsTheSame()
         {
             const bool lockSelection = true;
 
@@ -73,13 +78,13 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             var _instrumentController = CreateNewInstrumentController(_instrumentViewModel);
 
-            _instrumentController.ToggleLockSelection(_selectedScale, _selectedNotes, lockSelection);
+            await _instrumentController.ToggleLockSelection(_selectedScale, _selectedNotes, lockSelection);
 
             Assert.Equal(_selectedNotes, _instrumentViewModel.SelectedNotes.Select(n => n.Note));
         }
 
         [Fact]
-        public void ToggleLockSelection_LockSelection_ChordDefinitionsService_IsCalled()
+        public async Task ToggleLockSelection_LockSelection_ChordDefinitionsService_IsCalled()
         {
             const bool lockSelection = true;
 
@@ -87,13 +92,13 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             var _instrumentController = CreateNewInstrumentController(_instrumentViewModel);
 
-            _instrumentController.ToggleLockSelection(_selectedScale, _selectedNotes, lockSelection);
+            await _instrumentController.ToggleLockSelection(_selectedScale, _selectedNotes, lockSelection);
 
             m_MockMusicTheoryService.Verify(c => c.GetChordsDefinitions(It.IsAny<Note[]>(), It.IsAny<Note[]>()), Times.Once);
         }
 
         [Fact(Skip = "Not required until Chord Implementations are present in database")]
-        public void ToggleLockSelection_UnlockSelection_ChordDefinitionService_IsNotCalled()
+        public async Task ToggleLockSelection_UnlockSelection_ChordDefinitionService_IsNotCalled()
         {
             const bool lockSelection = false;
 
@@ -101,7 +106,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             var _instrumentController = CreateNewInstrumentController(_instrumentViewModel);
 
-            _instrumentController.ToggleLockSelection(_selectedScale, _selectedNotes, lockSelection);
+            await _instrumentController.ToggleLockSelection(_selectedScale, _selectedNotes, lockSelection);
 
             m_MockMusicTheoryService.Verify(c => c.GetChordsDefinitions(It.IsAny<Note[]>(), It.IsAny<Note[]>()), Times.Never);
         }

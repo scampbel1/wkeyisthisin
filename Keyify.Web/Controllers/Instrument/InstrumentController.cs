@@ -31,19 +31,19 @@ namespace Keyify.Controllers.Instrument
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var selectedScale = (string)TempData["QLscale"];
             var selectedNotes = (IEnumerable<Note>)TempData["QLnotes"];
 
-            UpdateFretboard(selectedNotes?.ToArray(), selectedScale);
+            await UpdateFretboard(selectedNotes?.ToArray(), selectedScale);
 
             return View(Model);
         }
 
         [HttpPost]
         //DON'T CHANGE THE NAMES OF THESE PARAMETERS
-        public ActionResult UpdateFretboardModel(List<Note> previouslySelectedNotes, Note? newlySelectedNote, string selectedScale)
+        public async Task<ActionResult> UpdateFretboardModel(List<Note> previouslySelectedNotes, Note? newlySelectedNote, string selectedScale)
         {
             if (newlySelectedNote.HasValue)
             {
@@ -58,17 +58,17 @@ namespace Keyify.Controllers.Instrument
                 }
             }
 
-            UpdateFretboard(previouslySelectedNotes.ToArray(), selectedScale);
+            await UpdateFretboard(previouslySelectedNotes.ToArray(), selectedScale);
 
             return PartialView("Fretboard", Model);
         }
 
         [HttpPost]
-        public ActionResult ToggleLockSelection(string selectedScale, Note[] selectedNotes, bool lockSelection)
+        public async Task<ActionResult> ToggleLockSelection(string selectedScale, Note[] selectedNotes, bool lockSelection)
         {
             Model.IsSelectionLocked = lockSelection;
 
-            UpdateFretboard(selectedNotes, selectedScale);
+            await UpdateFretboard(selectedNotes, selectedScale);
 
             if (lockSelection)
             {
@@ -83,7 +83,7 @@ namespace Keyify.Controllers.Instrument
         {
             if (selectedNotes != null)
             {
-                _fretboardService.UpdateViewModel(Model, selectedNotes, selectedScale);
+                await _fretboardService.UpdateViewModel(Model, selectedNotes, selectedScale);
             }
 
             _fretboardService.UpdateFretboard(Model);

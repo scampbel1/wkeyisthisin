@@ -13,6 +13,23 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
 
         public List<ChordDefinition> ChordDefinitions { get; set; }
 
+        public async Task Sync(List<ChordDefinition> chordDefinitions)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task Initialise(Dictionary<string, Interval[]> chordDefinitions)
+        {
+            var generatedChordDefinitions = new List<ChordDefinition>();
+
+            foreach (var chordDefinition in chordDefinitions)
+            {
+                await GenerateChordTemplatesByChordType(chordDefinition.Key, chordDefinition.Value, generatedChordDefinitions);
+            }
+
+            ChordDefinitions = generatedChordDefinitions;
+        }
+
         private async Task GenerateChordTemplatesByChordType(string chordType, Interval[] intervals, List<ChordDefinition> chordTemplates)
         {
             var currentNote = Note.A;
@@ -49,23 +66,6 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
                 : (Note)nextStepIndex;
 
             return await Task.FromResult(result);
-        }
-
-        public async Task Sync(List<ChordDefinition> chordDefinitions)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task Initialise(Dictionary<string, Interval[]> chordDefinitions)
-        {
-            var generatedChordDefinitions = new List<ChordDefinition>();
-
-            foreach (var chordDefinition in chordDefinitions)
-            {
-                await GenerateChordTemplatesByChordType(chordDefinition.Key, chordDefinition.Value, generatedChordDefinitions);
-            }
-
-            ChordDefinitions = generatedChordDefinitions;
         }
     }
 }
