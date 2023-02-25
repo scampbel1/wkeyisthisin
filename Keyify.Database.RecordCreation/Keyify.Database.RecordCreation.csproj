@@ -8,7 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Factories\Interfaces\" />
+    <PackageReference Include="Enums.NET" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Keyify.Infrastructure\Keyify.Infrastructure.csproj" />
+    <ProjectReference Include="..\Keyify.MusicTheory\Keyify.MusicTheory.csproj" />
   </ItemGroup>
 
 </Project>

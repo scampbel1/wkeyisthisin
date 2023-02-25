@@ -3,6 +3,7 @@ using Keyify.Web.Infrastructure.Models.ChordDefinition;
 using Keyify.Web.Infrastructure.Repository.Interfaces;
 using System.Data.SqlClient;
 using System.Text;
+using System.Text.Json;
 
 namespace Keyify.Infrastructure.Repository
 {
@@ -41,7 +42,10 @@ namespace Keyify.Infrastructure.Repository
             {
                 return;
             }
-            
+            using var memoryStream = new MemoryStream();
+
+            JsonSerializer.Serialize(memoryStream, chordDefinitionRequest.Intervals);
+
             using var sqlCconnection = new SqlConnection(_connectionString);
 
             await sqlCconnection.OpenAsync();
@@ -59,7 +63,7 @@ namespace Keyify.Infrastructure.Repository
             sb.AppendLine("@Intervals");
             sb.AppendLine(")");
 
-            var chord = await sqlCconnection.ExecuteAsync(sb.ToString(), new { chordDefinitionRequest.Name, chordDefinitionRequest.Intervals });
+            var chord = await sqlCconnection.ExecuteAsync(sb.ToString(), new { Name = chordDefinitionRequest.Name, Intervals = memoryStream.ToArray() });
 
             await sqlCconnection.CloseAsync();
         }
