@@ -19,11 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.MusicTheory", "Keyif
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Infrastructure", "Keyify.Infrastructure\Keyify.Infrastructure.csproj", "{68EF0FBE-A8AF-46BA-8BE0-B7AD530BD935}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keyify.Service", "Keyify.Service\Keyify.Service.csproj", "{73F6A95B-E87C-44BD-BDE7-0B6C92ED9774}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Service", "Keyify.Service\Keyify.Service.csproj", "{73F6A95B-E87C-44BD-BDE7-0B6C92ED9774}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keyify.Services.Models", "Keyify.Services.Models\Keyify.Services.Models.csproj", "{94894BA6-A081-48CF-AC87-E8844DDDC117}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Services.Models", "Keyify.Services.Models\Keyify.Services.Models.csproj", "{94894BA6-A081-48CF-AC87-E8844DDDC117}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keyify.Services.Formatter", "Keyify.Services.Formatter\Keyify.Services.Formatter.csproj", "{0F74A1A4-0A8A-4020-9F90-814268AFE59E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Services.Formatter", "Keyify.Services.Formatter\Keyify.Services.Formatter.csproj", "{0F74A1A4-0A8A-4020-9F90-814268AFE59E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keyify.Database.RecordCreation", "Keyify.Database.RecordCreation\Keyify.Database.RecordCreation.csproj", "{120F1D6C-3FDB-4FD5-8C05-85EB30992945}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{0F74A1A4-0A8A-4020-9F90-814268AFE59E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F74A1A4-0A8A-4020-9F90-814268AFE59E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F74A1A4-0A8A-4020-9F90-814268AFE59E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{120F1D6C-3FDB-4FD5-8C05-85EB30992945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{120F1D6C-3FDB-4FD5-8C05-85EB30992945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{120F1D6C-3FDB-4FD5-8C05-85EB30992945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{120F1D6C-3FDB-4FD5-8C05-85EB30992945}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

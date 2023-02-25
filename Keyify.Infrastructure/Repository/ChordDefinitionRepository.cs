@@ -1,7 +1,8 @@
-﻿using Dapper.Contrib.Extensions;
+﻿using Dapper;
 using Keyify.Web.Infrastructure.Models.ChordDefinition;
 using Keyify.Web.Infrastructure.Repository.Interfaces;
 using System.Data.SqlClient;
+using System.Text;
 
 namespace Keyify.Infrastructure.Repository
 {
@@ -12,18 +13,48 @@ namespace Keyify.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public Task<ChordDefinitionEntity> GetChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
+        public async Task<bool> DoesChordDefinitionExist(string name)
         {
-            throw new NotImplementedException();
+            using var sqlConnection = new SqlConnection("Server=.;Database=Keyify;Trusted_Connection=True;");
+
+            await sqlConnection.OpenAsync();
+
+            var query = "SELECT COUNT(1) FROM [Core].[ChordDefinition] WHERE [Name] = @name";
+            var isFound = await sqlConnection.ExecuteScalarAsync<bool>(query, new { name });
+
+            await sqlConnection.CloseAsync();
+
+            return isFound;
         }
 
         public async Task InsertChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
         {
+            //TODO: Validate request
+            if (await DoesChordDefinitionExist(chordDefinitionRequest.Name))
+            {
+                return;
+            }
+
+            //TODO: Move connection string to somewhere safe - map to environment
             using var sqlCconnection = new SqlConnection("Server=.;Database=Keyify;Trusted_Connection=True;");
-            
+
             await sqlCconnection.OpenAsync();
 
-            var chord = await sqlCconnection.InsertAsync(chordDefinitionRequest);
+
+            //TODO: Convert to Builder Pattern
+            var sb = new StringBuilder();
+
+            sb.AppendLine("INSERT INTO [Core].[ChordDefinition] (");
+            sb.AppendLine("[Name],");
+            sb.AppendLine("[Intervals]");
+            sb.AppendLine(")");
+            sb.AppendLine("VALUES");
+            sb.AppendLine("(");
+            sb.AppendLine("@Name,");
+            sb.AppendLine("@Intervals");
+            sb.AppendLine(")");
+
+            var chord = await sqlCconnection.ExecuteAsync(sb.ToString(), new { chordDefinitionRequest.Name, chordDefinitionRequest.Intervals });
 
             await sqlCconnection.CloseAsync();
         }

@@ -36,17 +36,17 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
             return await Task.FromResult(chordDefinitions.Select(c => new ChordDefinitionEntity() { Name = c.Key.ToString(), Intervals = c.Value }).ToList());
         }
 
-        public Task<ChordDefinitionEntity> GetChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task InsertChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
         {
             throw new NotImplementedException();
         }
 
         public Task<List<ChordDefinitionEntity>> SyncChordDefinitions(IEnumerable<int> existingChordDefinitionIds)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DoesChordDefinitionExist(string name)
         {
             throw new NotImplementedException();
         }
