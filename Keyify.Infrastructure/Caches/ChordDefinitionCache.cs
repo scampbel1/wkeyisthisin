@@ -1,12 +1,20 @@
 ﻿using Keyify.Infrastructure.Caches.Interfaces;
 using Keyify.MusicTheory.Enums;
+using Keyify.Services.Formatter.Interfaces;
 using Keyify.Services.Models;
 
 namespace Keyify.Web.Infrastructure.Caches
 {
     public class ChordDefinitionCache : IChordDefinitionCache
     {
+        private readonly INoteFormatService _noteFormatService;
+
         public List<ChordDefinition>? ChordDefinitions { get; set; }
+
+        public ChordDefinitionCache(INoteFormatService noteFormatService)
+        {
+            _noteFormatService = noteFormatService;
+        }
 
         public async Task Initialise(Dictionary<string, Interval[]> chordDefinitions)
         {
@@ -17,7 +25,6 @@ namespace Keyify.Web.Infrastructure.Caches
         {
             throw new NotImplementedException();
         }
-
 
         //TODO: Move to some sort of generator tool
         private async Task<List<ChordDefinition>> GenerateChordDefintions(Dictionary<string, Interval[]> chordDefinitions)
@@ -39,7 +46,10 @@ namespace Keyify.Web.Infrastructure.Caches
 
             while (currentNote <= Note.Ab)
             {
-                chordDefinitions.Add(new ChordDefinition(chordType, await GenerateChordDefinitionNotes(currentNote, intervals)));
+                var notes = await GenerateChordDefinitionNotes(currentNote, intervals);
+                var sharpNote = _noteFormatService.SharpNoteDictionary[notes[0]];
+                
+                chordDefinitions.Add(new ChordDefinition(chordType, notes, sharpNote));
                 currentNote++;
             }
         }

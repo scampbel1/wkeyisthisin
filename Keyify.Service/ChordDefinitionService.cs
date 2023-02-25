@@ -16,7 +16,7 @@ namespace Keyify.Service
             _chordDefinitionCache = chordDefinitionCache;
             _chordDefinitionRepository = chordDefinitionRepository;
 
-            Task.WhenAll(InitialiseChordDefinitionCache());
+            Task.Run(async () => await InitialiseChordDefinitionCache());
         }
 
         public async Task<List<ChordDefinition>> FindChordDefinitions(Note[] notes)

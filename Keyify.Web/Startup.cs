@@ -43,7 +43,15 @@ namespace Keyify
             services.AddSingleton(typeof(IScaleGroupingHtmlService), typeof(ScaleGroupingHtmlService));
             services.AddSingleton(typeof(IChordDefinitionGroupingHtmlService), typeof(ChordDefinitionsGroupingHtmlService));
             services.AddSingleton(typeof(IChordDefinitionCache), typeof(ChordDefinitionCache));
-            services.AddSingleton(typeof(IChordDefinitionRepository), typeof(ChordDefinitionRepository));
+            services.AddSingleton(typeof(ISerializationFormatter), typeof(SerializationFormatter));
+
+            //TODO: Move connection string to configuration/somewhere safe and configurable by environment
+            services.AddSingleton<IChordDefinitionRepository>(f =>
+                new ChordDefinitionRepository(
+                    "Server=.;Database=Keyify;Trusted_Connection=True;",
+                    f.GetRequiredService<ISerializationFormatter>()
+                ));
+
             services.AddSingleton(typeof(INoteFormatService), typeof(NoteFormatService));
 
 

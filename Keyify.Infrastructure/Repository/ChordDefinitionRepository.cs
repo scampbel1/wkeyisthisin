@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Keyify.Services.Formatter.Interfaces;
 using Keyify.Web.Infrastructure.Models.ChordDefinition;
 using Keyify.Web.Infrastructure.Repository.Interfaces;
 using System.Data.SqlClient;
@@ -10,15 +11,37 @@ namespace Keyify.Infrastructure.Repository
     public class ChordDefinitionRepository : IChordDefinitionRepository
     {
         private readonly string _connectionString;
-
-        public ChordDefinitionRepository(string connectionString)
+        private readonly ISerializationFormatter _serializationFormatter;
+        public ChordDefinitionRepository(string connectionString, ISerializationFormatter serializationFormatter)
         {
             _connectionString = connectionString;
+            _serializationFormatter = serializationFormatter;
         }
 
-        public Task<List<ChordDefinitionEntity>> GetAllChordDefinitions()
+        public async Task<List<ChordDefinitionEntity>> GetAllChordDefinitions()
         {
-            throw new NotImplementedException();
+            var chordDefinitions = new List<ChordDefinitionEntity>();
+
+            using var sqlConnection = new SqlConnection(_connectionString);
+
+            await sqlConnection.OpenAsync();
+
+            var query = "SELECT [Id], [Name], [Intervals] FROM [Core].[ChordDefinition] WHERE [Deleted] = 0";
+            var result = await sqlConnection.ExecuteReaderAsync(query);
+
+            while (result.Read())
+            {
+                chordDefinitions.Add(new ChordDefinitionEntity()
+                {
+                    Id = result.GetInt32(0),
+                    Name = result.GetString(1),
+                    Intervals = await _serializationFormatter.ConvertToIntervalArray((byte[])result[2])
+                });
+            }
+
+            await sqlConnection.CloseAsync();
+
+            return chordDefinitions;
         }
 
         public async Task<bool> DoesChordDefinitionExist(string name)

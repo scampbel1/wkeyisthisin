@@ -20,6 +20,11 @@ namespace Keyify.Services.Models
             Name = $"{notes[0]} {chordType}";
         }
 
+        public ChordDefinition(string chordType, Note[] notes, string rootNote) : this(chordType, notes)
+        {
+            Name = $"{rootNote} {chordType}";
+        }
+
         public bool IsSubsetOf(Note[] selectedNotes)
         {
             return selectedNotes.ToHashSet().IsSupersetOf(Notes);
