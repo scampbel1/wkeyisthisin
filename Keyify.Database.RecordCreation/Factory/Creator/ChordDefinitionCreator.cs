@@ -23,9 +23,11 @@ namespace Keyify.Database.RecordCreation.Factory.Creator
         {
             foreach (var chordDefinition in _chordDefinitions)
             {
-                Console.WriteLine($"Attempting to create record for Chord Definition: '{chordDefinition.Key}'");
+                var chordName = chordDefinition.Key.AsString(EnumFormat.Description);
 
-                await _chordDefinitionRepository.InsertChordDefinition(new ChordDefinitionRequest() { Name = chordDefinition.Key.AsString(EnumFormat.Description), Intervals = chordDefinition.Value });
+                Console.WriteLine($"Attempting to create record for Chord Definition: '{chordName}'");
+
+                await _chordDefinitionRepository.InsertChordDefinition(new ChordDefinitionRequest() { Name = chordName, Intervals = chordDefinition.Value });
             }
         }
     }

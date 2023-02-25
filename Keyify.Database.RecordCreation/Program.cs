@@ -17,7 +17,8 @@ internal class Program
         while (running)
         {
             Console.WriteLine("Please make a selection:");
-            Console.WriteLine($"{(int)Selection.ChordDefinition}: Chord Template Creation");
+
+            PrintSelections();
 
             var key = Console.ReadKey(true).KeyChar;
 
@@ -36,8 +37,16 @@ internal class Program
                     await creator.ExecuteAsync();
                     break;
                 default:
+                    Console.WriteLine($"Invalid selection '{selection}'");
                     break;
             }
         }
+    }
+
+    private static void PrintSelections()
+    {
+        foreach(var selection in Enum.GetValues(typeof(Selection)))
+        
+        Console.WriteLine($"{(int)selection}: {(Selection)selection}");
     }
 }
