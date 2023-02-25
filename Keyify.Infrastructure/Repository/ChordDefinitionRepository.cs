@@ -1,5 +1,7 @@
-﻿using Keyify.Web.Infrastructure.Models.ChordDefinition;
+﻿using Dapper.Contrib.Extensions;
+using Keyify.Web.Infrastructure.Models.ChordDefinition;
 using Keyify.Web.Infrastructure.Repository.Interfaces;
+using System.Data.SqlClient;
 
 namespace Keyify.Infrastructure.Repository
 {
@@ -15,9 +17,15 @@ namespace Keyify.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public Task InsertChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
+        public async Task InsertChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
         {
-            throw new NotImplementedException();
+            using var sqlCconnection = new SqlConnection("Server=.;Database=Keyify;Trusted_Connection=True;");
+            
+            await sqlCconnection.OpenAsync();
+
+            var chord = await sqlCconnection.InsertAsync(chordDefinitionRequest);
+
+            await sqlCconnection.CloseAsync();
         }
 
         public Task<List<ChordDefinitionEntity>> SyncChordDefinitions(IEnumerable<int> existingChordDefinitionIds)
