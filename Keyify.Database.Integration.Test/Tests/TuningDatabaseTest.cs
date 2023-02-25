@@ -4,7 +4,6 @@ using Keyify.Database.Integration.Test.Helper;
 using Keyify.Database.Integration.Test.ThrowawayDatabases;
 using Microsoft.Data.SqlClient;
 using System.Text.Json;
-using Xunit;
 
 namespace Keyify.Database.Integration.Test.Tests
 {
@@ -32,7 +31,7 @@ namespace Keyify.Database.Integration.Test.Tests
 
                 //Assert
                 Assert.Single(tuning);
-                Assert.Equal(GuitarTuningConstant.StandardTuning, notesResult);
+                Assert.Equal(TestGuitarTuningConstant.StandardTuning, notesResult);
             }
         }
 

@@ -1,4 +1,4 @@
-﻿using Keyify.Web.Service.Interfaces;
+﻿using Keyify.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;

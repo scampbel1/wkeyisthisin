@@ -1,5 +1,5 @@
-﻿using Keyify.Web.Models.Tunings;
-using KeyifyClassLibrary.Enums;
+﻿using Keyify.MusicTheory.Enums;
+using Keyify.Web.Models.Tunings;
 
 namespace KeyifyWebClient.Models.Instruments
 {

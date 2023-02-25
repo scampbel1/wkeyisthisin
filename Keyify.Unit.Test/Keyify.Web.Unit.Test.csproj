@@ -17,6 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Keyify.Infrastructure\Keyify.Infrastructure.csproj" />
+    <ProjectReference Include="..\Keyify.Service\Keyify.Service.csproj" />
     <ProjectReference Include="..\Keyify.Web\Keyify.Web.csproj" />
   </ItemGroup>
 

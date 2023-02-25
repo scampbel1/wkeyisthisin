@@ -1,8 +1,7 @@
-﻿using KeyifyClassLibrary.Enums;
-using KeyifyClassLibrary.Helper;
+﻿using Keyify.MusicTheory.Enums;
 using System;
 
-namespace KeyifyWebClient.Models.Instruments
+namespace Keyify.Web.Models.Instruments
 {
     public class FretboardNote : IEquatable<FretboardNote>
     {
@@ -12,12 +11,12 @@ namespace KeyifyWebClient.Models.Instruments
         public bool InSelectedScale { get; set; }
         public string DegreeInScale { get; set; }
 
-        public FretboardNote(Note note)
+        public FretboardNote(Note note, string sharpNote)
         {
             Note = note;
             Selected = false;
             InSelectedScale = false;
-            Sharp = NoteHelper.ConvertNoteToStringEquivalent(note, true);
+            Sharp = sharpNote;
         }
 
         public bool Equals(FretboardNote other)

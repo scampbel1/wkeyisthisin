@@ -1,21 +1,22 @@
-﻿using Keyify.Models.Service;
-using Keyify.Models.ServiceModels;
-using Keyify.Models.ViewModels.Misc;
-using KeyifyClassLibrary.Enums;
-using KeyifyWebClient.Models.Instruments;
+﻿using Keyify.MusicTheory.Enums;
+using Keyify.Services.Models;
+using Keyify.Web.Models.Instruments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
-namespace KeyifyWebClient.Models.ViewModels
+namespace Keyify.Web.Models.ViewModels
 {
     //WARNING: Be careful renaming this class! (It may not rename the reference in the Views)
     public partial class InstrumentViewModel
     {
+        private readonly Dictionary<Note, string> _sharpNotesDictionary;
+
         public InstrumentViewModel(Fretboard fretboard)
         {
             Fretboard = fretboard;
+            _sharpNotesDictionary = fretboard.SharpNotesDictionary;
             NotesMatrix = InitialiseNotesMatrix();
         }
 
@@ -31,17 +32,17 @@ namespace KeyifyWebClient.Models.ViewModels
         public Fretboard Fretboard { get; set; }
         public ScaleEntry SelectedScale { get; set; }
         public List<ScaleEntry> Scales { get; set; } = new List<ScaleEntry>();
-        public List<ChordTemplate> ChordTemplates { get; set; } = new List<ChordTemplate>();
+        public List<ChordDefinition> ChordDefinitions { get; set; } = new List<ChordDefinition>();
 
         public void UpdateViewModel(Fretboard fretboard) => Fretboard = fretboard;
         public void UpdateQuickLinkCode(string quickLinkCode) => QuickLinkCode = quickLinkCode;
         public void UpdateAvailableKeysAndScalesTableHtml(string htmlContent) => AvailableKeysAndScalesTableHtml = htmlContent;
-        public void UpdateAvailableChordTemplatesTableHtml(string htmlContent) => AvailableChordTemplatesTableHtml = htmlContent;
+        public void UpdateAvailableChordDefinitionsTableHtml(string htmlContent) => AvailableChordDefinitionsTableHtml = htmlContent;
 
         public string SelectedNotesJson => JsonSerializer.Serialize(SelectedNotes.Select(n => n.Note.ToString()));
 
         public string AvailableKeysAndScalesTableHtml { get; private set; }
-        public string AvailableChordTemplatesTableHtml { get; private set; }
+        public string AvailableChordDefinitionsTableHtml { get; private set; }
         public string AvailableKeysAndScalesLabel => $"{GetAvailableKeysLabel()} {GetAvailableScaleLabel()}";
 
         public List<FretboardNote> SelectedNotes => NotesMatrix.Where(n => n.Selected).ToList();
@@ -57,7 +58,7 @@ namespace KeyifyWebClient.Models.ViewModels
 
             foreach (Note note in Enum.GetValues(typeof(Note)))
             {
-                fretboardNotes.Add(new FretboardNote(note));
+                fretboardNotes.Add(new FretboardNote(note, _sharpNotesDictionary[note]));
             }
 
             return fretboardNotes;

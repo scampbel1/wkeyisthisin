@@ -1,7 +1,7 @@
-﻿using Keyify.Web.Controllers.Quicklink;
-using Keyify.Web.Enums;
+﻿using Keyify.MusicTheory.Enums;
+using Keyify.Web.Controllers.Quicklink;
 using Keyify.Web.Models.QuickLink;
-using Keyify.Web.Service.Interfaces;
+using Keyify.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;

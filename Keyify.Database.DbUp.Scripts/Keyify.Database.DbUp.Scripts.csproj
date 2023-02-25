@@ -9,10 +9,9 @@
   <ItemGroup>
     <None Remove="Scripts\Script0001 - Create Core Schema.sql" />
     <None Remove="Scripts\Script0002 - Create Core.Instrument.sql" />
-    <None Remove="Scripts\Script0003 - Create Core.ChordType.sql" />
+    <None Remove="Scripts\Script0003 - Create Core.ChordDefinition.sql" />
     <None Remove="Scripts\Script0004 - Create Core.Note.sql" />
     <None Remove="Scripts\Script0005 - Insert Notes into Note.sql" />
-    <None Remove="Scripts\Script0006 - Insert ChordTypes into ChordType.sql" />
     <None Remove="Scripts\Script0007 - Insert Instruments into Instrument.sql" />
     <None Remove="Scripts\Script0008 - Create Core.Tuning.sql" />
     <None Remove="Scripts\Script0009 - Create Core.Chord.sql" />
@@ -28,16 +27,13 @@
     <EmbeddedResource Include="Scripts\Script0002 - Create Core.Instrument.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0003 - Create Core.ChordType.sql">
+    <EmbeddedResource Include="Scripts\Script0003 - Create Core.ChordDefinition.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\Script0004 - Create Core.Note.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\Script0005 - Insert Notes into Note.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0006 - Insert ChordTypes into ChordType.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\Script0007 - Insert Instruments into Instrument.sql">

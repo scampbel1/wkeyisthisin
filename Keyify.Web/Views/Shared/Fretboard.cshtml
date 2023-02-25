@@ -1,5 +1,5 @@
-﻿@using KeyifyWebClient.Models.ViewModels
-@model InstrumentViewModel
+﻿@model Keyify.Web.Models.ViewModels.InstrumentViewModel
+
 @{
     var lockFretboard = !Model.IsSelectionLocked;
 }
@@ -83,7 +83,7 @@
 
     <div class="scaleResults center">        
         <div id="tablesDiv">
-            @Html.Raw(Model.AvailableChordTemplatesTableHtml)
+            @Html.Raw(Model.AvailableChordDefinitionsTableHtml)
         </div>
     </div>
 </div>

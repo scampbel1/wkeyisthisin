@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Keyify.MusicTheory\Keyify.MusicTheory.csproj" />
     <ProjectReference Include="..\Keyify.Web\Keyify.Web.csproj" />
   </ItemGroup>
 
