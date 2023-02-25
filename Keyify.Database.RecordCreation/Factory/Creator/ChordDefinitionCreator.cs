@@ -3,6 +3,7 @@ using Keyify.Database.RecordCreation.Factory.Abstraction;
 using Keyify.Infrastructure.Repository;
 using Keyify.MusicTheory.Definitions;
 using Keyify.MusicTheory.Enums;
+using Keyify.Services.Formatter.Services;
 using Keyify.Web.Infrastructure.Models.ChordDefinition;
 using Keyify.Web.Infrastructure.Repository.Interfaces;
 
@@ -16,7 +17,7 @@ namespace Keyify.Database.RecordCreation.Factory.Creator
         internal ChordDefinitionCreator(string connectionString) : base(connectionString)
         {
             _chordDefinitions = ChordDefinitions.GenerateChordDefinitions();
-            _chordDefinitionRepository = new ChordDefinitionRepository(connectionString);
+            _chordDefinitionRepository = new ChordDefinitionRepository(connectionString, new SerializationFormatter());
         }
 
         internal override async Task ExecuteAsync()
