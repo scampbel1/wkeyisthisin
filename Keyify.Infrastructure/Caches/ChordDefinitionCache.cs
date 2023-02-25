@@ -4,7 +4,7 @@ using Keyify.Services.Models;
 
 namespace Keyify.Web.Infrastructure.Caches
 {
-    public class ChordDefinitionDataCache : IChordDefinitionDataCache
+    public class ChordDefinitionCache : IChordDefinitionCache
     {
         public List<ChordDefinition>? ChordDefinitions { get; set; }
 

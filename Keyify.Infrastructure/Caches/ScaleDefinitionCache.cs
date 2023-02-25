@@ -3,14 +3,14 @@ using Keyify.Services.Models;
 
 namespace Keyify.Web.Infrastructure.Caches
 {
-    public class ModeDataCache
+    public class ScaleDefinitionCache
     {
-        public List<ModeDefinition> ModeDefinitions => GenerateModeDefinitions();
+        public List<ScaleDefinition> ScaleDefinitions => GenerateModeDefinitions();
 
         //TODO: Add duplicate Modes that contain the same note sets
-        private List<ModeDefinition> GenerateModeDefinitions()
+        private List<ScaleDefinition> GenerateModeDefinitions()
         {
-            var modeDefinitionDictionary = new Dictionary<string, ModeDefinition>();
+            var modeDefinitionDictionary = new Dictionary<string, ScaleDefinition>();
 
             var ionianSteps = new Interval[] {
                     Interval.R,
@@ -1208,21 +1208,21 @@ namespace Keyify.Web.Infrastructure.Caches
             return modeDefinitionDictionary.Select(m => m.Value).ToList();
         }
 
-        private void InsertDictionaryEntry(Dictionary<string, ModeDefinition> dictionary, Mode mode, Interval[] steps, string[] degrees)
+        private void InsertDictionaryEntry(Dictionary<string, ScaleDefinition> dictionary, Mode mode, Interval[] steps, string[] degrees)
         {
             var key = string.Join(',', degrees);
 
             switch (mode)
             {
                 case Mode.WholeTone:
-                    dictionary.Add(key, new ModeDefinition(mode, steps, degrees, new[] { Note.D, Note.F }));
+                    dictionary.Add(key, new ScaleDefinition(mode, steps, degrees, new[] { Note.D, Note.F }));
                     break;
                 case Mode.DiminishedWholeHalf:
                 case Mode.DiminishedHalfWhole:
-                    dictionary.Add(key, new ModeDefinition(mode, steps, degrees, new[] { Note.C, Note.Db, Note.D }));
+                    dictionary.Add(key, new ScaleDefinition(mode, steps, degrees, new[] { Note.C, Note.Db, Note.D }));
                     break;
                 default:
-                    dictionary.Add(key, new ModeDefinition(mode, steps, degrees));
+                    dictionary.Add(key, new ScaleDefinition(mode, steps, degrees));
                     break;
             }
         }

@@ -33,7 +33,7 @@ namespace Keyify
         {
             services.AddControllersWithViews();
 
-            services.AddSingleton(typeof(IModeService), typeof(ModeService));
+            services.AddSingleton(typeof(IScaleDefinitionService), typeof(ScaleDefinitionService));
             services.AddSingleton(typeof(IQuickLinkService), typeof(QuickLinkService));
             services.AddSingleton(typeof(IScaleService), typeof(ScaleService));
             services.AddTransient(typeof(IGroupedScalesService), typeof(GroupedScalesService));
@@ -42,12 +42,12 @@ namespace Keyify
             services.AddSingleton(typeof(IFretboardService), typeof(FretboardService));
             services.AddSingleton(typeof(IScaleGroupingHtmlService), typeof(ScaleGroupingHtmlService));
             services.AddSingleton(typeof(IChordDefinitionGroupingHtmlService), typeof(ChordDefinitionsGroupingHtmlService));
-            services.AddSingleton(typeof(IChordDefinitionDataCache), typeof(ChordDefinitionDataCache));
+            services.AddSingleton(typeof(IChordDefinitionCache), typeof(ChordDefinitionCache));
             services.AddSingleton(typeof(IChordDefinitionRepository), typeof(ChordDefinitionRepository));
             services.AddSingleton(typeof(INoteFormatService), typeof(NoteFormatService));
 
 
-            services.AddSingleton(typeof(ModeDataCache), typeof(ModeDataCache));
+            services.AddSingleton(typeof(ScaleDefinitionCache), typeof(ScaleDefinitionCache));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
             services.AddSingleton(f => new Fretboard(f.GetRequiredService<INoteFormatService>().SharpNoteDictionary));
         }

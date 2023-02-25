@@ -8,10 +8,10 @@ namespace Keyify.Service
 {
     public class ChordDefinitionService : IChordDefinitionService
     {
-        private readonly IChordDefinitionDataCache _chordDefinitionCache;
+        private readonly IChordDefinitionCache _chordDefinitionCache;
         private readonly IChordDefinitionRepository _chordDefinitionRepository;
 
-        public ChordDefinitionService(IChordDefinitionDataCache chordDefinitionCache, IChordDefinitionRepository chordDefinitionRepository)
+        public ChordDefinitionService(IChordDefinitionCache chordDefinitionCache, IChordDefinitionRepository chordDefinitionRepository)
         {
             _chordDefinitionCache = chordDefinitionCache;
             _chordDefinitionRepository = chordDefinitionRepository;

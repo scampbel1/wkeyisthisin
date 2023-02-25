@@ -3,7 +3,7 @@ using Keyify.Services.Models;
 
 namespace Keyify.Infrastructure.Caches.Interfaces
 {
-    public interface IChordDefinitionDataCache
+    public interface IChordDefinitionCache
     {
         public List<ChordDefinition>? ChordDefinitions { get; set; }
 

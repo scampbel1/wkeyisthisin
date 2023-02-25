@@ -8,6 +8,13 @@ namespace Keyify.Infrastructure.Repository
 {
     public class ChordDefinitionRepository : IChordDefinitionRepository
     {
+        private readonly string _connectionString;
+
+        public ChordDefinitionRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
         public Task<List<ChordDefinitionEntity>> GetAllChordDefinitions()
         {
             throw new NotImplementedException();
@@ -15,7 +22,7 @@ namespace Keyify.Infrastructure.Repository
 
         public async Task<bool> DoesChordDefinitionExist(string name)
         {
-            using var sqlConnection = new SqlConnection("Server=.;Database=Keyify;Trusted_Connection=True;");
+            using var sqlConnection = new SqlConnection(_connectionString);
 
             await sqlConnection.OpenAsync();
 
@@ -34,12 +41,10 @@ namespace Keyify.Infrastructure.Repository
             {
                 return;
             }
-
-            //TODO: Move connection string to somewhere safe - map to environment
-            using var sqlCconnection = new SqlConnection("Server=.;Database=Keyify;Trusted_Connection=True;");
+            
+            using var sqlCconnection = new SqlConnection(_connectionString);
 
             await sqlCconnection.OpenAsync();
-
 
             //TODO: Convert to Builder Pattern
             var sb = new StringBuilder();

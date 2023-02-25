@@ -8,7 +8,7 @@ namespace Keyify.Unit.Test.ScaleDictionary.UnitTests
 {
     public class DuplicateModeDefinitionUnitTest
     {
-        private List<ModeDefinition> _scaleEntries = new ModeService(new ModeDataCache()).Modes;
+        private List<ScaleDefinition> _scaleEntries = new ScaleDefinitionService(new ScaleDefinitionCache()).ScaleDefinitions;
 
         [Fact]
         public void NoDuplicateModeDefinitionsByScaleDegrees()

@@ -7,7 +7,7 @@ namespace Keyify.Models.Service
 {
     public class ScaleService : IScaleService
     {
-        private readonly IModeService _modeService;
+        private readonly IScaleDefinitionService _modeService;
         private readonly INoteFormatService _noteFormatService;
 
         private readonly List<ScaleEntry> _scaleList;
@@ -15,7 +15,7 @@ namespace Keyify.Models.Service
 
         public List<ScaleEntry> Scales => _scaleList;
 
-        public ScaleService(IModeService modeService, INoteFormatService noteFormatService)
+        public ScaleService(IScaleDefinitionService modeService, INoteFormatService noteFormatService)
         {
             _modeService = modeService;
             _noteFormatService = noteFormatService;
@@ -31,10 +31,10 @@ namespace Keyify.Models.Service
 
         private List<ScaleEntry> GenerateScaleList()
         {
-            return GetScaleEntries(_modeService.Modes);
+            return GetScaleEntries(_modeService.ScaleDefinitions);
         }
 
-        private List<ScaleEntry> GetScaleEntries(IEnumerable<ModeDefinition> modeDefinitionDictionary)
+        private List<ScaleEntry> GetScaleEntries(IEnumerable<ScaleDefinition> modeDefinitionDictionary)
         {
             var scaleEntries = new List<ScaleEntry>();
 
@@ -46,7 +46,7 @@ namespace Keyify.Models.Service
             return scaleEntries;
         }
 
-        private List<ScaleEntry> GenerateScaleEntries(ModeDefinition modeDefinition)
+        private List<ScaleEntry> GenerateScaleEntries(ScaleDefinition modeDefinition)
         {
             var scaleEntry = new List<ScaleEntry>();
 
@@ -61,7 +61,7 @@ namespace Keyify.Models.Service
         }
 
         //TODO: Move this to Factory pattern
-        private GeneratedScale CreateGeneratedScale(Note rootNote, ModeDefinition modeDefinition)
+        private GeneratedScale CreateGeneratedScale(Note rootNote, ScaleDefinition modeDefinition)
         {
             var notes = new List<Note>();
             var sharpRootNote = _sharpNoteDictionary[rootNote];
