@@ -2,6 +2,7 @@
 using Keyify.Services.Formatter.Interfaces;
 using Keyify.Web.Infrastructure.Models.ChordDefinition;
 using Keyify.Web.Infrastructure.Repository.Interfaces;
+using Microsoft.Extensions.Logging;
 using System.Data.SqlClient;
 using System.Text;
 using System.Text.Json;
@@ -10,36 +11,50 @@ namespace Keyify.Infrastructure.Repository
 {
     public class ChordDefinitionRepository : IChordDefinitionRepository
     {
+        private readonly ILogger _logger;
         private readonly string _connectionString;
         private readonly ISerializationFormatter _serializationFormatter;
-        public ChordDefinitionRepository(string connectionString, ISerializationFormatter serializationFormatter)
+
+        public ChordDefinitionRepository(ILogger<ChordDefinitionRepository> logger, string connectionString, ISerializationFormatter serializationFormatter)
         {
+            _logger = logger;
             _connectionString = connectionString;
             _serializationFormatter = serializationFormatter;
         }
 
         public async Task<List<ChordDefinitionEntity>> GetAllChordDefinitions()
         {
+            _logger.LogInformation($"Database Server: '{_connectionString.Split(';')[0]}'");
+
             var chordDefinitions = new List<ChordDefinitionEntity>();
 
-            using var sqlConnection = new SqlConnection(_connectionString);
-
-            await sqlConnection.OpenAsync();
-
-            var query = "SELECT [Id], [Name], [Intervals] FROM [Core].[ChordDefinition] WHERE [Deleted] = 0";
-            var result = await sqlConnection.ExecuteReaderAsync(query);
-
-            while (result.Read())
+            try
             {
-                chordDefinitions.Add(new ChordDefinitionEntity()
-                {
-                    Id = result.GetInt32(0),
-                    Name = result.GetString(1),
-                    Intervals = await _serializationFormatter.ConvertToIntervalArray((byte[])result[2])
-                });
-            }
+                using var sqlConnection = new SqlConnection(_connectionString);
 
-            await sqlConnection.CloseAsync();
+                await sqlConnection.OpenAsync();
+
+                var query = "SELECT [Id], [Name], [Intervals] FROM [Core].[ChordDefinition] WHERE [Deleted] = 0";
+                var result = await sqlConnection.ExecuteReaderAsync(query);
+
+                while (result.Read())
+                {
+                    chordDefinitions.Add(new ChordDefinitionEntity()
+                    {
+                        Id = result.GetInt32(0),
+                        Name = result.GetString(1),
+                        Intervals = await _serializationFormatter.ConvertToIntervalArray((byte[])result[2])
+                    });
+                }
+
+                _logger.LogInformation($"Found: {chordDefinitions.Count} Chord Definition Entries");
+
+                await sqlConnection.CloseAsync();
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Could not retrieve Chord Definitions");
+            }
 
             return chordDefinitions;
         }
