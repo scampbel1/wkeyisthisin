@@ -4,8 +4,6 @@ namespace Keyify.MusicTheory.Definitions
 {
     public static class ScaleDefinitions
     {
-        //TODO: Move everything from ScaleDefinitionCache to here (you'll need to use primitives to here, because using ScaleDefinition will cause circular reference)
-
         public static Dictionary<Mode, Interval[]> GetScaleIntervals()
         {
             var scaleIntervals = new Dictionary<Mode, Interval[]>();
@@ -64,5 +62,65 @@ namespace Keyify.MusicTheory.Definitions
 
             return scaleIntervals;
         }
+
+        public static Dictionary<Mode, string[]> GetScaleDegrees()
+        {
+            var scaleDegrees = new Dictionary<Mode, string[]>();
+
+            scaleDegrees.Add(Mode.Ionian, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.Sixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Aeolian, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Phrygian, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Lydian, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Mixolydian, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Locrian, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.FlatFifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Dorian, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.HarmonicMinor, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.MelodicMinor, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.Sixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Augmented, new string[] { Degree.First, Degree.FlatThird, Degree.Third, Degree.Fifth, Degree.SharpFifth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.MinorPentatonic, new string[] { Degree.First, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.MajorPentatonic, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fifth, Degree.Sixth, Degree.Eighth });
+            scaleDegrees.Add(Mode.Blues, new string[] { Degree.First, Degree.FlatThird, Degree.Fourth, Degree.SharpFourth, Degree.Fifth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.WholeTone, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.SharpFifth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.DiminishedWholeHalf, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fourth, Degree.FlatFifth, Degree.FlatSixth, Degree.Sixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.DiminishedHalfWhole, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.FlatFourth, Degree.FlatFifth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Arabian, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.SharpFourth, Degree.SharpFifth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.AugmentedLydian, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.SharpFifth, Degree.Sixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Byzantine, new string[] { Degree.First, Degree.FlatSecond, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Egyptian, new string[] { Degree.First, Degree.Second, Degree.Fourth, Degree.Fifth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.HungarianMajor, new string[] { Degree.First, Degree.SharpSecond, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.NeopolitanMajor, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.Sixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.BalinesePelog, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fifth, Degree.FlatSixth, Degree.Eighth });
+            scaleDegrees.Add(Mode.Prometheus, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.FlatFifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.SixToneSymmetrical, new string[] { Degree.First, Degree.FlatSecond, Degree.Third, Degree.Fourth, Degree.SharpFifth, Degree.Sixth, Degree.Eighth });
+            scaleDegrees.Add(Mode.Altered, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.FlatFourth, Degree.FlatFifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Chinese, new string[] { Degree.First, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.DiminishedLydian, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.EightToneSpanish, new string[] { Degree.First, Degree.FlatSecond, Degree.SharpSecond, Degree.Third, Degree.Fourth, Degree.FlatFifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Hindu, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.HungarianMinor, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.SharpFourth, Degree.Fifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Kumoi, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fifth, Degree.Sixth, Degree.Eighth });
+            scaleDegrees.Add(Mode.Locrian2, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fourth, Degree.FlatFifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Lydian9, new string[] { Degree.First, Degree.SharpSecond, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.MinorLydian, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.MixolydianB6, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Persian, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.FlatFifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.PrometheusNeopolitan, new string[] { Degree.First, Degree.FlatSecond, Degree.Third, Degree.FlatFifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.TodiTheta, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.SharpFourth, Degree.Fifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.AlteredBb7, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.FlatFourth, Degree.FlatFifth, Degree.FlatSixth, Degree.FlatFlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.AugmentedIonian, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.SharpFifth, Degree.Sixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Enigmatic, new string[] { Degree.First, Degree.FlatSecond, Degree.Third, Degree.SharpFourth, Degree.SharpFifth, Degree.SharpSixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Hirajoshi, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fifth, Degree.FlatSixth, Degree.Eighth });
+            scaleDegrees.Add(Mode.Ichikosucho, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.LeadingWholeTone, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.SharpFifth, Degree.SharpSixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.LydianB7, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.MajorPhrygian, new string[] { Degree.First, Degree.FlatSecond, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Neopolitan, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.Overtone, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.PurviTheta, new string[] { Degree.First, Degree.FlatSecond, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth });
+            scaleDegrees.Add(Mode.DorianB2, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth });
+
+            return scaleDegrees;
+        }
+
     }
 }
