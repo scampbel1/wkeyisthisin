@@ -9,7 +9,7 @@ namespace Keyify.Services.Models
         public readonly string[] ScaleDegrees;
 
         //Create scales of all notes by default. Some scales are limited to a subset of notes.
-        public readonly Array ExplicitNotesForMode = Enum.GetValues(typeof(Note));
+        public readonly Array AllowedRootNotes = Enum.GetValues(typeof(Note));
 
         public ScaleDefinition(Mode mode, Interval[] scaleSteps, string[] scaleDegrees)
         {
@@ -28,9 +28,9 @@ namespace Keyify.Services.Models
             }
         }
 
-        public ScaleDefinition(Mode mode, Interval[] scaleSteps, string[] scaleDegrees, Array explicitNotesForMode) : this(mode, scaleSteps, scaleDegrees)
+        public ScaleDefinition(Mode mode, Interval[] scaleSteps, string[] scaleDegrees, Array allowedRootNotes) : this(mode, scaleSteps, scaleDegrees)
         {
-            ExplicitNotesForMode = explicitNotesForMode;
+            AllowedRootNotes = allowedRootNotes;
         }
     }
 }

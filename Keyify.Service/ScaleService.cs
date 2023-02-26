@@ -50,9 +50,9 @@ namespace Keyify.Models.Service
         {
             var scaleEntry = new List<ScaleEntry>();
 
-            if (modeDefinition.ExplicitNotesForMode != null)
+            if (modeDefinition.AllowedRootNotes != null)
             {
-                scaleEntry.AddRange(from Note note in modeDefinition.ExplicitNotesForMode
+                scaleEntry.AddRange(from Note note in modeDefinition.AllowedRootNotes
                                     let generatedScale = CreateGeneratedScale(note, modeDefinition)
                                     select new ScaleEntry(generatedScale));
             }

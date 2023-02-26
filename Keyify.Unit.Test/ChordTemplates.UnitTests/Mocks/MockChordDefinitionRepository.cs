@@ -12,7 +12,7 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
     {
         public async Task<List<ChordDefinitionEntity>> GetAllChordDefinitions()
         {
-            var chordDefinitions = ChordDefinitions.GenerateChordDefinitions();
+            var chordDefinitions = ChordDefinitions.GetChordIntervals();
 
             return await Task.FromResult(chordDefinitions.Select(c => new ChordDefinitionEntity() { Name = c.Key.ToString(), Intervals = c.Value }).ToList());
         }

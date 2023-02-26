@@ -12,17 +12,6 @@ namespace Keyify.Web.Infrastructure.Caches
         {
             var modeDefinitionDictionary = new Dictionary<string, ScaleDefinition>();
 
-            var ionianSteps = new Interval[] {
-                    Interval.R,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h
-                };
-
             var ionianDegrees = new string[] {
                      Degree.First,
                      Degree.Second,
@@ -34,17 +23,6 @@ namespace Keyify.Web.Infrastructure.Caches
                      Degree.Eighth
                 };
 
-            var aeolianSteps = new Interval[] {
-                    Interval.R,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W
-                 };
-
             var aeolianDegrees = new string[] {
                      Degree.First,
                      Degree.Second,
@@ -54,18 +32,6 @@ namespace Keyify.Web.Infrastructure.Caches
                      Degree.FlatSixth,
                      Degree.FlatSeventh,
                      Degree.Eighth
-                };
-
-            var phrygianSteps = new Interval[]
-                {
-                    Interval.R,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W
                 };
 
             var phrygianDegrees = new string[] {
@@ -79,18 +45,6 @@ namespace Keyify.Web.Infrastructure.Caches
                      Degree.Eighth
                 };
 
-            var lydianSteps = new Interval[]
-                {
-                    Interval.R,
-                    Interval.W,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h
-                };
-
             var lydianDegrees = new string[] {
                      Degree.First,
                      Degree.Second,
@@ -100,18 +54,6 @@ namespace Keyify.Web.Infrastructure.Caches
                      Degree.Sixth,
                      Degree.Seventh,
                      Degree.Eighth
-                };
-
-            var mixolydianSteps = new Interval[]
-                {
-                    Interval.R,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W
                 };
 
             var mixolydianDegrees = new string[] {
@@ -125,18 +67,6 @@ namespace Keyify.Web.Infrastructure.Caches
                      Degree.Eighth
                 };
 
-            var locrianSteps = new Interval[]
-            {
-                    Interval.R,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W,
-                    Interval.W
-            };
-
             var locrianDegrees = new string[] {
                      Degree.First,
                      Degree.FlatSecond,
@@ -147,18 +77,6 @@ namespace Keyify.Web.Infrastructure.Caches
                      Degree.FlatSeventh,
                      Degree.Eighth
                 };
-
-            var dorianSteps = new Interval[]
-            {
-                    Interval.R,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W
-            };
 
             var dorianDegrees = new string[] {
                      Degree.First,
@@ -171,18 +89,6 @@ namespace Keyify.Web.Infrastructure.Caches
                      Degree.Eighth
                 };
 
-            var harmonicMinorSteps = new Interval[]
-             {
-                    Interval.R,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h,
-                    Interval.Wh,
-                    Interval.h
-              };
-
             var harmonicMinorDegrees = new string[] {
                      Degree.First,
                      Degree.Second,
@@ -193,18 +99,6 @@ namespace Keyify.Web.Infrastructure.Caches
                      Degree.Seventh,
                      Degree.Eighth
                 };
-
-            var melodicMinorSteps = new Interval[]
-            {
-                    Interval.R,
-                    Interval.W,
-                    Interval.h,
-                    Interval.W,
-                    Interval.W,
-                    Interval.W,
-                    Interval.W,
-                    Interval.h
-             };
 
             var melodicMinorDegrees = new string[] {
                      Degree.First,
