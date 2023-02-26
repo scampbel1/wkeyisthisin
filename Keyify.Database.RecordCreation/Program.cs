@@ -45,8 +45,8 @@ internal class Program
 
     private static void PrintSelections()
     {
-        foreach(var selection in Enum.GetValues(typeof(Selection)))
-        
-        Console.WriteLine($"{(int)selection}: {(Selection)selection}");
+        foreach (var selection in Enum.GetValues(typeof(Selection)))
+
+            Console.WriteLine($"{(int)selection}: {(Selection)selection}");
     }
 }

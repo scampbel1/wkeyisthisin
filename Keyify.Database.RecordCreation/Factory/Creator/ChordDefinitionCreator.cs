@@ -6,6 +6,7 @@ using Keyify.MusicTheory.Enums;
 using Keyify.Services.Formatter.Services;
 using Keyify.Web.Infrastructure.Models.ChordDefinition;
 using Keyify.Web.Infrastructure.Repository.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Keyify.Database.RecordCreation.Factory.Creator
 {
@@ -16,8 +17,18 @@ namespace Keyify.Database.RecordCreation.Factory.Creator
 
         internal ChordDefinitionCreator(string connectionString) : base(connectionString)
         {
+            using var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .AddFilter("Microsoft", LogLevel.Warning)
+                    .AddFilter("System", LogLevel.Warning);
+            });
+
+            var logger = loggerFactory.CreateLogger<ChordDefinitionRepository>();
+            logger.LogInformation("Generating Chord Definitions");
+
             _chordDefinitions = ChordDefinitions.GenerateChordDefinitions();
-            _chordDefinitionRepository = new ChordDefinitionRepository(connectionString, new SerializationFormatter());
+            _chordDefinitionRepository = new ChordDefinitionRepository(logger, connectionString, new SerializationFormatter());
         }
 
         internal override async Task ExecuteAsync()

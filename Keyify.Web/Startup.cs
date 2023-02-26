@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Keyify
 {
@@ -45,10 +46,9 @@ namespace Keyify
             services.AddSingleton(typeof(IChordDefinitionCache), typeof(ChordDefinitionCache));
             services.AddSingleton(typeof(ISerializationFormatter), typeof(SerializationFormatter));
 
-            //TODO: Move connection string to configuration/somewhere safe and configurable by environment
             services.AddSingleton<IChordDefinitionRepository>(f =>
-                new ChordDefinitionRepository(
-                    "Server=.;Database=Keyify;Trusted_Connection=True;",
+                new ChordDefinitionRepository(f.GetService<ILogger<ChordDefinitionRepository>>(),
+                    Configuration["ConnectionStrings:SqlServer"],
                     f.GetRequiredService<ISerializationFormatter>()
                 ));
 
@@ -63,7 +63,6 @@ namespace Keyify
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseDeveloperExceptionPage();
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();

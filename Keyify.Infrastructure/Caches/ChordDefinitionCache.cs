@@ -48,7 +48,7 @@ namespace Keyify.Web.Infrastructure.Caches
             {
                 var notes = await GenerateChordDefinitionNotes(currentNote, intervals);
                 var sharpNote = _noteFormatService.SharpNoteDictionary[notes[0]];
-                
+
                 chordDefinitions.Add(new ChordDefinition(chordType, notes, sharpNote));
                 currentNote++;
             }
