@@ -94,7 +94,7 @@ namespace ScaleDictionaryTests
             var sharpRootNote = "D#";
             var notes = new List<Note>();
             var sharpNotes = new List<string>();
-            var mode = Mode.Dorian_b2;
+            var mode = Mode.DorianB2;
             var scaleDegrees = new string[6];
 
             var generatedScale = new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, mode, scaleDegrees);

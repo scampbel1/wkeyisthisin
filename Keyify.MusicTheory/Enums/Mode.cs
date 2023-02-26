@@ -33,7 +33,7 @@
         BalinesePelog, //Same as Pelog
         Chinese,
         DiminishedLydian,
-        Dorian_b2,
+        DorianB2,
         EightToneSpanish,
         Hindu,
         HungarianMinor, //Same as Gypsie
