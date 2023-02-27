@@ -10,42 +10,42 @@ namespace Keyify.Services.Models
         public readonly List<Note> Notes;
         public readonly HashSet<Note> NoteSet;
         public readonly HashSet<string> NoteSetSharp;
-        public readonly Mode Mode;
+        public readonly string Name;
         public readonly string[] ScaleDegrees;
         public readonly string FlatColloquialism;
         public readonly string SharpColloquialism;
 
-        public GeneratedScale(Note rootNote, string rootNoteSharp, List<Note> notes, List<string> noteSetSharp, Mode mode, string[] scaleDegrees)
+        public GeneratedScale(Note rootNote, string rootNoteSharp, List<Note> notes, List<string> noteSetSharp, string name, string[] scaleDegrees)
         {
             RootNote = rootNote;
             SharpRootNote = rootNoteSharp;
             Notes = notes;
             NoteSet = notes.ToHashSet();
             NoteSetSharp = noteSetSharp.ToHashSet();
-            Mode = mode;
+            Name = name;
             ScaleDegrees = scaleDegrees;
-            FlatColloquialism = GetScaleColloquialism(SharpRootNote, RootNote, Mode, convertFlatNoteToSharp: false);
-            SharpColloquialism = GetScaleColloquialism(SharpRootNote, RootNote, Mode, convertFlatNoteToSharp: true);
+            FlatColloquialism = GetScaleColloquialism(SharpRootNote, RootNote, Name, convertFlatNoteToSharp: false);
+            SharpColloquialism = GetScaleColloquialism(SharpRootNote, RootNote, Name, convertFlatNoteToSharp: true);
 
-            IsKey = (mode == Mode.Ionian || mode == Mode.Aeolian);
+            IsKey = (name == "Ionian" || name == "Aeolian");
         }
 
-        private string GetScaleColloquialism(string sharpRootNote, Note rootNote, Mode mode, bool convertFlatNoteToSharp)
+        private string GetScaleColloquialism(string sharpRootNote, Note rootNote, string name, bool convertFlatNoteToSharp)
         {
             var note = convertFlatNoteToSharp ? sharpRootNote : rootNote.ToString();
 
-            var modeEquivalent = GetModeNameColloquialism(mode);
+            var modeEquivalent = GetModeNameColloquialism(name);
 
             return !string.IsNullOrWhiteSpace(modeEquivalent) ? $"{note} {modeEquivalent}" : modeEquivalent;
         }
 
-        private string GetModeNameColloquialism(Mode mode)
+        private string GetModeNameColloquialism(string name)
         {
-            switch (mode)
+            switch (name)
             {
-                case Mode.Ionian:
+                case "Ionian":
                     return ModeColloquialism.Major.ToString();
-                case Mode.Aeolian:
+                case "Aeolian":
                     return ModeColloquialism.Minor.ToString();
                 default:
                     return string.Empty;

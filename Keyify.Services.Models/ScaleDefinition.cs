@@ -4,31 +4,31 @@ namespace Keyify.Services.Models
 {
     public class ScaleDefinition
     {
-        public readonly Mode Mode;
-        public readonly Interval[] ScaleIntervals;
-        public readonly string[] ScaleDegrees;
+        public readonly string Name;
+        public readonly Interval[] Intervals;
+        public readonly string[] Degrees;
 
         //Create scales of all notes by default. Some scales are limited to a subset of notes.
         public readonly Array AllowedRootNotes = Enum.GetValues(typeof(Note));
 
-        public ScaleDefinition(Mode mode, Interval[] scaleIntervals, string[] scaleDegrees)
+        public ScaleDefinition(string name, Interval[] intervals, string[] degrees)
         {
-            Mode = mode;
-            ScaleIntervals = scaleIntervals;
-            ScaleDegrees = scaleDegrees;
+            Name = name;
+            Intervals = intervals;
+            Degrees = degrees;
 
-            if (ScaleIntervals.Length != ScaleDegrees.Length)
+            if (Intervals.Length != Degrees.Length)
             {
-                throw new ArgumentException($"{nameof(ScaleIntervals)} length was not equal to length of {nameof(ScaleDegrees)}");
+                throw new ArgumentException($"{nameof(Intervals)} length was not equal to length of {nameof(Degrees)}");
             }
 
-            if (ScaleDegrees.Distinct().Count() != ScaleDegrees.Length)
+            if (Degrees.Distinct().Count() != Degrees.Length)
             {
-                throw new ArgumentException($"{nameof(ScaleDegrees)} contains duplicate(s)");
+                throw new ArgumentException($"{nameof(Degrees)} contains duplicate(s)");
             }
         }
 
-        public ScaleDefinition(Mode mode, Interval[] scaleIntervals, string[] scaleDegrees, Array allowedRootNotes) : this(mode, scaleIntervals, scaleDegrees)
+        public ScaleDefinition(string name, Interval[] scaleIntervals, string[] scaleDegrees, Array allowedRootNotes) : this(name, scaleIntervals, scaleDegrees)
         {
             AllowedRootNotes = allowedRootNotes;
         }

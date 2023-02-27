@@ -2,7 +2,7 @@
 
 namespace Keyify.Infrastructure.Repository.Interfaces
 {
-    internal interface IScaleDefinitionRepository
+    public interface IScaleDefinitionRepository
     {
         public Task<bool> DoesScaleDefinitionExist(string name);
         public Task<List<ScaleDefinitionEntity>> GetAllScaleDefinitions();

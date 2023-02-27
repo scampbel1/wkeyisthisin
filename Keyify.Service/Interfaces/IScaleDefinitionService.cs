@@ -4,7 +4,7 @@ namespace Keyify.Service.Interfaces
 {
     public interface IScaleDefinitionService
     {
-        public List<ScaleDefinition> ScaleDefinitions { get; set; }
+        public List<ScaleDefinition> ScaleDefinitions { get; }
         public Task InitialiseChordDefinitionCache();
     }
 }

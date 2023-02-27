@@ -1,4 +1,5 @@
-﻿using Keyify.MusicTheory.Enums;
+﻿using EnumsNET;
+using Keyify.MusicTheory.Enums;
 using Keyify.Services.Formatter.Interfaces;
 using Keyify.Services.Formatter.Services;
 using Keyify.Services.Models;
@@ -50,7 +51,7 @@ namespace Keyify.Unit.Test.Note.UnitTests
             var sharpRootNote = "G#";
             var notes = new List<MusicTheory.Enums.Note>();
             var sharpNotes = new List<string>();
-            var mode = Mode.Ionian;
+            var mode = Mode.Ionian.AsString(EnumFormat.Description);
             var scaleDegrees = new string[6];
 
             var generatedScale = new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, mode, scaleDegrees);
@@ -69,7 +70,7 @@ namespace Keyify.Unit.Test.Note.UnitTests
             var sharpRootNote = "C#";
             var notes = new List<MusicTheory.Enums.Note>();
             var sharpNotes = new List<string>();
-            var mode = Mode.Aeolian;
+            var mode = Mode.Aeolian.AsString(EnumFormat.Description);
             var scaleDegrees = new string[6];
 
             var generatedScale = new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, mode, scaleDegrees);

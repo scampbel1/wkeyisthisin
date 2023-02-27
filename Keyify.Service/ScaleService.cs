@@ -69,7 +69,7 @@ namespace Keyify.Models.Service
 
             var noteNumber = (int)rootNote;
 
-            foreach (var scaleStep in modeDefinition.ScaleIntervals)
+            foreach (var scaleStep in modeDefinition.Intervals)
             {
                 noteNumber += (int)scaleStep;
 
@@ -82,7 +82,7 @@ namespace Keyify.Models.Service
                 sharpNotes.Add(_sharpNoteDictionary[note]);
             }
 
-            return new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, modeDefinition.Mode, modeDefinition.ScaleDegrees);
+            return new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, modeDefinition.Name, modeDefinition.Degrees);
         }
     }
 }

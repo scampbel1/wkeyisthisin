@@ -1,18 +1,21 @@
 ﻿using Keyify.Infrastructure.Models.ScaleDefinition;
 using Keyify.Infrastructure.Repository.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace Keyify.Infrastructure.Repository
+namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
 {
-    public class ScaleDefinitionRepository : IScaleDefinitionRepository
+    internal class MockScaleDefinitionRepository : IScaleDefinitionRepository
     {
         public Task<bool> DoesScaleDefinitionExist(string name)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(true);
         }
 
         public Task<List<ScaleDefinitionEntity>> GetAllScaleDefinitions()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new List<ScaleDefinitionEntity>());
         }
 
         public Task InsertScaleDefinition(ScaleDefinitionRequest chordDefinitionRequest)

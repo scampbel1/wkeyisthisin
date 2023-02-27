@@ -8,12 +8,12 @@ namespace Keyify.Unit.Test.ScaleDictionary.UnitTests
 {
     public class DuplicateModeDefinitionUnitTest
     {
-        private List<ScaleDefinition> _scaleEntries = new ScaleDefinitionService(new MockScaleDefinitionCache()).ScaleDefinitions;
+        private List<ScaleDefinition> _scaleEntries = new ScaleDefinitionService(new MockScaleDefinitionCache(), new MockScaleDefinitionRepository()).ScaleDefinitions;
 
         [Fact]
         public void NoDuplicateModeDefinitionsByScaleDegrees()
         {
-            var scaleDegrees = _scaleEntries.Select(s => string.Join(",", s.ScaleDegrees));
+            var scaleDegrees = _scaleEntries.Select(s => string.Join(",", s.Degrees));
             var scaleDegreeDuplicates = scaleDegrees.GroupBy(g => g).Where(s => s.Count() > 1);
 
             var duplicateNames = GetDuplicateModeNamesByScaleDegree(scaleDegreeDuplicates);
@@ -24,7 +24,7 @@ namespace Keyify.Unit.Test.ScaleDictionary.UnitTests
         [Fact]
         public void NoDuplicateModeDefinitionsByScaleIntervals()
         {
-            var scaleIntervals = _scaleEntries.Select(s => string.Join(",", s.ScaleIntervals));
+            var scaleIntervals = _scaleEntries.Select(s => string.Join(",", s.Intervals));
             var scaleIntervalDuplicates = scaleIntervals.GroupBy(g => g).Where(s => s.Count() > 1);
 
             var duplicateNames = GetDuplicateModeNamesByScaleIntervals(scaleIntervalDuplicates);
@@ -41,8 +41,8 @@ namespace Keyify.Unit.Test.ScaleDictionary.UnitTests
                 var duplicateNotesSet = duplicate.Key;
 
                 var duplicateModes = _scaleEntries
-                    .Where(e => string.Join(",", e.ScaleDegrees) == duplicateNotesSet)
-                    .Select(n => n.Mode.ToString());
+                    .Where(e => string.Join(",", e.Degrees) == duplicateNotesSet)
+                    .Select(n => n.Name);
 
                 foreach (var duplicateMode in duplicateModes)
                 {
@@ -62,8 +62,8 @@ namespace Keyify.Unit.Test.ScaleDictionary.UnitTests
                 var duplicateNotesSet = duplicate.Key;
 
                 var duplicateModes = _scaleEntries
-                    .Where(e => string.Join(",", e.ScaleIntervals) == duplicateNotesSet)
-                    .Select(n => n.Mode.ToString());
+                    .Where(e => string.Join(",", e.Intervals) == duplicateNotesSet)
+                    .Select(n => n.Name);
 
                 foreach (var duplicateMode in duplicateModes)
                 {

@@ -1,4 +1,6 @@
-﻿using Keyify.Infrastructure.Caches.Interfaces;
+﻿using EnumsNET;
+using Keyify.Infrastructure.Caches.Interfaces;
+using Keyify.Infrastructure.Models.ScaleDefinition;
 using Keyify.MusicTheory.Definitions;
 using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
@@ -27,7 +29,7 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
 
                 explicitRootNotes.TryGetValue(scaleType, out rootNotes);
 
-                var scaleEntry = rootNotes == null ? new ScaleDefinition(scaleType, scaleIntervals[scaleType], scaleDegrees[scaleType]) : new ScaleDefinition(scaleType, scaleIntervals[scaleType], scaleDegrees[scaleType], explicitRootNotes[scaleType]);
+                var scaleEntry = rootNotes == null ? new ScaleDefinition(scaleType.AsString(EnumFormat.Description), scaleIntervals[scaleType], scaleDegrees[scaleType]) : new ScaleDefinition(scaleType.AsString(EnumFormat.Description), scaleIntervals[scaleType], scaleDegrees[scaleType], explicitRootNotes[scaleType]);
 
                 scaleDefinitions.Add(scaleEntry);
             }
@@ -35,7 +37,7 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
             return await Task.FromResult(scaleDefinitions);
         }
 
-        async Task IScaleDefinitionCache.Initialise()
+        async Task IScaleDefinitionCache.Initialise(List<ScaleDefinitionEntity> scaleDefinitionEntities)
         {
             ScaleDefinitions = await GenerateScaleDefinitions();
         }

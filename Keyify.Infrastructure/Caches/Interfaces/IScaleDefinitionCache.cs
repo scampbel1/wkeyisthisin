@@ -1,4 +1,5 @@
-﻿using Keyify.Services.Models;
+﻿using Keyify.Infrastructure.Models.ScaleDefinition;
+using Keyify.Services.Models;
 
 namespace Keyify.Infrastructure.Caches.Interfaces
 {
@@ -6,7 +7,7 @@ namespace Keyify.Infrastructure.Caches.Interfaces
     {
         public List<ScaleDefinition> ScaleDefinitions { get; set; }
 
-        public Task Initialise();
+        public Task Initialise(List<ScaleDefinitionEntity> scaleDefinitionEntities);
 
         public Task Sync(List<ScaleDefinition> scaleDefinitions);
     }
