@@ -2,7 +2,7 @@
 
 namespace Keyify.MusicTheory.Definitions
 {
-    public static class ScaleDefinitions
+    public static class ModeDefinitions
     {
         public static Dictionary<Mode, Interval[]> GetScaleIntervals()
         {
@@ -37,13 +37,13 @@ namespace Keyify.MusicTheory.Definitions
             scaleIntervals.Add(Mode.Chinese, new Interval[] { Interval.R, Interval.WW, Interval.W, Interval.h, Interval.WW, Interval.h });
             scaleIntervals.Add(Mode.DiminishedLydian, new Interval[] { Interval.R, Interval.W, Interval.h, Interval.Wh, Interval.h, Interval.W, Interval.W, Interval.h });
             scaleIntervals.Add(Mode.EightToneSpanish, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.h, Interval.h, Interval.h, Interval.W, Interval.W, Interval.W });
-            scaleIntervals.Add(Mode.Hindu, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W, Interval.W });
             scaleIntervals.Add(Mode.HungarianMinor, new Interval[] { Interval.R, Interval.W, Interval.h, Interval.Wh, Interval.h, Interval.h, Interval.Wh, Interval.h });
             scaleIntervals.Add(Mode.Kumoi, new Interval[] { Interval.R, Interval.W, Interval.h, Interval.WW, Interval.W, Interval.Wh });
             scaleIntervals.Add(Mode.Locrian2, new Interval[] { Interval.R, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W, Interval.W, Interval.W });
             scaleIntervals.Add(Mode.Lydian9, new Interval[] { Interval.R, Interval.Wh, Interval.h, Interval.W, Interval.h, Interval.W, Interval.W, Interval.h });
             scaleIntervals.Add(Mode.MinorLydian, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.W, Interval.h, Interval.h, Interval.W, Interval.W });
             scaleIntervals.Add(Mode.MixolydianB6, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W, Interval.W });
+            //Duplicate of MixolydianB6 - scaleIntervals.Add(Mode.Hindu, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W, Interval.W });
             scaleIntervals.Add(Mode.Persian, new Interval[] { Interval.R, Interval.h, Interval.Wh, Interval.h, Interval.h, Interval.W, Interval.Wh, Interval.h });
             scaleIntervals.Add(Mode.PrometheusNeopolitan, new Interval[] { Interval.R, Interval.h, Interval.Wh, Interval.W, Interval.Wh, Interval.h, Interval.W });
             scaleIntervals.Add(Mode.TodiTheta, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.Wh, Interval.h, Interval.h, Interval.Wh, Interval.h });
@@ -53,10 +53,10 @@ namespace Keyify.MusicTheory.Definitions
             scaleIntervals.Add(Mode.Hirajoshi, new Interval[] { Interval.R, Interval.W, Interval.h, Interval.WW, Interval.h, Interval.WW });
             scaleIntervals.Add(Mode.Ichikosucho, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.h, Interval.h, Interval.h, Interval.W, Interval.W, Interval.h });
             scaleIntervals.Add(Mode.LeadingWholeTone, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.W, Interval.W, Interval.W, Interval.h, Interval.h });
-            scaleIntervals.Add(Mode.LydianB7, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.W, Interval.h, Interval.Wh, Interval.h, Interval.W });
+            scaleIntervals.Add(Mode.LydianB7, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W });
+            //Duplicate of LydianB7 - scaleIntervals.Add(Mode.Overtone, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W });
             scaleIntervals.Add(Mode.MajorPhrygian, new Interval[] { Interval.R, Interval.h, Interval.Wh, Interval.h, Interval.W, Interval.h, Interval.W, Interval.W });
             scaleIntervals.Add(Mode.Neopolitan, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.W, Interval.W, Interval.h, Interval.Wh, Interval.h });
-            scaleIntervals.Add(Mode.Overtone, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W });
             scaleIntervals.Add(Mode.PurviTheta, new Interval[] { Interval.R, Interval.h, Interval.Wh, Interval.W, Interval.h, Interval.h, Interval.Wh, Interval.h });
             scaleIntervals.Add(Mode.DorianB2, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W });
 
@@ -96,13 +96,13 @@ namespace Keyify.MusicTheory.Definitions
             scaleDegrees.Add(Mode.Chinese, new string[] { Degree.First, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Seventh, Degree.Eighth });
             scaleDegrees.Add(Mode.DiminishedLydian, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.Seventh, Degree.Eighth });
             scaleDegrees.Add(Mode.EightToneSpanish, new string[] { Degree.First, Degree.FlatSecond, Degree.SharpSecond, Degree.Third, Degree.Fourth, Degree.FlatFifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
-            scaleDegrees.Add(Mode.Hindu, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
             scaleDegrees.Add(Mode.HungarianMinor, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.SharpFourth, Degree.Fifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth });
             scaleDegrees.Add(Mode.Kumoi, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fifth, Degree.Sixth, Degree.Eighth });
             scaleDegrees.Add(Mode.Locrian2, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fourth, Degree.FlatFifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
             scaleDegrees.Add(Mode.Lydian9, new string[] { Degree.First, Degree.SharpSecond, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.Seventh, Degree.Eighth });
             scaleDegrees.Add(Mode.MinorLydian, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
             scaleDegrees.Add(Mode.MixolydianB6, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
+            //Duplicate of MixolydianB6 - scaleDegrees.Add(Mode.Hindu, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
             scaleDegrees.Add(Mode.Persian, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.FlatFifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth });
             scaleDegrees.Add(Mode.PrometheusNeopolitan, new string[] { Degree.First, Degree.FlatSecond, Degree.Third, Degree.FlatFifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth });
             scaleDegrees.Add(Mode.TodiTheta, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.SharpFourth, Degree.Fifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth });
@@ -113,14 +113,28 @@ namespace Keyify.MusicTheory.Definitions
             scaleDegrees.Add(Mode.Ichikosucho, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.Seventh, Degree.Eighth });
             scaleDegrees.Add(Mode.LeadingWholeTone, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.SharpFifth, Degree.SharpSixth, Degree.Seventh, Degree.Eighth });
             scaleDegrees.Add(Mode.LydianB7, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth });
+            //Duplicate of LydianB7 - scaleDegrees.Add(Mode.Overtone, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth });
             scaleDegrees.Add(Mode.MajorPhrygian, new string[] { Degree.First, Degree.FlatSecond, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
             scaleDegrees.Add(Mode.Neopolitan, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth });
-            scaleDegrees.Add(Mode.Overtone, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth });
             scaleDegrees.Add(Mode.PurviTheta, new string[] { Degree.First, Degree.FlatSecond, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth });
             scaleDegrees.Add(Mode.DorianB2, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth });
 
             return scaleDegrees;
         }
 
+        /// <summary>
+        /// Some scales have a limited array of root notes
+        /// </summary>
+        /// <returns></returns>
+        public static Dictionary<Mode, Array> GetExplicitRootNoteScaleRootNotes()
+        {
+            var explicitRootNoteScaleRootNotes = new Dictionary<Mode, Array>();
+
+            explicitRootNoteScaleRootNotes.Add(Mode.WholeTone, new[] { Note.D, Note.F });
+            explicitRootNoteScaleRootNotes.Add(Mode.DiminishedWholeHalf, new[] { Note.C, Note.Db, Note.D });
+            explicitRootNoteScaleRootNotes.Add(Mode.DiminishedHalfWhole, new[] { Note.C, Note.Db, Note.D });
+
+            return explicitRootNoteScaleRootNotes;
+        }
     }
 }

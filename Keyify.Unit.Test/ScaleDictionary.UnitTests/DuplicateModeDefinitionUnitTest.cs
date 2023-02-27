@@ -1,6 +1,6 @@
 ﻿using Keyify.Models.Service;
 using Keyify.Services.Models;
-using Keyify.Web.Infrastructure.Caches;
+using Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,7 +8,7 @@ namespace Keyify.Unit.Test.ScaleDictionary.UnitTests
 {
     public class DuplicateModeDefinitionUnitTest
     {
-        private List<ScaleDefinition> _scaleEntries = new ScaleDefinitionService(new ScaleDefinitionCache()).ScaleDefinitions;
+        private List<ScaleDefinition> _scaleEntries = new ScaleDefinitionService(new MockScaleDefinitionCache()).ScaleDefinitions;
 
         [Fact]
         public void NoDuplicateModeDefinitionsByScaleDegrees()
@@ -16,16 +16,62 @@ namespace Keyify.Unit.Test.ScaleDictionary.UnitTests
             var scaleDegrees = _scaleEntries.Select(s => string.Join(",", s.ScaleDegrees));
             var scaleDegreeDuplicates = scaleDegrees.GroupBy(g => g).Where(s => s.Count() > 1);
 
-            Assert.False(scaleDegreeDuplicates.Any());
+            var duplicateNames = GetDuplicateModeNamesByScaleDegree(scaleDegreeDuplicates);
+
+            Assert.False(scaleDegreeDuplicates.Any(), $"Duplicates found: {string.Join(", ", duplicateNames.Select(d => d.Key))}");
         }
 
         [Fact]
-        public void NoDuplicateModeDefinitionsByScaleSteps()
+        public void NoDuplicateModeDefinitionsByScaleIntervals()
         {
-            var scaleSteps = _scaleEntries.Select(s => string.Join(",", s.ScaleSteps));
-            var scaleStepDuplicates = scaleSteps.GroupBy(g => g).Where(s => s.Count() > 1);
+            var scaleIntervals = _scaleEntries.Select(s => string.Join(",", s.ScaleIntervals));
+            var scaleIntervalDuplicates = scaleIntervals.GroupBy(g => g).Where(s => s.Count() > 1);
 
-            Assert.False(scaleStepDuplicates.Any());
+            var duplicateNames = GetDuplicateModeNamesByScaleIntervals(scaleIntervalDuplicates);
+
+            Assert.False(scaleIntervalDuplicates.Any(), $"Duplicates found: {string.Join(", ", duplicateNames.Select(d => d.Key))}");
+        }
+
+        private Dictionary<string, string> GetDuplicateModeNamesByScaleDegree(IEnumerable<IGrouping<string, string>> scaleDegreeDuplicates)
+        {
+            var duplicateNames = new Dictionary<string, string>();
+
+            foreach (var duplicate in scaleDegreeDuplicates.ToList())
+            {
+                var duplicateNotesSet = duplicate.Key;
+
+                var duplicateModes = _scaleEntries
+                    .Where(e => string.Join(",", e.ScaleDegrees) == duplicateNotesSet)
+                    .Select(n => n.Mode.ToString());
+
+                foreach (var duplicateMode in duplicateModes)
+                {
+                    duplicateNames.Add(duplicateMode, duplicateNotesSet);
+                }
+            }
+
+            return duplicateNames;
+        }
+
+        private Dictionary<string, string> GetDuplicateModeNamesByScaleIntervals(IEnumerable<IGrouping<string, string>> scaleIntervalDuplicates)
+        {
+            var duplicateNames = new Dictionary<string, string>();
+
+            foreach (var duplicate in scaleIntervalDuplicates.ToList())
+            {
+                var duplicateNotesSet = duplicate.Key;
+
+                var duplicateModes = _scaleEntries
+                    .Where(e => string.Join(",", e.ScaleIntervals) == duplicateNotesSet)
+                    .Select(n => n.Mode.ToString());
+
+                foreach (var duplicateMode in duplicateModes)
+                {
+                    duplicateNames.Add(duplicateMode, duplicateNotesSet);
+                }
+            }
+
+            return duplicateNames;
         }
     }
 }

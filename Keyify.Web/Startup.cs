@@ -1,3 +1,4 @@
+using Keyify.Infrastructure.Caches;
 using Keyify.Infrastructure.Caches.Interfaces;
 using Keyify.Infrastructure.Repository;
 using Keyify.Models.Service;
@@ -5,7 +6,6 @@ using Keyify.Service;
 using Keyify.Service.Interfaces;
 using Keyify.Services.Formatter.Interfaces;
 using Keyify.Services.Formatter.Services;
-using Keyify.Web.Infrastructure.Caches;
 using Keyify.Web.Infrastructure.Repository.Interfaces;
 using Keyify.Web.Models.Instruments;
 using Keyify.Web.Models.ViewModels;
@@ -43,8 +43,12 @@ namespace Keyify
             services.AddSingleton(typeof(IFretboardService), typeof(FretboardService));
             services.AddSingleton(typeof(IScaleGroupingHtmlService), typeof(ScaleGroupingHtmlService));
             services.AddSingleton(typeof(IChordDefinitionGroupingHtmlService), typeof(ChordDefinitionsGroupingHtmlService));
-            services.AddSingleton(typeof(IChordDefinitionCache), typeof(ChordDefinitionCache));
             services.AddSingleton(typeof(ISerializationFormatter), typeof(SerializationFormatter));
+            services.AddSingleton(typeof(INoteFormatService), typeof(NoteFormatService));
+            services.AddSingleton(typeof(IChordDefinitionCache), typeof(ChordDefinitionCache));
+            services.AddSingleton(typeof(IScaleDefinitionCache), typeof(ScaleDefinitionCache));
+
+            services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
 
             services.AddSingleton<IChordDefinitionRepository>(f =>
                 new ChordDefinitionRepository(f.GetService<ILogger<ChordDefinitionRepository>>(),
@@ -52,11 +56,6 @@ namespace Keyify
                     f.GetRequiredService<ISerializationFormatter>()
                 ));
 
-            services.AddSingleton(typeof(INoteFormatService), typeof(NoteFormatService));
-
-
-            services.AddSingleton(typeof(ScaleDefinitionCache), typeof(ScaleDefinitionCache));
-            services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
             services.AddSingleton(f => new Fretboard(f.GetRequiredService<INoteFormatService>().SharpNoteDictionary));
         }
 

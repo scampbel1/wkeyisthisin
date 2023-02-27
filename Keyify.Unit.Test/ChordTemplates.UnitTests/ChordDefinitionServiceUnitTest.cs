@@ -14,7 +14,7 @@ namespace Keyify.Unit.Test.ChordDefinitions.UnitTests
 {
     public class ChordDefinitionServiceUnitTest
     {
-        private static IChordDefinitionCache _dataCache = new MockChordDefinitionDataCache();
+        private static IChordDefinitionCache _dataCache = new MockChordDefinitionCache();
         private static IChordDefinitionRepository _repository = new MockChordDefinitionRepository();
         private static IChordDefinitionService _chordDefinitionService = new ChordDefinitionService(_dataCache, _repository);
 
@@ -55,7 +55,7 @@ namespace Keyify.Unit.Test.ChordDefinitions.UnitTests
         [Fact]
         public async Task SearchChord_Gb_Minor_Notes_ReturnsChordWithinSet()
         {
-            var dataCache = new MockChordDefinitionDataCache();
+            var dataCache = new MockChordDefinitionCache();
             var repository = new MockChordDefinitionRepository();
             var chordDefinitionService = new ChordDefinitionService(dataCache, repository);
 

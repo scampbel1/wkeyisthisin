@@ -69,7 +69,7 @@ namespace Keyify.Models.Service
 
             var noteNumber = (int)rootNote;
 
-            foreach (var scaleStep in modeDefinition.ScaleSteps)
+            foreach (var scaleStep in modeDefinition.ScaleIntervals)
             {
                 noteNumber += (int)scaleStep;
 

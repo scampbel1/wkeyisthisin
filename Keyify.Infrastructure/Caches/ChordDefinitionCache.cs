@@ -3,7 +3,7 @@ using Keyify.MusicTheory.Enums;
 using Keyify.Services.Formatter.Interfaces;
 using Keyify.Services.Models;
 
-namespace Keyify.Web.Infrastructure.Caches
+namespace Keyify.Infrastructure.Caches
 {
     public class ChordDefinitionCache : IChordDefinitionCache
     {

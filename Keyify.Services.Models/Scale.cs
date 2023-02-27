@@ -12,7 +12,6 @@ namespace Keyify.Services.Models
         public readonly HashSet<string> NoteSetSharp;
         public readonly Mode Mode;
         public readonly string[] ScaleDegrees;
-        public readonly string Label;
         public readonly string FlatColloquialism;
         public readonly string SharpColloquialism;
 
@@ -25,7 +24,6 @@ namespace Keyify.Services.Models
             NoteSetSharp = noteSetSharp.ToHashSet();
             Mode = mode;
             ScaleDegrees = scaleDegrees;
-            Label = $"{RootNote}{Mode}";
             FlatColloquialism = GetScaleColloquialism(SharpRootNote, RootNote, Mode, convertFlatNoteToSharp: false);
             SharpColloquialism = GetScaleColloquialism(SharpRootNote, RootNote, Mode, convertFlatNoteToSharp: true);
 

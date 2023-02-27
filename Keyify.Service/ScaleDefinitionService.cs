@@ -1,18 +1,27 @@
-﻿using Keyify.Service.Interfaces;
+﻿using Keyify.Infrastructure.Caches.Interfaces;
+using Keyify.Service.Interfaces;
 using Keyify.Services.Models;
-using Keyify.Web.Infrastructure.Caches;
 
 namespace Keyify.Models.Service
 {
     public class ScaleDefinitionService : IScaleDefinitionService
     {
-        private readonly ScaleDefinitionCache _scaleDefinitionService;
+        private readonly IScaleDefinitionCache _scaleDefinitionCache;
 
-        public List<ScaleDefinition> ScaleDefinitions => _scaleDefinitionService.ScaleDefinitions;
+        public List<ScaleDefinition> ScaleDefinitions { get; set; }
 
-        public ScaleDefinitionService(ScaleDefinitionCache scaleDefinitionService)
+        public ScaleDefinitionService(IScaleDefinitionCache scaleDefinitionCache)
         {
-            _scaleDefinitionService = scaleDefinitionService;
+            _scaleDefinitionCache = scaleDefinitionCache;
+
+            Task.WhenAll(InitialiseChordDefinitionCache());
+        }
+
+        public async Task InitialiseChordDefinitionCache()
+        {
+            await _scaleDefinitionCache.Initialise();
+
+            ScaleDefinitions = _scaleDefinitionCache.ScaleDefinitions;
         }
     }
 }
