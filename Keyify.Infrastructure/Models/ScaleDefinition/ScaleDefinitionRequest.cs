@@ -1,13 +1,10 @@
 ﻿using Keyify.MusicTheory.Enums;
 
-namespace Keyify.Web.Infrastructure.Models.ChordDefinition
+namespace Keyify.Infrastructure.Models.ScaleDefinition
 {
-    public class ChordDefinitionEntity
+    public class ScaleDefinitionRequest
     {
-        public int Id { get; set; }
-
         public string? Name { get; set; }
-        
         public Interval[]? Intervals { get; set; }
     }
 }
