@@ -39,6 +39,7 @@ namespace Keyify.Database.Integration.Test.Helper
 
             return sb.ToString();
         }
+
         internal static object CreateInsertChordDefinitionSqlScriptParameters_DefinedRootNotes()
         {
             var mode = Mode.WholeTone;
@@ -62,6 +63,49 @@ namespace Keyify.Database.Integration.Test.Helper
                 Intervals = intervalsMemoryStream.ToArray(),
                 Degrees = degreesMemoryStream.ToArray(),
                 AllowedRootNotes = allowedRootNotesMemoryStream.ToArray()
+            };
+        }
+
+        internal static string CreateInsertScaleDefinitionSqlScript_NoRootNotes()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine("INSERT INTO [Core].[ScaleDefinition]");
+            sb.AppendLine("(");
+            sb.AppendLine("[Name],");
+            sb.AppendLine("[Description],");
+            sb.AppendLine("[Intervals],");
+            sb.AppendLine("[Degrees]");
+            sb.AppendLine(")");
+            sb.AppendLine("VALUES");
+            sb.AppendLine("(");
+            sb.AppendLine("@Name,");
+            sb.AppendLine("@Description,");
+            sb.AppendLine("@Intervals,");
+            sb.AppendLine("@Degrees");
+            sb.AppendLine(")");
+
+            return sb.ToString();
+        }
+
+        internal static object CreateInsertChordDefinitionSqlScriptParameters_NoRootNotes()
+        {
+            var mode = Mode.WholeTone;
+            var intervals = new Interval[] { Interval.R, Interval.W, Interval.W, Interval.W, Interval.W, Interval.W, Interval.W };
+            var degrees = new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.SharpFifth, Degree.FlatSeventh, Degree.Eighth };
+
+            using var intervalsMemoryStream = new MemoryStream();
+            JsonSerializer.Serialize(intervalsMemoryStream, intervals);
+
+            using var degreesMemoryStream = new MemoryStream();
+            JsonSerializer.Serialize(degreesMemoryStream, degrees);
+
+            return new
+            {
+                Name = mode.AsString(EnumFormat.Description),
+                Description = "This is just a test",
+                Intervals = intervalsMemoryStream.ToArray(),
+                Degrees = degreesMemoryStream.ToArray(),
             };
         }
 
@@ -94,7 +138,6 @@ namespace Keyify.Database.Integration.Test.Helper
                 Intervals = memoryStream.ToArray()
             };
         }
-
 
         internal static string CreateInsertTuningSqlScript()
         {
