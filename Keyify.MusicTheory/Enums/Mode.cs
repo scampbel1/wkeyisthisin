@@ -2,7 +2,6 @@
 
 namespace Keyify.MusicTheory.Enums
 {
-    //TODO: Tidy this up, and aggregate duplicate Modes that contain the same note sets
     public enum Mode
     {
         [Description("Ionian")]

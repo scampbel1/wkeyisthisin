@@ -7,6 +7,8 @@ CREATE TABLE [Core].[ScaleDefinition] (
 	[AllowedRootNotes] VARBINARY(900) NULL,
 	[Created] DATETIME NOT NULL DEFAULT GETUTCDATE(),
 	[LastModified] DATETIME NULL,
-	[Deleted] BIT NOT NULL DEFAULT 0
+	[Deleted] BIT NOT NULL DEFAULT 0,
+	[CreatedById] INT NOT NULL DEFAULT 0,
+	CONSTRAINT [FK_ScaleDefinition_CreatedById] FOREIGN KEY ([CreatedById]) REFERENCES [Core].[User](Id)
 	)
 GO
