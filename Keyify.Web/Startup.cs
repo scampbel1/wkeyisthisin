@@ -1,12 +1,12 @@
 using Keyify.Infrastructure.Caches;
 using Keyify.Infrastructure.Caches.Interfaces;
 using Keyify.Infrastructure.Repository;
+using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.Models.Service;
 using Keyify.Service;
 using Keyify.Service.Interfaces;
 using Keyify.Services.Formatter.Interfaces;
 using Keyify.Services.Formatter.Services;
-using Keyify.Web.Infrastructure.Repository.Interfaces;
 using Keyify.Web.Models.Instruments;
 using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Service;
@@ -52,6 +52,12 @@ namespace Keyify
 
             services.AddSingleton<IChordDefinitionRepository>(f =>
                 new ChordDefinitionRepository(f.GetService<ILogger<ChordDefinitionRepository>>(),
+                    Configuration["ConnectionStrings:SqlServer"],
+                    f.GetRequiredService<ISerializationFormatter>()
+                ));
+
+            services.AddSingleton<IScaleDefinitionRepository>(f =>
+                new ScaleDefinitionRepository(f.GetService<ILogger<ScaleDefinitionRepository>>(),
                     Configuration["ConnectionStrings:SqlServer"],
                     f.GetRequiredService<ISerializationFormatter>()
                 ));

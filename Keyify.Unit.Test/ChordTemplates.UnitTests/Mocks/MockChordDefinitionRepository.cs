@@ -1,6 +1,6 @@
-﻿using Keyify.MusicTheory.Definitions;
+﻿using Keyify.Infrastructure.Repository.Interfaces;
+using Keyify.MusicTheory.Definitions;
 using Keyify.Web.Infrastructure.Models.ChordDefinition;
-using Keyify.Web.Infrastructure.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

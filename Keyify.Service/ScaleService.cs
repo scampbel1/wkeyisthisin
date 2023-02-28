@@ -7,7 +7,7 @@ namespace Keyify.Models.Service
 {
     public class ScaleService : IScaleService
     {
-        private readonly IScaleDefinitionService _modeService;
+        private readonly IScaleDefinitionService _scaleDefinitionService;
         private readonly INoteFormatService _noteFormatService;
 
         private readonly List<ScaleEntry> _scaleList;
@@ -15,9 +15,9 @@ namespace Keyify.Models.Service
 
         public List<ScaleEntry> Scales => _scaleList;
 
-        public ScaleService(IScaleDefinitionService modeService, INoteFormatService noteFormatService)
+        public ScaleService(IScaleDefinitionService scaleDefinitionService, INoteFormatService noteFormatService)
         {
-            _modeService = modeService;
+            _scaleDefinitionService = scaleDefinitionService;
             _noteFormatService = noteFormatService;
 
             _sharpNoteDictionary = _noteFormatService.SharpNoteDictionary;
@@ -31,7 +31,7 @@ namespace Keyify.Models.Service
 
         private List<ScaleEntry> GenerateScaleList()
         {
-            return GetScaleEntries(_modeService.ScaleDefinitions);
+            return GetScaleEntries(_scaleDefinitionService.ScaleDefinitions);
         }
 
         private List<ScaleEntry> GetScaleEntries(IEnumerable<ScaleDefinition> modeDefinitionDictionary)

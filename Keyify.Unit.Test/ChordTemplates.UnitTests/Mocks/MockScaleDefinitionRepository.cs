@@ -1,5 +1,6 @@
 ﻿using Keyify.Infrastructure.Models.ScaleDefinition;
 using Keyify.Infrastructure.Repository.Interfaces;
+using Keyify.Services.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
             return Task.FromResult(new List<ScaleDefinitionEntity>());
         }
 
-        public Task InsertScaleDefinition(ScaleDefinitionRequest chordDefinitionRequest)
+        public Task InsertScaleDefinition(ScaleDefinition scaleDefinition)
         {
             throw new NotImplementedException();
         }

@@ -1,7 +1,7 @@
 ﻿using Dapper;
+using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.Services.Formatter.Interfaces;
 using Keyify.Web.Infrastructure.Models.ChordDefinition;
-using Keyify.Web.Infrastructure.Repository.Interfaces;
 using Microsoft.Extensions.Logging;
 using System.Data.SqlClient;
 using System.Text;

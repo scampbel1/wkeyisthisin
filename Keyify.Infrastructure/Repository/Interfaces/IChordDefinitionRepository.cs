@@ -1,6 +1,6 @@
 ﻿using Keyify.Web.Infrastructure.Models.ChordDefinition;
 
-namespace Keyify.Web.Infrastructure.Repository.Interfaces
+namespace Keyify.Infrastructure.Repository.Interfaces
 {
     public interface IChordDefinitionRepository
     {
