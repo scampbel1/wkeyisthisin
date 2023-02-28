@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
 {
     //TODO: Work out where this should live, and split out methods so that it can be used be tooling
-    public class MockChordDefinitionDataCache : IChordDefinitionCache
+    public class MockChordDefinitionCache : IChordDefinitionCache
     {
         public Dictionary<ChordType, Interval[]> ChordTemplateDefinitions;
 

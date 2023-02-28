@@ -1,11 +1,11 @@
 ﻿using EnumsNET;
 using Keyify.Database.RecordCreation.Factory.Abstraction;
 using Keyify.Infrastructure.Repository;
+using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.MusicTheory.Definitions;
 using Keyify.MusicTheory.Enums;
 using Keyify.Services.Formatter.Services;
 using Keyify.Web.Infrastructure.Models.ChordDefinition;
-using Keyify.Web.Infrastructure.Repository.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace Keyify.Database.RecordCreation.Factory.Creator
@@ -27,7 +27,7 @@ namespace Keyify.Database.RecordCreation.Factory.Creator
             var logger = loggerFactory.CreateLogger<ChordDefinitionRepository>();
             logger.LogInformation("Generating Chord Definitions");
 
-            _chordDefinitions = ChordDefinitions.GenerateChordDefinitions();
+            _chordDefinitions = ChordDefinitions.GetChordIntervals();
             _chordDefinitionRepository = new ChordDefinitionRepository(logger, connectionString, new SerializationFormatter());
         }
 

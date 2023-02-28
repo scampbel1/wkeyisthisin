@@ -1,4 +1,4 @@
-﻿namespace Keyify.Services.Models
+﻿namespace Keyify.MusicTheory.Enums
 {
     public static class Degree
     {

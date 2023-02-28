@@ -1,18 +1,36 @@
-﻿using Keyify.Service.Interfaces;
+﻿using Keyify.Infrastructure.Caches.Interfaces;
+using Keyify.Infrastructure.Repository.Interfaces;
+using Keyify.Service.Interfaces;
 using Keyify.Services.Models;
-using Keyify.Web.Infrastructure.Caches;
 
 namespace Keyify.Models.Service
 {
     public class ScaleDefinitionService : IScaleDefinitionService
     {
-        private readonly ScaleDefinitionCache _scaleDefinitionService;
+        private readonly IScaleDefinitionCache _scaleDefinitionCache;
+        private readonly IScaleDefinitionRepository _scaleDefinitionRepository;
+        public List<ScaleDefinition> ScaleDefinitions { get => _scaleDefinitionCache.ScaleDefinitions; }
 
-        public List<ScaleDefinition> ScaleDefinitions => _scaleDefinitionService.ScaleDefinitions;
-
-        public ScaleDefinitionService(ScaleDefinitionCache scaleDefinitionService)
+        public ScaleDefinitionService(IScaleDefinitionCache scaleDefinitionCache, IScaleDefinitionRepository scaleDefinitionRepository)
         {
-            _scaleDefinitionService = scaleDefinitionService;
+            _scaleDefinitionCache = scaleDefinitionCache;
+            _scaleDefinitionRepository = scaleDefinitionRepository;
+        }
+
+        public async Task InitialiseScaleDefinitionCache()
+        {
+            var scaleDefinitionEntities = await _scaleDefinitionRepository.GetAllScaleDefinitions();
+
+            //TODO: Install automapper and fluent validation for null references
+
+            //TODO: Add logging
+
+            await _scaleDefinitionCache.Initialise(scaleDefinitionEntities);
+        }
+
+        public Task<List<ScaleDefinition>> Sync(int[] scaleDefinitionIds)
+        {
+            throw new NotImplementedException();
         }
     }
 }

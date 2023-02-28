@@ -33,8 +33,12 @@ internal class Program
             switch ((int)selection)
             {
                 case (int)Selection.ChordDefinition:
-                    var creator = DatabaseRecordCreatorFactory.Create(Selection.ChordDefinition, connectionString);
-                    await creator.ExecuteAsync();
+                    var chordDefintionCreator = DatabaseRecordCreatorFactory.Create(Selection.ChordDefinition, connectionString);
+                    await chordDefintionCreator.ExecuteAsync();
+                    break;
+                case (int)Selection.ScaleDefinition:
+                    var scaleDefinitionCreator = DatabaseRecordCreatorFactory.Create(Selection.ScaleDefinition, connectionString);
+                    await scaleDefinitionCreator.ExecuteAsync();
                     break;
                 default:
                     Console.WriteLine($"Invalid selection '{selection}'");

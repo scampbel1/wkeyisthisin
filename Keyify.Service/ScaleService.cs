@@ -7,21 +7,22 @@ namespace Keyify.Models.Service
 {
     public class ScaleService : IScaleService
     {
-        private readonly IScaleDefinitionService _modeService;
+        private readonly IScaleDefinitionService _scaleDefinitionService;
         private readonly INoteFormatService _noteFormatService;
 
-        private readonly List<ScaleEntry> _scaleList;
+        private List<ScaleEntry> _scaleList = new List<ScaleEntry>();
         private readonly Dictionary<Note, string> _sharpNoteDictionary;
 
         public List<ScaleEntry> Scales => _scaleList;
 
-        public ScaleService(IScaleDefinitionService modeService, INoteFormatService noteFormatService)
+        public ScaleService(IScaleDefinitionService scaleDefinitionService, INoteFormatService noteFormatService)
         {
-            _modeService = modeService;
+            _scaleDefinitionService = scaleDefinitionService;
             _noteFormatService = noteFormatService;
 
             _sharpNoteDictionary = _noteFormatService.SharpNoteDictionary;
-            _scaleList = GenerateScaleList();
+
+            Task.WhenAll(InitialiseScaleDefinitionService());
         }
 
         public IEnumerable<ScaleEntry> FindScales(IEnumerable<Note> selectedNotes)
@@ -29,9 +30,16 @@ namespace Keyify.Models.Service
             return _scaleList.Where(a => a.Scale.NoteSet.IsSupersetOf(selectedNotes));
         }
 
+        public async Task InitialiseScaleDefinitionService()
+        {
+            await _scaleDefinitionService.InitialiseScaleDefinitionCache();
+
+            _scaleList = GenerateScaleList();
+        }
+
         private List<ScaleEntry> GenerateScaleList()
         {
-            return GetScaleEntries(_modeService.ScaleDefinitions);
+            return GetScaleEntries(_scaleDefinitionService.ScaleDefinitions);
         }
 
         private List<ScaleEntry> GetScaleEntries(IEnumerable<ScaleDefinition> modeDefinitionDictionary)
@@ -50,9 +58,9 @@ namespace Keyify.Models.Service
         {
             var scaleEntry = new List<ScaleEntry>();
 
-            if (modeDefinition.ExplicitNotesForMode != null)
+            if (modeDefinition.AllowedRootNotes != null)
             {
-                scaleEntry.AddRange(from Note note in modeDefinition.ExplicitNotesForMode
+                scaleEntry.AddRange(from Note note in modeDefinition.AllowedRootNotes
                                     let generatedScale = CreateGeneratedScale(note, modeDefinition)
                                     select new ScaleEntry(generatedScale));
             }
@@ -69,7 +77,7 @@ namespace Keyify.Models.Service
 
             var noteNumber = (int)rootNote;
 
-            foreach (var scaleStep in modeDefinition.ScaleSteps)
+            foreach (var scaleStep in modeDefinition.Intervals)
             {
                 noteNumber += (int)scaleStep;
 
@@ -82,7 +90,7 @@ namespace Keyify.Models.Service
                 sharpNotes.Add(_sharpNoteDictionary[note]);
             }
 
-            return new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, modeDefinition.Mode, modeDefinition.ScaleDegrees);
+            return new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, modeDefinition.Name, modeDefinition.Degrees);
         }
     }
 }

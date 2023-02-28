@@ -1,4 +1,5 @@
-﻿using Keyify.MusicTheory.Enums;
+﻿using EnumsNET;
+using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
 
 namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
@@ -47,7 +48,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
                         Note.C.ToString(),
                         new List<Note>() { Note.C },
                         new List<string>() { "C" },
-                        Mode.Kumoi,
+                        Mode.Kumoi.AsString(EnumFormat.Description),
                         new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fifth, Degree.Sixth, Degree.Eighth });
 
             var mockScaleResult = new ScaleEntry(mockGeneratedScale);

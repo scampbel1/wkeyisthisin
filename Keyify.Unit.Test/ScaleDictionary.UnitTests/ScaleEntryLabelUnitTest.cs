@@ -1,4 +1,5 @@
-﻿using Keyify.MusicTheory.Enums;
+﻿using EnumsNET;
+using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
 using System.Collections.Generic;
 
@@ -13,7 +14,7 @@ namespace ScaleDictionaryTests
             var sharpRootNote = "Ab";
             var notes = new List<Note>();
             var sharpNotes = new List<string>();
-            var mode = Mode.Ionian;
+            var mode = Mode.Ionian.AsString(EnumFormat.Description);
             var scaleDegrees = new string[6];
 
             var generatedScale = new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, mode, scaleDegrees);
@@ -40,7 +41,7 @@ namespace ScaleDictionaryTests
             var sharpRootNote = "Db";
             var notes = new List<Note>();
             var sharpNotes = new List<string>();
-            var mode = Mode.Aeolian;
+            var mode = Mode.Aeolian.AsString(EnumFormat.Description);
             var scaleDegrees = new string[6];
 
             var generatedScale = new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, mode, scaleDegrees);
@@ -67,7 +68,7 @@ namespace ScaleDictionaryTests
             var sharpRootNote = "F#";
             var notes = new List<Note>();
             var sharpNotes = new List<string>();
-            var mode = Mode.Aeolian;
+            var mode = Mode.Aeolian.AsString(EnumFormat.Description);
             var scaleDegrees = new string[6];
 
             var generatedScale = new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, mode, scaleDegrees);
@@ -94,7 +95,7 @@ namespace ScaleDictionaryTests
             var sharpRootNote = "D#";
             var notes = new List<Note>();
             var sharpNotes = new List<string>();
-            var mode = Mode.Dorian_b2;
+            var mode = Mode.DorianB2.AsString(EnumFormat.Description);
             var scaleDegrees = new string[6];
 
             var generatedScale = new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, mode, scaleDegrees);
