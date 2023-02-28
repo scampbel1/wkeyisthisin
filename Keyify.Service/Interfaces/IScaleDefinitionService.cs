@@ -5,6 +5,7 @@ namespace Keyify.Service.Interfaces
     public interface IScaleDefinitionService
     {
         public List<ScaleDefinition> ScaleDefinitions { get; }
-        public Task InitialiseChordDefinitionCache();
+        public Task InitialiseScaleDefinitionCache();
+        public Task<List<ScaleDefinition>> Sync(int[] scaleDefinitionIds);
     }
 }

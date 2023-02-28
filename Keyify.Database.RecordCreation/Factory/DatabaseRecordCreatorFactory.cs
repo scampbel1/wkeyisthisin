@@ -12,6 +12,8 @@ namespace Keyify.Database.RecordCreation.Factory
             {
                 case Selection.ChordDefinition:
                     return new ChordDefinitionCreator(connectionString);
+                case Selection.ScaleDefinition:
+                    return new ScaleDefinitionCreator(connectionString);
                 default:
                     throw new ArgumentException($"Invalid selection {selection}");
             }

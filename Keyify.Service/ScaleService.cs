@@ -10,7 +10,7 @@ namespace Keyify.Models.Service
         private readonly IScaleDefinitionService _scaleDefinitionService;
         private readonly INoteFormatService _noteFormatService;
 
-        private readonly List<ScaleEntry> _scaleList;
+        private List<ScaleEntry> _scaleList = new List<ScaleEntry>();
         private readonly Dictionary<Note, string> _sharpNoteDictionary;
 
         public List<ScaleEntry> Scales => _scaleList;
@@ -21,12 +21,20 @@ namespace Keyify.Models.Service
             _noteFormatService = noteFormatService;
 
             _sharpNoteDictionary = _noteFormatService.SharpNoteDictionary;
-            _scaleList = GenerateScaleList();
+
+            Task.WhenAll(InitialiseScaleDefinitionService());
         }
 
         public IEnumerable<ScaleEntry> FindScales(IEnumerable<Note> selectedNotes)
         {
             return _scaleList.Where(a => a.Scale.NoteSet.IsSupersetOf(selectedNotes));
+        }
+
+        public async Task InitialiseScaleDefinitionService()
+        {
+            await _scaleDefinitionService.InitialiseScaleDefinitionCache();
+
+            _scaleList = GenerateScaleList();
         }
 
         private List<ScaleEntry> GenerateScaleList()

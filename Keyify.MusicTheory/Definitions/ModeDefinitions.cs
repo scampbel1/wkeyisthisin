@@ -126,9 +126,9 @@ namespace Keyify.MusicTheory.Definitions
         /// Some scales have a limited array of root notes
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<Mode, Array> GetExplicitRootNoteScaleRootNotes()
+        public static Dictionary<Mode, Note[]> GetExplicitRootNoteScaleRootNotes()
         {
-            var explicitRootNoteScaleRootNotes = new Dictionary<Mode, Array>();
+            var explicitRootNoteScaleRootNotes = new Dictionary<Mode, Note[]>();
 
             explicitRootNoteScaleRootNotes.Add(Mode.WholeTone, new[] { Note.D, Note.F });
             explicitRootNoteScaleRootNotes.Add(Mode.DiminishedWholeHalf, new[] { Note.C, Note.Db, Note.D });

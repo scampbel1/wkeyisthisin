@@ -8,8 +8,7 @@ namespace Keyify.Services.Models
         public readonly Interval[] Intervals;
         public readonly string[] Degrees;
 
-        //Create scales of all notes by default. Some scales are limited to a subset of notes.
-        public readonly Array AllowedRootNotes = Enum.GetValues(typeof(Note));
+        public readonly Note[] AllowedRootNotes = (Note[])Enum.GetValues(typeof(Note));
 
         public ScaleDefinition(string name, Interval[] intervals, string[] degrees)
         {
@@ -28,7 +27,7 @@ namespace Keyify.Services.Models
             }
         }
 
-        public ScaleDefinition(string name, Interval[] scaleIntervals, string[] scaleDegrees, Array allowedRootNotes) : this(name, scaleIntervals, scaleDegrees)
+        public ScaleDefinition(string name, Interval[] scaleIntervals, string[] scaleDegrees, Note[] allowedRootNotes) : this(name, scaleIntervals, scaleDegrees)
         {
             AllowedRootNotes = allowedRootNotes;
         }

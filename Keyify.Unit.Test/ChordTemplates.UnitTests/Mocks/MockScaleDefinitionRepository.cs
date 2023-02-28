@@ -1,5 +1,6 @@
 ﻿using Keyify.Infrastructure.Models.ScaleDefinition;
 using Keyify.Infrastructure.Repository.Interfaces;
+using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,11 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
         public Task<bool> DoesScaleDefinitionExist(string name)
         {
             return Task.FromResult(true);
+        }
+
+        public Task<bool> DoesScaleDefinitionExist(Interval[] intervals)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<List<ScaleDefinitionEntity>> GetAllScaleDefinitions()

@@ -25,7 +25,7 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
 
             foreach (Mode scaleType in Enum.GetValues(typeof(Mode)))
             {
-                var rootNotes = Array.CreateInstance(typeof(Note), Enum.GetValues(typeof(Note)).Length);
+                var rootNotes = (Note[])Enum.GetValues(typeof(Note));
 
                 explicitRootNotes.TryGetValue(scaleType, out rootNotes);
 

@@ -24,9 +24,18 @@ namespace Keyify.Infrastructure.Repository
             _serializationFormatter = serializationFormatter;
         }
 
-        public Task<bool> DoesScaleDefinitionExist(string name)
+        public async Task<bool> DoesScaleDefinitionExist(string name)
         {
-            throw new NotImplementedException();
+            using var sqlConnection = new SqlConnection(_connectionString);
+
+            await sqlConnection.OpenAsync();
+
+            var query = "SELECT COUNT(1) FROM [Core].[ScaleDefinition] WHERE [Name] = @name";
+            var isFound = await sqlConnection.ExecuteScalarAsync<bool>(query, new { name });
+
+            await sqlConnection.CloseAsync();
+
+            return isFound;
         }
 
         public Task<bool> DoesScaleDefinitionExist(Interval[] intervals)
@@ -34,9 +43,43 @@ namespace Keyify.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public Task<List<ScaleDefinitionEntity>> GetAllScaleDefinitions()
+        public async Task<List<ScaleDefinitionEntity>> GetAllScaleDefinitions()
         {
-            throw new NotImplementedException();
+            _logger.LogInformation($"Database Server: '{_connectionString.Split(';')[0]}'");
+
+            var scaleDefinitions = new List<ScaleDefinitionEntity>();
+
+            try
+            {
+                using var sqlConnection = new SqlConnection(_connectionString);
+
+                await sqlConnection.OpenAsync();
+
+                var query = "SELECT [Id], [Name], [Intervals], [Degrees], [AllowedRootNotes] FROM [Core].[ScaleDefinition] WHERE [Deleted] = 0";
+                var result = await sqlConnection.ExecuteReaderAsync(query);
+
+                while (result.Read())
+                {
+                    scaleDefinitions.Add(new ScaleDefinitionEntity()
+                    {
+                        Id = result.GetInt32(0),
+                        Name = result.GetString(1),
+                        Intervals = await _serializationFormatter.ConvertToIntervalArray((byte[])result[2]),
+                        Degrees = await _serializationFormatter.ConvertToDegreeArray((byte[])result[3]),
+                        AllowedRootNotes = await _serializationFormatter.ConvertToAllowedRootNotesArray((byte[])result[4]),
+                    });
+                }
+
+                _logger.LogInformation($"Found: {scaleDefinitions.Count} Chord Definition Entries");
+
+                await sqlConnection.CloseAsync();
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Could not retrieve Chord Definitions");
+            }
+
+            return scaleDefinitions;
         }
 
         public async Task InsertScaleDefinition(ScaleDefinition scaleDefinition)
@@ -46,7 +89,18 @@ namespace Keyify.Infrastructure.Repository
                 return;
             }
 
-            //TODO: Implement
+            using var intervalsMemoryStream = new MemoryStream();
+            JsonSerializer.Serialize(intervalsMemoryStream, scaleDefinition.Intervals);
+
+            using var degreesMemoryStream = new MemoryStream();
+            JsonSerializer.Serialize(degreesMemoryStream, scaleDefinition.Degrees);
+
+            using var allowedRootNotesMemoryStream = new MemoryStream();
+            JsonSerializer.Serialize(allowedRootNotesMemoryStream, scaleDefinition.AllowedRootNotes);
+
+            //Convert Intervals to Byte for Check
+
+            //TODO: Implement check by interval
             //if (await DoesScaleDefinitionExist(scaleDefinition.Intervals))
             //{
             //    return;
@@ -56,15 +110,6 @@ namespace Keyify.Infrastructure.Repository
 
             using var sqlConnection = new SqlConnection(_connectionString);
             sqlConnection.Open();
-
-            using var intervalsMemoryStream = new MemoryStream();
-            JsonSerializer.Serialize(intervalsMemoryStream, scaleDefinition.Intervals);
-
-            using var degreesMemoryStream = new MemoryStream();
-            JsonSerializer.Serialize(degreesMemoryStream, scaleDefinition.Degrees);
-
-            using var allowedRootNotesMemoryStream = new MemoryStream();
-            JsonSerializer.Serialize(allowedRootNotesMemoryStream, scaleDefinition.AllowedRootNotes);
 
             var sqlQuery = GeneratedInsertSqlQuery();
 

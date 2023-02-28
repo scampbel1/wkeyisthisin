@@ -14,7 +14,7 @@ namespace Keyify.Database.RecordCreation.Factory.Creator
     {
         private Dictionary<Mode, Interval[]> _scaleIntervals;
         private Dictionary<Mode, string[]> _scaleDegrees;
-        private Dictionary<Mode, Array> _scaleAllowedRootNotes;
+        private Dictionary<Mode, Note[]> _scaleAllowedRootNotes;
 
         private IScaleDefinitionRepository _scaleDefinitionRepository;
 
@@ -44,7 +44,7 @@ namespace Keyify.Database.RecordCreation.Factory.Creator
                 var scaleIntervals = _scaleIntervals[scaleType];
                 var scaleDegrees = _scaleDegrees[scaleType];
 
-                var rootNotes = Array.CreateInstance(typeof(Note), Enum.GetValues(typeof(Note)).Length);
+                var rootNotes = (Note[])Enum.GetValues(typeof(Note));
 
                 _scaleAllowedRootNotes.TryGetValue(scaleType, out rootNotes);
 

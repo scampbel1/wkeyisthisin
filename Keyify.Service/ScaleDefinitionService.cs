@@ -9,33 +9,28 @@ namespace Keyify.Models.Service
     {
         private readonly IScaleDefinitionCache _scaleDefinitionCache;
         private readonly IScaleDefinitionRepository _scaleDefinitionRepository;
+        public List<ScaleDefinition> ScaleDefinitions { get => _scaleDefinitionCache.ScaleDefinitions; }
 
         public ScaleDefinitionService(IScaleDefinitionCache scaleDefinitionCache, IScaleDefinitionRepository scaleDefinitionRepository)
         {
             _scaleDefinitionCache = scaleDefinitionCache;
             _scaleDefinitionRepository = scaleDefinitionRepository;
-
-            Task.WhenAll(InitialiseChordDefinitionCache());
         }
 
-        public List<ScaleDefinition> ScaleDefinitions { get => _scaleDefinitionCache.ScaleDefinitions; }
-
-        public async Task InitialiseChordDefinitionCache()
+        public async Task InitialiseScaleDefinitionCache()
         {
             var scaleDefinitionEntities = await _scaleDefinitionRepository.GetAllScaleDefinitions();
 
             //TODO: Install automapper and fluent validation for null references
-            //_chordDefinitionCache.ChordDefinitions = newChordDefinitions;
 
             //TODO: Add logging
 
-            //foreach (var chordDefinition in scaleDefinitionEntities)
-            //{
-            //    //TODO: Remove ! postfix once validation is in place
-            //    chordDefinitionDictionary.Add(chordDefinition.Name!, chordDefinition.Intervals!);
-            //}
-
             await _scaleDefinitionCache.Initialise(scaleDefinitionEntities);
+        }
+
+        public Task<List<ScaleDefinition>> Sync(int[] scaleDefinitionIds)
+        {
+            throw new NotImplementedException();
         }
     }
 }
