@@ -1,3 +1,6 @@
+const chordDefinitionNameFullName = "Chord Definition Name";
+const chordDefinitionNameFieldName = "chordDefinitionName";
+
 function SubmitChordDefinition() {
 
     ValidateFields();
@@ -7,8 +10,8 @@ function ValidateFields() {
 
     //Example of Implicit Binding -see: "You Don't Know JS - this & Object Prototypes" - Page 14
     var nameTextbox = {
-        htmlFieldName: "chordDefinitionName",
-        fullName: "Chord Definition Name",
+        htmlFieldName: chordDefinitionNameFieldName,
+        fullName: chordDefinitionNameFullName,
         validate: validateTextbox
     };
 
@@ -33,6 +36,11 @@ function validateTextbox() {
         alert(message);
 
         return false;
+    }
+    else {
+        //TODO: Search for existing Chord Template name
+
+        //If name exists return false
     }
 
     return true;
