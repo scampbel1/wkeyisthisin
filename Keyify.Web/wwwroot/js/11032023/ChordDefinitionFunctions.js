@@ -1,12 +1,13 @@
 const chordDefinitionNameFullName = "Chord Definition Name";
 const chordDefinitionNameFieldName = "chordDefinitionName";
 
-const intervalFullName = "Chord Template Intervals";
-const intervalFieldName = "chordTemplateIntervals";
+const intervalFullName = "Chord Definition Intervals";
+const intervalFieldName = "chordDefinitionIntervals";
 
 function addInterval(button) {
     let interval = button.innerText;
 
+    //Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
     let intervalTextBox = {
         htmlFieldName: intervalFieldName,
         fullName: intervalFullName,
@@ -17,7 +18,19 @@ function addInterval(button) {
 }
 
 function updateIntervals(interval) {
-    alert(interval);
+    let intervalsFieldName = this.htmlFieldName;
+
+    let intervalsField = document.getElementById(intervalsFieldName);
+
+    let newInterval;
+
+    if (intervalsField.value == '') {
+        newInterval = `${interval}`;
+    } else {
+        newInterval = `-${interval}`;
+    }
+
+    intervalsField.value += newInterval;
 }
 
 function submitChordDefinition() {
