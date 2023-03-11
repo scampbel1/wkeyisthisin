@@ -3,3 +3,45 @@
 *@
 @{
 }
+<head>
+    <script src="~/js/11032023/ChordDefinitionFunctions.js"></script>
+</head>
+
+<h1>Create Chord Definition</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <label>Chord Defintion Name</label>
+            </td>
+            <td>
+                <input id="chordDefinitionName" name="chordDefinitionName" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Chord Intervals</label>
+            </td>
+            <td>
+                <input id="chordIntervals" name="chordIntervals" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Chord Degrees</label>
+            </td>
+            <td>
+                <input id="chordDegrees" name="chordDegrees" />
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<button onclick="SubmitChordDefinition()">Submit</button>
