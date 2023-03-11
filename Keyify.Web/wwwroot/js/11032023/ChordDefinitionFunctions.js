@@ -47,9 +47,17 @@ function validateFields() {
         validate: validateTextbox
     };
 
-    let nameValidation = nameTextbox.validate();
+    //Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
+    let intervalTextBox = {
+        htmlFieldName: intervalFieldName,
+        fullName: intervalFullName,
+        validate: validateTextbox
+    };
 
-    if (nameValidation) {
+    let nameValidation = nameTextbox.validate();
+    let intervalValidation = intervalTextBox.validate();
+
+    if (nameValidation && intervalValidation) {
         alert('Success!');
     }
 }
