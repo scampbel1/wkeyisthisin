@@ -1,14 +1,20 @@
 const chordDefinitionNameFullName = "Chord Definition Name";
 const chordDefinitionNameFieldName = "chordDefinitionName";
 
-function SubmitChordDefinition() {
+function addInterval(button) {
+    let interval = button.innerText;
 
-    ValidateFields();
+    alert(interval);
 }
 
-function ValidateFields() {
+function submitChordDefinition() {
 
-    //Example of Implicit Binding -see: "You Don't Know JS - this & Object Prototypes" - Page 14
+    validateFields();
+}
+
+function validateFields() {
+
+    //Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
     var nameTextbox = {
         htmlFieldName: chordDefinitionNameFieldName,
         fullName: chordDefinitionNameFullName,
@@ -44,4 +50,11 @@ function validateTextbox() {
     }
 
     return true;
+}
+
+function validateIntervalArray() {
+    //Is array null or empty?
+
+    //Does array already exist in database?
+    //If so -> show message showing name of existing Chord Template
 }

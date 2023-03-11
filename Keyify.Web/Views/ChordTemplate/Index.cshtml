@@ -13,8 +13,8 @@
     <table>
         <thead>
             <tr>
-                <th>Key</th>
-                <th>Value</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -31,11 +31,22 @@
                     <label>Chord Intervals</label>
                 </td>
                 <td>
-                    <input id="chordIntervals" name="chordIntervals" />
+                    <br />
+                    <button onclick="addInterval(this)">h</button>
+                    <button onclick="addInterval(this)">W</button>
+                    <button onclick="addInterval(this)">Wh</button>
+                    <button onclick="addInterval(this)">WW</button>
+                    <button onclick="addInterval(this)">WWh</button>
+                    <br />
+                    <br />
+                    <span>R-</span><input id="chordIntervals" name="chordIntervals" />
+                </td>
+                <td>
+                    
                 </td>
             </tr>
         </tbody>
     </table>
 
-    <button onclick="SubmitChordDefinition()">Submit</button>
+    <button onclick="submitChordDefinition()">Submit</button>
 </body>
