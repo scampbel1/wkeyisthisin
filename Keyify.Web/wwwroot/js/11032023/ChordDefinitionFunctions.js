@@ -1,3 +1,5 @@
+//NOTE: This form is to create what is programmatically being created here - C:\Users\cambo\source\repos\scampbel1\wkeyisthisin\Keyify.MusicTheory\Definitions\ChordDefinitions.cs
+
 const chordDefinitionNameFullName = "Chord Definition Name";
 const chordDefinitionNameFieldName = "chordDefinitionName";
 
@@ -20,7 +22,7 @@ function addInterval(button) {
 function updateIntervals(interval) {
     let intervalsFieldName = this.htmlFieldName;
 
-    let intervalsField = document.getElementById(intervalsFieldName);
+    var intervalsField = document.getElementById(intervalsFieldName);
 
     let newInterval;
 
@@ -44,21 +46,28 @@ function validateFields() {
     let nameTextbox = {
         htmlFieldName: chordDefinitionNameFieldName,
         fullName: chordDefinitionNameFullName,
-        validate: validateTextbox
+        validate: validateTextbox,
     };
 
     //Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
     let intervalTextBox = {
         htmlFieldName: intervalFieldName,
         fullName: intervalFullName,
-        validate: validateTextbox
+        validate: validateTextbox,
     };
 
     let nameValidation = nameTextbox.validate();
     let intervalValidation = intervalTextBox.validate();
 
     if (nameValidation && intervalValidation) {
-        alert('Success!');
+
+        // Send Chord Definition creation request
+
+        alert('Your Chord Definition request has been sent!');
+
+        //Example of Explicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 18.
+        clearTextbox.call(nameTextbox);
+        clearTextbox.call(intervalTextBox);
     }
 }
 
@@ -84,6 +93,10 @@ function validateTextbox() {
     }
 
     return true;
+}
+
+function clearTextbox() {
+    document.getElementById(this.htmlFieldName).value = '';
 }
 
 function validateIntervalArray() {
