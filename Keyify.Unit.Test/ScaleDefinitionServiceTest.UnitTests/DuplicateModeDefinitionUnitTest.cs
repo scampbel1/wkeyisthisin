@@ -4,7 +4,7 @@ using Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Keyify.Unit.Test.ScaleDictionary.UnitTests
+namespace Keyify.Unit.Test.ScaleDefinitionServiceTest.UnitTests
 {
     public class DuplicateModeDefinitionUnitTest
     {

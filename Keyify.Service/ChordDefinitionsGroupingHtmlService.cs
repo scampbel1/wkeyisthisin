@@ -83,7 +83,7 @@ namespace Keyify.Web.Service
 
             if (firstScaleInGroup != null)
             {
-                var noteSet = firstScaleInGroup.Scale.NoteSet;
+                var noteSet = firstScaleInGroup.Scale.NotesHashSet;
 
                 sb.Append("<span class=\"scaleResultLabel\">");
 

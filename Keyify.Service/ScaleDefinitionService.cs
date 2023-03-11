@@ -17,7 +17,7 @@ namespace Keyify.Models.Service
             _scaleDefinitionRepository = scaleDefinitionRepository;
         }
 
-        public async Task InitialiseScaleDefinitionCache()
+        public async Task Init()
         {
             var scaleDefinitionEntities = await _scaleDefinitionRepository.GetAllScaleDefinitions();
 

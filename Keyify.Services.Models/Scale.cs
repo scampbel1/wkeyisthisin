@@ -8,8 +8,8 @@ namespace Keyify.Services.Models
         public readonly Note RootNote;
         public readonly string SharpRootNote;
         public readonly List<Note> Notes;
-        public readonly HashSet<Note> NoteSet;
-        public readonly HashSet<string> NoteSetSharp;
+        public readonly HashSet<Note> NotesHashSet;
+        public readonly HashSet<string> SharpNotesHashSet;
         public readonly string Name;
         public readonly string[] ScaleDegrees;
         public readonly string FlatColloquialism;
@@ -20,14 +20,16 @@ namespace Keyify.Services.Models
             RootNote = rootNote;
             SharpRootNote = rootNoteSharp;
             Notes = notes;
-            NoteSet = notes.ToHashSet();
-            NoteSetSharp = noteSetSharp.ToHashSet();
+            NotesHashSet = notes.ToHashSet();
+            SharpNotesHashSet = noteSetSharp.ToHashSet();
             Name = name;
             ScaleDegrees = scaleDegrees;
             FlatColloquialism = GetScaleColloquialism(SharpRootNote, RootNote, Name, convertFlatNoteToSharp: false);
             SharpColloquialism = GetScaleColloquialism(SharpRootNote, RootNote, Name, convertFlatNoteToSharp: true);
 
-            IsKey = (name == "Ionian" || name == "Aeolian");
+            //TODO: This needs to be moved to the DB
+            //TODO: Create flag for parallel "scales"
+            IsKey = (name == "Ionian" || name == "Aeolian" || name == "Major/Minor (Parallel)" || name == "Minor/Major (Parallel)");
         }
 
         private string GetScaleColloquialism(string sharpRootNote, Note rootNote, string name, bool convertFlatNoteToSharp)

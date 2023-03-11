@@ -3,7 +3,7 @@ using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
 using System.Collections.Generic;
 
-namespace ScaleDictionaryTests
+namespace Keyify.Web.Unit.Test.ScaleDefinitionServiceTest.UnitTests
 {
     public class ScaleEntryLabelUnitTest
     {

@@ -32,7 +32,7 @@ namespace Keyify.Web.Service
 
             foreach (var scaleNotes in noteHashSets)
             {
-                var allScales = scales.Where(s => s.Scale.NoteSet.SetEquals(scaleNotes)).ToList();
+                var allScales = scales.Where(s => s.Scale.NotesHashSet.SetEquals(scaleNotes)).ToList();
                 var groupedKeys = allScales.Where(s => s.IsKey == true).ToList();
                 var groupedScales = allScales.Where(s => s.IsKey == false).ToList();
 
@@ -58,9 +58,9 @@ namespace Keyify.Web.Service
 
             foreach (var scale in scales)
             {
-                if (!distinctSets.Where(ds => ds.SetEquals(scale.Scale.NoteSet)).Any())
+                if (!distinctSets.Where(ds => ds.SetEquals(scale.Scale.NotesHashSet)).Any())
                 {
-                    distinctSets.Add(scale.Scale.NoteSet);
+                    distinctSets.Add(scale.Scale.NotesHashSet);
                 }
             }
 

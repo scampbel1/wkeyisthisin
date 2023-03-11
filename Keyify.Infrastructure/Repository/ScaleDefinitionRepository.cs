@@ -70,7 +70,7 @@ namespace Keyify.Infrastructure.Repository
                     });
                 }
 
-                _logger.LogInformation($"Found: {scaleDefinitions.Count} Chord Definition Entries");
+                _logger.LogInformation($"Found: {scaleDefinitions.Count} Scale Definition Entries");
 
                 await sqlConnection.CloseAsync();
             }

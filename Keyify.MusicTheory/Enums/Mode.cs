@@ -107,6 +107,8 @@ namespace Keyify.MusicTheory.Enums
         LydianB7,
         //Overtone,
         [Description("Purvi Theta")]
-        PurviTheta
+        PurviTheta,
+        [Description("Parallel")]
+        Parallel,
     }
 }

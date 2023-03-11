@@ -87,7 +87,7 @@ namespace Keyify.Web.Services
                             instrumentNote.Selected = currentNote.Selected;
                         }
 
-                        if (instrumentViewModel.SelectedScale != null && instrumentViewModel.SelectedScale.Scale.NoteSet.Contains(instrumentNote.Note))
+                        if (instrumentViewModel.SelectedScale != null && instrumentViewModel.SelectedScale.Scale.NotesHashSet.Contains(instrumentNote.Note))
                         {
                             instrumentNote.InSelectedScale = true;
 
