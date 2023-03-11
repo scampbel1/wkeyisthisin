@@ -1,30 +1,33 @@
 function SubmitChordDefinition() {
-    ValidateFields(document);
+
+    ValidateFields();
 }
 
-function ValidateFields(document) {
-    var nameField = {
-        htmlFieldName: "chordDefintionName",
+function ValidateFields() {
+
+    //Example of Implicit Binding -see: "You Don't Know JS - this & Object Prototypes" - Page 14
+    var nameTextbox = {
+        htmlFieldName: "chordDefinitionName",
         fullName: "Chord Definition Name",
-        validateField: validateField,
-        document: document
+        validate: validateTextbox
     };
 
-    var nameValidation = nameField.validateField();
+    var nameValidation = nameTextbox.validate();
+
+    if (nameValidation) {
+        alert('Success!');
+    }
 }
 
-function validateField() {
+function validateTextbox() {
 
-    var fieldName = this.htmlFieldName;
-    var fullName = this.fullName;
+    let fullName = this.fullName;
+    let fieldValue = document.getElementById(this.htmlFieldName).value;
 
-    //This is resulting in null - is this something to do with the document reference ("this" refers to where the current function was called from)
-    var fieldName = document.getElementById(fieldName).value;
+    console.log(`${fullName} - '${fieldValue}'`);
 
-    console.log(`${fullName} - '${fieldName}'`);
-
-    if (fieldName == undefined || fieldName == null || fieldName == '') {
-        const message = `Warning '${fieldName}' is not a valid value for ${fullName}.`;
+    if (fieldValue == undefined || fieldValue == null || fieldValue == '') {
+        const message = `Warning '${fieldValue}' is not a valid value for ${fullName}.`;
 
         console.warn(message);
         alert(message);
