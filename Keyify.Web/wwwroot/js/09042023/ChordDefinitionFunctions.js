@@ -6,6 +6,20 @@ const chordDefinitionNameFieldName = "chordDefinitionName";
 const intervalFullName = "Chord Definition Intervals";
 const intervalFieldName = "chordDefinitionIntervals";
 
+//Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
+var validateNameTextBox = {
+    htmlFieldName: chordDefinitionNameFieldName,
+    fullName: chordDefinitionNameFullName,
+    validate: validateTextbox,
+};
+
+//Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
+var validateIntervalTextBox = {
+    htmlFieldName: intervalFieldName,
+    fullName: intervalFullName,
+    validate: validateTextbox,
+};
+
 function addInterval(button) {
     let interval = button.innerText;
 
@@ -37,38 +51,30 @@ function updateIntervals(interval) {
 
 function submitChordDefinition() {
 
-    validateFields();
+    var validationResult = validateFields();
+
+    if (validationResult) {
+        //TODO: Implement submit
+        alert('Your Chord Definition has been sent!');
+    }
 }
 
 function validateFields() {
-
-    //Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
-    let nameTextbox = {
-        htmlFieldName: chordDefinitionNameFieldName,
-        fullName: chordDefinitionNameFullName,
-        validate: validateTextbox,
-    };
-
-    //Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
-    let intervalTextBox = {
-        htmlFieldName: intervalFieldName,
-        fullName: intervalFullName,
-        validate: validateTextbox,
-    };
-
-    let nameValidation = nameTextbox.validate();
-    let intervalValidation = intervalTextBox.validate();
+    let nameValidation = validateNameTextBox.validate();
+    let intervalValidation = validateIntervalTextBox.validate();
 
     if (nameValidation && intervalValidation) {
-
-        // Send Chord Definition creation request
-
-        alert('Your Chord Definition request has been sent!');
-
-        //Example of Explicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 18.
-        clearTextbox.call(nameTextbox);
-        clearTextbox.call(intervalTextBox);
+        return true;
     }
+    else {
+        alert('Your Chord Definition request failed!');
+        return false;
+    }
+}
+
+function clearAllTextBoxes() {
+    clearTextbox.call(validateNameTextBox);
+    clearTextbox.call(validateIntervalTextBox);
 }
 
 function validateTextbox() {
