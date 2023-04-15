@@ -12,8 +12,8 @@ const intervalFieldName = "chordDefinitionIntervals";
 var validateNameTextBox = {
     htmlFieldName: chordDefinitionNameFieldName,
     htmlFieldLabel: chordDefinitionNameLabel,
-    validate: validateTextbox,
-    findChordDefinition: doesChordDefinitionExist
+    validate: validateTextbox
+    //findChordDefinition: doesChordDefinitionExist
 };
 
 //Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
@@ -58,7 +58,27 @@ function submitChordDefinition() {
 
     if (fieldValidationResult) {
 
-        let doesChordDefinitionExist = validateNameTextBox.findChordDefinition();
+        let isFound;
+        let chordDefintiionName;
+
+        let userInput = document.getElementById(validateNameTextBox.htmlFieldName).value;
+
+        doesChordDefinitionExist(userInput)
+            .then((data) => {
+                console.log(data);
+
+                isFound = data.found;
+                chordDefinitionName = data.name;
+
+                console.log(isFound);
+                console.log(chordDefinitionName);
+            });
+
+        let resultWord = isFound ? 'IS' : 'ISN\'T';
+
+        let stupidConfimationMessage = `This is a stupid confimation message to confirm that the Chord Definition ${chordDefintiionName} ${resultWord} already in existence in the Database`;
+
+        alert(stupidConfimationMessage);
 
         //TODO: Implement submit
         //alert('Your Chord Definition has been sent!');
@@ -113,23 +133,18 @@ function validateIntervalArray() {
     //If so -> show message showing name of existing Chord Template
 }
 
-async function doesChordDefinitionExist() {
-    let proposedChordDefinitionName = JSON.stringify(document.getElementById(this.htmlFieldName).value);
+async function doesChordDefinitionExist(proposedChordDefinitionName) {
     let url = `https://${window.location.hostname}:${window.location.port}/ChordTemplate/Find/`;
 
-    var response;
+    //'Accept': 'application/json',
+    const response = await fetch(url, {
+        credentials: 'same-origin',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(proposedChordDefinitionName)
+    });
 
-    await fetch(
-        url,
-        {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-type': 'application/json'
-            },
-            body: proposedChordDefinitionName
-        })
-        .then(res => response = res.json())
-
-    alert(response);
+    return response.json();
 }
