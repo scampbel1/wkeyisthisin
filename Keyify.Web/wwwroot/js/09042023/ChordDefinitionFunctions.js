@@ -1,22 +1,25 @@
 //NOTE: This form is to create what is programmatically being created here - C:\Users\cambo\source\repos\scampbel1\wkeyisthisin\Keyify.MusicTheory\Definitions\ChordDefinitions.cs
 
-const chordDefinitionNameFullName = "Chord Definition Name";
+const chordDefinitionNameLabel = "Chord Definition Name";
 const chordDefinitionNameFieldName = "chordDefinitionName";
 
-const intervalFullName = "Chord Definition Intervals";
+const intervalFullNameLabel = "Chord Definition Intervals";
 const intervalFieldName = "chordDefinitionIntervals";
+
+//TODO: Convert below to prototype
 
 //Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
 var validateNameTextBox = {
     htmlFieldName: chordDefinitionNameFieldName,
-    fullName: chordDefinitionNameFullName,
+    htmlFieldLabel: chordDefinitionNameLabel,
     validate: validateTextbox,
+    findChordDefinition: doesChordDefinitionExist
 };
 
 //Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
 var validateIntervalTextBox = {
     htmlFieldName: intervalFieldName,
-    fullName: intervalFullName,
+    htmlFieldLabel: intervalFullNameLabel,
     validate: validateTextbox,
 };
 
@@ -26,7 +29,7 @@ function addInterval(button) {
     //Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
     let intervalTextBox = {
         htmlFieldName: intervalFieldName,
-        fullName: intervalFullName,
+        fullName: intervalFullNameLabel,
         add: updateIntervals
     };
 
@@ -51,11 +54,14 @@ function updateIntervals(interval) {
 
 function submitChordDefinition() {
 
-    var validationResult = validateFields();
+    var fieldValidationResult = validateFields();
 
-    if (validationResult) {
+    if (fieldValidationResult) {
+
+        let doesChordDefinitionExist = validateNameTextBox.findChordDefinition();
+
         //TODO: Implement submit
-        alert('Your Chord Definition has been sent!');
+        //alert('Your Chord Definition has been sent!');
     }
 }
 
@@ -79,23 +85,18 @@ function clearAllTextBoxes() {
 
 function validateTextbox() {
 
-    let fullName = this.fullName;
+    let htmlFieldLabel = this.htmlFieldLabel;
     let fieldValue = document.getElementById(this.htmlFieldName).value;
 
-    console.log(`${fullName} - '${fieldValue}'`);
+    console.log(`${htmlFieldLabel} - '${fieldValue}'`);
 
     if (fieldValue == undefined || fieldValue == null || fieldValue == '') {
-        const message = `Warning '${fieldValue}' is not a valid value for ${fullName}.`;
+        const message = `Warning '${fieldValue}' is not a valid value for ${htmlFieldLabel}.`;
 
         console.warn(message);
         alert(message);
 
         return false;
-    }
-    else {
-        //TODO: Search for existing Chord Template name
-
-        //If name exists return false
     }
 
     return true;
@@ -110,4 +111,25 @@ function validateIntervalArray() {
 
     //Does array already exist in database?
     //If so -> show message showing name of existing Chord Template
+}
+
+async function doesChordDefinitionExist() {
+    let proposedChordDefinitionName = JSON.stringify(document.getElementById(this.htmlFieldName).value);
+    let url = `https://${window.location.hostname}:${window.location.port}/ChordTemplate/Find/`;
+
+    var response;
+
+    await fetch(
+        url,
+        {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+            },
+            body: proposedChordDefinitionName
+        })
+        .then(res => response = res.json())
+
+    alert(response);
 }
