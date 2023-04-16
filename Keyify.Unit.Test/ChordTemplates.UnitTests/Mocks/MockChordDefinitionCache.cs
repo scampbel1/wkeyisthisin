@@ -13,7 +13,7 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
 
         public List<ChordDefinition> ChordDefinitions { get; set; }
 
-        public async Task Sync(List<ChordDefinition> chordDefinitions)
+        public Task Sync(List<ChordDefinition> chordDefinitions)
         {
             throw new System.NotImplementedException();
         }

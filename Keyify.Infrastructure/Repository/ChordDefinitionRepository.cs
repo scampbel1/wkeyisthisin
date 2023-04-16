@@ -76,7 +76,7 @@ namespace Keyify.Infrastructure.Repository
         public async Task InsertChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
         {
             //TODO: Validate request
-            if (await DoesChordDefinitionExist(chordDefinitionRequest.Name))
+            if (await DoesChordDefinitionExist(chordDefinitionRequest.Name!))
             {
                 return;
             }
@@ -101,7 +101,7 @@ namespace Keyify.Infrastructure.Repository
             sb.AppendLine("@Intervals");
             sb.AppendLine(")");
 
-            var chord = await sqlCconnection.ExecuteAsync(sb.ToString(), new { Name = chordDefinitionRequest.Name, Intervals = memoryStream.ToArray() });
+            var chord = await sqlCconnection.ExecuteAsync(sb.ToString(), new { chordDefinitionRequest.Name, Intervals = memoryStream.ToArray() });
 
             await sqlCconnection.CloseAsync();
         }

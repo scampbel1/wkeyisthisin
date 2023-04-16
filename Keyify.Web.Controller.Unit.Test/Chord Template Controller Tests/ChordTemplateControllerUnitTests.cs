@@ -1,5 +1,6 @@
 ﻿using Keyify.Infrastructure.Models.ChordDefinition;
 using Keyify.MusicTheory.Enums;
+using Keyify.Service.Interfaces;
 using Keyify.Web.Controllers.Music_Theory;
 using NuGet.Protocol;
 using System.Text.Json;
@@ -8,7 +9,8 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Template_Controller_Tests
 {
     public class ChordTemplateControllerUnitTests
     {
-        private ChordDefinitionController _chordTemplateController;
+        private readonly ChordDefinitionController _chordTemplateController;
+        private readonly Mock<IChordDefinitionService> m_chordDefinitionService;
 
         //Arrange
         private const string _chordDefinitionName = "testChordTemplate";
@@ -18,7 +20,8 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Template_Controller_Tests
 
         public ChordTemplateControllerUnitTests()
         {
-            _chordTemplateController = new ChordDefinitionController();
+            m_chordDefinitionService = new Mock<IChordDefinitionService>();
+            _chordTemplateController = new ChordDefinitionController(m_chordDefinitionService.Object);
             _chordDefinitionCheckRequest = new ChordDefinitionCheckRequest() { Name = _chordDefinitionName, Intervals = _chordDefintionIntervals };
         }
 
