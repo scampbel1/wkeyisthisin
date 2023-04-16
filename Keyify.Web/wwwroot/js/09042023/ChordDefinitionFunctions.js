@@ -58,7 +58,7 @@ function submitChordDefinition() {
 
     if (fieldValidationResult) {
 
-        let isFound;
+        let inserted;
         let chordDefinitionName;
 
         let proposedChordDefintionName = document.getElementById(validateNameTextBox.htmlFieldName).value;
@@ -68,12 +68,12 @@ function submitChordDefinition() {
             .then((data) => {
                 console.log(data);
 
-                isFound = data.found;
+                inserted = data.wasinserted;
                 chordDefinitionName = data.name;
             }).
             then(() => {
-                let resultWord = isFound ? 'IS' : 'ISN\'T';
-                let stupidConfimationMessage = `This is a stupid confimation message to confirm that the Chord Definition '${chordDefinitionName}' ${resultWord} already in existence in the Database`;
+                let resultWord = inserted ? 'WAS' : 'WASN\'T';
+                let stupidConfimationMessage = `This is a stupid confimation message to confirm that the Chord Definition '${chordDefinitionName}' ${resultWord} inserted into the Database`;
 
                 alert(stupidConfimationMessage);
             });
@@ -113,7 +113,6 @@ function validateTextbox() {
         const message = `Warning '${fieldValue}' is not a valid value for ${htmlFieldLabel}.`;
 
         console.warn(message);
-        alert(message);
 
         return false;
     }
@@ -133,7 +132,7 @@ function validateIntervalArray() {
 }
 
 async function doesChordDefinitionExist(proposedChordDefinitionName, proposedChordDefinitionIntervals) {
-    let url = `https://${window.location.hostname}:${window.location.port}/ChordDefinition/Find/`;
+    let url = `https://${window.location.hostname}:${window.location.port}/ChordDefinition/Submit/`;
 
     let chordDefinitionRequest = {
         name: proposedChordDefinitionName,
@@ -142,7 +141,6 @@ async function doesChordDefinitionExist(proposedChordDefinitionName, proposedCho
 
     let response = await fetch(url,
         {
-            credentials: 'same-origin',
             method: 'POST',
             headers:
             {

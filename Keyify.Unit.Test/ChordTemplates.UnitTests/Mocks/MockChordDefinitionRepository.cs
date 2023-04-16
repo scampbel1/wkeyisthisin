@@ -14,10 +14,10 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
         {
             var chordDefinitions = ChordDefinitions.GetChordIntervals();
 
-            return await Task.FromResult(chordDefinitions.Select(c => new ChordDefinitionEntity() { Name = c.Key.ToString(), Intervals = c.Value }).ToList());
+            return await Task<bool>.FromResult(chordDefinitions.Select(c => new ChordDefinitionEntity() { Name = c.Key.ToString(), Intervals = c.Value }).ToList());
         }
 
-        public Task InsertChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
+        public Task<bool> InsertChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +27,7 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
             throw new NotImplementedException();
         }
 
-        public Task<bool> DoesChordDefinitionExist(string name)
+        public Task<bool> DoesChordDefinitionExist(string name, byte[] intervals)
         {
             throw new NotImplementedException();
         }

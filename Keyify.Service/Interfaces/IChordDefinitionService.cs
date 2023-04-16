@@ -8,5 +8,9 @@ namespace Keyify.Service.Interfaces
         public Task<List<ChordDefinition>> FindChordDefinitions(Note[] notes);
 
         public Task SyncWithDatabase();
+
+        public Task<bool> DoesChordDefinitionExist(string chordDefinitionName, Interval[] intervals);
+
+        public Task<bool> InsertChordDefinition(string chordDefinitionName, Interval[] intervals);
     }
 }

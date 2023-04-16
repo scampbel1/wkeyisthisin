@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Keyify.Infrastructure.Repository.Interfaces;
+using Keyify.MusicTheory.Enums;
 using Keyify.Services.Formatter.Interfaces;
 using Keyify.Web.Infrastructure.Models.ChordDefinition;
 using Microsoft.Extensions.Logging;
@@ -59,30 +60,52 @@ namespace Keyify.Infrastructure.Repository
             return chordDefinitions;
         }
 
-        public async Task<bool> DoesChordDefinitionExist(string name)
+        public async Task<bool> DoesChordDefinitionExist(string name, byte[] intervals)
         {
             using var sqlConnection = new SqlConnection(_connectionString);
 
             await sqlConnection.OpenAsync();
 
-            var query = "SELECT COUNT(1) FROM [Core].[ChordDefinition] WHERE [Name] = @name";
-            var isFound = await sqlConnection.ExecuteScalarAsync<bool>(query, new { name });
+            var isFound = false;
+            var query = string.Empty;
+            var hasIntervals = intervals != null && intervals.Any();
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                if (hasIntervals)
+                {
+                    query = "SELECT COUNT(1) FROM [Core].[ChordDefinition] WHERE [Name] = @name OR [Intervals] = @intervals";
+                    isFound = await sqlConnection.ExecuteScalarAsync<bool>(query, new { name, intervals });
+                }
+                else
+                {
+                    query = "SELECT COUNT(1) FROM [Core].[ChordDefinition] WHERE [Name] = @name";
+                    isFound = await sqlConnection.ExecuteScalarAsync<bool>(query, new { name });
+                }
+            }
+            else if (hasIntervals)
+            {
+                query = "SELECT COUNT(1) FROM [Core].[ChordDefinition] WHERE [Intervals] = @intervals";
+                isFound = await sqlConnection.ExecuteScalarAsync<bool>(query, new { intervals });
+            }
 
             await sqlConnection.CloseAsync();
 
             return isFound;
         }
 
-        public async Task InsertChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
+        public async Task<bool> InsertChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
         {
-            //TODO: Validate request
-            if (await DoesChordDefinitionExist(chordDefinitionRequest.Name!))
-            {
-                return;
-            }
+            var (name, intervals) = (chordDefinitionRequest.Name, chordDefinitionRequest.Intervals);
+
             using var memoryStream = new MemoryStream();
 
-            JsonSerializer.Serialize(memoryStream, chordDefinitionRequest.Intervals);
+            JsonSerializer.Serialize(memoryStream, intervals);
+
+            if (await DoesChordDefinitionExist(name!, memoryStream.ToArray()))
+            {
+                return false;
+            }
 
             using var sqlCconnection = new SqlConnection(_connectionString);
 
@@ -104,6 +127,8 @@ namespace Keyify.Infrastructure.Repository
             var chord = await sqlCconnection.ExecuteAsync(sb.ToString(), new { chordDefinitionRequest.Name, Intervals = memoryStream.ToArray() });
 
             await sqlCconnection.CloseAsync();
+
+            return true;
         }
 
         public Task<List<ChordDefinitionEntity>> SyncChordDefinitions(IEnumerable<int> existingChordDefinitionIds)

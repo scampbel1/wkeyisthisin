@@ -21,17 +21,20 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Template_Controller_Tests
         public ChordTemplateControllerUnitTests()
         {
             m_chordDefinitionService = new Mock<IChordDefinitionService>();
+
             _chordTemplateController = new ChordDefinitionController(m_chordDefinitionService.Object);
             _chordDefinitionCheckRequest = new ChordDefinitionCheckRequest() { Name = _chordDefinitionName, Intervals = _chordDefintionIntervals };
+
+            m_chordDefinitionService.Setup(m => m.DoesChordDefinitionExist(It.IsAny<string>(), It.IsAny<Interval[]>())).ReturnsAsync(true);
         }
 
         [Fact]
-        public void ChordTemplateController_CheckChordTemplateExists_Exists_ReturnsTrue()
+        public async Task ChordTemplateController_CheckChordTemplateExists_Exists_ReturnsTrue()
         {
             //Arrange
 
             //Act
-            var result = _chordTemplateController.Find(_chordDefinitionCheckRequest);
+            var result = await _chordTemplateController.Submit(_chordDefinitionCheckRequest);
             var json = result.Value.ToJson();
             var responseModel = JsonSerializer.Deserialize<ChordTemplateCheckResponse>(json);
 
@@ -40,12 +43,12 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Template_Controller_Tests
         }
 
         [Fact]
-        public void ChordTemplateController_CheckChordTemplateExists_Exists_ReturnsSameName()
+        public async Task ChordTemplateController_CheckChordTemplateExists_Exists_ReturnsSameName()
         {
             //Arrange            
 
             //Act
-            var result = _chordTemplateController.Find(_chordDefinitionCheckRequest);
+            var result = await _chordTemplateController.Submit(_chordDefinitionCheckRequest);
             var json = result.Value.ToJson();
             var responseModel = JsonSerializer.Deserialize<ChordTemplateCheckResponse>(json);
 
@@ -55,13 +58,13 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Template_Controller_Tests
         }
 
         [Fact]
-        public void ChordTemplateController_CheckChordTemplateExists_Exists_ReturnsParsedNoteArray()
+        public async Task ChordTemplateController_CheckChordTemplateExists_Exists_ReturnsParsedNoteArray()
         {
             //Arrange
             var expectedIntervals = new[] { Interval.WW, Interval.W, Interval.h };
 
             //Act
-            var result = _chordTemplateController.Find(_chordDefinitionCheckRequest);
+            var result = await _chordTemplateController.Submit(_chordDefinitionCheckRequest);
             var json = result.Value.ToJson();
             var responseModel = JsonSerializer.Deserialize<ChordTemplateCheckResponse>(json);
 

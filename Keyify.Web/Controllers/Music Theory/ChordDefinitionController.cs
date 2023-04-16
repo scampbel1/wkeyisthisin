@@ -4,6 +4,7 @@ using Keyify.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Keyify.Web.Controllers.Music_Theory
 {
@@ -23,15 +24,15 @@ namespace Keyify.Web.Controllers.Music_Theory
         }
 
         [HttpPost]
-        public JsonResult Find([FromBody] ChordDefinitionCheckRequest request)
+        public async Task<JsonResult> Submit([FromBody] ChordDefinitionCheckRequest request)
         {
             var intervals = ConvertSelectedIntervalStringToIntervalArray(request.Intervals);
 
-            //TODO: Search for existing chord defintiion based on name and intervals
-
             //TODO: Handle name found, intervals found, or both
 
-            var result = new { request.Name, Intervals = intervals.Select(i => (int)i), Found = true };
+            var wasInserted = await _chordDefinitionService.InsertChordDefinition(request.Name, intervals);
+
+            var result = new { request.Name, Intervals = intervals.Select(i => (int)i), WasInserted = wasInserted };
 
             return Json(result);
         }

@@ -3,6 +3,8 @@ using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.MusicTheory.Enums;
 using Keyify.Service.Interfaces;
 using Keyify.Services.Models;
+using Keyify.Web.Infrastructure.Models.ChordDefinition;
+using System.Text.Json;
 
 namespace Keyify.Service
 {
@@ -71,6 +73,22 @@ namespace Keyify.Service
             }
 
             await _chordDefinitionCache.Initialise(chordDefinitionDictionary);
+        }
+
+        public async Task<bool> DoesChordDefinitionExist(string chordDefinitionName, Interval[] intervals)
+        {
+            using var memoryStream = new MemoryStream();
+
+            JsonSerializer.Serialize(memoryStream, intervals);
+
+            return await _chordDefinitionRepository.DoesChordDefinitionExist(chordDefinitionName, memoryStream.ToArray());
+        }
+
+        public async Task<bool> InsertChordDefinition(string chordDefinitionName, Interval[] intervals)
+        {
+            var request = new ChordDefinitionRequest() { Name = chordDefinitionName, Intervals = intervals };
+
+            return await _chordDefinitionRepository.InsertChordDefinition(request);
         }
     }
 }
