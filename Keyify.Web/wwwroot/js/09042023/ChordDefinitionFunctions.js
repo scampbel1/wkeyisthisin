@@ -59,7 +59,7 @@ function submitChordDefinition() {
     if (fieldValidationResult) {
 
         let isFound;
-        let chordDefintiionName;
+        let chordDefinitionName;
 
         let userInput = document.getElementById(validateNameTextBox.htmlFieldName).value;
 
@@ -69,16 +69,14 @@ function submitChordDefinition() {
 
                 isFound = data.found;
                 chordDefinitionName = data.name;
+            }).
+            then(() => {
+                let resultWord = isFound ? 'IS' : 'ISN\'T';
+                let stupidConfimationMessage = `This is a stupid confimation message to confirm that the Chord Definition '${chordDefinitionName}' ${resultWord} already in existence in the Database`;
 
-                console.log(isFound);
-                console.log(chordDefinitionName);
+                alert(stupidConfimationMessage);
             });
 
-        let resultWord = isFound ? 'IS' : 'ISN\'T';
-
-        let stupidConfimationMessage = `This is a stupid confimation message to confirm that the Chord Definition ${chordDefintiionName} ${resultWord} already in existence in the Database`;
-
-        alert(stupidConfimationMessage);
 
         //TODO: Implement submit
         //alert('Your Chord Definition has been sent!');
@@ -136,15 +134,16 @@ function validateIntervalArray() {
 async function doesChordDefinitionExist(proposedChordDefinitionName) {
     let url = `https://${window.location.hostname}:${window.location.port}/ChordTemplate/Find/`;
 
-    //'Accept': 'application/json',
-    const response = await fetch(url, {
-        credentials: 'same-origin',
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(proposedChordDefinitionName)
-    });
+    const response = await fetch(url,
+        {
+            credentials: 'same-origin',
+            method: 'POST',
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(proposedChordDefinitionName)
+        });
 
     return response.json();
 }
