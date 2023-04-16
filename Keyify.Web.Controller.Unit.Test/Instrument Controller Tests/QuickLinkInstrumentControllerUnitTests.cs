@@ -5,7 +5,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
     public class QuickLinkInstrumentControllerUnitTests : InstrumentControllerUnitTests
     {
         [Fact]
-        public void QuickLink_ScaleOnlyInQuickLinkTempData_ScaleShouldBeNull()
+        public async Task QuickLink_ScaleOnlyInQuickLinkTempData_ScaleShouldBeNull()
         {
             const string quickLinkScale = "CKumoi";
 
@@ -14,14 +14,14 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             instrumentController.TempData[_quickLinkScaleKey] = quickLinkScale;
 
-            instrumentController.Index();
+            await instrumentController.Index();
 
             Assert.Empty(instrumentViewModel.SelectedNotes);
             Assert.Null(instrumentViewModel.SelectedScale);
         }
 
         [Fact]
-        public void QuickLink_NotesOnlyTempData_ScaleShouldBeNull_NotesShouldContainSelectedNotes()
+        public async Task QuickLink_NotesOnlyTempData_ScaleShouldBeNull_NotesShouldContainSelectedNotes()
         {
             const int _expectedNotesCount = 3;
             var qlNotes = new List<Note> { Note.A, Note.C, Note.G };
@@ -31,14 +31,14 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             instrumentController.TempData[_quickLinkNotesKey] = qlNotes;
 
-            instrumentController.Index();
+            await instrumentController.Index();
 
             Assert.Equal(_expectedNotesCount, instrumentViewModel.SelectedNotes.Count);
             Assert.Null(instrumentViewModel.SelectedScale);
         }
 
         [Fact]
-        public void QuickLink_QuickLinkTempData_ViewModelShouldContainQuickLinkValues()
+        public async Task QuickLink_QuickLinkTempData_ViewModelShouldContainQuickLinkValues()
         {
             const int _expectedNotesCount = 3;
             const string _excpectedQuickLinkScale = "CKumoi";
@@ -62,11 +62,11 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             instrumentController.TempData[_quickLinkNotesKey] = qlNotes;
             instrumentController.TempData[_quickLinkScaleKey] = _excpectedQuickLinkScale;
 
-            instrumentController.Index();
+            await instrumentController.Index();
 
             m_MockMusicTheoryService.Reset();
 
-            //Assert.Equal(_expectedNotesCount, instrumentViewModel.SelectedNotes.Count);
+            Assert.Equal(_expectedNotesCount, instrumentViewModel.SelectedNotes.Count);
             //Assert.Equal(_excpectedQuickLinkScale, instrumentViewModel.SelectedScale.ScaleLabel);
         }
     }

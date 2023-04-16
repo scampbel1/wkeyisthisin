@@ -61,9 +61,10 @@ function submitChordDefinition() {
         let isFound;
         let chordDefinitionName;
 
-        let userInput = document.getElementById(validateNameTextBox.htmlFieldName).value;
+        let proposedChordDefintionName = document.getElementById(validateNameTextBox.htmlFieldName).value;
+        let proposedChordDefinitionIntervals = document.getElementById(validateIntervalTextBox.htmlFieldName).value;
 
-        doesChordDefinitionExist(userInput)
+        doesChordDefinitionExist(proposedChordDefintionName, proposedChordDefinitionIntervals)
             .then((data) => {
                 console.log(data);
 
@@ -131,10 +132,15 @@ function validateIntervalArray() {
     //If so -> show message showing name of existing Chord Template
 }
 
-async function doesChordDefinitionExist(proposedChordDefinitionName) {
-    let url = `https://${window.location.hostname}:${window.location.port}/ChordTemplate/Find/`;
+async function doesChordDefinitionExist(proposedChordDefinitionName, proposedChordDefinitionIntervals) {
+    let url = `https://${window.location.hostname}:${window.location.port}/ChordDefinition/Find/`;
 
-    const response = await fetch(url,
+    let chordDefinitionRequest = {
+        name: proposedChordDefinitionName,
+        intervals: proposedChordDefinitionIntervals
+    };
+
+    let response = await fetch(url,
         {
             credentials: 'same-origin',
             method: 'POST',
@@ -142,7 +148,7 @@ async function doesChordDefinitionExist(proposedChordDefinitionName) {
             {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(proposedChordDefinitionName)
+            body: JSON.stringify(chordDefinitionRequest)
         });
 
     return response.json();
