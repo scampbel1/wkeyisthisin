@@ -74,7 +74,7 @@ namespace Keyify.Service
             await _chordDefinitionCache.Initialise(chordDefinitionDictionary);
         }
 
-        public async Task<bool> InsertChordDefinition(string chordDefinitionName, Interval[] intervals)
+        public async Task<Tuple<bool, string>> InsertChordDefinition(string chordDefinitionName, Interval[] intervals)
         {
             var request = new ChordDefinitionRequest() { Name = chordDefinitionName, Intervals = intervals };
 

@@ -60,13 +60,12 @@ namespace Keyify.Infrastructure.Repository
             return chordDefinitions;
         }
 
-        public async Task<bool> DoesChordDefinitionExist(string name, byte[] intervals)
+        public async Task<Tuple<bool, string>> DoesChordDefinitionExist(string name, byte[] intervals)
         {
             using var sqlConnection = new SqlConnection(_connectionString);
 
             await sqlConnection.OpenAsync();
 
-            var isFound = false;
             var query = string.Empty;
             var hasIntervals = intervals != null && intervals.Any();
 
@@ -75,26 +74,39 @@ namespace Keyify.Infrastructure.Repository
                 if (hasIntervals)
                 {
                     query = "SELECT COUNT(1) FROM [Core].[ChordDefinition] WHERE [Name] = @name OR [Intervals] = @intervals";
-                    isFound = await sqlConnection.ExecuteScalarAsync<bool>(query, new { name, intervals });
+                    
+                    if (await sqlConnection.ExecuteScalarAsync<bool>(query, new { name, intervals }))
+                    {
+                        return Tuple.Create(true, $"Chord Definition already exists. Searched on Name: '{name}' and Intervals");
+                    }
                 }
                 else
                 {
                     query = "SELECT COUNT(1) FROM [Core].[ChordDefinition] WHERE [Name] = @name";
-                    isFound = await sqlConnection.ExecuteScalarAsync<bool>(query, new { name });
+                    
+                    if (await sqlConnection.ExecuteScalarAsync<bool>(query, new { name }))
+                    {
+                        return Tuple.Create(true, $"Chord Definition already exists. Searched on Name: '{name}'");
+                    }
+
                 }
             }
             else if (hasIntervals)
             {
                 query = "SELECT COUNT(1) FROM [Core].[ChordDefinition] WHERE [Intervals] = @intervals";
-                isFound = await sqlConnection.ExecuteScalarAsync<bool>(query, new { intervals });
+                
+                if (await sqlConnection.ExecuteScalarAsync<bool>(query, new { intervals }))
+                {
+                    return Tuple.Create(true, $"Chord Definition already exists. Searched on Intervals");
+                }
             }
 
             await sqlConnection.CloseAsync();
 
-            return isFound;
+            return Tuple.Create(false, string.Empty);
         }
 
-        public async Task<bool> InsertChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
+        public async Task<Tuple<bool, string>> InsertChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
         {
             var (name, intervals) = (chordDefinitionRequest.Name, chordDefinitionRequest.Intervals);
 
@@ -102,9 +114,11 @@ namespace Keyify.Infrastructure.Repository
 
             JsonSerializer.Serialize(memoryStream, intervals);
 
-            if (await DoesChordDefinitionExist(name!, memoryStream.ToArray()))
+            var wasChordDefinitionFound = await DoesChordDefinitionExist(name!, memoryStream.ToArray());
+
+            if (wasChordDefinitionFound.Item1)
             {
-                return false;
+                return Tuple.Create(false, wasChordDefinitionFound.Item2);
             }
 
             using var sqlCconnection = new SqlConnection(_connectionString);
@@ -128,7 +142,7 @@ namespace Keyify.Infrastructure.Repository
 
             await sqlCconnection.CloseAsync();
 
-            return true;
+            return Tuple.Create(true, string.Empty);
         }
 
         public Task<List<ChordDefinitionEntity>> SyncChordDefinitions(IEnumerable<int> existingChordDefinitionIds)

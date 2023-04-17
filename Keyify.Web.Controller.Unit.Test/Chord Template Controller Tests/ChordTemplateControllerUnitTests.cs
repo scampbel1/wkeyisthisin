@@ -12,7 +12,6 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Template_Controller_Tests
         private readonly ChordDefinitionController _chordTemplateController;
         private readonly Mock<IChordDefinitionService> m_chordDefinitionService;
 
-        //Arrange
         private const string _chordDefinitionName = "testChordTemplate";
         private const string _chordDefintionIntervals = "WW-W-h";
 
@@ -24,14 +23,13 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Template_Controller_Tests
 
             _chordTemplateController = new ChordDefinitionController(m_chordDefinitionService.Object);
             _chordDefinitionCheckRequest = new ChordDefinitionCheckRequest() { Name = _chordDefinitionName, Intervals = _chordDefintionIntervals };
-
         }
 
         [Fact]
         public async Task ChordTemplateController_Submit_WasInserted_ReturnsTrue()
         {
             //Arrange
-            m_chordDefinitionService.Setup(m => m.InsertChordDefinition(It.IsAny<string>(), It.IsAny<Interval[]>())).ReturnsAsync(true);
+            m_chordDefinitionService.Setup(m => m.InsertChordDefinition(It.IsAny<string>(), It.IsAny<Interval[]>())).ReturnsAsync(Tuple.Create(true, It.IsAny<string>()));
 
             //Act
             var result = await _chordTemplateController.Submit(_chordDefinitionCheckRequest);
@@ -48,7 +46,7 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Template_Controller_Tests
         public async Task ChordTemplateController_Submit_WasNotInserted_ReturnsFalse()
         {
             //Arrange
-            m_chordDefinitionService.Setup(m => m.InsertChordDefinition(It.IsAny<string>(), It.IsAny<Interval[]>())).ReturnsAsync(false);
+            m_chordDefinitionService.Setup(m => m.InsertChordDefinition(It.IsAny<string>(), It.IsAny<Interval[]>())).ReturnsAsync(Tuple.Create(false, It.IsAny<string>()));
 
             //Act
             var result = await _chordTemplateController.Submit(_chordDefinitionCheckRequest);
@@ -65,7 +63,7 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Template_Controller_Tests
         public async Task ChordTemplateController_Submit_WasInserted_ReturnsSameName()
         {
             //Arrange            
-            m_chordDefinitionService.Setup(m => m.InsertChordDefinition(It.IsAny<string>(), It.IsAny<Interval[]>())).ReturnsAsync(false);
+            m_chordDefinitionService.Setup(m => m.InsertChordDefinition(It.IsAny<string>(), It.IsAny<Interval[]>())).ReturnsAsync(Tuple.Create(false, It.IsAny<string>()));
 
             //Act
             var result = await _chordTemplateController.Submit(_chordDefinitionCheckRequest);
@@ -84,7 +82,7 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Template_Controller_Tests
         {
             //Arrange
             var expectedIntervals = new[] { Interval.WW, Interval.W, Interval.h };
-            m_chordDefinitionService.Setup(m => m.InsertChordDefinition(It.IsAny<string>(), It.IsAny<Interval[]>())).ReturnsAsync(false);
+            m_chordDefinitionService.Setup(m => m.InsertChordDefinition(It.IsAny<string>(), It.IsAny<Interval[]>())).ReturnsAsync(Tuple.Create(false, It.IsAny<string>()));
 
             //Act
             var result = await _chordTemplateController.Submit(_chordDefinitionCheckRequest);

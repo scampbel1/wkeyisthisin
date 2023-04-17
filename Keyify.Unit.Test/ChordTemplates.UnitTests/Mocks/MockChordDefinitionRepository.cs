@@ -17,7 +17,7 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
             return await Task<bool>.FromResult(chordDefinitions.Select(c => new ChordDefinitionEntity() { Name = c.Key.ToString(), Intervals = c.Value }).ToList());
         }
 
-        public Task<bool> InsertChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
+        public Task<Tuple<bool, string>> InsertChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +27,7 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
             throw new NotImplementedException();
         }
 
-        public Task<bool> DoesChordDefinitionExist(string name, byte[] intervals)
+        public Task<Tuple<bool, string>> DoesChordDefinitionExist(string name, byte[] intervals)
         {
             throw new NotImplementedException();
         }

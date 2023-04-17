@@ -13,7 +13,6 @@ var validateNameTextBox = {
     htmlFieldName: chordDefinitionNameFieldName,
     htmlFieldLabel: chordDefinitionNameLabel,
     validate: validateTextbox
-    //findChordDefinition: doesChordDefinitionExist
 };
 
 //Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
@@ -75,12 +74,8 @@ function submitChordDefinition() {
                 let resultWord = inserted ? 'WAS' : 'WASN\'T';
                 let stupidConfimationMessage = `This is a stupid confimation message to confirm that the Chord Definition '${chordDefinitionName}' ${resultWord} inserted into the Database`;
 
-                alert(stupidConfimationMessage);
+                console.log(stupidConfimationMessage);
             });
-
-
-        //TODO: Implement submit
-        //alert('Your Chord Definition has been sent!');
     }
 }
 
