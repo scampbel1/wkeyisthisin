@@ -9,8 +9,6 @@ namespace Keyify.Service.Interfaces
 
         public Task SyncWithDatabase();
 
-        public Task<bool> DoesChordDefinitionExist(string chordDefinitionName, Interval[] intervals);
-
         public Task<bool> InsertChordDefinition(string chordDefinitionName, Interval[] intervals);
     }
 }
