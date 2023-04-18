@@ -1,38 +1,40 @@
-//NOTE: This form is to create what is programmatically being created here - C:\Users\cambo\source\repos\scampbel1\wkeyisthisin\Keyify.MusicTheory\Definitions\ChordDefinitions.cs
 
-const chordDefinitionNameLabel = "Chord Definition Name";
-const chordDefinitionNameFieldName = "chordDefinitionName";
-
-const intervalFullNameLabel = "Chord Definition Intervals";
-const intervalFieldName = "chordDefinitionIntervals";
-
-//TODO: Convert below to prototype
-
-//Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
-var validateNameTextBox = {
-    htmlFieldName: chordDefinitionNameFieldName,
-    htmlFieldLabel: chordDefinitionNameLabel,
-    validate: validateTextbox
+const textBoxPrototype = {
+    htmlFieldName: undefined,
+    htmlFieldLabel: undefined,
+    validate: validateTextBox
 };
 
-//Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
-var validateIntervalTextBox = {
-    htmlFieldName: intervalFieldName,
-    htmlFieldLabel: intervalFullNameLabel,
-    validate: validateTextbox,
-};
+const nameTextBox = createNameTextBox();
+const intervalsTextBox = createIntervalsTextBox();
+
+function createNameTextBox() {
+    //Example of "prototypal inheritence" - the "dynamic language version of classical inheritance"
+    //See: "You Don't Know JS - this & Object Prototypes" - Page 93.
+    let nameTextBox = Object.create(textBoxPrototype);
+
+    nameTextBox.htmlFieldLabel = "Chord Definition Name";
+    nameTextBox.htmlFieldName = "chordDefinitionName";
+
+    return nameTextBox;
+}
+
+function createIntervalsTextBox() {
+    //Example of "prototypal inheritence" - the "dynamic language version of classical inheritance"
+    //See: "You Don't Know JS - this & Object Prototypes" - Page 93.
+    let intervalsTextBox = Object.create(textBoxPrototype);
+
+    intervalsTextBox.htmlFieldLabel = "Chord Definition Intervals";
+    intervalsTextBox.htmlFieldName = "chordDefinitionIntervals";
+    intervalsTextBox.add = updateIntervals;
+
+    return intervalsTextBox;
+}
 
 function addInterval(button) {
     let interval = button.innerText;
 
-    //Example of Implicit Binding. See: "You Don't Know JS - this & Object Prototypes" - Page 14.
-    let intervalTextBox = {
-        htmlFieldName: intervalFieldName,
-        fullName: intervalFullNameLabel,
-        add: updateIntervals
-    };
-
-    intervalTextBox.add(interval);
+    intervalsTextBox.add(interval);
 }
 
 function updateIntervals(interval) {
@@ -51,32 +53,25 @@ function updateIntervals(interval) {
     intervalsField.value += newInterval;
 }
 
-function submitChordDefinition() {
+function submitChordDefinitionProposal() {
 
-    var fieldValidationResult = validateFields();
+    var validationResult = validateFields();
 
-    if (fieldValidationResult) {
+    if (validationResult) {
 
         let inserted;
         let errorMessage;
 
-        let proposedChordDefintionName = document.getElementById(validateNameTextBox.htmlFieldName).value;
-        let proposedChordDefinitionIntervals = document.getElementById(validateIntervalTextBox.htmlFieldName).value;
+        let proposedName = document.getElementById(nameTextBox.htmlFieldName).value;
+        let proposedIntervals = document.getElementById(intervalsTextBox.htmlFieldName).value;
 
-        doesChordDefinitionExist(proposedChordDefintionName, proposedChordDefinitionIntervals)
+        submitProposal(proposedName, proposedIntervals)
             .then((data) => {
                 console.log(data);
 
                 inserted = data.wasInserted;
                 errorMessage = data.errorMessage;
-            }).
-            //then(() => {
-            //    let resultWord = inserted ? 'WAS' : 'WASN\'T';
-            //    let stupidConfimationMessage = `This is a stupid confimation message to confirm that the Chord Definition '${chordDefinitionName}' ${resultWord} inserted into the Database`;
-
-            //    console.log(stupidConfimationMessage);
-            //}).
-            then(() => {
+            }).then(() => {
                 if (inserted == false) {
                     alert(errorMessage);
                 }
@@ -85,24 +80,23 @@ function submitChordDefinition() {
 }
 
 function validateFields() {
-    let nameValidation = validateNameTextBox.validate();
-    let intervalValidation = validateIntervalTextBox.validate();
+    let isNameValid = nameTextBox.validate();
+    let isIntervalSelectionValid = intervalsTextBox.validate();
 
-    if (nameValidation && intervalValidation) {
+    if (isNameValid && isIntervalSelectionValid) {
         return true;
     }
     else {
-        alert('Your Chord Definition request failed!');
         return false;
     }
 }
 
 function clearAllTextBoxes() {
-    clearTextbox.call(validateNameTextBox);
-    clearTextbox.call(validateIntervalTextBox);
+    clearTextbox.call(nameTextBox);
+    clearTextbox.call(intervalsTextBox);
 }
 
-function validateTextbox() {
+function validateTextBox() {
 
     let htmlFieldLabel = this.htmlFieldLabel;
     let fieldValue = document.getElementById(this.htmlFieldName).value;
@@ -110,9 +104,10 @@ function validateTextbox() {
     console.log(`${htmlFieldLabel} - '${fieldValue}'`);
 
     if (fieldValue == undefined || fieldValue == null || fieldValue == '') {
-        const message = `Warning '${fieldValue}' is not a valid value for ${htmlFieldLabel}.`;
+        let message = `Warning '${fieldValue}' is not a valid value for '${htmlFieldLabel}'.`;
 
         console.warn(message);
+        alert(message);
 
         return false;
     }
@@ -131,12 +126,12 @@ function validateIntervalArray() {
     //If so -> show message showing name of existing Chord Template
 }
 
-async function doesChordDefinitionExist(proposedChordDefinitionName, proposedChordDefinitionIntervals) {
+async function submitProposal(name, intervals) {
     let url = `https://${window.location.hostname}:${window.location.port}/ChordDefinition/Submit/`;
 
     let chordDefinitionRequest = {
-        name: proposedChordDefinitionName,
-        intervals: proposedChordDefinitionIntervals
+        name: name,
+        intervals: intervals
     };
 
     let response = await fetch(url,
