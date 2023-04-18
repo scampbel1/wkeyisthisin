@@ -28,13 +28,9 @@ namespace Keyify.Web.Controllers.Music_Theory
         {
             var intervals = ConvertSelectedIntervalStringToIntervalArray(request.Intervals);
 
-            //TODO: Handle name found, intervals found, or both
-
             var wasInserted = await _chordDefinitionService.InsertChordDefinition(request.Name, intervals);
 
-            var result = new { request.Name, Intervals = intervals.Select(i => (int)i), WasInserted = wasInserted };
-
-            return Json(result);
+            return Json(new { request.Name, Intervals = intervals.Select(i => (int)i), WasInserted = wasInserted.Item1, ErrorMessage = wasInserted.Item2 });
         }
 
         //TODO: Replace this by creating array in JS on page

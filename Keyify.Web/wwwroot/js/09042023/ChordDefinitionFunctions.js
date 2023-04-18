@@ -58,7 +58,7 @@ function submitChordDefinition() {
     if (fieldValidationResult) {
 
         let inserted;
-        let chordDefinitionName;
+        let errorMessage;
 
         let proposedChordDefintionName = document.getElementById(validateNameTextBox.htmlFieldName).value;
         let proposedChordDefinitionIntervals = document.getElementById(validateIntervalTextBox.htmlFieldName).value;
@@ -67,14 +67,19 @@ function submitChordDefinition() {
             .then((data) => {
                 console.log(data);
 
-                inserted = data.wasinserted;
-                chordDefinitionName = data.name;
+                inserted = data.wasInserted;
+                errorMessage = data.errorMessage;
             }).
-            then(() => {
-                let resultWord = inserted ? 'WAS' : 'WASN\'T';
-                let stupidConfimationMessage = `This is a stupid confimation message to confirm that the Chord Definition '${chordDefinitionName}' ${resultWord} inserted into the Database`;
+            //then(() => {
+            //    let resultWord = inserted ? 'WAS' : 'WASN\'T';
+            //    let stupidConfimationMessage = `This is a stupid confimation message to confirm that the Chord Definition '${chordDefinitionName}' ${resultWord} inserted into the Database`;
 
-                console.log(stupidConfimationMessage);
+            //    console.log(stupidConfimationMessage);
+            //}).
+            then(() => {
+                if (inserted == false) {
+                    alert(errorMessage);
+                }
             });
     }
 }
