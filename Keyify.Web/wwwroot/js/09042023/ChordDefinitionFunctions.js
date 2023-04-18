@@ -1,7 +1,7 @@
 
 const textBoxPrototype = {
     htmlFieldName: undefined,
-    htmlFieldLabel: undefined,
+    fieldName: undefined,
     validate: validateTextBox
 };
 
@@ -13,7 +13,7 @@ function createNameTextBox() {
     //See: "You Don't Know JS - this & Object Prototypes" - Page 93.
     let nameTextBox = Object.create(textBoxPrototype);
 
-    nameTextBox.htmlFieldLabel = "Chord Definition Name";
+    nameTextBox.fieldName = "Chord Definition Name";
     nameTextBox.htmlFieldName = "chordDefinitionName";
 
     return nameTextBox;
@@ -24,7 +24,7 @@ function createIntervalsTextBox() {
     //See: "You Don't Know JS - this & Object Prototypes" - Page 93.
     let intervalsTextBox = Object.create(textBoxPrototype);
 
-    intervalsTextBox.htmlFieldLabel = "Chord Definition Intervals";
+    intervalsTextBox.fieldName = "Chord Definition Intervals";
     intervalsTextBox.htmlFieldName = "chordDefinitionIntervals";
     intervalsTextBox.add = updateIntervals;
 
@@ -98,13 +98,13 @@ function clearAllTextBoxes() {
 
 function validateTextBox() {
 
-    let htmlFieldLabel = this.htmlFieldLabel;
+    let fieldName = this.fieldName;
     let fieldValue = document.getElementById(this.htmlFieldName).value;
 
-    console.log(`${htmlFieldLabel} - '${fieldValue}'`);
+    console.log(`${fieldName} - '${fieldValue}'`);
 
     if (fieldValue == undefined || fieldValue == null || fieldValue == '') {
-        let message = `Warning '${fieldValue}' is not a valid value for '${htmlFieldLabel}'.`;
+        let message = `Warning '${fieldValue}' is not a valid value for '${fieldName}'.`;
 
         console.warn(message);
         alert(message);
