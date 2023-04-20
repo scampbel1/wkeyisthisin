@@ -1,4 +1,3 @@
-
 const textBoxPrototype = {
     htmlFieldName: undefined,
     fieldName: undefined,
@@ -40,7 +39,7 @@ function addInterval(button) {
 function updateIntervals(interval) {
     let intervalsFieldName = this.htmlFieldName;
 
-    var intervalsField = document.getElementById(intervalsFieldName);
+    let intervalsField = document.getElementById(intervalsFieldName);
 
     let newInterval;
 
@@ -55,7 +54,7 @@ function updateIntervals(interval) {
 
 function submitChordDefinitionProposal() {
 
-    var validationResult = validateFields();
+    let validationResult = validateFields();
 
     if (validationResult) {
 
