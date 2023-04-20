@@ -4,8 +4,14 @@ const textBoxPrototype = {
     validate: validateTextBox
 };
 
+const intervalSelectionPrototype = {
+    intervals: [],
+    validate: validateIntervalArray
+};
+
 const nameTextBox = createNameTextBox();
 const intervalsTextBox = createIntervalsTextBox();
+const intervalsSelection = createInvervalsSelection();
 
 function createNameTextBox() {
     //Example of "prototypal inheritence" - the "dynamic language version of classical inheritance"
@@ -25,18 +31,27 @@ function createIntervalsTextBox() {
 
     intervalsTextBox.fieldName = "Chord Definition Intervals";
     intervalsTextBox.htmlFieldName = "chordDefinitionIntervals";
-    intervalsTextBox.add = updateIntervals;
+    intervalsTextBox.add = updateIntervalsTextBox;
 
     return intervalsTextBox;
+}
+
+function createInvervalsSelection() {
+    var intervalsSelection = Object.create(intervalSelectionPrototype);
+
+    return intervalsSelection;
 }
 
 function addInterval(button) {
     let interval = button.innerText;
 
     intervalsTextBox.add(interval);
+    intervalsSelection.intervals.push(interval);
+
+    console.log(intervalsSelection.intervals);
 }
 
-function updateIntervals(interval) {
+function updateIntervalsTextBox(interval) {
     let intervalsFieldName = this.htmlFieldName;
 
     let intervalsField = document.getElementById(intervalsFieldName);
@@ -80,7 +95,7 @@ function submitChordDefinitionProposal() {
 
 function validateFields() {
     let isNameValid = nameTextBox.validate();
-    let isIntervalSelectionValid = intervalsTextBox.validate();
+    let isIntervalSelectionValid = intervalsSelection.validate();
 
     if (isNameValid && isIntervalSelectionValid) {
         return true;
@@ -90,9 +105,21 @@ function validateFields() {
     }
 }
 
-function clearAllTextBoxes() {
+function clearAll() {
     clearTextbox.call(nameTextBox);
     clearTextbox.call(intervalsTextBox);
+    clearIntervalsArray.call(intervalsSelection);
+}
+
+function clearIntervalsArray() {
+    let intervals = this.intervals;
+
+    if (intervals != null && intervals != undefined && intervals.length > 0) {
+        console.log(`Clearing intervals array: ${intervals}`);
+
+        intervals.splice(0, intervals.length);
+        console.log(intervals);
+    }
 }
 
 function validateTextBox() {
@@ -119,10 +146,14 @@ function clearTextbox() {
 }
 
 function validateIntervalArray() {
-    //Is array null or empty?
+    if (this.intervals != null && this.intervals.count > 0) {
+        console.log("Interval selection valids");
 
-    //Does array already exist in database?
-    //If so -> show message showing name of existing Chord Template
+        return true;
+    }
+
+    console.warn("Interval selection validation failed.");
+    return false;
 }
 
 async function submitProposal(name, intervals) {
