@@ -2,7 +2,6 @@
 using Keyify.MusicTheory.Enums;
 using Keyify.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,19 +23,16 @@ namespace Keyify.Web.Controllers.Music_Theory
         }
 
         [HttpPost]
-        public async Task<JsonResult> Submit([FromBody] ChordDefinitionCheckRequest request)
+        public async Task<JsonResult> Submit([FromBody] ChordDefinitionInsertRequest request)
         {
-            var intervals = ConvertSelectedIntervalStringToIntervalArray(request.Intervals);
+            //TODO: Setup proper mapping
+            //var intervals = request.Intervals.Select(i => (Interval)Enum.Parse(typeof(Interval), i)).ToArray();
+
+            var intervals = request.Intervals.Select(i => (Interval)i).ToArray();
 
             var wasInserted = await _chordDefinitionService.InsertChordDefinition(request.Name, intervals);
 
-            return Json(new { request.Name, Intervals = intervals.Select(i => (int)i), WasInserted = wasInserted.Item1, ErrorMessage = wasInserted.Item2 });
-        }
-
-        //TODO: Replace this by creating array in JS on page
-        private Interval[] ConvertSelectedIntervalStringToIntervalArray(string intervals)
-        {
-            return intervals.Split('-').Select(i => Enum.Parse<Interval>(i)).ToArray();
+            return Json(new { request.Name, WasInserted = wasInserted.Item1, ErrorMessage = wasInserted.Item2 });
         }
     }
 }

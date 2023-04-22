@@ -1,5 +1,8 @@
-﻿using Keyify.Infrastructure.Repository.Interfaces;
+﻿using Keyify.Infrastructure.Models.ChordDefinition;
+using Keyify.Infrastructure.Repository;
+using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.MusicTheory.Definitions;
+using Keyify.MusicTheory.Enums;
 using Keyify.Web.Infrastructure.Models.ChordDefinition;
 using System;
 using System.Collections.Generic;
@@ -14,10 +17,10 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
         {
             var chordDefinitions = ChordDefinitions.GetChordIntervals();
 
-            return await Task<bool>.FromResult(chordDefinitions.Select(c => new ChordDefinitionEntity() { Name = c.Key.ToString(), Intervals = c.Value }).ToList());
+            return await Task.FromResult(chordDefinitions.Select(c => new ChordDefinitionEntity() { Name = c.Key.ToString(), Intervals = c.Value }).ToList());
         }
 
-        public Task<Tuple<bool, string>> InsertChordDefinition(ChordDefinitionRequest chordDefinitionRequest)
+        public Task<Tuple<bool, string>> InsertChordDefinition(ChordDefinitionInsertRequest chordDefinitionRequest)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +30,7 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
             throw new NotImplementedException();
         }
 
-        public Task<Tuple<bool, string>> DoesChordDefinitionExist(string name, byte[] intervals)
+        public Task<ChordDefinitionFoundResult> DoesChordDefinitionExist(string name, Interval[] intervals)
         {
             throw new NotImplementedException();
         }

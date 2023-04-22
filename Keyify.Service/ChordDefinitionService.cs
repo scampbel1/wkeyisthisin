@@ -1,4 +1,5 @@
 ﻿using Keyify.Infrastructure.Caches.Interfaces;
+using Keyify.Infrastructure.Models.ChordDefinition;
 using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.MusicTheory.Enums;
 using Keyify.Service.Interfaces;
@@ -76,7 +77,7 @@ namespace Keyify.Service
 
         public async Task<Tuple<bool, string>> InsertChordDefinition(string chordDefinitionName, Interval[] intervals)
         {
-            var request = new ChordDefinitionRequest() { Name = chordDefinitionName, Intervals = intervals };
+            var request = new ChordDefinitionInsertRequest() { Name = chordDefinitionName, Intervals = intervals.Select(i => (int)i).ToArray() };
 
             var result = await _chordDefinitionRepository.InsertChordDefinition(request);
 

@@ -13,16 +13,16 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Template_Controller_Tests
         private readonly Mock<IChordDefinitionService> m_chordDefinitionService;
 
         private const string _chordDefinitionName = "testChordTemplate";
-        private const string _chordDefintionIntervals = "WW-W-h";
+        private Interval[] _chordDefintionIntervals = new[] { Interval.WW, Interval.W, Interval.h };
 
-        private readonly ChordDefinitionCheckRequest _chordDefinitionCheckRequest;
+        private readonly ChordDefinitionInsertRequest _chordDefinitionCheckRequest;
 
         public ChordTemplateControllerUnitTests()
         {
             m_chordDefinitionService = new Mock<IChordDefinitionService>();
 
             _chordTemplateController = new ChordDefinitionController(m_chordDefinitionService.Object);
-            _chordDefinitionCheckRequest = new ChordDefinitionCheckRequest() { Name = _chordDefinitionName, Intervals = _chordDefintionIntervals };
+            _chordDefinitionCheckRequest = new ChordDefinitionInsertRequest() { Name = _chordDefinitionName, Intervals = _chordDefintionIntervals.Select(i => (int)i).ToArray() };
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Template_Controller_Tests
 
             m_chordDefinitionService.Reset();
         }
-        
+
         [Fact]
         public async Task ChordTemplateController_Submit_WasNotInserted_ReturnsFalse()
         {
@@ -73,26 +73,7 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Template_Controller_Tests
             //Assert            
             Assert.NotNull(responseModel?.Name);
             Assert.NotEmpty(responseModel?.Name.ToCharArray()!);
-            
-            m_chordDefinitionService.Reset();
-        }
 
-        [Fact]
-        public async Task ChordTemplateController_Submit_WasInserted_ReturnsParsedNoteArray()
-        {
-            //Arrange
-            var expectedIntervals = new[] { Interval.WW, Interval.W, Interval.h };
-            m_chordDefinitionService.Setup(m => m.InsertChordDefinition(It.IsAny<string>(), It.IsAny<Interval[]>())).ReturnsAsync(Tuple.Create(false, It.IsAny<string>()));
-
-            //Act
-            var result = await _chordTemplateController.Submit(_chordDefinitionCheckRequest);
-            var json = result.Value.ToJson();
-            var responseModel = JsonSerializer.Deserialize<ChordTemplateCheckResponse>(json);
-
-            //Assert            
-            Assert.NotNull(responseModel?.Intervals);
-            Assert.Equal(expectedIntervals, responseModel?.Intervals);
-            
             m_chordDefinitionService.Reset();
         }
     }
@@ -102,6 +83,5 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Template_Controller_Tests
     {
         public string? Name { get; set; }
         public bool? WasInserted { get; set; }
-        public Interval[]? Intervals { get; set; }
     }
 }

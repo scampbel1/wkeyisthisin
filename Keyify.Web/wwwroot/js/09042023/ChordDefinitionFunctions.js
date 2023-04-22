@@ -34,8 +34,9 @@ function createInvervalsSelection() {
 
 function addInterval(button) {
     let interval = button.innerText;
+    let intervalValue = button.value;
 
-    intervalsSelection.intervals.push(interval);
+    intervalsSelection.intervals.push(intervalValue);
     updateIntervalsLabel(interval);
 
     console.log(intervalsSelection.intervals);
@@ -64,10 +65,10 @@ function submitChordDefinitionProposal() {
         let inserted;
         let errorMessage;
 
-        let proposedName = document.getElementById(nameTextBox.htmlFieldName).value;
-        let proposedIntervals = document.getElementById(intervalsTextBox.htmlFieldName).value;
+        let name = document.getElementById(nameTextBox.htmlFieldName).value;
+        let intervals = intervalsSelection.intervals;
 
-        submitProposal(proposedName, proposedIntervals)
+        submitProposal(name, intervals)
             .then((data) => {
                 console.log(data);
 
@@ -94,7 +95,7 @@ function validateFields() {
 }
 
 function clearAll() {
-    clearTextbox.call(nameTextBox);    
+    clearTextbox.call(nameTextBox);
     clearIntervalsArray.call(intervalsSelection);
     clearIntervalsLabel();
 }
@@ -140,9 +141,8 @@ function clearTextbox() {
 }
 
 function validateIntervalArray() {
-    if (this.intervals != null && this.intervals.count > 0) {
-        console.log("Interval selection valids");
-
+    if (this.intervals != null && this.intervals.length > 0) {
+        console.log("Interval selection valid");
         return true;
     }
 
@@ -153,10 +153,12 @@ function validateIntervalArray() {
 async function submitProposal(name, intervals) {
     let url = `https://${window.location.hostname}:${window.location.port}/ChordDefinition/Submit/`;
 
-    let chordDefinitionRequest = {
+    let chordDefinitionCheckRequest = {
         name: name,
         intervals: intervals
     };
+
+    console.log(chordDefinitionCheckRequest)
 
     let response = await fetch(url,
         {
@@ -165,7 +167,7 @@ async function submitProposal(name, intervals) {
             {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(chordDefinitionRequest)
+            body: JSON.stringify(chordDefinitionCheckRequest)
         });
 
     return response.json();
