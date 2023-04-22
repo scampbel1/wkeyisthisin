@@ -6,11 +6,11 @@ const textBoxPrototype = {
 
 const intervalSelectionPrototype = {
     intervals: [],
+    htmlFieldName: undefined,
     validate: validateIntervalArray
 };
 
 const nameTextBox = createNameTextBox();
-const intervalsTextBox = createIntervalsTextBox();
 const intervalsSelection = createInvervalsSelection();
 
 function createNameTextBox() {
@@ -24,20 +24,10 @@ function createNameTextBox() {
     return nameTextBox;
 }
 
-function createIntervalsTextBox() {
-    //Example of "prototypal inheritence" - the "dynamic language version of classical inheritance"
-    //See: "You Don't Know JS - this & Object Prototypes" - Page 93.
-    let intervalsTextBox = Object.create(textBoxPrototype);
-
-    intervalsTextBox.fieldName = "Chord Definition Intervals";
-    intervalsTextBox.htmlFieldName = "chordDefinitionIntervals";
-    intervalsTextBox.add = updateIntervalsTextBox;
-
-    return intervalsTextBox;
-}
-
 function createInvervalsSelection() {
     var intervalsSelection = Object.create(intervalSelectionPrototype);
+
+    intervalsSelection.htmlFieldName = "chordIntervals";
 
     return intervalsSelection;
 }
@@ -45,26 +35,24 @@ function createInvervalsSelection() {
 function addInterval(button) {
     let interval = button.innerText;
 
-    intervalsTextBox.add(interval);
     intervalsSelection.intervals.push(interval);
+    updateIntervalsLabel(interval);
 
     console.log(intervalsSelection.intervals);
 }
 
-function updateIntervalsTextBox(interval) {
-    let intervalsFieldName = this.htmlFieldName;
+function updateIntervalsLabel(interval) {
+    let intervalLabelText = document.getElementById(intervalsSelection.htmlFieldName);
 
-    let intervalsField = document.getElementById(intervalsFieldName);
+    let newInterval = `${interval}`;
 
-    let newInterval;
-
-    if (intervalsField.value == '') {
-        newInterval = `${interval}`;
-    } else {
+    if (intervalLabelText.innerHTML != '') {
         newInterval = `-${interval}`;
     }
 
-    intervalsField.value += newInterval;
+    intervalLabelText.innerHTML += newInterval;
+
+    console.log(intervalLabelText.innerHTML);
 }
 
 function submitChordDefinitionProposal() {
@@ -106,9 +94,9 @@ function validateFields() {
 }
 
 function clearAll() {
-    clearTextbox.call(nameTextBox);
-    clearTextbox.call(intervalsTextBox);
+    clearTextbox.call(nameTextBox);    
     clearIntervalsArray.call(intervalsSelection);
+    clearIntervalsLabel();
 }
 
 function clearIntervalsArray() {
@@ -120,6 +108,12 @@ function clearIntervalsArray() {
         intervals.splice(0, intervals.length);
         console.log(intervals);
     }
+}
+
+function clearIntervalsLabel() {
+    let intervalLabelText = document.getElementById(intervalsSelection.htmlFieldName);
+
+    intervalLabelText.innerHTML = "";
 }
 
 function validateTextBox() {
