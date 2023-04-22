@@ -30,7 +30,7 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
             throw new NotImplementedException();
         }
 
-        public Task<ChordDefinitionFoundResult> DoesChordDefinitionExist(string name, Interval[] intervals)
+        public Task<ChordDefinitionFoundResult> CheckChordDefinitionExists(string name, Interval[] intervals)
         {
             throw new NotImplementedException();
         }

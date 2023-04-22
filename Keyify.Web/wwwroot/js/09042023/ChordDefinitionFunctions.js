@@ -78,6 +78,10 @@ function submitChordDefinitionProposal() {
                 if (inserted == false) {
                     alert(errorMessage);
                 }
+                else {
+                    alert("Chord definition submitted successfully.");
+                    clearAll();
+                }
             });
     }
 }
