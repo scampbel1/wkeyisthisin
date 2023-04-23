@@ -37,7 +37,7 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Definition_Controller_Tests
         }
 
         [Fact]
-        public void ChordTemplateController_Submit_ParametersAreValid_PassValidation()
+        public void ChordTemplateController_Submit_ParametersAreValid_Validation_Pass()
         {
             //Arrange
             var request = _chordDefinitionCheckRequest;
@@ -48,6 +48,34 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Definition_Controller_Tests
             //Assert
             Assert.True(result.IsValid);
             Assert.Empty(result.Errors);
+        }
+
+        [Fact]
+        public void ChordTemplateController_Submit_EmptyName_Validation_Fail()
+        {
+            //Arrange
+            var request = new ChordDefinitionInsertRequestDto() { Name = string.Empty, Intervals = _chordDefintionIntervals };
+
+            //Act
+            var result = _validator.Validate(request);
+
+            //Assert
+            Assert.False(result.IsValid);
+            Assert.NotEmpty(result.Errors);
+        }
+
+        [Fact]
+        public void ChordTemplateController_Submit_Empty_IntervalArray_Validation_Fail()
+        {
+            //Arrange
+            var request = new ChordDefinitionInsertRequestDto() { Name = _chordDefinitionName, Intervals = Array.Empty<int>() };
+
+            //Act
+            var result = _validator.Validate(request);
+
+            //Assert
+            Assert.False(result.IsValid);
+            Assert.NotEmpty(result.Errors);
         }
 
         [Fact]
