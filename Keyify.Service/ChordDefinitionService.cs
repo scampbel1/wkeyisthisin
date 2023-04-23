@@ -1,4 +1,5 @@
 ﻿using Keyify.Infrastructure.Caches.Interfaces;
+using Keyify.Infrastructure.Models.ChordDefinition;
 using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.MusicTheory.Enums;
 using Keyify.Service.Interfaces;
@@ -71,6 +72,15 @@ namespace Keyify.Service
             }
 
             await _chordDefinitionCache.Initialise(chordDefinitionDictionary);
+        }
+
+        public async Task<Tuple<bool, string>> InsertChordDefinition(ChordDefinitionInsertRequest request)
+        {
+            var result = await _chordDefinitionRepository.InsertChordDefinition(request);
+
+            //TODO: Sync DB with cache
+
+            return result;
         }
     }
 }

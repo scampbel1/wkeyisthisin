@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<head>
+    <script src="~/js/23042023/ChordDefinitionFunctions.js"></script>
+</head>
+
+<body>
+    <h1>Create Chord Definition</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <label>Name</label>
+                </td>
+                <td>
+                    <input id="chordDefinitionName" name="chordDefinitionName" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <button value="1" onclick="addInterval(this)">h</button>
+                    <button value="2" onclick="addInterval(this)">W</button>
+                    <button value="3" onclick="addInterval(this)">Wh</button>
+                    <button value="4" onclick="addInterval(this)">WW</button>
+                    <button value="5" onclick="addInterval(this)">WWh</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Intervals</label>
+                </td>
+                <td>
+                    <label id="chordIntervals"></label>
+                </td>
+                <td>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button onclick="submitChordDefinitionProposal()">Submit</button>
+    <button onclick="clearAll()">Clear</button>
+</body>
