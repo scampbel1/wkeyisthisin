@@ -2,7 +2,6 @@
 using Keyify.Infrastructure.Repository;
 using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.MusicTheory.Definitions;
-using Keyify.MusicTheory.Enums;
 using Keyify.Web.Infrastructure.Models.ChordDefinition;
 using System;
 using System.Collections.Generic;
@@ -30,7 +29,7 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
             throw new NotImplementedException();
         }
 
-        public Task<ChordDefinitionExistsResult> CheckChordDefinitionExists(string name, Interval[] intervals)
+        public Task<ChordDefinitionExistsResult> CheckChordDefinitionExists(ChordDefinitionInsertRequest request)
         {
             throw new NotImplementedException();
         }

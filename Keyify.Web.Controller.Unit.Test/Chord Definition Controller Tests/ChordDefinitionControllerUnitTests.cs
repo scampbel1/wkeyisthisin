@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Keyify.Infrastructure.DTOs.ChordDefinition;
 using Keyify.Infrastructure.Models.ChordDefinition;
 using Keyify.Service.Interfaces;
 using Keyify.Web.Controllers.Music_Theory;
 using Keyify.Web.Mapping;
+using Keyify.Web.Validation;
 using NuGet.Protocol;
 using System.Text.Json;
 
@@ -15,6 +17,8 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Definition_Controller_Tests
         {
             mc.AddProfile(new MappingProfile());
         }));
+
+        private readonly IValidator<ChordDefinitionInsertRequestDto> _validator = new ChordDefinitionInsertValidator();
 
         private readonly ChordDefinitionController _chordTemplateController;
         private readonly Mock<IChordDefinitionService> m_chordDefinitionService;
@@ -28,8 +32,22 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Definition_Controller_Tests
         {
             m_chordDefinitionService = new Mock<IChordDefinitionService>();
 
-            _chordTemplateController = new ChordDefinitionController(_mapper, m_chordDefinitionService.Object);
+            _chordTemplateController = new ChordDefinitionController(_mapper, _validator, m_chordDefinitionService.Object);
             _chordDefinitionCheckRequest = new ChordDefinitionInsertRequestDto() { Name = _chordDefinitionName, Intervals = _chordDefintionIntervals };
+        }
+
+        [Fact]
+        public void ChordTemplateController_Submit_ParametersAreValid_PassValidation()
+        {
+            //Arrange
+            var request = _chordDefinitionCheckRequest;
+
+            //Act
+            var result = _validator.Validate(request);
+
+            //Assert
+            Assert.True(result.IsValid);
+            Assert.Empty(result.Errors);
         }
 
         [Fact]
