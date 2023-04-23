@@ -39,7 +39,7 @@ namespace Keyify.Database.RecordCreation.Factory.Creator
 
                 Console.WriteLine($"Attempting to create record for Chord Definition: '{chordName}'");
 
-                await _chordDefinitionRepository.InsertChordDefinition(new ChordDefinitionInsertRequest() { Name = chordName, Intervals = chordDefinition.Value.Select(i => (int)i).ToArray() });
+                await _chordDefinitionRepository.InsertChordDefinition(new ChordDefinitionInsertRequest() { Name = chordName, Intervals = chordDefinition.Value });
             }
         }
     }

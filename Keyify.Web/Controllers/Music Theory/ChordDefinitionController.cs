@@ -1,18 +1,20 @@
-﻿using Keyify.Infrastructure.Models.ChordDefinition;
-using Keyify.MusicTheory.Enums;
+﻿using AutoMapper;
+using Keyify.Infrastructure.DTOs.ChordDefinition;
+using Keyify.Infrastructure.Models.ChordDefinition;
 using Keyify.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Keyify.Web.Controllers.Music_Theory
 {
     public class ChordDefinitionController : Controller
     {
+        private readonly IMapper _mapper;
         private readonly IChordDefinitionService _chordDefinitionService;
 
-        public ChordDefinitionController(IChordDefinitionService chordDefinitionService)
+        public ChordDefinitionController(IMapper mapper, IChordDefinitionService chordDefinitionService)
         {
+            _mapper = mapper;
             _chordDefinitionService = chordDefinitionService;
         }
 
@@ -23,16 +25,13 @@ namespace Keyify.Web.Controllers.Music_Theory
         }
 
         [HttpPost]
-        public async Task<JsonResult> Submit([FromBody] ChordDefinitionInsertRequest request)
+        public async Task<JsonResult> Submit([FromBody] ChordDefinitionInsertRequestDto chordDefintionInsertRequest)
         {
-            //TODO: Setup proper mapping
-            //var intervals = request.Intervals.Select(i => (Interval)Enum.Parse(typeof(Interval), i)).ToArray();
+            var request = _mapper.Map<ChordDefinitionInsertRequest>(chordDefintionInsertRequest);
 
-            var intervals = request.Intervals.Select(i => (Interval)i).ToArray();
+            var result = await _chordDefinitionService.InsertChordDefinition(request);
 
-            var wasInserted = await _chordDefinitionService.InsertChordDefinition(request.Name, intervals);
-
-            return Json(new { request.Name, WasInserted = wasInserted.Item1, ErrorMessage = wasInserted.Item2 });
+            return Json(new { chordDefintionInsertRequest.Name, WasInserted = result.Item1, ErrorMessage = result.Item2 });
         }
     }
 }

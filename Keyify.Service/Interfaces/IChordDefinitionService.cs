@@ -1,4 +1,5 @@
-﻿using Keyify.MusicTheory.Enums;
+﻿using Keyify.Infrastructure.Models.ChordDefinition;
+using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
 
 namespace Keyify.Service.Interfaces
@@ -9,6 +10,6 @@ namespace Keyify.Service.Interfaces
 
         public Task SyncWithDatabase();
 
-        public Task<Tuple<bool, string>> InsertChordDefinition(string chordDefinitionName, Interval[] intervals);
+        public Task<Tuple<bool, string>> InsertChordDefinition(ChordDefinitionInsertRequest request);
     }
 }

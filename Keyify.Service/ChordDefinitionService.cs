@@ -4,7 +4,6 @@ using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.MusicTheory.Enums;
 using Keyify.Service.Interfaces;
 using Keyify.Services.Models;
-using Keyify.Web.Infrastructure.Models.ChordDefinition;
 
 namespace Keyify.Service
 {
@@ -75,10 +74,8 @@ namespace Keyify.Service
             await _chordDefinitionCache.Initialise(chordDefinitionDictionary);
         }
 
-        public async Task<Tuple<bool, string>> InsertChordDefinition(string chordDefinitionName, Interval[] intervals)
+        public async Task<Tuple<bool, string>> InsertChordDefinition(ChordDefinitionInsertRequest request)
         {
-            var request = new ChordDefinitionInsertRequest() { Name = chordDefinitionName, Intervals = intervals.Select(i => (int)i).ToArray() };
-
             var result = await _chordDefinitionRepository.InsertChordDefinition(request);
 
             //TODO: Sync DB with cache

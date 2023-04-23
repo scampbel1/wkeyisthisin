@@ -1,5 +1,8 @@
+using AutoMapper;
+using FluentValidation;
 using Keyify.Infrastructure.Caches;
 using Keyify.Infrastructure.Caches.Interfaces;
+using Keyify.Infrastructure.DTOs.ChordDefinition;
 using Keyify.Infrastructure.Repository;
 using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.Models.Service;
@@ -7,14 +10,17 @@ using Keyify.Service;
 using Keyify.Service.Interfaces;
 using Keyify.Services.Formatter.Interfaces;
 using Keyify.Services.Formatter.Services;
+using Keyify.Web.Mapping;
 using Keyify.Web.Models.Instruments;
 using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Service;
 using Keyify.Web.Service.Interfaces;
 using Keyify.Web.Services;
 using Keyify.Web.Services.Interfaces;
+using Keyify.Web.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -33,6 +39,9 @@ namespace Keyify
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            SetupMapping(services);
+            SetupValidation(services);
 
             services.AddSingleton(typeof(IScaleDefinitionService), typeof(ScaleDefinitionService));
             services.AddSingleton(typeof(IQuickLinkService), typeof(QuickLinkService));
@@ -81,6 +90,21 @@ namespace Keyify
                     name: "default",
                     pattern: "{controller=Guitar}/{action=Index}");
             });
+        }
+
+        private void SetupMapping(IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(Startup));
+
+            var mapperConfiguration = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+        }
+
+        private void SetupValidation(IServiceCollection services)
+        {
+            services.AddScoped<IValidator<ChordDefinitionInsertRequestDto>, ChordDefinitionInsertValidator>();
         }
     }
 }

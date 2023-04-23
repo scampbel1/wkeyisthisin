@@ -72,13 +72,15 @@ namespace Keyify.Infrastructure.Repository
             return bytes;
         }
 
-        public async Task<ChordDefinitionFoundResult> CheckChordDefinitionExists(string name, Interval[] intervals)
+        public async Task<ChordDefinitionExistsResult> CheckChordDefinitionExists(ChordDefinitionInsertRequest request)
         {
+            var (name, intervals) = (request.Name, request.Intervals);
+
             using var sqlConnection = new SqlConnection(_connectionString);
 
             await sqlConnection.OpenAsync();
 
-            var intervalsByteArray = ConvertIntervalsArrayToByteArray(intervals);
+            var intervalsByteArray = ConvertIntervalsArrayToByteArray(intervals!);
 
             var query = string.Empty;
             var hasIntervals = intervalsByteArray != null && intervalsByteArray.Any();
@@ -91,7 +93,7 @@ namespace Keyify.Infrastructure.Repository
 
                     if (await sqlConnection.ExecuteScalarAsync<bool>(query, new { name, intervalsByteArray }))
                     {
-                        return new ChordDefinitionFoundResult(true, $"Chord Definition already exists. Searched on Name: '{name}' and Intervals '{string.Join(',', intervals)}'", intervals, intervalsByteArray!);
+                        return new ChordDefinitionExistsResult(true, $"Chord Definition already exists. Searched on Name: '{name}' and Intervals '{string.Join(',', intervals)}'", intervals, intervalsByteArray!);
                     }
                 }
                 else
@@ -100,7 +102,7 @@ namespace Keyify.Infrastructure.Repository
 
                     if (await sqlConnection.ExecuteScalarAsync<bool>(query, new { name }))
                     {
-                        return new ChordDefinitionFoundResult(true, $"Chord Definition already exists. Searched on Name: '{name}'");
+                        return new ChordDefinitionExistsResult(true, $"Chord Definition already exists. Searched on Name: '{name}'");
                     }
 
                 }
@@ -111,24 +113,22 @@ namespace Keyify.Infrastructure.Repository
 
                 if (await sqlConnection.ExecuteScalarAsync<bool>(query, new { intervalsByteArray }))
                 {
-                    return new ChordDefinitionFoundResult(true, $"Chord Definition already exists. Searched on Intervals '{string.Join(',', intervals)}'", intervals, intervalsByteArray!);
+                    return new ChordDefinitionExistsResult(true, $"Chord Definition already exists. Searched on Intervals '{string.Join(',', intervals)}'", intervals, intervalsByteArray!);
                 }
             }
 
             await sqlConnection.CloseAsync();
 
-            return new ChordDefinitionFoundResult(false, string.Empty, intervals, intervalsByteArray!);
+            return new ChordDefinitionExistsResult(false, string.Empty, intervals!, intervalsByteArray!);
         }
 
         public async Task<Tuple<bool, string>> InsertChordDefinition(ChordDefinitionInsertRequest chordDefinitionRequest)
         {
-            var (name, intervals) = (chordDefinitionRequest.Name, chordDefinitionRequest.Intervals!);
+            var chordDefinitionExistsResult = await CheckChordDefinitionExists(chordDefinitionRequest);
 
-            var chordFoundResult = await CheckChordDefinitionExists(name!, intervals.Select(i => (Interval)i).ToArray());
-
-            if (chordFoundResult.Found)
+            if (chordDefinitionExistsResult.Found)
             {
-                return Tuple.Create(false, chordFoundResult.Message!);
+                return Tuple.Create(false, chordDefinitionExistsResult.Message!);
             }
 
             using var sqlCconnection = new SqlConnection(_connectionString);
@@ -148,42 +148,16 @@ namespace Keyify.Infrastructure.Repository
             sb.AppendLine("@Intervals");
             sb.AppendLine(")");
 
-            var chord = await sqlCconnection.ExecuteAsync(sb.ToString(), new { chordDefinitionRequest.Name, Intervals = chordFoundResult.Bytes });
+            var chord = await sqlCconnection.ExecuteAsync(sb.ToString(), new { chordDefinitionRequest.Name, Intervals = chordDefinitionExistsResult.Bytes });
 
             await sqlCconnection.CloseAsync();
 
             return Tuple.Create(true, string.Empty);
         }
 
-        private Task DoesChordDefinitionExist(string v, string[] strings)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<List<ChordDefinitionEntity>> SyncChordDefinitions(IEnumerable<int> existingChordDefinitionIds)
         {
             throw new NotImplementedException();
-        }
-    }
-
-    //TODO: Rename to something more useful and move elsewhere
-    public class ChordDefinitionFoundResult
-    {
-        public bool Found { get; set; }
-        public string? Message { get; set; }
-        public Interval[]? Intervals { get; set; }
-        public byte[]? Bytes { get; set; }
-
-        public ChordDefinitionFoundResult(bool found, string message)
-        {
-            Found = found;
-            Message = message;
-        }
-
-        public ChordDefinitionFoundResult(bool found, string message, Interval[] intervals, byte[] bytes) : this(found, message)
-        {
-            Intervals = intervals;
-            Bytes = bytes;
         }
     }
 }
