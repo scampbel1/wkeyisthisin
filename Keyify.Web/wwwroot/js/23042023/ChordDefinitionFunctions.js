@@ -179,6 +179,8 @@ async function submitProposal(name, intervals) {
     return response.json();
 }
 
+
+//TODO: Move this out to it's own file - figure out how to structure these common functions
 function getCurrentUrl() {
     let hostName = window.location.hostname;
 
