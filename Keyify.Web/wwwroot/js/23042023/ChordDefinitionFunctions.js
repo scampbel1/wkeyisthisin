@@ -155,7 +155,9 @@ function validateIntervalArray() {
 }
 
 async function submitProposal(name, intervals) {
-    let url = `https://${window.location.hostname}:${window.location.port}/ChordDefinition/Submit/`;
+    let url = `${getCurrentUrl()}/ChordDefinition/Submit/`;
+
+    alert(url);
 
     let chordDefinitionCheckRequest = {
         name: name,
@@ -175,4 +177,14 @@ async function submitProposal(name, intervals) {
         });
 
     return response.json();
+}
+
+function getCurrentUrl() {
+    let hostName = window.location.hostname;
+
+    if (hostName === "localhost") {
+        return `https://${hostName}:${window.location.port}`;
+    }
+
+    return `https://${hostName}`;
 }
