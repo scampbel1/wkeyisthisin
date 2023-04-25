@@ -39,6 +39,9 @@ namespace Keyify
         {
             services.AddControllersWithViews();
 
+            services.AddAuthorization();
+            services.AddAuthentication();
+
             SetupMapping(services);
             SetupValidation(services);
 
