@@ -38,7 +38,7 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'Test'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -52,6 +52,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'KeyifyWebAppTest'
-          slot-name: 'Production'
+          slot-name: 'Test'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_48D66E431F9744A185AD05FA89163ED1 }}
           package: .
