@@ -55,3 +55,13 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_48D66E431F9744A185AD05FA89163ED1 }}
           package: .
+          
+  test: VSTest@3
+    inputs:
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: |
+        **\Keyify*Test*.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
+      searchFolder: '$(System.DefaultWorkingDirectory)'
+      failOnMinTestsNotRun: false
