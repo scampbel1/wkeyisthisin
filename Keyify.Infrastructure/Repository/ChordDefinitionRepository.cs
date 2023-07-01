@@ -93,7 +93,7 @@ namespace Keyify.Infrastructure.Repository
 
                     if (await sqlConnection.ExecuteScalarAsync<bool>(query, new { name, intervalsByteArray }))
                     {
-                        return new ChordDefinitionExistsResult(true, $"Chord Definition already exists. Searched on Name: '{name}' and Intervals '{string.Join(',', intervals)}'", intervals, intervalsByteArray!);
+                        return new ChordDefinitionExistsResult(true, $"Chord Definition already exists. Searched on Name: '{name}' and Intervals '{string.Join(',', intervals!)}'", intervals!, intervalsByteArray!);
                     }
                 }
                 else
@@ -113,7 +113,7 @@ namespace Keyify.Infrastructure.Repository
 
                 if (await sqlConnection.ExecuteScalarAsync<bool>(query, new { intervalsByteArray }))
                 {
-                    return new ChordDefinitionExistsResult(true, $"Chord Definition already exists. Searched on Intervals '{string.Join(',', intervals)}'", intervals, intervalsByteArray!);
+                    return new ChordDefinitionExistsResult(true, $"Chord Definition already exists. Searched on Intervals '{string.Join(',', intervals!)}'", intervals!, intervalsByteArray!);
                 }
             }
 
