@@ -8,11 +8,11 @@ trigger:
 variables:
   buildConfiguration: 'Release'
   location: 'UK South'
-  acrHostName: ''
-  acrName: ''
-  rgName: ''
-  imageName: ''
-  webAppName: ''
+  acrHostName: 'keyifytest.azurecr.io'
+  acrName: 'keyifyTest'
+  rgName: 'Keyify'
+  imageName: 'keyifyTestImage'
+  webAppName: 'keyifyTestWebApp'
 
 stages:
 
