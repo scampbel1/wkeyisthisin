@@ -8,8 +8,8 @@ trigger:
 variables:
   buildConfiguration: 'Release'
   location: 'westeurope'
-  acrHostName: 'keyifytest.azurecr.io'
-  acrName: 'keyifyTest'
+  acrHostName: 'keyifytestcicd.azurecr.io'
+  acrName: 'keyifyTestCiCd'
   rgName: 'Keyify'
   imageName: 'KeyifyWebAppTest-CI-CD-Image'
   webAppName: 'KeyifyWebAppTest-CI-CD'
