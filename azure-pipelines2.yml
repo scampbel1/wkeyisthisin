@@ -12,7 +12,7 @@ variables:
   acrName: 'keyifyTest'
   rgName: 'Keyify'
   imageName: 'keyifyTestImage'
-  webAppName: 'keyifyTestWebApp'
+  webAppName: 'KeyifyWebAppTest'
 
 stages:
 
