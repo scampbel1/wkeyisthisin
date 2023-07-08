@@ -10,7 +10,7 @@ variables:
   location: 'westeurope'
   acrHostName: 'keyifytestcicd.azurecr.io'
   acrName: 'keyifyTestCiCd'
-  rgName: 'Keyify'
+  rgName: 'KeyifyCiCd'
   imageName: 'KeyifyWebAppTest-CI-CD-Image'
   webAppName: 'KeyifyWebAppTest-CI-CD'
 
