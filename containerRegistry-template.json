@@ -3,28 +3,28 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "profileName": {
-            "defaultValue": "[format('cdn-{0}', uniqueString(resourceGroup().id))]",
+            "defaultValue": "[format('cdnny-{0}', uniqueString(resourceGroup().id))]",
             "type": "String",
             "metadata": {
                 "description": "Name of the CDN Profile"
             }
         },
         "endpointName": {
-            "defaultValue": "[format('endpoint-{0}', uniqueString(resourceGroup().id))]",
+            "defaultValue": "[format('endpointty-{0}', uniqueString(resourceGroup().id))]",
             "type": "String",
             "metadata": {
                 "description": "Name of the CDN Endpoint, must be unique"
             }
         },
         "serverFarmName": {
-            "defaultValue": "[format('asp-{0}', uniqueString(resourceGroup().id))]",
+            "defaultValue": "[format('asppy-{0}', uniqueString(resourceGroup().id))]",
             "type": "String",
             "metadata": {
                 "description": "Name of the App Service Plan"
             }
         },
         "webAppName": {
-            "defaultValue": "[format('web-{0}', uniqueString(resourceGroup().id))]",
+            "defaultValue": "[format('webby-{0}', uniqueString(resourceGroup().id))]",
             "type": "String",
             "metadata": {
                 "description": "Name of the App Service Web App"
