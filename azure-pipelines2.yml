@@ -73,7 +73,7 @@ stages:
       displayName: Test
       inputs:
         command: test
-        projects: '**/*UnitTests/*.csproj'
+        projects: '**/*.Test/*.csproj'
         arguments: '--configuration $(BuildConfiguration)'
 
     # Publish the app
