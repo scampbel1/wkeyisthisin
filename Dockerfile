@@ -1,12 +1,12 @@
-#Note: check .dockerignore file is your having any issues with copying content
+# Note: Check .dockerignore file if you're having any issues with copying content
 
-FROM  mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /app
 
-COPY */*.csproj .
+COPY *.csproj .
 RUN dotnet restore
 
-COPY src .
+COPY . .
 RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
