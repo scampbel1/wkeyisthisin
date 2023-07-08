@@ -11,8 +11,8 @@ variables:
   acrHostName: 'keyifytest.azurecr.io'
   acrName: 'keyifyTest'
   rgName: 'Keyify'
-  imageName: 'keyifyTestImage'
-  webAppName: 'KeyifyWebAppTest'
+  imageName: 'KeyifyWebAppTest-CI-CD-Image'
+  webAppName: 'KeyifyWebAppTest-CI-CD'
 
 stages:
 
@@ -39,7 +39,7 @@ stages:
         deploymentScope: 'Resource Group'
         azureResourceManagerConnection: 'AzureSC'
         subscriptionId: 'a2fc1bcd-3446-47ea-9525-20f2a1a0de97'
-        #action: 'Create Or Update Resource Group'
+        action: 'Create Or Update Resource Group'
         resourceGroupName: 'Keyify'
         location: $(location)
         #templateLocation: 'Linked artifact'
