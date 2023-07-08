@@ -32,7 +32,8 @@ stages:
         resourceGroupName: '$(rgName)'
         location: $(location)
         csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
-        overrideParameters: '-webAppName "$(webAppName)" -registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
+        overrideParameters: '-hostingPlanName $(webAppName) -appInsightsLocation "$(location)" -registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
+        # -webAppName $(webAppName) -hostingPlanName $(webAppName) -appInsightsLocation "$(location)" -sku "S1 Standard" -registryName $(acrName) -registryLocation "$(location)" -registrySku standard -imageName $(imageName):$(Build.BuildId)
 
     - task: UseDotNet@2
       displayName: 'Use .NET Core sdk'
