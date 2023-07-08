@@ -7,7 +7,7 @@ trigger:
     - master
 variables:
   buildConfiguration: 'Release'
-  location: 'UK South'
+  location: 'westeurope'
   acrHostName: 'keyifytest.azurecr.io'
   acrName: 'keyifyTest'
   rgName: 'Keyify'
