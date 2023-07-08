@@ -40,7 +40,7 @@ stages:
         azureResourceManagerConnection: 'AzureSC'
         subscriptionId: 'a2fc1bcd-3446-47ea-9525-20f2a1a0de97'
         action: 'Create Or Update Resource Group'
-        resourceGroupName: 'Keyify'
+        resourceGroupName: $(rgName)
         location: $(location)
         #templateLocation: 'Linked artifact'
         csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
