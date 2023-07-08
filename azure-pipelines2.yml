@@ -32,7 +32,7 @@ stages:
         resourceGroupName: '$(rgName)'
         location: $(location)
         csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
-        overrideParameters: '-webAppName $(webAppName) -hostingPlanName $(webAppName) -appInsightsLocation "$(location)" -registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
+        overrideParameters: '-webAppName $(webAppName) -hostingPlanName $(webAppName) -appInsightsLocation "$(location)" -registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard imageName $(imageName):$(Build.BuildId)'
         # -webAppName $(webAppName) -hostingPlanName $(webAppName) -appInsightsLocation "$(location)" -sku "S1 Standard" -registryName $(acrName) -registryLocation "$(location)" -registrySku standard -imageName $(imageName):$(Build.BuildId)
 
     - task: UseDotNet@2
