@@ -25,14 +25,26 @@ stages:
     steps:
 
     # Create or update the ACR resource
-    - task: AzureResourceGroupDeployment@2
-      displayName: 'Azure Deployment:Create Azure Container Registry'
+    #- task: AzureResourceGroupDeployment@2
+    #  displayName: 'Azure Deployment:Create Azure Container Registry'
+    #  inputs:
+    #    azureSubscription: 'AzureSC'
+    #    resourceGroupName: '$(rgName)'
+    #    location: $(location)
+    #    #csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
+    #    overrideParameters: '-webAppName "$(webAppName)" -hostingPlanName "$(webAppName)" -appInsightsLocation "$(location)" -registryName "$(acrName)" -registryLocation "$(location)" -registrySku Standard -imageName "$(imageName):$(Build.BuildId)"'
+    
+    - task: AzureResourceManagerTemplateDeployment@3
       inputs:
-        azureSubscription: 'AzureSC'
-        resourceGroupName: '$(rgName)'
-        location: $(location)
-        #csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
-        overrideParameters: '-webAppName "$(webAppName)" -hostingPlanName "$(webAppName)" -appInsightsLocation "$(location)" -registryName "$(acrName)" -registryLocation "$(location)" -registrySku Standard -imageName "$(imageName):$(Build.BuildId)"'
+        deploymentScope: 'Resource Group'
+        azureResourceManagerConnection: 'AzureSC'
+        subscriptionId: 'a2fc1bcd-3446-47ea-9525-20f2a1a0de97'
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: 'Keyify'
+        location: 'UK South'
+        templateLocation: 'Linked artifact'
+        csmFile: 'Microsoft.Template-20230708141257'
+        deploymentMode: 'Incremental'
 
     - task: UseDotNet@2
       displayName: 'Use .NET Core sdk'
