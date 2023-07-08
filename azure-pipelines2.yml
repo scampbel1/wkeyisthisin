@@ -50,8 +50,8 @@ stages:
       displayName: 'Use .NET Core sdk'
       inputs:
         packageType: sdk
-        version: 2.2.x
-        installationPath: $(Agent.ToolsDirectory)/dotnet        
+        version: 7.x.x
+        installationPath: $(Agent.ToolsDirectory)/dotnet
   
     # Restore dependencies
     - task: DotNetCoreCLI@2
