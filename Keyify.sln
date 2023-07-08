@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Services.Models", "K
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Services.Formatter", "Keyify.Services.Formatter\Keyify.Services.Formatter.csproj", "{0F74A1A4-0A8A-4020-9F90-814268AFE59E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keyify.Database.RecordCreation", "Keyify.Database.RecordCreation\Keyify.Database.RecordCreation.csproj", "{120F1D6C-3FDB-4FD5-8C05-85EB30992945}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Database.RecordCreation", "Keyify.Database.RecordCreation\Keyify.Database.RecordCreation.csproj", "{120F1D6C-3FDB-4FD5-8C05-85EB30992945}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

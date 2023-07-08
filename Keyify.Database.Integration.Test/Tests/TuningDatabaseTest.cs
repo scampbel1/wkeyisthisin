@@ -9,6 +9,10 @@ namespace Keyify.Database.Integration.Test.Tests
 {
     public class TuningDatabaseTest
     {
+        //TODO: Research best practices for ThrowawayDb
+                // - Use of Snapshots
+                // - Disposing of ThrowawayDb instances
+
         [Fact]
         public async Task CreateTuning_RecordCreatedInDatabase_ReturnsSingleRecord_ReturnsCorrectNotesIntArray()
         {

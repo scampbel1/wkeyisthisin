@@ -6,7 +6,9 @@ namespace Keyify.Database.Integration.Test.ThrowawayDatabases
 {
     internal static class ThrowawayDatabaseSetup
     {
-        private const string _localDatabase = "(LocalDb)\\MSSQLLocalDB";
+        //TODO: Make this configurable - suspect this will fail in cloud environments
+        private const string _localDatabase = ".";
+        //TODO: Make this configurable - also suspect this will fail in cloud environments (perhaps not after looking at build output... but still)
         private static string _databaseCreationSqlScriptsDirectory => $"{Environment.CurrentDirectory}\\Scripts";
 
         internal static async Task<ThrowawayDatabase> CreateThrowawayDbInstanceAsync()
