@@ -62,7 +62,7 @@ stages:
 
     # Build app
     - task: DotNetCoreCLI@2
-      displayName: 'dotnet build'
+      displayName: 'dotnet build $(buildConfiguration)'
       inputs:
         command: build
         projects: '**/*.csproj'
@@ -70,10 +70,18 @@ stages:
 
     # Run unit tests
     - task: DotNetCoreCLI@2
-      displayName: Test
+      displayName: Unit Tests
       inputs:
         command: test
-        projects: '**/*.Test/*.csproj'
+        projects: '**/Keyify.Web.Unit.Test.csproj'
+        arguments: '--configuration $(BuildConfiguration)'
+
+    # Run controller unit tests
+    - task: DotNetCoreCLI@2
+      displayName: Controller Unit Tests
+      inputs:
+        command: test
+        projects: '**/Keyify.Web.Controller.Unit.Test.csproj'
         arguments: '--configuration $(BuildConfiguration)'
 
     # Publish the app
