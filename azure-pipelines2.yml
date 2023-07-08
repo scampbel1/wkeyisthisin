@@ -39,12 +39,12 @@ stages:
         deploymentScope: 'Resource Group'
         azureResourceManagerConnection: 'AzureSC'
         subscriptionId: 'a2fc1bcd-3446-47ea-9525-20f2a1a0de97'
-        action: 'Create Or Update Resource Group'
+        #action: 'Create Or Update Resource Group'
         resourceGroupName: 'Keyify'
-        location: 'UK South'
-        templateLocation: 'Linked artifact'
-        csmFile: 'Microsoft.Template-20230708141257'
-        deploymentMode: 'Incremental'
+        location: $(location)
+        #templateLocation: 'Linked artifact'
+        csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
+        #deploymentMode: 'Incremental'
 
     - task: UseDotNet@2
       displayName: 'Use .NET Core sdk'
