@@ -1,125 +1,138 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "profileName": {
+            "defaultValue": "[format('cdn-{0}', uniqueString(resourceGroup().id))]",
+            "type": "String",
+            "metadata": {
+                "description": "Name of the CDN Profile"
+            }
+        },
+        "endpointName": {
+            "defaultValue": "[format('endpoint-{0}', uniqueString(resourceGroup().id))]",
+            "type": "String",
+            "metadata": {
+                "description": "Name of the CDN Endpoint, must be unique"
+            }
+        },
+        "serverFarmName": {
+            "defaultValue": "[format('asp-{0}', uniqueString(resourceGroup().id))]",
+            "type": "String",
+            "metadata": {
+                "description": "Name of the App Service Plan"
+            }
+        },
         "webAppName": {
-            "type": "String"
+            "defaultValue": "[format('web-{0}', uniqueString(resourceGroup().id))]",
+            "type": "String",
+            "metadata": {
+                "description": "Name of the App Service Web App"
+            }
         },
-        "hostingPlanName": {
-            "type": "String"
-        },
-        "appInsightsLocation": {
-            "type": "String"
-        },
-        "sku": {
-            "defaultValue": "Standard",
-            "type": "String"
-        },
-        "registryName": {
-            "type": "String"
-        },
-        "imageName": {
-            "type":"String"
-        },
-        "registryLocation": {
-            "type": "String"
-        },
-        "registrySku": {
-            "defaultValue": "Standard",
-            "type": "String"
-        },
-        "startupCommand": {
-            "defaultValue": "",
-            "type": "String"
+        "location": {
+            "defaultValue": "[resourceGroup().location]",
+            "type": "String",
+            "metadata": {
+                "description": "Location for all resources."
+            }
         }
     },
     "resources": [
         {
-            "type": "Microsoft.Web/sites",
-            "name": "[parameters('webAppName')]",
-            "apiVersion": "2016-03-01",
-            "location": "[resourceGroup().location]",
-            "tags": {
-                "[concat('hidden-related:', '/subscriptions/', subscription().subscriptionId,'/resourcegroups/', resourceGroup().name, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]": "empty"
-            },
-            "properties": {
-                "name": "[parameters('webAppName')]",
-                "siteConfig": {
-                    "appSettings": [
-                        {
-                            "name": "DOCKER_REGISTRY_SERVER_URL",
-                            "value": "[concat('https://', reference(concat('Microsoft.ContainerRegistry/registries/', parameters('registryName'))).loginServer)]"
-                        },
-                        {
-                            "name": "DOCKER_REGISTRY_SERVER_USERNAME",
-                            "value": "[listCredentials(concat('Microsoft.ContainerRegistry/registries/', parameters('registryName')), '2017-10-01').username]"
-                        },
-                        {
-                            "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
-                            "value": "[listCredentials(concat('Microsoft.ContainerRegistry/registries/', parameters('registryName')), '2017-10-01').passwords[0].value]"
-                        },
-                        {
-                            "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
-                            "value": "false"
-                        },
-                        {
-                            "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-                            "value": "[reference(resourceId('microsoft.insights/components/', parameters('webAppName')), '2015-05-01').InstrumentationKey]"
-                        }
-                    ],
-                    "appCommandLine": "[parameters('startupCommand')]",
-                    "linuxFxVersion": "[concat('DOCKER|', reference(concat('Microsoft.ContainerRegistry/registries/', parameters('registryName'))).loginServer, '/', parameters('imageName'))]"
-                },
-                "serverFarmId": "[concat('/subscriptions/', subscription().subscriptionId,'/resourcegroups/', resourceGroup().name, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
-                "hostingEnvironment": ""
-            },
-            "dependsOn": [
-                "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
-                "[resourceId('microsoft.insights/components/', parameters('webAppName'))]"
-            ]
-        },
-        {
-            "type": "Microsoft.ContainerRegistry/registries",
-            "sku": {
-                "name": "[parameters('registrySku')]"
-            },
-            "name": "[parameters('registryName')]",
-            "apiVersion": "2017-10-01",
-            "location": "[parameters('registryLocation')]",
-            "properties": {
-                "adminUserEnabled": "true"
-            }
-        },
-        {
             "type": "Microsoft.Web/serverfarms",
-            "sku": {
-                "Tier": "[first(skip(split(parameters('sku'), ' '), 1))]",
-                "Name": "[first(split(parameters('sku'), ' '))]"
+            "apiVersion": "2021-02-01",
+            "name": "[parameters('serverFarmName')]",
+            "location": "[parameters('location')]",
+            "tags": {
+                "displayName": "[parameters('serverFarmName')]"
             },
-            "kind": "linux",
-            "name": "[parameters('hostingPlanName')]",
-            "apiVersion": "2016-09-01",
-            "location": "[resourceGroup().location]",
-            "properties": {
-                "name": "[parameters('hostingPlanName')]",
-                "workerSizeId": "0",
-                "reserved": true,
-                "numberOfWorkers": "1",
-                "hostingEnvironment": ""
+            "sku": {
+                "name": "F1",
+                "capacity": 1
             }
         },
         {
-            "type": "Microsoft.Insights/components",
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2021-02-01",
             "name": "[parameters('webAppName')]",
-            "apiVersion": "2014-04-01",
-            "location": "[parameters('appInsightsLocation')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverFarmName'))]"
+            ],
             "tags": {
-                "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', parameters('webAppName'))]": "Resource"
+                "displayName": "[parameters('webAppName')]"
+            },
+            "identity": {
+                "type": "SystemAssigned"
             },
             "properties": {
-                "applicationId": "[parameters('webAppName')]",
-                "Request_Source": "AzureTfsExtensionAzureProject"
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverFarmName'))]",
+                "siteConfig": {
+                    "ftpsState": "FtpsOnly",
+                    "minTlsVersion": "1.2",
+                    "scmMinTlsVersion": "1.2"
+                },
+                "httpsOnly": true
+            }
+        },
+        {
+            "type": "Microsoft.Cdn/profiles",
+            "apiVersion": "2021-06-01",
+            "name": "[parameters('profileName')]",
+            "location": "[parameters('location')]",
+            "tags": {
+                "displayName": "[parameters('profileName')]"
+            },
+            "sku": {
+                "name": "Standard_Microsoft"
+            },
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.Cdn/profiles/endpoints",
+            "apiVersion": "2021-06-01",
+            "name": "[format('{0}/{1}', parameters('profileName'), parameters('endpointName'))]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Cdn/profiles', parameters('profileName'))]",
+                "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
+            ],
+            "tags": {
+                "displayName": "[parameters('endpointName')]"
+            },
+            "properties": {
+                "originHostHeader": "[reference(resourceId('Microsoft.Web/sites', parameters('webAppName'))).hostNames[0]]",
+                "isHttpAllowed": true,
+                "isHttpsAllowed": true,
+                "queryStringCachingBehavior": "IgnoreQueryString",
+                "contentTypesToCompress": [
+                    "text/plain",
+                    "text/html",
+                    "text/css",
+                    "application/x-javascript",
+                    "text/javascript"
+                ],
+                "isCompressionEnabled": true,
+                "origins": [
+                    {
+                        "name": "origin1",
+                        "properties": {
+                            "hostName": "[reference(resourceId('Microsoft.Web/sites', parameters('webAppName'))).hostNames[0]]"
+                        }
+                    }
+                ]
             }
         }
-    ]
+    ],
+    "outputs": {
+        "hostName": {
+            "type": "String",
+            "value": "[reference(resourceId('Microsoft.Cdn/profiles/endpoints', parameters('profileName'), parameters('endpointName'))).hostName]"
+        },
+        "originHostHeader": {
+            "type": "String",
+            "value": "[reference(resourceId('Microsoft.Cdn/profiles/endpoints', parameters('profileName'), parameters('endpointName'))).originHostHeader]"
+        }
+    }
 }
