@@ -7,12 +7,12 @@ trigger:
     - master
 variables:
   buildConfiguration: 'Release'
-  location: 'UK South'
-  acrHostName: 'keyifytest.azurecr.io'
-  acrName: 'keyifyTest'
-  rgName: 'Keyify'
-  imageName: 'keyifyTestImage'
-  webAppName: 'KeyifyWebAppTest'
+  location: 'westeurope'
+  acrHostName: 'keyifytestcicd.azurecr.io'
+  acrName: 'keyifyTestCiCd'
+  rgName: 'KeyifyCiCd'
+  imageName: 'KeyifyWebAppTest-CI-CD-Image'
+  webAppName: 'KeyifyWebAppTest-CI-CD'
 
 stages:
 
@@ -25,15 +25,26 @@ stages:
     steps:
 
     # Create or update the ACR resource
-    - task: AzureResourceGroupDeployment@2
-      displayName: 'Azure Deployment:Create Azure Container Registry'
+    #- task: AzureResourceGroupDeployment@2
+    #  displayName: 'Azure Deployment:Create Azure Container Registry'
+    #  inputs:
+    #    azureSubscription: 'AzureSC'
+    #    resourceGroupName: '$(rgName)'
+    #    location: $(location)
+    #    #csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
+    #    overrideParameters: '-webAppName "$(webAppName)" -hostingPlanName "$(webAppName)" -appInsightsLocation "$(location)" -registryName "$(acrName)" -registryLocation "$(location)" -registrySku Standard -imageName "$(imageName):$(Build.BuildId)"'
+    
+    - task: AzureResourceManagerTemplateDeployment@3
       inputs:
-        azureSubscription: 'AzureSC'
-        resourceGroupName: '$(rgName)'
+        deploymentScope: 'Resource Group'
+        azureResourceManagerConnection: 'AzureSC'
+        subscriptionId: 'a2fc1bcd-3446-47ea-9525-20f2a1a0de97'
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: $(rgName)
         location: $(location)
+        #templateLocation: 'Linked artifact'
         csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
-        overrideParameters: '-webAppName "$(webAppName)" -hostingPlanName "$(webAppName)" -appInsightsLocation "$(location)" -registryName "$(acrName)" -registryLocation "$(location)" -registrySku Standard -imageName "$(imageName):$(Build.BuildId)"'
-        # -webAppName $(webAppName) -hostingPlanName $(webAppName) -appInsightsLocation "$(location)" -sku "S1 Standard" -registryName $(acrName) -registryLocation "$(location)" -registrySku standard -imageName $(imageName):$(Build.BuildId)
+        #deploymentMode: 'Incremental'
 
     - task: UseDotNet@2
       displayName: 'Use .NET Core sdk'
