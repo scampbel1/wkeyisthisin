@@ -102,6 +102,7 @@ stages:
         imageName: '$(imageName):$(Build.BuildId)'
         useDefaultContext: false
         buildContext: '$(System.DefaultWorkingDirectory)/PublishedWebApp'
+        pushMultipleImages: false
 
     # Push container image
     - task: Docker@1
