@@ -32,7 +32,7 @@ stages:
         resourceGroupName: '$(rgName)'
         location: $(location)
         csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
-        overrideParameters: '-webAppName "$(webAppName)" -hostingPlanName "$(webAppName)" -appInsightsLocation "$(location)" -registryName "$(acrName)" -registryLocation "$(location)" -registrySku Standard -imageName "$(imageName):$(Build.BuildId)"'
+        overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
     
 #    - task: AzureResourceManagerTemplateDeployment@3
  #     inputs:
@@ -45,18 +45,19 @@ stages:
         #templateLocation: 'Linked artifact'
      #   csmFile: '
       #  #deploymentMode: 'Incremental'
-    - task: AzureResourceManagerTemplateDeployment@3
-      inputs:
-        deploymentScope: 'Resource Group'
-        azureResourceManagerConnection: 'AzureSC'
-        subscriptionId: 'a2fc1bcd-3446-47ea-9525-20f2a1a0de97'
-        action: 'Create Or Update Resource Group'
-        resourceGroupName: 'KeyifyCiCd'
-        location: 'West Europe'
-        templateLocation: 'Linked artifact'
-        csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
-        deploymentMode: 'Incremental'
-        overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
+
+ #   - task: AzureResourceManagerTemplateDeployment@3
+  #    inputs:
+   #     deploymentScope: 'Resource Group'
+    #    azureResourceManagerConnection: 'AzureSC'
+     #   subscriptionId: 'a2fc1bcd-3446-47ea-9525-20f2a1a0de97'
+      #  action: 'Create Or Update Resource Group'
+       # resourceGroupName: 'KeyifyCiCd'
+#        location: 'West Europe'
+ #       templateLocation: 'Linked artifact'
+  #      csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
+   #     deploymentMode: 'Incremental'
+    #    overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
 
     - task: UseDotNet@2
       displayName: 'Use .NET Core sdk'
