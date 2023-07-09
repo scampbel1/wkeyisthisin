@@ -12,7 +12,8 @@ variables:
   acrName: 'keyifyTestCiCd'
   rgName: 'KeyifyCiCd'
   imageName: 'KeyifyWebAppTest-CI-CD-Image'
-  webAppName: 'webby-vf2lmfjft6fvo'
+  webAppName: 'KeyifyWebAppTest-CI-CD'
+  # KeyifyWebAppTest-CI-CD
 
 stages:
 
