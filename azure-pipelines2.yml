@@ -83,6 +83,8 @@ stages:
         command: test
         projects: '**/Keyify.Web.Controller.Unit.Test.csproj'
         arguments: '--configuration $(BuildConfiguration)'
+    
+    - task: PublishBuildArtifacts@1
 
     # Publish the app
     - task: DotNetCoreCLI@2
