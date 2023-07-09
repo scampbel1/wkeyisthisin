@@ -224,6 +224,10 @@ stages:
         csmFile: '$(Pipeline.Workspace)/**/container-webapp-template.json'
         overrideParameters: '-webAppName $(webAppName) -hostingPlanName $(webAppName) -appInsightsLocation "$(location)" -sku "S1 Standard" -registryName $(acrName) -registryLocation "$(location)" -registrySku standard -imageName $(imageName):$(Build.BuildId)'
 
+    - task: PowerShell@2
+      displayName: 'Search: $(Build.ArtifactStagingDirectory)'
+    - powershell: Get-ChildItem -Path '$(Build.ArtifactStagingDirectory)' -recurse
+    
     # Deploy App Service
     - task: AzureRmWebAppDeployment@3
       displayName: 'Deploy Azure App Service'
