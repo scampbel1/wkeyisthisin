@@ -269,7 +269,7 @@ stages:
         azureSubscription: 'AzureSC'
         appType: 'webApp'
         WebAppName: '$(webAppName)'
-        packageForLinux: 'D:/a/1/archives/*.zip'
+        packageForLinux: 'D:/a/1/a/archives/*.zip'
         #packageForLinux: '$(Build.ArtifactStagingDirectory)/archives/*.zip'
         #$(Build.ArtifactStagingDirectory)/archives/
         DockerNamespace: $(acrHostName)
