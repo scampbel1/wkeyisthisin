@@ -196,7 +196,7 @@ stages:
   jobs:
   - job: Release
     pool:
-      vmImage: 'windows-lastest'
+      vmImage: 'windows-latest'
     steps:
     # Don't clone the repo
     - checkout: none
