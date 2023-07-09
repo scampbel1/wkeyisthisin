@@ -12,7 +12,7 @@ variables:
   acrName: 'keyifyTestCiCd'
   rgName: 'KeyifyCiCd'
   imageName: 'KeyifyWebAppTest-CI-CD-Image'
-  webAppName: 'KeyifyWebAppTest-CI-CD'
+  webAppName: 'webby-vf2lmfjft6fvo'
 
 stages:
 
@@ -248,17 +248,30 @@ stages:
 
     
     # Deploy App Service
-    - task: AzureRmWebAppDeployment@3
-      displayName: 'Deploy Azure App Service'
+    # - task: AzureRmWebAppDeployment@3
+    #   displayName: 'Deploy Azure App Service'
+    #   inputs:
+    #     azureSubscription: 'AzureSC'
+    #     appType: app
+    #     WebAppName: $(webAppName)
+    #     DockerNamespace: $(acrHostName)
+    #     DockerRepository: $(webAppName)
+    #     DockerImageTag: '$(Build.BuildId)'
+    #     WebAppUri: webAppUrl
+    #     TakeAppOfflineFlag: true
+    #     UseWebDeploy: true
+    #     RenameFilesFlag: true
+        
+    - task: AzureRmWebAppDeployment@4
       inputs:
+        ConnectionType: 'AzureRM'
         azureSubscription: 'AzureSC'
-        appType: app
-        WebAppName: $(webAppName)
+        appType: 'webApp'
+        WebAppName: '$(webAppName)'
+        packageForLinux: '$(Build.BinariesDirectory)/archives/*.zip'
+        #packageForLinux: '$(Build.ArtifactStagingDirectory)/archives/*.zip'
+        #$(Build.ArtifactStagingDirectory)/archives/
         DockerNamespace: $(acrHostName)
         DockerRepository: $(webAppName)
         DockerImageTag: '$(Build.BuildId)'
-        WebAppUri: webAppUrl
-        TakeAppOfflineFlag: true
         UseWebDeploy: true
-        RenameFilesFlag: true        
-        
