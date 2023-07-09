@@ -211,7 +211,7 @@ stages:
         rootFolderOrFile: '$(Build.BinariesDirectory)'
         includeRootFolder: true
         archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/archives/$(Build.BuildId).zip'
         replaceExistingArchive: true
 
     # Create or update Azure App Service
@@ -237,4 +237,5 @@ stages:
         WebAppUri: webAppUrl
         TakeAppOfflineFlag: true
         UseWebDeploy: true
-        RenameFilesFlag: true
+        RenameFilesFlag: true        
+        
