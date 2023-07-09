@@ -123,16 +123,16 @@ stages:
         command: 'Push an image'
         imageName: '$(imageName):$(Build.BuildId)'
 
-    # Copy ARM templates
-    - task: CopyFiles@2
-      displayName: 'Copy ARM templates'
-      inputs:
-        SourceFolder: ArmTemplates
-        TargetFolder: '$(build.artifactstagingdirectory)'
+#    # Copy ARM templates
+ #   - task: CopyFiles@2
+  #    displayName: 'Copy ARM templates'
+   #   inputs:
+    #    SourceFolder: ArmTemplates
+     #   TargetFolder: '$(build.artifactstagingdirectory)'
 
-    # Publish the app as an artifact
-    - publish: $(Build.StagingDirectory)
-      artifact: app
+   # # Publish the app as an artifact
+    #- publish: $(Build.StagingDirectory)
+     # artifact: app
 
 # Staging release
 - stage: Staging
