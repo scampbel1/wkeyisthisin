@@ -84,7 +84,15 @@ stages:
         projects: '**/Keyify.Web.Controller.Unit.Test.csproj'
         arguments: '--configuration $(BuildConfiguration)'
     
+    # https://stackoverflow.com/questions/44153600/vsts-directory-d-a-1-a-is-empty-nothing-will-be-added-to-build-artifact-dr
+    - task: CopyFiles@2
+      inputs:
+        targetFolder: '$(Build.ArtifactStagingDirectory)'    
+
     - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
+      inputs:
+        PathtoPublish: '$(build.artifactstagingdirectory)'
 
     # Publish the app
     - task: DotNetCoreCLI@2
