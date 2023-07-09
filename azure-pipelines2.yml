@@ -172,7 +172,7 @@ stages:
     #    TakeAppOfflineFlag: true
      #   UseWebDeploy: true
       #  RenameFilesFlag: true
-
+              
     - task: AzureWebApp@1
       inputs:
         azureSubscription: 'AzureSC'
@@ -181,5 +181,6 @@ stages:
         deployToSlotOrASE: true
         resourceGroupName: 'KeyifyCiCd'
         slotName: 'production'
-        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-        deploymentMethod: 'auto'
+        #package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        package: '$(build.artifactstagingdirectory)/**/*.zip'
+        deploymentMethod: 'runFromPackage'
