@@ -34,17 +34,28 @@ stages:
         csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
         overrideParameters: '-webAppName "$(webAppName)" -hostingPlanName "$(webAppName)" -appInsightsLocation "$(location)" -registryName "$(acrName)" -registryLocation "$(location)" -registrySku Standard -imageName "$(imageName):$(Build.BuildId)"'
     
+#    - task: AzureResourceManagerTemplateDeployment@3
+ #     inputs:
+  #      deploymentScope: 'Resource Group'
+   #     azureResourceManagerConnection: 'AzureSC'
+    #    subscriptionId: 'a2fc1bcd-3446-47ea-9525-20f2a1a0de97'
+     #   action: 'Create Or Update Resource Group'
+      #  resourceGroupName: $(rgName)
+       # location: $(location)
+        #templateLocation: 'Linked artifact'
+     #   csmFile: '
+      #  #deploymentMode: 'Incremental'
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
         deploymentScope: 'Resource Group'
         azureResourceManagerConnection: 'AzureSC'
         subscriptionId: 'a2fc1bcd-3446-47ea-9525-20f2a1a0de97'
         action: 'Create Or Update Resource Group'
-        resourceGroupName: $(rgName)
-        location: $(location)
-        #templateLocation: 'Linked artifact'
+        resourceGroupName: 'KeyifyCiCd'
+        location: 'West Europe'
+        templateLocation: 'Linked artifact'
         csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
-        #deploymentMode: 'Incremental'
+        deploymentMode: 'Incremental'
 
     - task: UseDotNet@2
       displayName: 'Use .NET Core sdk'
