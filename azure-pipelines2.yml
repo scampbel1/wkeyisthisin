@@ -145,7 +145,7 @@ stages:
         azureSubscription: 'AzureSC'
         resourceGroupName: '$(rgName)'
         location: '$(location)'
-        csmFile: '$(build.artifactstagingdirectory)/containerRegistry-template.json'
+        csmFile: '$(build.artifactstagingdirectory)/**/containerRegistry-template.json'
         overrideParameters: '-webAppName $(webAppName) -hostingPlanName $(webAppName) -appInsightsLocation "$(location)" -sku "S1 Standard" -registryName $(acrName) -registryLocation "$(location)" -registrySku standard -imageName $(imageName):$(Build.BuildId)'
 
     # Deploy App Service
