@@ -32,7 +32,7 @@ stages:
         resourceGroupName: '$(rgName)'
         location: $(location)
         csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
-        overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
+        #overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
     
 #    - task: AzureResourceManagerTemplateDeployment@3
  #     inputs:
