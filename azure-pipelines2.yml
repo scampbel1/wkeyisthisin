@@ -103,7 +103,7 @@ stages:
         targetFolder: '$(Build.ArtifactStagingDirectory)'    
 
     - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
+      displayName: 'Publish Artifact: app'
       inputs:
         PathtoPublish: '$(build.artifactstagingdirectory)'
 
@@ -147,19 +147,63 @@ stages:
     #- publish: $(Build.StagingDirectory)
      # artifact: app
 
+# # Staging release
+# - stage: Staging
+#   jobs:
+#   - job: Release
+#     pool:
+#       vmImage: 'windows-latest'
+#     steps:
+#     # Don't clone the repo
+#     - checkout: none
+
+#     # Download the published application artifact
+#     - download: current
+#       artifact: drop
+
+#     # Create or update Azure App Service
+#     - task: AzureResourceGroupDeployment@2
+#       displayName: 'Azure Deployment:Create Azure App Service'
+#       inputs:
+#         azureSubscription: 'AzureSC'
+#         resourceGroupName: '$(rgName)'
+#         location: '$(location)'
+#         csmFile: '$(Pipeline.Workspace)/**/container-webapp-template.json'
+#         overrideParameters: '-webAppName $(webAppName) -hostingPlanName $(webAppName) -appInsightsLocation "$(location)" -sku "S1 Standard" -registryName $(acrName) -registryLocation "$(location)" -registrySku standard -imageName $(imageName):$(Build.BuildId)'
+
+#     #- task: PowerShell@2
+#       #displayName: 'Search root'
+#     - powershell: Get-ChildItem -Path 'D:/' -recurse
+    
+#     - powershell: Get-ChildItem -Path '$(System.DefaultWorkingDirectory)' -recurse
+
+#     # Deploy App Service
+#     #- task: PublishBuildArtifacts@1
+
+#     # Note - pipeline succeeds above this line when using '- task: PublishBuildArtifacts@1' - currently can't find Docker image post deployment
+
+#     - task: AzureRmWebAppDeployment@4
+#       inputs:
+#         ConnectionType: 'AzureRM'
+#         azureSubscription: 'AzureSC'
+#         appType: 'webApp'
+#         WebAppName: 'webby-vf2lmfjft6fvo'
+#         packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+
+
 # Staging release
 - stage: Staging
   jobs:
   - job: Release
     pool:
-      vmImage: 'windows-latest'
+      vmImage: 'windows-lastest'
     steps:
     # Don't clone the repo
     - checkout: none
 
     # Download the published application artifact
     - download: current
-      artifact: drop
+      artifact: app
 
     # Create or update Azure App Service
     - task: AzureResourceGroupDeployment@2
@@ -171,21 +215,17 @@ stages:
         csmFile: '$(Pipeline.Workspace)/**/container-webapp-template.json'
         overrideParameters: '-webAppName $(webAppName) -hostingPlanName $(webAppName) -appInsightsLocation "$(location)" -sku "S1 Standard" -registryName $(acrName) -registryLocation "$(location)" -registrySku standard -imageName $(imageName):$(Build.BuildId)'
 
-    #- task: PowerShell@2
-      #displayName: 'Search root'
-    - powershell: Get-ChildItem -Path 'D:/' -recurse
-    
-    - powershell: Get-ChildItem -Path '$(System.DefaultWorkingDirectory)' -recurse
-
     # Deploy App Service
-    #- task: PublishBuildArtifacts@1
-
-    # Note - pipeline succeeds above this line when using '- task: PublishBuildArtifacts@1' - currently can't find Docker image post deployment
-
-    - task: AzureRmWebAppDeployment@4
+    - task: AzureRmWebAppDeployment@3
+      displayName: 'Deploy Azure App Service'
       inputs:
-        ConnectionType: 'AzureRM'
         azureSubscription: 'AzureSC'
-        appType: 'webApp'
-        WebAppName: 'webby-vf2lmfjft6fvo'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        appType: applinux
+        WebAppName: $(webAppName)
+        DockerNamespace: $(acrHostName)
+        DockerRepository: $(webAppName)
+        DockerImageTag: '$(Build.BuildId)'
+        WebAppUri: webAppUrl
+        TakeAppOfflineFlag: true
+        UseWebDeploy: true
+        RenameFilesFlag: true
