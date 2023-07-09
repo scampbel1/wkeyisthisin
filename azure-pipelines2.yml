@@ -114,11 +114,11 @@ stages:
         imageName: '$(imageName):$(Build.BuildId)'
 
     # Copy ARM templates
-    #- task: CopyFiles@2
-    #  displayName: 'Copy ARM templates'
-    #  inputs:
-    #    SourceFolder: ArmTemplates
-    #    TargetFolder: '$(build.artifactstagingdirectory)'
+    - task: CopyFiles@2
+      displayName: 'Copy ARM templates'
+      inputs:
+        SourceFolder: ArmTemplates
+        TargetFolder: '$(build.artifactstagingdirectory)'
 
     # Publish the app as an artifact
     - publish: $(Build.StagingDirectory)
@@ -145,7 +145,7 @@ stages:
         azureSubscription: 'AzureSC'
         resourceGroupName: '$(rgName)'
         location: '$(location)'
-        csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
+        csmFile: '$(build.artifactstagingdirectory)/containerRegistry-template.json'
         overrideParameters: '-webAppName $(webAppName) -hostingPlanName $(webAppName) -appInsightsLocation "$(location)" -sku "S1 Standard" -registryName $(acrName) -registryLocation "$(location)" -registrySku standard -imageName $(imageName):$(Build.BuildId)'
 
     # Deploy App Service
