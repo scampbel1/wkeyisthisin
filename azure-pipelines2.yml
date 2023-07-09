@@ -90,7 +90,7 @@ stages:
       inputs:
         command: publish
         publishWebProjects: True
-        arguments: '--configuration $(BuildConfiguration) --output $(System.DefaultWorkingDirectory)/PublishedWebApp'
+        arguments: '--configuration $(BuildConfiguration) --output $(System.DefaultWorkingDirectory)'
         zipAfterPublish: false
 
     # Build container image
@@ -101,7 +101,7 @@ stages:
         azureContainerRegistry: '$(acrHostName)'
         imageName: '$(imageName):$(Build.BuildId)'
         useDefaultContext: false
-        buildContext: '$(System.DefaultWorkingDirectory)/PublishedWebApp'
+        buildContext: '$(System.DefaultWorkingDirectory)'
         pushMultipleImages: false
 
     # Push container image
