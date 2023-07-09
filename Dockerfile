@@ -1,26 +1,33 @@
-# Stage 1: Build the application
+# https://hub.docker.com/_/microsoft-dotnet
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /app
+WORKDIR /source
 
-# Copy the project file and restore dependencies
-COPY */Keyify.Web.csproj .
-RUN dotnet restore
+# copy csproj and restore as distinct layers
+COPY Keyify.Web/*.csproj Keyify.Web/
+COPY Keyify.Infrastructure/*.csproj Keyify.Infrastructure/
+COPY Keyify.MusicTheory/*.csproj Keyify.MusicTheory/
+COPY Keyify.Service/*.csproj Keyify.Service/
+COPY Keyify.Services.Formatter/*.csproj Keyify.Services.Formatter/
+COPY Keyify.Services.Models/*.csproj Keyify.Services.Models/
 
-# Copy the rest of the source code and build the application
-COPY . .
-RUN dotnet build -c Release --no-restore
+RUN dotnet restore Keyify.Web/Keyify.Web.csproj
 
-# Stage 2: Publish the application
+# copy and build app and libraries
+COPY Keyify.Web/ Keyify.Web/
+COPY Keyify.Infrastructure/ Keyify.Infrastructure/
+COPY Keyify.MusicTheory/ Keyify.MusicTheory/
+COPY Keyify.Service/ Keyify.Service/
+COPY Keyify.Services.Formatter/ Keyify.Services.Formatter/
+COPY Keyify.Services.Models/ Keyify.Services.Models/
+
+WORKDIR /source/Keyify.Web
+RUN dotnet build -c release --no-restore
+
 FROM build AS publish
-RUN dotnet publish -c Release --no-build -o /app/publish
+RUN dotnet publish -c release --no-build -o /app
 
-# Stage 3: Create a runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
+# final stage/image
+FROM mcr.microsoft.com/dotnet/runtime:7.0
 WORKDIR /app
-EXPOSE 80 443
-
-# Copy the published output from the previous stage
-COPY --from=publish /app/publish .
-
-# Set the entry point for the application
+COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "Keyify.Web.dll"]
