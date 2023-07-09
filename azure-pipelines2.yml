@@ -13,7 +13,6 @@ variables:
   rgName: 'KeyifyCiCd'
   imageName: 'KeyifyWebAppTest-CI-CD2-Image'
   webAppName: 'KeyifyWebAppTest-CI-CD2'
-  # KeyifyWebAppTest-CI-CD
 
 stages:
 
@@ -141,46 +140,29 @@ stages:
         resourceGroupName: '$(rgName)'
         location: '$(location)'
         csmFile: '$(Pipeline.Workspace)/**/container-webapp-template.json'
-        # overrideParameters: '-webAppName $(webAppName) -hostingPlanName $(webAppName) -appInsightsLocation "$(location)" -sku "S1 Standard" -registryName $(acrName) -registryLocation "$(location)" -registrySku standard -imageName $(imageName):$(Build.BuildId)'
 
     # - task: PowerShell@2
     # - powershell: Get-ChildItem -Path 'D:/' -recurse
     # - powershell: Get-ChildItem -Path '$(Build.ArtifactStagingDirectory)' -recurse
 
-    - task: CmdLine@2
-      inputs:
-        script: |
-          echo "Structure of work folder of this pipeline:"
-          tree $(Agent.WorkFolder)\1 /f
-          
-          echo "Build.ArtifactStagingDirectory:" 
-          
-          echo "$(Build.ArtifactStagingDirectory)"
-          
-          echo "Build.BinariesDirectory:" 
-          
-          echo "$(Build.BinariesDirectory)"
-          
-          echo "Build.SourcesDirectory:"
-          
-          echo "$(Build.SourcesDirectory)"
-
-    
-    # Deploy App Service
-    # - task: AzureRmWebAppDeployment@3
-    #   displayName: 'Deploy Azure App Service'
+    # - task: CmdLine@2
     #   inputs:
-    #     azureSubscription: 'AzureSC'
-    #     appType: app
-    #     WebAppName: $(webAppName)
-    #     DockerNamespace: $(acrHostName)
-    #     DockerRepository: $(webAppName)
-    #     DockerImageTag: '$(Build.BuildId)'
-    #     WebAppUri: webAppUrl
-    #     TakeAppOfflineFlag: true
-    #     UseWebDeploy: true
-    #     RenameFilesFlag: true
-        
+    #     script: |
+    #       echo "Structure of work folder of this pipeline:"
+    #       tree $(Agent.WorkFolder)\1 /f
+          
+    #       echo "Build.ArtifactStagingDirectory:" 
+          
+    #       echo "$(Build.ArtifactStagingDirectory)"
+          
+    #       echo "Build.BinariesDirectory:" 
+          
+    #       echo "$(Build.BinariesDirectory)"
+          
+    #       echo "Build.SourcesDirectory:"
+          
+    #       echo "$(Build.SourcesDirectory)"
+
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
