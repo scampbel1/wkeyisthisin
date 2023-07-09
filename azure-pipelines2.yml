@@ -158,29 +158,29 @@ stages:
         csmFile: '$(Pipeline.Workspace)/**/container-webapp-template.json'
         overrideParameters: '-webAppName $(webAppName) -hostingPlanName $(webAppName) -appInsightsLocation "$(location)" -sku "S1 Standard" -registryName $(acrName) -registryLocation "$(location)" -registrySku standard -imageName $(imageName):$(Build.BuildId)'
 
-  #  # Deploy App Service
-   # - task: AzureRmWebAppDeployment@3
-    #  displayName: 'Deploy Azure App Service'
-     # inputs:
-      #  azureSubscription: 'AzureSC'
-       # appType: app
-   #     WebAppName: $(webAppName)
-    #    DockerNamespace: $(acrHostName)
-     #   DockerRepository: $(webAppName)
-      #  DockerImageTag: '$(Build.BuildId)'
-       # WebAppUri: webAppUrl
-    #    TakeAppOfflineFlag: true
-     #   UseWebDeploy: true
-      #  RenameFilesFlag: true
-              
-    - task: AzureWebApp@1
+    # Deploy App Service
+    - task: AzureRmWebAppDeployment@3
+      displayName: 'Deploy Azure App Service'
       inputs:
         azureSubscription: 'AzureSC'
-        appType: 'webApp'
-        appName: 'webby-vf2lmfjft6fvo'
-        deployToSlotOrASE: true
-        resourceGroupName: 'KeyifyCiCd'
-        slotName: 'production'
-        #package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-        package: '$(Build.ArtifactStagingDirectory)/*.zip'
-        deploymentMethod: 'runFromPackage'
+        appType: app
+        WebAppName: $(webAppName)
+        DockerNamespace: $(acrHostName)
+        DockerRepository: $(webAppName)
+        DockerImageTag: '$(Build.BuildId)'
+        WebAppUri: webAppUrl
+        TakeAppOfflineFlag: true
+        UseWebDeploy: true
+        RenameFilesFlag: true
+              
+#    - task: AzureWebApp@1
+ #     inputs:
+  #      azureSubscription: 'AzureSC'
+   #     appType: 'webApp'
+    #    appName: 'webby-vf2lmfjft6fvo'
+     #   deployToSlotOrASE: true
+      #  resourceGroupName: 'KeyifyCiCd'
+       # slotName: 'production'
+#        #package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+ #       package: '$(Build.ArtifactStagingDirectory)/*.zip'
+  #      deploymentMethod: 'runFromPackage'
