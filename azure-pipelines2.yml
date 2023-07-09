@@ -103,7 +103,7 @@ stages:
         targetFolder: '$(Build.ArtifactStagingDirectory)'    
 
     - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: app'
+      displayName: 'Publish Artifact: drop'
       inputs:
         PathtoPublish: '$(build.artifactstagingdirectory)'
 
@@ -203,7 +203,7 @@ stages:
 
     # Download the published application artifact
     - download: current
-      artifact: app
+      artifact: drop
 
     # Create or update Azure App Service
     - task: AzureResourceGroupDeployment@2
@@ -220,7 +220,7 @@ stages:
       displayName: 'Deploy Azure App Service'
       inputs:
         azureSubscription: 'AzureSC'
-        appType: applinux
+        appType: app
         WebAppName: $(webAppName)
         DockerNamespace: $(acrHostName)
         DockerRepository: $(webAppName)
