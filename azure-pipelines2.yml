@@ -182,5 +182,5 @@ stages:
         resourceGroupName: 'KeyifyCiCd'
         slotName: 'production'
         #package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-        package: '$(build.artifactstagingdirectory)/**/*.zip'
+        package: '$(Build.ArtifactStagingDirectory)/*.zip'
         deploymentMethod: 'runFromPackage'
