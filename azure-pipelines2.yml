@@ -158,5 +158,21 @@ stages:
         csmFile: '$(Pipeline.Workspace)/**/container-webapp-template.json'
         overrideParameters: '-webAppName $(webAppName) -hostingPlanName $(webAppName) -appInsightsLocation "$(location)" -sku "S1 Standard" -registryName $(acrName) -registryLocation "$(location)" -registrySku standard -imageName $(imageName):$(Build.BuildId)'
 
+    #- task: PowerShell@2
+      #displayName: 'Search root'
+    - powershell: Get-ChildItem -Path 'D:/' -recurse
+    
+    - powershell: Get-ChildItem -Path '$(System.DefaultWorkingDirectory)' -recurse
+
     # Deploy App Service
-    - task: PublishBuildArtifacts@1
+    #- task: PublishBuildArtifacts@1
+
+    # Note - pipeline succeeds above this line when using '- task: PublishBuildArtifacts@1' - currently can't find Docker image post deployment
+
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'AzureSC'
+        appType: 'webApp'
+        WebAppName: 'webby-vf2lmfjft6fvo'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
