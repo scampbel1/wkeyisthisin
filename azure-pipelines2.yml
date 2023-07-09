@@ -226,7 +226,7 @@ stages:
 
     - task: PowerShell@2
       displayName: 'Search: $(Build.ArtifactStagingDirectory)'
-    - powershell: Get-ChildItem -Path '$(Build.ArtifactStagingDirectory)' -recurse
+    - powershell: Get-ChildItem -Path '$(Build.ArtifactStagingDirectory)/' -recurse
     
     # Deploy App Service
     - task: AzureRmWebAppDeployment@3
