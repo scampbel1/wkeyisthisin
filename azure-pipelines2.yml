@@ -205,6 +205,15 @@ stages:
     - download: current
       artifact: drop
 
+    - task: ArchiveFiles@2
+      displayName: 'Zippy Zippy'
+      inputs:
+        rootFolderOrFile: '$(Build.BinariesDirectory)'
+        includeRootFolder: true
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        replaceExistingArchive: true
+
     # Create or update Azure App Service
     - task: AzureResourceGroupDeployment@2
       displayName: 'Azure Deployment:Create Azure App Service'
