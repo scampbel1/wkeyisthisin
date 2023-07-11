@@ -1,0 +1,191 @@
+#Copied from: https://github.com/CloudSkills/aspnet-core-docker-demo/blob/master/azure-pipelines.yaml
+#Following tutorial: https://www.youtube.com/watch?v=272GOWKDqP4
+
+trigger:
+  branches:
+    include: 
+    - master
+variables:
+  buildConfiguration: 'Release'
+  location: 'westeurope'
+  acrHostName: 'keyifytestcicd.azurecr.io'
+  acrName: 'keyifyTestCiCd'
+  rgName: 'KeyifyCiCd'
+  imageName: 'KeyifyWebAppTest-CI-CD2-Image'
+  webAppName: 'KeyifyWebAppTest-CI-CD2'
+
+stages:
+
+# Build Stage
+- stage: BuildAndTest
+  jobs:
+  - job: BuildAndTest
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+
+    # Create or update the ACR resource
+    - task: AzureResourceGroupDeployment@2
+      displayName: 'Azure Deployment:Create Azure Container Registry'
+      inputs:
+        azureSubscription: 'AzureSC'
+        resourceGroupName: '$(rgName)'
+        location: $(location)
+        csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
+    - task: UseDotNet@2
+      displayName: 'Use .NET Core sdk'
+      inputs:
+        packageType: sdk
+        version: 7.x
+        installationPath: $(Agent.ToolsDirectory)/dotnet
+  
+    # Restore dependencies
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet restore'
+      inputs:
+        command: restore
+        projects: '**/*.csproj'
+
+    # Build app
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build $(buildConfiguration)'
+      inputs:
+        command: build
+        projects: '**/*.csproj'
+        arguments: '--configuration $(buildConfiguration)'
+
+    # Run unit tests
+    - task: DotNetCoreCLI@2
+      displayName: Unit Tests
+      inputs:
+        command: test
+        projects: '**/Keyify.Web.Unit.Test.csproj'
+        arguments: '--configuration $(BuildConfiguration)'
+
+    # Run controller unit tests
+    - task: DotNetCoreCLI@2
+      displayName: Controller Unit Tests
+      inputs:
+        command: test
+        projects: '**/Keyify.Web.Controller.Unit.Test.csproj'
+        arguments: '--configuration $(BuildConfiguration)'
+    
+    # https://stackoverflow.com/questions/44153600/vsts-directory-d-a-1-a-is-empty-nothing-will-be-added-to-build-artifact-dr
+    - task: CopyFiles@2
+      inputs:
+        targetFolder: '$(Build.ArtifactStagingDirectory)'    
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
+      inputs:
+        PathtoPublish: '$(build.artifactstagingdirectory)'
+
+    # Publish the app
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet publish'
+      inputs:
+        command: publish
+        publishWebProjects: True
+        arguments: '--configuration $(BuildConfiguration) --output $(System.DefaultWorkingDirectory)'
+        zipAfterPublish: false
+
+    # Build container image
+    - task: Docker@1
+      displayName: 'Build container image'
+      inputs:
+        azureSubscriptionEndpoint: 'AzureSC'
+        azureContainerRegistry: '$(acrHostName)'
+        imageName: '$(imageName):$(Build.BuildId)'
+        useDefaultContext: false
+        buildContext: '$(System.DefaultWorkingDirectory)'
+        pushMultipleImages: false
+
+    # Push container image
+    - task: Docker@1
+      displayName: 'Push container image'
+      inputs:
+        azureSubscriptionEndpoint: 'AzureSC'
+        azureContainerRegistry: '$(acrHostName)'
+        command: 'Push an image'
+        imageName: '$(imageName):$(Build.BuildId)'
+
+# Staging release
+- stage: Staging
+  jobs:
+  - job: Release
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    # Don't clone the repo
+    - checkout: none
+
+    # Download the published application artifact
+    - download: current
+      artifact: drop
+
+    - task: ArchiveFiles@2
+      displayName: 'Zippy Zippy'
+      inputs:
+        rootFolderOrFile: '$(Build.BinariesDirectory)'
+        includeRootFolder: true
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/archives/$(Build.BuildId).zip'
+        replaceExistingArchive: true
+
+    # Create or update Azure App Service
+    - task: AzureResourceGroupDeployment@2
+      displayName: 'Azure Deployment:Create Azure App Service'
+      inputs:
+        azureSubscription: 'AzureSC'
+        resourceGroupName: '$(rgName)'
+        location: '$(location)'
+        csmFile: '$(Pipeline.Workspace)/**/container-webapp-template.json'
+
+
+
+    # - task: PowerShell@2
+    # - powershell: Get-ChildItem -Path 'D:/' -recurse
+    # - powershell: Get-ChildItem -Path '$(Build.ArtifactStagingDirectory)' -recurse
+
+    # - task: CmdLine@2
+    #   inputs:
+    #     script: |
+    #       echo "Structure of work folder of this pipeline:"
+    #       tree $(Agent.WorkFolder)\1 /f
+          
+    #       echo "Build.ArtifactStagingDirectory:" 
+          
+    #       echo "$(Build.ArtifactStagingDirectory)"
+          
+    #       echo "Build.BinariesDirectory:" 
+          
+    #       echo "$(Build.BinariesDirectory)"
+          
+    #       echo "Build.SourcesDirectory:"
+          
+    #       echo "$(Build.SourcesDirectory)"
+
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'AzureSC'
+        appType: 'webApp'
+        WebAppName: '$(webAppName)'
+        packageForLinux: 'D:/a/1/a/archives/*.zip'
+        #packageForLinux: '$(Build.ArtifactStagingDirectory)/archives/*.zip'
+        #$(Build.ArtifactStagingDirectory)/archives/
+        DockerNamespace: $(acrHostName)
+        DockerRepository: 'keyifyTestCiCd'
+        DockerImageTag: '$(Build.BuildId)'
+        UseWebDeploy: true
+
+    # - task: AzureRmWebAppDeployment@4
+    #   inputs:
+    #     ConnectionType: 'AzureRM'
+    #     azureSubscription: 'AzureSC'
+    #     appType: 'webApp'
+    #     WebAppName: 'KeyifyWebAppTest-CI-CD2'
+    #     deployToSlotOrASE: true
+    #     ResourceGroupName: 'KeyifyCiCd'
+    #     SlotName: 'production'
+    #     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
