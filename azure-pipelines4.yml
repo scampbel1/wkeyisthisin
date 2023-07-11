@@ -123,9 +123,18 @@ stages:
     # Don't clone the repo
     - checkout: none
 
+
+
     # # Download the published application artifact
     # - download: current
     #   artifact: drop
+
+    - task: AzureContainerApps@1
+      inputs:
+        azureSubscription: 'Sean Campbell(1)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
+        acrName: 'KeyifyDockerTest'
+        acrUsername: 'KeyifyDockerTest'
+        acrPassword: 'NSRq2f3IJeMQpmsOiXJPeQ1OzRXMdFwDbmRWkjd9pw+ACRA/jJGE'
 
     # - task: ArchiveFiles@2
     #   displayName: 'Zippy Zippy'
@@ -136,14 +145,14 @@ stages:
     #     archiveFile: '$(Build.ArtifactStagingDirectory)/archives/$(Build.BuildId).zip'
     #     replaceExistingArchive: true
 
-    # Create or update Azure App Service
-    - task: AzureResourceGroupDeployment@2
-      displayName: 'Azure Deployment:Create Azure App Service'
-      inputs:
-        azureSubscription: 'AzureSC'
-        resourceGroupName: '$(rgName)'
-        location: '$(location)'
-        csmFile: '$(Pipeline.Workspace)/**/container-webapp-template.json'
+    # # Create or update Azure App Service
+    # - task: AzureResourceGroupDeployment@2
+    #   displayName: 'Azure Deployment:Create Azure App Service'
+    #   inputs:
+    #     azureSubscription: 'AzureSC'
+    #     resourceGroupName: '$(rgName)'
+    #     location: '$(location)'
+    #     csmFile: '$(Pipeline.Workspace)/**/container-webapp-template.json'
 
     # - task: PowerShell@2
     # - powershell: Get-ChildItem -Path 'D:/' -recurse
