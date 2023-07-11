@@ -142,11 +142,12 @@ stages:
         azureSubscription: 'Sean Campbell(1)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
         acrName: 'KeyifyDockerTest'
         acrUsername: 'KeyifyDockerTest'
-        acrPassword: 'NSRq2f3IJeMQpmsOiXJPeQ1OzRXMdFwDbmRWkjd9pw+ACRA/jJGE'
+        acrPassword: 'loGfs9CeJf17aizd4Dy5Ai65qG5INL5owg11X6k8ms+ACRDjVhPZ'
         # imageToBuild: 'keyifydockertest-image'
         imageToDeploy: 'keyifydockertest-image'
         containerAppName: 'keyifydockertest'
         resourceGroup: 'KeyifyDockerTest'
+        appSourcePath: '$(System.DefaultWorkingDirectory)'
         # imageName: 'KeyifyDockerTest-Image'
 
     # - task: ArchiveFiles@2
