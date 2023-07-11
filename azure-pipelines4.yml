@@ -136,6 +136,24 @@ stages:
     #     acrUsername: 'KeyifyDockerTest'
     #     acrPassword: 'NSRq2f3IJeMQpmsOiXJPeQ1OzRXMdFwDbmRWkjd9pw+ACRA/jJGE'
     #     imageToBuild: 'keyifydockertest-image'
+    
+    - task: CmdLine@2
+      inputs:
+        script: |
+          echo "Structure of work folder of this pipeline:"
+          tree $(Agent.WorkFolder)\1 /f
+          
+          echo "Build.ArtifactStagingDirectory:" 
+          
+          echo "$(Build.ArtifactStagingDirectory)"
+          
+          echo "Build.BinariesDirectory:" 
+          
+          echo "$(Build.BinariesDirectory)"
+          
+          echo "Build.SourcesDirectory:"
+          
+          echo "$(Build.SourcesDirectory)"
 
     - task: AzureContainerApps@1
       inputs:
@@ -147,7 +165,7 @@ stages:
         imageToDeploy: 'keyifydockertest-image'
         containerAppName: 'keyifydockertest'
         resourceGroup: 'KeyifyDockerTest'
-        appSourcePath: '$(System.DefaultWorkingDirectory)'
+        # appSourcePath: '$(System.DefaultWorkingDirectory)'
         # imageName: 'KeyifyDockerTest-Image'
 
     # - task: ArchiveFiles@2
@@ -172,23 +190,6 @@ stages:
     # - powershell: Get-ChildItem -Path 'D:/' -recurse
     # - powershell: Get-ChildItem -Path '$(Build.ArtifactStagingDirectory)' -recurse
 
-    # - task: CmdLine@2
-    #   inputs:
-    #     script: |
-    #       echo "Structure of work folder of this pipeline:"
-    #       tree $(Agent.WorkFolder)\1 /f
-          
-    #       echo "Build.ArtifactStagingDirectory:" 
-          
-    #       echo "$(Build.ArtifactStagingDirectory)"
-          
-    #       echo "Build.BinariesDirectory:" 
-          
-    #       echo "$(Build.BinariesDirectory)"
-          
-    #       echo "Build.SourcesDirectory:"
-          
-    #       echo "$(Build.SourcesDirectory)"
 
     # - task: AzureRmWebAppDeployment@4
     #   inputs:
