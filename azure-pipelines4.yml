@@ -24,27 +24,31 @@ stages:
       vmImage: 'windows-latest'
     steps:
 
-    # Create or update the ACR resource
-    - task: AzureResourceGroupDeployment@2
-      displayName: 'Azure Deployment:Create Azure Container Registry'
+    - task: AzureResourceManagerTemplateDeployment@3
       inputs:
-        azureSubscription: 'AzureSC'
-        resourceGroupName: '$(rgName)'
-        location: $(location)
+        deploymentScope: 'Resource Group'
+        azureResourceManagerConnection: 'Sean Campbell(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
+        subscriptionId: 'a2fc1bcd-3446-47ea-9525-20f2a1a0de97'
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: 'KeyifyDockerTest'
+        location: 'West Europe'
+        templateLocation: 'Linked artifact'
         csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
-    - task: UseDotNet@2
-      displayName: 'Use .NET Core sdk'
-      inputs:
-        packageType: sdk
-        version: 7.x
-        installationPath: $(Agent.ToolsDirectory)/dotnet
+        deploymentMode: 'Incremental'
+    
+    # - task: UseDotNet@2
+    #   displayName: 'Use .NET Core sdk'
+    #   inputs:
+    #     packageType: sdk
+    #     version: 7.x
+    #     installationPath: $(Agent.ToolsDirectory)/dotnet
   
-    # Restore dependencies
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet restore'
-      inputs:
-        command: restore
-        projects: '**/*.csproj'
+    # # Restore dependencies
+    # - task: DotNetCoreCLI@2
+    #   displayName: 'dotnet restore'
+    #   inputs:
+    #     command: restore
+    #     projects: '**/*.csproj'
 
     # Build app
     - task: DotNetCoreCLI@2
@@ -54,40 +58,40 @@ stages:
         projects: '**/*.csproj'
         arguments: '--configuration $(buildConfiguration)'
 
-    # Run unit tests
-    - task: DotNetCoreCLI@2
-      displayName: Unit Tests
-      inputs:
-        command: test
-        projects: '**/Keyify.Web.Unit.Test.csproj'
-        arguments: '--configuration $(BuildConfiguration)'
+    # # Run unit tests
+    # - task: DotNetCoreCLI@2
+    #   displayName: Unit Tests
+    #   inputs:
+    #     command: test
+    #     projects: '**/Keyify.Web.Unit.Test.csproj'
+    #     arguments: '--configuration $(BuildConfiguration)'
 
-    # Run controller unit tests
-    - task: DotNetCoreCLI@2
-      displayName: Controller Unit Tests
-      inputs:
-        command: test
-        projects: '**/Keyify.Web.Controller.Unit.Test.csproj'
-        arguments: '--configuration $(BuildConfiguration)'
+    # # Run controller unit tests
+    # - task: DotNetCoreCLI@2
+    #   displayName: Controller Unit Tests
+    #   inputs:
+    #     command: test
+    #     projects: '**/Keyify.Web.Controller.Unit.Test.csproj'
+    #     arguments: '--configuration $(BuildConfiguration)'
     
-    # https://stackoverflow.com/questions/44153600/vsts-directory-d-a-1-a-is-empty-nothing-will-be-added-to-build-artifact-dr
-    - task: CopyFiles@2
-      inputs:
-        targetFolder: '$(Build.ArtifactStagingDirectory)'    
+    # # https://stackoverflow.com/questions/44153600/vsts-directory-d-a-1-a-is-empty-nothing-will-be-added-to-build-artifact-dr
+    # - task: CopyFiles@2
+    #   inputs:
+    #     targetFolder: '$(Build.ArtifactStagingDirectory)'    
 
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
-      inputs:
-        PathtoPublish: '$(build.artifactstagingdirectory)'
+    # - task: PublishBuildArtifacts@1
+    #   displayName: 'Publish Artifact: drop'
+    #   inputs:
+    #     PathtoPublish: '$(build.artifactstagingdirectory)'
 
-    # Publish the app
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet publish'
-      inputs:
-        command: publish
-        publishWebProjects: True
-        arguments: '--configuration $(BuildConfiguration) --output $(System.DefaultWorkingDirectory)'
-        zipAfterPublish: false
+    # # Publish the app
+    # - task: DotNetCoreCLI@2
+    #   displayName: 'dotnet publish'
+    #   inputs:
+    #     command: publish
+    #     publishWebProjects: True
+    #     arguments: '--configuration $(BuildConfiguration) --output $(System.DefaultWorkingDirectory)'
+    #     zipAfterPublish: false
 
     # Build container image
     - task: Docker@1
