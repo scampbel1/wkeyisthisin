@@ -135,6 +135,7 @@ stages:
         acrName: 'KeyifyDockerTest'
         acrUsername: 'KeyifyDockerTest'
         acrPassword: 'NSRq2f3IJeMQpmsOiXJPeQ1OzRXMdFwDbmRWkjd9pw+ACRA/jJGE'
+        imageToBuild: 'keyifydockertest-image'
 
     # - task: ArchiveFiles@2
     #   displayName: 'Zippy Zippy'
