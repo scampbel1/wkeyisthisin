@@ -145,7 +145,7 @@ stages:
         acrPassword: 'NSRq2f3IJeMQpmsOiXJPeQ1OzRXMdFwDbmRWkjd9pw+ACRA/jJGE'
         imageToBuild: 'keyifydockertest-image'
         imageToDeploy: 'keyifydockertest-image'
-        containerAppName: 'KeyifyDockerTest'
+        containerAppName: 'keyifydockertest'
         resourceGroup: 'KeyifyDockerTest'
         # imageName: 'KeyifyDockerTest-Image'
 
