@@ -50,13 +50,13 @@ stages:
     #     command: restore
     #     projects: '**/*.csproj'
 
-    # Build app
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet build $(buildConfiguration)'
-      inputs:
-        command: build
-        projects: '**/*.csproj'
-        arguments: '--configuration $(buildConfiguration)'
+    # # Build app
+    # - task: DotNetCoreCLI@2
+    #   displayName: 'dotnet build $(buildConfiguration)'
+    #   inputs:
+    #     command: build
+    #     projects: '**/*.csproj'
+    #     arguments: '--configuration $(buildConfiguration)'
 
     # # Run unit tests
     # - task: DotNetCoreCLI@2
