@@ -8,11 +8,11 @@ trigger:
 variables:
   buildConfiguration: 'Release'
   location: 'westeurope'
-  acrHostName: 'keyifytestcicd.azurecr.io'
-  acrName: 'keyifyTestCiCd'
-  rgName: 'KeyifyCiCd'
-  imageName: 'KeyifyWebAppTest-CI-CD2-Image'
-  webAppName: 'KeyifyWebAppTest-CI-CD2'
+  acrHostName: 'keyifydockertest.azurecr.io'
+  acrName: 'KeyifyDockerTest'
+  rgName: 'KeyifyDockerTest'
+  imageName: 'KeyifyDockerTest-Image'
+  webAppName: 'KeyifyDockerTest'
 
 stages:
 
