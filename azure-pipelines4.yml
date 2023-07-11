@@ -129,6 +129,14 @@ stages:
     # - download: current
     #   artifact: drop
 
+    # - task: AzureContainerApps@1
+    #   inputs:
+    #     azureSubscription: 'Sean Campbell(1)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
+    #     acrName: 'KeyifyDockerTest'
+    #     acrUsername: 'KeyifyDockerTest'
+    #     acrPassword: 'NSRq2f3IJeMQpmsOiXJPeQ1OzRXMdFwDbmRWkjd9pw+ACRA/jJGE'
+    #     imageToBuild: 'keyifydockertest-image'
+
     - task: AzureContainerApps@1
       inputs:
         azureSubscription: 'Sean Campbell(1)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
@@ -136,6 +144,10 @@ stages:
         acrUsername: 'KeyifyDockerTest'
         acrPassword: 'NSRq2f3IJeMQpmsOiXJPeQ1OzRXMdFwDbmRWkjd9pw+ACRA/jJGE'
         imageToBuild: 'keyifydockertest-image'
+        imageToDeploy: 'keyifydockertest-image'
+        containerAppName: 'KeyifyDockerTest'
+        resourceGroup: 'KeyifyDockerTest'
+        # imageName: 'KeyifyDockerTest-Image'
 
     # - task: ArchiveFiles@2
     #   displayName: 'Zippy Zippy'
