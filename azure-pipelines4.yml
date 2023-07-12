@@ -9,10 +9,10 @@ variables:
   buildConfiguration: 'Release'
   location: 'westeurope'
   acrHostName: 'keyifydockertest.azurecr.io'
-  acrName: 'KeyifyDockerTest'
-  rgName: 'KeyifyDockerTest'
-  imageName: 'KeyifyDockerTest-Image'
-  webAppName: 'KeyifyDockerTest'
+  acrName: 'keyifydockertest'
+  rgName: 'keyifydockertest'
+  imageName: 'keyifydockertest-image'
+  webAppName: 'keyifydockertest'
 
 stages:
 
