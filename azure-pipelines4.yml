@@ -161,10 +161,11 @@ stages:
         acrName: 'KeyifyDockerTest'
         acrUsername: 'KeyifyDockerTest'
         acrPassword: 'loGfs9CeJf17aizd4Dy5Ai65qG5INL5owg11X6k8ms+ACRDjVhPZ'
-        # imageToBuild: 'keyifydockertest-image'
-        imageToDeploy: 'keyifydockertest-image'
+        imageToBuild: 'keyifydockertest-image:latest'
+        imageToDeploy: 'keyifydockertest-image:latest'
         containerAppName: 'keyifydockertest'
         resourceGroup: 'KeyifyDockerTest'
+        
         # appSourcePath: '$(System.DefaultWorkingDirectory)'
         # imageName: 'KeyifyDockerTest-Image'
 
