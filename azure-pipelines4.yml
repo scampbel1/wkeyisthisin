@@ -97,7 +97,7 @@ stages:
     - task: Docker@1
       displayName: 'Build container image'
       inputs:
-        azureSubscriptionEndpoint: 'AzureSC'
+        azureSubscriptionEndpoint: 'Sean Campbell(4)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
         azureContainerRegistry: '$(acrHostName)'
         imageName: '$(imageName):$(Build.BuildId)'
         useDefaultContext: false
@@ -108,7 +108,7 @@ stages:
     - task: Docker@1
       displayName: 'Push container image'
       inputs:
-        azureSubscriptionEndpoint: 'AzureSC'
+        azureSubscriptionEndpoint: 'Sean Campbell(4)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
         azureContainerRegistry: '$(acrHostName)'
         command: 'Push an image'
         imageName: '$(imageName):$(Build.BuildId)'
