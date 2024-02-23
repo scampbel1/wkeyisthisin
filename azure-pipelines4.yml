@@ -97,3 +97,4 @@ stages:
         imageToDeploy: 'keyifydockertest-image:$(Build.BuildId)'
         containerAppName: 'keyifydockertest'
         resourceGroup: 'KeyifyDockerTest'
+        location: 'westeurope'
