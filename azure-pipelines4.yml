@@ -84,13 +84,16 @@ stages:
           
           echo "$(Build.SourcesDirectory)"
 
+# Sean Campbell(4)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)
+# Sean Campbell(1)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)
+
     - task: AzureContainerApps@1
       inputs:
-        azureSubscription: 'Sean Campbell(1)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
+        azureSubscription: 'Sean Campbell(4)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
         acrName: 'KeyifyDockerTest'
         acrUsername: 'keyifydockertest'
         acrPassword: '9a/uz3+iUbqtrxK9RVabfW1wusyQiqj5KQaCLQnpwF+ACRBp9EUf'
-        imageToBuild: 'keyifydockertest-image:latest'
-        imageToDeploy: 'keyifydockertest-image:latest'
+        imageToBuild: 'keyifydockertest-image:$(Build.BuildId)'
+        imageToDeploy: 'keyifydockertest-image:$(Build.BuildId)'
         containerAppName: 'keyifydockertest'
         resourceGroup: 'KeyifyDockerTest'
