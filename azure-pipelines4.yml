@@ -133,8 +133,8 @@ stages:
     #   inputs:
     #     azureSubscription: 'Sean Campbell(1)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
     #     acrName: 'KeyifyDockerTest'
-    #     acrUsername: 'KeyifyDockerTest'
-    #     acrPassword: 'NSRq2f3IJeMQpmsOiXJPeQ1OzRXMdFwDbmRWkjd9pw+ACRA/jJGE'
+    #     acrUsername: 'keyifydockertest'
+    #     acrPassword: '9a/uz3+iUbqtrxK9RVabfW1wusyQiqj5KQaCLQnpwF+ACRBp9EUf'
     #     imageToBuild: 'keyifydockertest-image'
     
     - task: CmdLine@2
