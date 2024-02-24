@@ -97,7 +97,7 @@ stages:
         acrName: 'KeyifyDockerTest'
         acrUsername: 'keyifydockertest'
         acrPassword: '8hn2tNhZ0hPyMhrDpFLQbKSZVpfYhE7K/lVmc3GF2f+ACRBDygdL'
-        imageToBuild: '$(acrHostName)/$(imageName):$(Build.BuildId)'
+        # imageToBuild: '$(acrHostName)/$(imageName):$(Build.BuildId)'
         imageToDeploy: '$(acrHostName)/$(imageName):$(Build.BuildId)'
         location: '$(location)'
         resourceGroup: 'KeyifyDockerTest'
