@@ -21,7 +21,7 @@ stages:
   jobs:
   - job: BuildAndTest
     pool:
-      vmImage: 'windows-latest'
+      vmImage: 'ubuntu-latest'
     steps:
 
     - task: AzureResourceManagerTemplateDeployment@3
