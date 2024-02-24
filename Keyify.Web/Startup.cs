@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace Keyify
 {
@@ -40,6 +41,7 @@ namespace Keyify
             services.AddControllersWithViews();
 
             SetupMapping(services);
+            SetupDatabase(services);
             SetupValidation(services);
 
             services.AddSingleton(typeof(IScaleDefinitionService), typeof(ScaleDefinitionService));
@@ -55,40 +57,30 @@ namespace Keyify
             services.AddSingleton(typeof(INoteFormatService), typeof(NoteFormatService));
             services.AddSingleton(typeof(IChordDefinitionCache), typeof(ChordDefinitionCache));
             services.AddSingleton(typeof(IScaleDefinitionCache), typeof(ScaleDefinitionCache));
-
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
-
-            services.AddSingleton<IChordDefinitionRepository>(f =>
-                new ChordDefinitionRepository(f.GetService<ILogger<ChordDefinitionRepository>>(),
-                    Configuration["ConnectionStrings:SqlServer"],
-                    f.GetRequiredService<ISerializationFormatter>()
-                ));
-
-            services.AddSingleton<IScaleDefinitionRepository>(f =>
-                new ScaleDefinitionRepository(f.GetService<ILogger<ScaleDefinitionRepository>>(),
-                    Configuration["ConnectionStrings:SqlServer"],
-                    f.GetRequiredService<ISerializationFormatter>()
-                ));
-
             services.AddSingleton(f => new Fretboard(f.GetRequiredService<INoteFormatService>().SharpNoteDictionary));
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        private void SetupDatabase(IServiceCollection services)
         {
-            app.UseDeveloperExceptionPage();
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseRouting();
-            app.UseAuthorization();
+            var databaseConfiguration = Configuration.GetValue<string>("databaseConnectionString");
 
-            app.UseForwardedHeaders();
-
-            app.UseEndpoints(endpoints =>
+            if (string.IsNullOrWhiteSpace(databaseConfiguration))
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Guitar}/{action=Index}");
-            });
+                Console.WriteLine("Database Configuration not found! Searching: System.Environment.GetEnvironmentVariable(\"databaseConnectionString\")");
+
+                databaseConfiguration = System.Environment.GetEnvironmentVariable("databaseConnectionString");
+            }
+
+            services.AddSingleton<IChordDefinitionRepository>(f => new ChordDefinitionRepository(
+                f.GetService<ILogger<ChordDefinitionRepository>>(),
+                databaseConfiguration,
+                f.GetRequiredService<ISerializationFormatter>()));
+
+            services.AddSingleton<IScaleDefinitionRepository>(f => new ScaleDefinitionRepository(
+                f.GetService<ILogger<ScaleDefinitionRepository>>(),
+                databaseConfiguration,
+                f.GetRequiredService<ISerializationFormatter>()));
         }
 
         private void SetupMapping(IServiceCollection services)
@@ -104,6 +96,24 @@ namespace Keyify
         private void SetupValidation(IServiceCollection services)
         {
             services.AddScoped<IValidator<ChordDefinitionInsertRequestDto>, ChordDefinitionInsertValidator>();
+        }
+
+        public void Configure(IApplicationBuilder applicationBuilder, IWebHostEnvironment webHostEnvironment)
+        {
+            applicationBuilder.UseDeveloperExceptionPage();
+            applicationBuilder.UseHttpsRedirection();
+            applicationBuilder.UseStaticFiles();
+            applicationBuilder.UseRouting();
+            applicationBuilder.UseAuthorization();
+
+            applicationBuilder.UseForwardedHeaders();
+
+            applicationBuilder.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Guitar}/{action=Index}");
+            });
         }
     }
 }
