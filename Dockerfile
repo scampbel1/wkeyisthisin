@@ -29,6 +29,6 @@ RUN dotnet publish -c release --no-build -o /app
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /app
-EXPOSE 80 443
+EXPOSE 80
 COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "Keyify.Web.dll"]
