@@ -103,5 +103,5 @@ stages:
         resourceGroup: 'KeyifyDockerTest'
         containerAppName: 'keyifydockertest'
         targetPort: '8080'
-        containerAppEnvironment: 'keyifydockertest-env'
+        containerAppEnvironment: 'managedEnvironment-KeyifyDockerTes-ab8b'
         runtimeStack: 'Dotnetcore'
