@@ -99,7 +99,9 @@ stages:
         acrPassword: '9a/uz3+iUbqtrxK9RVabfW1wusyQiqj5KQaCLQnpwF+ACRBp9EUf'
         imageToBuild: '$(acrHostName)/$(imageName):$(Build.BuildId)'
         imageToDeploy: '$(acrHostName)/$(imageName):$(Build.BuildId)'
-        location: 'westeurope'
+        location: '$(location)'
         resourceGroup: 'KeyifyDockerTest'
         containerAppName: 'keyifydockertest'
         targetPort: '8080'
+        # containerAppEnvironment: 
+        runtimeStack: 'Dotnetcore'
