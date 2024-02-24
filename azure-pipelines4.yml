@@ -94,10 +94,10 @@ stages:
     - task: AzureContainerApps@1
       inputs:
         azureSubscription: 'Sean Campbell(4)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
-        acrName: 'KeyifyDockerTest'
+        acrName: 'keyifydockertest'
         acrUsername: 'keyifydockertest'
         acrPassword: '8hn2tNhZ0hPyMhrDpFLQbKSZVpfYhE7K/lVmc3GF2f+ACRBDygdL'
-        # imageToBuild: '$(acrHostName)/$(imageName):$(Build.BuildId)'
+        imageToBuild: '$(acrHostName)/$(imageName):$(Build.BuildId)'
         imageToDeploy: '$(acrHostName)/$(imageName):$(Build.BuildId)'
         location: '$(location)'
         resourceGroup: 'KeyifyDockerTest'
