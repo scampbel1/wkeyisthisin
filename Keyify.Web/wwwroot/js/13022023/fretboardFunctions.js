@@ -1,4 +1,5 @@
-﻿function UpdateModel(url, scale, addNote, selectedNotes) {
+﻿//TODO: Should this be async?
+function UpdateModel(url, scale, addNote, selectedNotes) {
 
     var dataPost = { previouslySelectedNotes: selectedNotes, newlySelectedNote: addNote, selectedScale: scale };
 
