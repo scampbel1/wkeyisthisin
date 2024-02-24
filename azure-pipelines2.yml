@@ -141,6 +141,8 @@ stages:
         location: '$(location)'
         csmFile: '$(Pipeline.Workspace)/**/container-webapp-template.json'
 
+
+
     # - task: PowerShell@2
     # - powershell: Get-ChildItem -Path 'D:/' -recurse
     # - powershell: Get-ChildItem -Path '$(Build.ArtifactStagingDirectory)' -recurse
@@ -173,6 +175,17 @@ stages:
         #packageForLinux: '$(Build.ArtifactStagingDirectory)/archives/*.zip'
         #$(Build.ArtifactStagingDirectory)/archives/
         DockerNamespace: $(acrHostName)
-        DockerRepository: 
+        DockerRepository: 'keyifyTestCiCd'
         DockerImageTag: '$(Build.BuildId)'
         UseWebDeploy: true
+
+    # - task: AzureRmWebAppDeployment@4
+    #   inputs:
+    #     ConnectionType: 'AzureRM'
+    #     azureSubscription: 'AzureSC'
+    #     appType: 'webApp'
+    #     WebAppName: 'KeyifyWebAppTest-CI-CD2'
+    #     deployToSlotOrASE: true
+    #     ResourceGroupName: 'KeyifyCiCd'
+    #     SlotName: 'production'
+    #     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'

@@ -1,0 +1,107 @@
+#Copied from: https://github.com/CloudSkills/aspnet-core-docker-demo/blob/master/azure-pipelines.yaml
+#Following tutorial: https://www.youtube.com/watch?v=272GOWKDqP4
+
+trigger:
+  branches:
+    include: 
+    - master
+variables:
+  buildConfiguration: 'Release'
+  location: 'westeurope'
+  acrHostName: 'keyifydockertest.azurecr.io'
+  acrName: 'keyifydockertest'
+  rgName: 'keyifydockertest'
+  imageName: 'keyifydockertest-image'
+  webAppName: 'keyifydockertest'
+
+stages:
+
+# Build Stage
+- stage: BuildAndTest
+  jobs:
+  - job: BuildAndTest
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+
+    - task: AzureResourceManagerTemplateDeployment@3
+      inputs:
+        deploymentScope: 'Resource Group'
+        azureResourceManagerConnection: 'Sean Campbell(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
+        subscriptionId: 'a2fc1bcd-3446-47ea-9525-20f2a1a0de97'
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: 'KeyifyDockerTest'
+        location: 'West Europe'
+        templateLocation: 'Linked artifact'
+        csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
+        deploymentMode: 'Incremental'
+
+    # Build container image
+    - task: Docker@1
+      displayName: 'Build container image'
+      inputs:
+        azureSubscriptionEndpoint: 'Sean Campbell(4)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
+        azureContainerRegistry: '$(acrHostName)'
+        imageName: '$(imageName):$(Build.BuildId)'
+        useDefaultContext: false
+        buildContext: '$(System.DefaultWorkingDirectory)'
+        pushMultipleImages: false
+
+    # Push container image
+    - task: Docker@1
+      displayName: 'Push container image'
+      inputs:
+        azureSubscriptionEndpoint: 'Sean Campbell(4)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
+        azureContainerRegistry: '$(acrHostName)'
+        command: 'Push an image'
+        imageName: '$(imageName):$(Build.BuildId)'
+
+# Staging release
+- stage: Staging
+  jobs:
+  - job: Release
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    # Don't clone the repo
+    - checkout: none
+    
+    - task: CmdLine@2
+      inputs:
+        script: |
+          echo "Structure of work folder of this pipeline:"
+          tree $(Agent.WorkFolder)\1 /f
+          
+          echo "Build.ArtifactStagingDirectory:" 
+          
+          echo "$(Build.ArtifactStagingDirectory)"
+          
+          echo "Build.BinariesDirectory:" 
+          
+          echo "$(Build.BinariesDirectory)"
+          
+          echo "Build.SourcesDirectory:"
+          
+          echo "$(Build.SourcesDirectory)"
+
+          echo "Build Id:"
+          
+          echo "$(Build.BuildId)"
+
+# Sean Campbell(4)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)
+# Sean Campbell(1)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)
+
+    - task: AzureContainerApps@1
+      inputs:
+        azureSubscription: 'Sean Campbell(4)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
+        acrName: 'keyifydockertest'
+        acrUsername: 'keyifydockertest'
+        acrPassword: '8hn2tNhZ0hPyMhrDpFLQbKSZVpfYhE7K/lVmc3GF2f+ACRBDygdL'
+        imageToBuild: '$(acrHostName)/$(imageName):$(Build.BuildId)'
+        imageToDeploy: '$(acrHostName)/$(imageName):$(Build.BuildId)'
+        location: '$(location)'
+        resourceGroup: 'KeyifyDockerTest'
+        containerAppName: 'keyifydockertest'
+        targetPort: '8080'
+        containerAppEnvironment: 'managedEnvironment-KeyifyDockerTes-ab8b'
+        # runtimeStack: 'Dotnetcore'
