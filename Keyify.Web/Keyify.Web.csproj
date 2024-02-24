@@ -12,7 +12,6 @@
 
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
-		<RuntimeFrameworkVersion>7.0.0</RuntimeFrameworkVersion>
 		<UserSecretsId>a50ac624-865b-41b6-b124-40c9089050d7</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileContext>.</DockerfileContext>
