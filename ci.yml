@@ -54,5 +54,5 @@ stages:
       inputs:
         command: 'test'
         projects: '**\*Test*.dll'
-        arguments: '--configuration $(buildConfiguration) --no-restore'
+        # arguments: '--configuration $(buildConfiguration) --no-restore'
         testRunTitle: 'Run Tests'
