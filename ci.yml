@@ -27,6 +27,12 @@ stages:
         projects: '**/*.csproj'
         feedsToUse: 'select'
 
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'build'
+        projects: '**/Keyify.Web.csproj'
+        arguments: '--configuration $(buildConfiguration) --no-restore'
+
 #     - task: AzureResourceManagerTemplateDeployment@3
 #       inputs:
 #         deploymentScope: 'Resource Group'
