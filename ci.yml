@@ -47,12 +47,12 @@ stages:
       inputs:
         command: 'build'
         projects: '**/*Test.csproj'
-        # arguments: '--configuration $(buildConfiguration) --no-restore'
+        arguments: '--configuration $(buildConfiguration) --no-restore'
         
     - task: DotNetCoreCLI@2
       displayName: Run Unit Tests
       inputs:
         command: 'test'
         projects: '**/*Unit.Test.dll'
-        # arguments: '--configuration $(buildConfiguration) --no-restore'
+        arguments: '--configuration $(buildConfiguration) --no-restore'
         testRunTitle: 'Run Tests'
