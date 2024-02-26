@@ -15,7 +15,7 @@ variables:
 
 stages:
 - stage: BuildWindowsFilesAndTest
-  displayName: Build Windows Files and Test
+  displayName: Build Windows Files and Run Unit Test
   jobs:
   - job: BuildWindowsFilesAndTest
     pool:
@@ -27,6 +27,13 @@ stages:
         command: 'build'
         projects: '**/*Unit.Test.csproj'
         arguments: '--configuration $(buildConfiguration) --no-restore'
+        
+    - task: DotNetCoreCLI@2
+      displayName: Restore Test Projects
+      inputs:
+        command: 'restore'
+        projects: '**/*Unit.Test.dll'
+        feedsToUse: 'select'
         
     - task: VSTest@3
       inputs:
