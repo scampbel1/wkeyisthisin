@@ -28,12 +28,12 @@ stages:
         command: 'build'
         projects: '**/*Unit.Test.csproj'
         
-    - task: DotNetCoreCLI@2
-      displayName: Restore Test Projects
-      inputs:
-        command: 'restore'
-        projects: '**/*Unit.Test.dll'
-        feedsToUse: 'select'
+    # - task: DotNetCoreCLI@2
+    #   displayName: Restore Test Projects
+    #   inputs:
+    #     command: 'restore'
+    #     projects: '**/*Unit.Test.dll'
+    #     feedsToUse: 'select'
         
     - task: VSTest@3
       inputs:
