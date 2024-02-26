@@ -24,9 +24,9 @@ stages:
     
     steps:
     - task: DotNetCoreCLI@2
-      displayName: Build Unit Tests
+      displayName: Restore Unit Tests
       inputs:
-        command: 'build'
+        command: 'restore'
         projects: '**/*Unit.Test.csproj'
     - task: VSTest@3
       displayName: Run Unit Tests
