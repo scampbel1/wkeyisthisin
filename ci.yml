@@ -60,7 +60,7 @@ stages:
           !**\bin\**\ref\**
           !**\testhost*.*
           !**\Microsoft*.dll
-        arguments: '--configuration $(buildConfiguration) --no-restore'
+        # arguments: '--configuration $(buildConfiguration) --no-restore'
         testRunTitle: 'Run Tests'
 
     # - task: VSTest@3
