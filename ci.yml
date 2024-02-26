@@ -18,24 +18,18 @@ stages:
   displayName: Build Windows Files and Run Unit Test
   jobs:
   - job: BuildWindowsFilesAndTest
+    displayName: Build Windows Files and Run Unit Test
     pool:
       vmImage: 'windows-latest'
     
     steps:
     - task: DotNetCoreCLI@2
-      displayName: Build Tests
+      displayName: Build Unit Tests
       inputs:
         command: 'build'
         projects: '**/*Unit.Test.csproj'
-        
-    # - task: DotNetCoreCLI@2
-    #   displayName: Restore Test Projects
-    #   inputs:
-    #     command: 'restore'
-    #     projects: '**/*Unit.Test.dll'
-    #     feedsToUse: 'select'
-        
     - task: VSTest@3
+      displayName: Run Unit Tests
       inputs:
         testSelector: 'testAssemblies'
         testAssemblyVer2: |
@@ -51,6 +45,7 @@ stages:
   displayName: Build and Create Image
   jobs:
   - job: BuildAndCreateImage
+    displayName: Build and Create Image
     pool:
       vmImage: 'ubuntu-latest'
     steps:    
@@ -67,39 +62,3 @@ stages:
         command: 'build'
         projects: '**/Keyify.Web.csproj'
         arguments: '--configuration $(buildConfiguration) --no-restore'
-
-    # - task: DotNetCoreCLI@2
-    #   displayName: Restore Tests
-    #   inputs:
-    #     command: 'restore'
-    #     projects: '**/*Test.csproj'
-    #     feedsToUse: 'select'
-
-    - task: DotNetCoreCLI@2
-      displayName: Build Tests
-      inputs:
-        command: 'build'
-        projects: '**/*Unit.Test.csproj'
-        arguments: '--configuration $(buildConfiguration) --no-restore'
-        
-    # - task: DotNetCoreCLI@2
-    #   displayName: Run Unit Tests
-    #   inputs:
-    #     command: 'test'
-    #     projects: |
-    #       **/*Unit.Test.dll
-    #       !**\*TestAdapter.dll
-    #       !**\obj\**
-    #       !**\bin\**\ref\**
-    #       !**\testhost*.*
-    #       !**\Microsoft*.dll
-    #     # arguments: '--configuration $(buildConfiguration) --no-restore'
-    #     testRunTitle: 'Run Tests'
-
-    # - task: DotNetCoreCLI@2
-    #   displayName: 'Run Unit Tests (dotnet custom)'
-    #   inputs:
-    #     command: custom
-    #     projects: '**/*Test.dll'
-    #     custom: vstest
-    #     arguments: '--logger:trx;logfilename=TEST.xml'
