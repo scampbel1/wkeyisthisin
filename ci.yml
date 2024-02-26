@@ -67,10 +67,10 @@ stages:
     #     searchFolder: '$(System.DefaultWorkingDirectory)'
     #     runOnlyImpactedTests: false
 
-    # - task: DotNetCoreCLI@2
-    #   displayName: 'dotnet custom'
-    #   inputs:
-    #     command: custom
-    #     projects: '**\*Unit.Test.dll'
-    #     custom: vstest
-    #     arguments: '--logger:trx;logfilename=TEST.xml'
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet custom'
+      inputs:
+        command: custom
+        projects: '**\*test.dll'
+        custom: vstest
+        arguments: '--logger:trx;logfilename=TEST.xml'
