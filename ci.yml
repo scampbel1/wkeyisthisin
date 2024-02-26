@@ -49,10 +49,20 @@ stages:
         projects: '**/*Test.csproj'
         arguments: '--configuration $(buildConfiguration) --no-restore'
         
-    - task: DotNetCoreCLI@2
-      displayName: Run Unit Tests
+    # - task: DotNetCoreCLI@2
+    #   displayName: Run Unit Tests
+    #   inputs:
+    #     command: 'test'
+    #     projects: '**/*Unit.Test.dll'
+    #     arguments: '--configuration $(buildConfiguration) --no-restore'
+    #     testRunTitle: 'Run Tests'
+    
+    - task: VSTest@3
       inputs:
-        command: 'test'
-        projects: '**/*Unit.Test.dll'
-        arguments: '--configuration $(buildConfiguration) --no-restore'
-        testRunTitle: 'Run Tests'
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: |
+          **\*Unit.Test.dll
+          !**\*TestAdapter.dll
+          !**\obj\**
+        searchFolder: '$(System.DefaultWorkingDirectory)'
+        runOnlyImpactedTests: false
