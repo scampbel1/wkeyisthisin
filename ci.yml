@@ -11,16 +11,42 @@ variables:
   imageName: 'keyifydockertest-image'
   webAppName: 'keyifydockertest'
 
-stages:
 
-# Build Stage
-- stage: BuildAndTest
+
+stages:
+- stage: BuildWindowsFilesAndTest
+  displayName: Build Windows Files and Test
   jobs:
-  - job: BuildAndTest
+  - job: BuildWindowsFilesAndTest
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: Build Tests
+      inputs:
+        command: 'build'
+        projects: '**/*Unit.Test.csproj'
+        arguments: '--configuration $(buildConfiguration) --no-restore'
+        
+    - task: VSTest@3
+      inputs:
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: |
+          **\*Unit.Test.dll
+          !**\*TestAdapter.dll
+          !**\obj\**
+          !**\testhost*.*
+          !**\Microsoft*.dll
+        searchFolder: '$(System.DefaultWorkingDirectory)'
+        runOnlyImpactedTests: false
+
+- stage: BuildAndCreateImage
+  displayName: Build and Create Image
+  jobs:
+  - job: BuildAndCreateImage
     pool:
       vmImage: 'ubuntu-latest'
-    steps:
-    
+    steps:    
     - task: DotNetCoreCLI@2
       displayName: Restore All Projects
       inputs:
@@ -49,31 +75,19 @@ stages:
         projects: '**/*Unit.Test.csproj'
         arguments: '--configuration $(buildConfiguration) --no-restore'
         
-    - task: DotNetCoreCLI@2
-      displayName: Run Unit Tests
-      inputs:
-        command: 'test'
-        projects: |
-          **/*Unit.Test.dll
-          !**\*TestAdapter.dll
-          !**\obj\**
-          !**\bin\**\ref\**
-          !**\testhost*.*
-          !**\Microsoft*.dll
-        # arguments: '--configuration $(buildConfiguration) --no-restore'
-        testRunTitle: 'Run Tests'
-
-    # - task: VSTest@3
+    # - task: DotNetCoreCLI@2
+    #   displayName: Run Unit Tests
     #   inputs:
-    #     testSelector: 'testAssemblies'
-    #     testAssemblyVer2: |
-    #       **\*Unit.Test.dll
+    #     command: 'test'
+    #     projects: |
+    #       **/*Unit.Test.dll
     #       !**\*TestAdapter.dll
     #       !**\obj\**
+    #       !**\bin\**\ref\**
     #       !**\testhost*.*
     #       !**\Microsoft*.dll
-    #     searchFolder: '$(System.DefaultWorkingDirectory)'
-    #     runOnlyImpactedTests: false
+    #     # arguments: '--configuration $(buildConfiguration) --no-restore'
+    #     testRunTitle: 'Run Tests'
 
     # - task: DotNetCoreCLI@2
     #   displayName: 'Run Unit Tests (dotnet custom)'
