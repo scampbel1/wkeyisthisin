@@ -68,9 +68,9 @@ stages:
     #     runOnlyImpactedTests: false
 
     - task: DotNetCoreCLI@2
-      displayName: 'dotnet custom'
+      displayName: 'Run Unit Tests (dotnet custom)'
       inputs:
         command: custom
-        projects: '**\*test.dll'
+        projects: '**/*Test.dll'
         custom: vstest
         arguments: '--logger:trx;logfilename=TEST.xml'
