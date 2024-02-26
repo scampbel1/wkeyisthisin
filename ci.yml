@@ -56,13 +56,21 @@ stages:
     #     projects: '**/*Unit.Test.dll'
     #     arguments: '--configuration $(buildConfiguration) --no-restore'
     #     testRunTitle: 'Run Tests'
-    
-    - task: VSTest@3
+
+    # - task: VSTest@3
+    #   inputs:
+    #     testSelector: 'testAssemblies'
+    #     testAssemblyVer2: |
+    #       **\*Unit.Test.dll
+    #       !**\*TestAdapter.dll
+    #       !**\obj\**
+    #     searchFolder: '$(System.DefaultWorkingDirectory)'
+    #     runOnlyImpactedTests: false
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet custom'
       inputs:
-        testSelector: 'testAssemblies'
-        testAssemblyVer2: |
-          **\*Unit.Test.dll
-          !**\*TestAdapter.dll
-          !**\obj\**
-        searchFolder: '$(System.DefaultWorkingDirectory)'
-        runOnlyImpactedTests: false
+        command: custom
+        projects: '**\*Unit.Test.dll'
+        custom: vstest
+        arguments: '--logger:trx;logfilename=TEST.xml'
