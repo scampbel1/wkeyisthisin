@@ -49,25 +49,30 @@ stages:
         projects: '**/*Unit.Test.csproj'
         arguments: '--configuration $(buildConfiguration) --no-restore'
         
-    # - task: DotNetCoreCLI@2
-    #   displayName: Run Unit Tests
-    #   inputs:
-    #     command: 'test'
-    #     projects: '**/*Unit.Test.dll'
-    #     arguments: '--configuration $(buildConfiguration) --no-restore'
-    #     testRunTitle: 'Run Tests'
-
-    - task: VSTest@3
+    - task: DotNetCoreCLI@2
+      displayName: Run Unit Tests
       inputs:
-        testSelector: 'testAssemblies'
-        testAssemblyVer2: |
-          **\*Unit.Test.dll
+        command: 'test'
+        projects: |
+          **/*Unit.Test.dll
           !**\*TestAdapter.dll
           !**\obj\**
           !**\testhost*.*
           !**\Microsoft*.dll
-        searchFolder: '$(System.DefaultWorkingDirectory)'
-        runOnlyImpactedTests: false
+        arguments: '--configuration $(buildConfiguration) --no-restore'
+        testRunTitle: 'Run Tests'
+
+    # - task: VSTest@3
+    #   inputs:
+    #     testSelector: 'testAssemblies'
+    #     testAssemblyVer2: |
+    #       **\*Unit.Test.dll
+    #       !**\*TestAdapter.dll
+    #       !**\obj\**
+    #       !**\testhost*.*
+    #       !**\Microsoft*.dll
+    #     searchFolder: '$(System.DefaultWorkingDirectory)'
+    #     runOnlyImpactedTests: false
 
     # - task: DotNetCoreCLI@2
     #   displayName: 'Run Unit Tests (dotnet custom)'
