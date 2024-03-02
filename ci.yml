@@ -66,6 +66,12 @@ stages:
         command: 'build'
         projects: '$(System.DefaultWorkingDirectory)\**\*Integration.Test.csproj'
       
+    - task: CmdLine@2
+      inputs:
+        script: |
+          echo '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
+          echo '$(keyifyDatabaseConnectionString)'
+
     - task: VSTest@3
       displayName: Run Integration Tests
       inputs:
@@ -78,12 +84,6 @@ stages:
           !**\Microsoft*.dll
         searchFolder: '$(System.DefaultWorkingDirectory)'
         runOnlyImpactedTests: false
-    
-    - task: CmdLine@2
-      inputs:
-        script: |
-          echo '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
-          echo '$(keyifyDatabaseConnectionString)'
 
 - stage: BuildAndCreateImage
   displayName: Build and Create Image
