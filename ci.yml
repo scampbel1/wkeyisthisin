@@ -45,6 +45,32 @@ stages:
           !**\Microsoft*.dll
         searchFolder: '$(System.DefaultWorkingDirectory)'
         runOnlyImpactedTests: false
+        
+        steps:
+    - task: DotNetCoreCLI@2
+      displayName: Restore Unit Tests
+      inputs:
+        command: 'restore'
+        projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
+    
+    - task: DotNetCoreCLI@2
+      displayName: Build Integration Tests
+      inputs:
+        command: 'build'
+        projects: '$(System.DefaultWorkingDirectory)\**\*Integration.Test.csproj'
+      
+    - task: VSTest@3
+      displayName: Run Integration Tests
+      inputs:
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: |
+          **\*Integration.Test*.dll
+          !**\*TestAdapter.dll
+          !**\obj\**
+          !**\testhost*.*
+          !**\Microsoft*.dll
+        searchFolder: '$(System.DefaultWorkingDirectory)'
+        runOnlyImpactedTests: false
     
     - task: CmdLine@2
       inputs:
