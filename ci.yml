@@ -26,6 +26,12 @@ stages:
       inputs:
         command: 'restore'
         projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
+    
+    - task: DotNetCoreCLI@2
+      displayName: Build Unit Tests
+      inputs:
+        command: 'build'
+        projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
       
     - task: VSTest@3
       displayName: Run Unit Tests
