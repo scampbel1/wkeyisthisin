@@ -12,15 +12,79 @@ variables:
   webAppName: 'keyifydockertest'
 
 stages:
-
-# Build Stage
-- stage: BuildAndTest
+- stage: BuildWindowsFilesAndTest
+  displayName: Build Windows Files and Run Unit Test
   jobs:
-  - job: BuildAndTest
+  - job: BuildWindowsFilesAndTest
+    displayName: Build Windows Files and Run Unit Test
+    pool:
+      vmImage: 'windows-latest'
+    
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: Restore Unit Tests
+      inputs:
+        command: 'restore'
+        projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
+    
+    - task: DotNetCoreCLI@2
+      displayName: Build Unit Tests
+      inputs:
+        command: 'build'
+        projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
+      
+    - task: VSTest@3
+      displayName: Run Unit Tests
+      inputs:
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: |
+          **\*test*.dll
+          !**\*TestAdapter.dll
+          !**\obj\**
+          !**\testhost*.*
+          !**\Microsoft*.dll
+        searchFolder: '$(System.DefaultWorkingDirectory)'
+        runOnlyImpactedTests: false
+        
+        steps:
+    - task: DotNetCoreCLI@2
+      displayName: Restore Unit Tests
+      inputs:
+        command: 'restore'
+        projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
+    
+    - task: DotNetCoreCLI@2
+      displayName: Build Integration Tests
+      inputs:
+        command: 'build'
+        projects: '$(System.DefaultWorkingDirectory)\**\*Integration.Test.csproj'
+      
+    - task: VSTest@3
+      displayName: Run Integration Tests
+      inputs:
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: |
+          **\*Integration.Test*.dll
+          !**\*TestAdapter.dll
+          !**\obj\**
+          !**\testhost*.*
+          !**\Microsoft*.dll
+        searchFolder: '$(System.DefaultWorkingDirectory)'
+        runOnlyImpactedTests: false
+    
+    - task: CmdLine@2
+      inputs:
+        script: |
+          echo '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
+
+- stage: BuildAndCreateImage
+  displayName: Build and Create Image
+  jobs:
+  - job: BuildAndCreateImage
+    displayName: Build and Create Image
     pool:
       vmImage: 'ubuntu-latest'
-    steps:
-    
+    steps:    
     - task: DotNetCoreCLI@2
       displayName: Restore All Projects
       inputs:
@@ -34,51 +98,3 @@ stages:
         command: 'build'
         projects: '**/Keyify.Web.csproj'
         arguments: '--configuration $(buildConfiguration) --no-restore'
-
-    # - task: DotNetCoreCLI@2
-    #   displayName: Restore Tests
-    #   inputs:
-    #     command: 'restore'
-    #     projects: '**/*Test.csproj'
-    #     feedsToUse: 'select'
-
-    - task: DotNetCoreCLI@2
-      displayName: Build Tests
-      inputs:
-        command: 'build'
-        projects: '**/*Unit.Test.csproj'
-        arguments: '--configuration $(buildConfiguration) --no-restore'
-        
-    - task: DotNetCoreCLI@2
-      displayName: Run Unit Tests
-      inputs:
-        command: 'test'
-        projects: |
-          **/*Unit.Test.dll
-          !**\*TestAdapter.dll
-          !**\obj\**
-          !**\bin\**\ref\**
-          !**\testhost*.*
-          !**\Microsoft*.dll
-        # arguments: '--configuration $(buildConfiguration) --no-restore'
-        testRunTitle: 'Run Tests'
-
-    # - task: VSTest@3
-    #   inputs:
-    #     testSelector: 'testAssemblies'
-    #     testAssemblyVer2: |
-    #       **\*Unit.Test.dll
-    #       !**\*TestAdapter.dll
-    #       !**\obj\**
-    #       !**\testhost*.*
-    #       !**\Microsoft*.dll
-    #     searchFolder: '$(System.DefaultWorkingDirectory)'
-    #     runOnlyImpactedTests: false
-
-    # - task: DotNetCoreCLI@2
-    #   displayName: 'Run Unit Tests (dotnet custom)'
-    #   inputs:
-    #     command: custom
-    #     projects: '**/*Test.dll'
-    #     custom: vstest
-    #     arguments: '--logger:trx;logfilename=TEST.xml'
