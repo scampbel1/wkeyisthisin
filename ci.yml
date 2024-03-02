@@ -11,8 +11,6 @@ variables:
   imageName: 'keyifydockertest-image'
   webAppName: 'keyifydockertest'
 
-
-
 stages:
 - stage: BuildWindowsFilesAndTest
   displayName: Build Windows Files and Run Unit Test
@@ -33,11 +31,11 @@ stages:
       inputs:
         testSelector: 'testAssemblies'
         testAssemblyVer2: |
-          **\*Unit.Test.dll
-          !**\*TestAdapter.dll
-          !**\obj\**
-          !**\testhost*.*
-          !**\Microsoft*.dll
+          **/*Unit.Test.dll
+          !**/*TestAdapter.dll
+          !**/obj/**
+          !**/testhost*.*
+          !**/Microsoft*.dll
         searchFolder: '$(System.DefaultWorkingDirectory)'
         runOnlyImpactedTests: false
 
