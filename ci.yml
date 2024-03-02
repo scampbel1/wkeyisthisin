@@ -38,7 +38,7 @@ stages:
       inputs:
         testSelector: 'testAssemblies'
         testAssemblyVer2: |
-          $(BuildConfiguration)\**\*test*.dll
+          **\*test*.dll
           !**\*TestAdapter.dll
           !**\obj\**
           !**\testhost*.*
