@@ -25,19 +25,42 @@ stages:
       displayName: Restore Unit Tests
       inputs:
         command: 'restore'
-        projects: '**/*Unit.Test.csproj'
+        projects: '$(System.DefaultWorkingDirectory)/**/*Unit.Test.csproj'
+      
     - task: VSTest@3
       displayName: Run Unit Tests
       inputs:
         testSelector: 'testAssemblies'
         testAssemblyVer2: |
-          **\bin\$(BuildConfiguration)\**\*test*.dll
+          $(BuildConfiguration)\**\*test*.dll
           !**\*TestAdapter.dll
           !**\obj\**
           !**\testhost*.*
           !**\Microsoft*.dll
         searchFolder: '$(System.DefaultWorkingDirectory)'
         runOnlyImpactedTests: false
+    
+    - task: CmdLine@2
+      inputs:
+        script: |
+          echo "Structure of work folder of this pipeline:"
+          tree $(Agent.WorkFolder)\1 /f
+          
+          echo "Build.ArtifactStagingDirectory:" 
+          
+          echo "$(Build.ArtifactStagingDirectory)"
+          
+          echo "Build.BinariesDirectory:" 
+          
+          echo "$(Build.BinariesDirectory)"
+          
+          echo "Build.SourcesDirectory:"
+          
+          echo "$(Build.SourcesDirectory)"
+
+          echo "Build Id:"
+          
+          echo "$(Build.BuildId)"
 
 - stage: BuildAndCreateImage
   displayName: Build and Create Image
