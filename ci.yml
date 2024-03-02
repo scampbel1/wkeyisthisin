@@ -46,19 +46,37 @@ stages:
         searchFolder: '$(System.DefaultWorkingDirectory)'
         runOnlyImpactedTests: false
         
-        steps:
+    - task: AzureKeyVault@2
+      displayName: Retrieve Test Database ConnectionString
+      inputs:
+        azureSubscription: 'Sean Campbell(4)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
+        KeyVaultName: 'KeyifyDockerTest'
+        SecretsFilter: 'keyifyDatabaseConnectionString'
+        RunAsPreJob: false
+        
     - task: DotNetCoreCLI@2
-      displayName: Restore Unit Tests
+      displayName: Restore Integration Tests
       inputs:
         command: 'restore'
-        projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
-    
+        projects: '$(System.DefaultWorkingDirectory)\**\*Integration.Test.csproj'
+        
     - task: DotNetCoreCLI@2
       displayName: Build Integration Tests
       inputs:
         command: 'build'
         projects: '$(System.DefaultWorkingDirectory)\**\*Integration.Test.csproj'
       
+    - task: CmdLine@2
+      inputs:
+        script: |
+          echo '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
+          echo '$(keyifyDatabaseConnectionString)'
+
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: 'Write-Host ("##vso[task.setvariable variable=databaseConnectionString]$(keyifyDatabaseConnectionString)")'
+
     - task: VSTest@3
       displayName: Run Integration Tests
       inputs:
@@ -71,11 +89,6 @@ stages:
           !**\Microsoft*.dll
         searchFolder: '$(System.DefaultWorkingDirectory)'
         runOnlyImpactedTests: false
-    
-    - task: CmdLine@2
-      inputs:
-        script: |
-          echo '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
 
 - stage: BuildAndCreateImage
   displayName: Build and Create Image
