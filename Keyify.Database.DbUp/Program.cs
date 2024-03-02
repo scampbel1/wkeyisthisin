@@ -4,20 +4,18 @@ internal class Program
 {
     public static int Main(string[] args)
     {
-        var connectionString =
-            args.FirstOrDefault()
-            ?? "Server=.; Database=Keyify; Trusted_connection=true; TrustServerCertificate=True";
 
         var scriptsDirectory = $"{Environment.CurrentDirectory}\\Scripts";
+        var databaseConfiguration = Environment.GetEnvironmentVariable("databaseConnectionString");
 
         var upgrader =
             DeployChanges.To
-                .SqlDatabase(connectionString)
+                .SqlDatabase(databaseConfiguration)
                 .WithScriptsFromFileSystem(scriptsDirectory)
                 .LogToConsole()
                 .Build();
 
-        EnsureDatabase.For.SqlDatabase(connectionString);
+        EnsureDatabase.For.SqlDatabase(databaseConfiguration);
 
         var result = upgrader.PerformUpgrade();
 
@@ -26,9 +24,11 @@ internal class Program
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(result.Error);
             Console.ResetColor();
+
 #if DEBUG
             Console.ReadLine();
 #endif
+
             return -1;
         }
 

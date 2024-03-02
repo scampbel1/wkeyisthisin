@@ -6,31 +6,16 @@ namespace Keyify.Database.Integration.Test.ThrowawayDatabases
 {
     internal static class ThrowawayDatabaseSetup
     {
-        //TODO: Make this configurable - suspect this will fail in cloud environments
-        private const string _localDatabase = ".";
-        //TODO: Make this configurable - also suspect this will fail in cloud environments (perhaps not after looking at build output... but still)
-        private static string _databaseCreationSqlScriptsDirectory => $"{Environment.CurrentDirectory}\\Scripts";
-
         internal static async Task<ThrowawayDatabase> CreateThrowawayDbInstanceAsync()
         {
-            var throwawayDbInstance = ThrowawayDatabase.FromLocalInstance(_localDatabase);
-            var sqlScriptFileNames = GetSqlScriptFileNames();
+            var sqlScriptFileNames = Directory.GetFiles($"{Environment.CurrentDirectory}\\Scripts").ToList();
+
+            var databaseConfiguration = Environment.GetEnvironmentVariable("databaseConnectionString");
+            var throwawayDbInstance = ThrowawayDatabase.FromLocalInstance(databaseConfiguration);
 
             await ExecuteSqlScriptsAgainstThrowawayDbInstanceAsync(sqlScriptFileNames, throwawayDbInstance);
 
             return throwawayDbInstance;
-        }
-
-        private static List<string> GetSqlScriptFileNames()
-        {
-            var sqlScriptFilesNames = new List<string>();
-
-            foreach (var sqlScriptFileName in Directory.GetFiles(_databaseCreationSqlScriptsDirectory))
-            {
-                sqlScriptFilesNames.Add(sqlScriptFileName);
-            }
-
-            return sqlScriptFilesNames;
         }
 
         private static async Task ExecuteSqlScriptsAgainstThrowawayDbInstanceAsync(List<string> sqlScriptFileNames, ThrowawayDatabase throwawayDbInstance)

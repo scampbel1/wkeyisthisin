@@ -69,7 +69,7 @@ namespace Keyify
             {
                 Console.WriteLine("Database Configuration not found! Searching: System.Environment.GetEnvironmentVariable(\"databaseConnectionString\")");
 
-                databaseConfiguration = System.Environment.GetEnvironmentVariable("databaseConnectionString");
+                databaseConfiguration = Environment.GetEnvironmentVariable("databaseConnectionString");
             }
 
             services.AddSingleton<IChordDefinitionRepository>(f => new ChordDefinitionRepository(
