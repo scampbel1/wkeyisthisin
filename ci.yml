@@ -44,25 +44,7 @@ stages:
       inputs:
         script: |
           echo "Structure of work folder of this pipeline:"
-          '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
-          
-          # tree $(Agent.WorkFolder)\1 /f
-          
-          # echo "Build.ArtifactStagingDirectory:" 
-          
-          # echo "$(Build.ArtifactStagingDirectory)"
-          
-          # echo "Build.BinariesDirectory:" 
-          
-          # echo "$(Build.BinariesDirectory)"
-          
-          # echo "Build.SourcesDirectory:"
-          
-          # echo "$(Build.SourcesDirectory)"
-
-          # echo "Build Id:"
-          
-          # echo "$(Build.BuildId)"
+          $(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
 
 - stage: BuildAndCreateImage
   displayName: Build and Create Image
