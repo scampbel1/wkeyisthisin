@@ -43,8 +43,7 @@ stages:
     - task: CmdLine@2
       inputs:
         script: |
-          echo "Structure of work folder of this pipeline:"
-          $(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
+          echo '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
 
 - stage: BuildAndCreateImage
   displayName: Build and Create Image
