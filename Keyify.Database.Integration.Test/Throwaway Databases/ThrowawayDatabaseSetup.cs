@@ -11,7 +11,7 @@ namespace Keyify.Database.Integration.Test.ThrowawayDatabases
             var sqlScriptFileNames = Directory.GetFiles($"{Environment.CurrentDirectory}\\Scripts").ToList();
 
             var databaseConfiguration = Environment.GetEnvironmentVariable("databaseConnectionString");
-            var throwawayDbInstance = ThrowawayDatabase.FromLocalInstance(databaseConfiguration);
+            var throwawayDbInstance = ThrowawayDatabase.Create(databaseConfiguration);
 
             await ExecuteSqlScriptsAgainstThrowawayDbInstanceAsync(sqlScriptFileNames, throwawayDbInstance);
 
