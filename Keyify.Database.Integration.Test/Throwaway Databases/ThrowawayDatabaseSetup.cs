@@ -1,5 +1,6 @@
 ﻿using Keyify.Database.Integration.Test.Helper;
 using Microsoft.Data.SqlClient;
+using System.Diagnostics;
 using ThrowawayDb;
 
 namespace Keyify.Database.Integration.Test.ThrowawayDatabases
@@ -8,14 +9,40 @@ namespace Keyify.Database.Integration.Test.ThrowawayDatabases
     {
         internal static async Task<ThrowawayDatabase> CreateThrowawayDbInstanceAsync()
         {
-            var sqlScriptFileNames = Directory.GetFiles($"{Environment.CurrentDirectory}\\Scripts").ToList();
+            try
+            {
+                ThrowawayDatabase throwawayDbInstance;
 
-            var databaseConfiguration = Environment.GetEnvironmentVariable("databaseConnectionString");
-            var throwawayDbInstance = ThrowawayDatabase.Create(databaseConfiguration);
+#if !DEBUG
+                var databaseConfiguration = Environment.GetEnvironmentVariable("databaseConnectionString");
 
-            await ExecuteSqlScriptsAgainstThrowawayDbInstanceAsync(sqlScriptFileNames, throwawayDbInstance);
+                if (string.IsNullOrWhiteSpace(databaseConfiguration))
+                {
+                    throw new ArgumentNullException($"Problem with value of {nameof(databaseConfiguration)}: {databaseConfiguration}");
+                }
+                else
+                {
+                    Console.WriteLine($"From Console: {databaseConfiguration}");
+                    Trace.WriteLine($"From Trace: {databaseConfiguration}");
+                }
 
-            return throwawayDbInstance;
+                throwawayDbInstance = ThrowawayDatabase.Create(databaseConfiguration);
+#else
+                throwawayDbInstance = ThrowawayDatabase.FromLocalInstance(".");
+#endif
+                var sqlScriptFileNames = Directory.GetFiles($"{Environment.CurrentDirectory}\\Scripts").ToList();
+
+                await ExecuteSqlScriptsAgainstThrowawayDbInstanceAsync(sqlScriptFileNames, throwawayDbInstance);
+
+                return throwawayDbInstance;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine($"From Console: {exception}");
+                Trace.WriteLine($"From Trace: {exception}");
+
+                throw;
+            }
         }
 
         private static async Task ExecuteSqlScriptsAgainstThrowawayDbInstanceAsync(List<string> sqlScriptFileNames, ThrowawayDatabase throwawayDbInstance)
