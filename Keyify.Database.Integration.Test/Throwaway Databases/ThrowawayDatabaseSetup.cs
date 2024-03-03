@@ -14,9 +14,6 @@ namespace Keyify.Database.Integration.Test.ThrowawayDatabases
                 ThrowawayDatabase throwawayDbInstance;
                 var sqlScriptFileNames = Directory.GetFiles($"{Environment.CurrentDirectory}\\Scripts").ToList();
 
-#if DEBUG
-                throwawayDbInstance = ThrowawayDatabase.FromLocalInstance(".");
-#else
                 var databaseConfiguration = Environment.GetEnvironmentVariable("databaseConnectionString");
 
                 if (string.IsNullOrWhiteSpace(databaseConfiguration))
@@ -30,7 +27,6 @@ namespace Keyify.Database.Integration.Test.ThrowawayDatabases
                 }
 
                 throwawayDbInstance = ThrowawayDatabase.Create(databaseConfiguration);
-#endif
 
                 await ExecuteSqlScriptsAgainstThrowawayDbInstanceAsync(sqlScriptFileNames, throwawayDbInstance);
 
