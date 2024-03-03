@@ -66,16 +66,16 @@ stages:
         command: 'build'
         projects: '$(System.DefaultWorkingDirectory)\**\*Integration.Test.csproj'
       
-    - task: CmdLine@2
-      inputs:
-        script: |
-          echo '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
-          echo '$(keyifyDatabaseConnectionString)'
+    # - task: CmdLine@2
+    #   inputs:
+    #     script: |
+    #       echo '$(keyifyDatabaseConnectionString)'
 
     - task: PowerShell@2
       inputs:
         targetType: 'inline'
-        script: 'Write-Host ("##vso[task.setvariable variable=databaseConnectionString]$(keyifyDatabaseConnectionString)")'
+        script: | 
+          Write-Host ("##vso[task.setvariable variable=databaseConnectionString]$(keyifyDatabaseConnectionString)")
 
     - task: VSTest@3
       displayName: Run Integration Tests
