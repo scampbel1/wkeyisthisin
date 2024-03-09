@@ -1,61 +1,49 @@
-﻿using Dapper;
-using Keyify.Database.Integration.Test.Enums;
+﻿using Keyify.Database.Integration.Test.Enums;
 using Keyify.Database.Integration.Test.Helper;
 using Keyify.Database.Integration.Test.ThrowawayDatabases;
+using Keyify.Infrastructure.Models.Data;
 using Microsoft.Data.SqlClient;
 using System.Text.Json;
 
 namespace Keyify.Database.Integration.Test.Tests
 {
-    public class TuningDatabaseTest
+    public class TuningDatabaseTest : DatabaseIntegrationTest
     {
         //TODO: Research best practices for ThrowawayDb
-                // - Use of Snapshots
-                // - Disposing of ThrowawayDb instances
+        // - Use of Snapshots
+
+        public TuningDatabaseTest(ThrowawayDatabaseWrapper throwawayDb) : base (throwawayDb)
+        {
+        }
 
         [Fact]
         public async Task CreateTuning_RecordCreatedInDatabase_ReturnsSingleRecord_ReturnsCorrectNotesIntArray()
         {
-            using (var throwawayDbInstance = await ThrowawayDatabaseSetup.CreateThrowawayDbInstanceAsync())
-            {
-                using var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
-                sqlCconnection.Open();
+            await ThrowAwayDatabaseWrapper.ExecuteSqlQueryAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertStandardTuningSqlScriptParameters());
 
-                //Arrange
-                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertStandardTuningSqlScriptParameters());
+            //Act
+            var sqlQuery = "SELECT [Notes] FROM [Core].[Tuning]";
+            var tuning = await ThrowAwayDatabaseWrapper.QuerySingleAsync<TuningData>(sqlQuery);
 
-                //Act
-                var sqlQuery = "SELECT [Notes] FROM [Core].[Tuning]";
-                var tuning = await sqlCconnection.QuerySingleAsync(sqlQuery);
+            var notes = await ConvertToIntArray(tuning.Notes);
 
-                using var memoryStream = new MemoryStream(tuning.Notes);
-                var notesResult = await JsonSerializer.DeserializeAsync<int[]>(memoryStream);
-
-                await sqlCconnection.CloseAsync();
-
-                //Assert
-                Assert.Single(tuning);
-                Assert.Equal(TestGuitarTuningConstant.StandardTuning, notesResult);
-            }
+            //Assert
+            Assert.NotNull(tuning);
+            Assert.Equal(TestGuitarTuningConstant.StandardTuning, notes);
         }
 
         [Fact]
-        public async Task CreateTuning_AttemptToInsertDuplicateRecords_TriggersUniqueConstraint_ThrowsException()
+        public async Task CreateTuning_AttemptToInsertDuplicateRecords_TriggersUniqueConstraint_ThrowsException() 
+            => await Assert.ThrowsAsync<SqlException>(() => ThrowAwayDatabaseWrapper.ExecuteSqlQueryAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertStandardTuningSqlScriptParameters()));
+
+
+        private async Task<int[]?> ConvertToIntArray(byte[] bytes)
         {
-            using (var throwawayDbInstance = await ThrowawayDatabaseSetup.CreateThrowawayDbInstanceAsync())
-            {
-                using var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
-                sqlCconnection.Open();
+            using var memoryStream = new MemoryStream(bytes);
 
-                //Arrange
-                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertStandardTuningSqlScriptParameters());
+            var ints = await JsonSerializer.DeserializeAsync<int[]>(memoryStream);
 
-                //Act
-                Func<Task> duplicateRecordInsertAttempt = () => sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertStandardTuningSqlScriptParameters());
-
-                //Assert
-                await Assert.ThrowsAsync<SqlException>(duplicateRecordInsertAttempt);
-            }
+            return ints;
         }
     }
 }

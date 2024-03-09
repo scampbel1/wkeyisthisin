@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Keyify.Database.Integration.Test.Enums;
 using Keyify.Database.Integration.Test.Helper;
+using Keyify.Database.Integration.Test.Tests;
 using Keyify.Database.Integration.Test.ThrowawayDatabases;
 using Keyify.MusicTheory.Enums;
 using Microsoft.Data.SqlClient;
@@ -8,56 +9,33 @@ using System.Text.Json;
 
 namespace Keyify.Database.Integration.Tests.Test
 {
-    public class ChordDatabaseTest
+    public class ChordDatabaseTest : DatabaseIntegrationTest
     {
+        public ChordDatabaseTest(ThrowawayDatabaseWrapper throwawayDbInstance) : base(throwawayDbInstance)
+        {
+        }
+
         [Fact]
         public async Task CreateChord_RecordCreatedInDatabase_ReturnsSingleRecord_ReturnsCorrectTabsIntArray()
         {
-            using (var throwawayDbInstance = await ThrowawayDatabaseSetup.CreateThrowawayDbInstanceAsync())
-            {
-                using var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
-                sqlCconnection.Open();
+            //Arrange
+            await ThrowAwayDatabaseWrapper.ExecuteSqlQueryAsync(DatabaseTestHelper.CreateInsertChordSqlScript(), DatabaseTestHelper.CreateInsertEMajorChordSqlScriptParameters());
 
-                //Arrange
-                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordDefinitionSqlScript(), DatabaseTestHelper.CreateInsertChordDefinitionSqlScriptParameters());
-                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertStandardTuningSqlScriptParameters());
-                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordSqlScript(), DatabaseTestHelper.CreateInsertEMajorChordSqlScriptParameters());
+            //Act
+            var sqlQuery = "SELECT [Tabs] FROM [Core].[Chord]";
+            var chord = await ThrowAwayDatabaseWrapper.QuerySingleAsync<byte[]>(sqlQuery);
 
-                //Act
-                var sqlQuery = "SELECT [Tabs] FROM [Core].[Chord]";
-                var chord = await sqlCconnection.QuerySingleAsync(sqlQuery);
+            var tabResult = await ConvertToIntArray(chord);
 
-                using var memoryStream = new MemoryStream(chord.Tabs);
-                var tabResult = await JsonSerializer.DeserializeAsync<int[]>(memoryStream);
+            //Assert
+            Assert.NotNull(chord);
+            Assert.Equal(TestGuitarChordTabConstant.StandardTuning_E_Major, tabResult);
 
-                await sqlCconnection.CloseAsync();
-
-                //Assert
-                Assert.Single(chord);
-                Assert.Equal(TestGuitarChordTabConstant.StandardTuning_E_Major, tabResult);
-            }
         }
 
         [Fact]
-        public async Task CreateChord_AttemptInsertIntoDatabaseTwice_TriggersUniqueConstraint_ThrowsException()
-        {
-            using (var throwawayDbInstance = await ThrowawayDatabaseSetup.CreateThrowawayDbInstanceAsync())
-            {
-                using var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
-                sqlCconnection.Open();
+        public async Task CreateChord_AttemptInsertIntoDatabaseTwice_TriggersUniqueConstraint_ThrowsException() => await Assert.ThrowsAsync<SqlException>(() => ThrowAwayDatabaseWrapper.ExecuteSqlQueryAsync(DatabaseTestHelper.CreateInsertChordSqlScript(), DatabaseTestHelper.CreateInsertEMajorChordSqlScriptParameters()));
 
-                //Arrange
-                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordDefinitionSqlScript(), DatabaseTestHelper.CreateInsertChordDefinitionSqlScriptParameters());
-                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertTuningSqlScript(), DatabaseTestHelper.CreateInsertStandardTuningSqlScriptParameters());
-                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordSqlScript(), DatabaseTestHelper.CreateInsertEMajorChordSqlScriptParameters());
-
-                //Act
-                Func<Task> duplicateRecordInsertAttempt = () => sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertChordSqlScript(), DatabaseTestHelper.CreateInsertEMajorChordSqlScriptParameters());
-
-                //Assert
-                await Assert.ThrowsAsync<SqlException>(duplicateRecordInsertAttempt);
-            }
-        }
 
         [Fact(Skip = "This is an attempt to figure out how chord definitions are supposed to work")]
         public async Task DeleteMe_GetIntervalBinaryValues()
@@ -101,6 +79,15 @@ namespace Keyify.Database.Integration.Tests.Test
             }
 
             Assert.True(results.Count > 0);
+        }
+
+        private async Task<int[]?> ConvertToIntArray(byte[] bytes)
+        {
+            using var memoryStream = new MemoryStream(bytes);
+
+            var ints = await JsonSerializer.DeserializeAsync<int[]>(memoryStream);
+
+            return ints;
         }
     }
 }

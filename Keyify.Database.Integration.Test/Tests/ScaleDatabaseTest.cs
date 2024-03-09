@@ -2,69 +2,78 @@
 using Keyify.Database.Integration.Test.Helper;
 using Keyify.Database.Integration.Test.Models;
 using Keyify.Database.Integration.Test.ThrowawayDatabases;
+using Keyify.Infrastructure.Models.Data;
 using Keyify.MusicTheory.Enums;
+using Keyify.Services.Models;
 using System.Data.SqlClient;
 using System.Text.Json;
 
 namespace Keyify.Database.Integration.Test.Tests
 {
-    public class ScaleDatabaseTest
+
+    public class ScaleDatabaseTest : DatabaseIntegrationTest
     {
-        private const string expectedChordTemplateName = "Whole Tone";
+
         private const string expectedChordTemplateDescription = "This is just a test";
+
+        public ScaleDatabaseTest(ThrowawayDatabaseWrapper throwawayDb) : base(throwawayDb)
+        {
+
+        }
 
         [Fact]
         public async Task CreateScale_WithDefinedRootNotes_ReturnsChordDefinition_WithDefinedNotes_ExpectedNotesReturned()
         {
-            using (var throwawayDbInstance = await ThrowawayDatabaseSetup.CreateThrowawayDbInstanceAsync())
-            {
-                var expectedAllowedNotes = new[] { Note.D, Note.F };
 
-                using var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
-                sqlCconnection.Open();
+            const string expectedChordTemplateName = "Whole Tone";
 
-                //Arrange
-                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertScaleDefinitionSqlScript_DefinedRootNotes(), DatabaseTestHelper.CreateInsertChordDefinitionSqlScriptParameters_DefinedRootNotes());
+            var expectedAllowedNotes = new[] { Note.D, Note.F };
 
-                //Act
-                var sqlQuery = "SELECT [Name], [Description], [Intervals], [Degrees], [AllowedRootNotes] FROM [Core].[ScaleDefinition]";
-                var scaleDefinition = await sqlCconnection.QuerySingleAsync(sqlQuery);
+            //Arrange
+            await ThrowAwayDatabaseWrapper.ExecuteSqlQueryAsync(DatabaseTestHelper.CreateInsertScaleDefinitionSqlScript_DefinedRootNotes(), DatabaseTestHelper.CreateInsertChordDefinitionSqlScriptParameters_DefinedRootNotes());
 
-                using var memoryStream = new MemoryStream(scaleDefinition.AllowedRootNotes);
-                var allowedRootNotesResult = await JsonSerializer.DeserializeAsync<Note[]>(memoryStream);
+            //Act
+            var sqlQuery = "SELECT [Name], [Intervals], [Degrees], [Description], [AllowedRootNotes] FROM [Core].[ScaleDefinition]";
+            var scaleDefinition = await ThrowAwayDatabaseWrapper.QuerySingleAsync<ScaleDefinitionData>(sqlQuery);
 
-                await sqlCconnection.CloseAsync();
+            // TODO: Create factory with all this conversion stuff - use ...Data types and remove ...Entity types
+            var rootNotes = await ConvertToNoteArray(scaleDefinition!.AllowedRootNotes);
 
-                //Assert
-                Assert.NotNull(allowedRootNotesResult);
-                Assert.Equal(expectedAllowedNotes, allowedRootNotesResult);
-                Assert.Equal(expectedChordTemplateName, scaleDefinition.Name);
-                Assert.Equal(expectedChordTemplateDescription, scaleDefinition.Description);
-            }
+            //TODO: Tests aren't isolated - create script to delete record
+
+            //Assert
+            Assert.NotNull(scaleDefinition?.AllowedRootNotes);
+            Assert.Equal(expectedAllowedNotes, rootNotes);
+            Assert.Equal(expectedChordTemplateName, scaleDefinition?.Name);
+            Assert.Equal(expectedChordTemplateDescription, scaleDefinition?.Description);
         }
 
         [Fact]
         public async Task CreateScale_WithoutDefinedRootNotes_ReturnsChordDefinition_NoDefinedNotes_NullDefinedNotesArray()
         {
-            using (var throwawayDbInstance = await ThrowawayDatabaseSetup.CreateThrowawayDbInstanceAsync())
-            {
-                using var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
-                sqlCconnection.Open();
+            const string expectedChordTemplateName = "Blues";
 
-                //Arrange
-                await sqlCconnection.ExecuteAsync(DatabaseTestHelper.CreateInsertScaleDefinitionSqlScript_NoRootNotes(), DatabaseTestHelper.CreateInsertChordDefinitionSqlScriptParameters_NoRootNotes());
+            //Arrange
+            await ThrowAwayDatabaseWrapper.ExecuteSqlQueryAsync(DatabaseTestHelper.CreateInsertScaleDefinitionSqlScript_NoRootNotes(), DatabaseTestHelper.CreateInsertChordDefinitionSqlScriptParameters_NoRootNotes());
 
-                //Act
-                var sqlQuery = "SELECT [Name], [Description], [Intervals], [Degrees], [AllowedRootNotes] FROM [Core].[ScaleDefinition]";
-                var scaleDefinition = await sqlCconnection.QuerySingleAsync<StubChordTemplateResponse>(sqlQuery);
+            //Act
+            var sqlQuery = $"SELECT [Name], [Description], [Intervals], [Degrees], [AllowedRootNotes] FROM [Core].[ScaleDefinition] WHERE [Name] = '{expectedChordTemplateName}'";
+            var scaleDefinition = await ThrowAwayDatabaseWrapper.QuerySingleAsync<ScaleDefinitionData>(sqlQuery);
 
-                await sqlCconnection.CloseAsync();
+            //Assert
+            Assert.NotNull(scaleDefinition);
+            Assert.Null(scaleDefinition.AllowedRootNotes);
+            Assert.Equal(expectedChordTemplateName, scaleDefinition.Name);
+            Assert.Equal(expectedChordTemplateDescription, scaleDefinition.Description);
+        }
 
-                //Assert
-                Assert.Null(scaleDefinition.AllowedRootNotes);
-                Assert.Equal(expectedChordTemplateName, scaleDefinition.Name);
-                Assert.Equal(expectedChordTemplateDescription, scaleDefinition.Description);
-            }
+        private async Task<Note[]?> ConvertToNoteArray(byte[] bytes)
+        {
+            using var memoryStream = new MemoryStream(bytes);
+
+            var intervals = await JsonSerializer.DeserializeAsync<Note[]>(memoryStream);
+
+            return intervals;
         }
     }
 }

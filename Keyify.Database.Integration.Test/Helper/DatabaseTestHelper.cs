@@ -90,9 +90,9 @@ namespace Keyify.Database.Integration.Test.Helper
 
         internal static object CreateInsertChordDefinitionSqlScriptParameters_NoRootNotes()
         {
-            var mode = Mode.WholeTone;
-            var intervals = new Interval[] { Interval.R, Interval.W, Interval.W, Interval.W, Interval.W, Interval.W, Interval.W };
-            var degrees = new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.SharpFifth, Degree.FlatSeventh, Degree.Eighth };
+            var mode = Mode.Blues;
+            var intervals = new Interval[] { Interval.R, Interval.W, };
+            var degrees = new string[] { Degree.First, Degree.Second, };
 
             using var intervalsMemoryStream = new MemoryStream();
             JsonSerializer.Serialize(intervalsMemoryStream, intervals);

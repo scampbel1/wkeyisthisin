@@ -5,8 +5,12 @@ using Microsoft.Data.SqlClient;
 
 namespace Keyify.Database.Integration.Test.Tests
 {
+    [Collection("Database Collection")]
     public class LookupTableConsistencyTest
     {
+
+        private readonly ThrowawayDatabaseWrapper _throwawayDb;
+
         //Arrange
         private int _noteTypeTableEntryCount;
         private int _instrumentTypeTableEntryCount;
@@ -17,22 +21,21 @@ namespace Keyify.Database.Integration.Test.Tests
         private const string _noteTypeCountSqlQuery = "SELECT COUNT(1) FROM [Core].[Note]";
         private const string _instrumentTypeCountSqlQuery = "SELECT COUNT(1) FROM [Core].[Instrument]";
 
-        public LookupTableConsistencyTest()
+        public LookupTableConsistencyTest(ThrowawayDatabaseWrapper throwawayDb)
         {
+            _throwawayDb = throwawayDb;
+
             Task.WaitAll(SetupFixture());
         }
 
         private async Task SetupFixture()
         {
-            using (var throwawayDbInstance = await ThrowawayDatabaseSetup.CreateThrowawayDbInstanceAsync())
-            {
-                using var sqlCconnection = new SqlConnection(throwawayDbInstance.ConnectionString);
-                sqlCconnection.Open();
+            using var sqlCconnection = new SqlConnection(_throwawayDb.ThrowawayDatabase.ConnectionString);
+            sqlCconnection.Open();
 
-                //Act
-                _noteTypeTableEntryCount = await sqlCconnection.QuerySingleAsync<int>(_noteTypeCountSqlQuery);
-                _instrumentTypeTableEntryCount = await sqlCconnection.QuerySingleAsync<int>(_instrumentTypeCountSqlQuery);
-            }
+            //Act
+            _noteTypeTableEntryCount = await sqlCconnection.QuerySingleAsync<int>(_noteTypeCountSqlQuery);
+            _instrumentTypeTableEntryCount = await sqlCconnection.QuerySingleAsync<int>(_instrumentTypeCountSqlQuery);
         }
 
         [Fact]
