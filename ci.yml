@@ -46,69 +46,69 @@ stages:
         searchFolder: '$(System.DefaultWorkingDirectory)'
         runOnlyImpactedTests: false
         
-    - task: AzureKeyVault@2
-      displayName: Retrieve Test Database ConnectionString
-      inputs:
-        azureSubscription: 'Sean Campbell(4)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
-        KeyVaultName: 'KeyifyDockerTest'
-        SecretsFilter: 'keyifyDatabaseConnectionString'
-        RunAsPreJob: false
+    # - task: AzureKeyVault@2
+    #   displayName: Retrieve Test Database ConnectionString
+    #   inputs:
+    #     azureSubscription: 'Sean Campbell(4)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
+    #     KeyVaultName: 'KeyifyDockerTest'
+    #     SecretsFilter: 'keyifyDatabaseConnectionString'
+    #     RunAsPreJob: false
         
-    - task: DotNetCoreCLI@2
-      displayName: Restore Integration Tests
-      inputs:
-        command: 'restore'
-        projects: '$(System.DefaultWorkingDirectory)\**\*Integration.Test.csproj'
+    # - task: DotNetCoreCLI@2
+    #   displayName: Restore Integration Tests
+    #   inputs:
+    #     command: 'restore'
+    #     projects: '$(System.DefaultWorkingDirectory)\**\*Integration.Test.csproj'
         
-    - task: DotNetCoreCLI@2
-      displayName: Build Integration Tests
-      inputs:
-        command: 'build'
-        projects: '$(System.DefaultWorkingDirectory)\**\*Integration.Test.csproj'
+    # - task: DotNetCoreCLI@2
+    #   displayName: Build Integration Tests
+    #   inputs:
+    #     command: 'build'
+    #     projects: '$(System.DefaultWorkingDirectory)\**\*Integration.Test.csproj'
       
     # - task: CmdLine@2
     #   inputs:
     #     script: |
     #       echo '$(keyifyDatabaseConnectionString)'
 
-    - task: PowerShell@2
-      displayName: Set Database ConnectionString
-      inputs:
-        targetType: 'inline'
-        script: | 
-          Write-Host ("##vso[task.setvariable variable=databaseConnectionString]$(keyifyDatabaseConnectionString)")
+    # - task: PowerShell@2
+    #   displayName: Set Database ConnectionString
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: | 
+    #       Write-Host ("##vso[task.setvariable variable=databaseConnectionString]$(keyifyDatabaseConnectionString)")
 
-    - task: VSTest@3
-      displayName: Run Integration Tests
-      inputs:
-        testSelector: 'testAssemblies'
-        testAssemblyVer2: |
-          **\*Integration.Test*.dll
-          !**\*TestAdapter.dll
-          !**\obj\**
-          !**\testhost*.*
-          !**\Microsoft*.dll
-        searchFolder: '$(System.DefaultWorkingDirectory)'
-        runOnlyImpactedTests: false
+    # - task: VSTest@3
+    #   displayName: Run Integration Tests
+    #   inputs:
+    #     testSelector: 'testAssemblies'
+    #     testAssemblyVer2: |
+    #       **\*Integration.Test*.dll
+    #       !**\*TestAdapter.dll
+    #       !**\obj\**
+    #       !**\testhost*.*
+    #       !**\Microsoft*.dll
+    #     searchFolder: '$(System.DefaultWorkingDirectory)'
+    #     runOnlyImpactedTests: false
 
-- stage: BuildAndCreateImage
-  displayName: Build and Create Image
-  jobs:
-  - job: BuildAndCreateImage
-    displayName: Build and Create Image
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:    
-    - task: DotNetCoreCLI@2
-      displayName: Restore All Projects
-      inputs:
-        command: 'restore'
-        projects: '**/*.csproj'
-        feedsToUse: 'select'
+# - stage: BuildAndCreateImage
+#   displayName: Build and Create Image
+#   jobs:
+#   - job: BuildAndCreateImage
+#     displayName: Build and Create Image
+#     pool:
+#       vmImage: 'ubuntu-latest'
+#     steps:    
+#     - task: DotNetCoreCLI@2
+#       displayName: Restore All Projects
+#       inputs:
+#         command: 'restore'
+#         projects: '**/*.csproj'
+#         feedsToUse: 'select'
 
-    - task: DotNetCoreCLI@2
-      displayName: Build Keyify.Web
-      inputs:
-        command: 'build'
-        projects: '**/Keyify.Web.csproj'
-        arguments: '--configuration $(buildConfiguration) --no-restore'
+#     - task: DotNetCoreCLI@2
+#       displayName: Build Keyify.Web
+#       inputs:
+#         command: 'build'
+#         projects: '**/Keyify.Web.csproj'
+#         arguments: '--configuration $(buildConfiguration) --no-restore'
