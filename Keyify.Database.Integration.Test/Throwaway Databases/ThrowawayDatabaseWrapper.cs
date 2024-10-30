@@ -26,6 +26,9 @@ namespace Keyify.Database.Integration.Test.ThrowawayDatabases
             {
                 var connectionString = Environment.GetEnvironmentVariable("databaseConnectionString");
 
+                Console.WriteLine($"Helloy!: {connectionString}");
+                Trace.WriteLine($"Helloy From't Trace!!!: {connectionString}");
+
                 if (string.IsNullOrWhiteSpace(connectionString))
                 {
                     throw new ArgumentNullException($"Problem with value of {nameof(connectionString)}: {connectionString}");

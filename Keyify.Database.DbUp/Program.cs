@@ -1,4 +1,5 @@
-﻿using DbUp;
+﻿using System.Diagnostics;
+using DbUp;
 
 internal class Program
 {
@@ -6,9 +7,9 @@ internal class Program
     {
 
         var scriptsDirectory = $"{Environment.CurrentDirectory}\\Scripts";
-        var databaseConfiguration = Environment.GetEnvironmentVariable("databaseConnectionString");
+        var databaseConfiguration = "Server=tcp:campbe11devops.database.windows.net,1433;Initial Catalog=deployment;Persist Security Info=False;User ID=deploymentadmin;Password=Zt@3lUDwZewDvV;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
-        Console.WriteLine($"Hey look! {databaseConfiguration}");
+        Trace.WriteLine($"Hey look! {databaseConfiguration}");
 
         var upgrader =
             DeployChanges.To
