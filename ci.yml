@@ -18,30 +18,30 @@ stages:
       vmImage: 'windows-latest'
     
     steps:
-    - task: DotNetCoreCLI@2
-      displayName: Restore Unit Tests
-      inputs:
-        command: 'restore'
-        projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
+    # - task: DotNetCoreCLI@2
+    #   displayName: Restore Unit Tests
+    #   inputs:
+    #     command: 'restore'
+    #     projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
     
-    - task: DotNetCoreCLI@2
-      displayName: Build Unit Tests
-      inputs:
-        command: 'build'
-        projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
+    # - task: DotNetCoreCLI@2
+    #   displayName: Build Unit Tests
+    #   inputs:
+    #     command: 'build'
+    #     projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
       
-    - task: VSTest@3
-      displayName: Run Unit Tests
-      inputs:
-        testSelector: 'testAssemblies'
-        testAssemblyVer2: |
-          **\*test*.dll
-          !**\*TestAdapter.dll
-          !**\obj\**
-          !**\testhost*.*
-          !**\Microsoft*.dll
-        searchFolder: '$(System.DefaultWorkingDirectory)'
-        runOnlyImpactedTests: false
+    # - task: VSTest@3
+    #   displayName: Run Unit Tests
+    #   inputs:
+    #     testSelector: 'testAssemblies'
+    #     testAssemblyVer2: |
+    #       **\*test*.dll
+    #       !**\*TestAdapter.dll
+    #       !**\obj\**
+    #       !**\testhost*.*
+    #       !**\Microsoft*.dll
+    #     searchFolder: '$(System.DefaultWorkingDirectory)'
+    #     runOnlyImpactedTests: false
         
     - task: AzureKeyVault@2
       displayName: Retrieve Staging Database ConnectionString
@@ -57,36 +57,36 @@ stages:
         command: 'restore'
         projects: '$(System.DefaultWorkingDirectory)\**\*Integration.Test.csproj'
         
-    # - task: DotNetCoreCLI@2
-    #   displayName: Build Database Integration Tests
-    #   inputs:
-    #     command: 'build'
-    #     projects: '$(System.DefaultWorkingDirectory)\**\*Integration.Test.csproj'
+    - task: DotNetCoreCLI@2
+      displayName: Build Database Integration Tests
+      inputs:
+        command: 'build'
+        projects: '$(System.DefaultWorkingDirectory)\**\*Integration.Test.csproj'
       
-    # - task: CmdLine@2
-    #   inputs:
-    #     script: |
-    #       echo '$(keyifyDatabaseConnectionString)'
+    - task: CmdLine@2
+      inputs:
+        script: |
+          echo '$(stagingDatabaseConnectionString)'
 
-    # - task: PowerShell@2
-    #   displayName: Set Database ConnectionString
-    #   inputs:
-    #     targetType: 'inline'
-    #     script: | 
-    #       Write-Host ("##vso[task.setvariable variable=databaseConnectionString]$(keyifyDatabaseConnectionString)")
+    - task: PowerShell@2
+      displayName: Set Database ConnectionString
+      inputs:
+        targetType: 'inline'
+        script: | 
+          Write-Host ("##vso[task.setvariable variable=databaseConnectionString]$(stagingDatabaseConnectionString)")
 
-    # - task: VSTest@3
-    #   displayName: Run Integration Tests
-    #   inputs:
-    #     testSelector: 'testAssemblies'
-    #     testAssemblyVer2: |
-    #       **\*Integration.Test*.dll
-    #       !**\*TestAdapter.dll
-    #       !**\obj\**
-    #       !**\testhost*.*
-    #       !**\Microsoft*.dll
-    #     searchFolder: '$(System.DefaultWorkingDirectory)'
-    #     runOnlyImpactedTests: false
+    - task: VSTest@3
+      displayName: Run Integration Tests
+      inputs:
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: |
+          **\*Integration.Test*.dll
+          !**\*TestAdapter.dll
+          !**\obj\**
+          !**\testhost*.*
+          !**\Microsoft*.dll
+        searchFolder: '$(System.DefaultWorkingDirectory)'
+        runOnlyImpactedTests: false
 
 # - stage: BuildAndCreateImage
 #   displayName: Build and Create Image
