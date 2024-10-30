@@ -4,12 +4,9 @@ trigger:
     - master
 variables:
   buildConfiguration: 'Release'
-  location: 'westeurope'
-  acrHostName: 'keyifydockertest.azurecr.io'
-  acrName: 'keyifydockertest'
-  rgName: 'keyifydockertest'
-  imageName: 'keyifydockertest-image'
-  webAppName: 'keyifydockertest'
+  location: 'uksouth'
+  rgName: 'notestokey'
+  webAppName: 'notestokey'
 
 stages:
 - stage: BuildWindowsFilesAndTest
@@ -47,11 +44,11 @@ stages:
         runOnlyImpactedTests: false
         
     # - task: AzureKeyVault@2
-    #   displayName: Retrieve Test Database ConnectionString
+    #   displayName: Retrieve Staging Database ConnectionString
     #   inputs:
-    #     azureSubscription: 'Sean Campbell(4)(a2fc1bcd-3446-47ea-9525-20f2a1a0de97)'
-    #     KeyVaultName: 'KeyifyDockerTest'
-    #     SecretsFilter: 'keyifyDatabaseConnectionString'
+    #     azureSubscription: 'c5d140d4-4130-4229-9fc9-025261099893'
+    #     KeyVaultName: 'DeploymentSecretsKeyify'
+    #     SecretsFilter: 'notesToKeyStagingDatabaseConnectionString'
     #     RunAsPreJob: false
         
     # - task: DotNetCoreCLI@2
