@@ -24,7 +24,7 @@ namespace Keyify.Database.Integration.Test.ThrowawayDatabases
         {
             try
             {
-                var connectionString = Environment.GetEnvironmentVariable("databaseConnectionString") ?? "Data Source=.;Integrated Security=True;";
+                var connectionString = Environment.GetEnvironmentVariable("databaseConnectionString");
 
                 if (string.IsNullOrWhiteSpace(connectionString))
                 {

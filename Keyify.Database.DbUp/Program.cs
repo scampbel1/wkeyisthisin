@@ -8,6 +8,8 @@ internal class Program
         var scriptsDirectory = $"{Environment.CurrentDirectory}\\Scripts";
         var databaseConfiguration = Environment.GetEnvironmentVariable("databaseConnectionString");
 
+        Console.WriteLine($"Hey look! {databaseConfiguration}");
+
         var upgrader =
             DeployChanges.To
                 .SqlDatabase(databaseConfiguration)
