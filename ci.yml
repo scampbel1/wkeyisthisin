@@ -48,7 +48,7 @@ stages:
       inputs:
         azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
         KeyVaultName: 'DeploymentSecretsKeyify'
-        SecretsFilter: 'notesToKeyStagingDatabaseConnectionString'
+        SecretsFilter: 'stagingDatabaseConnectionString'
         RunAsPreJob: true
         
     - task: DotNetCoreCLI@2
