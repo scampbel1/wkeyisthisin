@@ -51,11 +51,6 @@ stages:
         SecretsFilter: 'stagingDatabaseConnectionString'
         RunAsPreJob: true
         
-    - task: DotNetCoreCLI@2
-      displayName: Restore DbUp Projects
-      inputs:
-        command: 'restore'
-        projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
         
     - task: PowerShell@2
       displayName: Set Database ConnectionString
@@ -79,11 +74,24 @@ stages:
         arguments: '"$(stagingDatabaseConnectionString)"'
 
     - task: DotNetCoreCLI@2
+      displayName: Restore DbUp Projects
+      inputs:
+        command: 'restore'
+        projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
+
+    - task: DotNetCoreCLI@2
+      displayName: Build Keyify.Web
+      inputs:
+        command: 'build'
+        projects: '**/Keyify.Web.csproj'
+        arguments: '--configuration $(buildConfiguration) --no-restore'
+
+    - task: DotNetCoreCLI@2
       inputs:
         command: 'publish'
         projects: '$(System.DefaultWorkingDirectory)\**\*Web.csproj'
         publishWebProjects: true
-    
+
     - task: AzureWebApp@1
       inputs:
         azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
@@ -91,38 +99,3 @@ stages:
         appName: $(webAppName)
         resourceGroupName: $(rgName)
         package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-
-    # - task: VSTest@3
-    #   displayName: Run Integration Tests
-    #   inputs:
-    #     testSelector: 'testAssemblies'
-    #     testAssemblyVer2: |
-    #       **\*Integration.Test*.dll
-    #       !**\*TestAdapter.dll
-    #       !**\obj\**
-    #       !**\testhost*.*
-    #       !**\Microsoft*.dll
-    #     searchFolder: '$(System.DefaultWorkingDirectory)'
-    #     runOnlyImpactedTests: false
-
-# - stage: BuildAndCreateImage
-#   displayName: Build and Create Image
-#   jobs:
-#   - job: BuildAndCreateImage
-#     displayName: Build and Create Image
-#     pool:
-#       vmImage: 'ubuntu-latest'
-#     steps:    
-#     - task: DotNetCoreCLI@2
-#       displayName: Restore All Projects
-#       inputs:
-#         command: 'restore'
-#         projects: '**/*.csproj'
-#         feedsToUse: 'select'
-
-#     - task: DotNetCoreCLI@2
-#       displayName: Build Keyify.Web
-#       inputs:
-#         command: 'build'
-#         projects: '**/Keyify.Web.csproj'
-#         arguments: '--configuration $(buildConfiguration) --no-restore'
