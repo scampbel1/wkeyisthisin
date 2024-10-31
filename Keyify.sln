@@ -25,6 +25,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Services.Formatter",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keyify.Database.RecordCreation", "Keyify.Database.RecordCreation\Keyify.Database.RecordCreation.csproj", "{120F1D6C-3FDB-4FD5-8C05-85EB30992945}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{A4C02597-FE6F-41C9-B83C-2541F49C7DF4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F6108C5C-3B3D-4814-9940-FD46B2E03A87}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +82,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{03786211-80C7-4964-84EB-701FA6D3B938} = {F6108C5C-3B3D-4814-9940-FD46B2E03A87}
+		{4DC3CBA7-5545-494D-8AE7-581079F74EBE} = {F6108C5C-3B3D-4814-9940-FD46B2E03A87}
+		{120F1D6C-3FDB-4FD5-8C05-85EB30992945} = {A4C02597-FE6F-41C9-B83C-2541F49C7DF4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFFC0729-E040-499E-A7A2-D48062B4888C}

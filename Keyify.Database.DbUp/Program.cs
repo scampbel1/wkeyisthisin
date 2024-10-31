@@ -5,7 +5,7 @@ internal class Program
     public static int Main(string[] args)
     {
         var scriptsDirectory = $"{Environment.CurrentDirectory}\\Scripts";
-        var databaseConfiguration = Environment.GetEnvironmentVariable("databaseConnectionString");
+        var databaseConfiguration = args[0];
 
         var upgrader =
             DeployChanges.To
