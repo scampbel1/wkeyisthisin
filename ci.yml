@@ -54,6 +54,7 @@ stages:
         azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
         appType: 'webApp'
         appName: webAppName
+        resourceGroupName: rgName
         package: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
 # - stage: BuildWindowsFilesAndTest
