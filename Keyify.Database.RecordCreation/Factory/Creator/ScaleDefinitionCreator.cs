@@ -50,11 +50,16 @@ namespace Keyify.Database.RecordCreation.Factory.Creator
 
                 _scaleAllowedRootNotes.TryGetValue(scaleType, out rootNotes);
 
-                var scaleEntry = new ScaleDefinition(scaleType.AsString(EnumFormat.Description), scaleIntervals, scaleDegrees, _generatedByDescription, rootNotes);
+                var scaleEntry = new ScaleDefinition(GetScaleNameFromScaleType(scaleType), scaleIntervals, scaleDegrees, _generatedByDescription, rootNotes);
 
                 //Map ScaleDefinition to request
 
                 await _scaleDefinitionRepository.InsertScaleDefinition(scaleEntry);
+            }
+
+            static string GetScaleNameFromScaleType(Mode scaleType)
+            {
+                return scaleType.AsString(EnumFormat.Description) ?? string.Empty;
             }
         }
     }

@@ -19,7 +19,7 @@ namespace Keyify.Web.Service
 
         public string GenerateChordDefinitionsTableHtml(IEnumerable<ChordDefinition> chordDefinitions)
         {
-            if (chordDefinitions == null && chordDefinitions.Any())
+            if (!chordDefinitions.Any())
             {
                 return string.Empty;
             }

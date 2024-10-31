@@ -2,6 +2,6 @@
 {
     public class TuningData
     {
-        public byte[] Notes { get; set; }
+        public byte[]? Notes { get; set; }
     }
 }

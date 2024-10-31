@@ -6,20 +6,18 @@ namespace Keyify.Infrastructure.Caches
 {
     public class ScaleDefinitionCache : IScaleDefinitionCache
     {
-        public List<ScaleDefinition> ScaleDefinitions { get; set; }
+        public List<ScaleDefinition> ScaleDefinitions { get; set; } = new List<ScaleDefinition>();
 
         public async Task Initialise(List<ScaleDefinitionEntity> scaleDefinitionEntities)
         {
-            var scaleDefinitions = new List<ScaleDefinition>();
-
             foreach (var entity in scaleDefinitionEntities)
             {
-                var scaleEntry = new ScaleDefinition(entity.Name, entity.Intervals, entity.Degrees, entity.Description, entity.AllowedRootNotes);
+                var scaleEntry = new ScaleDefinition(entity.Name!, entity.Intervals!, entity.Degrees!, entity.Description!, entity.AllowedRootNotes);
 
-                scaleDefinitions.Add(scaleEntry);
+                ScaleDefinitions.Add(scaleEntry);
             }
 
-            await Task.FromResult(ScaleDefinitions = scaleDefinitions);
+            await Task.FromResult(ScaleDefinitions);
         }
 
         public Task Sync(List<ScaleDefinition> scaleDefinitions)
