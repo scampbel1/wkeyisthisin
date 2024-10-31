@@ -56,47 +56,41 @@ stages:
         appName: $(webAppName)
         resourceGroupName: $(rgName)
         package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        
+    - task: AzureKeyVault@2
+      displayName: Retrieve Staging Database ConnectionString
+      inputs:
+        azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
+        KeyVaultName: 'DeploymentSecretsKeyify'
+        SecretsFilter: 'stagingDatabaseConnectionString'
+        RunAsPreJob: true
+        
+    - task: DotNetCoreCLI@2
+      displayName: Restore DbUp Projects
+      inputs:
+        command: 'restore'
+        projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
+        
+    - task: DotNetCoreCLI@2
+      displayName: Build DbUp Project
+      inputs:
+        command: 'build'
+        projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp.csproj'
 
-# - stage: BuildWindowsFilesAndTest
-#   displayName: Build Windows Files and Run Unit Test
-#       steps:
-#     - task: DotNetCoreCLI@2
-#       displayName: Restore Unit Tests
-#       inputs:
-#         command: 'restore'
-#         projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
-        
-    # - task: AzureKeyVault@2
-    #   displayName: Retrieve Staging Database ConnectionString
-    #   inputs:
-    #     azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
-    #     KeyVaultName: 'DeploymentSecretsKeyify'
-    #     SecretsFilter: 'stagingDatabaseConnectionString'
-    #     RunAsPreJob: true
-        
-    # - task: DotNetCoreCLI@2
-    #   displayName: Restore Database Integration Tests
-    #   inputs:
-    #     command: 'restore'
-    #     projects: '$(System.DefaultWorkingDirectory)\**\*Integration.Test.csproj'
-        
-    # - task: DotNetCoreCLI@2
-    #   displayName: Build Database Integration Tests
-    #   inputs:
-    #     command: 'build'
-    #     projects: '$(System.DefaultWorkingDirectory)\**\*Integration.Test.csproj'
-      
-    # - task: CmdLine@2
-    #   inputs:
-    #     script: |
-    #       echo '$(stagingDatabaseConnectionString)'
+    - task: DotNetCoreCLI@2
+      displayName: Run DbUp Project
+      inputs:
+        azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
+        command: 'run'
+        projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp.csproj'
+        arguments: '$(stagingDatabaseConnectionString)'
 
     # - task: PowerShell@2
     #   displayName: Set Database ConnectionString
     #   inputs:
     #     targetType: 'inline'
     #     script: | 
-    #       Write-Host ("##vso[task.setvariable variable=databaseConnectionString]$(stagingDatabaseConnectionString)")
+    #       Write-Host ("##vso[task.setvariable variable=databaseConnectionString]$(stagingDatabaseConnectionString)")    
 
     # - task: VSTest@3
     #   displayName: Run Integration Tests
