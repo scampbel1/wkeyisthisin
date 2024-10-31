@@ -51,7 +51,6 @@ stages:
         SecretsFilter: 'stagingDatabaseConnectionString'
         RunAsPreJob: true
         
-        
     - task: PowerShell@2
       displayName: Set Database ConnectionString
       inputs:
@@ -66,18 +65,18 @@ stages:
         projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
 
     - task: DotNetCoreCLI@2
+      displayName: Restore DbUp Projects
+      inputs:
+        command: 'restore'
+        projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
+
+    - task: DotNetCoreCLI@2
       displayName: Run DbUp Project
       inputs:
         azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
         command: 'run'
         projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp.csproj'
         arguments: '"$(stagingDatabaseConnectionString)"'
-
-    - task: DotNetCoreCLI@2
-      displayName: Restore DbUp Projects
-      inputs:
-        command: 'restore'
-        projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
 
     - task: DotNetCoreCLI@2
       displayName: Build Keyify.Web
