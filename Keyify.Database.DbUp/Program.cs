@@ -1,11 +1,28 @@
 ﻿using DbUp;
+using System.Net.Sockets;
+using System.Net;
 
 internal class Program
 {
     public static int Main(string[] args)
     {
         var scriptsDirectory = $"{Environment.CurrentDirectory}\\Scripts";
+
         var databaseConfiguration = args[0];
+
+        Console.WriteLine($"Environment: {Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}");
+
+        Console.WriteLine("Here, have some IP addresses:");
+
+        var host = Dns.GetHostEntry(Dns.GetHostName());
+        
+        foreach (var ip in host.AddressList)
+        {
+            if (ip.AddressFamily == AddressFamily.InterNetwork)
+            {
+                Console.WriteLine(ip.ToString());
+            }
+        }
 
         var upgrader =
             DeployChanges.To
