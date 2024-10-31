@@ -42,20 +42,6 @@ stages:
           !**\Microsoft*.dll
         searchFolder: '$(System.DefaultWorkingDirectory)'
         runOnlyImpactedTests: false
-
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: 'publish'
-        projects: '$(System.DefaultWorkingDirectory)\**\*Web.csproj'
-        publishWebProjects: true
-    
-    - task: AzureWebApp@1
-      inputs:
-        azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
-        appType: 'webApp'
-        appName: $(webAppName)
-        resourceGroupName: $(rgName)
-        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
         
     - task: AzureKeyVault@2
       displayName: Retrieve Staging Database ConnectionString
@@ -71,6 +57,13 @@ stages:
         command: 'restore'
         projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
         
+    - task: PowerShell@2
+      displayName: Set Database ConnectionString
+      inputs:
+        targetType: 'inline'
+        script: | 
+          Write-Host ("##vso[task.setvariable variable=databaseConnectionString]$(stagingDatabaseConnectionString)")
+
     - task: DotNetCoreCLI@2
       displayName: Build DbUp Project
       inputs:
@@ -83,14 +76,21 @@ stages:
         azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
         command: 'run'
         projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp.csproj'
-        arguments: '$(stagingDatabaseConnectionString)'
+        arguments: '$(databaseConnectionString)'
 
-    # - task: PowerShell@2
-    #   displayName: Set Database ConnectionString
-    #   inputs:
-    #     targetType: 'inline'
-    #     script: | 
-    #       Write-Host ("##vso[task.setvariable variable=databaseConnectionString]$(stagingDatabaseConnectionString)")    
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'publish'
+        projects: '$(System.DefaultWorkingDirectory)\**\*Web.csproj'
+        publishWebProjects: true
+    
+    - task: AzureWebApp@1
+      inputs:
+        azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
+        appType: 'webApp'
+        appName: $(webAppName)
+        resourceGroupName: $(rgName)
+        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
     # - task: VSTest@3
     #   displayName: Run Integration Tests
