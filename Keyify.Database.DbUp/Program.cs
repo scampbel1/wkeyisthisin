@@ -5,7 +5,6 @@ internal class Program
 {
     public static int Main(string[] args)
     {
-
         var scriptsDirectory = $"{Environment.CurrentDirectory}\\Scripts";
         var databaseConfiguration = "Server=tcp:campbe11devops.database.windows.net,1433;Initial Catalog=deployment;Persist Security Info=False;User ID=deploymentadmin;Password=Zt@3lUDwZewDvV;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
