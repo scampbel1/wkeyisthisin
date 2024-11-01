@@ -59,15 +59,15 @@ stages:
           Write-Host ("##vso[task.setvariable variable=databaseConnectionString]$(stagingDatabaseConnectionString)")
 
     - task: DotNetCoreCLI@2
-      displayName: Build DbUp Project
-      inputs:
-        command: 'build'
-        projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
-
-    - task: DotNetCoreCLI@2
       displayName: Restore DbUp Projects
       inputs:
         command: 'restore'
+        projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
+
+    - task: DotNetCoreCLI@2
+      displayName: Build DbUp Project
+      inputs:
+        command: 'build'
         projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
 
     - task: DotNetCoreCLI@2
