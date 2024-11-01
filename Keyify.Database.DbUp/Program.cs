@@ -6,7 +6,7 @@ internal class Program
 {
     public static int Main(string[] args)
     {
-        var scriptsDirectory = $"{Environment.CurrentDirectory}\\Scripts";
+        var scriptsDirectory = $"{Environment.CurrentDirectory}\\Keyify.Database.DbUp.Scripts\\Scripts";
 
         var databaseConfiguration = args[0];
 
