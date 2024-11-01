@@ -64,11 +64,49 @@ stages:
         command: 'restore'
         projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
 
+    - task: CmdLine@2
+      displayName: Show me the directories!
+      inputs:
+        script: |
+          echo "Structure of work folder of this pipeline:"
+          tree $(Agent.WorkFolder)\1 /f
+          
+          echo "Build.ArtifactStagingDirectory:" 
+          
+          echo "$(Build.ArtifactStagingDirectory)"
+          
+          echo "Build.BinariesDirectory:" 
+          
+          echo "$(Build.BinariesDirectory)"
+          
+          echo "Build.SourcesDirectory:"
+          
+          echo "$(Build.SourcesDirectory)"
+
     - task: DotNetCoreCLI@2
       displayName: Build DbUp Project
       inputs:
         command: 'build'
         projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
+
+    - task: CmdLine@2
+      displayName: Show me the directories!
+      inputs:
+        script: |
+          echo "Structure of work folder of this pipeline:"
+          tree $(Agent.WorkFolder)\1 /f
+          
+          echo "Build.ArtifactStagingDirectory:" 
+          
+          echo "$(Build.ArtifactStagingDirectory)"
+          
+          echo "Build.BinariesDirectory:" 
+          
+          echo "$(Build.BinariesDirectory)"
+          
+          echo "Build.SourcesDirectory:"
+          
+          echo "$(Build.SourcesDirectory)"
 
     - task: DotNetCoreCLI@2
       displayName: Run DbUp Project
