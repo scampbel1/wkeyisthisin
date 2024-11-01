@@ -1,37 +1,19 @@
 ﻿using DbUp;
-using System.Net.Sockets;
-using System.Net;
 
 internal class Program
 {
     public static int Main(string[] args)
     {
-        var scriptsDirectory = $"{Environment.CurrentDirectory}\\Keyify.Database.DbUp.Scripts\\Scripts";
-
-        var databaseConfiguration = args[0];
-
-        Console.WriteLine($"Environment: {Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}");
-
-        Console.WriteLine("Here, have some IP addresses:");
-
-        var host = Dns.GetHostEntry(Dns.GetHostName());
-        
-        foreach (var ip in host.AddressList)
-        {
-            if (ip.AddressFamily == AddressFamily.InterNetwork)
-            {
-                Console.WriteLine(ip.ToString());
-            }
-        }
+        var (connectionString, scriptsDirectoryArg) = SetArgumentValues(args);
 
         var upgrader =
             DeployChanges.To
-                .SqlDatabase(databaseConfiguration)
-                .WithScriptsFromFileSystem(scriptsDirectory)
+                .SqlDatabase(connectionString)
+                .WithScriptsFromFileSystem($"{Environment.CurrentDirectory}{scriptsDirectoryArg}\\Scripts")
                 .LogToConsole()
                 .Build();
 
-        EnsureDatabase.For.SqlDatabase(databaseConfiguration);
+        EnsureDatabase.For.SqlDatabase(connectionString);
 
         var result = upgrader.PerformUpgrade();
 
@@ -52,5 +34,31 @@ internal class Program
         Console.WriteLine("Success!");
         Console.ResetColor();
         return 0;
+
+        static (string, string) SetArgumentValues(string[] args)
+        {
+            string connectionString;
+            string scriptsDirectoryArg;
+
+            try
+            {
+                connectionString = args[0];
+            }
+            catch
+            {
+                connectionString = string.Empty;
+            }
+
+            try
+            {
+                scriptsDirectoryArg = args[1];
+            }
+            catch
+            {
+                scriptsDirectoryArg = string.Empty;
+            }
+
+            return (connectionString, scriptsDirectoryArg);
+        }
     }
 }

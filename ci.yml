@@ -7,6 +7,7 @@ variables:
   location: 'uksouth'
   rgName: 'notestokey'
   webAppName: 'notestokey'
+  scriptDirectory: '\Keyify.Database.DbUp.Scripts'
 
 stages:
 - stage: BuildWindowsTestFilesAndTest
@@ -64,49 +65,11 @@ stages:
         command: 'restore'
         projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
 
-    - task: CmdLine@2
-      displayName: Show me the directories!
-      inputs:
-        script: |
-          echo "Structure of work folder of this pipeline:"
-          tree $(Agent.WorkFolder)\1 /f
-          
-          echo "Build.ArtifactStagingDirectory:" 
-          
-          echo "$(Build.ArtifactStagingDirectory)"
-          
-          echo "Build.BinariesDirectory:" 
-          
-          echo "$(Build.BinariesDirectory)"
-          
-          echo "Build.SourcesDirectory:"
-          
-          echo "$(Build.SourcesDirectory)"
-
     - task: DotNetCoreCLI@2
       displayName: Build DbUp Project
       inputs:
         command: 'build'
         projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
-
-    - task: CmdLine@2
-      displayName: Show me the directories!
-      inputs:
-        script: |
-          echo "Structure of work folder of this pipeline:"
-          tree $(Agent.WorkFolder)\1 /f
-          
-          echo "Build.ArtifactStagingDirectory:" 
-          
-          echo "$(Build.ArtifactStagingDirectory)"
-          
-          echo "Build.BinariesDirectory:" 
-          
-          echo "$(Build.BinariesDirectory)"
-          
-          echo "Build.SourcesDirectory:"
-          
-          echo "$(Build.SourcesDirectory)"
 
     - task: DotNetCoreCLI@2
       displayName: Run DbUp Project
@@ -114,7 +77,7 @@ stages:
         azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
         command: 'run'
         projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp.csproj'
-        arguments: '"$(stagingDatabaseConnectionString)"'
+        arguments: '-a $(stagingDatabaseConnectionString) -b $(scriptDirectory)'
 
     - task: DotNetCoreCLI@2
       displayName: Build Keyify.Web
