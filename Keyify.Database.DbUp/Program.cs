@@ -10,10 +10,10 @@ internal class Program
 
         var upgrader =
             DeployChanges.To
-                .SqlDatabase(connectionString)
-                .WithScriptsFromFileSystem(scriptsDirectoryArg)
-                .LogToConsole()
-                .Build();
+            .SqlDatabase(connectionString)
+            .WithScriptsFromFileSystem(scriptsDirectoryArg)
+            .LogToConsole()
+            .Build();
 
         EnsureDatabase.For.SqlDatabase(connectionString);
 
@@ -31,7 +31,7 @@ internal class Program
         }
         catch
         {
-            connectionString = "Server=localhost;Database=notestokey;Trusted_Connection=True;TrustServerCertificate=True;";
+            connectionString = "Server=localhost;Database=notestokey;Trusted_Connection=True;TrustServerCertificate=True;ConnectRetryCount=5;ConnectRetryInterval=15;";
         }
 
         Console.WriteLine($"Console: {connectionString}");
@@ -56,7 +56,6 @@ internal class Program
 
         return (connectionString, scriptsDirectoryArg);
     }
-
     private static int ProcessUpgradeResult(DatabaseUpgradeResult result)
     {
         if (!result.Successful)

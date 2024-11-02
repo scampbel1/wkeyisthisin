@@ -45,11 +45,11 @@ stages:
         runOnlyImpactedTests: false
 
 - stage: BuildAndDeployDbUp
-  displayName: DbUp
+  displayName: Database Deployments
   dependsOn: BuildWindowsTestFilesAndTest
   jobs:
   - job: BuildAndDeployDbUp
-    displayName: Deploy Database Changes
+    displayName: Retrieve ConnectionString and Deploy Scripts via DbUp
     pool:
       vmImage: 'windows-latest'
     steps:
