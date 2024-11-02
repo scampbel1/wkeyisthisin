@@ -103,6 +103,13 @@ stages:
         command: 'build'
         projects: '**/Keyify.Web.csproj'
         arguments: '--configuration $(buildConfiguration) --no-restore'
+    
+    - task: DotNetCoreCLI@2
+      displayName: Restore Keyify.Web
+      inputs:
+        command: 'restore'
+        projects: '**/Keyify.Web.csproj'
+        arguments: '--configuration $(buildConfiguration) --no-restore'
 
     - task: DotNetCoreCLI@2
       inputs:
