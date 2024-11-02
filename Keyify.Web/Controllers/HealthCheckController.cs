@@ -19,15 +19,13 @@ namespace Keyify.Controllers
         {
             var (dbStatus, dbMessage) = DatabaseCheck();
 
-            var db = new
-            {
-                dbStatus,
-                dbMessage,
-            };
-
             var info = new
             {
-                db,
+                db = new
+                {
+                    dbStatus,
+                    dbMessage,
+                },
             };
 
             return Ok(info);

@@ -63,7 +63,7 @@ namespace Keyify
 
         private void SetupDatabase(IServiceCollection services)
         {
-            var databaseConfiguration = Configuration.GetValue<string>("databaseConnectionString");
+            var databaseConfiguration = Configuration.GetConnectionString("databaseConnectionString");
 
             if (string.IsNullOrWhiteSpace(databaseConfiguration))
             {
