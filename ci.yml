@@ -8,11 +8,11 @@ variables:
   location: 'uksouth'
   rgName: 'notestokey'
   webAppName: 'notestokey'
-  scriptDirectory: '\Keyify.Database.DbUp.Scripts'
+  scriptDirectory: '\\Keyify.Database.DbUp.Scripts'
 
 stages:
 - stage: BuildWindowsTestFilesAndTest
-  displayName: Build Windows Files and Run Unit Tests
+  displayName: Unit Tests
   jobs:
   - job: BuildWindowsTestFilesAndRunTests
     displayName: Build Windows Test Files and Run Unit Tests
@@ -45,7 +45,7 @@ stages:
         runOnlyImpactedTests: false
 
 - stage: BuildAndDeployDbUp
-  displayName: Build and Deploy DbUp
+  displayName: DbUp
   dependsOn: BuildWindowsTestFilesAndTest
   jobs:
   - job: BuildAndDeployDbUp
@@ -93,7 +93,7 @@ stages:
   dependsOn: BuildAndDeployDbUp
   jobs:
   - job: BuildAndDeployWebApp
-    displayName: Build and Deploy Web App
+    displayName: Deploy Web App
     pool:
       vmImage: 'windows-latest'
     steps:
