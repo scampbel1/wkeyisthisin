@@ -23,7 +23,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
 
 namespace Keyify
 {
@@ -64,13 +63,6 @@ namespace Keyify
         private void SetupDatabase(IServiceCollection services)
         {
             var databaseConfiguration = Configuration.GetConnectionString("databaseConnectionString");
-
-            if (string.IsNullOrWhiteSpace(databaseConfiguration))
-            {
-                Console.WriteLine("Database Configuration not found! Searching: System.Environment.GetEnvironmentVariable(\"databaseConnectionString\")");
-
-                databaseConfiguration = Environment.GetEnvironmentVariable("databaseConnectionString");
-            }
 
             services.AddSingleton<IChordDefinitionRepository>(f => new ChordDefinitionRepository(
                 f.GetService<ILogger<ChordDefinitionRepository>>(),

@@ -4,9 +4,10 @@ namespace Keyify.Web.Controllers.Music_Theory
 {
     public class MusicTheoryController : Controller
     {
-        public ActionResult Index()
+        [HttpGet]
+        public IActionResult Index()
         {
-            return View();
+            return Redirect("/UnderConstruction");
         }
     }
 }

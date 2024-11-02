@@ -1,0 +1,54 @@
+﻿.selectedNoteSelectedScale {
+    color: green !important;
+    background-color: rgba(52, 255, 152, 0.4) !important;
+}
+
+.noteSelectedScale {
+    color: darkblue !important;
+    background-color: rgba(30, 144, 225, 0.4) !important;
+}
+
+.selectedNote {
+    color: orangered !important;
+    background-color: rgba(255,182,193, 0.4) !important;
+}
+
+.defaultNote {
+    background-color: rgba(255, 255, 255, 0.6) !important;
+    color: darkgrey !important;
+}
+
+.noteText {
+    font-size: medium;
+}
+
+.degreeText {
+    font-size: 60%;
+}
+
+.note {
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    height: 26px;
+    min-height: 26px;
+    max-height: 26px;
+    font-size: 18px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.fretboardHeading {
+    min-width: 50px;
+    text-align: center;
+    color: darkgrey;
+    font-size: 12px;
+}
+
+.fretboard {
+    table-layout: fixed;
+    width: 80%;
+    min-width: 80%;
+    max-width: 80%;
+    text-align: center;
+}

@@ -24,9 +24,9 @@ namespace Keyify.Web.Controllers.Music_Theory
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public IActionResult Index()
         {
-            return View();
+            return Redirect("/UnderConstruction");
         }
 
         [HttpPost]
