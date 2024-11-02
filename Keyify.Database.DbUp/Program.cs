@@ -50,6 +50,9 @@ internal class Program
                 connectionString = string.Empty;
             }
 
+            Console.WriteLine($"Console: {connectionString}");
+            Trace.WriteLine($"Trace: {connectionString}");
+
             try
             {
                 scriptsDirectoryArg = args[1];
@@ -59,11 +62,12 @@ internal class Program
                 scriptsDirectoryArg = string.Empty;
             }
 
+            Console.WriteLine($"Console: {scriptsDirectoryArg}");
+            Trace.WriteLine($"Trace: {scriptsDirectoryArg}");
+
             scriptsDirectoryArg = $"{Environment.CurrentDirectory}{scriptsDirectoryArg}\\Scripts";
 
-            Console.WriteLine($"Console: {connectionString}");
             Console.WriteLine($"Console: {scriptsDirectoryArg}");
-            Trace.WriteLine($"Trace: {connectionString}");
             Trace.WriteLine($"Trace: {scriptsDirectoryArg}");
 
             return (connectionString, scriptsDirectoryArg);
