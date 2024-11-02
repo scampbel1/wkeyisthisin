@@ -1,4 +1,5 @@
 ﻿using DbUp;
+using System.Diagnostics;
 
 internal class Program
 {
@@ -9,7 +10,7 @@ internal class Program
         var upgrader =
             DeployChanges.To
                 .SqlDatabase(connectionString)
-                .WithScriptsFromFileSystem($"{Environment.CurrentDirectory}{scriptsDirectoryArg}\\Scripts")
+                .WithScriptsFromFileSystem(scriptsDirectoryArg)
                 .LogToConsole()
                 .Build();
 
@@ -58,7 +59,14 @@ internal class Program
                 scriptsDirectoryArg = string.Empty;
             }
 
+            scriptsDirectoryArg = $"{Environment.CurrentDirectory}{scriptsDirectoryArg}\\Scripts";
+
+            Console.WriteLine($"Console: {connectionString}");
+            Console.WriteLine($"Console: {scriptsDirectoryArg}");
+            Trace.WriteLine($"Trace: {connectionString}");
+            Trace.WriteLine($"Trace: {scriptsDirectoryArg}");
+
             return (connectionString, scriptsDirectoryArg);
-        }
+        }}
     }
-}
+}}
