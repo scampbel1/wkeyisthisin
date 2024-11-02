@@ -19,6 +19,7 @@
     <None Remove="Scripts\Script0011 - Create System User in Core.User.sql" />
     <None Remove="Scripts\Script0012 - Add CreatedBy column to Core.Chord.sql" />
     <None Remove="Scripts\Script0013 - Create Core.ScaleDefinition.sql" />
+    <None Remove="Scripts\Script0014 - Add Column ScaleDefinition.Popularity.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +45,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\Script0011 - Create System User in Core.User.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\Script0014 - Add Column ScaleDefinition.Popularity.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\Script0013 - Create Core.ScaleDefinition.sql">

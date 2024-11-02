@@ -1,0 +1,1 @@
+ALTER TABLE [Core].[ScaleDefinition] ADD [Popularity] [INT] NOT NULL DEFAULT(3);

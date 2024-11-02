@@ -31,7 +31,7 @@ internal class Program
         }
         catch
         {
-            connectionString = "Server=localhost;Database=notestokey;Trusted_Connection=True;TrustServerCertificate=True;ConnectRetryCount=5;ConnectRetryInterval=15;";
+            connectionString = "Server=localhost;Database=notestokey;Trusted_Connection=True;TrustServerCertificate=True;ConnectRetryCount=3;ConnectRetryInterval=3;";
         }
 
         Console.WriteLine($"Console: {connectionString}");
