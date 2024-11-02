@@ -67,6 +67,7 @@ internal class Program
             Trace.WriteLine($"Trace: {scriptsDirectoryArg}");
 
             return (connectionString, scriptsDirectoryArg);
-        }}
+        };
     }
-}}
+}
+
