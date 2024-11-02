@@ -96,20 +96,13 @@ stages:
     displayName: Deploy Web App
     pool:
       vmImage: 'windows-latest'
-    steps:
+    steps:    
     - task: DotNetCoreCLI@2
       displayName: Build Keyify.Web
       inputs:
         command: 'build'
         projects: '**/Keyify.Web.csproj'
-        arguments: '--configuration $(buildConfiguration) --no-restore'
-    
-    - task: DotNetCoreCLI@2
-      displayName: Restore Keyify.Web
-      inputs:
-        command: 'restore'
-        projects: '**/Keyify.Web.csproj'
-        arguments: '--configuration $(buildConfiguration) --no-restore'
+        arguments: '--configuration $(buildConfiguration)'
 
     - task: DotNetCoreCLI@2
       inputs:
