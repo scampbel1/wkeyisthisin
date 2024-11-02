@@ -30,8 +30,13 @@ namespace Keyify.Services.Models
             return selectedNotes.ToHashSet().IsSupersetOf(Notes);
         }
 
-        public bool Equals(ChordDefinition other)
+        public bool Equals(ChordDefinition? other)
         {
+            if (other is null)
+            {
+                return false;
+            }
+
             var notesHashcode = GetHashCode();
             var otherNotesHashcode = other.GetHashCode();
 
@@ -46,11 +51,6 @@ namespace Keyify.Services.Models
         public static bool operator !=(ChordDefinition a, ChordDefinition b)
         {
             return a.Equals(b);
-        }
-
-        public override bool Equals(object obj)
-        {
-            return Equals((ChordDefinition)obj);
         }
 
         public override int GetHashCode()
@@ -84,6 +84,12 @@ namespace Keyify.Services.Models
             }
 
             return sb.ToString();
+        }
+
+        #pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as ChordDefinition);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Keyify.Web.Services
             _groupedScalesService = groupedScalesService;
         }
 
-        public async Task UpdateViewModel(InstrumentViewModel viewModel, IEnumerable<Note> selectedNotes, string selectedScale)
+        public void UpdateViewModel(InstrumentViewModel viewModel, IEnumerable<Note> selectedNotes, string selectedScale)
         {
             UpdateSelectedNotes(viewModel, selectedNotes);
 
@@ -58,6 +58,20 @@ namespace Keyify.Web.Services
             }
 
             ApplySelectedScales(viewModel, selectedScale);
+
+            void UpdateSelectedNotes(InstrumentViewModel viewModel, IEnumerable<Note> selectedNotes)
+            {
+                var noteStack = new Stack<Note>(selectedNotes);
+
+                ResetSelectedNotes(viewModel);
+
+                while (noteStack.Any())
+                {
+                    var selectedNote = noteStack.Pop();
+
+                    viewModel.UnselectedNotes.Where(n => n.Note == selectedNote).Single().Selected = true;
+                }
+            }
         }
 
         public void UpdateFretboard(InstrumentViewModel instrumentViewModel)
@@ -99,20 +113,6 @@ namespace Keyify.Web.Services
                         }
                     }
                 }
-            }
-        }
-
-        private void UpdateSelectedNotes(InstrumentViewModel viewModel, IEnumerable<Note> selectedNotes)
-        {
-            var noteStack = new Stack<Note>(selectedNotes);
-
-            ResetSelectedNotes(viewModel);
-
-            while (noteStack.Any())
-            {
-                var selectedNote = noteStack.Pop();
-
-                viewModel.UnselectedNotes.Where(n => n.Note == selectedNote).Single().Selected = true;
             }
         }
 

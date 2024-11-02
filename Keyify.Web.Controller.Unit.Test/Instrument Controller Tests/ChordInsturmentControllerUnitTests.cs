@@ -48,7 +48,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
                         Note.C.ToString(),
                         new List<Note>() { Note.C },
                         new List<string>() { "C" },
-                        Mode.Kumoi.AsString(EnumFormat.Description),
+                        Mode.Kumoi.AsString(EnumFormat.Description) ?? string.Empty,
                         new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fifth, Degree.Sixth, Degree.Eighth });
 
             var mockScaleResult = new ScaleEntry(mockGeneratedScale);

@@ -9,6 +9,6 @@ namespace Keyify.Web.Services.Interfaces
     {
         void UpdateFretboard(InstrumentViewModel viewModel);
 
-        Task UpdateViewModel(InstrumentViewModel viewModel, IEnumerable<Note> selectedNotes, string selectedScale);
+        void UpdateViewModel(InstrumentViewModel viewModel, IEnumerable<Note> selectedNotes, string selectedScale);
     }
 }

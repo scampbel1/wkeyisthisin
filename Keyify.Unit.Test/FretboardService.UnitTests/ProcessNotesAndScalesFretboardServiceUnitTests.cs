@@ -4,9 +4,9 @@ namespace Keyify.Web.Unit.Test.FretboardServiceTest.UnitTests
 {
     public class ProcessNotesAndScalesFretboardServiceUnitTests : FretboardServiceUnitTests
     {
-        [Fact]
-        public async Task ViewModelHasExistingScalesAndNotes_NewInputPassedToMethod_ScalesAndKeysReset()
-        {
+        //[Fact]
+        //public async Task ViewModelHasExistingScalesAndNotes_NewInputPassedToMethod_ScalesAndKeysReset()
+        //{
             //var selectedScale = string.Empty;
             //var selectedNotes = new[] { Note.A, Note.Bb, Note.Ab, Note.C, Note.Db, Note.D };
             //var viewModel = new InstrumentViewModel(_fretboard);
@@ -45,6 +45,6 @@ namespace Keyify.Web.Unit.Test.FretboardServiceTest.UnitTests
 
             //Assert.Null(viewModel.AvailableKeyGroups);
             //Assert.Null(viewModel.AvailableScaleGroups);
-        }
+        //}
     }
 }
