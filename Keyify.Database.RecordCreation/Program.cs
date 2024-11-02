@@ -5,52 +5,40 @@ internal class Program
 {
     private static async Task Main(string[] args)
     {
-        var running = true;
-        var connectionString = string.Empty;
+        var connectionString = SetConnectionString(args);
 
-        while (string.IsNullOrWhiteSpace(connectionString))
+        foreach (var recordType in Enum.GetValues(typeof(RecordType)))
         {
-            Console.WriteLine("Insert Connection String: ");
-            connectionString = Console.ReadLine();
-        }
-
-        while (running)
-        {
-            Console.WriteLine("Please make a selection:");
-
-            PrintSelections();
-
-            var key = Console.ReadKey(true).KeyChar;
-
-            if (key.ToString().ToUpper() == "Q")
+            switch (recordType)
             {
-                running = false;
-                break;
-            }
-
-            var selection = char.GetNumericValue(key);
-
-            switch ((int)selection)
-            {
-                case (int)Selection.ChordDefinition:
-                    var chordDefintionCreator = DatabaseRecordCreatorFactory.Create(Selection.ChordDefinition, connectionString);
+                case RecordType.ChordDefinition:
+                    var chordDefintionCreator = DatabaseRecordFactory.Create(RecordType.ChordDefinition, connectionString);
                     await chordDefintionCreator.ExecuteAsync();
                     break;
-                case (int)Selection.ScaleDefinition:
-                    var scaleDefinitionCreator = DatabaseRecordCreatorFactory.Create(Selection.ScaleDefinition, connectionString);
+                case RecordType.ScaleDefinition:
+                    var scaleDefinitionCreator = DatabaseRecordFactory.Create(RecordType.ScaleDefinition, connectionString);
                     await scaleDefinitionCreator.ExecuteAsync();
                     break;
                 default:
-                    Console.WriteLine($"Invalid selection '{selection}'");
-                    break;
+                    Console.WriteLine($"Invalid selection '{recordType}'");
+                    throw new NotImplementedException();
             }
         }
     }
 
-    private static void PrintSelections()
+    private static string SetConnectionString(string[] args)
     {
-        foreach (var selection in Enum.GetValues(typeof(Selection)))
+        string connectionString;
 
-            Console.WriteLine($"{(int)selection}: {(Selection)selection}");
+        try
+        {
+            connectionString = args[0];
+        }
+        catch
+        {
+            connectionString = "Server=localhost;Database=notestokey;Trusted_Connection=True;TrustServerCertificate=True;";
+        }
+
+        return connectionString;
     }
 }

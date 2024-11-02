@@ -4,15 +4,15 @@ using Keyify.Database.RecordCreation.Factory.Creator;
 
 namespace Keyify.Database.RecordCreation.Factory
 {
-    internal static class DatabaseRecordCreatorFactory
+    internal static class DatabaseRecordFactory
     {
-        internal static DatabaseRecordCreator Create(Selection selection, string connectionString)
+        internal static DatabaseRecordCreator Create(RecordType selection, string connectionString)
         {
             switch (selection)
             {
-                case Selection.ChordDefinition:
+                case RecordType.ChordDefinition:
                     return new ChordDefinitionCreator(connectionString);
-                case Selection.ScaleDefinition:
+                case RecordType.ScaleDefinition:
                     return new ScaleDefinitionCreator(connectionString);
                 default:
                     throw new ArgumentException($"Invalid selection {selection}");

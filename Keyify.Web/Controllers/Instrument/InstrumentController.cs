@@ -83,7 +83,7 @@ namespace Keyify.Controllers.Instrument
         {
             if (selectedNotes != null)
             {
-                await _fretboardService.UpdateViewModel(Model, selectedNotes, selectedScale);
+                _fretboardService.UpdateViewModel(Model, selectedNotes, selectedScale);
             }
 
             _fretboardService.UpdateFretboard(Model);

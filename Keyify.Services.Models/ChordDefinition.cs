@@ -86,7 +86,7 @@ namespace Keyify.Services.Models
             return sb.ToString();
         }
 
-        #pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
+#pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
         public override bool Equals(object obj)
         {
             return Equals(obj as ChordDefinition);
