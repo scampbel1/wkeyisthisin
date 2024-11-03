@@ -90,7 +90,13 @@ namespace Keyify.Controllers.Instrument
 
             var quickLink = new QuickLink(Model);
             var quickLinkBase64 = _quickLinkService.ConvertQuickLinkToBase64(quickLink);
-            var availableKeysAndScalesTableHtml = _scaleGroupingHtmlService.GenerateAvailableKeysAndScalesTable(selectedNotes, Model.Fretboard.InstrumentType, Model.AvailableKeyGroups, Model.AvailableScaleGroups);
+            
+            var availableKeysAndScalesTableHtml = _scaleGroupingHtmlService.GenerateKeysAndScalesTable(
+                selectedNotes,
+                Model.Fretboard.InstrumentType,
+                Model.AvailableKeyGroups,
+                Model.AvailableScaleGroups,
+                selectedScale);
 
             Model.UpdateQuickLinkCode(quickLinkBase64);
             Model.UpdateAvailableKeysAndScalesTableHtml(availableKeysAndScalesTableHtml);

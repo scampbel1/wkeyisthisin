@@ -33,7 +33,6 @@ namespace Keyify.Web.Services
                 viewModel.AvailableKeyGroups = _groupedScalesService.GroupedKeys;
                 viewModel.AvailableScaleGroups = _groupedScalesService.GroupedScales;
 
-                //TODO: This can just be worked out on the View Model
                 viewModel.TotalScaleCount = _groupedScalesService.TotalScaleCount;
                 viewModel.TotalKeyCount = _groupedScalesService.TotalKeyCount;
             }

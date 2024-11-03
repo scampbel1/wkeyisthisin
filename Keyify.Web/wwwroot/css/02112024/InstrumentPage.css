@@ -8,9 +8,9 @@
 
 .instrumentHyperlinkContainer {
     margin: auto;
-    width: 80%;
+    width: 61.8%;
     display: flex;
-    justify-content: space-between;    
+    justify-content: space-between;
 }
 
 #instrumentHyperlinkHeaderList {
@@ -48,9 +48,9 @@
 
 .scaleResults {
     table-layout: fixed;
-    width: 80%;
-    min-width: 80%;
-    max-width: 80%;
+    width: 61.8%;
+    min-width: 61.8%;
+    max-width: 61.8%;
     padding-left: 15px;
 }
 
@@ -141,13 +141,4 @@ a {
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
-}
-
-#tablesDiv {
-    width: 80%;
-    min-width: 80%;
-    max-width: 80%;
-    /*Note: Make sure this is kept inline so that the tables align next to each other*/
-    display: inline;
-    margin: 0px;
 }

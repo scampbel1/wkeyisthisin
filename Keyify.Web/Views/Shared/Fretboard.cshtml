@@ -3,87 +3,86 @@
 @{
     var lockFretboard = !Model.IsSelectionLocked;
 }
-<div class="nonSelectable">
-    <!-- Don't remove instrument links from here, the selected notes aren't updated on the layout page-->
-    <div class="instrumentHyperlinkContainer">
-        <div id="copyQuickLinkHeader">
-            <a class="copyToClipboard" onclick="copyContent('@Model.QuickLinkCode')">Copy To Clipboard</a>
-            @*<a class="copyToClipboard" onclick="ToggleLockSelection('@Url.Action("ToggleLockSelection", Model.Fretboard.InstrumentType.ToString())','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson, @(lockFretboard.ToString().ToLower()))">Lock Fretboard</a>*@
-        </div>
-        <div id="instrumentHyperlinkHeaderList">
-            <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Bass")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Bass</a>
-            <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Guitar")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Guitar</a>
-            <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Mandolin")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Mandolin</a>
-            <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Ukulele")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Ukulele</a>
-        </div>
+<!-- Don't remove instrument links from here, the selected notes aren't updated on the layout page-->
+<div class="instrumentHyperlinkContainer">
+    <div id="copyQuickLinkHeader">
+        <a class="copyToClipboard" onclick="copyContent('@Model.QuickLinkCode')">Copy Link 🔗</a>
+        @*<a class="copyToClipboard" onclick="ToggleLockSelection('@Url.Action("ToggleLockSelection", Model.Fretboard.InstrumentType.ToString())','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson, @(lockFretboard.ToString().ToLower()))">Lock Fretboard</a>*@
+        <a class="copyToClipboard" onclick="Reset('@Url.Action("UpdateFretboardModel")', null , null , null)">Undo All 🔄</a>
     </div>
-    <div>
-        <table class="fretboard center">
-            <tr>
-                @for (int count = 0; count < Model.Fretboard.FretCount; count++)
-                {
-                    if (count == 0)
-                    {
-                        <th class="fretboardHeading" style="-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;"></th>
-                        continue;
-                    }
-
-                    <th class="fretboardHeading" style="-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;">
-                        @count
-                    </th>
-                }
-            </tr>
-            @foreach (var instrumentString in Model.Fretboard.InstrumentStrings)
+    <div id="instrumentHyperlinkHeaderList">
+        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Bass")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Bass</a>
+        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Guitar")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Guitar</a>
+        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Mandolin")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Mandolin</a>
+        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Ukulele")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Ukulele</a>
+    </div>
+</div>
+<div>
+    <table class="fretboard center">
+        <tr>
+            @for (int count = 0; count < Model.Fretboard.FretCount; count++)
             {
-                <tr>
-                    @foreach (var note in instrumentString.Notes)
+                if (count == 0)
+                {
+                    <th class="fretboardHeading" style="-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;"></th>
+                    continue;
+                }
+
+                <th class="fretboardHeading" style="-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;">
+                    @count
+                </th>
+            }
+        </tr>
+        @foreach (var instrumentString in Model.Fretboard.InstrumentStrings)
+        {
+            <tr>
+                @foreach (var note in instrumentString.Notes)
+                {
+                    if (Model.SelectedScale != null)
                     {
-                        if (Model.SelectedScale != null)
+                        if (note.InSelectedScale && note.Selected)
                         {
-                            if (note.InSelectedScale && note.Selected)
-                            {
-                                <td class="note selectedNoteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
-                                    <span class="nonSelectable noteText">@note.Sharp</span> <span class="nonSelectable degreeText">@note.DegreeInScale</span>
-                                </td>
-                                continue;
-                            }
-                            else if (note.InSelectedScale && !note.Selected)
-                            {
-                                <td class="note noteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
-                                    <span class="nonSelectable noteText">@note.Sharp</span> <span class="nonSelectable degreeText">@note.DegreeInScale</span>
-                                </td>
-                                continue;
-                            }
-                        }
-                        if (note.Selected)
-                        {
-                            <td class="note selectedNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
-                                <span class="nonSelectable noteText">@note.Sharp</span>
+                            <td class="note selectedNoteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
+                                <span class="nonSelectable noteText">@note.Sharp</span> <span class="nonSelectable degreeText">@note.DegreeInScale</span>
                             </td>
                             continue;
                         }
-
-                        <td class="note defaultNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
+                        else if (note.InSelectedScale && !note.Selected)
+                        {
+                            <td class="note noteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
+                                <span class="nonSelectable noteText">@note.Sharp</span> <span class="nonSelectable degreeText">@note.DegreeInScale</span>
+                            </td>
+                            continue;
+                        }
+                    }
+                    if (note.Selected)
+                    {
+                        <td class="note selectedNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
                             <span class="nonSelectable noteText">@note.Sharp</span>
                         </td>
+                        continue;
                     }
-                </tr>
-            }
-        </table>
-    </div>
 
-    <div class="scaleResults center">
-        <h2>
-            @Model.AvailableKeysAndScalesLabel
-        </h2>
-        <div id="tablesDiv">
-            @Html.Raw(Model.AvailableKeysAndScalesTableHtml)
-        </div>
-    </div>
+                    <td class="note defaultNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
+                        <span class="nonSelectable noteText">@note.Sharp</span>
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>
 
-    <div class="scaleResults center">        
-        <div id="tablesDiv">
-            @Html.Raw(Model.AvailableChordDefinitionsTableHtml)
-        </div>
+<div class="scaleResults center">
+    <h2>
+        @Model.AvailableKeysAndScalesLabel
+    </h2>
+    <div id="tablesDiv">
+        @Html.Raw(Model.AvailableKeysAndScalesTableHtml)
+    </div>
+</div>
+
+<div class="scaleResults center">
+    <div id="tablesDiv">
+        @Html.Raw(Model.AvailableChordDefinitionsTableHtml)
     </div>
 </div>
