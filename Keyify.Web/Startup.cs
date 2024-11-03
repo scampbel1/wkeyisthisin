@@ -43,6 +43,7 @@ namespace Keyify
             SetupDatabase(services);
             SetupValidation(services);
 
+            services.AddApplicationInsightsTelemetry(Configuration);
             services.AddSingleton(typeof(IScaleDefinitionService), typeof(ScaleDefinitionService));
             services.AddSingleton(typeof(IQuickLinkService), typeof(QuickLinkService));
             services.AddSingleton(typeof(IScaleService), typeof(ScaleService));

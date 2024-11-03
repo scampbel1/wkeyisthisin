@@ -14,12 +14,15 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<UserSecretsId>a50ac624-865b-41b6-b124-40c9089050d7</UserSecretsId>
 		<StartupObject>Keyify.Program</StartupObject>
+		<ApplicationInsightsResourceId>/subscriptions/c5d140d4-4130-4229-9fc9-025261099893/resourceGroups/notestokey/providers/microsoft.insights/components/notestokey</ApplicationInsightsResourceId>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Enums.NET" Version="5.0.0" />
 		<PackageReference Include="FluentValidation" Version="11.10.0" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
+		<PackageReference Include="Microsoft.ApplicationInsights" Version="2.22.0" />
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.6" />
 		<PackageReference Include="System.Text.Json" Version="8.0.5" />

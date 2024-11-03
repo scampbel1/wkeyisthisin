@@ -15,7 +15,14 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             _ = instrumentController.Index();
 
-            m_MockScaleGroupingHtmlService.Verify(m => m.GenerateKeysAndScalesTable(It.IsAny<IEnumerable<Note>>(), It.IsAny<InstrumentType>(), It.IsAny<List<ScaleGroupingEntry>>(), It.IsAny<List<ScaleGroupingEntry>>()), Times.Once);
+            m_MockScaleGroupingHtmlService.Verify(m => m.GenerateKeysAndScalesTable(
+                It.IsAny<IEnumerable<Note>>(),
+                It.IsAny<InstrumentType>(),
+                It.IsAny<List<ScaleGroupingEntry>>(),
+                It.IsAny<List<ScaleGroupingEntry>>(),
+                It.IsAny<string>()),
+                Times.Once);
+
             m_MockChordDefinitionsGroupingHtmlService.Verify(m => m.GenerateChordDefinitionsTableHtml(It.IsAny<IEnumerable<ChordDefinition>>()), Times.Once);
 
             m_MockScaleGroupingHtmlService.Reset();
@@ -50,7 +57,14 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             _ = instrumentController.UpdateFretboardModel(previouslySeletedNotes, newNote, selectedScale);
 
-            m_MockScaleGroupingHtmlService.Verify(m => m.GenerateKeysAndScalesTable(It.IsAny<IEnumerable<Note>>(), It.IsAny<InstrumentType>(), It.IsAny<List<ScaleGroupingEntry>>(), It.IsAny<List<ScaleGroupingEntry>>()), Times.Once);
+            m_MockScaleGroupingHtmlService.Verify(m => m.GenerateKeysAndScalesTable(
+                It.IsAny<IEnumerable<Note>>(),
+                It.IsAny<InstrumentType>(),
+                It.IsAny<List<ScaleGroupingEntry>>(),
+                It.IsAny<List<ScaleGroupingEntry>>(),
+                It.IsAny<string>()),
+                Times.Once);
+
             m_MockChordDefinitionsGroupingHtmlService.Verify(m => m.GenerateChordDefinitionsTableHtml(It.IsAny<IEnumerable<ChordDefinition>>()), Times.Once);
 
             m_MockMusicTheoryService.Reset();
