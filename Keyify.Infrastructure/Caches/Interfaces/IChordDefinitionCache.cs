@@ -5,7 +5,7 @@ namespace Keyify.Infrastructure.Caches.Interfaces
 {
     public interface IChordDefinitionCache
     {
-        public List<ChordDefinition>? ChordDefinitions { get; set; }
+        public List<ChordDefinition> ChordDefinitions { get; set; }
 
         public Task Initialise(Dictionary<string, Interval[]> chordDefinitions);
 

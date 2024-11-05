@@ -9,7 +9,7 @@ namespace Keyify.Infrastructure.Caches
     {
         private readonly INoteFormatService _noteFormatService;
 
-        public List<ChordDefinition>? ChordDefinitions { get; set; }
+        public List<ChordDefinition> ChordDefinitions { get; set; } = new List<ChordDefinition>();
 
         public ChordDefinitionCache(INoteFormatService noteFormatService)
         {

@@ -3,6 +3,7 @@ using FluentValidation;
 using Keyify.Infrastructure.Caches;
 using Keyify.Infrastructure.Caches.Interfaces;
 using Keyify.Infrastructure.DTOs.ChordDefinition;
+using Keyify.Infrastructure.Middleware;
 using Keyify.Infrastructure.Repository;
 using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.Models.Service;
@@ -42,7 +43,6 @@ namespace Keyify
             SetupMapping(services);
             SetupDatabase(services);
             SetupValidation(services);
-
             services.AddApplicationInsightsTelemetry(Configuration);
             services.AddSingleton(typeof(IScaleDefinitionService), typeof(ScaleDefinitionService));
             services.AddSingleton(typeof(IQuickLinkService), typeof(QuickLinkService));
@@ -59,6 +59,8 @@ namespace Keyify
             services.AddSingleton(typeof(IScaleDefinitionCache), typeof(ScaleDefinitionCache));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
             services.AddSingleton(f => new Fretboard(f.GetRequiredService<INoteFormatService>().SharpNoteDictionary));
+
+            services.AddTransient<CacheUpdateMiddleware>();
         }
 
         private void SetupDatabase(IServiceCollection services)
@@ -98,7 +100,6 @@ namespace Keyify
             applicationBuilder.UseStaticFiles();
             applicationBuilder.UseRouting();
             applicationBuilder.UseAuthorization();
-
             applicationBuilder.UseForwardedHeaders();
 
             applicationBuilder.UseEndpoints(endpoints =>
@@ -107,6 +108,13 @@ namespace Keyify
                     name: "default",
                     pattern: "{controller=Guitar}/{action=Index}");
             });
+
+            SetupMiddleware(applicationBuilder);
+        }
+
+        private void SetupMiddleware(IApplicationBuilder applicationBuilder)
+        {
+            applicationBuilder.UseMiddleware<CacheUpdateMiddleware>();
         }
     }
 }
