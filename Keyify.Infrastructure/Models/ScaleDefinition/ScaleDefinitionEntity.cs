@@ -15,5 +15,7 @@ namespace Keyify.Infrastructure.Models.ScaleDefinition
         public Note[]? AllowedRootNotes { get; set; }
 
         public string? Description { get; set; }
+
+        public int Popularity { get; set; } = 3;
     }
 }

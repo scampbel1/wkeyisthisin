@@ -20,6 +20,11 @@
     <None Remove="Scripts\Script0012 - Add CreatedBy column to Core.Chord.sql" />
     <None Remove="Scripts\Script0013 - Create Core.ScaleDefinition.sql" />
     <None Remove="Scripts\Script0014 - Add Column ScaleDefinition.Popularity.sql" />
+    <None Remove="Scripts\Script0015 - Set popularity for ScaleDefinition records that are keys.sql" />
+    <None Remove="Scripts\Script0016 - Set popularity ScaleDefinition popular scales.sql" />
+    <None Remove="Scripts\Script0017 - Set popularity ScaleDefinition less popular scales.sql" />
+    <None Remove="Scripts\Script0018 - Set popularity ScaleDefinition somewhat rare scales.sql" />
+    <None Remove="Scripts\Script0019 - Set popularity ScaleDefinition rare scales.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +50,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\Script0011 - Create System User in Core.User.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\Script0019 - Set popularity ScaleDefinition rare scales.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\Script0018 - Set popularity ScaleDefinition somewhat rare scales.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\Script0017 - Set popularity ScaleDefinition less popular scales.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\Script0016 - Set popularity ScaleDefinition popular scales.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\Script0015 - Set popularity for ScaleDefinition records that are keys.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\Script0014 - Add Column ScaleDefinition.Popularity.sql">

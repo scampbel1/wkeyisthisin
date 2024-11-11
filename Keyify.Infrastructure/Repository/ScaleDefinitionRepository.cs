@@ -55,7 +55,7 @@ namespace Keyify.Infrastructure.Repository
 
                 await sqlConnection.OpenAsync();
 
-                var query = "SELECT [Id], [Name], [Intervals], [Degrees], [AllowedRootNotes] FROM [Core].[ScaleDefinition] WHERE [Deleted] = 0";
+                var query = "SELECT [Id], [Name], [Intervals], [Degrees], [AllowedRootNotes], [Popularity] FROM [Core].[ScaleDefinition] WHERE [Deleted] = 0";
                 var result = await sqlConnection.ExecuteReaderAsync(query);
 
                 while (result.Read())
@@ -67,6 +67,7 @@ namespace Keyify.Infrastructure.Repository
                         Intervals = await _serializationFormatter.ConvertToIntervalArray((byte[])result[2]),
                         Degrees = await _serializationFormatter.ConvertToDegreeArray((byte[])result[3]),
                         AllowedRootNotes = await _serializationFormatter.ConvertToAllowedRootNotesArray((byte[])result[4]),
+                        Popularity = result.GetInt32(5),
                     });
                 }
 

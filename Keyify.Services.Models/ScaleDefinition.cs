@@ -8,10 +8,11 @@ namespace Keyify.Services.Models
         public readonly Interval[] Intervals;
         public readonly string[] Degrees;
         public readonly string Description;
+        public readonly int Popularity;
 
         public readonly Note[] AllowedRootNotes = (Note[])Enum.GetValues(typeof(Note));
 
-        public ScaleDefinition(string name, Interval[] intervals, string[] degrees, string description, Note[]? allowedRootNotes)
+        public ScaleDefinition(string name, Interval[] intervals, string[] degrees, string description, Note[]? allowedRootNotes, int popularity = 3)
         {
             if (intervals.Length != degrees.Length)
             {
@@ -32,6 +33,8 @@ namespace Keyify.Services.Models
             {
                 AllowedRootNotes = allowedRootNotes;
             }
+
+            Popularity = popularity;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Keyify.Infrastructure.Caches
         {
             foreach (var entity in scaleDefinitionEntities)
             {
-                var scaleEntry = new ScaleDefinition(entity.Name!, entity.Intervals!, entity.Degrees!, entity.Description!, entity.AllowedRootNotes);
+                var scaleEntry = new ScaleDefinition(entity.Name!, entity.Intervals!, entity.Degrees!, entity.Description!, entity.AllowedRootNotes, entity.Popularity);
 
                 ScaleDefinitions.Add(scaleEntry);
             }
