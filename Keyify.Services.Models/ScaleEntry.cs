@@ -14,7 +14,7 @@
 
         public string ScaleLabel => $"{Scale.RootNote}{Scale.Name}";
 
-        public bool IsKey => Scale.IsKey;
+        public bool IsKey => Scale.Popularity == 0;
 
         public int Popularity => Scale.Popularity;
 

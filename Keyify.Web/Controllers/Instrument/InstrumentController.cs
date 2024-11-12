@@ -90,16 +90,15 @@ namespace Keyify.Controllers.Instrument
 
             var quickLink = new QuickLink(Model);
             var quickLinkBase64 = _quickLinkService.ConvertQuickLinkToBase64(quickLink);
-            
-            var availableKeysAndScalesTableHtml = _scaleGroupingHtmlService.GenerateKeysAndScalesTable(
+
+            var availableScalesTableHtml = _scaleGroupingHtmlService.GenerateScalesTable(
                 selectedNotes,
                 Model.Fretboard.InstrumentType,
-                Model.AvailableKeyGroups,
                 Model.AvailableScaleGroups,
                 selectedScale);
 
             Model.UpdateQuickLinkCode(quickLinkBase64);
-            Model.UpdateAvailableKeysAndScalesTableHtml(availableKeysAndScalesTableHtml);
+            Model.UpdateAvailableScalesTableHtml(availableScalesTableHtml);
 
             var chordDefintiions = await _musicTheoryService.GetChordsDefinitions(Model.SelectedScale?.Scale?.Notes?.ToArray(), selectedNotes);
             var availableChordDefinitionsTableHtml = _chordDefinitionsGroupingHtmlService.GenerateChordDefinitionsTableHtml(chordDefintiions);

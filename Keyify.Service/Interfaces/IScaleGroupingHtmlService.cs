@@ -5,10 +5,9 @@ namespace Keyify.Web.Services.Interfaces
 {
     public interface IScaleGroupingHtmlService
     {
-        public string GenerateKeysAndScalesTable(
+        public string GenerateScalesTable(
             IEnumerable<Note> selectedNotes,
             InstrumentType instrumentType,
-            List<ScaleGroupingEntry> availableKeyGroups,
             List<ScaleGroupingEntry> availableScaleGroups,
             string selectedString);
     }

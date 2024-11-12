@@ -31,11 +31,7 @@ namespace Keyify.Web.Services
 
                 _groupedScalesService.UpdateScaleGroupingModel(viewModel.Scales, selectedNotes);
 
-                viewModel.AvailableKeyGroups = _groupedScalesService.GroupedKeys;
                 viewModel.AvailableScaleGroups = _groupedScalesService.GroupedScales;
-
-                viewModel.TotalScaleCount = _groupedScalesService.TotalScaleCount;
-                viewModel.TotalKeyCount = _groupedScalesService.TotalKeyCount;
             }
             else
             {

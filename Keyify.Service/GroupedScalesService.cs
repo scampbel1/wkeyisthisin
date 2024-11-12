@@ -9,14 +9,11 @@ namespace Keyify.Web.Service
     {
         private readonly IChordDefinitionGroupingHtmlService _chordDefinitionGroupingHtmlService;
 
-        private List<ScaleGroupingEntry> KeyGroupingEntries { get; init; } = new List<ScaleGroupingEntry>();
         private List<ScaleGroupingEntry> ScaleGroupingEntries { get; init; } = new List<ScaleGroupingEntry>();
 
         public List<ScaleGroupingEntry> GroupedScales => ScaleGroupingEntries;
-        public List<ScaleGroupingEntry> GroupedKeys => KeyGroupingEntries;
 
         public int TotalScaleCount => ScaleGroupingEntries.Sum(s => s.Count);
-        public int TotalKeyCount => KeyGroupingEntries.Sum(k => k.Count);
 
         public GroupedScalesService(IChordDefinitionGroupingHtmlService chordDefinitionGroupingHtmlService)
         {
@@ -25,34 +22,27 @@ namespace Keyify.Web.Service
 
         public void UpdateScaleGroupingModel(IEnumerable<ScaleEntry> scales, IEnumerable<Note> selectedNotes)
         {
-            KeyGroupingEntries.Clear();
             ScaleGroupingEntries.Clear();
 
             var noteHashSets = GenerateNoteHashSets(scales);
 
             foreach (var scaleNotes in noteHashSets)
             {
-                var allScales = scales.Where(s => s.Scale.NoteSet.SetEquals(scaleNotes)).ToList();
-                var groupedKeys = allScales.Where(s => s.IsKey == true).ToList();
-                var groupedScales = allScales.Where(s => s.IsKey == false).ToList();
+                var allScales = scales
+                    .Where(s => s.Scale.NoteSet.SetEquals(scaleNotes))
+                    .OrderBy(s => s.Popularity)
+                    .ToList();
 
-                if (groupedScales.Any())
+                if (allScales.Any())
                 {
-                    var scalesHtmls = _chordDefinitionGroupingHtmlService.GenerateNotesGroupingLabelHtml(selectedNotes, groupedScales);
+                    var scalesHtmls = _chordDefinitionGroupingHtmlService.GenerateNotesGroupingLabelHtml(selectedNotes, allScales);
 
-                    ScaleGroupingEntries.Add(new ScaleGroupingEntry(groupedScales, scalesHtmls));
-                }
-
-                if (groupedKeys.Any())
-                {
-                    var keysHtml = _chordDefinitionGroupingHtmlService.GenerateNotesGroupingLabelHtml(selectedNotes, groupedKeys);
-
-                    KeyGroupingEntries.Add(new ScaleGroupingEntry(groupedKeys, keysHtml));
+                    ScaleGroupingEntries.Add(new ScaleGroupingEntry(allScales, scalesHtmls));
                 }
             }
         }
 
-        private IEnumerable<HashSet<Note>> GenerateNoteHashSets(IEnumerable<ScaleEntry> scales)
+        private List<HashSet<Note>> GenerateNoteHashSets(IEnumerable<ScaleEntry> scales)
         {
             var distinctSets = new List<HashSet<Note>>();
 

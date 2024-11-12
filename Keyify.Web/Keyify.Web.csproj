@@ -18,6 +18,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Models\View Models\Misc\**" />
+	  <Content Remove="Models\View Models\Misc\**" />
+	  <EmbeddedResource Remove="Models\View Models\Misc\**" />
+	  <None Remove="Models\View Models\Misc\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Enums.NET" Version="5.0.0" />
 		<PackageReference Include="FluentValidation" Version="11.10.0" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
@@ -46,9 +53,5 @@
 		<Content Update="wwwroot\js\jquery-3.5.1.min.js">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Models\View Models\Misc\" />
 	</ItemGroup>
 </Project>

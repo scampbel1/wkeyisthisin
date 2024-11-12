@@ -15,10 +15,9 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             _ = instrumentController.Index();
 
-            m_MockScaleGroupingHtmlService.Verify(m => m.GenerateKeysAndScalesTable(
+            m_MockScaleGroupingHtmlService.Verify(m => m.GenerateScalesTable(
                 It.IsAny<IEnumerable<Note>>(),
                 It.IsAny<InstrumentType>(),
-                It.IsAny<List<ScaleGroupingEntry>>(),
                 It.IsAny<List<ScaleGroupingEntry>>(),
                 It.IsAny<string>()),
                 Times.Once);
@@ -57,10 +56,9 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             _ = instrumentController.UpdateFretboardModel(previouslySeletedNotes, newNote, selectedScale);
 
-            m_MockScaleGroupingHtmlService.Verify(m => m.GenerateKeysAndScalesTable(
+            m_MockScaleGroupingHtmlService.Verify(m => m.GenerateScalesTable(
                 It.IsAny<IEnumerable<Note>>(),
                 It.IsAny<InstrumentType>(),
-                It.IsAny<List<ScaleGroupingEntry>>(),
                 It.IsAny<List<ScaleGroupingEntry>>(),
                 It.IsAny<string>()),
                 Times.Once);

@@ -25,8 +25,6 @@ namespace Keyify.Web.Models.ViewModels
         public string ViewTitle = $"What Key Is This In?";
         public string QuickLinkCode { get; private set; }
 
-        public int TotalKeyCount { get; set; }
-        public int TotalScaleCount { get; set; }
         public bool IsSelectionLocked { get; set; }
 
         public Fretboard Fretboard { get; set; }
@@ -36,7 +34,7 @@ namespace Keyify.Web.Models.ViewModels
 
         public void UpdateViewModel(Fretboard fretboard) => Fretboard = fretboard;
         public void UpdateQuickLinkCode(string quickLinkCode) => QuickLinkCode = quickLinkCode;
-        public void UpdateAvailableKeysAndScalesTableHtml(string htmlContent) => AvailableKeysAndScalesTableHtml = htmlContent;
+        public void UpdateAvailableScalesTableHtml(string htmlContent) => AvailableKeysAndScalesTableHtml = htmlContent;
         public void UpdateAvailableChordDefinitionsTableHtml(string htmlContent) => AvailableChordDefinitionsTableHtml = htmlContent;
 
         public string SelectedNotesJson => JsonSerializer.Serialize(SelectedNotes.Select(n => n.Note.ToString()));
@@ -49,7 +47,6 @@ namespace Keyify.Web.Models.ViewModels
         public List<FretboardNote> UnselectedNotes => NotesMatrix.Where(n => !n.Selected).ToList();
         public List<FretboardNote> NotesPartOfScale => NotesMatrix.Where(n => n.InSelectedScale).ToList();
 
-        public List<ScaleGroupingEntry> AvailableKeyGroups { get; set; } = new List<ScaleGroupingEntry>();
         public List<ScaleGroupingEntry> AvailableScaleGroups { get; set; } = new List<ScaleGroupingEntry>();
 
         private List<FretboardNote> InitialiseNotesMatrix()
@@ -66,7 +63,7 @@ namespace Keyify.Web.Models.ViewModels
 
         private string GetAvailableKeysLabel()
         {
-            var matchingScaleCount = TotalKeyCount;
+            var matchingScaleCount = Scales.Count(s => s.IsKey);
 
             switch (matchingScaleCount)
             {
@@ -94,7 +91,7 @@ namespace Keyify.Web.Models.ViewModels
 
         private string GetAvailableScaleLabel()
         {
-            var matchingScaleCount = TotalScaleCount;
+            var matchingScaleCount = Scales.Count(s => s.IsKey);
 
             switch (matchingScaleCount)
             {

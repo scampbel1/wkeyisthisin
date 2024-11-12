@@ -2,20 +2,18 @@
 using Keyify.Services.Models;
 using Keyify.Web.Services.Interfaces;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Keyify.Web.Service
 {
     public class ScaleGroupingHtmlService : IScaleGroupingHtmlService
     {
-        public string GenerateKeysAndScalesTable(
+        public string GenerateScalesTable(
             IEnumerable<Note> selectedNotes,
             InstrumentType instrumentType,
-            List<ScaleGroupingEntry> availableKeyGroups,
             List<ScaleGroupingEntry> availableScaleGroups,
             string selectedScale)
         {
-            if (!availableKeyGroups.Any() && !availableScaleGroups.Any())
+            if (!availableScaleGroups.Any())
             {
                 return string.Empty;
             }
@@ -24,17 +22,11 @@ namespace Keyify.Web.Service
 
             sb.Append("<table class=\"scaleTable\">");
 
-            GenerateKeys(selectedNotes, instrumentType, availableKeyGroups, selectedScale, sb);
             GenerateScales(selectedNotes, instrumentType, availableScaleGroups, selectedScale, sb);
 
             sb.Append("</table>");
 
             return sb.ToString();
-
-            void GenerateKeys(IEnumerable<Note> selectedNotes, InstrumentType instrumentType, List<ScaleGroupingEntry> availableKeyGroups, string selectedScale, StringBuilder sb)
-            {
-                GenerateAvailableKeysAndScalesSection(selectedNotes, instrumentType, availableKeyGroups, sb, selectedScale);
-            }
 
             void GenerateScales(IEnumerable<Note> selectedNotes, InstrumentType instrumentType, List<ScaleGroupingEntry> availableScaleGroups, string selectedScale, StringBuilder sb)
             {
@@ -51,11 +43,11 @@ namespace Keyify.Web.Service
         {
             var count = 0;
 
-            while (count < scaleGroupingEntries.Count())
+            while (count < scaleGroupingEntries.Count)
             {
                 sb.Append("<tr>");
 
-                if (scaleGroupingEntries.Count() - count >= 2)
+                if (scaleGroupingEntries.Count - count >= 2)
                 {
                     AddScalesToNoteSet(selectedNotes, instrumentType, scaleGroupingEntries, sb, count, isNeighbouringScaleGroup: false, selectedScale);
                     AddScalesToNoteSet(selectedNotes, instrumentType, scaleGroupingEntries, sb, count, isNeighbouringScaleGroup: true, selectedScale);
@@ -75,14 +67,6 @@ namespace Keyify.Web.Service
 
                 sb.Append("</tr>");
             }
-
-            //Blank Row to separate Keys and Scales
-            sb.Append("<tr class=\"keyAndScaleSeparator\">");
-            sb.Append($"<td></td>");
-            sb.Append($"<td></td>");
-            sb.Append($"<td></td>");
-            sb.Append($"<td></td>");
-            sb.Append("</tr>");
         }
 
         private void AddScalesToNoteSet(

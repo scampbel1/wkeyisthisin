@@ -7,12 +7,6 @@ namespace Keyify.Web.Service.Interfaces
     {
         void UpdateScaleGroupingModel(IEnumerable<ScaleEntry> scaleEntries, IEnumerable<Note> notes);
 
-        List<ScaleGroupingEntry> GroupedKeys { get; }
-
         List<ScaleGroupingEntry> GroupedScales { get; }
-
-        int TotalScaleCount { get; }
-
-        int TotalKeyCount { get; }
     }
 }
