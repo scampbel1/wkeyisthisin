@@ -9,6 +9,7 @@ namespace Keyify.Web.Services
 {
     public class FretboardService : IFretboardService
     {
+        private const int MinimumSelectedNotes = 2;
         private readonly IMusicTheoryService _musicTheoryService;
         private readonly IGroupedScalesService _groupedScalesService;
 
@@ -22,11 +23,11 @@ namespace Keyify.Web.Services
         {
             UpdateSelectedNotes(viewModel, selectedNotes);
 
-            if (viewModel.SelectedNotes.Count > 2)
+            if (viewModel.SelectedNotes.Count > MinimumSelectedNotes)
             {
-                var scales = _musicTheoryService.FindScales(viewModel.SelectedNotes.Select(a => a.Note));
-
-                viewModel.Scales = scales.ToList();
+                viewModel.Scales = _musicTheoryService
+                    .FindScales(selectedNotes)
+                    .ToList();
 
                 _groupedScalesService.UpdateScaleGroupingModel(viewModel.Scales, selectedNotes);
 

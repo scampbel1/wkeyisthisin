@@ -82,7 +82,9 @@ namespace Keyify.Models.Service
                 noteNumber += (int)scaleStep;
 
                 if (noteNumber > 11)
+                {
                     noteNumber -= 12;
+                }
 
                 var note = (Note)noteNumber;
 
@@ -90,7 +92,14 @@ namespace Keyify.Models.Service
                 sharpNotes.Add(_sharpNoteDictionary[note]);
             }
 
-            return new GeneratedScale(rootNote, sharpRootNote, notes, sharpNotes, modeDefinition.Name, modeDefinition.Degrees);
+            return new GeneratedScale(
+                rootNote,
+                sharpRootNote,
+                notes,
+                noteSetSharp: sharpNotes,
+                modeDefinition.Name,
+                modeDefinition.Degrees,
+                modeDefinition.Popularity);
         }
     }
 }

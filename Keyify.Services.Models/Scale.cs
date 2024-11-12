@@ -4,7 +4,6 @@ namespace Keyify.Services.Models
 {
     public class GeneratedScale
     {
-        public readonly bool IsKey;
         public readonly Note RootNote;
         public readonly string SharpRootNote;
         public readonly List<Note> Notes;
@@ -14,8 +13,18 @@ namespace Keyify.Services.Models
         public readonly string[] ScaleDegrees;
         public readonly string FlatColloquialism;
         public readonly string SharpColloquialism;
+        public readonly int Popularity;
 
-        public GeneratedScale(Note rootNote, string rootNoteSharp, List<Note> notes, List<string> noteSetSharp, string name, string[] scaleDegrees)
+        public bool IsKey => Name == "Ionian" || Name == "Aeolian";
+
+        public GeneratedScale(
+            Note rootNote,
+            string rootNoteSharp,
+            List<Note> notes,
+            List<string> noteSetSharp,
+            string name,
+            string[] scaleDegrees,
+            int popularity = 3)
         {
             RootNote = rootNote;
             SharpRootNote = rootNoteSharp;
@@ -24,31 +33,45 @@ namespace Keyify.Services.Models
             NoteSetSharp = noteSetSharp.ToHashSet();
             Name = name;
             ScaleDegrees = scaleDegrees;
-            FlatColloquialism = GetScaleColloquialism(SharpRootNote, RootNote, Name, convertFlatNoteToSharp: false);
-            SharpColloquialism = GetScaleColloquialism(SharpRootNote, RootNote, Name, convertFlatNoteToSharp: true);
 
-            IsKey = (name == "Ionian" || name == "Aeolian");
+            FlatColloquialism = GetScaleColloquialism(
+                SharpRootNote,
+                RootNote,
+                Name,
+                convertFlatNoteToSharp: false);
+
+            SharpColloquialism = GetScaleColloquialism(
+                SharpRootNote,
+                RootNote,
+                Name,
+                convertFlatNoteToSharp: true);
+
+            Popularity = popularity;
         }
 
         private string GetScaleColloquialism(string sharpRootNote, Note rootNote, string name, bool convertFlatNoteToSharp)
         {
-            var note = convertFlatNoteToSharp ? sharpRootNote : rootNote.ToString();
+            var note = convertFlatNoteToSharp ?
+                sharpRootNote :
+                rootNote.ToString();
 
             var modeEquivalent = GetModeNameColloquialism(name);
 
-            return !string.IsNullOrWhiteSpace(modeEquivalent) ? $"{note} {modeEquivalent}" : modeEquivalent;
-        }
+            return !string.IsNullOrWhiteSpace(modeEquivalent) ?
+                $"{note} {modeEquivalent}" :
+                modeEquivalent;
 
-        private string GetModeNameColloquialism(string name)
-        {
-            switch (name)
+            string GetModeNameColloquialism(string name)
             {
-                case "Ionian":
-                    return ModeColloquialism.Major.ToString();
-                case "Aeolian":
-                    return ModeColloquialism.Minor.ToString();
-                default:
-                    return string.Empty;
+                switch (name)
+                {
+                    case "Ionian":
+                        return ModeColloquialism.Major.ToString();
+                    case "Aeolian":
+                        return ModeColloquialism.Minor.ToString();
+                    default:
+                        return string.Empty;
+                }
             }
         }
     }

@@ -100,19 +100,34 @@ namespace Keyify.Web.Service
 
             sb.Append($"<td class=\"scaleResultColumn\">");
 
-            foreach (var availableScale in scaleGroupingEntries[count].GroupedScales.Select(gs => new KeyValuePair<string, string>(gs.ScaleLabel, gs.ColloquialismIncludingFormalName_Sharp)))
-            {
-                if (!availableScale.Key.Equals(selectedScale))
+            var scaleEntries = scaleGroupingEntries[count]
+                .GroupedScales
+                .Select(gs => new
                 {
-                    sb.Append($"<a class=\"scaleResult scaleText\" onclick=\"UpdateModel('/{instrumentType.ToString()}/UpdateFretboardModel'," +
-                        $" '{availableScale.Key}', null, {$"[{string.Join(',', selectedNotes.Select(s => $"'{s}'"))}]"} )\">" +
-                        $"{availableScale.Value}</a>&nbsp;");
+                    gs.ScaleLabel,
+                    gs.ColloquialismIncludingFormalName_Sharp,
+                    gs.Popularity
+                });
+
+            foreach (var availableScale in scaleEntries)
+            {
+                var selectedNotesString = string.Join(",", selectedNotes.Select(s => $"'{s}'"));
+
+                var scaleText = $"{availableScale.ColloquialismIncludingFormalName_Sharp} ({availableScale.Popularity})";
+
+                if (!availableScale.ScaleLabel.Equals(selectedScale))
+                {
+                    var onclick = $"UpdateModel('/{instrumentType.ToString()}/UpdateFretboardModel'," +
+                        $" '{availableScale.ScaleLabel}', null, [{selectedNotesString}])";
+
+                    sb.Append($"<a class=\"scaleResult scaleText\" onclick=\"{onclick}\">{scaleText}</a>&nbsp;");
                 }
                 else
                 {
-                    sb.Append($"<a class=\"scaleResult scaleText\" style=\"text-decoration: underline double; font-weight: bold;\" onclick=\"UpdateModel('/{instrumentType.ToString()}/UpdateFretboardModel'," +
-                        $" null, null, {$"[{string.Join(',', selectedNotes.Select(s => $"'{s}'"))}]"} )\">" +
-                        $"{availableScale.Value}</a>&nbsp;");
+                    var onclick = $"UpdateModel('/{instrumentType.ToString()}/UpdateFretboardModel', null, null, [{selectedNotesString}])";
+                    var style = "text-decoration: underline double; font-weight: bold;";
+
+                    sb.Append($"<a class=\"scaleResult scaleText\" style=\"{style}\" onclick=\"{onclick}\">{scaleText}</a>&nbsp;");
                 }
             }
 
