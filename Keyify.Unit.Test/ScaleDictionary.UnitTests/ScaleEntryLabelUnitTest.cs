@@ -26,7 +26,7 @@ namespace ScaleDictionaryTests
             var userReadableExpected = "Ab Ionian";
             var userReadableActual = scaleEntry.FormalNameLabel_Flat;
             var combinationLabelExpected = "Ab Major (Ab Ionian)";
-            var combinationLabelActual = scaleEntry.ColloquialismIncludingFormalName_Flat;
+            var combinationLabelActual = scaleEntry.FullName_Flat;
 
             //Note: Best practice to have 1 Assertion - making the exception here as I'd like to group these labels together
             Assert.Equal(colloquialExpected, colloquialActual);
@@ -53,7 +53,7 @@ namespace ScaleDictionaryTests
             var userReadableExpected = "Db Aeolian";
             var userReadableActual = scaleEntry.FormalNameLabel_Flat;
             var combinationLabelExpected = "Db Minor (Db Aeolian)";
-            var combinationLabelActual = scaleEntry.ColloquialismIncludingFormalName_Flat;
+            var combinationLabelActual = scaleEntry.FullName_Flat;
 
             //Note: Best practice to have 1 Assertion - making the exception here as I'd like to group these labels together
             Assert.Equal(colloquialExpected, colloquialActual);
@@ -80,7 +80,7 @@ namespace ScaleDictionaryTests
             var userReadableExpected = "F# Aeolian";
             var userReadableActual = scaleEntry.FormalNameLabel_Sharp;
             var combinationLabelExpected = "F# Minor (F# Aeolian)";
-            var combinationLabelActual = scaleEntry.ColloquialismIncludingFormalName_Sharp;
+            var combinationLabelActual = scaleEntry.FullName_Sharp;
 
             //Note: Best practice to have 1 Assertion - making the exception here as I'd like to group these labels together
             Assert.Equal(colloquialExpected, colloquialActual);
@@ -107,7 +107,7 @@ namespace ScaleDictionaryTests
             var userReadableExpected = "D# Dorian b2";
             var userReadableActual = scaleEntry.FormalNameLabel_Sharp;
             var combinationLabelExpected = "D# Dorian b2";
-            var combinationLabelActual = scaleEntry.ColloquialismIncludingFormalName_Sharp;
+            var combinationLabelActual = scaleEntry.FullName_Sharp;
 
             //Note: Best practice to have 1 Assertion - making the exception here as I'd like to group these labels together
             Assert.Equal(colloquialExpected, colloquialActual);

@@ -89,15 +89,18 @@ namespace Keyify.Web.Service
                 .Select(gs => new
                 {
                     gs.ScaleLabel,
-                    gs.ColloquialismIncludingFormalName_Sharp,
+                    gs.FullName_Sharp,
                     gs.Popularity
                 });
 
             foreach (var availableScale in scaleEntries)
             {
                 var selectedNotesString = string.Join(",", selectedNotes.Select(s => $"'{s}'"));
+                
+                //TODO: Try and fix the symbol size here
+                var popularitySymbol = $"<span style=\"transform: scale(2);\">{GetScalePopularityIcon(availableScale.Popularity)}</span>";
 
-                var scaleText = $"{availableScale.ColloquialismIncludingFormalName_Sharp} ({availableScale.Popularity})";
+                var scaleText = $"{popularitySymbol} <span>{availableScale.FullName_Sharp}</span>";
 
                 if (!availableScale.ScaleLabel.Equals(selectedScale))
                 {
@@ -116,6 +119,25 @@ namespace Keyify.Web.Service
             }
 
             sb.Append($"</td>");
+
+            static string GetScalePopularityIcon(int popularity)
+            {
+                switch (popularity)
+                {
+                    case 0:
+                        return "🔑";
+                    case 1:
+                        return "\U0001F7E2";
+                    case 2:
+                        return "\U0001F7E1";
+                    case 3:
+                        return "\U0001F7E0";
+                    case 4:
+                        return "\U0001F534";
+                    default:
+                        return $"({popularity})";
+                }
+            }
         }
     }
 }
