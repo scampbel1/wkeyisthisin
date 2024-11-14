@@ -18,19 +18,21 @@ namespace Keyify.Web.Service
                 return string.Empty;
             }
 
+            var limitedGroupScale = availableScaleGroups.Take(8).ToList();
+
             var sb = new StringBuilder();
 
             sb.Append("<table class=\"scaleTable\">");
 
-            GenerateScales(selectedNotes, instrumentType, availableScaleGroups, selectedScale, sb);
+            GenerateScales(selectedNotes, instrumentType, limitedGroupScale, selectedScale, sb);
 
             sb.Append("</table>");
 
             return sb.ToString();
 
-            void GenerateScales(IEnumerable<Note> selectedNotes, InstrumentType instrumentType, List<ScaleGroupingEntry> availableScaleGroups, string selectedScale, StringBuilder sb)
+            void GenerateScales(IEnumerable<Note> selectedNotes, InstrumentType instrumentType, List<ScaleGroupingEntry> limitedGroupScale, string selectedScale, StringBuilder sb)
             {
-                GenerateAvailableKeysAndScalesSection(selectedNotes, instrumentType, availableScaleGroups, sb, selectedScale);
+                GenerateAvailableKeysAndScalesSection(selectedNotes, instrumentType, limitedGroupScale, sb, selectedScale);
             }
         }
 
@@ -80,9 +82,9 @@ namespace Keyify.Web.Service
         {
             count = isNeighbouringScaleGroup ? count += 1 : count;
 
-            sb.Append($"<td class=\"scaleResultLabelColumn\"><span class=\"scaleResultLabel\">{scaleGroupingEntries[count].NotesGroupingLabelHtml}</span></td>");
+            sb.Append($"<td class=\"scaleResultCell\"><span class=\"scaleResultLabel\">{scaleGroupingEntries[count].NotesGroupingLabelHtml}</span></td>");
 
-            sb.Append($"<td class=\"scaleResultColumn\">");
+            sb.Append($"<td class=\"scaleResultCell\">");
 
             var scaleEntries = scaleGroupingEntries[count]
                 .GroupedScales
@@ -93,29 +95,33 @@ namespace Keyify.Web.Service
                     gs.Popularity
                 });
 
-            foreach (var availableScale in scaleEntries)
+            var selectedNotesString = string.Join(",", selectedNotes.Select(s => $"'{s}'"));
+
+            foreach (var availableScale in scaleEntries.GroupBy(s => s.Popularity))
             {
-                var selectedNotesString = string.Join(",", selectedNotes.Select(s => $"'{s}'"));
-                
-                //TODO: Try and fix the symbol size here
-                var popularitySymbol = $"<span style=\"transform: scale(2);\">{GetScalePopularityIcon(availableScale.Popularity)}</span>";
+                sb.Append($"<span style=\"transform: scale(2);\">{GetScalePopularityIcon(availableScale.First().Popularity)}</span>");
 
-                var scaleText = $"{popularitySymbol} <span>{availableScale.FullName_Sharp}</span>";
-
-                if (!availableScale.ScaleLabel.Equals(selectedScale))
+                foreach (var scale in availableScale)
                 {
-                    var onclick = $"UpdateModel('/{instrumentType.ToString()}/UpdateFretboardModel'," +
-                        $" '{availableScale.ScaleLabel}', null, [{selectedNotesString}])";
+                    var scaleText = $"<span>{scale.FullName_Sharp}</span>";
 
-                    sb.Append($"<a class=\"scaleResult scaleText\" onclick=\"{onclick}\">{scaleText}</a>&nbsp;");
-                }
-                else
-                {
-                    var onclick = $"UpdateModel('/{instrumentType.ToString()}/UpdateFretboardModel', null, null, [{selectedNotesString}])";
-                    var style = "text-decoration: underline double; font-weight: bold;";
+                    if (!scale.ScaleLabel.Equals(selectedScale))
+                    {
+                        var onclick = $"UpdateModel('/{instrumentType.ToString()}/UpdateFretboardModel'," +
+                            $" '{scale.ScaleLabel}', null, [{selectedNotesString}])";
 
-                    sb.Append($"<a class=\"scaleResult scaleText\" style=\"{style}\" onclick=\"{onclick}\">{scaleText}</a>&nbsp;");
+                        sb.Append($"<a class=\"scaleResult scaleText\" onclick=\"{onclick}\">{scaleText}</a>&nbsp;");
+                    }
+                    else
+                    {
+                        var onclick = $"UpdateModel('/{instrumentType.ToString()}/UpdateFretboardModel', null, null, [{selectedNotesString}])";
+                        var style = "text-decoration: underline double; font-weight: bold;";
+
+                        sb.Append($"<a class=\"scaleResult scaleText\" style=\"{style}\" onclick=\"{onclick}\">{scaleText}</a>&nbsp;");
+                    }
                 }
+
+                sb.Append("<br/>");
             }
 
             sb.Append($"</td>");

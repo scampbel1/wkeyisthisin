@@ -94,7 +94,7 @@ namespace Keyify.Controllers.Instrument
             var availableScalesTableHtml = _scaleGroupingHtmlService.GenerateScalesTable(
                 selectedNotes,
                 Model.Fretboard.InstrumentType,
-                Model.AvailableScaleGroups,
+                Model.LimitedScaleGroup,
                 selectedScale);
 
             Model.UpdateQuickLinkCode(quickLinkBase64);

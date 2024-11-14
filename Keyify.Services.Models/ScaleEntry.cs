@@ -24,7 +24,6 @@
 
         public string FullName_Flat => !string.IsNullOrWhiteSpace(ColloquialNameLabel_Flat) ? $"{ColloquialNameLabel_Flat} ({FormalNameLabel_Flat})" : $"{FormalNameLabel_Flat}";
 
-
         public string FormalNameLabel_Sharp => $"{Scale.SharpRootNote} {Scale.Name}";
 
         public string ColloquialNameLabel_Sharp => Scale.SharpColloquialism;

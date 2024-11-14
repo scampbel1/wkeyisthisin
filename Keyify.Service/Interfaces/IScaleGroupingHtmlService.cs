@@ -8,7 +8,7 @@ namespace Keyify.Web.Services.Interfaces
         public string GenerateScalesTable(
             IEnumerable<Note> selectedNotes,
             InstrumentType instrumentType,
-            List<ScaleGroupingEntry> availableScaleGroups,
+            List<ScaleGroupingEntry> limitedScaleGroups,
             string selectedString);
     }
 }

@@ -8,7 +8,6 @@ using System.Text.Json;
 
 namespace Keyify.Web.Models.ViewModels
 {
-    //WARNING: Be careful renaming this class! (It may not rename the reference in the Views)
     public partial class InstrumentViewModel
     {
         private readonly Dictionary<Note, string> _sharpNotesDictionary;
@@ -22,30 +21,43 @@ namespace Keyify.Web.Models.ViewModels
 
         private List<FretboardNote> NotesMatrix { get; } = new List<FretboardNote>();
 
-        public string ViewTitle = $"What Key Is This In?";
+        public string ViewTitle { get; } = "Notes to Key";
+
         public string QuickLinkCode { get; private set; }
 
         public bool IsSelectionLocked { get; set; }
 
         public Fretboard Fretboard { get; set; }
+
         public ScaleEntry SelectedScale { get; set; }
+
         public List<ScaleEntry> Scales { get; set; } = new List<ScaleEntry>();
+
         public List<ChordDefinition> ChordDefinitions { get; set; } = new List<ChordDefinition>();
 
         public void UpdateViewModel(Fretboard fretboard) => Fretboard = fretboard;
+
         public void UpdateQuickLinkCode(string quickLinkCode) => QuickLinkCode = quickLinkCode;
+
         public void UpdateAvailableScalesTableHtml(string htmlContent) => AvailableKeysAndScalesTableHtml = htmlContent;
+
         public void UpdateAvailableChordDefinitionsTableHtml(string htmlContent) => AvailableChordDefinitionsTableHtml = htmlContent;
 
         public string SelectedNotesJson => JsonSerializer.Serialize(SelectedNotes.Select(n => n.Note.ToString()));
 
         public string AvailableKeysAndScalesTableHtml { get; private set; }
+
         public string AvailableChordDefinitionsTableHtml { get; private set; }
-        public string AvailableKeysAndScalesLabel => $"{GetAvailableKeysLabel()} {GetAvailableScaleLabel()}";
+
+        public string AvailableKeysAndScalesLabel => $"Showing {LimitedScaleGroup.SelectMany(l => l.GroupedScales).Count(g => !g.IsKey)} of {GetAvailableScaleLabel()} - {GetAvailableKeysLabel()}";
 
         public List<FretboardNote> SelectedNotes => NotesMatrix.Where(n => n.Selected).ToList();
+
         public List<FretboardNote> UnselectedNotes => NotesMatrix.Where(n => !n.Selected).ToList();
+
         public List<FretboardNote> NotesPartOfScale => NotesMatrix.Where(n => n.InSelectedScale).ToList();
+
+        public List<ScaleGroupingEntry> LimitedScaleGroup => AvailableScaleGroups.Take(8).ToList();
 
         public List<ScaleGroupingEntry> AvailableScaleGroups { get; set; } = new List<ScaleGroupingEntry>();
 
@@ -64,59 +76,44 @@ namespace Keyify.Web.Models.ViewModels
         private string GetAvailableKeysLabel()
         {
             var matchingScaleCount = Scales.Count(s => s.IsKey);
-
-            switch (matchingScaleCount)
+            return matchingScaleCount switch
             {
-                case 0:
-                    return GetNoKeysFoundMessage();
-                case 1:
-                    return $"{matchingScaleCount} Matching Key";
-                default:
-                    return $"{matchingScaleCount} Matching Keys";
-            }
+                0 => GetNoKeysFoundMessage(),
+                1 => $"{matchingScaleCount} Matching Key",
+                _ => $"{matchingScaleCount} Matching Keys"
+            };
         }
 
         private string GetNoKeysFoundMessage()
         {
             var selectedNoteCount = SelectedNotes.Count;
-
-            if (selectedNoteCount <= 2)
-                return $"";
-
-            if (selectedNoteCount > 2)
-                return "No Matching Keys";
-            else
-                return "";
+            return selectedNoteCount switch
+            {
+                <= 2 => "",
+                _ => "No Matching Keys"
+            };
         }
 
         private string GetAvailableScaleLabel()
         {
-            var matchingScaleCount = Scales.Count(s => s.IsKey);
-
-            switch (matchingScaleCount)
+            var matchingScaleCount = Scales.Count(s => !s.IsKey);
+            return matchingScaleCount switch
             {
-                case 0:
-                    return GetNoScalesFoundMessage();
-                case 1:
-                    return $"{matchingScaleCount} Matching Scale";
-                default:
-                    return $"{matchingScaleCount} Matching Scales";
-            }
+                0 => GetNoScalesFoundMessage(),
+                1 => $"{matchingScaleCount} Matching Scale",
+                _ => $"{matchingScaleCount} Matching Scales"
+            };
         }
 
         private string GetNoScalesFoundMessage()
         {
             var selectedNoteCount = SelectedNotes.Count;
-
-            if (selectedNoteCount == 1)
-                return $"Only {selectedNoteCount} Note Selected";
-            else if (selectedNoteCount <= 2)
-                return $"Only {selectedNoteCount} Notes Selected";
-
-            if (selectedNoteCount > 2)
-                return "No Matching Scales";
-            else
-                return "No Notes Selected";
+            return selectedNoteCount switch
+            {
+                1 => $"Only {selectedNoteCount} Note Selected",
+                <= 2 => $"Only {selectedNoteCount} Notes Selected",
+                _ => "No Matching Scales"
+            };
         }
     }
 }
