@@ -2,6 +2,7 @@ using Keyify.Controllers.Instrument;
 using Keyify.MusicTheory.Enums;
 using Keyify.Service.Interfaces;
 using Keyify.Services.Formatter.Services;
+using Keyify.Services.Models;
 using Keyify.Web.Models.Instruments;
 using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Service.Interfaces;
@@ -35,6 +36,8 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             InstrumentViewModel = new InstrumentViewModel(new Fretboard(_sharpNotesDictionary));
 
+            InstrumentViewModel.AvailableScaleGroups = new List<ScaleGroupingEntry>();
+
             m_MockMusicTheoryService = new Mock<IMusicTheoryService>();
             m_MockGroupedScalesService = new Mock<IGroupedScalesService>();
             m_MockScaleGroupingHtmlService = new Mock<IScaleGroupingHtmlService>();
@@ -42,6 +45,8 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             m_MockQuickLinkService = new Mock<IQuickLinkService>();
 
             FretboardService = new FretboardService(m_MockMusicTheoryService.Object, m_MockGroupedScalesService.Object);
+
+            m_MockGroupedScalesService.Setup(m => m.GroupedScales).Returns(new List<ScaleGroupingEntry>());
         }
 
         protected InstrumentController CreateNewInstrumentController(InstrumentViewModel instrumentViewModel)
@@ -50,7 +55,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             {
                 TempData = new TempDataDictionary(
                     Mock.Of<HttpContext>(),
-                    Mock.Of<ITempDataProvider>())
+                    Mock.Of<ITempDataProvider>()),
             };
         }
     }
