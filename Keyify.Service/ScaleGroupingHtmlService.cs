@@ -99,7 +99,7 @@ namespace Keyify.Web.Service
 
             foreach (var availableScale in scaleEntries.GroupBy(s => s.Popularity))
             {
-                sb.Append($"<span style=\"transform: scale(2);\">{GetScalePopularityIcon(availableScale.First().Popularity)}</span>");
+                sb.Append($"<span style=\"font-size:xx-small;\">{GetScalePopularityIcon(availableScale.First().Popularity).Item2}</span>");
 
                 foreach (var scale in availableScale)
                 {
@@ -126,23 +126,24 @@ namespace Keyify.Web.Service
 
             sb.Append($"</td>");
 
-            static string GetScalePopularityIcon(int popularity)
+        }
+
+        public (string, string) GetScalePopularityIcon(int popularity)
+        {
+            switch (popularity)
             {
-                switch (popularity)
-                {
-                    case 0:
-                        return "🔑";
-                    case 1:
-                        return "\U0001F7E2";
-                    case 2:
-                        return "\U0001F7E1";
-                    case 3:
-                        return "\U0001F7E0";
-                    case 4:
-                        return "\U0001F534";
-                    default:
-                        return $"({popularity})";
-                }
+                case 0:
+                    return ("Key", "🔑");
+                case 1:
+                    return ("Widely Used", "\U0001F7E2");
+                case 2:
+                    return ("Frequently Used", "\U0001F7E1");
+                case 3:
+                    return ("Rarely Used", "\U0001F7E0");
+                case 4:
+                    return ("Very Rarely Used", "\U0001F534");
+                default:
+                    return ("Unknown", $"{popularity}");
             }
         }
     }

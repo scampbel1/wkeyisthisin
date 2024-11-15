@@ -10,5 +10,7 @@ namespace Keyify.Web.Services.Interfaces
             InstrumentType instrumentType,
             List<ScaleGroupingEntry> limitedScaleGroups,
             string selectedString);
+
+        public (string, string) GetScalePopularityIcon(int popularity);
     }
 }

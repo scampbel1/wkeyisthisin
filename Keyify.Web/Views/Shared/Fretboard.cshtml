@@ -6,9 +6,9 @@
 <!-- Don't remove instrument links from here, the selected notes aren't updated on the layout page-->
 <div class="instrumentHyperlinkContainer">
     <div id="copyQuickLinkHeader">
-        <a class="copyToClipboard" onclick="copyContent('@Model.QuickLinkCode')">Copy Link 🔗</a>
+        <a class="copyToClipboard" onclick="copyContent('@Model.QuickLinkCode')">Save Results 🔗</a>
         @*<a class="copyToClipboard" onclick="ToggleLockSelection('@Url.Action("ToggleLockSelection", Model.Fretboard.InstrumentType.ToString())','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson, @(lockFretboard.ToString().ToLower()))">Lock Fretboard</a>*@
-        <a class="copyToClipboard" onclick="Reset('@Url.Action("UpdateFretboardModel")', null , null , null)">Undo All 🔄</a>
+        <a class="copyToClipboard" onclick="Reset('@Url.Action("UpdateFretboardModel")', null , null , null)">Reset All 🔄</a>
     </div>
     <div id="instrumentHyperlinkHeaderList">
         <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Bass")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Bass</a>
@@ -73,9 +73,18 @@
 </div>
 
 <div class="scaleResults center">
-    <h2>
-        @Model.AvailableKeysAndScalesLabel
-    </h2>
+    <div>
+        <div style="float: left;">
+            <h6>
+                @Model.AvailableKeysAndScalesLabel
+            </h6>
+        </div>
+        <div style="float: right;">
+            <h6>
+                @Model.PopularityIconLegend
+            </h6>
+        </div>
+    </div>
     <div id="tablesDiv">
         @Html.Raw(Model.AvailableKeysAndScalesTableHtml)
     </div>

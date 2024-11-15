@@ -4,8 +4,10 @@ using Keyify.Web.Models.QuickLink;
 using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR.Protocol;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Keyify.Controllers.Instrument
@@ -105,6 +107,28 @@ namespace Keyify.Controllers.Instrument
 
             Model.ChordDefinitions = chordDefintiions.ToList();
             Model.UpdateAvailableChordDefinitionsTableHtml(availableChordDefinitionsTableHtml);
+
+            // TODO: Set this on startup
+            Model.PopularityIconLegend = SetLegend();
+        }
+
+        private string SetLegend()
+        {
+            if (!Model.AvailableScaleGroups.Any())
+            {
+                return string.Empty;
+            }
+
+            var sb = new StringBuilder();
+
+            foreach (var popularity in new int[] { 0, 1, 2, 3, 4 })
+            {
+                var (label, icon) = _scaleGroupingHtmlService.GetScalePopularityIcon(popularity);
+
+                sb.Append($"{icon}{label} ");
+            }
+
+            return sb.ToString().TrimEnd();
         }
     }
 }

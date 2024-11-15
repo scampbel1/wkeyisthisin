@@ -4,6 +4,7 @@ using Keyify.Web.Models.Instruments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.Json;
 
 namespace Keyify.Web.Models.ViewModels
@@ -49,7 +50,26 @@ namespace Keyify.Web.Models.ViewModels
 
         public string AvailableChordDefinitionsTableHtml { get; private set; }
 
-        public string AvailableKeysAndScalesLabel => $"Showing {LimitedScaleGroup.SelectMany(l => l.GroupedScales).Count(g => !g.IsKey)} of {GetAvailableScaleLabel()} - {GetAvailableKeysLabel()}";
+        public string AvailableKeysAndScalesLabel => AvailableScaleGroups.Any() ?
+            $"{ScalesFoundText} {GetAvailableKeysLabel()}" :
+            $"Select 3 or More Notes ({3 - SelectedNotes.Count} more to go!)";
+
+        public string PopularityIconLegend { get; set; }
+
+        public string ScalesFoundText
+        {
+            get
+            {
+                if (AvailableScaleGroups.Any())
+                {
+                    return $"Showing {LimitedScaleGroup.SelectMany(l => l.GroupedScales).Count(g => !g.IsKey)} of {GetAvailableScaleLabel()} - ";
+                }
+                else
+                {
+                    return "No Scales Found";
+                }
+            }
+        }
 
         public List<FretboardNote> SelectedNotes => NotesMatrix.Where(n => n.Selected).ToList();
 
@@ -57,7 +77,7 @@ namespace Keyify.Web.Models.ViewModels
 
         public List<FretboardNote> NotesPartOfScale => NotesMatrix.Where(n => n.InSelectedScale).ToList();
 
-        public List<ScaleGroupingEntry> LimitedScaleGroup => AvailableScaleGroups.Take(8).ToList();
+        public List<ScaleGroupingEntry> LimitedScaleGroup => AvailableScaleGroups.Take(18).ToList();
 
         public List<ScaleGroupingEntry> AvailableScaleGroups { get; set; } = new List<ScaleGroupingEntry>();
 
@@ -89,7 +109,6 @@ namespace Keyify.Web.Models.ViewModels
             var selectedNoteCount = SelectedNotes.Count;
             return selectedNoteCount switch
             {
-                <= 2 => "",
                 _ => "No Matching Keys"
             };
         }
