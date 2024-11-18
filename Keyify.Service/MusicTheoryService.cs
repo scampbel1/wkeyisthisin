@@ -23,9 +23,12 @@ namespace Keyify.Web.Service
 
         public async Task<IEnumerable<ChordDefinition>> GetChordsDefinitions(Note[] selectedScaleNotes, Note[] selectedNotes)
         {
-            var notes = selectedScaleNotes != null && selectedScaleNotes.Length >= selectedNotes.Length ? selectedScaleNotes : selectedNotes;
+            if (selectedScaleNotes != null && selectedScaleNotes.Length >= selectedNotes.Length)
+            {
+                return await _chordDefinitionsSerice.FindChordDefinitions(selectedScaleNotes);
+            }
 
-            return await _chordDefinitionsSerice.FindChordDefinitions(notes);
+            return await _chordDefinitionsSerice.FindChordDefinitions(selectedNotes);
         }
     }
 }

@@ -4,6 +4,7 @@ using Keyify.Web.Models.Instruments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 
@@ -42,7 +43,7 @@ namespace Keyify.Web.Models.ViewModels
 
         public void UpdateAvailableScalesTableHtml(string htmlContent) => AvailableKeysAndScalesTableHtml = htmlContent;
 
-        public void UpdateAvailableChordDefinitionsTableHtml(string htmlContent) => AvailableChordDefinitionsTableHtml = htmlContent;
+        public void UpdateAvailableChordDefinitionsHtml(string htmlContent) => AvailableChordDefinitionsTableHtml = htmlContent;
 
         public string SelectedNotesJson => JsonSerializer.Serialize(SelectedNotes.Select(n => n.Note.ToString()));
 
@@ -52,9 +53,19 @@ namespace Keyify.Web.Models.ViewModels
 
         public string AvailableKeysAndScalesLabel => AvailableScaleGroups.Any() ?
             $"{ScalesFoundText} {GetAvailableKeysLabel()}" :
-            $"Select 3 or More Notes ({3 - SelectedNotes.Count} more to go!)";
+            SelectionMessage;
+
+        private string SelectionMessage => SelectedNotes.Count < 3 ?
+            $"Select 3 or More Notes ({3 - SelectedNotes.Count} more to go!)" :
+             "No Scales Found";
 
         public string PopularityIconLegend { get; set; }
+
+        public string ChordsFoundHtml => AvailableScaleGroups.Any() && ChordDefinitions.Any() ?
+            $"{ChordsFound}" :
+            string.Empty;
+
+        public string ChordsFound => $"Chords found: {ChordDefinitions.Count}";
 
         public string ScalesFoundText
         {
@@ -62,7 +73,11 @@ namespace Keyify.Web.Models.ViewModels
             {
                 if (AvailableScaleGroups.Any())
                 {
-                    return $"Showing {LimitedScaleGroup.SelectMany(l => l.GroupedScales).Count(g => !g.IsKey)} of {GetAvailableScaleLabel()} - ";
+                    var groupedScaleCount = LimitedScaleGroup
+                        .SelectMany(l => l.GroupedScales)
+                        .Count(g => !g.IsKey);
+
+                    return $"Showing {groupedScaleCount} of {GetAvailableScaleLabel()} - ";
                 }
                 else
                 {

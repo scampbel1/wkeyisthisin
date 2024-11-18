@@ -25,7 +25,7 @@ namespace Keyify.Services.Models
             Name = $"{rootNote} {chordType}";
         }
 
-        public bool IsSubsetOf(Note[] selectedNotes)
+        public bool IsSupersetOf(Note[] selectedNotes)
         {
             return selectedNotes.ToHashSet().IsSupersetOf(Notes);
         }
@@ -50,7 +50,7 @@ namespace Keyify.Services.Models
 
         public static bool operator !=(ChordDefinition a, ChordDefinition b)
         {
-            return a.Equals(b);
+            return !a.Equals(b);
         }
 
         public override int GetHashCode()
@@ -66,8 +66,8 @@ namespace Keyify.Services.Models
         //TODO: Boilerplate code - move to service or define in database or both
         private string GenerateLabel(string label)
         {
+            var count = 1;
             var sb = new StringBuilder().Append(label);
-            int count = 1;
 
             while (count < sb.Length - 1)
             {

@@ -29,7 +29,11 @@ namespace Keyify.Service
 
             if (notes != null && _chordDefinitionCache.ChordDefinitions != null)
             {
-                var chordDefinitions = await Task.FromResult(_chordDefinitionCache.ChordDefinitions.Where(c => c.IsSubsetOf(notes)).ToList());
+                var chordDefinitionsCache = _chordDefinitionCache
+                    .ChordDefinitions
+                    .Where(c => c.IsSupersetOf(notes)).ToList();
+
+                var chordDefinitions = await Task.FromResult(chordDefinitionsCache);
 
                 result.AddRange(chordDefinitions);
             }

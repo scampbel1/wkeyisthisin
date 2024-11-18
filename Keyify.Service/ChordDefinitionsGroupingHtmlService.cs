@@ -17,7 +17,7 @@ namespace Keyify.Web.Service
             _sharpNoteDictionary = _noteFormatService.SharpNoteDictionary;
         }
 
-        public string GenerateChordDefinitionsTableHtml(IEnumerable<ChordDefinition> chordDefinitions)
+        public string GenerateChordDefinitionsHtml(IEnumerable<ChordDefinition> chordDefinitions)
         {
             if (!chordDefinitions.Any())
             {

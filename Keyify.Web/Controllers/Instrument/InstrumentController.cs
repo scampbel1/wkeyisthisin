@@ -4,7 +4,6 @@ using Keyify.Web.Models.QuickLink;
 using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR.Protocol;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,7 +44,7 @@ namespace Keyify.Controllers.Instrument
 
         [HttpPost]
         //DON'T CHANGE THE NAMES OF THESE PARAMETERS
-        public async Task<ActionResult> UpdateFretboardModel(List<Note> previouslySelectedNotes, Note? newlySelectedNote, string selectedScale)
+        public async Task<ActionResult> UpdateFretboardModel(List<Note> previouslySelectedNotes, Note? newlySelectedNote, string selectedScale, bool lockScale)
         {
             if (newlySelectedNote.HasValue)
             {
@@ -102,14 +101,29 @@ namespace Keyify.Controllers.Instrument
             Model.UpdateQuickLinkCode(quickLinkBase64);
             Model.UpdateAvailableScalesTableHtml(availableScalesTableHtml);
 
-            var chordDefintiions = await _musicTheoryService.GetChordsDefinitions(Model.SelectedScale?.Scale?.Notes?.ToArray(), selectedNotes);
-            var availableChordDefinitionsTableHtml = _chordDefinitionsGroupingHtmlService.GenerateChordDefinitionsTableHtml(chordDefintiions);
 
-            Model.ChordDefinitions = chordDefintiions.ToList();
-            Model.UpdateAvailableChordDefinitionsTableHtml(availableChordDefinitionsTableHtml);
+            if (selectedScale != null && Model.IsSelectionLocked)
+            {
+                await SetChordDefinitions(selectedNotes);
+            }
 
             // TODO: Set this on startup
             Model.PopularityIconLegend = SetLegend();
+
+            async Task SetChordDefinitions(Note[] selectedNotes)
+            {
+                var selectedScaleNotes = Model.SelectedScale?.Scale?.Notes?.ToArray();
+
+                var chordDefintions = await _musicTheoryService
+                    .GetChordsDefinitions(selectedScaleNotes, selectedNotes);
+
+                Model.ChordDefinitions = chordDefintions.ToList();
+
+                var availableChordDefinitionsHtml = _chordDefinitionsGroupingHtmlService
+                    .GenerateChordDefinitionsHtml(Model.ChordDefinitions);
+
+                Model.UpdateAvailableChordDefinitionsHtml(availableChordDefinitionsHtml);
+            }
         }
 
         private string SetLegend()

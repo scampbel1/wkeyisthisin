@@ -30,7 +30,12 @@ namespace Keyify.Web.Service
 
             return sb.ToString();
 
-            void GenerateScales(IEnumerable<Note> selectedNotes, InstrumentType instrumentType, List<ScaleGroupingEntry> limitedGroupScale, string selectedScale, StringBuilder sb)
+            void GenerateScales(
+                IEnumerable<Note> selectedNotes,
+                InstrumentType instrumentType,
+                List<ScaleGroupingEntry> limitedGroupScale,
+                string selectedScale,
+                StringBuilder sb)
             {
                 GenerateAvailableKeysAndScalesSection(selectedNotes, instrumentType, limitedGroupScale, sb, selectedScale);
             }
@@ -51,14 +56,33 @@ namespace Keyify.Web.Service
 
                 if (scaleGroupingEntries.Count - count >= 2)
                 {
-                    AddScalesToNoteSet(selectedNotes, instrumentType, scaleGroupingEntries, sb, count, isNeighbouringScaleGroup: false, selectedScale);
-                    AddScalesToNoteSet(selectedNotes, instrumentType, scaleGroupingEntries, sb, count, isNeighbouringScaleGroup: true, selectedScale);
+                    AddLeftColumnCell(
+                        selectedNotes,
+                        instrumentType,
+                        scaleGroupingEntries,
+                        sb,
+                        selectedScale,
+                        count);
+
+                    AddRightColumnCell(
+                        selectedNotes,
+                        instrumentType,
+                        scaleGroupingEntries,
+                        sb,
+                        selectedScale,
+                        count);
 
                     count += 2;
                 }
                 else
                 {
-                    AddScalesToNoteSet(selectedNotes, instrumentType, scaleGroupingEntries, sb, count, false, selectedScale);
+                    AddLeftColumnCell(
+                        selectedNotes,
+                        instrumentType,
+                        scaleGroupingEntries,
+                        sb,
+                        selectedScale,
+                        count);
 
                     //No more Scale Groups
                     sb.Append($"<td></td>");
@@ -68,6 +92,42 @@ namespace Keyify.Web.Service
                 }
 
                 sb.Append("</tr>");
+            }
+
+            void AddLeftColumnCell(
+                IEnumerable<Note> selectedNotes,
+                InstrumentType instrumentType,
+                List<ScaleGroupingEntry> scaleGroupingEntries,
+                StringBuilder sb,
+                string selectedScale,
+                int count)
+            {
+                AddScalesToNoteSet(
+                    selectedNotes,
+                    instrumentType,
+                    scaleGroupingEntries,
+                    sb,
+                    count,
+                    isNeighbouringScaleGroup: false,
+                    selectedScale);
+            }
+
+            void AddRightColumnCell(
+                IEnumerable<Note> selectedNotes,
+                InstrumentType instrumentType,
+                List<ScaleGroupingEntry> scaleGroupingEntries,
+                StringBuilder sb,
+                string selectedScale,
+                int count)
+            {
+                AddScalesToNoteSet(
+                    selectedNotes,
+                    instrumentType,
+                    scaleGroupingEntries,
+                    sb,
+                    count,
+                    isNeighbouringScaleGroup: true,
+                    selectedScale);
             }
         }
 
@@ -125,7 +185,6 @@ namespace Keyify.Web.Service
             }
 
             sb.Append($"</td>");
-
         }
 
         public (string, string) GetScalePopularityIcon(int popularity)

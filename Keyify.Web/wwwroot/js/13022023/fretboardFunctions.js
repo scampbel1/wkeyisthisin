@@ -1,7 +1,12 @@
 ﻿//TODO: Should this be async?
-function UpdateModel(url, scale, addNote, selectedNotes) {
+function UpdateModel(url, scale, addNote, selectedNotes, lockScale) {
 
-    var dataPost = { previouslySelectedNotes: selectedNotes, newlySelectedNote: addNote, selectedScale: scale };
+    var dataPost = {
+        previouslySelectedNotes: selectedNotes,
+        newlySelectedNote: addNote,
+        selectedScale: scale,
+        lockScale: lockScale
+    };
 
     $.ajax({
         url: url,
