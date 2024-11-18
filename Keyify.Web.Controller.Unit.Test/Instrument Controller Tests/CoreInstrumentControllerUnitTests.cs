@@ -22,7 +22,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
                 It.IsAny<string>()),
                 Times.Once);
 
-            m_MockChordDefinitionsGroupingHtmlService.Verify(m => m.GenerateChordDefinitionsHtml(It.IsAny<IEnumerable<ChordDefinition>>()), Times.Once);
+            m_MockChordDefinitionsGroupingHtmlService.Verify(m => m.GenerateChordDefinitionsHtml(It.IsAny<IEnumerable<ChordDefinition>>()), Times.Never);
 
             m_MockScaleGroupingHtmlService.Reset();
             m_MockChordDefinitionsGroupingHtmlService.Reset();
@@ -67,7 +67,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
                 It.IsAny<string>()),
                 Times.Once);
 
-            m_MockChordDefinitionsGroupingHtmlService.Verify(m => m.GenerateChordDefinitionsHtml(It.IsAny<IEnumerable<ChordDefinition>>()), Times.Once);
+            m_MockChordDefinitionsGroupingHtmlService.Verify(m => m.GenerateChordDefinitionsHtml(It.IsAny<IEnumerable<ChordDefinition>>()), Times.Never);
 
             m_MockMusicTheoryService.Reset();
             m_MockScaleGroupingHtmlService.Reset();
