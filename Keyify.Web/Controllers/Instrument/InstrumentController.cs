@@ -102,7 +102,7 @@ namespace Keyify.Controllers.Instrument
             Model.UpdateAvailableScalesTableHtml(availableScalesTableHtml);
 
 
-            if (selectedScale != null && Model.IsSelectionLocked)
+            if (selectedScale != null)
             {
                 await SetChordDefinitions(selectedNotes);
             }

@@ -61,11 +61,20 @@ namespace Keyify.Web.Models.ViewModels
 
         public string PopularityIconLegend { get; set; }
 
-        public string ChordsFoundHtml => AvailableScaleGroups.Any() && ChordDefinitions.Any() ?
-            $"{ChordsFound}" :
-            string.Empty;
+        public string LockChordHtml
+        {
+            get
+            {
+                if (SelectedScale is null || ChordDefinitions is null)
+                {
+                    return string.Empty;
+                }
 
-        public string ChordsFound => $"Chords found: {ChordDefinitions.Count}";
+                return $"<span>Lock <a><u>{SelectedScale?.FullName_Sharp ?? string.Empty}</u></a> " +
+                    $"&#128274; " +
+                    $"{ChordDefinitions?.Count ?? 0} Chords found!</span>";
+            }
+        }
 
         public string ScalesFoundText
         {
