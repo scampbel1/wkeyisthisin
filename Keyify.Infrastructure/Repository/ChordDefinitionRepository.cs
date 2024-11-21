@@ -4,30 +4,21 @@ using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.MusicTheory.Enums;
 using Keyify.Services.Formatter.Interfaces;
 using Keyify.Web.Infrastructure.Models.ChordDefinition;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
-using System.Data.SqlClient;
 using System.Text;
 using System.Text.Json;
 
 namespace Keyify.Infrastructure.Repository
 {
-    public class ChordDefinitionRepository : IChordDefinitionRepository
+    public class ChordDefinitionRepository(ILogger<ChordDefinitionRepository> logger, string connectionString, ISerializationFormatter serializationFormatter) : IChordDefinitionRepository
     {
-        private readonly ILogger _logger;
-        private readonly string _connectionString;
-        private readonly ISerializationFormatter _serializationFormatter;
-
-        public ChordDefinitionRepository(ILogger<ChordDefinitionRepository> logger, string connectionString, ISerializationFormatter serializationFormatter)
-        {
-            _logger = logger;
-            _connectionString = connectionString;
-            _serializationFormatter = serializationFormatter;
-        }
+        private readonly ILogger _logger = logger;
+        private readonly string _connectionString = connectionString;
+        private readonly ISerializationFormatter _serializationFormatter = serializationFormatter;
 
         public async Task<List<ChordDefinitionEntity>> GetAllChordDefinitions()
         {
-            _logger.LogInformation($"Database Server: '{_connectionString.Split(';')[0]}'");
-
             var chordDefinitions = new List<ChordDefinitionEntity>();
 
             try
@@ -49,7 +40,10 @@ namespace Keyify.Infrastructure.Repository
                     });
                 }
 
-                _logger.LogInformation($"Found: {chordDefinitions.Count} Chord Definition Entries");
+                if (chordDefinitions.Count != 0)
+                {
+                    _logger.LogInformation("Found Chord Definition Entries");
+                }
 
                 await sqlConnection.CloseAsync();
             }
@@ -61,7 +55,7 @@ namespace Keyify.Infrastructure.Repository
             return chordDefinitions;
         }
 
-        private byte[] ConvertIntervalsArrayToByteArray(Interval[] intervals)
+        private static byte[] ConvertIntervalsArrayToByteArray(Interval[] intervals)
         {
             using var memoryStream = new MemoryStream();
 
@@ -83,7 +77,7 @@ namespace Keyify.Infrastructure.Repository
             var intervalsByteArray = ConvertIntervalsArrayToByteArray(intervals!);
 
             var query = string.Empty;
-            var hasIntervals = intervalsByteArray != null && intervalsByteArray.Any();
+            var hasIntervals = intervalsByteArray != null && intervalsByteArray.Length != 0;
 
             if (!string.IsNullOrWhiteSpace(name))
             {

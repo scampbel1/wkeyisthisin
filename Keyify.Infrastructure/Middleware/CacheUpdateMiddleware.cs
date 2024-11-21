@@ -2,7 +2,6 @@
 using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.MusicTheory.Enums;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Build.Framework;
 using Microsoft.Extensions.Logging;
 
 namespace Keyify.Infrastructure.Middleware
