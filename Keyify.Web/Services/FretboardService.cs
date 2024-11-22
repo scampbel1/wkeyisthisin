@@ -69,7 +69,7 @@ namespace Keyify.Web.Services
             }
         }
 
-        public void UpdateFretboard(InstrumentViewModel instrumentViewModel)
+        public void UpdateUnlockedFretboard(InstrumentViewModel instrumentViewModel)
         {
             if (instrumentViewModel.SelectedNotes == null || !instrumentViewModel.SelectedNotes.Any())
             {

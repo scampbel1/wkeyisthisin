@@ -37,14 +37,18 @@ namespace Keyify.Controllers.Instrument
             var selectedScale = (string)TempData["QLscale"];
             var selectedNotes = (IEnumerable<Note>)TempData["QLnotes"];
 
-            await UpdateFretboard(selectedNotes?.ToArray(), selectedScale);
+            await UpdateFretboard(selectedNotes?.ToArray(), selectedScale, false);
 
             return View(Model);
         }
 
         [HttpPost]
         //DON'T CHANGE THE NAMES OF THESE PARAMETERS
-        public async Task<ActionResult> UpdateFretboardModel(List<Note> previouslySelectedNotes, Note? newlySelectedNote, string selectedScale, bool lockScale)
+        public async Task<ActionResult> UpdateFretboardModel(
+            List<Note> previouslySelectedNotes,
+            Note? newlySelectedNote,
+            string selectedScale,
+            bool lockScale)
         {
             if (newlySelectedNote.HasValue)
             {
@@ -59,35 +63,25 @@ namespace Keyify.Controllers.Instrument
                 }
             }
 
-            await UpdateFretboard(previouslySelectedNotes.ToArray(), selectedScale);
-
-            return PartialView("Fretboard", Model);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> ToggleLockSelection(string selectedScale, Note[] selectedNotes, bool lockSelection)
-        {
-            Model.IsSelectionLocked = lockSelection;
-
-            await UpdateFretboard(selectedNotes, selectedScale);
-
-            if (lockSelection)
-            {
-
-            }
+            await UpdateFretboard(previouslySelectedNotes.ToArray(), selectedScale, lockScale);
 
             return PartialView("Fretboard", Model);
         }
 
         //TODO: Move all of this out of the controller
-        private async Task UpdateFretboard(Note[] selectedNotes, string selectedScale)
+        private async Task UpdateFretboard(Note[] selectedNotes, string selectedScale, bool lockFretboard)
         {
             if (selectedNotes != null)
             {
                 _fretboardService.UpdateViewModel(Model, selectedNotes, selectedScale);
             }
 
-            _fretboardService.UpdateFretboard(Model);
+            Model.IsSelectionLocked = lockFretboard;
+
+            if (!Model.IsSelectionLocked)
+            {
+                _fretboardService.UpdateUnlockedFretboard(Model);
+            }
 
             var quickLink = new QuickLink(Model);
             var quickLinkBase64 = _quickLinkService.ConvertQuickLinkToBase64(quickLink);
@@ -100,7 +94,6 @@ namespace Keyify.Controllers.Instrument
 
             Model.UpdateQuickLinkCode(quickLinkBase64);
             Model.UpdateAvailableScalesTableHtml(availableScalesTableHtml);
-
 
             if (selectedScale != null)
             {

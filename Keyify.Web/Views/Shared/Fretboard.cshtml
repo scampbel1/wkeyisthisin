@@ -7,7 +7,6 @@
 <div class="instrumentHyperlinkContainer">
     <div id="copyQuickLinkHeader">
         <a class="copyToClipboard" onclick="copyContent('@Model.QuickLinkCode')">Save Results 🔗</a>
-        @*<a class="copyToClipboard" onclick="ToggleLockSelection('@Url.Action("ToggleLockSelection", Model.Fretboard.InstrumentType.ToString())','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson, @(lockFretboard.ToString().ToLower()))">Lock Fretboard</a>*@
         <a class="copyToClipboard" onclick="Reset('@Url.Action("UpdateFretboardModel")', null , null , null)">Reset All 🔄</a>
     </div>
     <div id="instrumentHyperlinkHeaderList">
@@ -91,17 +90,13 @@
         </div>
     </div>
     <div id="tablesDiv">
-        @Html.Raw(Model.AvailableKeysAndScalesTableHtml)
-    </div>
-</div>
-
-@* <div class="scaleResults center">
-    <div id="tablesDiv">
-        @{
-            if (Model.IsSelectionLocked)
-            {
-                @Html.Raw(Model.AvailableChordDefinitionsTableHtml)
-            }
+        @if (Model.IsSelectionLocked)
+        {
+            @Html.Raw(Model.AvailableChordDefinitionsTableHtml)
+        }
+        else
+        {
+            @Html.Raw(Model.AvailableKeysAndScalesTableHtml)
         }
     </div>
-</div> *@
+</div>

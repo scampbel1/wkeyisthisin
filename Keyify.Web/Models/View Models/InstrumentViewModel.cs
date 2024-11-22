@@ -68,9 +68,29 @@ namespace Keyify.Web.Models.ViewModels
                     return string.Empty;
                 }
 
-                return $"<span>Lock <a><u>{SelectedScale?.FullName_Sharp ?? string.Empty}</u></a> " +
-                    $"&#128274; " +
-                    $"{ChordDefinitions?.Count ?? 0} Chords found!</span>";
+                var lockText = IsSelectionLocked ?
+                    "Unlock" :
+                    "Lock";
+
+                var isFretboardUnlocked = $"{!IsSelectionLocked}".ToLower();
+
+                var onclick = $"UpdateModel('/{Fretboard.InstrumentType.ToString()}/UpdateFretboardModel', " +
+                    $"'{SelectedScale.ScaleLabel}', " +
+                    $"null, " +
+                    $"{SelectedNotesJson.Replace("\"", "\'")}, " +
+                    $"{isFretboardUnlocked})";
+
+                var lockEmojiIcon = IsSelectionLocked ?
+                    "&#128274; " :
+                    "&#128275; ";
+
+                var chordsFoundMessage = IsSelectionLocked ?
+                    string.Empty :
+                    $"{ChordDefinitions?.Count ?? 0} Chords found!";
+
+                return $"<span>{lockText} <a onclick=\"{onclick}\"><u>{SelectedScale?.FullName_Sharp}</u></a> " +
+                    $"{lockEmojiIcon}" +
+                    $"{chordsFoundMessage}</span>";
             }
         }
 

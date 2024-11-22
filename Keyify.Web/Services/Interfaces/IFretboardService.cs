@@ -6,7 +6,7 @@ namespace Keyify.Web.Services.Interfaces
 {
     public interface IFretboardService
     {
-        void UpdateFretboard(InstrumentViewModel viewModel);
+        void UpdateUnlockedFretboard(InstrumentViewModel viewModel);
 
         void UpdateViewModel(InstrumentViewModel viewModel, IEnumerable<Note> selectedNotes, string selectedScale);
     }
