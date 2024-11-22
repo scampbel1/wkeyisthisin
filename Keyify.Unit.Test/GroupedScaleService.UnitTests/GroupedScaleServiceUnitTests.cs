@@ -1,19 +1,19 @@
-﻿using Keyify.Service.Interfaces;
-using Keyify.Web.Service;
+﻿using Keyify.Web.Service;
+using Keyify.Web.Services.Interfaces;
 using System;
 
 namespace Keyify.Web.Unit.Test.GroupedScaleServiceTest.UnitTests
 {
     public class GroupedScaleServiceUnitTests
     {
-        private readonly Mock<IChordDefinitionGroupingHtmlService> _chordDefinitionGroupingHtmlService;
+        private readonly Mock<IScaleGroupingHtmlService> _scaleGroupingHtmlService;
 
         protected readonly GroupedScalesService _groupedScalesService;
 
         public GroupedScaleServiceUnitTests()
         {
-            _chordDefinitionGroupingHtmlService = new Mock<IChordDefinitionGroupingHtmlService>();
-            _groupedScalesService = new GroupedScalesService(_chordDefinitionGroupingHtmlService.Object);
+            _scaleGroupingHtmlService = new Mock<IScaleGroupingHtmlService>();
+            _groupedScalesService = new GroupedScalesService(_scaleGroupingHtmlService.Object);
         }
 
         [Fact(Skip = "Not Implemented. Test that Scales and Keys are cleared first, this has tripped you up more than once!")]

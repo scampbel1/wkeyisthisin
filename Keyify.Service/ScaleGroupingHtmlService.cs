@@ -1,4 +1,5 @@
 ﻿using Keyify.MusicTheory.Enums;
+using Keyify.Services.Formatter.Interfaces;
 using Keyify.Services.Models;
 using Keyify.Web.Services.Interfaces;
 using System.Text;
@@ -7,6 +8,15 @@ namespace Keyify.Web.Service
 {
     public class ScaleGroupingHtmlService : IScaleGroupingHtmlService
     {
+        private readonly INoteFormatService _noteFormatService;
+        private readonly Dictionary<Note, string> _sharpNoteDictionary;
+
+        public ScaleGroupingHtmlService(INoteFormatService noteFormatService)
+        {
+            _noteFormatService = noteFormatService;
+            _sharpNoteDictionary = _noteFormatService.SharpNoteDictionary;
+        }
+
         public string GenerateScalesTable(
             IEnumerable<Note> selectedNotes,
             InstrumentType instrumentType,
@@ -204,6 +214,40 @@ namespace Keyify.Web.Service
                 default:
                     return ("Unknown", $"{popularity}");
             }
+        }
+
+        public string GenerateNotesGroupingLabelHtml(IEnumerable<Note> selectedNotes, List<ScaleEntry> groupedScales)
+        {
+            if (groupedScales == null || !groupedScales.Any())
+            {
+                return string.Empty;
+            }
+
+            var sb = new StringBuilder();
+            var firstScaleInGroup = groupedScales.FirstOrDefault();
+
+            if (firstScaleInGroup != null)
+            {
+                var noteSet = firstScaleInGroup.Scale.NoteSet;
+
+                sb.Append("<span class=\"scaleResultLabel\">");
+
+                foreach (var note in noteSet)
+                {
+                    if (selectedNotes.Contains(note))
+                    {
+                        sb.Append($"<span class=\"scaleSetLabelNote matchedScaleSetLabelNote\">{_sharpNoteDictionary[note]}</span>");
+                    }
+                    else
+                    {
+                        sb.Append($"<span class=\"scaleSetLabelNote\">{_sharpNoteDictionary[note]}</span>");
+                    }
+                }
+
+                sb.Append("</span>");
+            }
+
+            return sb.ToString();
         }
     }
 }

@@ -12,5 +12,9 @@ namespace Keyify.Web.Services.Interfaces
             string selectedString);
 
         public (string, string) GetScalePopularityIcon(int popularity);
+
+        public string GenerateNotesGroupingLabelHtml(
+            IEnumerable<Note> selectedNotes,
+            List<ScaleEntry> groupedScales);
     }
 }

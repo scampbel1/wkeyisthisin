@@ -1,24 +1,24 @@
 ﻿using Keyify.MusicTheory.Enums;
-using Keyify.Service.Interfaces;
 using Keyify.Services.Models;
 using Keyify.Web.Service.Interfaces;
+using Keyify.Web.Services.Interfaces;
 
 namespace Keyify.Web.Service
 {
     public class GroupedScalesService : IGroupedScalesService
     {
-        private readonly IChordDefinitionGroupingHtmlService _chordDefinitionGroupingHtmlService;
+        private readonly IScaleGroupingHtmlService _scaleGroupingHtmlService;
+
+        public GroupedScalesService(IScaleGroupingHtmlService scaleGroupingHtmlService)
+        {
+            _scaleGroupingHtmlService = scaleGroupingHtmlService;
+        }
 
         private List<ScaleGroupingEntry> ScaleGroupingEntries { get; init; } = new List<ScaleGroupingEntry>();
 
         public List<ScaleGroupingEntry> GroupedScales => ScaleGroupingEntries;
 
         public int TotalScaleCount => ScaleGroupingEntries.Sum(s => s.Count);
-
-        public GroupedScalesService(IChordDefinitionGroupingHtmlService chordDefinitionGroupingHtmlService)
-        {
-            _chordDefinitionGroupingHtmlService = chordDefinitionGroupingHtmlService;
-        }
 
         public void UpdateScaleGroupingModel(IEnumerable<ScaleEntry> scales, IEnumerable<Note> selectedNotes)
         {
@@ -35,7 +35,7 @@ namespace Keyify.Web.Service
 
                 if (allScales.Any())
                 {
-                    var scalesHtmls = _chordDefinitionGroupingHtmlService.GenerateNotesGroupingLabelHtml(selectedNotes, allScales);
+                    var scalesHtmls = _scaleGroupingHtmlService.GenerateNotesGroupingLabelHtml(selectedNotes, allScales);
 
                     ScaleGroupingEntries.Add(new ScaleGroupingEntry(allScales, scalesHtmls));
                 }

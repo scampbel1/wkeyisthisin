@@ -1,5 +1,4 @@
 ﻿using EnumsNET;
-using Keyify.Controllers.Instrument;
 using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
 
@@ -11,7 +10,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
         private Note[] _selectedNotes = new[] { Note.A, Note.C, Note.G };
 
         [Fact]
-        public async Task ToggleLockSelection_True_IsSelectionLocked_IsTrue()
+        public void ToggleLockSelection_True_IsSelectionLocked_IsTrue()
         {
             const string selectedScale = "CKumoi";
 
@@ -33,7 +32,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
         }
 
         [Fact]
-        public async Task ToggleLockSelection_False_IsSelectionLocked_IsTrue()
+        public void ToggleLockSelection_False_IsSelectionLocked_IsTrue()
         {
             var _instrumentViewModel = InstrumentViewModel;
 
@@ -43,7 +42,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
         }
 
         [Fact]
-        public async Task ToggleLockSeletion_InputScale_IsTheSame()
+        public void ToggleLockSeletion_InputScale_IsTheSame()
         {
             const string _excpectedQuickLinkScale = "CKumoi";
 
@@ -84,7 +83,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
         }
 
         [Fact]
-        public async Task ToggleLockSeletion_InputNotesArray_IsTheSame()
+        public void ToggleLockSeletion_InputNotesArray_IsTheSame()
         {
             const string selectedScale = "CKumoi";
 
@@ -105,7 +104,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
         }
 
         [Fact]
-        public async Task ToggleLockSelection_LockSelection_ChordDefinitionsService_IsCalled()
+        public void ToggleLockSelection_LockSelection_ChordDefinitionsService_IsCalled()
         {
             const string selectedScale = "CKumoi";
 
