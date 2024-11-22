@@ -25,6 +25,7 @@
     <None Remove="Scripts\Script0017 - Set popularity ScaleDefinition less popular scales.sql" />
     <None Remove="Scripts\Script0018 - Set popularity ScaleDefinition somewhat rare scales.sql" />
     <None Remove="Scripts\Script0019 - Set popularity ScaleDefinition rare scales.sql" />
+    <None Remove="Scripts\Script0020 - Add Column ChordDefinition.Popularity.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,6 +51,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\Script0011 - Create System User in Core.User.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\Script0020 - Add Column ChordDefinition.Popularity.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\Script0019 - Set popularity ScaleDefinition rare scales.sql">
