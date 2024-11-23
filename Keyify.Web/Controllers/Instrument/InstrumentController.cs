@@ -1,9 +1,11 @@
 ﻿using Keyify.MusicTheory.Enums;
 using Keyify.Service.Interfaces;
+using Keyify.Web.Data_Contracts;
 using Keyify.Web.Models.QuickLink;
 using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,27 +46,27 @@ namespace Keyify.Controllers.Instrument
         }
 
         [HttpPost]
-        //DON'T CHANGE THE NAMES OF THESE PARAMETERS
-        public async Task<ActionResult> UpdateFretboardModel(
-            List<Note> previouslySelectedNotes,
-            Note? newlySelectedNote,
-            string selectedScale,
-            bool lockScale)
+        public async Task<ActionResult> UpdateFretboardModel([FromBody] UpdateFretboardRequest updateFretboardRequest)
         {
-            if (newlySelectedNote.HasValue)
+            if (updateFretboardRequest?.NewlySelectedNote != null)
             {
-                switch (previouslySelectedNotes.Contains(newlySelectedNote.Value))
+                var newlySelectedNote = updateFretboardRequest.NewlySelectedNote;
+
+                switch (updateFretboardRequest.PreviouslySelectedNotes.Contains(newlySelectedNote.Value))
                 {
                     case true:
-                        previouslySelectedNotes.Remove(newlySelectedNote.Value);
+                        updateFretboardRequest.PreviouslySelectedNotes.Remove(newlySelectedNote.Value);
                         break;
                     case false:
-                        previouslySelectedNotes.Add(newlySelectedNote.Value);
+                        updateFretboardRequest.PreviouslySelectedNotes.Add(newlySelectedNote.Value);
                         break;
                 }
             }
 
-            await UpdateFretboard(previouslySelectedNotes.ToArray(), selectedScale, lockScale);
+            await UpdateFretboard(
+                selectedNotes: updateFretboardRequest.PreviouslySelectedNotes?.ToArray() ?? [],
+                selectedScale: updateFretboardRequest.SelectedScale,
+                lockFretboard: updateFretboardRequest.LockScale);
 
             return PartialView("Fretboard", Model);
         }

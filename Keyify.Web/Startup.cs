@@ -11,6 +11,7 @@ using Keyify.Service;
 using Keyify.Service.Interfaces;
 using Keyify.Services.Formatter.Interfaces;
 using Keyify.Services.Formatter.Services;
+using Keyify.Web.Converters;
 using Keyify.Web.Mapping;
 using Keyify.Web.Models.Instruments;
 using Keyify.Web.Models.ViewModels;
@@ -39,6 +40,13 @@ namespace Keyify
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new NoteConverter());
+                    options.JsonSerializerOptions.Converters.Add(new NoteListConverter());
+                });
 
             SetupMapping(services);
             SetupDatabase(services);

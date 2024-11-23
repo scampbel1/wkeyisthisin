@@ -1,8 +1,5 @@
 ﻿@model Keyify.Web.Models.ViewModels.InstrumentViewModel
 
-@{
-    var lockFretboard = !Model.IsSelectionLocked;
-}
 <!-- Don't remove instrument links from here, the selected notes aren't updated on the layout page-->
 <div class="instrumentHyperlinkContainer">
     <div id="copyQuickLinkHeader">
@@ -10,10 +7,10 @@
         <a class="copyToClipboard" onclick="Reset('@Url.Action("UpdateFretboardModel")', null , null , null)">Reset All 🔄</a>
     </div>
     <div id="instrumentHyperlinkHeaderList">
-        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Bass")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Bass</a>
-        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Guitar")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Guitar</a>
-        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Mandolin")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Mandolin</a>
-        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Ukulele")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson)">Ukulele</a>
+        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Bass")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">Bass</a>
+        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Guitar")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">Guitar</a>
+        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Mandolin")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">Mandolin</a>
+        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Ukulele")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">Ukulele</a>
     </div>
 </div>
 <div>
@@ -41,14 +38,14 @@
                     {
                         if (note.InSelectedScale && note.Selected)
                         {
-                            <td class="note selectedNoteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
+                            <td class="note selectedNoteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">
                                 <span class="nonSelectable noteText">@note.Sharp</span> <span class="nonSelectable degreeText">@note.DegreeInScale</span>
                             </td>
                             continue;
                         }
                         else if (note.InSelectedScale && !note.Selected)
                         {
-                            <td class="note noteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
+                            <td class="note noteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">
                                 <span class="nonSelectable noteText">@note.Sharp</span> <span class="nonSelectable degreeText">@note.DegreeInScale</span>
                             </td>
                             continue;
@@ -56,13 +53,13 @@
                     }
                     if (note.Selected)
                     {
-                        <td class="note selectedNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
+                        <td class="note selectedNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">
                             <span class="nonSelectable noteText">@note.Sharp</span>
                         </td>
                         continue;
                     }
 
-                    <td class="note defaultNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson)">
+                    <td class="note defaultNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">
                         <span class="nonSelectable noteText">@note.Sharp</span>
                     </td>
                 }

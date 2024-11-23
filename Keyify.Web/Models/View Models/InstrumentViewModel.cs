@@ -27,6 +27,8 @@ namespace Keyify.Web.Models.ViewModels
 
         public bool IsSelectionLocked { get; set; }
 
+        public string IsSelectionLockedJson => IsSelectionLocked.ToString().ToLower();
+
         public Fretboard Fretboard { get; set; }
 
         public ScaleEntry SelectedScale { get; set; }
@@ -43,7 +45,16 @@ namespace Keyify.Web.Models.ViewModels
 
         public void UpdateAvailableChordDefinitionsHtml(string htmlContent) => AvailableChordDefinitionsTableHtml = htmlContent;
 
-        public string SelectedNotesJson => JsonSerializer.Serialize(SelectedNotes.Select(n => n.Note.ToString()));
+        public string SelectedNotesJson
+        {
+            get
+            {
+                var selectedNoteArray = SelectedNotes
+                    .Select(n => n.Note.ToString());
+
+                return JsonSerializer.Serialize(selectedNoteArray);
+            }
+        }
 
         public string AvailableKeysAndScalesTableHtml { get; private set; }
 
@@ -79,7 +90,7 @@ namespace Keyify.Web.Models.ViewModels
                 var onclick = $"UpdateModel('/{Fretboard.InstrumentType.ToString()}/UpdateFretboardModel', " +
                     $"'{SelectedScale.ScaleLabel}', " +
                     $"null, " +
-                    $"{SelectedNotesJson.Replace("\"", "\'")}, " +
+                    $"{SelectedNotesJson.Replace("\"", "\'")} , " +
                     $"{isFretboardUnlocked})";
 
                 var lockEmojiIcon = IsSelectionLocked ?
