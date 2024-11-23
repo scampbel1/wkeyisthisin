@@ -1,5 +1,4 @@
-﻿//TODO: Should this be async?
-function UpdateModel(url, scale, addNote, selectedNotes, lockScale) {
+﻿async function UpdateModel(url, scale, addNote, selectedNotes, lockScale) {
 
     var dataPost = {
         previouslySelectedNotes: selectedNotes,
@@ -8,51 +7,62 @@ function UpdateModel(url, scale, addNote, selectedNotes, lockScale) {
         lockScale: lockScale
     };
 
-    $.ajax({
-        url: url,
-        async: 'true',
-        type: "POST",
-        data: dataPost,
-        datatype: "json",
-        success: function (data) {
-            $("#Fretboard").html(data);
-        }
-    });
+    try {
+        const response = await $.ajax({
+            url: url,
+            type: "POST",
+            data: dataPost,
+            datatype: "json"
+        });
+
+        $("#Fretboard").html(response);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
-//TODO: Should this be async?
-function Reset(url, scale, addNote, selectedNotes) {
+async function Reset(url, scale, addNote, selectedNotes) {
 
-    var dataPost = { previouslySelectedNotes: selectedNotes, newlySelectedNote: addNote, selectedScale: scale };
+    var dataPost = {
+        previouslySelectedNotes: selectedNotes,
+        newlySelectedNote: addNote,
+        selectedScale: scale
+    };
 
-    $.ajax({
-        url: url,
-        async: 'true',
-        type: "POST",
-        data: dataPost,
-        datatype: "json",
-        success: function (data) {
-            $("#Fretboard").html(data);
-        }
-    });
+    try {
+        const response = await $.ajax({
+            url: url,
+            type: "POST",
+            data: dataPost,
+            datatype: "json"
+        });
+
+        $("#Fretboard").html(response);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
-function ChangeInstrument(url, scale, selectedNotes) {
+async function ChangeInstrument(url, scale, selectedNotes) {
 
-    var dataPost = { previouslySelectedNotes: selectedNotes, selectedScale: scale };
+    var dataPost = {
+        previouslySelectedNotes: selectedNotes,
+        selectedScale: scale
+    };
 
-    $.ajax({
-        url: url,
-        async: 'true',
-        type: "POST",
-        data: dataPost,
-        datatype: "json",
-        success: function (data) {
-            $("#Fretboard").html(data);
-        }
-    });
+    try {
+        const response = await $.ajax({
+            url: url,
+            type: "POST",
+            data: dataPost,
+            datatype: "json"
+        });
+
+        $("#Fretboard").html(response);
+    } catch (error) {
+        console.error(error);
+    }
 }
-
 
 async function copyContent(quickLinkCode) {
     try {
@@ -64,20 +74,4 @@ async function copyContent(quickLinkCode) {
     } catch (err) {
         console.error('Failed to copy Quick Link: ', err);
     }
-}
-
-function ToggleLockSelection(url, scale, selectedNotes, lockSelection) {
-
-    var dataPost = { selectedNotes: selectedNotes, selectedScale: scale, lockSelection: lockSelection };
-
-    $.ajax({
-        url: url,
-        async: 'true',
-        type: "POST",
-        data: dataPost,
-        datatype: "json",
-        success: function (data) {
-            $("#Fretboard").html(data);
-        }
-    });
 }

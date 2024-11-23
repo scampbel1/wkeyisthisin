@@ -4,6 +4,7 @@ using Keyify.Web.Models.QuickLink;
 using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -101,7 +102,9 @@ namespace Keyify.Controllers.Instrument
             }
 
             // TODO: Set this on startup
-            Model.PopularityIconLegend = SetLegend();
+            Model.ScalePopularityIconLegend = SetScaleResultLegend();
+
+            Model.ChordPopularityIconLegend = SetChordResultLegend();
 
             async Task SetChordDefinitions(Note[] selectedNotes)
             {
@@ -119,7 +122,26 @@ namespace Keyify.Controllers.Instrument
             }
         }
 
-        private string SetLegend()
+        private string SetChordResultLegend()
+        {
+            if (!Model.ChordDefinitions.Any())
+            {
+                return string.Empty;
+            }
+
+            var sb = new StringBuilder();
+
+            foreach (var popularity in new int[] { 1, 2, 3, 4 })
+            {
+                var (label, icon) = _chordDefinitionsGroupingHtmlService.GetChordPopularityIcon(popularity);
+
+                sb.Append($"{icon}{label} ");
+            }
+
+            return sb.ToString().TrimEnd();
+        }
+
+        private string SetScaleResultLegend()
         {
             if (!Model.AvailableScaleGroups.Any())
             {

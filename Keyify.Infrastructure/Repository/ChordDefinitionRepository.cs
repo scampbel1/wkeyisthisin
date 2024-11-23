@@ -27,7 +27,7 @@ namespace Keyify.Infrastructure.Repository
 
                 await sqlConnection.OpenAsync();
 
-                var query = "SELECT [Id], [Name], [Intervals] FROM [Core].[ChordDefinition] WHERE [Deleted] = 0";
+                var query = "SELECT [Id], [Name], [Intervals], [Popularity] FROM [Core].[ChordDefinition] WHERE [Deleted] = 0";
                 var result = await sqlConnection.ExecuteReaderAsync(query);
 
                 while (result.Read())
@@ -36,7 +36,8 @@ namespace Keyify.Infrastructure.Repository
                     {
                         Id = result.GetInt32(0),
                         Name = result.GetString(1),
-                        Intervals = await _serializationFormatter.ConvertToIntervalArray((byte[])result[2])
+                        Intervals = await _serializationFormatter.ConvertToIntervalArray((byte[])result[2]),
+                        Popularity = result.GetInt32(3),
                     });
                 }
 

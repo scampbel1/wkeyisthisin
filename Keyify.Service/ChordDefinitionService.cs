@@ -12,7 +12,9 @@ namespace Keyify.Service
         private readonly IChordDefinitionCache _chordDefinitionCache;
         private readonly IChordDefinitionRepository _chordDefinitionRepository;
 
-        public ChordDefinitionService(IChordDefinitionCache chordDefinitionCache, IChordDefinitionRepository chordDefinitionRepository)
+        public ChordDefinitionService(
+            IChordDefinitionCache chordDefinitionCache,
+            IChordDefinitionRepository chordDefinitionRepository)
         {
             _chordDefinitionCache = chordDefinitionCache;
             _chordDefinitionRepository = chordDefinitionRepository;
@@ -60,8 +62,6 @@ namespace Keyify.Service
         {
             //Dictionary<string, Interval[]>
 
-            var chordDefinitionDictionary = new Dictionary<string, Interval[]>();
-
             var chordDefinitionEntities = await _chordDefinitionRepository.GetAllChordDefinitions();
 
             //TODO: Install automapper and fluent validation for null references
@@ -69,13 +69,7 @@ namespace Keyify.Service
 
             //TODO: Add logging
 
-            foreach (var chordDefinition in chordDefinitionEntities)
-            {
-                //TODO: Remove ! postfix once validation is in place
-                chordDefinitionDictionary.Add(chordDefinition.Name!, chordDefinition.Intervals!);
-            }
-
-            await _chordDefinitionCache.Initialise(chordDefinitionDictionary);
+            await _chordDefinitionCache.Initialise(chordDefinitionEntities);
         }
 
         public async Task<Tuple<bool, string>> InsertChordDefinition(ChordDefinitionInsertRequest request)

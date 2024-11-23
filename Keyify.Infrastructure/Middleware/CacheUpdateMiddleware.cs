@@ -1,6 +1,5 @@
 ﻿using Keyify.Infrastructure.Caches.Interfaces;
 using Keyify.Infrastructure.Repository.Interfaces;
-using Keyify.MusicTheory.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
@@ -55,11 +54,7 @@ namespace Keyify.Infrastructure.Middleware
 
                 var chordDefinitions = await _chordDefinitionRepository.GetAllChordDefinitions();
 
-                var chordDefinitionDictionary = chordDefinitions
-                    .Select(c => new KeyValuePair<string, Interval[]>(c.Name ?? string.Empty, c.Intervals ?? Enumerable.Empty<Interval>().ToArray()))
-                    .ToDictionary();
-
-                await _chordDefinitionCache.Initialise(chordDefinitionDictionary);
+                await _chordDefinitionCache.Initialise(chordDefinitions);
             }
         }
     }

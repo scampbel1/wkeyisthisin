@@ -1,6 +1,7 @@
 ﻿using Keyify.Infrastructure.Caches.Interfaces;
 using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
+using Keyify.Web.Infrastructure.Models.ChordDefinition;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -18,13 +19,13 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
             throw new System.NotImplementedException();
         }
 
-        public async Task Initialise(Dictionary<string, Interval[]> chordDefinitions)
+        public async Task Initialise(List<ChordDefinitionEntity> chordDefinitions)
         {
             var generatedChordDefinitions = new List<ChordDefinition>();
 
             foreach (var chordDefinition in chordDefinitions)
             {
-                await GenerateChordTemplatesByChordType(chordDefinition.Key, chordDefinition.Value, generatedChordDefinitions);
+                await GenerateChordTemplatesByChordType(chordDefinition.Name, chordDefinition.Intervals, generatedChordDefinitions);
             }
 
             ChordDefinitions = generatedChordDefinitions;

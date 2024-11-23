@@ -75,7 +75,12 @@
     <div style="display: flex; justify-content: space-between;">
         <div>
             <h6>
-                @Model.AvailableKeysAndScalesLabel
+                @{
+                    if (!Model.IsSelectionLocked)
+                    {
+                        @Model.AvailableKeysAndScalesLabel
+                    }
+                }
             </h6>
         </div>
         <div>
@@ -85,7 +90,16 @@
         </div>
         <div>
             <h6>
-                @Model.PopularityIconLegend
+                @{
+                    if (Model.IsSelectionLocked)
+                    {
+                        @Model.ChordPopularityIconLegend
+                    }
+                    else
+                    {
+                        @Model.ScalePopularityIconLegend
+                    }
+                }
             </h6>
         </div>
     </div>

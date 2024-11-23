@@ -2,6 +2,7 @@
 using Keyify.MusicTheory.Enums;
 using Keyify.Services.Formatter.Interfaces;
 using Keyify.Services.Models;
+using Keyify.Web.Infrastructure.Models.ChordDefinition;
 
 namespace Keyify.Infrastructure.Caches
 {
@@ -16,9 +17,9 @@ namespace Keyify.Infrastructure.Caches
             _noteFormatService = noteFormatService;
         }
 
-        public async Task Initialise(Dictionary<string, Interval[]> chordDefinitions)
+        public async Task Initialise(List<ChordDefinitionEntity> chordDefinitionEntities)
         {
-            ChordDefinitions = await GenerateChordDefintions(chordDefinitions);
+            ChordDefinitions = await GenerateChordDefintions(chordDefinitionEntities);
         }
 
         public Task Sync(List<ChordDefinition> chordDefinitions)
@@ -27,29 +28,39 @@ namespace Keyify.Infrastructure.Caches
         }
 
         //TODO: Move to some sort of generator tool
-        private async Task<List<ChordDefinition>> GenerateChordDefintions(Dictionary<string, Interval[]> chordDefinitions)
+        private async Task<List<ChordDefinition>> GenerateChordDefintions(List<ChordDefinitionEntity> chordDefinitionEntities)
         {
             var result = new List<ChordDefinition>();
 
-            foreach (var chordDefinition in chordDefinitions)
+            foreach (var chordDefinitionEntity in chordDefinitionEntities)
             {
-                await GenerateChordDefinitionByChordType(chordDefinition.Key, chordDefinition.Value, result);
+                await GenerateChordDefinitionByChordType(chordDefinitionEntity, result);
             }
 
             return result;
         }
 
         //TODO: Move to some sort of generator tool
-        private async Task GenerateChordDefinitionByChordType(string chordType, Interval[] intervals, List<ChordDefinition> chordDefinitions)
+        private async Task GenerateChordDefinitionByChordType(ChordDefinitionEntity chordDefinitionEntity, List<ChordDefinition> chordDefinitions)
         {
+            if (chordDefinitionEntity is null || chordDefinitionEntity.Intervals is null)
+            {
+                return;
+            }
+
             var currentNote = Note.A;
 
             while (currentNote <= Note.Ab)
             {
-                var notes = await GenerateChordDefinitionNotes(currentNote, intervals);
+                var notes = await GenerateChordDefinitionNotes(currentNote, chordDefinitionEntity.Intervals);
                 var sharpNote = _noteFormatService.SharpNoteDictionary[notes[0]];
 
-                chordDefinitions.Add(new ChordDefinition(chordType, notes, sharpNote));
+                chordDefinitions.Add(new ChordDefinition(
+                    chordType: chordDefinitionEntity.Name ?? "Name not found!",
+                    notes,
+                    rootNote: sharpNote,
+                    chordDefinitionEntity.Popularity));
+
                 currentNote++;
             }
         }

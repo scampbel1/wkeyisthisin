@@ -57,7 +57,9 @@ namespace Keyify.Web.Models.ViewModels
             $"Select 3 or More Notes ({3 - SelectedNotes.Count} more to go!)" :
              "No Scales Found";
 
-        public string PopularityIconLegend { get; set; }
+        public string ScalePopularityIconLegend { get; set; }
+
+        public string ChordPopularityIconLegend { get; set; }
 
         public string LockChordHtml
         {
@@ -81,15 +83,15 @@ namespace Keyify.Web.Models.ViewModels
                     $"{isFretboardUnlocked})";
 
                 var lockEmojiIcon = IsSelectionLocked ?
-                    "&#128274; " :
-                    "&#128275; ";
+                    "&#128274;" :
+                    "&#128275;";
 
                 var chordsFoundMessage = IsSelectionLocked ?
                     string.Empty :
                     $"{ChordDefinitions?.Count ?? 0} Chords found!";
 
                 return $"<span>{lockText} <a onclick=\"{onclick}\"><u>{SelectedScale?.FullName_Sharp}</u></a> " +
-                    $"{lockEmojiIcon}" +
+                    $"{lockEmojiIcon} " +
                     $"{chordsFoundMessage}</span>";
             }
         }

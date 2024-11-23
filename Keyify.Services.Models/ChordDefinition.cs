@@ -10,17 +10,26 @@ namespace Keyify.Services.Models
         public readonly string Type;
         public readonly Note[] Notes;
         public readonly string Name = string.Empty;
+        public readonly int Popularity = 3;
 
         public string Label => GenerateLabel(Name);
 
-        public ChordDefinition(string chordType, Note[] notes)
+        public ChordDefinition(
+            string chordType,
+            Note[] notes,
+            int popularity = 3)
         {
             Type = chordType;
             Notes = notes;
             Name = $"{notes[0]} {chordType}";
+            Popularity = popularity;
         }
 
-        public ChordDefinition(string chordType, Note[] notes, string rootNote) : this(chordType, notes)
+        public ChordDefinition(
+            string chordType,
+            Note[] notes,
+            string rootNote,
+            int popularity = 3) : this(chordType, notes, popularity)
         {
             Name = $"{rootNote} {chordType}";
         }
