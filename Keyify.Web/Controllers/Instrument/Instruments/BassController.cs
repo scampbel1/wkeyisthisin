@@ -1,11 +1,13 @@
 ﻿using Keyify.Domain.Tunings.Bass;
 using Keyify.MusicTheory.Enums;
 using Keyify.Service.Interfaces;
+using Keyify.Web.Controllers.Instrument;
 using Keyify.Web.Models.Tunings;
 using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Services.Interfaces;
+using Microsoft.Extensions.Configuration;
 
-namespace Keyify.Controllers.Instrument.Instruments
+namespace Keyify.Web.Controllers.Instrument.Instruments
 {
     public class BassController : InstrumentController
     {
@@ -13,7 +15,22 @@ namespace Keyify.Controllers.Instrument.Instruments
         private const int _fretCount = 21;
         private readonly InstrumentType _instrumentType = InstrumentType.Bass;
 
-        public BassController(InstrumentViewModel instrumentViewModel, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService, IQuickLinkService quickLinkService, IChordDefinitionGroupingHtmlService chordDefintionsGroupingHtmlService) : base(instrumentViewModel, musicTheoryService, fretboardService, scaleGroupingHtmlService, quickLinkService, chordDefintionsGroupingHtmlService)
+        public BassController(
+            InstrumentViewModel instrumentViewModel,
+            IConfiguration configuration,
+            IMusicTheoryService musicTheoryService,
+            IFretboardService fretboardService,
+            IScaleGroupingHtmlService scaleGroupingHtmlService,
+            IQuickLinkService quickLinkService,
+            IChordDefinitionGroupingHtmlService chordDefintionsGroupingHtmlService)
+            : base(
+                instrumentViewModel,
+                configuration,
+                musicTheoryService,
+                fretboardService,
+                scaleGroupingHtmlService,
+                quickLinkService,
+                chordDefintionsGroupingHtmlService)
         {
             _tuning = new StandardBassTuning();
 

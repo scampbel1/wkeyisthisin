@@ -1,8 +1,8 @@
-using Keyify.Controllers.Instrument;
 using Keyify.MusicTheory.Enums;
 using Keyify.Service.Interfaces;
 using Keyify.Services.Formatter.Services;
 using Keyify.Services.Models;
+using Keyify.Web.Controllers.Instrument;
 using Keyify.Web.Models.Instruments;
 using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Service.Interfaces;
@@ -10,6 +10,7 @@ using Keyify.Web.Services;
 using Keyify.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Extensions.Configuration;
 
 namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 {
@@ -20,6 +21,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
         protected readonly IFretboardService FretboardService;
 
+        protected readonly Mock<IConfiguration> m_MockConfiguration;
         protected readonly Mock<IMusicTheoryService> m_MockMusicTheoryService;
         protected readonly Mock<IGroupedScalesService> m_MockGroupedScalesService;
         protected readonly Mock<IScaleGroupingHtmlService> m_MockScaleGroupingHtmlService;
@@ -34,10 +36,12 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
         {
             _sharpNotesDictionary = new NoteFormatService().SharpNoteDictionary;
 
-            InstrumentViewModel = new InstrumentViewModel(new Fretboard(_sharpNotesDictionary));
+            InstrumentViewModel = new InstrumentViewModel(new Fretboard(_sharpNotesDictionary))
+            {
+                AvailableScaleGroups = []
+            };
 
-            InstrumentViewModel.AvailableScaleGroups = new List<ScaleGroupingEntry>();
-
+            m_MockConfiguration = new Mock<IConfiguration>();
             m_MockMusicTheoryService = new Mock<IMusicTheoryService>();
             m_MockGroupedScalesService = new Mock<IGroupedScalesService>();
             m_MockScaleGroupingHtmlService = new Mock<IScaleGroupingHtmlService>();
@@ -46,12 +50,19 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 
             FretboardService = new FretboardService(m_MockMusicTheoryService.Object, m_MockGroupedScalesService.Object);
 
-            m_MockGroupedScalesService.Setup(m => m.GroupedScales).Returns(new List<ScaleGroupingEntry>());
+            m_MockGroupedScalesService.Setup(m => m.GroupedScales).Returns([]);
         }
 
         protected InstrumentController CreateNewInstrumentController(InstrumentViewModel instrumentViewModel)
         {
-            return new InstrumentController(instrumentViewModel, m_MockMusicTheoryService.Object, FretboardService, m_MockScaleGroupingHtmlService.Object, m_MockQuickLinkService.Object, m_MockChordDefinitionsGroupingHtmlService.Object)
+            return new InstrumentController(
+                instrumentViewModel,
+                m_MockConfiguration.Object,
+                m_MockMusicTheoryService.Object,
+                FretboardService,
+                m_MockScaleGroupingHtmlService.Object,
+                m_MockQuickLinkService.Object,
+                m_MockChordDefinitionsGroupingHtmlService.Object)
             {
                 TempData = new TempDataDictionary(
                     Mock.Of<HttpContext>(),

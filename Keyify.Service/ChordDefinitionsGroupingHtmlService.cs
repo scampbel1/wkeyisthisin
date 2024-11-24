@@ -2,7 +2,7 @@
 using Keyify.Services.Models;
 using System.Text;
 
-namespace Keyify.Web.Service
+namespace Keyify.Service
 {
     public class ChordDefinitionsGroupingHtmlService : IChordDefinitionGroupingHtmlService
     {

@@ -6,16 +6,11 @@ using Keyify.Web.Infrastructure.Models.ChordDefinition;
 
 namespace Keyify.Infrastructure.Caches
 {
-    public class ChordDefinitionCache : IChordDefinitionCache
+    public class ChordDefinitionCache(INoteFormatService noteFormatService) : IChordDefinitionCache
     {
-        private readonly INoteFormatService _noteFormatService;
+        private readonly INoteFormatService _noteFormatService = noteFormatService;
 
-        public List<ChordDefinition> ChordDefinitions { get; set; } = new List<ChordDefinition>();
-
-        public ChordDefinitionCache(INoteFormatService noteFormatService)
-        {
-            _noteFormatService = noteFormatService;
-        }
+        public List<ChordDefinition> ChordDefinitions { get; set; } = [];
 
         public async Task Initialise(List<ChordDefinitionEntity> chordDefinitionEntities)
         {
@@ -66,7 +61,7 @@ namespace Keyify.Infrastructure.Caches
         }
 
         //TODO: Move to some sort of generator tool
-        private async Task<Note[]> GenerateChordDefinitionNotes(Note rootNote, Interval[] intervals)
+        private static async Task<Note[]> GenerateChordDefinitionNotes(Note rootNote, Interval[] intervals)
         {
             var count = 0;
             var currentNote = rootNote;
@@ -83,7 +78,7 @@ namespace Keyify.Infrastructure.Caches
         }
 
         //TODO: Move to some sort of generator tool
-        private async Task<Note> FindNextNote(Note currentNote, Interval interval)
+        private static async Task<Note> FindNextNote(Note currentNote, Interval interval)
         {
             var nextStepIndex = (int)currentNote + (int)interval;
 

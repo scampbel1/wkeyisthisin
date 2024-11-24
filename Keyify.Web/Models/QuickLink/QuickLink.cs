@@ -19,6 +19,8 @@ namespace Keyify.Web.Models.QuickLink
 
         public string InstrumentName => InstrumentType.ToString();
 
+        public bool IsLocked { get; set; }
+
         public QuickLink()
         {
 
@@ -30,6 +32,7 @@ namespace Keyify.Web.Models.QuickLink
             InstrumentType = instrumentViewModel.Fretboard.InstrumentType;
             SelectedScale = instrumentViewModel.SelectedScale?.ScaleLabel;
             SelectedNotes = instrumentViewModel.SelectedNotes.Select(n => n.Note).ToArray();
+            IsLocked = instrumentViewModel.IsSelectionLocked;
         }
 
         public bool Equals(QuickLink other)

@@ -1,21 +1,17 @@
 ﻿using Keyify.MusicTheory.Enums;
 using Keyify.Web.Models.QuickLink;
 using Keyify.Web.Services;
-using Keyify.Web.Services.Interfaces;
 using System.Collections.Generic;
 
-namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
+namespace Keyify.Web.Unit.Test.QuickLinkUnitTests
 {
     public class QuicklinkServiceUnitTest
     {
         public static IEnumerable<object[]> QuickLinkParameters => GenerateQuickLinkTestArguments();
 
-        private IQuickLinkService _quickLinkService;
+        private readonly QuickLinkService _quickLinkService;
 
-        public QuicklinkServiceUnitTest()
-        {
-            _quickLinkService = new QuickLinkService();
-        }
+        public QuicklinkServiceUnitTest() => _quickLinkService = new QuickLinkService();
 
         [Fact]
         public void QuickLink_NotesDifferentOrder_ObjectsAreEqual()
@@ -24,17 +20,18 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
             var quickLink1 = new QuickLink()
             {
                 InstrumentType = InstrumentType.Guitar,
-                Tuning = new Note[6] { Note.E, Note.A, Note.D, Note.G, Note.B, Note.E },
-                SelectedNotes = new Note[] { Note.A, Note.E, Note.Gb },
-                SelectedScale = "GbAeolian"
+                Tuning = [Note.E, Note.A, Note.D, Note.G, Note.B, Note.E],
+                SelectedNotes = [Note.A, Note.E, Note.Gb],
+                SelectedScale = "GbAeolian",
+                IsLocked = false,
             };
 
             //Act - When
             var quickLink2 = new QuickLink()
             {
                 InstrumentType = InstrumentType.Guitar,
-                Tuning = new Note[6] { Note.E, Note.A, Note.D, Note.G, Note.B, Note.E },
-                SelectedNotes = new Note[] { Note.E, Note.A, Note.Gb },
+                Tuning = [Note.E, Note.A, Note.D, Note.G, Note.B, Note.E],
+                SelectedNotes = [Note.E, Note.A, Note.Gb],
                 SelectedScale = "GbAeolian"
             };
 
@@ -49,8 +46,8 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
             var quickLink1 = new QuickLink()
             {
                 InstrumentType = InstrumentType.Bass,
-                Tuning = new Note[6] { Note.E, Note.A, Note.D, Note.G, Note.B, Note.E },
-                SelectedNotes = new Note[] { Note.A, Note.E, Note.Gb },
+                Tuning = [Note.E, Note.A, Note.D, Note.G, Note.B, Note.E],
+                SelectedNotes = [Note.A, Note.E, Note.Gb],
                 SelectedScale = "GbAeolian"
             };
 
@@ -61,6 +58,30 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
 
             //Assert - Then
             Assert.Equal(quickLink1, quickLink2);
+        }
+
+        [Fact]
+        public void IsLocked_IsSet()
+        {
+            //Arrange
+            var isLocked = true;
+
+            var quickLink = new QuickLink()
+            {
+                InstrumentType = InstrumentType.Guitar,
+                Tuning = [Note.E, Note.A, Note.D, Note.G, Note.B, Note.E],
+                SelectedNotes = [Note.A, Note.E, Note.Gb],
+                SelectedScale = "GbAeolian",
+                IsLocked = isLocked,
+            };
+
+            //Act
+            var quickLinkBase64String = _quickLinkService.ConvertQuickLinkToBase64(quickLink);
+
+            var quickLink2 = _quickLinkService.DeserializeQuickLink(quickLinkBase64String);
+            //Assert
+
+            Assert.Equal(isLocked, quickLink2.IsLocked);
         }
 
         [Theory, MemberData(nameof(QuickLinkParameters))]

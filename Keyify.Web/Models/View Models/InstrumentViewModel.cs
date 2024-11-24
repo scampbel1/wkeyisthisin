@@ -19,7 +19,7 @@ namespace Keyify.Web.Models.ViewModels
             NotesMatrix = InitialiseNotesMatrix();
         }
 
-        private List<FretboardNote> NotesMatrix { get; } = new List<FretboardNote>();
+        private List<FretboardNote> NotesMatrix { get; } = [];
 
         public string ViewTitle { get; } = "Notes to Key";
 
@@ -33,9 +33,9 @@ namespace Keyify.Web.Models.ViewModels
 
         public ScaleEntry SelectedScale { get; set; }
 
-        public List<ScaleEntry> Scales { get; set; } = new List<ScaleEntry>();
+        public List<ScaleEntry> Scales { get; set; } = [];
 
-        public List<ChordDefinition> ChordDefinitions { get; set; } = new List<ChordDefinition>();
+        public List<ChordDefinition> ChordDefinitions { get; set; } = [];
 
         public void UpdateViewModel(Fretboard fretboard) => Fretboard = fretboard;
 
@@ -60,7 +60,7 @@ namespace Keyify.Web.Models.ViewModels
 
         public string AvailableChordDefinitionsTableHtml { get; private set; }
 
-        public string LockedScale => $"Fretboard is locked to: {SelectedScale.FullName_Sharp}";
+        public string LockedScale => $"Fretboard is locked to: {SelectedScale?.FullName_Sharp ?? string.Empty}";
 
         public string AvailableKeysAndScalesLabel => AvailableScaleGroups.Any() ?
             $"{ScalesFoundText} {GetAvailableKeysLabel()}" :
@@ -89,7 +89,7 @@ namespace Keyify.Web.Models.ViewModels
 
                 var isFretboardUnlocked = $"{!IsSelectionLocked}".ToLower();
 
-                var onclick = $"UpdateModel('/{Fretboard.InstrumentType.ToString()}/UpdateFretboardModel', " +
+                var onclick = $"UpdateModel('/{Fretboard.InstrumentType}/UpdateFretboardModel', " +
                     $"'{SelectedScale.ScaleLabel}', " +
                     $"null, " +
                     $"{SelectedNotesJson.Replace("\"", "\'")} , " +
@@ -146,7 +146,7 @@ namespace Keyify.Web.Models.ViewModels
 
         public List<ScaleGroupingEntry> LimitedScaleGroup => AvailableScaleGroups.Take(18).ToList();
 
-        public List<ScaleGroupingEntry> AvailableScaleGroups { get; set; } = new List<ScaleGroupingEntry>();
+        public List<ScaleGroupingEntry> AvailableScaleGroups { get; set; } = [];
 
         private List<FretboardNote> InitialiseNotesMatrix()
         {

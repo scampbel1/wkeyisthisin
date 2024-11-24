@@ -6,16 +6,10 @@ using System.Diagnostics;
 
 namespace Keyify.Web.Controllers.Quicklink
 {
-    public class QuickLinkController : Controller
+    public class QuickLinkController(IConfiguration configuration, IQuickLinkService quickLinkService) : Controller
     {
-        private IConfiguration _configuration;
-        private IQuickLinkService _quickLinkService;
-
-        public QuickLinkController(IConfiguration configuration, IQuickLinkService quickLinkService)
-        {
-            _configuration = configuration;
-            _quickLinkService = quickLinkService;
-        }
+        private readonly IConfiguration _configuration = configuration;
+        private readonly IQuickLinkService _quickLinkService = quickLinkService;
 
         [HttpGet("/ql/v1/{code}")]
         public IActionResult Index(string code)
@@ -34,6 +28,7 @@ namespace Keyify.Web.Controllers.Quicklink
                 TempData[_configuration["QuickLinkTempDataKey:SelectedNotes"]] = quickLink.SelectedNotes;
                 TempData[_configuration["QuickLinkTempDataKey:InstrumentType"]] = quickLink.InstrumentType;
                 TempData[_configuration["QuickLinkTempDataKey:InstrumentName"]] = quickLink.InstrumentName;
+                TempData[_configuration["QuickLinkTempDataKey:IsLocked"]] = quickLink.IsLocked;
 
                 var redirectUrl = $"/{quickLink.InstrumentName}/";
 

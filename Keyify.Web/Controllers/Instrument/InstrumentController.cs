@@ -5,17 +5,17 @@ using Keyify.Web.Models.QuickLink;
 using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
-using System;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Keyify.Controllers.Instrument
+namespace Keyify.Web.Controllers.Instrument
 {
     public class InstrumentController : Controller
     {
+        private readonly IConfiguration _configuration;
         private readonly IMusicTheoryService _musicTheoryService;
         private readonly IFretboardService _fretboardService;
         private readonly IScaleGroupingHtmlService _scaleGroupingHtmlService;
@@ -24,9 +24,17 @@ namespace Keyify.Controllers.Instrument
 
         protected InstrumentViewModel Model;
 
-        public InstrumentController(InstrumentViewModel model, IMusicTheoryService musicTheoryService, IFretboardService fretboardService, IScaleGroupingHtmlService scaleGroupingHtmlService, IQuickLinkService quickLinkService, IChordDefinitionGroupingHtmlService chordDefinitionsGroupingHtmlService)
+        public InstrumentController(
+            InstrumentViewModel model,
+            IConfiguration configuration,
+            IMusicTheoryService musicTheoryService,
+            IFretboardService fretboardService,
+            IScaleGroupingHtmlService scaleGroupingHtmlService,
+            IQuickLinkService quickLinkService,
+            IChordDefinitionGroupingHtmlService chordDefinitionsGroupingHtmlService)
         {
             Model = model;
+            _configuration = configuration;
             _musicTheoryService = musicTheoryService;
             _fretboardService = fretboardService;
             _scaleGroupingHtmlService = scaleGroupingHtmlService;
@@ -39,6 +47,8 @@ namespace Keyify.Controllers.Instrument
         {
             var selectedScale = (string)TempData["QLscale"];
             var selectedNotes = (IEnumerable<Note>)TempData["QLnotes"];
+
+            ClearQuicklinkTempData();
 
             await UpdateFretboard(selectedNotes?.ToArray(), selectedScale, false);
 
@@ -71,7 +81,18 @@ namespace Keyify.Controllers.Instrument
             return PartialView("Fretboard", Model);
         }
 
-        //TODO: Move all of this out of the controller
+
+        private void ClearQuicklinkTempData()
+        {
+            if (TempData.Any())
+            {
+                foreach (var tempData in TempData.Where(d => d.Key.StartsWith("QL")).ToList())
+                {
+                    TempData.Remove(tempData.Key);
+                }
+            }
+        }
+
         private async Task UpdateFretboard(Note[] selectedNotes, string selectedScale, bool lockFretboard)
         {
             if (selectedNotes != null)

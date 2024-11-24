@@ -45,7 +45,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             {
                 LockScale = false,
                 NewlySelectedNote = Note.G,
-                PreviouslySelectedNotes = new List<Note> { Note.A, Note.C },
+                PreviouslySelectedNotes = [Note.A, Note.C],
                 SelectedScale = selectedScale,
             };
 

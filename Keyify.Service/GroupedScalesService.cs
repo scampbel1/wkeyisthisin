@@ -18,8 +18,6 @@ namespace Keyify.Web.Service
 
         public List<ScaleGroupingEntry> GroupedScales => ScaleGroupingEntries;
 
-        public int TotalScaleCount => ScaleGroupingEntries.Sum(s => s.Count);
-
         public void UpdateScaleGroupingModel(IEnumerable<ScaleEntry> scales, IEnumerable<Note> selectedNotes)
         {
             ScaleGroupingEntries.Clear();

@@ -15,8 +15,8 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
             var quickLink1 = new QuickLink()
             {
                 InstrumentType = InstrumentType.Guitar,
-                Tuning = new Note[6] { Note.E, Note.A, Note.D, Note.G, Note.B, Note.E },
-                SelectedNotes = new Note[] { Note.A, Note.E, Note.Gb },
+                Tuning = [Note.E, Note.A, Note.D, Note.G, Note.B, Note.E],
+                SelectedNotes = [Note.A, Note.E, Note.Gb],
                 SelectedScale = "GbAeolian"
             };
 
