@@ -169,7 +169,7 @@ namespace Keyify.Web.Service
 
             foreach (var availableScale in scaleEntries.GroupBy(s => s.Popularity))
             {
-                sb.Append($"<span style=\"font-size:xx-small;\">{GetScalePopularityIcon(availableScale.First().Popularity).Item2}</span>");
+                sb.Append($"<span style=\"font-size:7px;\">{GetScalePopularityIcon(availableScale.First().Popularity).Item2}</span>");
 
                 foreach (var scale in availableScale)
                 {

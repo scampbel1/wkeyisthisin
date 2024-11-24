@@ -102,11 +102,11 @@
                 @{
                     if (Model.IsSelectionLocked)
                     {
-                        @Html.Raw(Model.LockedScale)
+                        @Model.ChordPopularityIconLegend
                     }
                     else
                     {
-                        @Model.AvailableKeysAndScalesLabel
+                        @Model.ScalePopularityIconLegend
                     }
                 }
             </h6>
@@ -121,11 +121,11 @@
                 @{
                     if (Model.IsSelectionLocked)
                     {
-                        @Model.ChordPopularityIconLegend
+                        @Html.Raw(Model.LockedScale)
                     }
                     else
                     {
-                        @Model.ScalePopularityIconLegend
+                        @Model.AvailableKeysAndScalesLabel
                     }
                 }
             </h6>

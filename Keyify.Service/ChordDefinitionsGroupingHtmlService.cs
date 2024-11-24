@@ -25,7 +25,7 @@ namespace Keyify.Service
 
                 foreach (var chordDefinitionType in chordDefinitionTypeGrouping)
                 {
-                    sb.Append($"<span style=\"font-size:xx-small;\">{popularityIcon} </span>");
+                    sb.Append($"<span style=\"font-size:7px;\">{popularityIcon} </span>");
 
                     foreach (var chord in chordDefinitionType)
                     {

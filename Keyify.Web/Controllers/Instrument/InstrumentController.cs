@@ -132,9 +132,8 @@ namespace Keyify.Web.Controllers.Instrument
                 await SetChordDefinitions(selectedNotes);
             }
 
-            // TODO: Set this on startup
+            // TODO: Set these on startup
             Model.ScalePopularityIconLegend = SetScaleResultLegend();
-
             Model.ChordPopularityIconLegend = SetChordResultLegend();
 
             async Task SetChordDefinitions(Note[] selectedNotes)
