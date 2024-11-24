@@ -1,69 +1,35 @@
-﻿// This worked last time...
-//var dataPost = new FormData();
-//dataPost.append('previouslySelectedNotes', JSON.stringify(selectedNotes));
-//dataPost.append('newlySelectedNote', addNote);
-//dataPost.append('selectedScale', scale);
-//dataPost.append('lockScale', lockScale);
-
-//var headers = {
-//    "Content-Type": "application/json",
-//    "Access-Control-Origin": "*"
-//}
-//headers: headers,
-
-function UpdateModel(url, scale, addNote, selectedNotes, lockScale) {
-    var dataPost = {
-        PreviouslySelectedNotes: selectedNotes,
-        NewlySelectedNote: addNote,
-        SelectedScale: scale,
-        LockScale: lockScale
-    };
-
+﻿function UpdateModel(url, scale, addNote, selectedNotes, lockScale) {
     fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             "Access-Control-Origin": "*"
         },
-        body: JSON.stringify(dataPost),
+        body: JSON.stringify({
+            PreviouslySelectedNotes: selectedNotes,
+            NewlySelectedNote: addNote,
+            SelectedScale: scale,
+            LockScale: lockScale
+        }),
     })
-        .then(response => {
-            if (response.ok) {
-                return response.text();
-            } else {
-                throw new Error('Error:', response.status);
-            }
-        })
-        .then(data => {
-            console.log('Received HTML!');
-            const fretboardElement = document.getElementById("Fretboard");
-            if (fretboardElement) {
-                fretboardElement.innerHTML = data;
-            } else {
-                console.error("Could not find #Fretboard element");
-            }
-        })
-        .catch(error => {
-            console.error(error);
-        });
+        .then(response => response.ok ? response.text() : Promise.reject(response.status))
+        .then(data => document.getElementById("Fretboard").innerHTML = data)
+        .catch(error => console.error(error));
 }
 
 async function Reset(url, scale, addNote, selectedNotes) {
-
-    var dataPost = {
-        PreviouslySelectedNotes: selectedNotes,
-        NewlySelectedNote: addNote,
-        SelectedScale: scale,
-        LockScale: false
-    };
-
     try {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(dataPost)
+            body: JSON.stringify({
+                PreviouslySelectedNotes: selectedNotes,
+                NewlySelectedNote: addNote,
+                SelectedScale: scale,
+                LockScale: false
+            })
         });
 
         if (response.ok) {
@@ -78,20 +44,17 @@ async function Reset(url, scale, addNote, selectedNotes) {
 }
 
 async function ChangeInstrument(url, scale, selectedNotes, lockScale) {
-
-    var dataPost = {
-        PreviouslySelectedNotes: selectedNotes,
-        SelectedScale: scale,
-        LockScale: lockScale
-    };
-
     try {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(dataPost)
+            body: JSON.stringify({
+                PreviouslySelectedNotes: selectedNotes,
+                SelectedScale: scale,
+                LockScale: lockScale
+            })
         });
 
         if (response.ok) {

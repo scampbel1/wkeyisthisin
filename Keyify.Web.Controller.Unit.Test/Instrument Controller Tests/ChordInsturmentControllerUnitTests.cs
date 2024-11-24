@@ -1,6 +1,7 @@
 ﻿using EnumsNET;
 using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
+using Keyify.Web.Data_Contracts;
 
 namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 {
@@ -18,15 +19,19 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             var previouslySeletedNotes = new List<Note> { Note.A, Note.C };
             var expectedSelectedNotes = new List<Note>(previouslySeletedNotes) { newNote };
 
+            var fretboardRequest = new UpdateFretboardRequest()
+            {
+                LockScale = true,
+                NewlySelectedNote = Note.G,
+                PreviouslySelectedNotes = new List<Note> { Note.A, Note.C },
+                SelectedScale = selectedScale,
+            };
+
             var _instrumentViewModel = InstrumentViewModel;
 
             var _instrumentController = CreateNewInstrumentController(_instrumentViewModel);
 
-            _ = _instrumentController.UpdateFretboardModel(
-                previouslySeletedNotes,
-                newNote,
-                selectedScale,
-                lockScale: true);
+            _ = _instrumentController.UpdateFretboardModel(fretboardRequest);
 
             Assert.True(_instrumentViewModel.IsSelectionLocked);
         }
@@ -62,6 +67,14 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             var previouslySeletedNotes = new List<Note> { Note.A, Note.C };
             var expectedSelectedNotes = new List<Note>(previouslySeletedNotes) { newNote };
 
+            var fretboardRequest = new UpdateFretboardRequest()
+            {
+                LockScale = false,
+                NewlySelectedNote = Note.G,
+                PreviouslySelectedNotes = new List<Note> { Note.A, Note.C },
+                SelectedScale = selectedScale,
+            };
+
             var _instrumentViewModel = InstrumentViewModel;
 
             var _instrumentController = CreateNewInstrumentController(_instrumentViewModel);
@@ -71,11 +84,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
                     mockScaleResult
                 });
 
-            _ = _instrumentController.UpdateFretboardModel(
-                previouslySeletedNotes,
-                newNote,
-                selectedScale,
-                lockScale: true);
+            _ = _instrumentController.UpdateFretboardModel(fretboardRequest);
 
             m_MockMusicTheoryService.Reset();
 
@@ -91,14 +100,18 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             var previouslySeletedNotes = new List<Note> { Note.A, Note.C };
             var expectedSelectedNotes = new List<Note>(previouslySeletedNotes) { newNote };
 
+            var fretboardRequest = new UpdateFretboardRequest()
+            {
+                LockScale = false,
+                NewlySelectedNote = Note.G,
+                PreviouslySelectedNotes = new List<Note> { Note.A, Note.C },
+                SelectedScale = selectedScale,
+            };
+
             var instrumentViewModel = InstrumentViewModel;
             var instrumentController = CreateNewInstrumentController(instrumentViewModel);
 
-            _ = instrumentController.UpdateFretboardModel(
-                previouslySeletedNotes,
-                newNote,
-                selectedScale,
-                lockScale: true);
+            _ = instrumentController.UpdateFretboardModel(fretboardRequest);
 
             Assert.Equal(_selectedNotes, instrumentViewModel.SelectedNotes.Select(n => n.Note));
         }
@@ -112,14 +125,18 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             var previouslySeletedNotes = new List<Note> { Note.A, Note.C };
             var expectedSelectedNotes = new List<Note>(previouslySeletedNotes) { newNote };
 
+            var fretboardRequest = new UpdateFretboardRequest()
+            {
+                LockScale = false,
+                NewlySelectedNote = Note.G,
+                PreviouslySelectedNotes = new List<Note> { Note.A, Note.C },
+                SelectedScale = selectedScale,
+            };
+
             var instrumentViewModel = InstrumentViewModel;
             var instrumentController = CreateNewInstrumentController(instrumentViewModel);
 
-            _ = instrumentController.UpdateFretboardModel(
-                previouslySeletedNotes,
-                newNote,
-                selectedScale,
-                lockScale: true);
+            _ = instrumentController.UpdateFretboardModel(fretboardRequest);
 
             m_MockMusicTheoryService.Verify(c => c.GetChordsDefinitions(It.IsAny<Note[]>(), It.IsAny<Note[]>()), Times.Once);
         }

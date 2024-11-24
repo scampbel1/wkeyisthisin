@@ -1,5 +1,6 @@
 ﻿using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
+using Keyify.Web.Data_Contracts;
 
 namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
 {
@@ -40,6 +41,14 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             var previouslySeletedNotes = new List<Note> { Note.A, Note.C, Note.G };
             var expectedSelectedNotes = new List<Note>(previouslySeletedNotes) { newNote };
 
+            var fretboardRequest = new UpdateFretboardRequest()
+            {
+                LockScale = false,
+                NewlySelectedNote = Note.G,
+                PreviouslySelectedNotes = new List<Note> { Note.A, Note.C },
+                SelectedScale = selectedScale,
+            };
+
             var instrumentViewModel = InstrumentViewModel;
             var instrumentController = CreateNewInstrumentController(instrumentViewModel);
 
@@ -54,11 +63,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             //        new ScaleEntry()
             //});
 
-            _ = instrumentController.UpdateFretboardModel(
-                previouslySeletedNotes,
-                newNote,
-                selectedScale,
-                lockScale: false);
+            _ = instrumentController.UpdateFretboardModel(fretboardRequest);
 
             m_MockScaleGroupingHtmlService.Verify(m => m.GenerateScalesTable(
                 It.IsAny<IEnumerable<Note>>(),
