@@ -8,7 +8,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
     public class ChordInsturmentControllerUnitTests : InstrumentControllerUnitTests
     {
         private const string _selectedScale = "scale";
-        private Note[] _selectedNotes = new[] { Note.A, Note.C, Note.G };
+        private Note[] _selectedNotes = [Note.A, Note.C, Note.G];
 
         [Fact]
         public void ToggleLockSelection_True_IsSelectionLocked_IsTrue()

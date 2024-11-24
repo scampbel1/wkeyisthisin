@@ -1,8 +1,6 @@
 ﻿using Keyify.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Diagnostics;
 
 namespace Keyify.Web.Controllers.Quicklink
 {
@@ -34,11 +32,8 @@ namespace Keyify.Web.Controllers.Quicklink
 
                 return Redirect(redirectUrl);
             }
-            catch (Exception exception)
+            catch
             {
-                //TODO: Implement logging
-                Trace.WriteLine(exception.Message);
-
                 return Redirect("/");
             }
         }

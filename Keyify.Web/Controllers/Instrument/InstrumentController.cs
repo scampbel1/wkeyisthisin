@@ -45,12 +45,23 @@ namespace Keyify.Web.Controllers.Instrument
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var selectedScale = (string)TempData["QLscale"];
-            var selectedNotes = (IEnumerable<Note>)TempData["QLnotes"];
+            try
+            {
+                var isLocked = (bool?)TempData["QLlocked"] ?? false;
+                var selectedScale = (string)TempData["QLscale"];
+                var selectedNotes = (IEnumerable<Note>)TempData["QLnotes"];
 
-            ClearQuicklinkTempData();
+                // TODO: 
+                //TempData[_configuration["QuickLinkTempDataKey:Tuning"]] = quickLink.Tuning;
+                //TempData[_configuration["QuickLinkTempDataKey:InstrumentType"]] = quickLink.InstrumentType;
+                //TempData[_configuration["QuickLinkTempDataKey:InstrumentName"]] = quickLink.InstrumentName;
 
-            await UpdateFretboard(selectedNotes?.ToArray(), selectedScale, false);
+                await UpdateFretboard(selectedNotes?.ToArray(), selectedScale, isLocked);
+            }
+            finally
+            {
+                ClearQuicklinkTempData();
+            }
 
             return View(Model);
         }

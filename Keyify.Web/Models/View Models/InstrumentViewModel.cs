@@ -60,7 +60,18 @@ namespace Keyify.Web.Models.ViewModels
 
         public string AvailableChordDefinitionsTableHtml { get; private set; }
 
-        public string LockedScale => $"Fretboard is locked to: {SelectedScale?.FullName_Sharp ?? string.Empty}";
+        public string LockedScale
+        {
+            get
+            {
+                var scaleResultCountText = $"{Scales.Count} Scales " +
+                    $"including {Scales.Count(s => s.IsKey)} Keys.";
+
+                return "<span>Fretboard is locked to: " +
+                    $"<u>{SelectedScale?.FullName_Sharp ?? string.Empty}</u>. " +
+                    $"Hiding {scaleResultCountText}</span>";
+            }
+        }
 
         public string AvailableKeysAndScalesLabel => AvailableScaleGroups.Any() ?
             $"{ScalesFoundText} {GetAvailableKeysLabel()}" :
@@ -99,12 +110,8 @@ namespace Keyify.Web.Models.ViewModels
                     "&#128274;" :
                     "&#128275;";
 
-                var keysFoundMessage = IsSelectionLocked ?
-                    $"/{Scales.Count(s => s.IsKey)} Keys" :
-                    string.Empty;
-
                 var searchResultsFoundMessage = IsSelectionLocked ?
-                $"({Scales.Count} Scales{keysFoundMessage} found!)" :
+                string.Empty :
                 $"({ChordDefinitions?.Count ?? 0} Chords found!)";
 
                 var scaleLabel = IsSelectionLocked ?

@@ -75,7 +75,7 @@
                 @{
                     if (Model.IsSelectionLocked)
                     {
-                        @Model.LockedScale
+                        @Html.Raw(Model.LockedScale)
                     }
                     else
                     {

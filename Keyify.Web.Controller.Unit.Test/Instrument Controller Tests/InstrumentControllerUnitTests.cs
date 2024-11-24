@@ -1,7 +1,6 @@
 using Keyify.MusicTheory.Enums;
 using Keyify.Service.Interfaces;
 using Keyify.Services.Formatter.Services;
-using Keyify.Services.Models;
 using Keyify.Web.Controllers.Instrument;
 using Keyify.Web.Models.Instruments;
 using Keyify.Web.Models.ViewModels;

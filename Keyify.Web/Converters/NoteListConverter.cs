@@ -1,8 +1,8 @@
 ﻿using Keyify.MusicTheory.Enums;
-using System.Collections.Generic;
 using System;
-using System.Text.Json.Serialization;
+using System.Collections.Generic;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Keyify.Web.Converters
 {
