@@ -73,7 +73,11 @@
         <div>
             <h6>
                 @{
-                    if (!Model.IsSelectionLocked)
+                    if (Model.IsSelectionLocked)
+                    {
+                        @Model.LockedScale
+                    }
+                    else
                     {
                         @Model.AvailableKeysAndScalesLabel
                     }
