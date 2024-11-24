@@ -113,10 +113,7 @@ namespace Keyify.Web.Controllers.Instrument
 
             Model.IsSelectionLocked = lockFretboard;
 
-            if (!Model.IsSelectionLocked)
-            {
-                _fretboardService.UpdateUnlockedFretboard(Model);
-            }
+            _fretboardService.UpdateUnlockedFretboard(Model);
 
             var quickLink = new QuickLink(Model);
             var quickLinkBase64 = _quickLinkService.ConvertQuickLinkToBase64(quickLink);

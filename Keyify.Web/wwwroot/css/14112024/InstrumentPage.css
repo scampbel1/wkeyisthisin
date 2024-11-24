@@ -26,6 +26,12 @@ body {
         margin: auto 0;
     }
 
+    .pageHeading h5 {
+        text-align: center;
+        margin: auto 0;
+        padding-bottom: 15px;
+    }
+
 .instrumentHyperlinkContainer {
     margin: auto;
     width: 61.8%;
@@ -35,14 +41,14 @@ body {
 
 #instrumentHyperlinkHeaderList {
     margin: auto 0;
-    width: 30%;
+    width: 33%;
     text-align: right;
     margin: 0px 0px 20px 0px;
 }
 
 #copyQuickLinkHeader {
     text-align: left;
-    width: 25%;
+    width: 33%;
 }
 
 .instrumentHyperlink {
@@ -64,7 +70,7 @@ body {
 }
 
 .scaleResults {
-    table-layout: fixed;
+    table-layout: inherit;
     width: 61.8%;
     min-width: 61.8%;
     max-width: 61.8%;

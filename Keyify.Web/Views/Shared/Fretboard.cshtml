@@ -29,47 +29,74 @@
                 </th>
             }
         </tr>
-        @foreach (var instrumentString in Model.Fretboard.InstrumentStrings)
-        {
-            <tr>
-                @foreach (var note in instrumentString.Notes)
+        @{
+            if (!Model.IsSelectionLocked)
+            {
+                @foreach (var instrumentString in Model.Fretboard.InstrumentStrings)
                 {
-                    if (Model.SelectedScale != null)
-                    {
-                        if (note.InSelectedScale && note.Selected)
+                    <tr>
+                        @foreach (var note in instrumentString.Notes)
                         {
-                            <td class="note selectedNoteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">
-                                <span class="nonSelectable noteText">@note.Sharp</span> <span class="nonSelectable degreeText">@note.DegreeInScale</span>
-                            </td>
-                            continue;
-                        }
-                        else if (note.InSelectedScale && !note.Selected)
-                        {
-                            <td class="note noteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">
-                                <span class="nonSelectable noteText">@note.Sharp</span> <span class="nonSelectable degreeText">@note.DegreeInScale</span>
-                            </td>
-                            continue;
-                        }
-                    }
-                    if (note.Selected)
-                    {
-                        <td class="note selectedNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">
-                            <span class="nonSelectable noteText">@note.Sharp</span>
-                        </td>
-                        continue;
-                    }
+                            if (Model.SelectedScale != null)
+                            {
+                                if (note.InSelectedScale && note.Selected)
+                                {
+                                    <td class="note selectedNoteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">
+                                        <span class="nonSelectable noteText">@note.Sharp</span> <span class="nonSelectable degreeText">@note.DegreeInScale</span>
+                                    </td>
+                                    continue;
+                                }
+                                else if (note.InSelectedScale && !note.Selected)
+                                {
+                                    <td class="note noteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">
+                                        <span class="nonSelectable noteText">@note.Sharp</span> <span class="nonSelectable degreeText">@note.DegreeInScale</span>
+                                    </td>
+                                    continue;
+                                }
+                            }
+                            if (note.Selected)
+                            {
+                                <td class="note selectedNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">
+                                    <span class="nonSelectable noteText">@note.Sharp</span>
+                                </td>
+                                continue;
+                            }
 
-                    <td class="note defaultNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">
-                        <span class="nonSelectable noteText">@note.Sharp</span>
-                    </td>
+                            <td class="note defaultNote" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">
+                                <span class="nonSelectable noteText">@note.Sharp</span>
+                            </td>
+                        }
+                    </tr>
                 }
-            </tr>
+            }
+            else
+            {
+                @foreach (var instrumentString in Model.Fretboard.InstrumentStrings)
+                {
+                    <tr>
+                        @foreach (var note in instrumentString.Notes)
+                        {
+                            if (note.InSelectedScale)
+                            {
+                                <td class="note lockedNoteSelectedScale">
+                                    <span class="nonSelectable noteText">@note.Sharp</span>
+                                </td>
+                                continue;
+                            }
+
+                            <td class="note defaultNote">
+                                <span class="nonSelectable noteText">@note.Sharp</span>
+                            </td>
+                        }
+                    </tr>
+                }
+            }
         }
     </table>
 </div>
 
 <div class="scaleResults center">
-    <div style="display: flex; justify-content: space-between;">
+    <div id="infoBar">
         <div>
             <h6>
                 @{
@@ -85,12 +112,12 @@
             </h6>
         </div>
         <div>
-            <h6>
+            <h6 style="text-align:center;">
                 @Html.Raw(Model.LockChordHtml)
             </h6>
         </div>
         <div>
-            <h6>
+            <h6 style="text-align:right;">
                 @{
                     if (Model.IsSelectionLocked)
                     {
@@ -104,6 +131,9 @@
             </h6>
         </div>
     </div>
+</div>
+
+<div class="scaleResults center">
     <div id="tablesDiv">
         @if (Model.IsSelectionLocked)
         {

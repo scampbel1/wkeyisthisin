@@ -3,6 +3,11 @@
     background-color: rgba(52, 255, 152, 0.4) !important;
 }
 
+.lockedNoteSelectedScale {
+    color: coral !important;
+    background-color: rgba(255, 215, 0, 0.4) !important;
+}
+
 .noteSelectedScale {
     color: darkblue !important;
     background-color: rgba(30, 144, 225, 0.4) !important;
@@ -61,3 +66,18 @@
     display: inline;
     margin: 0px;
 }
+
+#infoBar {
+    width: 100%;
+    height: 22px;
+    display: inline;
+    margin: 0px;
+}
+
+    #infoBar div {
+        width: 33%;
+        display: inline-block;
+        vertical-align: top;
+        margin: 0px;
+        white-space: nowrap;
+    }

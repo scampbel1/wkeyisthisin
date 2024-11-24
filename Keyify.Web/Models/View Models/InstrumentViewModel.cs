@@ -67,7 +67,7 @@ namespace Keyify.Web.Models.ViewModels
                 var scaleResultCountText = $"{Scales.Count} Scales " +
                     $"including {Scales.Count(s => s.IsKey)} Keys.";
 
-                return "<span>Fretboard is locked to: " +
+                return "<span>Fretboard locked: " +
                     $"<u>{SelectedScale?.FullName_Sharp ?? string.Empty}</u>. " +
                     $"Hiding {scaleResultCountText}</span>";
             }
