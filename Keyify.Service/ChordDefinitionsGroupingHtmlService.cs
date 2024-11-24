@@ -19,16 +19,21 @@ namespace Keyify.Web.Service
 
             foreach (var rating in popularityRatings.OrderBy(r => r))
             {
-                var chordDef = chordDefinitions.Where(c => c.Popularity == rating);
+                var chordDefinitionTypeGrouping = chordDefinitions.Where(c => c.Popularity == rating).GroupBy(c => c.Type);
 
-                sb.Append($"<span style=\"font-size:xx-small;\">{GetChordPopularityIcon(chordDef.First().Popularity).Item2}</span>");
+                var popularityIcon = GetChordPopularityIcon(chordDefinitionTypeGrouping.First().First().Popularity).Item2;
 
-                foreach (var chord in chordDef)
+                foreach (var chordDefinitionType in chordDefinitionTypeGrouping)
                 {
-                    sb.Append($"<span class=\"scaleResult scaleText\">{chord.Label} </span>");
-                }
+                    sb.Append($"<span style=\"font-size:xx-small;\">{popularityIcon} </span>");
 
-                sb.AppendLine("<br/>");
+                    foreach (var chord in chordDefinitionType)
+                    {
+                        sb.Append($"<span class=\"scaleResult scaleText\">{chord.Label} </span>");
+                    }
+
+                    sb.AppendLine("<br/>");
+                }
             }
 
             return sb.ToString();
@@ -39,13 +44,13 @@ namespace Keyify.Web.Service
             switch (popularity)
             {
                 case 1:
-                    return ("Widely Used", "\U0001F7E2");
+                    return ("Common", "\U0001F7E2");
                 case 2:
-                    return ("Frequently Used", "\U0001F7E1");
+                    return ("Less Common", "\U0001F7E1");
                 case 3:
-                    return ("Rarely Used", "\U0001F7E0");
+                    return ("Used Frequently", "\U0001F7E0");
                 case 4:
-                    return ("Very Rarely Used", "\U0001F534");
+                    return ("Used Infrequently", "\U0001F534");
                 default:
                     return ("Unknown", $"{popularity}");
             }

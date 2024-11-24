@@ -95,21 +95,27 @@ namespace Keyify.Web.Models.ViewModels
                     $"{SelectedNotesJson.Replace("\"", "\'")} , " +
                     $"{isFretboardUnlocked})";
 
-                var lockEmojiIcon = IsSelectionLocked ?
+                var padlockEmojiIcon = IsSelectionLocked ?
                     "&#128274;" :
                     "&#128275;";
 
-                var chordsFoundMessage = IsSelectionLocked ?
-                    string.Empty :
-                    $"{ChordDefinitions?.Count ?? 0} Chords found!";
+                var keysFoundMessage = IsSelectionLocked ?
+                    $"/{Scales.Count(s => s.IsKey)} Keys" :
+                    string.Empty;
+
+                var searchResultsFoundMessage = IsSelectionLocked ?
+                $"({Scales.Count} Scales{keysFoundMessage} found!)" :
+                $"({ChordDefinitions?.Count ?? 0} Chords found!)";
 
                 var scaleLabel = IsSelectionLocked ?
                     "Unlock" :
                     SelectedScale?.FullName_Sharp;
 
-                return $"<span>{lockText} <a onclick=\"{onclick}\"><u>{scaleLabel}</u></a> " +
-                    $"{lockEmojiIcon} " +
-                    $"{chordsFoundMessage}</span>";
+                return
+                    $"{padlockEmojiIcon} " +
+                    $"<span>{lockText} <a onclick=\"{onclick}\"><u>{scaleLabel}</u></a> " +
+                    $"<a onclick=\"{onclick}\"><u>{searchResultsFoundMessage}</u>" +
+                     "</a></span>";
             }
         }
 
@@ -160,8 +166,8 @@ namespace Keyify.Web.Models.ViewModels
             return matchingScaleCount switch
             {
                 0 => GetNoKeysFoundMessage(),
-                1 => $"{matchingScaleCount} Matching Key",
-                _ => $"{matchingScaleCount} Matching Keys"
+                1 => $"Including {matchingScaleCount} Matching Key",
+                _ => $"Including {matchingScaleCount} Matching Keys"
             };
         }
 
@@ -176,7 +182,7 @@ namespace Keyify.Web.Models.ViewModels
 
         private string GetAvailableScaleLabel()
         {
-            var matchingScaleCount = Scales.Count(s => !s.IsKey);
+            var matchingScaleCount = Scales.Count;
             return matchingScaleCount switch
             {
                 0 => GetNoScalesFoundMessage(),
