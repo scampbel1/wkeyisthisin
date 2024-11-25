@@ -4,23 +4,27 @@ using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.MusicTheory.Enums;
 using Keyify.Service.Interfaces;
 using Keyify.Services.Models;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Keyify.Service
 {
     public class ChordDefinitionService : IChordDefinitionService
     {
+        private readonly IMemoryCache _memoryCache;
         private readonly IChordDefinitionCache _chordDefinitionCache;
         private readonly IChordDefinitionRepository _chordDefinitionRepository;
 
         public ChordDefinitionService(
+            IMemoryCache memoryCache,
             IChordDefinitionCache chordDefinitionCache,
             IChordDefinitionRepository chordDefinitionRepository)
         {
+            _memoryCache = memoryCache;
             _chordDefinitionCache = chordDefinitionCache;
             _chordDefinitionRepository = chordDefinitionRepository;
 
             //Do not change this as it breaks unit tests
-            Task.WhenAny(InitialiseChordDefinitionCache());
+            //Task.WhenAny(InitialiseChordDefinitionCache());
         }
 
         public async Task<List<ChordDefinition>> FindChordDefinitions(Note[] notes)
@@ -39,30 +43,6 @@ namespace Keyify.Service
             }
 
             return result;
-        }
-
-        public async Task SyncWithDatabase()
-        {
-            if (_chordDefinitionCache.ChordDefinitions != null)
-            {
-                var existingChordDefinitionIds = _chordDefinitionCache.ChordDefinitions.Select(c => c.Id).ToList();
-
-                var newChordDefinitions = await _chordDefinitionRepository.SyncChordDefinitions(existingChordDefinitionIds);
-            }
-        }
-
-        public async Task InitialiseChordDefinitionCache()
-        {
-            var chordDefinitionEntities = await _chordDefinitionRepository.GetAllChordDefinitions();
-
-            await _chordDefinitionCache.Initialise(chordDefinitionEntities);
-        }
-
-        public async Task<Tuple<bool, string>> InsertChordDefinition(ChordDefinitionInsertRequest request)
-        {
-            var result = await _chordDefinitionRepository.InsertChordDefinition(request);
-
-            return result;
-        }
+        }        
     }
 }

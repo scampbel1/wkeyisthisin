@@ -8,8 +8,8 @@ namespace Keyify.Service.Interfaces
     {
         public Task<List<ChordDefinition>> FindChordDefinitions(Note[] notes);
 
-        public Task SyncWithDatabase();
+        //public Task SyncWithDatabase();
 
-        public Task<Tuple<bool, string>> InsertChordDefinition(ChordDefinitionInsertRequest request);
+        //public Task<Tuple<bool, string>> InsertChordDefinition(ChordDefinitionInsertRequest request);
     }
 }
