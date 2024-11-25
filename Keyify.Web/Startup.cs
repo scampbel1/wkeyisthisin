@@ -52,6 +52,7 @@ namespace Keyify
             SetupDatabase(services);
             SetupValidation(services);
             services.AddApplicationInsightsTelemetry(Configuration);
+
             services.AddSingleton(typeof(IScaleDefinitionService), typeof(ScaleDefinitionService));
             services.AddSingleton(typeof(IQuickLinkService), typeof(QuickLinkService));
             services.AddSingleton(typeof(IScaleService), typeof(ScaleService));
@@ -63,12 +64,12 @@ namespace Keyify
             services.AddSingleton(typeof(IChordDefinitionGroupingHtmlService), typeof(ChordDefinitionsGroupingHtmlService));
             services.AddSingleton(typeof(ISerializationFormatter), typeof(SerializationFormatter));
             services.AddSingleton(typeof(INoteFormatService), typeof(NoteFormatService));
-            services.AddSingleton(typeof(IChordDefinitionCache), typeof(ChordDefinitionCache));
-            services.AddSingleton(typeof(IScaleDefinitionCache), typeof(ScaleDefinitionCache));
+            services.AddTransient(typeof(IChordDefinitionCache), typeof(ChordDefinitionCache));
+            services.AddTransient(typeof(IScaleDefinitionCache), typeof(ScaleDefinitionCache));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
             services.AddSingleton(f => new Fretboard(f.GetRequiredService<INoteFormatService>().SharpNoteDictionary));
 
-            services.AddTransient<CacheUpdateMiddleware>();
+            services.AddTransient<ChordScaleCacheMiddleware>();
         }
 
         private void SetupDatabase(IServiceCollection services)
@@ -101,8 +102,12 @@ namespace Keyify
             services.AddScoped<IValidator<ChordDefinitionInsertRequestDto>, ChordDefinitionInsertValidator>();
         }
 
-        public void Configure(IApplicationBuilder applicationBuilder, IWebHostEnvironment webHostEnvironment)
+        public void Configure(
+            IApplicationBuilder applicationBuilder,
+            IWebHostEnvironment webHostEnvironment)
         {
+            SetupMiddleware(applicationBuilder);
+
             applicationBuilder.UseDeveloperExceptionPage();
             applicationBuilder.UseHttpsRedirection();
             applicationBuilder.UseStaticFiles();
@@ -116,13 +121,11 @@ namespace Keyify
                     name: "default",
                     pattern: "{controller=Guitar}/{action=Index}");
             });
-
-            SetupMiddleware(applicationBuilder);
         }
 
         private void SetupMiddleware(IApplicationBuilder applicationBuilder)
         {
-            applicationBuilder.UseMiddleware<CacheUpdateMiddleware>();
+            applicationBuilder.UseMiddleware<ChordScaleCacheMiddleware>();
         }
     }
 }

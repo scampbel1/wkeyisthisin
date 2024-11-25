@@ -27,8 +27,6 @@ namespace Keyify.Service
         {
             var result = new List<ChordDefinition>();
 
-            //TODO: Sync with Database
-
             if (notes != null && _chordDefinitionCache.ChordDefinitions != null)
             {
                 var chordDefinitionsCache = _chordDefinitionCache
@@ -50,24 +48,12 @@ namespace Keyify.Service
                 var existingChordDefinitionIds = _chordDefinitionCache.ChordDefinitions.Select(c => c.Id).ToList();
 
                 var newChordDefinitions = await _chordDefinitionRepository.SyncChordDefinitions(existingChordDefinitionIds);
-
-                //TODO: Install automapper and fluent validation for null references
-                //_chordDefinitionCache.ChordDefinitions = newChordDefinitions;
-
-                //TODO: Add logging
             }
         }
 
         public async Task InitialiseChordDefinitionCache()
         {
-            //Dictionary<string, Interval[]>
-
             var chordDefinitionEntities = await _chordDefinitionRepository.GetAllChordDefinitions();
-
-            //TODO: Install automapper and fluent validation for null references
-            //_chordDefinitionCache.ChordDefinitions = newChordDefinitions;
-
-            //TODO: Add logging
 
             await _chordDefinitionCache.Initialise(chordDefinitionEntities);
         }
@@ -75,8 +61,6 @@ namespace Keyify.Service
         public async Task<Tuple<bool, string>> InsertChordDefinition(ChordDefinitionInsertRequest request)
         {
             var result = await _chordDefinitionRepository.InsertChordDefinition(request);
-
-            //TODO: Sync DB with cache
 
             return result;
         }
