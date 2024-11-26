@@ -20,13 +20,9 @@ namespace Keyify.Service
 
             if (notes != null)
             {
-                _memoryCache.TryGetValue(CacheKey, out List<ChordDefinition> chordDefinitions);
+                List<ChordDefinition> chordDefinitions;
 
-                //            var chordDefinitionsCache = _chordDefinitionCache
-                //.ChordDefinitions
-                //.Where(c => c.IsSupersetOf(notes)).ToList();
-
-                //var chordDefinitions = await Task.FromResult(chordDefinitionsCache);
+                _memoryCache.TryGetValue(CacheKey, out chordDefinitions!);
 
                 result = chordDefinitions?.Where(c => c.IsSupersetOf(notes)).ToList();
             }

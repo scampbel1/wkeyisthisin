@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using Keyify.Infrastructure.DTOs.ChordDefinition;
-using Keyify.Infrastructure.Models.ChordDefinition;
 using Keyify.Service.Interfaces;
 using Keyify.Web.Controllers.Music_Theory;
 using Keyify.Web.Mapping;
 using Keyify.Web.Validation;
-using NuGet.Protocol;
-using System.Text.Json;
 
 namespace Keyify.Web.Controller.Unit.Test.Chord_Definition_Controller_Tests
 {

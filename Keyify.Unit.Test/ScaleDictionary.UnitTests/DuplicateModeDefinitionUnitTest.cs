@@ -1,16 +1,24 @@
 ﻿using Keyify.Models.Service;
 using Keyify.Services.Models;
 using Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks;
-using Microsoft.Extensions.Caching.Memory;
-using NSubstitute;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Keyify.Unit.Test.ScaleDictionary.UnitTests
 {
     public class DuplicateModeDefinitionUnitTest
     {
-        private List<ScaleDefinition> _scaleEntries = new ScaleDefinitionService(Arg.Any<IMemoryCache>(), new MockScaleDefinitionRepository()).ScaleDefinitions;
+        private List<ScaleDefinition> _scaleEntries;
+        private const string _scaleDefinitionsCacheKey = "ScaleDefinitions";
+
+        public DuplicateModeDefinitionUnitTest()
+        {
+            var cache = new MockScaleDefinitionCache();
+            Task.WhenAny(cache.InitializeCacheAsync());
+
+            _scaleEntries = new ScaleDefinitionService(cache, new MockScaleDefinitionRepository()).ScaleDefinitions;
+        }
 
         [Fact]
         public void NoDuplicateModeDefinitionsByScaleDegrees()

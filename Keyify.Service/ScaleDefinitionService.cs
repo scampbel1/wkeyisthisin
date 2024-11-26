@@ -17,7 +17,9 @@ namespace Keyify.Models.Service
         {
             get
             {
-                _memoryCache.TryGetValue(CacheKey, out List<ScaleDefinition> scaleDefinitions);
+                List<ScaleDefinition> scaleDefinitions;
+
+                _memoryCache.TryGetValue(CacheKey, out scaleDefinitions!);
 
                 return scaleDefinitions ?? Enumerable.Empty<ScaleDefinition>().ToList();
             }

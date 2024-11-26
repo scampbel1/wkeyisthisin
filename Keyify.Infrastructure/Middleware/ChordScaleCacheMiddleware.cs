@@ -1,4 +1,5 @@
-﻿using Keyify.Infrastructure.Models.ScaleDefinition;
+﻿using Keyify.Infrastructure.Caches;
+using Keyify.Infrastructure.Models.ScaleDefinition;
 using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.MusicTheory.Enums;
 using Keyify.Services.Formatter.Interfaces;
@@ -10,15 +11,19 @@ using Microsoft.Extensions.Caching.Memory;
 namespace Keyify.Infrastructure.Middleware
 {
     public class ChordScaleCacheMiddleware(
+        IMemoryCache memoryCache,
+        INoteFormatService noteFormatService,
         IChordDefinitionRepository chordDefinitionRepository,
         IScaleDefinitionRepository scaleDefinitionRepository,
-        IMemoryCache memoryCache,
-        INoteFormatService noteFormatService) : IMiddleware
+        CacheSignal<ScaleDefinition> scaleDefinitionCacheSignal,
+        CacheSignal<ChordDefinition> chordDefinitionCacheSignal) : IMiddleware
     {
-        private readonly IChordDefinitionRepository _chordDefinitionRepository = chordDefinitionRepository;
-        private readonly IScaleDefinitionRepository _scaleDefinitionRepository = scaleDefinitionRepository;
         private readonly IMemoryCache _memoryCache = memoryCache;
         private readonly INoteFormatService _noteFormatService = noteFormatService;
+        private readonly IChordDefinitionRepository _chordDefinitionRepository = chordDefinitionRepository;
+        private readonly IScaleDefinitionRepository _scaleDefinitionRepository = scaleDefinitionRepository;
+        private readonly CacheSignal<ScaleDefinition> _scaleDefinitionCacheSignal = scaleDefinitionCacheSignal;
+        private readonly CacheSignal<ChordDefinition> _chordDefinitionCacheSignal = chordDefinitionCacheSignal;
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
@@ -31,17 +36,30 @@ namespace Keyify.Infrastructure.Middleware
         private async Task CheckScaleCache()
         {
             var cacheKey = "ScaleDefinitions";
-            if (!_memoryCache.TryGetValue(cacheKey, out List<ScaleDefinition> scaleDefinitions))
+
+            List<ScaleDefinition> scaleDefinitions;
+
+            if (!_memoryCache.TryGetValue(cacheKey, out scaleDefinitions!))
             {
-                var scaleDefinitionEntities = await _scaleDefinitionRepository.GetAllScaleDefinitions();
+                try
+                {
+                    await _scaleDefinitionCacheSignal.WaitAsync();
 
-                scaleDefinitions = new List<ScaleDefinition>(scaleDefinitionEntities.Count);
+                    var scaleDefinitionEntities = await _scaleDefinitionRepository.GetAllScaleDefinitions();
 
-                ConvertScaleDefinitionEntities(scaleDefinitions!, scaleDefinitionEntities);
+                    scaleDefinitions = new List<ScaleDefinition>(scaleDefinitionEntities.Count);
 
-                var cacheEntryOptions = new MemoryCacheEntryOptions()
-                    .SetSlidingExpiration(TimeSpan.FromMinutes(2));
-                _memoryCache.Set(cacheKey, scaleDefinitions, cacheEntryOptions);
+                    ConvertScaleDefinitionEntities(scaleDefinitions!, scaleDefinitionEntities);
+
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromHours(1));
+
+                    _memoryCache.Set(cacheKey, scaleDefinitions, cacheEntryOptions);
+                }
+                finally
+                {
+                    _scaleDefinitionCacheSignal.Release();
+                }
             }
         }
 
@@ -70,16 +88,27 @@ namespace Keyify.Infrastructure.Middleware
         {
             var cacheKey = "ChordDefinitions";
 
-            if (!_memoryCache.TryGetValue(cacheKey, out List<ChordDefinition> chordDefinitions))
+            List<ChordDefinition> chordDefinitions;
+
+            if (!_memoryCache.TryGetValue(cacheKey, out chordDefinitions!))
             {
-                var chordDefinitionsEntities = await _chordDefinitionRepository.GetAllChordDefinitions();
+                try
+                {
+                    await _scaleDefinitionCacheSignal.WaitAsync();
 
-                chordDefinitions = await GenerateChordDefinitions(chordDefinitionsEntities);
+                    var chordDefinitionEntities = await _chordDefinitionRepository.GetAllChordDefinitions();
 
-                var cacheEntryOptions = new MemoryCacheEntryOptions()
-                    .SetSlidingExpiration(TimeSpan.FromMinutes(2));
+                    chordDefinitions = await GenerateChordDefinitions(chordDefinitionEntities);
 
-                _memoryCache.Set(cacheKey, chordDefinitions, cacheEntryOptions);
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromHours(1));
+
+                    _memoryCache.Set(cacheKey, chordDefinitions, cacheEntryOptions);
+                }
+                finally
+                {
+                    _scaleDefinitionCacheSignal.Release();
+                }
             }
         }
 
@@ -106,7 +135,7 @@ namespace Keyify.Infrastructure.Middleware
 
             while (currentNote <= Note.Ab)
             {
-                var notes = await GenerateChordDefinitionNotes(currentNote, chordDefinitionEntity.Intervals);
+                var notes = await ChordScaleCacheMiddlewareHelpers.GenerateChordDefinitionNotes(currentNote, chordDefinitionEntity.Intervals);
                 var sharpNote = _noteFormatService.SharpNoteDictionary[notes[0]];
 
                 chordDefinitions.Add(new ChordDefinition(
@@ -117,33 +146,6 @@ namespace Keyify.Infrastructure.Middleware
 
                 currentNote++;
             }
-        }
-
-        private static async Task<Note[]> GenerateChordDefinitionNotes(Note rootNote, Interval[] intervals)
-        {
-            var count = 0;
-            var currentNote = rootNote;
-            var chordNotes = new Note[intervals.Length];
-
-            foreach (var interval in intervals)
-            {
-                currentNote = interval == Interval.R ? currentNote : await FindNextNote(currentNote, interval);
-                chordNotes[count] = currentNote;
-                count++;
-            }
-
-            return chordNotes;
-        }
-
-        private static async Task<Note> FindNextNote(Note currentNote, Interval interval)
-        {
-            var nextStepIndex = (int)currentNote + (int)interval;
-
-            var result = nextStepIndex > (int)Note.Ab
-                ? (Note)(nextStepIndex - (int)Note.Ab) - 1
-                : (Note)nextStepIndex;
-
-            return await Task.FromResult(result);
         }
     }
 }

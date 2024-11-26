@@ -1,5 +1,4 @@
-﻿using Keyify.Infrastructure.Models.ChordDefinition;
-using Keyify.MusicTheory.Enums;
+﻿using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
 
 namespace Keyify.Service.Interfaces

@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using Keyify.Infrastructure.DTOs.ChordDefinition;
-using Keyify.Infrastructure.Models.ChordDefinition;
 using Keyify.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Keyify.Web.Controllers.Music_Theory
 {
