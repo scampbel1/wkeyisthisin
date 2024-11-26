@@ -78,8 +78,8 @@
                         {
                             if (note.InSelectedScale)
                             {
-                                <td class="note lockedNoteSelectedScale">
-                                    <span class="nonSelectable noteText">@note.Sharp</span>
+                                <td class="note lockedNoteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson)">
+                                    <span class="nonSelectable noteText">@note.Sharp</span> <span class="nonSelectable degreeText">@note.DegreeInScale</span>
                                 </td>
                                 continue;
                             }

@@ -1,7 +1,6 @@
 using AutoMapper;
 using FluentValidation;
 using Keyify.Infrastructure.Caches;
-using Keyify.Infrastructure.Caches.Interfaces;
 using Keyify.Infrastructure.DTOs.ChordDefinition;
 using Keyify.Infrastructure.Middleware;
 using Keyify.Infrastructure.Repository;
@@ -11,6 +10,7 @@ using Keyify.Service;
 using Keyify.Service.Interfaces;
 using Keyify.Services.Formatter.Interfaces;
 using Keyify.Services.Formatter.Services;
+using Keyify.Services.Models;
 using Keyify.Web.Converters;
 using Keyify.Web.Mapping;
 using Keyify.Web.Models.Instruments;
@@ -48,10 +48,12 @@ namespace Keyify
                     options.JsonSerializerOptions.Converters.Add(new NoteListConverter());
                 });
 
+            services.AddApplicationInsightsTelemetry(Configuration);
+
             SetupMapping(services);
             SetupDatabase(services);
             SetupValidation(services);
-            services.AddApplicationInsightsTelemetry(Configuration);
+            SetupCaches(services);
 
             services.AddSingleton(typeof(IScaleDefinitionService), typeof(ScaleDefinitionService));
             services.AddSingleton(typeof(IQuickLinkService), typeof(QuickLinkService));
@@ -64,12 +66,16 @@ namespace Keyify
             services.AddSingleton(typeof(IChordDefinitionGroupingHtmlService), typeof(ChordDefinitionsGroupingHtmlService));
             services.AddSingleton(typeof(ISerializationFormatter), typeof(SerializationFormatter));
             services.AddSingleton(typeof(INoteFormatService), typeof(NoteFormatService));
-            services.AddTransient(typeof(IChordDefinitionCache), typeof(ChordDefinitionCache));
-            services.AddTransient(typeof(IScaleDefinitionCache), typeof(ScaleDefinitionCache));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
             services.AddSingleton(f => new Fretboard(f.GetRequiredService<INoteFormatService>().SharpNoteDictionary));
 
+        }
+
+        private static void SetupCaches(IServiceCollection services)
+        {
             services.AddTransient<ChordScaleCacheMiddleware>();
+            services.AddSingleton<CacheSignal<ScaleDefinition>>();
+            services.AddSingleton<CacheSignal<ChordDefinition>>();
         }
 
         private void SetupDatabase(IServiceCollection services)

@@ -2,11 +2,13 @@
 using Keyify.Service.Interfaces;
 using Keyify.Services.Formatter.Interfaces;
 using Keyify.Services.Models;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Keyify.Models.Service
 {
     public class ScaleService : IScaleService
     {
+        private readonly IMemoryCache _memoryCache;
         private readonly IScaleDefinitionService _scaleDefinitionService;
         private readonly INoteFormatService _noteFormatService;
 
@@ -15,25 +17,29 @@ namespace Keyify.Models.Service
 
         public List<ScaleEntry> Scales => _scaleList;
 
-        public ScaleService(IScaleDefinitionService scaleDefinitionService, INoteFormatService noteFormatService)
+        public ScaleService(
+            IMemoryCache memoryCache,
+            IScaleDefinitionService scaleDefinitionService,
+            INoteFormatService noteFormatService)
         {
+            _memoryCache = memoryCache;
             _scaleDefinitionService = scaleDefinitionService;
             _noteFormatService = noteFormatService;
 
             _sharpNoteDictionary = _noteFormatService.SharpNoteDictionary;
 
-            Task.WhenAll(InitialiseScaleDefinitionService());
+            InitialiseScaleDefinitionService();
         }
 
         public IEnumerable<ScaleEntry> FindScales(IEnumerable<Note> selectedNotes)
         {
-            return _scaleList.Where(a => a.Scale.NoteSet.IsSupersetOf(selectedNotes));
+            var scaleList = GenerateScaleList();
+
+            return scaleList.Where(a => a.Scale.NoteSet.IsSupersetOf(selectedNotes));
         }
 
-        public async Task InitialiseScaleDefinitionService()
+        public void InitialiseScaleDefinitionService()
         {
-            await _scaleDefinitionService.InitialiseScaleDefinitionCache();
-
             _scaleList = GenerateScaleList();
         }
 

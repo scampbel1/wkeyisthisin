@@ -1,10 +1,12 @@
-﻿using Keyify.Infrastructure.Caches.Interfaces;
-using Keyify.Infrastructure.Repository.Interfaces;
+﻿using Keyify.Infrastructure.Repository.Interfaces;
+using Keyify.MusicTheory.Definitions;
 using Keyify.MusicTheory.Enums;
 using Keyify.Service;
 using Keyify.Services.Models;
 using Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Data;
 using Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks;
+using Microsoft.Extensions.Caching.Memory;
+using NSubstitute;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,9 +15,25 @@ namespace Keyify.Web.Unit.Test.ChordTemplatesUnitTests;
 
 public class ChordDefinitionServiceUnitTest
 {
-    private static readonly IChordDefinitionCache _dataCache = new MockChordDefinitionCache();
-    private static readonly IChordDefinitionRepository _repository = new MockChordDefinitionRepository();
-    private static readonly ChordDefinitionService _chordDefinitionService = new(_dataCache, _repository);
+    private static ChordDefinitionService _chordDefinitionService;
+    private static IChordDefinitionRepository _repository;
+
+    public ChordDefinitionServiceUnitTest()
+    {
+        Task.WaitAny(Initialize());
+    }
+
+    private async Task Initialize()
+    {
+        var memoryCache = new MockChordDefinitionCache();
+        _repository = new MockChordDefinitionRepository();
+
+        var chords = await _repository.GetAllChordDefinitions();
+
+        await memoryCache.Initialise(chords);
+
+        _chordDefinitionService = new(memoryCache, _repository);
+    }
 
     public static IEnumerable<object[]> ChordTestParameters => TestArguments.ChordTemplateParams;
 
@@ -55,16 +73,14 @@ public class ChordDefinitionServiceUnitTest
     [Fact]
     public async Task SearchChord_Gb_Minor_Notes_ReturnsChordWithinSet()
     {
-        var dataCache = new MockChordDefinitionCache();
         var repository = new MockChordDefinitionRepository();
-        var chordDefinitionService = new ChordDefinitionService(dataCache, repository);
 
         //Arrange - Given
         var expectedChordName = "Gb Minor";
         var inputNotes = new[] { Note.Gb, Note.A, Note.Db };
 
         //Act - When
-        var chordDefinitions = await chordDefinitionService.FindChordDefinitions(inputNotes);
+        var chordDefinitions = await _chordDefinitionService.FindChordDefinitions(inputNotes);
 
         var result = chordDefinitions.SingleOrDefault(c => c.Name == expectedChordName);
 
