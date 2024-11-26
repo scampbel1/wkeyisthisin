@@ -11,7 +11,10 @@ using System.Text.Json;
 
 namespace Keyify.Infrastructure.Repository
 {
-    public class ScaleDefinitionRepository(ILogger<ScaleDefinitionRepository> logger, string connectionString, ISerializationFormatter serializationFormatter) : IScaleDefinitionRepository
+    public class ScaleDefinitionRepository(
+        ILogger<ScaleDefinitionRepository> logger,
+        string connectionString,
+        ISerializationFormatter serializationFormatter) : IScaleDefinitionRepository
     {
         private readonly ILogger _logger = logger;
         private readonly string _connectionString = connectionString;

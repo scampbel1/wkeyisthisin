@@ -1,6 +1,4 @@
-﻿using Keyify.Infrastructure.Caches.Interfaces;
-using Keyify.Infrastructure.Models.ChordDefinition;
-using Keyify.Infrastructure.Repository.Interfaces;
+﻿using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.MusicTheory.Enums;
 using Keyify.Service.Interfaces;
 using Keyify.Services.Models;
@@ -8,41 +6,32 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Keyify.Service
 {
-    public class ChordDefinitionService : IChordDefinitionService
+    public class ChordDefinitionService(
+        IMemoryCache memoryCache,
+        IChordDefinitionRepository chordDefinitionRepository) : IChordDefinitionService
     {
-        private readonly IMemoryCache _memoryCache;
-        private readonly IChordDefinitionCache _chordDefinitionCache;
-        private readonly IChordDefinitionRepository _chordDefinitionRepository;
-
-        public ChordDefinitionService(
-            IMemoryCache memoryCache,
-            IChordDefinitionCache chordDefinitionCache,
-            IChordDefinitionRepository chordDefinitionRepository)
-        {
-            _memoryCache = memoryCache;
-            _chordDefinitionCache = chordDefinitionCache;
-            _chordDefinitionRepository = chordDefinitionRepository;
-
-            //Do not change this as it breaks unit tests
-            //Task.WhenAny(InitialiseChordDefinitionCache());
-        }
+        private const string CacheKey = "ChordDefinitions";
+        private readonly IMemoryCache _memoryCache = memoryCache;
+        private readonly IChordDefinitionRepository _chordDefinitionRepository = chordDefinitionRepository;
 
         public async Task<List<ChordDefinition>> FindChordDefinitions(Note[] notes)
         {
             var result = new List<ChordDefinition>();
 
-            if (notes != null && _chordDefinitionCache.ChordDefinitions != null)
+            if (notes != null)
             {
-                var chordDefinitionsCache = _chordDefinitionCache
-                    .ChordDefinitions
-                    .Where(c => c.IsSupersetOf(notes)).ToList();
+                _memoryCache.TryGetValue(CacheKey, out List<ChordDefinition> chordDefinitions);
 
-                var chordDefinitions = await Task.FromResult(chordDefinitionsCache);
+                //            var chordDefinitionsCache = _chordDefinitionCache
+                //.ChordDefinitions
+                //.Where(c => c.IsSupersetOf(notes)).ToList();
 
-                result.AddRange(chordDefinitions);
+                //var chordDefinitions = await Task.FromResult(chordDefinitionsCache);
+
+                result = chordDefinitions?.Where(c => c.IsSupersetOf(notes)).ToList();
             }
 
-            return result;
-        }        
+            return await Task.FromResult(result ?? Enumerable.Empty<ChordDefinition>().ToList());
+        }
     }
 }

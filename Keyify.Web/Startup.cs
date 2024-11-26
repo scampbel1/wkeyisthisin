@@ -1,7 +1,5 @@
 using AutoMapper;
 using FluentValidation;
-using Keyify.Infrastructure.Caches;
-using Keyify.Infrastructure.Caches.Interfaces;
 using Keyify.Infrastructure.DTOs.ChordDefinition;
 using Keyify.Infrastructure.Middleware;
 using Keyify.Infrastructure.Repository;
@@ -64,8 +62,6 @@ namespace Keyify
             services.AddSingleton(typeof(IChordDefinitionGroupingHtmlService), typeof(ChordDefinitionsGroupingHtmlService));
             services.AddSingleton(typeof(ISerializationFormatter), typeof(SerializationFormatter));
             services.AddSingleton(typeof(INoteFormatService), typeof(NoteFormatService));
-            services.AddTransient(typeof(IChordDefinitionCache), typeof(ChordDefinitionCache));
-            services.AddTransient(typeof(IScaleDefinitionCache), typeof(ScaleDefinitionCache));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
             services.AddSingleton(f => new Fretboard(f.GetRequiredService<INoteFormatService>().SharpNoteDictionary));
 

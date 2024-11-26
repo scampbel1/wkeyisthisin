@@ -7,6 +7,5 @@ namespace Keyify.Service.Interfaces
     {
         public List<ScaleEntry> Scales { get; }
         public IEnumerable<ScaleEntry> FindScales(IEnumerable<Note> selectedNotes);
-        public Task InitialiseScaleDefinitionService();
     }
 }

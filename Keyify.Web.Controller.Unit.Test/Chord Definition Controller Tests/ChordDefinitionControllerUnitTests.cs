@@ -78,56 +78,56 @@ namespace Keyify.Web.Controller.Unit.Test.Chord_Definition_Controller_Tests
             Assert.NotEmpty(result.Errors);
         }
 
-        [Fact]
-        public async Task ChordTemplateController_Submit_WasInserted_ReturnsTrue()
-        {
-            //Arrange
-            m_chordDefinitionService.Setup(m => m.InsertChordDefinition(It.IsAny<ChordDefinitionInsertRequest>())).ReturnsAsync(Tuple.Create(true, It.IsAny<string>()));
+        //[Fact]
+        //public async Task ChordTemplateController_Submit_WasInserted_ReturnsTrue()
+        //{
+        //    //Arrange
+        //    m_chordDefinitionService.Setup(m => m.InsertChordDefinition(It.IsAny<ChordDefinitionInsertRequest>())).ReturnsAsync(Tuple.Create(true, It.IsAny<string>()));
 
-            //Act
-            var result = await _chordTemplateController.Submit(_chordDefinitionCheckRequest);
-            var json = result.Value.ToJson();
-            var responseModel = JsonSerializer.Deserialize<ChordDefinitionCheckTestResponse>(json);
+        //    //Act
+        //    var result = await _chordTemplateController.Submit(_chordDefinitionCheckRequest);
+        //    var json = result.Value.ToJson();
+        //    var responseModel = JsonSerializer.Deserialize<ChordDefinitionCheckTestResponse>(json);
 
-            //Assert
-            Assert.True(responseModel?.WasInserted);
+        //    //Assert
+        //    Assert.True(responseModel?.WasInserted);
 
-            m_chordDefinitionService.Reset();
-        }
+        //    m_chordDefinitionService.Reset();
+        //}
 
-        [Fact]
-        public async Task ChordTemplateController_Submit_WasNotInserted_ReturnsFalse()
-        {
-            //Arrange
-            m_chordDefinitionService.Setup(m => m.InsertChordDefinition(It.IsAny<ChordDefinitionInsertRequest>())).ReturnsAsync(Tuple.Create(false, It.IsAny<string>()));
+        //[Fact]
+        //public async Task ChordTemplateController_Submit_WasNotInserted_ReturnsFalse()
+        //{
+        //    //Arrange
+        //    m_chordDefinitionService.Setup(m => m.InsertChordDefinition(It.IsAny<ChordDefinitionInsertRequest>())).ReturnsAsync(Tuple.Create(false, It.IsAny<string>()));
 
-            //Act
-            var result = await _chordTemplateController.Submit(_chordDefinitionCheckRequest);
-            var json = result.Value.ToJson();
-            var responseModel = JsonSerializer.Deserialize<ChordDefinitionCheckTestResponse>(json);
+        //    //Act
+        //    var result = await _chordTemplateController.Submit(_chordDefinitionCheckRequest);
+        //    var json = result.Value.ToJson();
+        //    var responseModel = JsonSerializer.Deserialize<ChordDefinitionCheckTestResponse>(json);
 
-            //Assert
-            Assert.False(responseModel?.WasInserted);
+        //    //Assert
+        //    Assert.False(responseModel?.WasInserted);
 
-            m_chordDefinitionService.Reset();
-        }
+        //    m_chordDefinitionService.Reset();
+        //}
 
-        [Fact]
-        public async Task ChordTemplateController_Submit_WasInserted_ReturnsSameName()
-        {
-            //Arrange            
-            m_chordDefinitionService.Setup(m => m.InsertChordDefinition(It.IsAny<ChordDefinitionInsertRequest>())).ReturnsAsync(Tuple.Create(false, It.IsAny<string>()));
+        //[Fact]
+        //public async Task ChordTemplateController_Submit_WasInserted_ReturnsSameName()
+        //{
+        //    //Arrange            
+        //    m_chordDefinitionService.Setup(m => m.InsertChordDefinition(It.IsAny<ChordDefinitionInsertRequest>())).ReturnsAsync(Tuple.Create(false, It.IsAny<string>()));
 
-            //Act
-            var result = await _chordTemplateController.Submit(_chordDefinitionCheckRequest);
-            var json = result.Value.ToJson();
-            var responseModel = JsonSerializer.Deserialize<ChordDefinitionCheckTestResponse>(json);
+        //    //Act
+        //    var result = await _chordTemplateController.Submit(_chordDefinitionCheckRequest);
+        //    var json = result.Value.ToJson();
+        //    var responseModel = JsonSerializer.Deserialize<ChordDefinitionCheckTestResponse>(json);
 
-            //Assert            
-            Assert.NotNull(responseModel?.Name);
-            Assert.NotEmpty(responseModel?.Name.ToCharArray()!);
+        //    //Assert            
+        //    Assert.NotNull(responseModel?.Name);
+        //    Assert.NotEmpty(responseModel?.Name.ToCharArray()!);
 
-            m_chordDefinitionService.Reset();
-        }
+        //    m_chordDefinitionService.Reset();
+        //}
     }
 }

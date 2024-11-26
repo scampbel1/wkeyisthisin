@@ -1,6 +1,8 @@
 ﻿using Keyify.Models.Service;
 using Keyify.Services.Models;
 using Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks;
+using Microsoft.Extensions.Caching.Memory;
+using NSubstitute;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,7 +10,7 @@ namespace Keyify.Unit.Test.ScaleDictionary.UnitTests
 {
     public class DuplicateModeDefinitionUnitTest
     {
-        private List<ScaleDefinition> _scaleEntries = new ScaleDefinitionService(new MockScaleDefinitionCache(), new MockScaleDefinitionRepository()).ScaleDefinitions;
+        private List<ScaleDefinition> _scaleEntries = new ScaleDefinitionService(Arg.Any<IMemoryCache>(), new MockScaleDefinitionRepository()).ScaleDefinitions;
 
         [Fact]
         public void NoDuplicateModeDefinitionsByScaleDegrees()

@@ -1,5 +1,4 @@
-﻿using Keyify.Infrastructure.Caches.Interfaces;
-using Keyify.MusicTheory.Enums;
+﻿using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
 using Keyify.Web.Infrastructure.Models.ChordDefinition;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
 {
     //TODO: Work out where this should live, and split out methods so that it can be used be tooling
-    public class MockChordDefinitionCache : IChordDefinitionCache
+    public class MockChordDefinitionCache
     {
         public Dictionary<ChordType, Interval[]> ChordTemplateDefinitions;
 

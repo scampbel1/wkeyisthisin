@@ -1,4 +1,4 @@
-﻿using Keyify.Infrastructure.Caches.Interfaces;
+﻿using Keyify.Infrastructure.Models.ScaleDefinition;
 using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.MusicTheory.Enums;
 using Keyify.Services.Formatter.Interfaces;
@@ -12,13 +12,11 @@ namespace Keyify.Infrastructure.Middleware
     public class ChordScaleCacheMiddleware(
         IChordDefinitionRepository chordDefinitionRepository,
         IScaleDefinitionRepository scaleDefinitionRepository,
-        IScaleDefinitionCache scaleDefinitionCache,
         IMemoryCache memoryCache,
         INoteFormatService noteFormatService) : IMiddleware
     {
         private readonly IChordDefinitionRepository _chordDefinitionRepository = chordDefinitionRepository;
         private readonly IScaleDefinitionRepository _scaleDefinitionRepository = scaleDefinitionRepository;
-        private readonly IScaleDefinitionCache _scaleDefinitionCache = scaleDefinitionCache;
         private readonly IMemoryCache _memoryCache = memoryCache;
         private readonly INoteFormatService _noteFormatService = noteFormatService;
 
@@ -32,23 +30,55 @@ namespace Keyify.Infrastructure.Middleware
 
         private async Task CheckScaleCache()
         {
-            if (!_scaleDefinitionCache.ScaleDefinitions.Any())
+            var cacheKey = "ScaleDefinitions";
+            if (!_memoryCache.TryGetValue(cacheKey, out List<ScaleDefinition> scaleDefinitions))
             {
-                var scaleDefinitions = await _scaleDefinitionRepository.GetAllScaleDefinitions();
+                var scaleDefinitionEntities = await _scaleDefinitionRepository.GetAllScaleDefinitions();
 
-                await _scaleDefinitionCache.Initialise(scaleDefinitions);
+                scaleDefinitions = new List<ScaleDefinition>(scaleDefinitionEntities.Count);
+
+                ConvertScaleDefinitionEntities(scaleDefinitions!, scaleDefinitionEntities);
+
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(2));
+                _memoryCache.Set(cacheKey, scaleDefinitions, cacheEntryOptions);
+            }
+        }
+
+        private void ConvertScaleDefinitionEntities(List<ScaleDefinition> scaleDefinitions, List<ScaleDefinitionEntity> scaleDefinitionEntities)
+        {
+            if (scaleDefinitionEntities is null)
+            {
+                return;
+            }
+
+            foreach (var entity in scaleDefinitionEntities)
+            {
+                var scaleEntry = new ScaleDefinition(
+                    entity.Name!,
+                    entity.Intervals!,
+                    entity.Degrees!,
+                    entity.Description!,
+                    entity.AllowedRootNotes,
+                    entity.Popularity);
+
+                scaleDefinitions.Add(scaleEntry);
             }
         }
 
         private async Task CheckChordCache()
         {
             var cacheKey = "ChordDefinitions";
+
             if (!_memoryCache.TryGetValue(cacheKey, out List<ChordDefinition> chordDefinitions))
             {
                 var chordDefinitionsEntities = await _chordDefinitionRepository.GetAllChordDefinitions();
+
                 chordDefinitions = await GenerateChordDefinitions(chordDefinitionsEntities);
+
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
-                    .SetSlidingExpiration(TimeSpan.FromHours(1));
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(2));
+
                 _memoryCache.Set(cacheKey, chordDefinitions, cacheEntryOptions);
             }
         }
