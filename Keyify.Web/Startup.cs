@@ -68,7 +68,6 @@ namespace Keyify
             services.AddSingleton(typeof(INoteFormatService), typeof(NoteFormatService));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
             services.AddSingleton(f => new Fretboard(f.GetRequiredService<INoteFormatService>().SharpNoteDictionary));
-
         }
 
         private static void SetupCaches(IServiceCollection services)
@@ -120,6 +119,7 @@ namespace Keyify
             applicationBuilder.UseRouting();
             applicationBuilder.UseAuthorization();
             applicationBuilder.UseForwardedHeaders();
+            applicationBuilder.UseAntiforgery();
 
             applicationBuilder.UseEndpoints(endpoints =>
             {

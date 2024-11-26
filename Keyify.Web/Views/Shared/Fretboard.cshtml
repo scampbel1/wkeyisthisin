@@ -1,4 +1,7 @@
-﻿@model Keyify.Web.Models.ViewModels.InstrumentViewModel
+﻿@{
+    @model Keyify.Web.Models.ViewModels.InstrumentViewModel
+    @Html.AntiForgeryToken()
+}
 
 <!-- Don't remove instrument links from here, the selected notes aren't updated on the layout page-->
 <div class="instrumentHyperlinkContainer">

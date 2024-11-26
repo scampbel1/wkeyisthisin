@@ -4,6 +4,8 @@ using Keyify.Web.Data_Contracts;
 using Keyify.Web.Models.QuickLink;
 using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Services.Interfaces;
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
@@ -67,6 +69,8 @@ namespace Keyify.Web.Controllers.Instrument
         }
 
         [HttpPost]
+        [AllowAnonymous]
+        [RequireAntiforgeryToken(true)]
         public async Task<ActionResult> UpdateFretboardModel([FromBody] UpdateFretboardRequest updateFretboardRequest)
         {
             if (updateFretboardRequest?.NewlySelectedNote != null)
