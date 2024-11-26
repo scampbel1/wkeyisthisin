@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Keyify.Web.Controllers.Instrument
@@ -73,27 +75,35 @@ namespace Keyify.Web.Controllers.Instrument
         [RequireAntiforgeryToken(true)]
         public async Task<ActionResult> UpdateFretboardModel([FromBody] UpdateFretboardRequest updateFretboardRequest)
         {
-            if (updateFretboardRequest?.NewlySelectedNote != null)
+            try
             {
-                var newlySelectedNote = updateFretboardRequest.NewlySelectedNote;
-
-                switch (updateFretboardRequest.PreviouslySelectedNotes.Contains(newlySelectedNote.Value))
+                if (updateFretboardRequest?.NewlySelectedNote != null)
                 {
-                    case true:
-                        updateFretboardRequest.PreviouslySelectedNotes.Remove(newlySelectedNote.Value);
-                        break;
-                    case false:
-                        updateFretboardRequest.PreviouslySelectedNotes.Add(newlySelectedNote.Value);
-                        break;
+                    var newlySelectedNote = updateFretboardRequest.NewlySelectedNote;
+
+                    switch (updateFretboardRequest.PreviouslySelectedNotes.Contains(newlySelectedNote.Value))
+                    {
+                        case true:
+                            updateFretboardRequest.PreviouslySelectedNotes.Remove(newlySelectedNote.Value);
+                            break;
+                        case false:
+                            updateFretboardRequest.PreviouslySelectedNotes.Add(newlySelectedNote.Value);
+                            break;
+                    }
                 }
+
+                await UpdateFretboard(
+                    selectedNotes: updateFretboardRequest.PreviouslySelectedNotes?.ToArray() ?? [],
+                    selectedScale: updateFretboardRequest.SelectedScale,
+                    lockFretboard: updateFretboardRequest.LockScale);
+
+                return PartialView("Fretboard", Model);
             }
-
-            await UpdateFretboard(
-                selectedNotes: updateFretboardRequest.PreviouslySelectedNotes?.ToArray() ?? [],
-                selectedScale: updateFretboardRequest.SelectedScale,
-                lockFretboard: updateFretboardRequest.LockScale);
-
-            return PartialView("Fretboard", Model);
+            finally
+            {
+                // TODO: Add timer for free members
+                Thread.Sleep(TimeSpan.FromMilliseconds(100));
+            }
         }
 
 

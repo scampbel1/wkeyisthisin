@@ -1,20 +1,22 @@
 ﻿using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
 using Keyify.Web.Infrastructure.Models.ChordDefinition;
-using Microsoft.Extensions.Caching.Memory;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
 {
     //TODO: Work out where this should live, and split out methods so that it can be used be tooling
-    public class MockChordDefinitionCache : IMemoryCache
+    public class MockChordDefinitionCache : IChordDefinitionCache
     {
         public Dictionary<ChordType, Interval[]> ChordTemplateDefinitions;
 
         public List<ChordDefinition> ChordDefinitions { get; set; }
 
-        public const string _chordDefinitionsCacheKey = "ChordDefinitions";
+        public Task Sync(List<ChordDefinition> chordDefinitions)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public async Task Initialise(List<ChordDefinitionEntity> chordDefinitions)
         {
@@ -64,33 +66,6 @@ namespace Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks
                 : (Note)nextStepIndex;
 
             return await Task.FromResult(result);
-        }
-
-        public ICacheEntry CreateEntry(object key)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Remove(object key)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public bool TryGetValue(object key, out object value)
-        {
-            if (key is string cacheKey && cacheKey == _chordDefinitionsCacheKey)
-            {
-                value = ChordDefinitions;
-                return true;
-            }
-
-            value = null;
-            return false;
-        }
-
-        public void Dispose()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

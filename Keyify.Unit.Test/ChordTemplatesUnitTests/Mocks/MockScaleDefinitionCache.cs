@@ -3,9 +3,9 @@ using Keyify.MusicTheory.Definitions;
 using Keyify.MusicTheory.Enums;
 using Keyify.Services.Models;
 using Microsoft.Extensions.Caching.Memory;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System;
 
 public class MockScaleDefinitionCache : IMemoryCache
 {

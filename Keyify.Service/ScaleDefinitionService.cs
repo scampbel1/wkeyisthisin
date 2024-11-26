@@ -1,28 +1,35 @@
 ﻿using Keyify.Infrastructure.Repository.Interfaces;
 using Keyify.Service.Interfaces;
 using Keyify.Services.Models;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace Keyify.Models.Service
 {
-    public class ScaleDefinitionService(
-        IMemoryCache memoryCache,
-        IScaleDefinitionRepository scaleDefinitionRepository) : IScaleDefinitionService
+    public class ScaleDefinitionService : IScaleDefinitionService
     {
-        private const string CacheKey = "ScaleDefinitions";
-        private readonly IMemoryCache _memoryCache = memoryCache;
-        private readonly IScaleDefinitionRepository _scaleDefinitionRepository = scaleDefinitionRepository;
+        private readonly IScaleDefinitionCache _scaleDefinitionCache;
+        private readonly IScaleDefinitionRepository _scaleDefinitionRepository;
+        public List<ScaleDefinition> ScaleDefinitions { get => _scaleDefinitionCache.ScaleDefinitions; }
 
-        public List<ScaleDefinition> ScaleDefinitions
+        public ScaleDefinitionService(IScaleDefinitionCache scaleDefinitionCache, IScaleDefinitionRepository scaleDefinitionRepository)
         {
-            get
-            {
-                List<ScaleDefinition> scaleDefinitions;
+            _scaleDefinitionCache = scaleDefinitionCache;
+            _scaleDefinitionRepository = scaleDefinitionRepository;
+        }
 
-                _memoryCache.TryGetValue(CacheKey, out scaleDefinitions!);
+        public async Task InitialiseScaleDefinitionCache()
+        {
+            var scaleDefinitionEntities = await _scaleDefinitionRepository.GetAllScaleDefinitions();
 
-                return scaleDefinitions ?? Enumerable.Empty<ScaleDefinition>().ToList();
-            }
+            //TODO: Install automapper and fluent validation for null references
+
+            //TODO: Add logging
+
+            await _scaleDefinitionCache.Initialise(scaleDefinitionEntities);
+        }
+
+        public Task<List<ScaleDefinition>> Sync(int[] scaleDefinitionIds)
+        {
+            throw new NotImplementedException();
         }
     }
 }

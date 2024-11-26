@@ -1,12 +1,9 @@
 ﻿using Keyify.Infrastructure.Repository.Interfaces;
-using Keyify.MusicTheory.Definitions;
 using Keyify.MusicTheory.Enums;
 using Keyify.Service;
 using Keyify.Services.Models;
 using Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Data;
 using Keyify.Web.Unit.Test.ChordTemplates.UnitTests.Mocks;
-using Microsoft.Extensions.Caching.Memory;
-using NSubstitute;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

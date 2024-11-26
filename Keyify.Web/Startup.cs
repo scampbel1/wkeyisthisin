@@ -68,6 +68,11 @@ namespace Keyify
             services.AddSingleton(typeof(INoteFormatService), typeof(NoteFormatService));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));
             services.AddSingleton(f => new Fretboard(f.GetRequiredService<INoteFormatService>().SharpNoteDictionary));
+
+            services.AddAntiforgery(options =>
+            {
+                options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.SameAsRequest;
+            });
         }
 
         private static void SetupCaches(IServiceCollection services)
