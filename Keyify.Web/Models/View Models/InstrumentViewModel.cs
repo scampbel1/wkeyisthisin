@@ -27,6 +27,10 @@ namespace Keyify.Web.Models.ViewModels
 
         public bool IsSelectionLocked { get; set; }
 
+        public string LockHyperlinkCssClass => !SelectedNotes.Any() && SelectedScale == null ?
+            "disabled" :
+            string.Empty;
+
         public string IsSelectionLockedJson => IsSelectionLocked.ToString().ToLower();
 
         public Fretboard Fretboard { get; set; }

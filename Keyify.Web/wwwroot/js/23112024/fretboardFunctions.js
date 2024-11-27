@@ -30,6 +30,8 @@ function ChangeInstrument(url, scale, selectedNotes, lockScale) {
 function fetchAndUpdateFretboard(url, data) {
     var token = document.querySelector('input[name="__RequestVerificationToken"]').value;
 
+    showSpinner();
+
     fetch(url, {
         method: 'POST',
         headers: {
@@ -51,6 +53,9 @@ function fetchAndUpdateFretboard(url, data) {
         })
         .catch(error => {
             console.error(error);
+        })
+        .finally(() => {
+            hideSpinner();
         });
 }
 
@@ -64,4 +69,15 @@ function copyContent(quickLinkCode) {
         .catch(err => {
             console.error('Failed to copy Quick Link: ', err);
         });
+}
+
+
+function showSpinner() {
+    var loadingDiv = document.getElementById('loading');
+    loadingDiv.style.visibility = 'visible';
+}
+
+function hideSpinner() {
+    var loadingDiv = document.getElementById('loading');
+    loadingDiv.style.visibility = 'hidden';
 }

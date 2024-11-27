@@ -102,7 +102,7 @@ namespace Keyify.Web.Controllers.Instrument
             finally
             {
                 // TODO: Add timer for free members
-                Thread.Sleep(TimeSpan.FromMilliseconds(100));
+                Thread.Sleep(TimeSpan.FromMilliseconds(200));
             }
         }
 

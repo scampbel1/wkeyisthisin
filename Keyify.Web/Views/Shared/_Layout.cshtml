@@ -4,7 +4,8 @@
     <title>@ViewBag.Title</title>
     <meta name="viewport" content="width=device-width" />
     <link href="~/css/14112024/InstrumentPage.css" rel="stylesheet" />
-    <link href="~/css/24112024/Fretboard.css" rel="stylesheet" />
+    <link href="~/css/27112024/Fretboard.css" rel="stylesheet" />
+    <link href="~/css/27112024/Loader.css" rel="stylesheet" />
     <script src="~/js/23112024/fretboardFunctions.js"></script>
 </head>
 <body>
@@ -17,6 +18,9 @@
             <content>
                 @RenderBody()
             </content>
+            <div id="loading" class="loading">
+                &#8230;
+            </div>
         </div>
     </div>
 

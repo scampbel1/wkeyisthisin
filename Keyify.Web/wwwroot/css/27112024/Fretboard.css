@@ -81,3 +81,8 @@
         margin: 0px;
         white-space: nowrap;
     }
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}
