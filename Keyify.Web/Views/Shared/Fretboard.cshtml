@@ -97,37 +97,41 @@
     </table>
 </div>
 
+@* top stats *@
 <div class="scaleResults center">
-    <div id="infoBar">
-        <div>
+    <div>
+        @* TODO: Move to CSS *@
+        <div style="float:left; white-space:nowrap; display:inline; max-width: 50%;">
             <h6>
                 @{
-                    if (Model.IsSelectionLocked)
+                    if (Model.SelectedNotes.Count < 3)
                     {
-                        @Model.ChordPopularityIconLegend
+                        @Model.AvailableKeysAndScalesLabel
                     }
                     else
                     {
-                        @Model.ScalePopularityIconLegend
+                        if (Model.IsSelectionLocked)
+                        {
+                            @Html.Raw(Model.ChordPopularityIconLegendHtml)
+                        }
+                        else
+                        {
+                            @Html.Raw(Model.ScalePopularityIconLegendHtml)
+                        }
                     }
                 }
             </h6>
         </div>
-        <div>
-            <h6 style="text-align:center;">
-                @Html.Raw(Model.LockChordHtml)
-            </h6>
-        </div>
-        <div>
-            <h6 style="text-align:right;">
+        <div style="float:right; white-space:nowrap; display:inline; max-width: 50%;">
+            <h6 style="text-align:left; white-space:nowrap;">
                 @{
                     if (Model.IsSelectionLocked)
                     {
-                        @Html.Raw(Model.LockedScale)
+                        @Html.Raw(Model.LockedScaleHtml)
                     }
                     else
                     {
-                        @Model.AvailableKeysAndScalesLabel
+                        @Html.Raw(Model.LockChordHtml)
                     }
                 }
             </h6>
@@ -139,7 +143,9 @@
     <div id="tablesDiv">
         @if (Model.IsSelectionLocked)
         {
-            @Html.Raw(Model.AvailableChordDefinitionsTableHtml)
+            <div style="float:left; white-space:nowrap; display:block; max-width: 50%;">
+                @Html.Raw(Model.AvailableChordDefinitionsTableHtml)
+            </div>
         }
         else
         {
@@ -147,3 +153,28 @@
         }
     </div>
 </div>
+
+@* bottom stats *@
+@if (Model.AvailableScaleGroups.Any())
+{
+    <div class="scaleResults center" style="display:block">
+        <div>
+            <div style="float:left">
+                <h6 style="text-align:right;">
+                    @{
+                        if (Model.IsSelectionLocked)
+                        {
+                            // TODO: Split up message
+                        }
+                        else
+                        {
+                            @Model.AvailableKeysAndScalesLabel
+                        }
+                    }
+                </h6>
+            </div>
+            <div style="float:right">
+            </div>
+        </div>
+    </div>
+}

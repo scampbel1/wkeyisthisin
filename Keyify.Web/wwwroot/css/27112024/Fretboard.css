@@ -67,21 +67,6 @@
     margin: 0px;
 }
 
-#infoBar {
-    width: 100%;
-    height: 22px;
-    display: inline;
-    margin: 0px;
-}
-
-    #infoBar div {
-        width: 33%;
-        display: inline-block;
-        vertical-align: top;
-        margin: 0px;
-        white-space: nowrap;
-    }
-
 a.disabled {
     pointer-events: none;
     cursor: default;

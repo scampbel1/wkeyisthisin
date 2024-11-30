@@ -101,11 +101,13 @@ namespace Keyify.Web.Controllers.Instrument
             }
             finally
             {
-                // TODO: Add timer for free members
+                // TODO: Set timer for unpaid members
+                // TODO: Set timer for unpaid members
+#if !DEBUG
                 Thread.Sleep(TimeSpan.FromMilliseconds(200));
+#endif
             }
         }
-
 
         private void ClearQuicklinkTempData()
         {
@@ -147,8 +149,8 @@ namespace Keyify.Web.Controllers.Instrument
             }
 
             // TODO: Set these on startup
-            Model.ScalePopularityIconLegend = SetScaleResultLegend();
-            Model.ChordPopularityIconLegend = SetChordResultLegend();
+            Model.ScalePopularityIconLegendHtml = SetScaleResultLegendHtml();
+            Model.ChordPopularityIconLegendHtml = SetChordResultLegendHtml();
 
             async Task SetChordDefinitions(Note[] selectedNotes)
             {
@@ -166,7 +168,7 @@ namespace Keyify.Web.Controllers.Instrument
             }
         }
 
-        private string SetChordResultLegend()
+        private string SetChordResultLegendHtml()
         {
             if (!Model.ChordDefinitions.Any())
             {
@@ -179,13 +181,13 @@ namespace Keyify.Web.Controllers.Instrument
             {
                 var (label, icon) = _chordDefinitionsGroupingHtmlService.GetChordPopularityIcon(popularity);
 
-                sb.Append($"{icon}{label} ");
+                sb.Append($"<span>{icon}{label} </span>");
             }
 
             return sb.ToString().TrimEnd();
         }
 
-        private string SetScaleResultLegend()
+        private string SetScaleResultLegendHtml()
         {
             if (!Model.AvailableScaleGroups.Any())
             {
@@ -198,7 +200,7 @@ namespace Keyify.Web.Controllers.Instrument
             {
                 var (label, icon) = _scaleGroupingHtmlService.GetScalePopularityIcon(popularity);
 
-                sb.Append($"{icon}{label} ");
+                sb.Append($"<span>{icon}{label} </span>");
             }
 
             return sb.ToString().TrimEnd();

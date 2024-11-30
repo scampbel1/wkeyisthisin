@@ -64,7 +64,7 @@ namespace Keyify.Web.Models.ViewModels
 
         public string AvailableChordDefinitionsTableHtml { get; private set; }
 
-        public string LockedScale
+        public string LockedScaleHtml
         {
             get
             {
@@ -85,9 +85,9 @@ namespace Keyify.Web.Models.ViewModels
             $"Select 3 or More Notes ({3 - SelectedNotes.Count} more to go!)" :
              "No Scales Found";
 
-        public string ScalePopularityIconLegend { get; set; }
+        public string ScalePopularityIconLegendHtml { get; set; }
 
-        public string ChordPopularityIconLegend { get; set; }
+        public string ChordPopularityIconLegendHtml { get; set; }
 
         public string LockChordHtml
         {
