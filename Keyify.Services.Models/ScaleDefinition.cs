@@ -12,11 +12,17 @@ namespace Keyify.Services.Models
 
         public readonly Note[] AllowedRootNotes = (Note[])Enum.GetValues(typeof(Note));
 
-        public ScaleDefinition(string name, Interval[] intervals, string[] degrees, string description, Note[]? allowedRootNotes, int popularity = 3)
+        public ScaleDefinition(
+            string name,
+            Interval[] intervals,
+            string[] degrees,
+            string description,
+            Note[]? allowedRootNotes,
+            int popularity = 3)
         {
             if (intervals.Length != degrees.Length)
             {
-                throw new ArgumentException($"{nameof(Intervals)} length was not equal to length of {nameof(Degrees)}");
+                throw new ArgumentException($"{name}: {nameof(Intervals)} length was not equal to length of {nameof(Degrees)}");
             }
 
             if (degrees.Distinct().Count() != degrees.Length)

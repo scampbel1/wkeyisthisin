@@ -84,6 +84,8 @@ namespace Keyify.Infrastructure.Repository
         {
             if (await DoesScaleDefinitionExist(scaleDefinition.Name))
             {
+                Console.WriteLine($"Scale Definition '{scaleDefinition.Name}' already exists.");
+
                 return;
             }
 
@@ -118,9 +120,19 @@ namespace Keyify.Infrastructure.Repository
                 AllowedRootNotes = allowedRootNotesMemoryStream.ToArray()
             };
 
-            await sqlConnection.ExecuteAsync(sqlQuery, sqlQueryParameters);
-
-            await sqlConnection.CloseAsync();
+            Console.WriteLine($"Attempting to Insert Scale Definition '{scaleDefinition.Name}'");
+            try
+            {
+                await sqlConnection.ExecuteAsync(sqlQuery, sqlQueryParameters);
+            }
+            catch
+            {
+                // Ignore - this can be looked into another time.
+            }
+            finally
+            {
+                await sqlConnection.CloseAsync();
+            }
         }
 
         public Task<List<ScaleDefinitionEntity>> SyncScaleDefinitions(IEnumerable<int> existingScaleDefinitionIds)

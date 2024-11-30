@@ -43,7 +43,7 @@ namespace Keyify.MusicTheory.Definitions
                 { Mode.Lydian9, new Interval[] { Interval.R, Interval.Wh, Interval.h, Interval.W, Interval.h, Interval.W, Interval.W, Interval.h } },
                 { Mode.MinorLydian, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.W, Interval.h, Interval.h, Interval.W, Interval.W } },
                 { Mode.MixolydianB6, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W, Interval.W } },
-                //Duplicate of MixolydianB6 - scaleIntervals.Add(Mode.Hindu, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W, Interval.W });
+                { Mode.Hindu, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W, Interval.W } },
                 { Mode.Persian, new Interval[] { Interval.R, Interval.h, Interval.Wh, Interval.h, Interval.h, Interval.W, Interval.Wh, Interval.h } },
                 { Mode.PrometheusNeopolitan, new Interval[] { Interval.R, Interval.h, Interval.Wh, Interval.W, Interval.Wh, Interval.h, Interval.W } },
                 { Mode.TodiTheta, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.Wh, Interval.h, Interval.h, Interval.Wh, Interval.h } },
@@ -54,11 +54,48 @@ namespace Keyify.MusicTheory.Definitions
                 { Mode.Ichikosucho, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.h, Interval.h, Interval.h, Interval.W, Interval.W, Interval.h } },
                 { Mode.LeadingWholeTone, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.W, Interval.W, Interval.W, Interval.h, Interval.h } },
                 { Mode.LydianB7, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W } },
-                //Duplicate of LydianB7 - scaleIntervals.Add(Mode.Overtone, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W });
+                { Mode.Overtone, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W } },
                 { Mode.MajorPhrygian, new Interval[] { Interval.R, Interval.h, Interval.Wh, Interval.h, Interval.W, Interval.h, Interval.W, Interval.W } },
                 { Mode.Neopolitan, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.W, Interval.W, Interval.h, Interval.Wh, Interval.h } },
                 { Mode.PurviTheta, new Interval[] { Interval.R, Interval.h, Interval.Wh, Interval.W, Interval.h, Interval.h, Interval.Wh, Interval.h } },
-                { Mode.DorianB2, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W } }
+                { Mode.DorianB2, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W } },
+    
+                // Modes Derived from Harmonic Minor
+                { Mode.LocrianSharp6, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.h, Interval.W, Interval.W, Interval.Wh, Interval.h } },
+                { Mode.IonianSharp5, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.h, Interval.W, Interval.Wh, Interval.Wh, Interval.h } },
+                { Mode.DorianSharp4, new Interval[] { Interval.R, Interval.W, Interval.h, Interval.W, Interval.Wh, Interval.Wh, Interval.Wh, Interval.h } },
+                { Mode.PhrygianDominant, new Interval[] { Interval.R, Interval.h, Interval.Wh, Interval.W, Interval.h, Interval.W, Interval.h, Interval.Wh } },
+                { Mode.LydianSharp2, new Interval[] { Interval.R, Interval.Wh, Interval.Wh, Interval.h, Interval.W, Interval.Wh, Interval.W, Interval.h } },
+
+                // Modes Derived from Melodic Minor
+                { Mode.PhrygianNatural6, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.W, Interval.W, Interval.W, Interval.W, Interval.h } },
+                { Mode.LydianAugmented, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.W, Interval.W, Interval.W, Interval.W, Interval.h } },
+                { Mode.LydianDominant, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h } },
+                { Mode.MixolydianFlat6, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W, Interval.W } },
+                { Mode.LocrianNatural2, new Interval[] { Interval.R, Interval.W, Interval.h, Interval.W, Interval.W, Interval.h, Interval.W, Interval.W } },
+
+                // Middle Eastern Maqam
+                { Mode.Rast, new Interval[] { Interval.R, Interval.W, Interval.h, Interval.W, Interval.W, Interval.h, Interval.Wh, Interval.h } },
+                { Mode.Bayati, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.W, Interval.h, Interval.W, Interval.W, Interval.h } },
+                { Mode.Hijaz, new Interval[] { Interval.R, Interval.h, Interval.Wh, Interval.h, Interval.Wh, Interval.W, Interval.W, Interval.h } },
+                { Mode.Nahawand, new Interval[] { Interval.R, Interval.W, Interval.h, Interval.W, Interval.W, Interval.h, Interval.Wh, Interval.h } },
+                { Mode.Kurd, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.W, Interval.h, Interval.W, Interval.W, Interval.W } },
+                { Mode.Saba, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.h, Interval.W, Interval.h, Interval.Wh, Interval.h } },
+                { Mode.Ajam, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.h, Interval.W, Interval.W, Interval.h, Interval.W } },
+
+                // Chinese Pentatonic Variants
+                { Mode.Shang, new Interval[] { Interval.R, Interval.W, Interval.Wh, Interval.W, Interval.Wh } },
+                { Mode.Jiao, new Interval[] { Interval.R, Interval.W, Interval.Wh, Interval.W, Interval.Wh } },
+                { Mode.Zhi, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.Wh, Interval.W } },
+                { Mode.Yu, new Interval[] { Interval.R, Interval.W, Interval.Wh, Interval.W, Interval.Wh } },
+
+
+                // Japanese Scales
+                { Mode.Yo, new Interval[] { Interval.R, Interval.W, Interval.W, Interval.Wh, Interval.W } },
+                { Mode.Iwato, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.h, Interval.W } },
+                { Mode.Kokinjoshi, new Interval[] { Interval.R, Interval.W, Interval.Wh, Interval.W, Interval.Wh, Interval.h, Interval.W } },
+
+                //{ Mode.Kokinjoshi, new Interval[] { Interval.R, Interval.h, Interval.W, Interval.h, Interval.W, Interval.h, Interval.W, Interval.W } }
             };
 
             return scaleIntervals;
@@ -103,7 +140,7 @@ namespace Keyify.MusicTheory.Definitions
                 { Mode.Lydian9, new string[] { Degree.First, Degree.SharpSecond, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.Seventh, Degree.Eighth } },
                 { Mode.MinorLydian, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth } },
                 { Mode.MixolydianB6, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth } },
-                //Duplicate of MixolydianB6 - scaleDegrees.Add(Mode.Hindu, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth });
+                { Mode.Hindu, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth } },
                 { Mode.Persian, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.FlatFifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth } },
                 { Mode.PrometheusNeopolitan, new string[] { Degree.First, Degree.FlatSecond, Degree.Third, Degree.FlatFifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth } },
                 { Mode.TodiTheta, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.SharpFourth, Degree.Fifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth } },
@@ -114,11 +151,46 @@ namespace Keyify.MusicTheory.Definitions
                 { Mode.Ichikosucho, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.Seventh, Degree.Eighth } },
                 { Mode.LeadingWholeTone, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.SharpFifth, Degree.SharpSixth, Degree.Seventh, Degree.Eighth } },
                 { Mode.LydianB7, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth } },
-                //Duplicate of LydianB7 - scaleDegrees.Add(Mode.Overtone, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth });
+                { Mode.Overtone, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth } },
                 { Mode.MajorPhrygian, new string[] { Degree.First, Degree.FlatSecond, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth } },
                 { Mode.Neopolitan, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth } },
                 { Mode.PurviTheta, new string[] { Degree.First, Degree.FlatSecond, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.FlatSixth, Degree.Seventh, Degree.Eighth } },
-                { Mode.DorianB2, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth } }
+                { Mode.DorianB2, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth } },
+
+                // Modes Derived from Harmonic Minor
+                { Mode.LocrianSharp6, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.FlatFifth, Degree.SharpSixth, Degree.FlatSeventh, Degree.Eighth } },
+                { Mode.IonianSharp5, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.SharpFifth, Degree.Sixth, Degree.Seventh, Degree.Eighth } },
+                { Mode.DorianSharp4, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth } },
+                { Mode.PhrygianDominant, new string[] { Degree.First, Degree.FlatSecond, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth } },
+                { Mode.LydianSharp2, new string[] { Degree.First, Degree.SharpSecond, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.Seventh, Degree.Eighth } },
+
+                // Modes Derived from Melodic Minor
+                { Mode.PhrygianNatural6, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth } },
+                { Mode.LydianAugmented, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.SharpFifth, Degree.Sixth, Degree.Seventh, Degree.Eighth } },
+                { Mode.LydianDominant, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.SharpFourth, Degree.Fifth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth } },
+                { Mode.MixolydianFlat6, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth } },
+                { Mode.LocrianNatural2, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fourth, Degree.FlatFifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth } },
+
+                // Middle Eastern Maqam
+                { Mode.Rast, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh } },
+                { Mode.Bayati, new string[] { Degree.First, Degree.FlatSecond, Degree.Second, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth } },
+                { Mode.Hijaz, new string[] { Degree.First, Degree.FlatSecond, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth } },
+                { Mode.Nahawand, new string[] { Degree.First, Degree.Second, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth } },
+                { Mode.Kurd, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.Fifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth } },
+                { Mode.Saba, new string[] { Degree.First, Degree.FlatSecond, Degree.FlatThird, Degree.Fourth, Degree.FlatFifth, Degree.FlatSixth, Degree.FlatSeventh, Degree.Eighth } },
+                { Mode.Ajam, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.Sixth, Degree.Seventh, Degree.Eighth } },
+
+                // Chinese Pentatonic Variants
+                { Mode.Shang, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fifth, Degree.Sixth } },
+                { Mode.Jiao, new string[] { Degree.First, Degree.Second, Degree.Fourth, Degree.Fifth, Degree.Sixth } },
+                { Mode.Zhi, new string[] { Degree.First, Degree.Third, Degree.Fourth, Degree.Fifth, Degree.Seventh } },
+                { Mode.Yu, new string[] { Degree.First, Degree.Third, Degree.Fourth, Degree.Sixth, Degree.Seventh } },
+
+                // Japanese Scales
+                { Mode.Yo, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fifth, Degree.Sixth } },
+                { Mode.Iwato, new string[] { Degree.First, Degree.FlatSecond, Degree.Fourth, Degree.FlatFifth, Degree.FlatSeventh } },
+                { Mode.Kokinjoshi, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth } },
+                //{ Mode.Kokinjoshi, new string[] { Degree.First, Degree.Second, Degree.Third, Degree.Fourth, Degree.Sixth, Degree.FlatSeventh, Degree.Eighth } }
             };
 
             return scaleDegrees;

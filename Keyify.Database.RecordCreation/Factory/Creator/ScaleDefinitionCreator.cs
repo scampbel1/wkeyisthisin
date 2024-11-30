@@ -50,9 +50,12 @@ namespace Keyify.Database.RecordCreation.Factory.Creator
 
                 _scaleAllowedRootNotes.TryGetValue(scaleType, out rootNotes);
 
-                var scaleEntry = new ScaleDefinition(GetScaleNameFromScaleType(scaleType), scaleIntervals, scaleDegrees, _generatedByDescription, rootNotes);
-
-                //Map ScaleDefinition to request
+                var scaleEntry = new ScaleDefinition(
+                    name: GetScaleNameFromScaleType(scaleType),
+                    intervals: scaleIntervals,
+                    degrees: scaleDegrees,
+                    description: _generatedByDescription,
+                    allowedRootNotes: rootNotes);
 
                 await _scaleDefinitionRepository.InsertScaleDefinition(scaleEntry);
             }

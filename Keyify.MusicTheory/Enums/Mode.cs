@@ -107,6 +107,60 @@ namespace Keyify.MusicTheory.Enums
         LydianB7,
         //Overtone,
         [Description("Purvi Theta")]
-        PurviTheta
+        PurviTheta,
+        [Description("Locrian ♯6")]
+        LocrianSharp6, // From Harmonic Minor Modes
+        [Description("Ionian ♯5")]
+        IonianSharp5, // From Harmonic Minor Modes
+        [Description("Dorian ♯4")]
+        DorianSharp4, // From Harmonic Minor Modes
+        [Description("Phrygian Dominant")]
+        PhrygianDominant, // From Harmonic Minor Modes
+        [Description("Lydian ♯2")]
+        LydianSharp2, // From Harmonic Minor Modes
+
+        [Description("Phrygian ♮6")]
+        PhrygianNatural6, // From Melodic Minor Modes
+        [Description("Lydian Augmented")]
+        LydianAugmented, // From Melodic Minor Modes
+        [Description("Lydian Dominant")]
+        LydianDominant, // From Melodic Minor Modes
+        [Description("Mixolydian ♭6")]
+        MixolydianFlat6, // From Melodic Minor Modes
+        [Description("Locrian ♮2")]
+        LocrianNatural2, // From Melodic Minor Modes
+
+        [Description("Rast")]
+        Rast, // Middle Eastern Maqam
+        [Description("Bayati")]
+        Bayati, // Middle Eastern Maqam
+        [Description("Hijaz")]
+        Hijaz, // Middle Eastern Maqam
+        [Description("Nahawand")]
+        Nahawand, // Middle Eastern Maqam
+        [Description("Kurd")]
+        Kurd, // Middle Eastern Maqam
+        [Description("Saba")]
+        Saba, // Middle Eastern Maqam
+        [Description("Ajam")]
+        Ajam, // Middle Eastern Maqam
+
+        [Description("Shang")]
+        Shang, // Chinese Scale
+        [Description("Jiao")]
+        Jiao, // Chinese Scale
+        [Description("Zhi")]
+        Zhi, // Chinese Scale
+        [Description("Yu")]
+        Yu, // Chinese Scale
+
+        [Description("Yo")]
+        Yo, // Japanese Scale
+        [Description("Iwato")]
+        Iwato, // Japanese Scale
+        [Description("Kokinjoshi")]
+        Kokinjoshi, // Japanese Scale
+        Overtone,
+        Hindu
     }
 }

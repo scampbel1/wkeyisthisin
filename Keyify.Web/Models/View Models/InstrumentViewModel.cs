@@ -99,7 +99,7 @@ namespace Keyify.Web.Models.ViewModels
                 }
 
                 var lockText = IsSelectionLocked ?
-                    string.Empty :
+                    "Unlock" :
                     "Lock";
 
                 var isFretboardUnlocked = $"{!IsSelectionLocked}".ToLower();
@@ -115,16 +115,12 @@ namespace Keyify.Web.Models.ViewModels
                     "&#128275;";
 
                 var searchResultsFoundMessage = IsSelectionLocked ?
-                string.Empty :
-                $"({ChordDefinitions?.Count ?? 0} Chords found!)";
-
-                var scaleLabel = IsSelectionLocked ?
-                    "Unlock" :
-                    SelectedScale?.FullName_Sharp;
+                $"(Show all {Scales?.Count ?? 0} matching Scales)" :
+                $"(Show {ChordDefinitions?.Count ?? 0} matching Chords)";
 
                 return
                     $"{padlockEmojiIcon} " +
-                    $"<span>{lockText} <a onclick=\"{onclick}\"><u>{scaleLabel}</u></a> " +
+                    $"<span>{lockText} <a onclick=\"{onclick}\"><u>{SelectedScale?.FullName_Sharp}</u></a> " +
                     $"<a onclick=\"{onclick}\"><u>{searchResultsFoundMessage}</u>" +
                      "</a></span>";
             }

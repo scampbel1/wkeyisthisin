@@ -101,7 +101,7 @@
 <div class="scaleResults center">
     <div>
         @* TODO: Move to CSS *@
-        <div style="float:left; white-space:nowrap; display:inline; max-width: 50%;">
+        <div style="float:left; white-space:nowrap; display:inline; min-width: 50%; max-width: 50%;">
             <h6>
                 @{
                     if (Model.SelectedNotes.Count < 3)
@@ -122,16 +122,14 @@
                 }
             </h6>
         </div>
-        <div style="float:right; white-space:nowrap; display:inline; max-width: 50%;">
-            <h6 style="text-align:left; white-space:nowrap;">
+        <div style="float:right; white-space:nowrap; display:inline; min-width: 50%; max-width: 50%;">
+            <h6 style="text-align:right; white-space:nowrap;">
                 @{
-                    if (Model.IsSelectionLocked)
+                    @Html.Raw(Model.LockChordHtml)
+
+                    @if (Model.IsSelectionLocked)
                     {
-                        @Html.Raw(Model.LockedScaleHtml)
-                    }
-                    else
-                    {
-                        @Html.Raw(Model.LockChordHtml)
+                        // @Html.Raw(Model.LockedScaleHtml)
                     }
                 }
             </h6>

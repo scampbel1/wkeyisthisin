@@ -28,7 +28,11 @@ namespace Keyify.Database.RecordCreation.Factory.Creator
             logger.LogInformation("Generating Chord Definitions");
 
             _chordDefinitions = ChordDefinitions.GetChordIntervals();
-            _chordDefinitionRepository = new ChordDefinitionRepository(logger, connectionString, new SerializationFormatter());
+            
+            _chordDefinitionRepository = new ChordDefinitionRepository(
+                logger, 
+                connectionString,
+                serializationFormatter: new SerializationFormatter());
         }
 
         internal override async Task ExecuteAsync()
@@ -37,9 +41,12 @@ namespace Keyify.Database.RecordCreation.Factory.Creator
             {
                 var chordName = chordDefinition.Key.AsString(EnumFormat.Description);
 
-                Console.WriteLine($"Attempting to create record for Chord Definition: '{chordName}'");
-
-                await _chordDefinitionRepository.InsertChordDefinition(new ChordDefinitionInsertRequest() { Name = chordName, Intervals = chordDefinition.Value });
+                await _chordDefinitionRepository.InsertChordDefinition(
+                    new ChordDefinitionInsertRequest()
+                    {
+                        Name = chordName,
+                        Intervals = chordDefinition.Value
+                    });
             }
         }
     }
