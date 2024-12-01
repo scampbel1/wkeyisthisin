@@ -123,15 +123,8 @@
             </h6>
         </div>
         <div style="float:right; white-space:nowrap; display:inline; min-width: 50%; max-width: 50%;">
-            <h6 style="text-align:right; white-space:nowrap;">
-                @{
-                    @Html.Raw(Model.LockChordHtml)
-
-                    @if (Model.IsSelectionLocked)
-                    {
-                        // @Html.Raw(Model.LockedScaleHtml)
-                    }
-                }
+            <h6 style="text-align:right;">
+                @Html.Raw(Model.NoteSelectionIconLegendHtml)
             </h6>
         </div>
     </div>
@@ -141,7 +134,7 @@
     <div id="tablesDiv">
         @if (Model.IsSelectionLocked)
         {
-            <div style="float:left; white-space:nowrap; display:block; max-width: 50%;">
+            <div style="float:left; white-space:nowrap; display:block; width:100%;">
                 @Html.Raw(Model.AvailableChordDefinitionsTableHtml)
             </div>
         }
@@ -157,8 +150,8 @@
 {
     <div class="scaleResults center" style="display:block">
         <div>
-            <div style="float:left">
-                <h6 style="text-align:right;">
+            <div style="float:left; white-space:nowrap; display:inline; min-width: 50%; max-width: 50%;">
+                <h6 style="text-align:left;">
                     @{
                         if (Model.IsSelectionLocked)
                         {
@@ -171,7 +164,15 @@
                     }
                 </h6>
             </div>
-            <div style="float:right">
+            <div style="float:right; white-space:nowrap; display:inline; min-width: 50%; max-width: 50%;">
+                <h6 style="text-align:right; white-space:nowrap;">
+                    @{
+                        if (Model.SelectedNotes.Any() && Model.SelectedScale is not null)
+                        {
+                            @Html.Raw(Model.LockChordHtml)
+                        }
+                    }
+                </h6>
             </div>
         </div>
     </div>

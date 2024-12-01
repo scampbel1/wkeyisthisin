@@ -89,6 +89,8 @@ namespace Keyify.Web.Models.ViewModels
 
         public string ChordPopularityIconLegendHtml { get; set; }
 
+        public string NoteSelectionIconLegendHtml { get; set; }
+
         public string LockChordHtml
         {
             get

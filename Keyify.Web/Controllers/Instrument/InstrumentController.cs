@@ -151,6 +151,7 @@ namespace Keyify.Web.Controllers.Instrument
             // TODO: Set these on startup
             Model.ScalePopularityIconLegendHtml = SetScaleResultLegendHtml();
             Model.ChordPopularityIconLegendHtml = SetChordResultLegendHtml();
+            Model.NoteSelectionIconLegendHtml = SetNoteColourLegendHtml();
 
             async Task SetChordDefinitions(Note[] selectedNotes)
             {
@@ -204,6 +205,44 @@ namespace Keyify.Web.Controllers.Instrument
             }
 
             return sb.ToString().TrimEnd();
+        }
+
+        private string SetNoteColourLegendHtml()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine("<div style=\"display:flex; gap:5px; float:right;\">");
+
+            foreach (var noteColourIndex in new int[] { 2, 3, 4, 5 })
+            {
+                var (description, cssClass) = GetNoteColourMapping(noteColourIndex);
+
+                sb.AppendLine($"<span class=\"color-box {cssClass}\"></span>");
+                sb.Append($"<span>{description}</span>");
+            }
+
+            sb.AppendLine("</div>");
+
+            return sb.ToString();
+        }
+
+        private (string, string) GetNoteColourMapping(int noteColourIndex)
+        {
+            switch (noteColourIndex)
+            {
+                case 1:
+                    return ("Unselected", "defaultNote");
+                case 2:
+                    return ("Selected", "selectedNote");
+                case 3:
+                    return ("Note in Scale", "noteSelectedScale");
+                case 4:
+                    return ("Selected Note in Scale", "selectedNoteSelectedScale");
+                case 5:
+                    return ("Locked Scale Note", "lockedNoteSelectedScale");
+                default:
+                    return ("Unknown", $"{noteColourIndex}");
+            }
         }
     }
 }
