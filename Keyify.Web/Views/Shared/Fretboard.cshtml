@@ -155,7 +155,7 @@
                     @{
                         if (Model.IsSelectionLocked)
                         {
-                            // TODO: Split up message
+                            @Html.Raw(Model.LockedScaleHtml)
                         }
                         else
                         {
