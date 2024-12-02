@@ -197,7 +197,7 @@ namespace Keyify.Web.Controllers.Instrument
 
             var sb = new StringBuilder();
 
-            foreach (var popularity in new int[] { 0, 1, 2, 3, 4 })
+            foreach (var popularity in new int[] { 0, 1, 2, 3, 4, 5 })
             {
                 var (label, icon) = _scaleGroupingHtmlService.GetScalePopularityIcon(popularity);
 

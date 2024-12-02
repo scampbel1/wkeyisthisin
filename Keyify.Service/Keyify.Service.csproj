@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.13.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Keyify.Infrastructure\Keyify.Infrastructure.csproj" />
     <ProjectReference Include="..\Keyify.MusicTheory\Keyify.MusicTheory.csproj" />
     <ProjectReference Include="..\Keyify.Services.Models\Keyify.Services.Models.csproj" />

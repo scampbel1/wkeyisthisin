@@ -211,6 +211,8 @@ namespace Keyify.Web.Service
                     return ("Rarely Used", "\U0001F7E0");
                 case 4:
                     return ("Very Rarely Used", "\U0001F534");
+                case 5:
+                    return ("Super Rare", "\U0001F7E3");
                 default:
                     return ("Unknown", $"{popularity}");
             }
