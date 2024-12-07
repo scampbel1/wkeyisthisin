@@ -21,7 +21,7 @@ namespace Keyify.Web.Models.ViewModels
 
         private List<FretboardNote> NotesMatrix { get; } = [];
 
-        public string ViewTitle { get; } = "Notes to Key";
+        public string ViewTitle { get; } = "Notes To Key | What Key Is This In?";
 
         public string QuickLinkCode { get; private set; }
 

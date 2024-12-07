@@ -11,25 +11,24 @@ body {
     background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(../../images/bg-tile-23092020.jpg);
     background-repeat: repeat;
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: darkslategrey !important;
 }
 
 .pageHeading {
-    margin: 0px 0px 20px 0px;
     background-color: rgba(0, 0, 0, 0.25);
+    margin: 0px 0px 20px 0px;
 }
 
-    .pageHeading h1 {
-        font-size: 45px;
-        text-align: center;
-        margin: auto 0;
-    }
+.pageHeadingText {
+    width: 61.8%;
+    padding-left: 18.3%;
+}
 
-    .pageHeading h5 {
-        text-align: center;
+    .pageHeadingText h1 {
+        font-size: 45px;
+        text-align: left;
         margin: auto 0;
-        padding-bottom: 15px;
     }
 
 .instrumentHyperlinkContainer {
