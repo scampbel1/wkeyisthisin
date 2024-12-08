@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,20 +54,22 @@ namespace Keyify.Web.Controllers.Instrument
                 var isLocked = (bool?)TempData["QLlocked"] ?? false;
                 var selectedScale = (string)TempData["QLscale"];
                 var selectedNotes = (IEnumerable<Note>)TempData["QLnotes"];
-                var selectedInstrument = (InstrumentType?)TempData["QLtype"] ?? InstrumentType.Guitar;
+                var selectedInstrument = (int?)TempData["QLtype"] ?? Convert.ToInt32(InstrumentType.Guitar);
 
-                var instrument = InstrumentFactory.CreateInstrument(selectedInstrument);
-
-                Model.Fretboard.UpdateFretboard(
-                    instrument.InstrumentType,
-                    instrument.Tuning,
-                    instrument.FretCount);
+                //Model.Fretboard.UpdateFretboard(
+                //    instrument.InstrumentType,
+                //    instrument.Tuning,
+                //    instrument.FretCount);
 
                 // TODO: 
                 //TempData[_configuration["QuickLinkTempDataKey:Tuning"]] = quickLink.Tuning;
                 //TempData[_configuration["QuickLinkTempDataKey:InstrumentName"]] = quickLink.InstrumentName;
 
-                await UpdateFretboard(selectedNotes?.ToArray(), selectedScale, isLocked);
+                await UpdateFretboard(
+                    selectedNotes: selectedNotes?.ToArray(),
+                    selectedScale,
+                    isLocked,
+                    instrumentType: (InstrumentType)selectedInstrument);
             }
             finally
             {
@@ -101,7 +104,8 @@ namespace Keyify.Web.Controllers.Instrument
                 await UpdateFretboard(
                     selectedNotes: updateFretboardRequest.PreviouslySelectedNotes?.ToArray() ?? [],
                     selectedScale: updateFretboardRequest.SelectedScale,
-                    lockFretboard: updateFretboardRequest.LockScale);
+                    lockFretboard: updateFretboardRequest.LockScale,
+                    instrumentType: updateFretboardRequest.Instrument);
 
                 return PartialView("Fretboard", Model);
             }
@@ -126,19 +130,33 @@ namespace Keyify.Web.Controllers.Instrument
             }
         }
 
-        private async Task UpdateFretboard(Note[] selectedNotes, string selectedScale, bool lockFretboard)
+        private async Task UpdateFretboard(
+            Note[] selectedNotes,
+            string selectedScale,
+            bool lockFretboard,
+            InstrumentType instrumentType)
         {
+            var instrument = InstrumentFactory.CreateInstrument(instrumentType);
+
+            Model.Fretboard.UpdateFretboard(
+                instrument.InstrumentType,
+                instrument.Tuning,
+                instrument.FretCount);
+
             if (selectedNotes != null)
             {
-                _fretboardService.UpdateViewModel(Model, selectedNotes, selectedScale);
+                _fretboardService.UpdateViewModel(
+                    viewModel: Model,
+                    selectedNotes,
+                    selectedScale,
+                    instrument.InstrumentType);
             }
 
             Model.IsSelectionLocked = lockFretboard;
 
             _fretboardService.UpdateUnlockedFretboard(Model);
 
-            var quickLink = new QuickLink(Model);
-            var quickLinkBase64 = _quickLinkService.ConvertQuickLinkToBase64(quickLink);
+            var quickLinkBase64 = _quickLinkService.ConvertQuickLinkToBase64(new QuickLink(Model));
 
             var availableScalesTableHtml = _scaleGroupingHtmlService.GenerateScalesTable(
                 selectedNotes,
@@ -146,7 +164,7 @@ namespace Keyify.Web.Controllers.Instrument
                 Model.LimitedScaleGroup,
                 selectedScale);
 
-            Model.UpdateQuickLinkCode(quickLinkBase64);
+            Model.SetQuicklinkCode(quickLinkBase64);
             Model.UpdateAvailableScalesTableHtml(availableScalesTableHtml);
 
             if (selectedScale != null)

@@ -17,8 +17,6 @@ namespace Keyify.Web.Models.QuickLink
 
         public string SelectedScale { get; set; }
 
-        public string InstrumentName => InstrumentType.ToString();
-
         public bool IsLocked { get; set; }
 
         public QuickLink()

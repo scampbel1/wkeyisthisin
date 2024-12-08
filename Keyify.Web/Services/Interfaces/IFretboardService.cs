@@ -8,6 +8,10 @@ namespace Keyify.Web.Services.Interfaces
     {
         void UpdateUnlockedFretboard(InstrumentViewModel viewModel);
 
-        void UpdateViewModel(InstrumentViewModel viewModel, IEnumerable<Note> selectedNotes, string selectedScale);
+        void UpdateViewModel(
+            InstrumentViewModel viewModel,
+            IEnumerable<Note> selectedNotes,
+            string selectedScale,
+            InstrumentType instrumentType);
     }
 }

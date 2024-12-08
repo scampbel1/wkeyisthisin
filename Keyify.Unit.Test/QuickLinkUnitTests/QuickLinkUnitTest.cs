@@ -21,7 +21,7 @@ namespace Keyify.Web.Unit.Test.QuickLinkTest.UnitTests
             };
 
             //Assert - Then
-            Assert.Equal(expected, quickLink1.InstrumentName);
+            Assert.Equal(expected, quickLink1.InstrumentType.ToString());
         }
     }
 }

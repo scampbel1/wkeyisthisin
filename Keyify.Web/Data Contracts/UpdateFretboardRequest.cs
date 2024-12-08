@@ -12,5 +12,7 @@ namespace Keyify.Web.Data_Contracts
         public string SelectedScale { get; set; }
 
         public bool LockScale { get; set; }
+
+        public InstrumentType Instrument { get; set; }
     }
 }

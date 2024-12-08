@@ -49,7 +49,7 @@
 		<Content Update="appsettings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Update="wwwroot\js\23112024\fretboardFunctions.js">
+		<Content Update="wwwroot\js\08122024\fretboardFunctions.js">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
