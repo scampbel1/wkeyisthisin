@@ -9,7 +9,7 @@
         <a class="copyToClipboard @Model.LockHyperlinkCssClass" onclick="Reset('@Url.Action("UpdateFretboardModel")', null , null , null, @Convert.ToInt32(Model.Fretboard.InstrumentType))">Reset All 🔄</a>
     </div>
     <div id="instrumentHyperlinkHeaderList">
-        @Html.Partial("InstrumentLinks", Model)
+        @await Html.PartialAsync("InstrumentLinks", Model)
     </div>
 </div>
 <div>
