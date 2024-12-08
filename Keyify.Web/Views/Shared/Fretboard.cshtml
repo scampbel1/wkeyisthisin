@@ -9,10 +9,7 @@
         <a class="copyToClipboard @Model.LockHyperlinkCssClass" onclick="Reset('@Url.Action("UpdateFretboardModel")', null , null , null, @Convert.ToInt32(Model.Fretboard.InstrumentType))">Reset All 🔄</a>
     </div>
     <div id="instrumentHyperlinkHeaderList">
-        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Instrument")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson, @Convert.ToInt32(Keyify.MusicTheory.Enums.InstrumentType.Bass))">Bass</a>
-        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Instrument")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson, @Convert.ToInt32(Keyify.MusicTheory.Enums.InstrumentType.Guitar))">Guitar</a>
-        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Instrument")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson, @Convert.ToInt32(Keyify.MusicTheory.Enums.InstrumentType.Mandolin))">Mandolin</a>
-        <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Instrument")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson, @Convert.ToInt32(Keyify.MusicTheory.Enums.InstrumentType.Ukulele))">Ukulele</a>
+        @Html.Partial("InstrumentLinks", Model)
     </div>
 </div>
 <div>

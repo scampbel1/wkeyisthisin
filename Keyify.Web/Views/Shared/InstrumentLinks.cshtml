@@ -1,0 +1,37 @@
+﻿@model Keyify.Web.Models.ViewModels.InstrumentViewModel
+@if (Model.Fretboard.InstrumentType != Keyify.MusicTheory.Enums.InstrumentType.Bass)
+{
+    <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Instrument")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson, @Convert.ToInt32(Keyify.MusicTheory.Enums.InstrumentType.Bass))">Bass</a>
+}
+else
+{
+    <a class="instrumentHyperlink" style="text-decoration:underline;">Bass</a>
+}
+
+@if (Model.Fretboard.InstrumentType != Keyify.MusicTheory.Enums.InstrumentType.Guitar)
+{
+    <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Instrument")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson, @Convert.ToInt32(Keyify.MusicTheory.Enums.InstrumentType.Guitar))">Guitar</a>
+}
+else
+{
+    <a class="instrumentHyperlink" style="text-decoration:underline;">Guitar</a>
+}
+
+@if (Model.Fretboard.InstrumentType != Keyify.MusicTheory.Enums.InstrumentType.Mandolin)
+{
+    <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Instrument")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson, @Convert.ToInt32(Keyify.MusicTheory.Enums.InstrumentType.Mandolin))">Mandolin</a>
+}
+else
+{
+    <a class="instrumentHyperlink" style="text-decoration:underline;">Mandolin</a>
+}
+
+@if (Model.Fretboard.InstrumentType != Keyify.MusicTheory.Enums.InstrumentType.Ukulele)
+{
+    <a class="instrumentHyperlink" onclick="ChangeInstrument('@Url.Action("UpdateFretboardModel", "Instrument")','@Model.SelectedScale?.ScaleLabel', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson, @Convert.ToInt32(Keyify.MusicTheory.Enums.InstrumentType.Ukulele))">Ukulele</a>
+
+}
+else
+{
+    <a class="instrumentHyperlink" style="text-decoration:underline;">Ukulele</a>
+}
