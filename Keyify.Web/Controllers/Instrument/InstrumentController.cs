@@ -1,6 +1,7 @@
 ﻿using Keyify.MusicTheory.Enums;
 using Keyify.Service.Interfaces;
 using Keyify.Web.Data_Contracts;
+using Keyify.Web.Factories;
 using Keyify.Web.Models.QuickLink;
 using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Services.Interfaces;
@@ -8,11 +9,9 @@ using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Keyify.Web.Controllers.Instrument
@@ -54,10 +53,17 @@ namespace Keyify.Web.Controllers.Instrument
                 var isLocked = (bool?)TempData["QLlocked"] ?? false;
                 var selectedScale = (string)TempData["QLscale"];
                 var selectedNotes = (IEnumerable<Note>)TempData["QLnotes"];
+                var selectedInstrument = (InstrumentType?)TempData["QLtype"] ?? InstrumentType.Guitar;
+
+                var instrument = InstrumentFactory.CreateInstrument(selectedInstrument);
+
+                Model.Fretboard.UpdateFretboard(
+                    instrument.InstrumentType,
+                    instrument.Tuning,
+                    instrument.FretCount);
 
                 // TODO: 
                 //TempData[_configuration["QuickLinkTempDataKey:Tuning"]] = quickLink.Tuning;
-                //TempData[_configuration["QuickLinkTempDataKey:InstrumentType"]] = quickLink.InstrumentType;
                 //TempData[_configuration["QuickLinkTempDataKey:InstrumentName"]] = quickLink.InstrumentName;
 
                 await UpdateFretboard(selectedNotes?.ToArray(), selectedScale, isLocked);

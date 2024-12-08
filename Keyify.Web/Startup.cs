@@ -130,7 +130,7 @@ namespace Keyify
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Guitar}/{action=Index}");
+                    pattern: "{controller=Instrument}/{action=Index}");
             });
         }
 

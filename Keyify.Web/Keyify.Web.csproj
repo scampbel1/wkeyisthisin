@@ -53,4 +53,8 @@
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Controllers\Instrument\Instruments\" />
+	</ItemGroup>
 </Project>

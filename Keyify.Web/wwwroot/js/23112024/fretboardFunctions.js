@@ -1,4 +1,11 @@
 ﻿function UpdateModel(url, scale, addNote, selectedNotes, lockScale) {
+
+    console.log(url);
+    console.log(scale);
+    console.log(addNote);
+    console.log(selectedNotes);
+    console.log(lockScale);
+    
     var data = {
         PreviouslySelectedNotes: selectedNotes,
         NewlySelectedNote: addNote,

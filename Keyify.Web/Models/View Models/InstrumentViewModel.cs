@@ -104,7 +104,7 @@ namespace Keyify.Web.Models.ViewModels
 
                 var isFretboardUnlocked = $"{!IsSelectionLocked}".ToLower();
 
-                var onclick = $"UpdateModel('/{Fretboard.InstrumentType}/UpdateFretboardModel', " +
+                var onclick = $"UpdateModel('/Instrument/UpdateFretboardModel', " +
                     $"'{SelectedScale.ScaleLabel}', " +
                     $"null, " +
                     $"{SelectedNotesJson.Replace("\"", "\'")} , " +
