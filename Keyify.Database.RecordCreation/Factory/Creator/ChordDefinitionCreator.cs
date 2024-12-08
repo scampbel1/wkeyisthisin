@@ -28,9 +28,9 @@ namespace Keyify.Database.RecordCreation.Factory.Creator
             logger.LogInformation("Generating Chord Definitions");
 
             _chordDefinitions = ChordDefinitions.GetChordIntervals();
-            
+
             _chordDefinitionRepository = new ChordDefinitionRepository(
-                logger, 
+                logger,
                 connectionString,
                 serializationFormatter: new SerializationFormatter());
         }

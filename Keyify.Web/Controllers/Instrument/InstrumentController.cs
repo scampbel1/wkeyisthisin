@@ -114,7 +114,7 @@ namespace Keyify.Web.Controllers.Instrument
                 // TODO: Set timer for unpaid members
                 // TODO: Set timer for unpaid members
 #if !DEBUG
-                Thread.Sleep(TimeSpan.FromMilliseconds(200));
+                System.Threading.Thread.Sleep(TimeSpan.FromMilliseconds(200));
 #endif
             }
         }
