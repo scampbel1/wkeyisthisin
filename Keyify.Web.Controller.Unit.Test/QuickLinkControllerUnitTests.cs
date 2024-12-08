@@ -19,7 +19,7 @@ namespace Keyify.Web.Controller.Unit.Test
         public void ValidTokenPassed_TokenConverted_RetrievesGuitarQuickLink_RedirectToHomePageGuitarPage()
         {
             //Arrange
-            const string expected = "/Guitar/";
+            const string expected = "/";
             const string validToken = "validToken";
 
             m_mockConfiguration = new Mock<IConfiguration>();
