@@ -1,4 +1,5 @@
 ﻿using Keyify.MusicTheory.Enums;
+using Keyify.Web.Factories;
 using Keyify.Web.Models.ViewModels;
 using Keyify.Web.Service.Interfaces;
 using Keyify.Web.Services.Interfaces;
@@ -19,7 +20,11 @@ namespace Keyify.Web.Services
             _groupedScalesService = groupedScalesService;
         }
 
-        public void UpdateViewModel(InstrumentViewModel viewModel, IEnumerable<Note> selectedNotes, string selectedScale)
+        public void UpdateViewModel(
+            InstrumentViewModel viewModel,
+            IEnumerable<Note> selectedNotes,
+            string selectedScale,
+            InstrumentType instrumentType)
         {
             UpdateSelectedNotes(viewModel, selectedNotes);
 
@@ -48,7 +53,14 @@ namespace Keyify.Web.Services
 
                 if (!selectedNotes.Any())
                 {
-                    ResetSelectedNotes(viewModel);
+                    var instrument = InstrumentFactory.CreateInstrument(instrumentType);
+
+                    viewModel.ResetNotes();
+
+                    viewModel.Fretboard.UpdateFretboard(
+                        instrument.InstrumentType,
+                        instrument.Tuning,
+                        instrument.FretCount);
                 }
             }
 
@@ -58,7 +70,7 @@ namespace Keyify.Web.Services
             {
                 var noteStack = new Stack<Note>(selectedNotes);
 
-                ResetSelectedNotes(viewModel);
+                viewModel.ResetNotes();
 
                 while (noteStack.Any())
                 {
@@ -108,14 +120,6 @@ namespace Keyify.Web.Services
                         }
                     }
                 }
-            }
-        }
-
-        private void ResetSelectedNotes(InstrumentViewModel viewModel)
-        {
-            foreach (var selectedNote in viewModel.SelectedNotes)
-            {
-                selectedNote.Selected = false;
             }
         }
 

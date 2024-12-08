@@ -1,8 +1,0 @@
-﻿@model Keyify.Web.Models.ViewModels.InstrumentViewModel
-
-@{
-    ViewData["Title"] = Model.ViewTitle;
-    Layout = "/Views/Shared/_Layout.cshtml";
-}
-
-<div id="Fretboard">@await Html.PartialAsync("Fretboard", Model)</div>

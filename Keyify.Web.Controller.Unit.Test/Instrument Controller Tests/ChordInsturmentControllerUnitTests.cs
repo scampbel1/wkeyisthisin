@@ -124,6 +124,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
             var newNote = Note.G;
             var previouslySeletedNotes = new List<Note> { Note.A, Note.C };
             var expectedSelectedNotes = new List<Note>(previouslySeletedNotes) { newNote };
+            var expectedInstrument = InstrumentType.Guitar;
 
             var fretboardRequest = new UpdateFretboardRequest()
             {
@@ -131,6 +132,7 @@ namespace Keyify.Web.Controller.Unit.Test.Instrument_Controller_Tests
                 NewlySelectedNote = Note.G,
                 PreviouslySelectedNotes = new List<Note> { Note.A, Note.C },
                 SelectedScale = selectedScale,
+                Instrument = expectedInstrument,
             };
 
             var instrumentViewModel = InstrumentViewModel;

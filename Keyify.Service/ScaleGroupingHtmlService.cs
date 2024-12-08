@@ -177,14 +177,14 @@ namespace Keyify.Web.Service
 
                     if (!scale.ScaleLabel.Equals(selectedScale))
                     {
-                        var onclick = $"UpdateModel('/{instrumentType.ToString()}/UpdateFretboardModel'," +
-                            $" '{scale.ScaleLabel}', null, [{selectedNotesString}])";
+                        var onclick = $"UpdateModel('/Instrument/UpdateFretboardModel'," +
+                            $" '{scale.ScaleLabel}', null, [{selectedNotesString}], false, {Convert.ToInt32(instrumentType)})";
 
                         sb.Append($"<a class=\"scaleResult scaleText\" onclick=\"{onclick}\">{scaleText}</a>&nbsp;");
                     }
                     else
                     {
-                        var onclick = $"UpdateModel('/{instrumentType.ToString()}/UpdateFretboardModel', null, null, [{selectedNotesString}])";
+                        var onclick = $"UpdateModel('/Instrument/UpdateFretboardModel', null, null, [{selectedNotesString}], false, {Convert.ToInt32(instrumentType)})";
                         var style = "text-decoration: underline double; font-weight: bold;";
 
                         sb.Append($"<a class=\"scaleResult scaleText\" style=\"{style}\" onclick=\"{onclick}\">{scaleText}</a>&nbsp;");

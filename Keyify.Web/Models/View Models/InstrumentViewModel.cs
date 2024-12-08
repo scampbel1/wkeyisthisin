@@ -43,7 +43,7 @@ namespace Keyify.Web.Models.ViewModels
 
         public void UpdateViewModel(Fretboard fretboard) => Fretboard = fretboard;
 
-        public void UpdateQuickLinkCode(string quickLinkCode) => QuickLinkCode = quickLinkCode;
+        public void SetQuicklinkCode(string quickLinkCode) => QuickLinkCode = quickLinkCode;
 
         public void UpdateAvailableScalesTableHtml(string htmlContent) => AvailableKeysAndScalesTableHtml = htmlContent;
 
@@ -104,11 +104,12 @@ namespace Keyify.Web.Models.ViewModels
 
                 var isFretboardUnlocked = $"{!IsSelectionLocked}".ToLower();
 
-                var onclick = $"UpdateModel('/{Fretboard.InstrumentType}/UpdateFretboardModel', " +
+                var onclick = $"UpdateModel('/Instrument/UpdateFretboardModel', " +
                     $"'{SelectedScale.ScaleLabel}', " +
                     $"null, " +
                     $"{SelectedNotesJson.Replace("\"", "\'")} , " +
-                    $"{isFretboardUnlocked})";
+                    $"{isFretboardUnlocked}," +
+                    $"{Convert.ToInt32(Fretboard.InstrumentType)})";
 
                 var padlockEmojiIcon = IsSelectionLocked ?
                     "&#128274;" :
@@ -142,6 +143,14 @@ namespace Keyify.Web.Models.ViewModels
                 {
                     return "No Scales Found";
                 }
+            }
+        }
+
+        public void ResetNotes()
+        {
+            foreach (var note in NotesMatrix)
+            {
+                note.Selected = false;
             }
         }
 

@@ -1,28 +1,31 @@
-﻿function UpdateModel(url, scale, addNote, selectedNotes, lockScale) {
+﻿function UpdateModel(url, scale, addNote, selectedNotes, lockScale, instrumentType) {
     var data = {
         PreviouslySelectedNotes: selectedNotes,
         NewlySelectedNote: addNote,
         SelectedScale: scale,
-        LockScale: lockScale
+        LockScale: lockScale,
+        Instrument: instrumentType
     };
     fetchAndUpdateFretboard(url, data);
 }
 
-function Reset(url, scale, addNote, selectedNotes) {
+function Reset(url, scale, addNote, selectedNotes, instrumentType) {
     var data = {
         PreviouslySelectedNotes: selectedNotes,
         NewlySelectedNote: addNote,
         SelectedScale: scale,
-        LockScale: false
+        LockScale: false,
+        Instrument: instrumentType,
     };
     fetchAndUpdateFretboard(url, data);
 }
 
-function ChangeInstrument(url, scale, selectedNotes, lockScale) {
+function ChangeInstrument(url, scale, selectedNotes, lockScale, instrumentType) {
     var data = {
         PreviouslySelectedNotes: selectedNotes,
         SelectedScale: scale,
-        LockScale: lockScale
+        LockScale: lockScale,
+        Instrument: instrumentType,
     };
     fetchAndUpdateFretboard(url, data);
 }

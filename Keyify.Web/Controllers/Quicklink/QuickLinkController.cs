@@ -17,25 +17,15 @@ namespace Keyify.Web.Controllers.Quicklink
                 return Redirect("/");
             }
 
-            try
-            {
-                var quickLink = _quickLinkService.DeserializeQuickLink(code);
+            var quickLink = _quickLinkService.DeserializeQuickLink(code);
 
-                TempData[_configuration["QuickLinkTempDataKey:Tuning"]] = quickLink.Tuning;
-                TempData[_configuration["QuickLinkTempDataKey:SelectedScale"]] = quickLink.SelectedScale;
-                TempData[_configuration["QuickLinkTempDataKey:SelectedNotes"]] = quickLink.SelectedNotes;
-                TempData[_configuration["QuickLinkTempDataKey:InstrumentType"]] = quickLink.InstrumentType;
-                TempData[_configuration["QuickLinkTempDataKey:InstrumentName"]] = quickLink.InstrumentName;
-                TempData[_configuration["QuickLinkTempDataKey:IsLocked"]] = quickLink.IsLocked;
+            TempData[_configuration["QuickLinkTempDataKey:Tuning"]] = quickLink.Tuning;
+            TempData[_configuration["QuickLinkTempDataKey:SelectedScale"]] = quickLink.SelectedScale;
+            TempData[_configuration["QuickLinkTempDataKey:SelectedNotes"]] = quickLink.SelectedNotes;
+            TempData[_configuration["QuickLinkTempDataKey:InstrumentType"]] = quickLink.InstrumentType;
+            TempData[_configuration["QuickLinkTempDataKey:IsLocked"]] = quickLink.IsLocked;
 
-                var redirectUrl = $"/{quickLink.InstrumentName}/";
-
-                return Redirect(redirectUrl);
-            }
-            catch
-            {
-                return Redirect("/");
-            }
+            return Redirect("/");
         }
     }
 }
