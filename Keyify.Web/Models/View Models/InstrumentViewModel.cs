@@ -108,7 +108,8 @@ namespace Keyify.Web.Models.ViewModels
                     $"'{SelectedScale.ScaleLabel}', " +
                     $"null, " +
                     $"{SelectedNotesJson.Replace("\"", "\'")} , " +
-                    $"{isFretboardUnlocked})";
+                    $"{isFretboardUnlocked}," +
+                    $"{Convert.ToInt32(Fretboard.InstrumentType)})";
 
                 var padlockEmojiIcon = IsSelectionLocked ?
                     "&#128274;" :
