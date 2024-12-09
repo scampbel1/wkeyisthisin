@@ -37,18 +37,24 @@ stages:
         # projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
         projects: '$(System.DefaultWorkingDirectory)/**/*Unit.Test.csproj'
 
-    - task: VSTest@3
-      displayName: Run Unit Tests
+    # - task: VSTest@3
+    #   displayName: Run Unit Tests
+    #   inputs:
+    #     testSelector: 'testAssemblies'
+    #     testAssemblyVer2: |
+    #       !**/*TestAdapter.dll
+    #       !**/obj/**
+    #       !**/testhost*.*
+    #       !**/Microsoft*.dll
+    #     searchFolder: '$(System.DefaultWorkingDirectory)'
+    #     runOnlyImpactedTests: false
+
+    - task: DotNetCoreCLI@2
       inputs:
-        testSelector: 'testAssemblies'
-        testAssemblyVer2: |
-          **/*test*.dll
-          !**/*TestAdapter.dll
-          !**/obj/**
-          !**/testhost*.*
-          !**/Microsoft*.dll
-        searchFolder: '$(System.DefaultWorkingDirectory)'
-        runOnlyImpactedTests: false
+        azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
+        command: 'test'
+        projects: '**/*test*.dll'
+        testRunTitle: 'Run Unit Tests'
 
 - stage: BuildAndDeployDbUp
   displayName: Database Deployments
