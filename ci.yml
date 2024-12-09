@@ -10,8 +10,9 @@ variables:
   buildConfiguration: 'Release'
   location: 'uksouth'
   rgName: 'notestokey'
-  webAppName: 'notestokey'
+  webAppName: 'notestokey2'
   scriptDirectory: '\\Keyify.Database.DbUp.Scripts'
+  vmImageName: 'ubuntu-latest'
 
 stages:
 - stage: BuildWindowsTestFilesAndTest
@@ -20,7 +21,7 @@ stages:
   - job: BuildWindowsTestFilesAndRunTests
     displayName: Build Windows Test Files and Run Unit Tests
     pool:
-      vmImage: 'windows-latest'
+      vmImage: '$(vmImageName)'
     steps:
     - task: DotNetCoreCLI@2
       displayName: Restore Unit Tests
@@ -54,7 +55,7 @@ stages:
   - job: BuildAndDeployDbUp
     displayName: Retrieve ConnectionString and Deploy Scripts via DbUp
     pool:
-      vmImage: 'windows-latest'
+      vmImage: '$(vmImageName)'
     steps:
     - task: AzureKeyVault@2
       displayName: Retrieve Staging Database ConnectionString
@@ -118,7 +119,7 @@ stages:
   - job: BuildAndDeployWebApp
     displayName: Deploy Web App
     pool:
-      vmImage: 'windows-latest'
+      vmImage: '$(vmImageName)'
     steps:    
     - task: DotNetCoreCLI@2
       displayName: Build Keyify.Web
