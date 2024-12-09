@@ -5,12 +5,13 @@ trigger:
     exclude:
     - feature/*
     - release/*
+    - merge_request/*
 
 variables:
   buildConfiguration: 'Release'
   location: 'uksouth'
   rgName: 'notestokey'
-  webAppName: 'notestokey2'
+  webAppName: 'notestokeylinux'
   sqlScriptFileDirectory: '/Keyify.Database.DbUp.Scripts'
   vmImageName: 'ubuntu-latest'
 
@@ -112,24 +113,26 @@ stages:
   dependsOn: BuildAndDeployDbUp
   jobs:
   - job: BuildAndDeployWebApp
-    displayName: Deploy Web App
+    displayName: Setup Web Application Deployment
     pool:
       vmImage: '$(vmImageName)'
     steps:    
     - task: DotNetCoreCLI@2
-      displayName: Build Keyify.Web
+      displayName: Build Web Application
       inputs:
         command: 'build'
         projects: '**/Keyify.Web.csproj'
         arguments: '--configuration $(buildConfiguration)'
 
     - task: DotNetCoreCLI@2
+      displayName: 'Publish Web Application'
       inputs:
         command: 'publish'
         projects: '$(System.DefaultWorkingDirectory)/**/*Web.csproj'
         publishWebProjects: true
 
     - task: AzureWebApp@1
+      displayName: 'Deploy Web Application To Azure'
       inputs:
         azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
         appType: 'webApp'
