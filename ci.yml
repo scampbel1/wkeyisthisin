@@ -118,6 +118,13 @@ stages:
       vmImage: '$(vmImageName)'
     steps:    
     - task: DotNetCoreCLI@2
+      displayName: Restore Web Application
+      inputs:
+        command: 'restore'
+        projects: '**/Keyify.Web.csproj'
+        arguments: '--configuration $(buildConfiguration)'
+
+    - task: DotNetCoreCLI@2
       displayName: Build Web Application
       inputs:
         command: 'build'
@@ -128,7 +135,7 @@ stages:
       displayName: 'Publish Web Application'
       inputs:
         command: 'publish'
-        projects: '$(System.DefaultWorkingDirectory)/**/*Web.csproj'
+        projects: '**/*Web.csproj'
         publishWebProjects: true
 
     - task: AzureWebApp@1
@@ -138,4 +145,4 @@ stages:
         appType: 'webApp'
         appName: $(webAppName)
         resourceGroupName: $(rgName)
-        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        package: '**/*.zip'
