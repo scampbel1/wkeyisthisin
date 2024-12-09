@@ -15,41 +15,23 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: BuildWindowsTestFilesAndTest
-  displayName: Run Tests
+- stage: BuildLinuxTestFilesAndTest
+  displayName: Build and Run Unit Tests
   jobs:
-  - job: BuildWindowsTestFilesAndRunTests
-    displayName: Build Windows Test Files and Run Unit Tests
+  - job: BuildLinuxTestFilesAndRunTests
+    displayName: Build Linux Test Files and Run Unit Tests
     pool:
       vmImage: '$(vmImageName)'
     steps:
-    # - task: DotNetCoreCLI@2
-    #   displayName: Restore Unit Tests
-    #   inputs:
-    #     command: 'restore'
-    #     # projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
-    #     projects: '$(System.DefaultWorkingDirectory)/**/*Unit.Test.csproj'
 
     - task: DotNetCoreCLI@2
       displayName: Build Unit Tests
       inputs:
-        command: 'build'
-        # projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
+        command: 'build'        
         projects: '$(System.DefaultWorkingDirectory)/**/*Unit.Test.csproj'
 
-    # - task: VSTest@3
-    #   displayName: Run Unit Tests
-    #   inputs:
-    #     testSelector: 'testAssemblies'
-    #     testAssemblyVer2: |
-    #       !**/*TestAdapter.dll
-    #       !**/obj/**
-    #       !**/testhost*.*
-    #       !**/Microsoft*.dll
-    #     searchFolder: '$(System.DefaultWorkingDirectory)'
-    #     runOnlyImpactedTests: false
-
     - task: DotNetCoreCLI@2
+      displayName: Run Unit Tests
       inputs:
         azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
         command: 'test'
@@ -61,17 +43,9 @@ stages:
           !**/Microsoft*.dll
         testRunTitle: 'Run Unit Tests'
 
-    # - task: DotNetCoreCLI@2
-    #   inputs:
-    #     azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
-    #     command: 'test'
-    #     projects: '**/*test*.dll'
-        
-    #     testRunTitle: 'Run Unit Tests'
-
 - stage: BuildAndDeployDbUp
   displayName: Database Deployments
-  dependsOn: BuildWindowsTestFilesAndTest
+  dependsOn: BuildLinuxTestFilesAndTest
   jobs:
   - job: BuildAndDeployDbUp
     displayName: Retrieve ConnectionString and Deploy Scripts via DbUp
@@ -93,44 +67,44 @@ stages:
         script: | 
           Write-Host ("##vso[task.setvariable variable=databaseConnectionString]$(stagingDatabaseConnectionString)")
 
-    - task: DotNetCoreCLI@2
-      displayName: Restore DbUp Projects
-      inputs:
-        command: 'restore'
-        projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
+    # - task: DotNetCoreCLI@2
+    #   displayName: Restore DbUp Projects
+    #   inputs:
+    #     command: 'restore'
+    #     projects: '$(System.DefaultWorkingDirectory)/**/Keyify.Database.DbUp*.csproj'
 
     - task: DotNetCoreCLI@2
       displayName: Build DbUp Project
       inputs:
         command: 'build'
-        projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp*.csproj'
+        projects: '$(System.DefaultWorkingDirectory)/**/Keyify.Database.DbUp*.csproj'
 
     - task: DotNetCoreCLI@2
       displayName: Run DbUp Project
       inputs:
         azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
         command: 'run'
-        projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.DbUp.csproj'
+        projects: '$(System.DefaultWorkingDirectory)/**/Keyify.Database.DbUp.csproj'
         arguments: '"$(stagingDatabaseConnectionString)" "$(scriptDirectory)"'
         
     - task: DotNetCoreCLI@2
       displayName: Restore RecordCreation Project
       inputs:
         command: 'restore'
-        projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.RecordCreation.csproj'
+        projects: '$(System.DefaultWorkingDirectory)/**/Keyify.Database.RecordCreation.csproj'
 
     - task: DotNetCoreCLI@2
       displayName: Build DbUp Project
       inputs:
         command: 'build'
-        projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.RecordCreation.csproj'
+        projects: '$(System.DefaultWorkingDirectory)/**/Keyify.Database.RecordCreation.csproj'
 
     - task: DotNetCoreCLI@2
       displayName: Run DbUp Project
       inputs:
         azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
         command: 'run'
-        projects: '$(System.DefaultWorkingDirectory)\**\Keyify.Database.RecordCreation.csproj'
+        projects: '$(System.DefaultWorkingDirectory)/**/Keyify.Database.RecordCreation.csproj'
         arguments: '"$(stagingDatabaseConnectionString)" "$(scriptDirectory)"'
 
 - stage: BuildAndDeployWebApp
@@ -152,7 +126,7 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: 'publish'
-        projects: '$(System.DefaultWorkingDirectory)\**\*Web.csproj'
+        projects: '$(System.DefaultWorkingDirectory)/**/*Web.csproj'
         publishWebProjects: true
 
     - task: AzureWebApp@1
