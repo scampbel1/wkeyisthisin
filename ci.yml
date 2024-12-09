@@ -23,19 +23,19 @@ stages:
     pool:
       vmImage: '$(vmImageName)'
     steps:
-    - task: DotNetCoreCLI@2
-      displayName: Restore Unit Tests
-      inputs:
-        command: 'restore'
-        # projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
-        projects: '$(System.DefaultWorkingDirectory)/**/*Unit.Test.csproj'
+    # - task: DotNetCoreCLI@2
+    #   displayName: Restore Unit Tests
+    #   inputs:
+    #     command: 'restore'
+    #     # projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
+    #     projects: '$(System.DefaultWorkingDirectory)/**/*Unit.Test.csproj'
 
-    - task: DotNetCoreCLI@2
-      displayName: Build Unit Tests
-      inputs:
-        command: 'build'
-        # projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
-        projects: '$(System.DefaultWorkingDirectory)/**/*Unit.Test.csproj'
+    # - task: DotNetCoreCLI@2
+    #   displayName: Build Unit Tests
+    #   inputs:
+    #     command: 'build'
+    #     # projects: '$(System.DefaultWorkingDirectory)\**\*Unit.Test.csproj'
+    #     projects: '$(System.DefaultWorkingDirectory)/**/*Unit.Test.csproj'
 
     # - task: VSTest@3
     #   displayName: Run Unit Tests
@@ -53,8 +53,21 @@ stages:
       inputs:
         azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
         command: 'test'
-        projects: '**/*test*.dll'
+        projects: |
+          **/*.Test.dll
+          !**/*TestAdapter.dll
+          !**/obj/**
+          !**/testhost*.*
+          !**/Microsoft*.dll
         testRunTitle: 'Run Unit Tests'
+
+    # - task: DotNetCoreCLI@2
+    #   inputs:
+    #     azureSubscription: 'campbe11sean root(c5d140d4-4130-4229-9fc9-025261099893)'
+    #     command: 'test'
+    #     projects: '**/*test*.dll'
+        
+    #     testRunTitle: 'Run Unit Tests'
 
 - stage: BuildAndDeployDbUp
   displayName: Database Deployments
