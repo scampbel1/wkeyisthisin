@@ -58,6 +58,13 @@
     text-align: center;
 }
 
+.fretboardInfo {
+    white-space: nowrap;
+    display: inline;
+    min-width: 50%;
+    max-width: 50%;
+}
+
 #tablesDiv {
     width: 61.8%;
     min-width: 61.8%;
@@ -75,4 +82,46 @@ a.disabled {
 .color-box {
     width: 12px;
     height: 12px;
+}
+
+@media (max-width: 1404px) {
+    .fretboardInfo {
+        display: none;
+    }
+}
+
+@media (max-width: 685px) {
+    .fretboard th:nth-child(n+10), .fretboard td:nth-child(n+10) {
+        display: none;
+    }
+}
+
+@media (max-width: 479px) {
+    .fretboard th:nth-child(n+6), .fretboard td:nth-child(n+6) {
+        display: none;
+    }
+}
+
+@media (max-width: 1340px) {
+    .fretboard th:nth-child(n+18), .fretboard td:nth-child(n+18) {
+        display: none;
+    }
+}
+
+@media (max-width: 952px) {
+    .fretboard th:nth-child(n+14), .fretboard td:nth-child(n+14) {
+        display: none;
+    }
+
+    .scaleResultLabel {
+        font-size: smaller;
+    }
+
+    .scaleText {
+        font-size: smaller;
+    }
+
+    .scaleSetLabelNote {
+        display: block;
+    }
 }

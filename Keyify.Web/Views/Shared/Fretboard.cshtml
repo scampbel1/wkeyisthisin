@@ -98,7 +98,7 @@
 <div class="scaleResults center">
     <div>
         @* TODO: Move to CSS *@
-        <div style="float:left; white-space:nowrap; display:inline; min-width: 50%; max-width: 50%;">
+        <div style="float:left;" class="fretboardInfo">
             <h6>
                 @{
                     if (Model.SelectedNotes.Count < 3)
@@ -119,7 +119,7 @@
                 }
             </h6>
         </div>
-        <div style="float:right; white-space:nowrap; display:inline; min-width: 50%; max-width: 50%;">
+        <div style="float:right;" class="fretboardInfo">
             <h6 style="text-align:right;">
                 @Html.Raw(Model.NoteSelectionIconLegendHtml)
             </h6>
@@ -147,7 +147,7 @@
 {
     <div class="scaleResults center" style="display:block">
         <div>
-            <div style="float:left; white-space:nowrap; display:inline; min-width: 50%; max-width: 50%;">
+            <div style="float:left;" class="fretboardInfo">
                 <h6 style="text-align:left;">
                     @{
                         if (Model.IsSelectionLocked)
@@ -161,7 +161,7 @@
                     }
                 </h6>
             </div>
-            <div style="float:right; white-space:nowrap; display:inline; min-width: 50%; max-width: 50%;">
+            <div style="float:right;" class="fretboardInfo">
                 <h6 style="text-align:right; white-space:nowrap;">
                     @{
                         if (Model.SelectedNotes.Any() && Model.SelectedScale is not null)
