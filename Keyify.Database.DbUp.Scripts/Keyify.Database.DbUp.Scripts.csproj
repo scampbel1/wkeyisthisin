@@ -7,95 +7,70 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Scripts\Script0001 - Create Core Schema.sql" />
-    <None Remove="Scripts\Script0002 - Create Core.Instrument.sql" />
-    <None Remove="Scripts\Script0003 - Create Core.ChordDefinition.sql" />
-    <None Remove="Scripts\Script0004 - Create Core.Note.sql" />
-    <None Remove="Scripts\Script0005 - Insert Notes into Note.sql" />
-    <None Remove="Scripts\Script0007 - Insert Instruments into Instrument.sql" />
-    <None Remove="Scripts\Script0008 - Create Core.Tuning.sql" />
-    <None Remove="Scripts\Script0009 - Create Core.Chord.sql" />
-    <None Remove="Scripts\Script0010 - Create Core.User.sql" />
-    <None Remove="Scripts\Script0011 - Create System User in Core.User.sql" />
-    <None Remove="Scripts\Script0012 - Add CreatedBy column to Core.Chord.sql" />
-    <None Remove="Scripts\Script0013 - Create Core.ScaleDefinition.sql" />
-    <None Remove="Scripts\Script0014 - Add Column ScaleDefinition.Popularity.sql" />
-    <None Remove="Scripts\Script0015 - Set popularity for ScaleDefinition records that are keys.sql" />
-    <None Remove="Scripts\Script0016 - Set popularity ScaleDefinition popular scales.sql" />
-    <None Remove="Scripts\Script0017 - Set popularity ScaleDefinition less popular scales.sql" />
-    <None Remove="Scripts\Script0018 - Set popularity ScaleDefinition somewhat rare scales.sql" />
-    <None Remove="Scripts\Script0019 - Set popularity ScaleDefinition rare scales.sql" />
-    <None Remove="Scripts\Script0020 - Add Column ChordDefinition.Popularity.sql" />
-    <None Remove="Scripts\Script0021 - Set Population values for ChordDefinition.sql" />
-    <None Remove="Scripts\Script0022 - Set missing Population values for ChordDefinition.sql" />
-    <None Remove="Scripts\Script0023 - Update popularity values for ScaleDefinition.sql" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Scripts\Script0001 - Create Core Schema.sql">
+    <EmbeddedResource Include="Script0001 - Create Core Schema.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0002 - Create Core.Instrument.sql">
+    <EmbeddedResource Include="Script0002 - Create Core.Instrument.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0003 - Create Core.ChordDefinition.sql">
+    <EmbeddedResource Include="Script0003 - Create Core.ChordDefinition.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0004 - Create Core.Note.sql">
+    <EmbeddedResource Include="Script0004 - Create Core.Note.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0005 - Insert Notes into Note.sql">
+    <EmbeddedResource Include="Script0005 - Insert Notes into Note.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0007 - Insert Instruments into Instrument.sql">
+    <EmbeddedResource Include="Script0007 - Insert Instruments into Instrument.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0008 - Create Core.Tuning.sql">
+    <EmbeddedResource Include="Script0008 - Create Core.Tuning.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0011 - Create System User in Core.User.sql">
+    <EmbeddedResource Include="Script0011 - Create System User in Core.User.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0016 - Set popularity ScaleDefinition popular scales.sql">
+    <EmbeddedResource Include="Script0016 - Set popularity ScaleDefinition popular scales.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0017 - Set popularity ScaleDefinition less popular scales.sql">
+    <EmbeddedResource Include="Script0017 - Set popularity ScaleDefinition less popular scales.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0018 - Set popularity ScaleDefinition somewhat rare scales.sql">
+    <EmbeddedResource Include="Script0018 - Set popularity ScaleDefinition somewhat rare scales.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0019 - Set popularity ScaleDefinition rare scales.sql">
+    <EmbeddedResource Include="Script0019 - Set popularity ScaleDefinition rare scales.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0020 - Add Column ChordDefinition.Popularity.sql">
+    <EmbeddedResource Include="Script0020 - Add Column ChordDefinition.Popularity.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0014 - Add Column ScaleDefinition.Popularity.sql">
+    <EmbeddedResource Include="Script0014 - Add Column ScaleDefinition.Popularity.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0013 - Create Core.ScaleDefinition.sql">
+    <EmbeddedResource Include="Script0013 - Create Core.ScaleDefinition.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0012 - Add CreatedBy column to Core.Chord.sql">
+    <EmbeddedResource Include="Script0012 - Add CreatedBy column to Core.Chord.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0010 - Create Core.User.sql">
+    <EmbeddedResource Include="Script0010 - Create Core.User.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0009 - Create Core.Chord.sql">
+    <EmbeddedResource Include="Script0009 - Create Core.Chord.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0021 - Set Population values for ChordDefinition.sql">
+    <EmbeddedResource Include="Script0021 - Set Population values for ChordDefinition.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0022 - Set missing Population values for ChordDefinition.sql">
+    <EmbeddedResource Include="Script0022 - Set missing Population values for ChordDefinition.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0015 - Set popularity for ScaleDefinition records that are keys.sql">
+    <EmbeddedResource Include="Script0015 - Set popularity for ScaleDefinition records that are keys.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Script0023 - Update popularity values for ScaleDefinition.sql">
+    <EmbeddedResource Include="Script0023 - Update popularity values for ScaleDefinition.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

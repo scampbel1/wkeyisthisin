@@ -49,7 +49,7 @@ internal class Program
         Console.WriteLine($"Console: {scriptsDirectoryArg}");
         Trace.WriteLine($"Trace: {scriptsDirectoryArg}");
 
-        scriptsDirectoryArg = $"{Environment.CurrentDirectory}{scriptsDirectoryArg}\\Scripts";
+        scriptsDirectoryArg = $"{Environment.CurrentDirectory}{scriptsDirectoryArg}";
 
         Console.WriteLine($"Console: {scriptsDirectoryArg}");
         Trace.WriteLine($"Trace: {scriptsDirectoryArg}");
