@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<Version>1.8.5.0</Version>
-		<AssemblyVersion>1.8.5.0</AssemblyVersion>
-		<FileVersion>1.8.5.0</FileVersion>
+		<Version>1.9.0.0</Version>
+		<AssemblyVersion>1.9.0.0</AssemblyVersion>
+		<FileVersion>1.9.0.0</FileVersion>
 		<Authors>Sean Campbell</Authors>
 		<Product>Keyify</Product>
 		<Description />
-		<Copyright>Copyright © 2023</Copyright>
+		<Copyright>Copyright © 2025</Copyright>
 	</PropertyGroup>
 
 	<PropertyGroup>

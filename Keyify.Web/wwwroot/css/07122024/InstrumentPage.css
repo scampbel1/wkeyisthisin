@@ -58,6 +58,20 @@ body {
     width: 33%;
 }
 
+.footer {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.25) !important;
+    padding-bottom: 30px;
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+    .footer h6 {
+        padding-top: 5px;
+    }
+
 .instrumentHyperlink {
     margin: 0px 7px 0px 7px;
     text-decoration: none;
@@ -165,6 +179,11 @@ a:active {
 a {
     cursor: pointer;
 }
+
+/*html, body {
+    margin: 0;
+    padding: 0;
+}*/
 
 .nonSelectable {
     -webkit-user-select: none; /* Safari */
