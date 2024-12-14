@@ -17,7 +17,8 @@ body {
 
 .pageHeading {
     background-color: rgba(0, 0, 0, 0.25);
-    margin: 0px 0px 20px 0px;
+    height: 100px;
+    line-height: 80px;
 }
 
 .pageHeadingText {
@@ -31,11 +32,18 @@ body {
         margin: auto 0;
     }
 
+.instrumentHyperlinkContainer_Outer {
+    margin: auto;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
 .instrumentHyperlinkContainer {
     margin: auto;
     width: 61.8%;
     display: flex;
     justify-content: space-between;
+    padding-top: 15px;
 }
 
 #instrumentHyperlinkHeaderList {

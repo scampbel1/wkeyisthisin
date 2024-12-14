@@ -18,9 +18,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Controllers\Instrument\Instruments\**" />
 	  <Compile Remove="Models\View Models\Misc\**" />
+	  <Content Remove="Controllers\Instrument\Instruments\**" />
 	  <Content Remove="Models\View Models\Misc\**" />
+	  <EmbeddedResource Remove="Controllers\Instrument\Instruments\**" />
 	  <EmbeddedResource Remove="Models\View Models\Misc\**" />
+	  <None Remove="Controllers\Instrument\Instruments\**" />
 	  <None Remove="Models\View Models\Misc\**" />
 	</ItemGroup>
 
@@ -52,9 +56,5 @@
 		<Content Update="wwwroot\js\08122024\fretboardFunctions.js">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Controllers\Instrument\Instruments\" />
 	</ItemGroup>
 </Project>

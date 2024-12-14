@@ -3,13 +3,15 @@
     @Html.AntiForgeryToken()
 }
 <!-- Don't remove instrument links from here, the selected notes aren't updated on the layout page-->
-<div class="instrumentHyperlinkContainer">
-    <div id="copyQuickLinkHeader">
-        <a class="copyToClipboard @Model.LockHyperlinkCssClass" onclick="copyContent('@Model.QuickLinkCode')">Copy Results Link 🔗</a>
-        <a class="copyToClipboard @Model.LockHyperlinkCssClass" onclick="Reset('@Url.Action("UpdateFretboardModel")', null , null , null, @Convert.ToInt32(Model.Fretboard.InstrumentType))">Reset All 🔄</a>
-    </div>
-    <div id="instrumentHyperlinkHeaderList">
-        @await Html.PartialAsync("InstrumentLinks", Model)
+<div class="instrumentHyperlinkContainer_Outer">
+    <div class="instrumentHyperlinkContainer">
+        <div id="copyQuickLinkHeader">
+            <a class="copyToClipboard @Model.LockHyperlinkCssClass" onclick="copyContent('@Model.QuickLinkCode')">Copy Results Link 🔗</a>
+            <a class="copyToClipboard @Model.LockHyperlinkCssClass" onclick="Reset('@Url.Action("UpdateFretboardModel")', null , null , null, @Convert.ToInt32(Model.Fretboard.InstrumentType))">Reset All 🔄</a>
+        </div>
+        <div id="instrumentHyperlinkHeaderList">
+            @await Html.PartialAsync("InstrumentLinks", Model)
+        </div>
     </div>
 </div>
 <div>
@@ -96,34 +98,31 @@
 
 @* top stats *@
 <div class="scaleResults center">
-    <div>
-        @* TODO: Move to CSS *@
-        <div style="float:left;" class="fretboardInfo">
-            <h6>
-                @{
-                    if (Model.SelectedNotes.Count < 3)
+    <div style="float:left;" class="fretboardInfo">
+        <h6>
+            @{
+                if (Model.SelectedNotes.Count < 3)
+                {
+                    @Model.AvailableKeysAndScalesLabel
+                }
+                else
+                {
+                    if (Model.IsSelectionLocked)
                     {
-                        @Model.AvailableKeysAndScalesLabel
+                        @Html.Raw(Model.ChordPopularityIconLegendHtml)
                     }
                     else
                     {
-                        if (Model.IsSelectionLocked)
-                        {
-                            @Html.Raw(Model.ChordPopularityIconLegendHtml)
-                        }
-                        else
-                        {
-                            @Html.Raw(Model.ScalePopularityIconLegendHtml)
-                        }
+                        @Html.Raw(Model.ScalePopularityIconLegendHtml)
                     }
                 }
-            </h6>
-        </div>
-        <div style="float:right;" class="fretboardInfo">
-            <h6 style="text-align:right;">
-                @Html.Raw(Model.NoteSelectionIconLegendHtml)
-            </h6>
-        </div>
+            }
+        </h6>
+    </div>
+    <div style="float:right;" class="fretboardInfo">
+        <h6 style="text-align:right;">
+            @Html.Raw(Model.NoteSelectionIconLegendHtml)
+        </h6>
     </div>
 </div>
 
