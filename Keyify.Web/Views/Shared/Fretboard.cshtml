@@ -40,7 +40,7 @@
                             {
                                 if (note.InSelectedScale && note.Selected)
                                 {
-                                    <td class="note selectedNoteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson, @Convert.ToInt32(Model.Fretboard.InstrumentType)">
+                                    <td class="note selectedNoteSelectedScale" onclick="UpdateModel('@Url.Action("UpdateFretboardModel")', '@Model.SelectedScale?.ScaleLabel', '@note.Note', @Model.SelectedNotesJson , @Model.IsSelectionLockedJson, @Convert.ToInt32(Model.Fretboard.InstrumentType))">
                                         <span class="nonSelectable noteText">@note.Sharp</span> <span class="nonSelectable degreeText">@note.DegreeInScale</span>
                                     </td>
                                     continue;
