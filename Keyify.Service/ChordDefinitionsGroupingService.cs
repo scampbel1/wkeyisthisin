@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Keyify.Service
 {
-    public class ChordDefinitionsGroupingHtmlService : IChordDefinitionGroupingHtmlService
+    public class ChordDefinitionsGroupingService : IChordDefinitionGroupingService
     {
         public string GenerateChordDefinitionsHtml(IEnumerable<ChordDefinition> chordDefinitions)
         {

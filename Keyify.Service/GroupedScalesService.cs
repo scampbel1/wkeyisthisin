@@ -7,9 +7,9 @@ namespace Keyify.Web.Service
 {
     public class GroupedScalesService : IGroupedScalesService
     {
-        private readonly IScaleGroupingHtmlService _scaleGroupingHtmlService;
+        private readonly IScaleGroupingService _scaleGroupingHtmlService;
 
-        public GroupedScalesService(IScaleGroupingHtmlService scaleGroupingHtmlService)
+        public GroupedScalesService(IScaleGroupingService scaleGroupingHtmlService)
         {
             _scaleGroupingHtmlService = scaleGroupingHtmlService;
         }

@@ -6,12 +6,12 @@ using System.Text;
 
 namespace Keyify.Web.Service
 {
-    public class ScaleGroupingHtmlService : IScaleGroupingHtmlService
+    public class ScaleGroupingService : IScaleGroupingService
     {
         private readonly INoteFormatService _noteFormatService;
         private readonly Dictionary<Note, string> _sharpNoteDictionary;
 
-        public ScaleGroupingHtmlService(INoteFormatService noteFormatService)
+        public ScaleGroupingService(INoteFormatService noteFormatService)
         {
             _noteFormatService = noteFormatService;
             _sharpNoteDictionary = _noteFormatService.SharpNoteDictionary;
@@ -250,6 +250,11 @@ namespace Keyify.Web.Service
             }
 
             return sb.ToString();
+        }
+
+        public List<ScaleGroupingEntry> GenerateScaleGroupingList(IEnumerable<Note> selectedNotes, InstrumentType instrumentType, List<ScaleGroupingEntry> limitedScaleGroups, string selectedString)
+        {
+            throw new NotImplementedException();
         }
     }
 }

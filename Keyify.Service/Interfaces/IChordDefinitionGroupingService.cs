@@ -2,7 +2,7 @@
 
 namespace Keyify.Service.Interfaces
 {
-    public interface IChordDefinitionGroupingHtmlService
+    public interface IChordDefinitionGroupingService
     {
         public (string, string) GetChordPopularityIcon(int popularity);
 

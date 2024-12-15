@@ -22,9 +22,9 @@ namespace Keyify.Web.Controllers.Instrument
         private readonly IConfiguration _configuration;
         private readonly IMusicTheoryService _musicTheoryService;
         private readonly IFretboardService _fretboardService;
-        private readonly IScaleGroupingHtmlService _scaleGroupingHtmlService;
+        private readonly IScaleGroupingService _scaleGroupingHtmlService;
         private readonly IQuickLinkService _quickLinkService;
-        private readonly IChordDefinitionGroupingHtmlService _chordDefinitionsGroupingHtmlService;
+        private readonly IChordDefinitionGroupingService _chordDefinitionsGroupingHtmlService;
 
         protected InstrumentViewModel Model;
 
@@ -33,9 +33,9 @@ namespace Keyify.Web.Controllers.Instrument
             IConfiguration configuration,
             IMusicTheoryService musicTheoryService,
             IFretboardService fretboardService,
-            IScaleGroupingHtmlService scaleGroupingHtmlService,
+            IScaleGroupingService scaleGroupingHtmlService,
             IQuickLinkService quickLinkService,
-            IChordDefinitionGroupingHtmlService chordDefinitionsGroupingHtmlService)
+            IChordDefinitionGroupingService chordDefinitionsGroupingHtmlService)
         {
             Model = model;
             _configuration = configuration;

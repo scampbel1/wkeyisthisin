@@ -62,8 +62,8 @@ namespace Keyify
             services.AddSingleton(typeof(IChordDefinitionService), typeof(ChordDefinitionService));
             services.AddSingleton(typeof(IMusicTheoryService), typeof(MusicTheoryService));
             services.AddSingleton(typeof(IFretboardService), typeof(FretboardService));
-            services.AddSingleton(typeof(IScaleGroupingHtmlService), typeof(ScaleGroupingHtmlService));
-            services.AddSingleton(typeof(IChordDefinitionGroupingHtmlService), typeof(ChordDefinitionsGroupingHtmlService));
+            services.AddSingleton(typeof(IScaleGroupingService), typeof(ScaleGroupingService));
+            services.AddSingleton(typeof(IChordDefinitionGroupingService), typeof(ChordDefinitionsGroupingService));
             services.AddSingleton(typeof(ISerializationFormatter), typeof(SerializationFormatter));
             services.AddSingleton(typeof(INoteFormatService), typeof(NoteFormatService));
             services.AddTransient(typeof(InstrumentViewModel), typeof(InstrumentViewModel));

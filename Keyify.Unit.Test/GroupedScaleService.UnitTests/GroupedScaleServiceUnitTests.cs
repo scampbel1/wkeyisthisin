@@ -6,13 +6,13 @@ namespace Keyify.Web.Unit.Test.GroupedScaleServiceTest.UnitTests
 {
     public class GroupedScaleServiceUnitTests
     {
-        private readonly Mock<IScaleGroupingHtmlService> _scaleGroupingHtmlService;
+        private readonly Mock<IScaleGroupingService> _scaleGroupingHtmlService;
 
         protected readonly GroupedScalesService _groupedScalesService;
 
         public GroupedScaleServiceUnitTests()
         {
-            _scaleGroupingHtmlService = new Mock<IScaleGroupingHtmlService>();
+            _scaleGroupingHtmlService = new Mock<IScaleGroupingService>();
             _groupedScalesService = new GroupedScalesService(_scaleGroupingHtmlService.Object);
         }
 
