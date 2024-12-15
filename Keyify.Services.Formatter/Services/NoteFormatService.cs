@@ -7,7 +7,7 @@ namespace Keyify.Services.Formatter.Services
     {
         public Dictionary<Note, string> SharpNoteDictionary => GenerateSharpNoteDictionary();
 
-        private Dictionary<Note, string> GenerateSharpNoteDictionary()
+        public static Dictionary<Note, string> GenerateSharpNoteDictionary()
         {
             var sharpNotes = new Dictionary<Note, string>((int)Note.Ab + 1);
 
@@ -21,7 +21,7 @@ namespace Keyify.Services.Formatter.Services
             return sharpNotes;
         }
 
-        private string MapNoteToString(Note note)
+        private static string MapNoteToString(Note note)
         {
             switch (note)
             {

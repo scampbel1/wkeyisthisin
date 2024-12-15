@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Keyify.Web.Unit.Test.ScaleGroupingUnitTests.GenerateScaleGroupingList
 {
-    public class WhenScaleNotSelected : WhenTestingTheMethod
+    public class WhenScaleSelected : WhenTestingTheMethod
     {
         private const int MinimumNoteCount = 3;
         private const int ExpectedScaleCount = 1;
@@ -18,9 +18,8 @@ namespace Keyify.Web.Unit.Test.ScaleGroupingUnitTests.GenerateScaleGroupingList
 
         public override void Arrange()
         {
-            SelectedScale = string.Empty;
-            InstrumentType = InstrumentType.Guitar;
             SelectedNotes = new List<Note>() { Note.Ab, Note.Bb, Note.C };
+            InstrumentType = InstrumentType.Guitar;
 
             var rootNote = Note.Db;
             var sharpRootNote = "G#";
@@ -40,6 +39,8 @@ namespace Keyify.Web.Unit.Test.ScaleGroupingUnitTests.GenerateScaleGroupingList
                         mode,
                         scaleDegrees)),
             };
+
+            SelectedScale = "G# Ionian";
 
             _expectedLabelNotes = new List<string>() { "G#", "A#", "C", "C#", "D#", "F", "G", };
             _expectedLabelSelectedNotes = new List<string>() { "(G#)", "(A#)", "(C)", };
@@ -123,7 +124,7 @@ namespace Keyify.Web.Unit.Test.ScaleGroupingUnitTests.GenerateScaleGroupingList
             Assert.Multiple(() =>
             {
                 Assert.NotNull(SelectedScale);
-                Assert.True(SelectedScale == string.Empty);
+                Assert.NotEmpty(SelectedScale);
             });
         }
 
@@ -184,7 +185,7 @@ namespace Keyify.Web.Unit.Test.ScaleGroupingUnitTests.GenerateScaleGroupingList
         }
 
         [Fact]
-        public void ItHasUnselectedScaleInResult()
+        public void ItHasSelectedScaleIsInResult()
         {
             Act();
 
@@ -192,8 +193,8 @@ namespace Keyify.Web.Unit.Test.ScaleGroupingUnitTests.GenerateScaleGroupingList
 
             Assert.Multiple(() =>
             {
-                Assert.NotEqual(SelectedScale, Result.First().GroupedScales.First().FormalNameLabel_Sharp);
-                Assert.False(Result.First().GroupedScales.First().Selected);
+                Assert.Contains(SelectedScale, Result.First().GroupedScales.First().FormalNameLabel_Sharp);
+                Assert.True(Result.First().GroupedScales.First().Selected);
             });
         }
     }

@@ -15,7 +15,7 @@ namespace Keyify.Web.Unit.Test.ScaleGroupingUnitTests.GenerateScaleGroupingList
 
         protected IEnumerable<Note> SelectedNotes { get; set; }
 
-        protected List<ScaleGroupingEntry> LimitedScaleGroups { get; set; }
+        protected IEnumerable<ScaleEntry> Scales { get; set; }
 
         protected Exception Exception { get; set; }
 
@@ -27,8 +27,8 @@ namespace Keyify.Web.Unit.Test.ScaleGroupingUnitTests.GenerateScaleGroupingList
             {
                 Result = ItemUnderTest.GenerateScaleGroupingList(
                     SelectedNotes,
+                    Scales,
                     InstrumentType,
-                    LimitedScaleGroups,
                     SelectedScale);
             }
             catch (Exception exception)

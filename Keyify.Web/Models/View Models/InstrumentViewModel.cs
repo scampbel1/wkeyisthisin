@@ -133,7 +133,7 @@ namespace Keyify.Web.Models.ViewModels
             {
                 if (AvailableScaleGroups.Any())
                 {
-                    var groupedScaleCount = LimitedScaleGroup
+                    var groupedScaleCount = AvailableScaleGroups
                         .SelectMany(l => l.GroupedScales)
                         .Count(g => !g.IsKey);
 
@@ -159,8 +159,6 @@ namespace Keyify.Web.Models.ViewModels
         public List<FretboardNote> UnselectedNotes => NotesMatrix.Where(n => !n.Selected).ToList();
 
         public List<FretboardNote> NotesPartOfScale => NotesMatrix.Where(n => n.InSelectedScale).ToList();
-
-        public List<ScaleGroupingEntry> LimitedScaleGroup => AvailableScaleGroups.Take(18).ToList();
 
         public List<ScaleGroupingEntry> AvailableScaleGroups { get; set; } = [];
 

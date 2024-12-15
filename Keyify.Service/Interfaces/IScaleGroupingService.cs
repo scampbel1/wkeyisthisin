@@ -20,8 +20,8 @@ namespace Keyify.Web.Services.Interfaces
         // To be converted to JSON on the controller
         public List<ScaleGroupingEntry> GenerateScaleGroupingList(
             IEnumerable<Note> selectedNotes,
-            InstrumentType instrumentType,
-            List<ScaleGroupingEntry> limitedScaleGroups,
+            IEnumerable<ScaleEntry> scales,
+            InstrumentType instrumentType,            
             string selectedScale);
     }
 }

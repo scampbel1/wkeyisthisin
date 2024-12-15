@@ -22,9 +22,9 @@ namespace Keyify.Web.Controllers.Instrument
         private readonly IConfiguration _configuration;
         private readonly IMusicTheoryService _musicTheoryService;
         private readonly IFretboardService _fretboardService;
-        private readonly IScaleGroupingService _scaleGroupingHtmlService;
+        private readonly IScaleGroupingService _scaleGroupingService;
         private readonly IQuickLinkService _quickLinkService;
-        private readonly IChordDefinitionGroupingService _chordDefinitionsGroupingHtmlService;
+        private readonly IChordDefinitionGroupingService _chordDefinitionsGroupingService;
 
         protected InstrumentViewModel Model;
 
@@ -33,17 +33,17 @@ namespace Keyify.Web.Controllers.Instrument
             IConfiguration configuration,
             IMusicTheoryService musicTheoryService,
             IFretboardService fretboardService,
-            IScaleGroupingService scaleGroupingHtmlService,
+            IScaleGroupingService scaleGroupingService,
             IQuickLinkService quickLinkService,
-            IChordDefinitionGroupingService chordDefinitionsGroupingHtmlService)
+            IChordDefinitionGroupingService chordDefinitionsGroupingService)
         {
             Model = model;
             _configuration = configuration;
             _musicTheoryService = musicTheoryService;
             _fretboardService = fretboardService;
-            _scaleGroupingHtmlService = scaleGroupingHtmlService;
+            _scaleGroupingService = scaleGroupingService;
             _quickLinkService = quickLinkService;
-            _chordDefinitionsGroupingHtmlService = chordDefinitionsGroupingHtmlService;
+            _chordDefinitionsGroupingService = chordDefinitionsGroupingService;
         }
 
         [HttpGet]
@@ -88,17 +88,7 @@ namespace Keyify.Web.Controllers.Instrument
             {
                 if (updateFretboardRequest?.NewlySelectedNote != null)
                 {
-                    var newlySelectedNote = updateFretboardRequest.NewlySelectedNote;
-
-                    switch (updateFretboardRequest.PreviouslySelectedNotes.Contains(newlySelectedNote.Value))
-                    {
-                        case true:
-                            updateFretboardRequest.PreviouslySelectedNotes.Remove(newlySelectedNote.Value);
-                            break;
-                        case false:
-                            updateFretboardRequest.PreviouslySelectedNotes.Add(newlySelectedNote.Value);
-                            break;
-                    }
+                    HandleSeletedNote(updateFretboardRequest);
                 }
 
                 await UpdateFretboard(
@@ -116,6 +106,21 @@ namespace Keyify.Web.Controllers.Instrument
 #if !DEBUG
                 System.Threading.Thread.Sleep(TimeSpan.FromMilliseconds(200));
 #endif
+            }
+        }
+
+        private static void HandleSeletedNote(UpdateFretboardRequest updateFretboardRequest)
+        {
+            var newlySelectedNote = updateFretboardRequest.NewlySelectedNote;
+
+            switch (updateFretboardRequest.PreviouslySelectedNotes.Contains(newlySelectedNote.Value))
+            {
+                case true:
+                    updateFretboardRequest.PreviouslySelectedNotes.Remove(newlySelectedNote.Value);
+                    break;
+                case false:
+                    updateFretboardRequest.PreviouslySelectedNotes.Add(newlySelectedNote.Value);
+                    break;
             }
         }
 
@@ -158,10 +163,10 @@ namespace Keyify.Web.Controllers.Instrument
 
             var quickLinkBase64 = _quickLinkService.ConvertQuickLinkToBase64(new QuickLink(Model));
 
-            var availableScalesTableHtml = _scaleGroupingHtmlService.GenerateScalesTable(
+            var availableScalesTableHtml = _scaleGroupingService.GenerateScalesTable(
                 selectedNotes,
                 Model.Fretboard.InstrumentType,
-                Model.LimitedScaleGroup,
+                Model.AvailableScaleGroups,
                 selectedScale);
 
             Model.SetQuicklinkCode(quickLinkBase64);
@@ -186,7 +191,7 @@ namespace Keyify.Web.Controllers.Instrument
 
                 Model.ChordDefinitions = chordDefintions.ToList();
 
-                var availableChordDefinitionsHtml = _chordDefinitionsGroupingHtmlService
+                var availableChordDefinitionsHtml = _chordDefinitionsGroupingService
                     .GenerateChordDefinitionsHtml(Model.ChordDefinitions);
 
                 Model.UpdateAvailableChordDefinitionsHtml(availableChordDefinitionsHtml);
@@ -204,7 +209,7 @@ namespace Keyify.Web.Controllers.Instrument
 
             foreach (var popularity in new int[] { 1, 2, 3, 4 })
             {
-                var (label, icon) = _chordDefinitionsGroupingHtmlService.GetChordPopularityIcon(popularity);
+                var (label, icon) = _chordDefinitionsGroupingService.GetChordPopularityIcon(popularity);
 
                 sb.Append($"<span>{icon}{label} </span>");
             }
@@ -223,7 +228,7 @@ namespace Keyify.Web.Controllers.Instrument
 
             foreach (var popularity in new int[] { 0, 1, 2, 3, 4, 5 })
             {
-                var (label, icon) = _scaleGroupingHtmlService.GetScalePopularityIcon(popularity);
+                var (label, icon) = _scaleGroupingService.GetScalePopularityIcon(popularity);
 
                 sb.Append($"<span>{icon}{label} </span>");
             }

@@ -34,7 +34,12 @@ namespace Keyify.Web.Service
 
             sb.Append("<table class=\"scaleTable\">");
 
-            GenerateScales(selectedNotes, instrumentType, limitedGroupScale, selectedScale, sb);
+            GenerateScales(
+                selectedNotes,
+                instrumentType,
+                limitedGroupScale,
+                selectedScale,
+                sb);
 
             sb.Append("</table>");
 
@@ -43,11 +48,16 @@ namespace Keyify.Web.Service
             void GenerateScales(
                 IEnumerable<Note> selectedNotes,
                 InstrumentType instrumentType,
-                List<ScaleGroupingEntry> limitedGroupScale,
+                List<ScaleGroupingEntry> scaleGroupEntries,
                 string selectedScale,
                 StringBuilder sb)
             {
-                GenerateAvailableKeysAndScalesSection(selectedNotes, instrumentType, limitedGroupScale, sb, selectedScale);
+                GenerateAvailableKeysAndScalesSection(
+                    selectedNotes,
+                    instrumentType,
+                    scaleGroupEntries,
+                    sb,
+                    selectedScale);
             }
         }
 
@@ -252,9 +262,97 @@ namespace Keyify.Web.Service
             return sb.ToString();
         }
 
-        public List<ScaleGroupingEntry> GenerateScaleGroupingList(IEnumerable<Note> selectedNotes, InstrumentType instrumentType, List<ScaleGroupingEntry> limitedScaleGroups, string selectedString)
+        public string GenerateNotesGroupingLabel(IEnumerable<Note> selectedNotes, List<ScaleEntry> groupedScales)
         {
-            throw new NotImplementedException();
+            if (groupedScales == null || !groupedScales.Any())
+            {
+                return string.Empty;
+            }
+
+            var sb = new StringBuilder();
+            var firstScaleInGroup = groupedScales.FirstOrDefault();
+
+            if (firstScaleInGroup != null)
+            {
+                var noteSet = firstScaleInGroup.Scale.NoteSet;
+
+                foreach (var note in noteSet)
+                {
+                    if (selectedNotes.Contains(note))
+                    {
+                        sb.Append($"({_sharpNoteDictionary[note]}) ");
+                    }
+                    else
+                    {
+                        sb.Append($"{_sharpNoteDictionary[note]} ");
+                    }
+                }
+            }
+
+            return sb.ToString().TrimEnd();
+        }
+
+        public List<ScaleGroupingEntry> GenerateScaleGroupingList(
+            IEnumerable<Note> selectedNotes,
+            IEnumerable<ScaleEntry> scales,
+            InstrumentType instrumentType,
+            string selectedScale)
+        {
+            if (selectedNotes is null || selectedNotes?.Count() < 3)
+            {
+                return Enumerable.Empty<ScaleGroupingEntry>().ToList();
+            }
+
+            return GenerateScaleGroups(selectedNotes!, scales, selectedScale);
+        }
+
+        private List<ScaleGroupingEntry> GenerateScaleGroups(
+            IEnumerable<Note> selectedNotes,
+            IEnumerable<ScaleEntry> scales,
+            string selectedScale)
+        {
+            var scaleGroupingEntries = new List<ScaleGroupingEntry>();
+            var noteHashSets = GenerateNoteHashSets(scales);
+
+            foreach (var scaleNotes in noteHashSets)
+            {
+                var allScales = scales
+                    .Where(s => s.Scale.NoteSet.SetEquals(scaleNotes))
+                    .OrderBy(s => s.Popularity)
+                    .ToList();
+
+                foreach (var scale in allScales)
+                {
+                    if (scale.FormalNameLabel_Sharp == selectedScale)
+                    {
+                        scale.Selected = true;
+                    }
+                }
+
+                if (allScales.Any())
+                {
+                    var scaleLabel = GenerateNotesGroupingLabel(selectedNotes, allScales);
+
+                    scaleGroupingEntries.Add(new ScaleGroupingEntry(allScales, scaleLabel));
+                }
+            }
+
+            return scaleGroupingEntries;
+
+            List<HashSet<Note>> GenerateNoteHashSets(IEnumerable<ScaleEntry> scales)
+            {
+                var distinctSets = new List<HashSet<Note>>();
+
+                foreach (var scale in scales)
+                {
+                    if (!distinctSets.Where(ds => ds.SetEquals(scale.Scale.NoteSet)).Any())
+                    {
+                        distinctSets.Add(scale.Scale.NoteSet);
+                    }
+                }
+
+                return distinctSets;
+            }
         }
     }
 }
