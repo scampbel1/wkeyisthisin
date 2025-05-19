@@ -136,7 +136,8 @@
         }
         else
         {
-            @Html.Raw(Model.AvailableKeysAndScalesTableHtml)
+            @* @Html.Raw(Model.AvailableKeysAndScalesTableHtml) *@
+            <div id="example-table"></div>
         }
     </div>
 </div>
@@ -173,3 +174,27 @@
         </div>
     </div>
 }
+
+<script>
+    // Define table data
+    const tableData = [
+        { id: 1, name: "John Doe", age: 28, occupation: "Developer" },
+        { id: 2, name: "Jane Smith", age: 34, occupation: "Designer" },
+        { id: 3, name: "Sam Brown", age: 45, occupation: "Manager" }
+    ];
+
+    // Define table columns
+    const tableColumns = [
+        { title: "ID", field: "id", width: 50 },
+        { title: "Name", field: "name", width: 150 },
+        { title: "Age", field: "age", width: 100 },
+        { title: "Occupation", field: "occupation", width: 200 }
+    ];
+
+    // Initialize Tabulator
+    const table = new Tabulator("#example-table", {
+        data: tableData,         // Load data into the table
+        columns: tableColumns,   // Define table columns
+        layout: "fitColumns"     // Fit columns to width of table
+    });
+</script>

@@ -53,6 +53,7 @@ function fetchAndUpdateFretboard(url, data) {
         })
         .then(data => {
             document.getElementById("Fretboard").innerHTML = data;
+            //var table = new Tabulator("#example-table", {});
         })
         .catch(error => {
             console.error(error);
