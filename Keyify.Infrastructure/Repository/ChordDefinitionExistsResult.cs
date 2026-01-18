@@ -15,7 +15,11 @@ namespace Keyify.Infrastructure.Repository
             Message = message;
         }
 
-        public ChordDefinitionExistsResult(bool found, string message, Interval[] intervals, byte[] bytes) : this(found, message)
+        public ChordDefinitionExistsResult(
+            bool found,
+            string message,
+            Interval[] intervals,
+            byte[] bytes) : this(found, message)
         {
             Intervals = intervals;
             Bytes = bytes;

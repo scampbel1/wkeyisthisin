@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "Keyify.Database.DbUp": {
+      "commandName": "Project"
+    }
+  }
+}

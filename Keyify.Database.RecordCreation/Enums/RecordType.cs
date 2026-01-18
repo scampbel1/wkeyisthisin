@@ -2,7 +2,7 @@
 {
     internal enum RecordType
     {
-        ChordDefinition = 1,
-        ScaleDefinition = 2,
+        ScaleDefinition = 1,
+        ChordDefinition = 2,
     }
 }
