@@ -11,7 +11,10 @@ using System.Text.Json;
 
 namespace Keyify.Infrastructure.Repository
 {
-    public class ChordDefinitionRepository(ILogger<ChordDefinitionRepository> logger, string connectionString, ISerializationFormatter serializationFormatter) : IChordDefinitionRepository
+    public class ChordDefinitionRepository(
+        ILogger<ChordDefinitionRepository> logger,
+        string connectionString,
+        ISerializationFormatter serializationFormatter) : IChordDefinitionRepository
     {
         private readonly ILogger _logger = logger;
         private readonly string _connectionString = connectionString;
@@ -123,6 +126,8 @@ namespace Keyify.Infrastructure.Repository
 
             if (chordDefinitionExistsResult.Found)
             {
+                Console.WriteLine($"Chord Definition '{chordDefinitionRequest.Name}' already exists.");
+
                 return Tuple.Create(false, chordDefinitionExistsResult.Message!);
             }
 
@@ -142,6 +147,8 @@ namespace Keyify.Infrastructure.Repository
             sb.AppendLine("@Name,");
             sb.AppendLine("@Intervals");
             sb.AppendLine(")");
+
+            Console.WriteLine($"Attempting to Insert Chord Definition '{chordDefinitionRequest.Name}'");
 
             var chord = await sqlCconnection.ExecuteAsync(sb.ToString(), new { chordDefinitionRequest.Name, Intervals = chordDefinitionExistsResult.Bytes });
 
